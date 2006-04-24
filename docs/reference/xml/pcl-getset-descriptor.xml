@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclGetSetDescriptor">
+<refmeta>
+<refentrytitle>PclGetSetDescr</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclGetSetDescr</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclGetSetDescriptor-struct">PclGetSetDescriptor</link>;
+            <link linkend="PclGetSetDef">PclGetSetDef</link>;
+<link linkend="PclObject">PclObject</link>*  (<link linkend="PclGetFunc">*PclGetFunc</link>)                   (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="gpointer">gpointer</link> context);
+<link linkend="gboolean">gboolean</link>    (<link linkend="PclSetFunc">*PclSetFunc</link>)                   (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *value,
+                                             <link linkend="gpointer">gpointer</link> context);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-getset-descriptor-get-type-object">pcl_getset_descriptor_get_type_object</link>
+                                            (void);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----<link linkend="PclContainer">PclContainer</link>
+               +----<link linkend="PclDescriptor">PclDescriptor</link>
+                     +----PclGetSetDescriptor
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclGetSetDescriptor-struct"/>PclGetSetDescriptor</title>
+<indexterm><primary>PclGetSetDescriptor</primary></indexterm><programlisting>typedef struct _PclGetSetDescriptor PclGetSetDescriptor;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclGetSetDef"/>PclGetSetDef</title>
+<indexterm><primary>PclGetSetDef</primary></indexterm><programlisting>typedef struct {
+        gchar *name;
+        PclGetFunc get;
+        PclSetFunc set;
+        gchar *doc;
+        gpointer closure;
+} PclGetSetDef;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclGetFunc"/>PclGetFunc ()</title>
+<indexterm><primary>PclGetFunc</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  (*PclGetFunc)                   (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="gpointer">gpointer</link> context);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>context</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PclSetFunc"/>PclSetFunc ()</title>
+<indexterm><primary>PclSetFunc</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    (*PclSetFunc)                   (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *value,
+                                             <link linkend="gpointer">gpointer</link> context);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>context</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-getset-descriptor-get-type-object"/>pcl_getset_descriptor_get_type_object ()</title>
+<indexterm><primary>pcl_getset_descriptor_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_getset_descriptor_get_type_object
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

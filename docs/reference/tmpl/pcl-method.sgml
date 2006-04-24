@@ -1,0 +1,98 @@
+<!-- ##### SECTION Title ##### -->
+PclMethod
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclMethod ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclMethodDef ##### -->
+<para>
+
+</para>
+
+@name: 
+@func: 
+@flags: 
+@doc: 
+@offset: 
+
+<!-- ##### ENUM PclMethodFlags ##### -->
+<para>
+
+</para>
+
+@PCL_METHOD_FLAG_VARARGS: 
+@PCL_METHOD_FLAG_KEYWORDS: 
+@PCL_METHOD_FLAG_ONEARG: 
+@PCL_METHOD_FLAG_NOARGS: 
+@PCL_METHOD_FLAG_CLASS: 
+
+<!-- ##### FUNCTION pcl_method_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_method_new ##### -->
+<para>
+
+</para>
+
+@def: 
+@self: 
+@module: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_METHOD_GET_FLAGS ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_METHOD_GET_FUNCTION ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_METHOD_GET_NAME ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_METHOD_GET_SELF ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

@@ -1,0 +1,46 @@
+<!-- ##### SECTION Title ##### -->
+pcl-factory
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclFactory ##### -->
+<para>
+
+</para>
+
+@type: 
+@limit: 
+@length: 
+@list: 
+
+<!-- ##### FUNCTION pcl_factory_order ##### -->
+<para>
+
+</para>
+
+@factory: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_factory_close ##### -->
+<para>
+
+</para>
+
+@factory: 
+
+

@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclFloat">
+<refmeta>
+<refentrytitle>PclFloat</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclFloat</refname><refpurpose>Floating-point objects</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclFloat-struct">PclFloat</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-float-get-type-object">pcl_float_get_type_object</link>       (void);
+<link linkend="gdouble">gdouble</link>     <link linkend="pcl-float-as-double">pcl_float_as_double</link>             (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-float-from-double">pcl_float_from_double</link>           (<link linkend="gdouble">gdouble</link> v_double);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-float-from-string">pcl_float_from_string</link>           (const <link linkend="gchar">gchar</link> *v_string,
+                                             <link linkend="gchar">gchar</link> **endptr);
+#define     <link linkend="PCL-FLOAT-AS-DOUBLE:CAPS">PCL_FLOAT_AS_DOUBLE</link>             (obj)
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----PclFloat
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>Implemented Interfaces</title>
+<para>
+PclFloat implements
+ <link linkend="PclNumber">PclNumber</link>.</para>
+
+</refsect1>
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclFloat-struct"/>PclFloat</title>
+<indexterm><primary>PclFloat</primary></indexterm><programlisting>typedef struct _PclFloat PclFloat;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-float-get-type-object"/>pcl_float_get_type_object ()</title>
+<indexterm><primary>pcl_float_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_float_get_type_object       (void);</programlisting>
+<para>
+Returns the type object for <link linkend="PclFloat"><type>PclFloat</type></link>.  During runtime this is the built-in
+object <literal>float</literal>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the type object for <link linkend="PclFloat"><type>PclFloat</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-float-as-double"/>pcl_float_as_double ()</title>
+<indexterm><primary>pcl_float_as_double</primary></indexterm><programlisting><link linkend="gdouble">gdouble</link>     pcl_float_as_double             (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-float-from-double"/>pcl_float_from_double ()</title>
+<indexterm><primary>pcl_float_from_double</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_float_from_double           (<link linkend="gdouble">gdouble</link> v_double);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>v_double</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-float-from-string"/>pcl_float_from_string ()</title>
+<indexterm><primary>pcl_float_from_string</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_float_from_string           (const <link linkend="gchar">gchar</link> *v_string,
+                                             <link linkend="gchar">gchar</link> **endptr);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>v_string</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>endptr</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-FLOAT-AS-DOUBLE:CAPS"/>PCL_FLOAT_AS_DOUBLE()</title>
+<indexterm><primary>PCL_FLOAT_AS_DOUBLE</primary></indexterm><programlisting>#define PCL_FLOAT_AS_DOUBLE(obj)        (PCL_FLOAT (obj)-&gt;v_double)
+</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

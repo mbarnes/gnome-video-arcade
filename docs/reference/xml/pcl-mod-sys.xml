@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="pcl-pcl-mod-sys">
+<refmeta>
+<refentrytitle>pcl-mod-sys</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>pcl-mod-sys</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sys-get-object">pcl_sys_get_object</link>              (const <link linkend="gchar">gchar</link> *name);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-sys-set-object">pcl_sys_set_object</link>              (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *object);
+<link linkend="void">void</link>        <link linkend="pcl-sys-set-argv">pcl_sys_set_argv</link>                (<link linkend="gint">gint</link> argc,
+                                             <link linkend="gchar">gchar</link> **argv);
+<link linkend="void">void</link>        <link linkend="pcl-sys-set-path">pcl_sys_set_path</link>                (const <link linkend="gchar">gchar</link> *path);
+<link linkend="void">void</link>        <link linkend="pcl-sys-write-stdout">pcl_sys_write_stdout</link>            (const <link linkend="gchar">gchar</link> *format,
+                                             ...);
+<link linkend="void">void</link>        <link linkend="pcl-sys-write-stderr">pcl_sys_write_stderr</link>            (const <link linkend="gchar">gchar</link> *format,
+                                             ...);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="pcl-sys-get-object"/>pcl_sys_get_object ()</title>
+<indexterm><primary>pcl_sys_get_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sys_get_object              (const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sys-set-object"/>pcl_sys_set_object ()</title>
+<indexterm><primary>pcl_sys_set_object</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_sys_set_object              (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sys-set-argv"/>pcl_sys_set_argv ()</title>
+<indexterm><primary>pcl_sys_set_argv</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_sys_set_argv                (<link linkend="gint">gint</link> argc,
+                                             <link linkend="gchar">gchar</link> **argv);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>argc</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>argv</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sys-set-path"/>pcl_sys_set_path ()</title>
+<indexterm><primary>pcl_sys_set_path</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_sys_set_path                (const <link linkend="gchar">gchar</link> *path);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>path</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sys-write-stdout"/>pcl_sys_write_stdout ()</title>
+<indexterm><primary>pcl_sys_write_stdout</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_sys_write_stdout            (const <link linkend="gchar">gchar</link> *format,
+                                             ...);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>format</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sys-write-stderr"/>pcl_sys_write_stderr ()</title>
+<indexterm><primary>pcl_sys_write_stderr</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_sys_write_stderr            (const <link linkend="gchar">gchar</link> *format,
+                                             ...);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>format</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+PclFree
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclFree ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_FREE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION pcl_free_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_free_get_instance ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

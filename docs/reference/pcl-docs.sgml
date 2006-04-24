@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<book id="index" xmlns:xi="http://www.w3.org/2003/XInclude">
+  <bookinfo>
+    <title>PCL Reference Manual</title>
+    <releaseinfo>for PCL &version;</releaseinfo>
+  </bookinfo>
+
+  <part>
+    <title>High Level API</title>
+    <xi:include href="xml/pcl.xml"/>
+    <xi:include href="xml/pcl-arg.xml"/>
+    <xi:include href="xml/pcl-error.xml"/>
+    <xi:include href="xml/pcl-eval.xml"/>
+    <xi:include href="xml/pcl-import.xml"/>
+    <xi:include href="xml/pcl-main.xml"/>
+    <xi:include href="xml/pcl-member.xml"/>
+    <xi:include href="xml/pcl-mod-gc.xml"/>
+    <xi:include href="xml/pcl-mod-sys.xml"/>
+    <xi:include href="xml/pcl-run.xml"/>
+    <xi:include href="xml/pcl-state.xml"/>
+    <xi:include href="xml/pcl-util.xml"/>
+    <xi:include href="xml/glib-ext.xml"/>
+  </part>
+
+  <part>
+    <title>Basic Types</title>
+    <xi:include href="xml/pcl-attr-getter.xml"/>
+    <xi:include href="xml/pcl-base-set.xml"/>
+    <xi:include href="xml/pcl-bool.xml"/>
+    <xi:include href="xml/pcl-complex.xml"/>
+    <xi:include href="xml/pcl-dict.xml"/>
+    <xi:include href="xml/pcl-ellipsis.xml"/>
+    <xi:include href="xml/pcl-exception.xml"/>
+    <xi:include href="xml/pcl-file.xml"/>
+    <xi:include href="xml/pcl-float.xml"/>
+    <xi:include href="xml/pcl-free.xml"/>
+    <xi:include href="xml/pcl-frozen-set.xml"/>
+    <xi:include href="xml/pcl-int.xml"/>
+    <xi:include href="xml/pcl-item-getter.xml"/>
+    <xi:include href="xml/pcl-list.xml"/>
+    <xi:include href="xml/pcl-long.xml"/>
+    <xi:include href="xml/pcl-none.xml"/>
+    <xi:include href="xml/pcl-not-implemented.xml"/>
+    <xi:include href="xml/pcl-object.xml"/>
+    <xi:include href="xml/pcl-set.xml"/>
+    <xi:include href="xml/pcl-slice.xml"/>
+    <xi:include href="xml/pcl-string.xml"/>
+    <xi:include href="xml/pcl-table.xml"/>
+    <xi:include href="xml/pcl-tablerecord.xml"/>
+    <xi:include href="xml/pcl-tuple.xml"/>
+    <xi:include href="xml/pcl-type.xml"/>
+  </part>
+
+  <part>
+  <title>Iterators</title>
+    <xi:include href="xml/pcl-iterator.xml"/>
+    <xi:include href="xml/pcl-callable-iterator.xml"/>
+    <xi:include href="xml/pcl-dict-iterator.xml"/>
+    <xi:include href="xml/pcl-dict-key-iterator.xml"/>
+    <xi:include href="xml/pcl-dict-value-iterator.xml"/>
+    <xi:include href="xml/pcl-dict-item-iterator.xml"/>
+    <xi:include href="xml/pcl-enumerate.xml"/>
+    <xi:include href="xml/pcl-range.xml"/>
+    <xi:include href="xml/pcl-reversed.xml"/>
+    <xi:include href="xml/pcl-sequence-iterator.xml"/>
+    <xi:include href="xml/pcl-zip.xml"/>
+  </part>
+
+  <part>
+  <title>Descriptors</title>
+    <xi:include href="xml/pcl-descriptor.xml"/>
+    <xi:include href="xml/pcl-class-method.xml"/>
+    <xi:include href="xml/pcl-getset-descriptor.xml"/>
+    <xi:include href="xml/pcl-instance-method.xml"/>
+    <xi:include href="xml/pcl-member-descriptor.xml"/>
+    <xi:include href="xml/pcl-method-descriptor.xml"/>
+    <xi:include href="xml/pcl-property.xml"/>
+    <xi:include href="xml/pcl-static-method.xml"/>
+    <xi:include href="xml/pcl-super.xml"/>
+  </part>
+
+  <part>
+  <title>Internal Types</title>
+    <xi:include href="xml/pcl-cell.xml"/>
+    <xi:include href="xml/pcl-code.xml"/>
+    <xi:include href="xml/pcl-container.xml"/>
+    <xi:include href="xml/pcl-dict-proxy.xml"/>
+    <xi:include href="xml/pcl-frame.xml"/>
+    <xi:include href="xml/pcl-function.xml"/>
+    <xi:include href="xml/pcl-generator.xml"/>
+    <xi:include href="xml/pcl-method.xml"/>
+    <xi:include href="xml/pcl-module.xml"/>
+    <xi:include href="xml/pcl-traceback.xml"/>
+    <xi:include href="xml/pcl-weak-ref.xml"/>
+  </part>
+
+  <part>
+  <title>Interfaces</title>
+    <xi:include href="xml/pcl-mapping.xml"/>
+    <xi:include href="xml/pcl-number.xml"/>
+    <xi:include href="xml/pcl-sequence.xml"/>
+  </part>
+
+  <index>
+    <title>Index</title>
+  </index>
+
+</book>

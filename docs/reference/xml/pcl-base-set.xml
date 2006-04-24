@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclBaseSet">
+<refmeta>
+<refentrytitle>PclBaseSet</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclBaseSet</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclBaseSet-struct">PclBaseSet</link>;
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----<link linkend="PclContainer">PclContainer</link>
+               +----PclBaseSet
+                     +----<link linkend="PclFrozenSet">PclFrozenSet</link>
+                     +----<link linkend="PclSet">PclSet</link>
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclBaseSet-struct"/>PclBaseSet</title>
+<indexterm><primary>PclBaseSet</primary></indexterm><programlisting>typedef struct _PclBaseSet PclBaseSet;</programlisting>
+<para>
+
+</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

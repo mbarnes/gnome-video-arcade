@@ -1,0 +1,72 @@
+<!-- ##### SECTION Title ##### -->
+PclIterable
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclIterable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclIterableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@contains: 
+@iterate: 
+
+<!-- ##### USER_FUNCTION PclIterableContains ##### -->
+<para>
+
+</para>
+
+@iterable: 
+@value: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION PclIterableIterate ##### -->
+<para>
+
+</para>
+
+@iterable: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_object_contains ##### -->
+<para>
+
+</para>
+
+@object: 
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_object_iterate ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+

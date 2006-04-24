@@ -1,0 +1,59 @@
+<!-- ##### SECTION Title ##### -->
+PclWeakRef
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclWeakRef ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_weak_ref_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_weak_ref_new ##### -->
+<para>
+
+</para>
+
+@object: 
+@callback: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_WEAK_REF_GET_OBJECT ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_WEAK_REF_GET_CALLBACK ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

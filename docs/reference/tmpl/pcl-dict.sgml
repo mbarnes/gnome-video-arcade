@@ -1,0 +1,144 @@
+<!-- ##### SECTION Title ##### -->
+PclDict
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclDict ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclDictEntry ##### -->
+<para>
+
+</para>
+
+@hash: 
+@key: 
+@value: 
+
+<!-- ##### FUNCTION pcl_dict_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_has_key ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_has_key_string ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_get_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_get_item_string ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_set_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_set_item_string ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_del_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_del_item_string ##### -->
+<para>
+
+</para>
+
+@object: 
+@key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_dict_next ##### -->
+<para>
+
+</para>
+
+@dict: 
+@p_pos: 
+@p_key: 
+@p_value: 
+@Returns: 
+
+

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="pcl-pcl-main">
+<refmeta>
+<refentrytitle>pcl-main</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>pcl-main</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+<link linkend="gint">gint</link>        <link linkend="pcl-main">pcl_main</link>                        (<link linkend="gint">gint</link> argc,
+                                             <link linkend="gchar">gchar</link> **argv);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="pcl-main"/>pcl_main ()</title>
+<indexterm><primary>pcl_main</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_main                        (<link linkend="gint">gint</link> argc,
+                                             <link linkend="gchar">gchar</link> **argv);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>argc</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>argv</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

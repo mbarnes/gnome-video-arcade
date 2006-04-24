@@ -1,0 +1,51 @@
+<!-- ##### SECTION Title ##### -->
+PclMeasurable
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclMeasurable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclMeasurableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@measure: 
+
+<!-- ##### USER_FUNCTION PclMeasurableMeasure ##### -->
+<para>
+
+</para>
+
+@measurable: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_object_measure ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+

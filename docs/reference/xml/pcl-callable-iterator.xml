@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclCallableIterator">
+<refmeta>
+<refentrytitle>PclCallableIterator</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclCallableIterator</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclCallableIterator-struct">PclCallableIterator</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-callable-iterator-get-type-object">pcl_callable_iterator_get_type_object</link>
+                                            (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-callable-iterator-new">pcl_callable_iterator_new</link>       (<link linkend="PclObject">PclObject</link> *callable,
+                                             <link linkend="PclObject">PclObject</link> *sentinel);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----<link linkend="PclContainer">PclContainer</link>
+               +----<link linkend="PclIterator">PclIterator</link>
+                     +----PclCallableIterator
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclCallableIterator-struct"/>PclCallableIterator</title>
+<indexterm><primary>PclCallableIterator</primary></indexterm><programlisting>typedef struct _PclCallableIterator PclCallableIterator;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-callable-iterator-get-type-object"/>pcl_callable_iterator_get_type_object ()</title>
+<indexterm><primary>pcl_callable_iterator_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_callable_iterator_get_type_object
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-callable-iterator-new"/>pcl_callable_iterator_new ()</title>
+<indexterm><primary>pcl_callable_iterator_new</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_callable_iterator_new       (<link linkend="PclObject">PclObject</link> *callable,
+                                             <link linkend="PclObject">PclObject</link> *sentinel);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>callable</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sentinel</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

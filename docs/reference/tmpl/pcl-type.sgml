@@ -1,0 +1,71 @@
+<!-- ##### SECTION Title ##### -->
+PclType
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclType ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_type_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_type_new ##### -->
+<para>
+
+</para>
+
+@g_type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_type_get_attr ##### -->
+<para>
+
+</para>
+
+@type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_type_is_subtype ##### -->
+<para>
+
+</para>
+
+@subtype: 
+@of: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_GET_TYPE_NAME ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

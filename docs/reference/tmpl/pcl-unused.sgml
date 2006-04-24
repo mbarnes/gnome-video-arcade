@@ -1,0 +1,1192 @@
+<!-- ##### SECTION ./tmpl/pcl-callable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-callable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-callable.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-callable.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-callable.sgml:Title ##### -->
+PclCallable
+
+
+<!-- ##### SECTION ./tmpl/pcl-comparable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-comparable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-comparable.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-comparable.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-comparable.sgml:Title ##### -->
+PclComparable
+
+
+<!-- ##### SECTION ./tmpl/pcl-compiler.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-compiler.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-compiler.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-compiler.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-compiler.sgml:Title ##### -->
+pcl-compiler
+
+
+<!-- ##### SECTION ./tmpl/pcl-hashable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-hashable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-hashable.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-hashable.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-hashable.sgml:Title ##### -->
+PclHashable
+
+
+<!-- ##### SECTION ./tmpl/pcl-iterable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-iterable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-iterable.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-iterable.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-iterable.sgml:Title ##### -->
+PclIterable
+
+
+<!-- ##### SECTION ./tmpl/pcl-measurable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-measurable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-measurable.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-measurable.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-measurable.sgml:Title ##### -->
+PclMeasurable
+
+
+<!-- ##### SECTION ./tmpl/pcl-member-descriptor.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-member-descriptor.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-member-descriptor.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-member-descriptor.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-member-descriptor.sgml:Title ##### -->
+PclMemberDescr
+
+
+<!-- ##### SECTION ./tmpl/pcl-method-descriptor.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-method-descriptor.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-method-descriptor.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-method-descriptor.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-method-descriptor.sgml:Title ##### -->
+PclMethodDescr
+
+
+<!-- ##### SECTION ./tmpl/pcl-rich-comparable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-rich-comparable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-rich-comparable.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-rich-comparable.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-rich-comparable.sgml:Title ##### -->
+PclRichComparable
+
+
+<!-- ##### SECTION ./tmpl/pcl-subscriptable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-subscriptable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/pcl-subscriptable.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-subscriptable.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/pcl-subscriptable.sgml:Title ##### -->
+PclSubscriptable
+
+
+<!-- ##### MACRO PCL_CODE_FLAG_CONJUNCTION ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_CODE_FLAG_GENERATOR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_CODE_FLAG_NEWLOCALS ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_CODE_FLAG_NOFREE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_CODE_FLAG_PREDICATE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_CODE_FLAG_VARARGS ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_CODE_FLAG_VARKWDS ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_DESCR_IS_DATA ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO PCL_DICT_MIN_SIZE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_EQ ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_GE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_GT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_LE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_LT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_MEMBER_FLAG_READONLY ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_METHOD_FLAG_CLASS ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_METHOD_FLAG_KEYWORDS ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_METHOD_FLAG_MUTABLE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_METHOD_FLAG_NOARGS ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_METHOD_FLAG_ONEARG ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_METHOD_FLAG_VARARGS ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_NE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_PRINT_FLAG_RAW ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclAttrGetterClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclBaseSetClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclBoolClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclCallable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION PclCallableCall ##### -->
+<para>
+
+</para>
+
+@callable: 
+@args: 
+@kwds: 
+@Returns: 
+
+<!-- ##### STRUCT PclCallableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@call: 
+
+<!-- ##### STRUCT PclCallableIteratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclCellClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclCodeClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclComparable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION PclComparableCompare ##### -->
+<para>
+
+</para>
+
+@comparable1: 
+@comparable2: 
+@Returns: 
+
+<!-- ##### STRUCT PclComparableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@compare: 
+
+<!-- ##### STRUCT PclCompilerState ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclComplexClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclContainerClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@traverse: 
+
+<!-- ##### STRUCT PclDescr ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclDescrClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@get: 
+@set: 
+
+<!-- ##### STRUCT PclDictClass ##### -->
+<para>
+
+</para>
+
+@parent: 
+
+<!-- ##### STRUCT PclDictItemIteratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclDictIteratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclDictKeyIteratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclDictProxyClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclDictValueIteratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclEllipsisClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclEnumerateClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclExceptionClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclFileClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclFloatClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclFrameClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@block_setup: 
+@block_pop: 
+@fast_to_locals: 
+@locals_to_fast: 
+
+<!-- ##### STRUCT PclFreeClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclFrozenSetClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclFunctionClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclGeneratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclGetSetDescr ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclGetSetDescrClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclHashable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION PclHashableHash ##### -->
+<para>
+
+</para>
+
+@hashable: 
+@Returns: 
+
+<!-- ##### STRUCT PclHashableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@hash: 
+
+<!-- ##### STRUCT PclIntClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclItemGetterClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclIterable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION PclIterableContains ##### -->
+<para>
+
+</para>
+
+@iterable: 
+@value: 
+@Returns: 
+
+<!-- ##### STRUCT PclIterableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@contains: 
+@iterate: 
+
+<!-- ##### USER_FUNCTION PclIterableIterate ##### -->
+<para>
+
+</para>
+
+@iterable: 
+@Returns: 
+
+<!-- ##### STRUCT PclIteratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@next: 
+@stop: 
+
+<!-- ##### STRUCT PclListClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclMeasurable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclMeasurableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@measure: 
+
+<!-- ##### USER_FUNCTION PclMeasurableMeasure ##### -->
+<para>
+
+</para>
+
+@measurable: 
+@Returns: 
+
+<!-- ##### STRUCT PclMemberDescr ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclMemberDescrClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclMethodClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclMethodDescr ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclMethodDescrClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclModuleClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclNoneClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclNotImplementedClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclObjectClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@type: 
+@new_instance: 
+@clone: 
+@print: 
+@copy: 
+@dict: 
+@repr: 
+@str: 
+@get_attr: 
+@set_attr: 
+@doc: 
+@is_mutable: 
+
+<!-- ##### STRUCT PclPropertyClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclReversedClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclRichComparable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclRichComparableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@compare: 
+
+<!-- ##### STRUCT PclSequenceIteratorClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclSetClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclSliceClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclStringClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclSubscriptable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclSubscriptableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@get_item: 
+@set_item: 
+
+<!-- ##### STRUCT PclTableClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclTableRecordClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclTracebackClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclTupleClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclTypeClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### STRUCT PclWeakRefClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### FUNCTION g_string_compare ##### -->
+<para>
+
+</para>
+
+@lhs: 
+@rhs: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_callable_call_function ##### -->
+<para>
+
+</para>
+
+@object: 
+@format: 
+@Varargs: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_callable_call_method ##### -->
+<para>
+
+</para>
+
+@object: 
+@name: 
+@format: 
+@Varargs: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_callable_call_object ##### -->
+<para>
+
+</para>
+
+@object: 
+@args: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_compile_ast ##### -->
+<para>
+
+</para>
+
+@ast: 
+@filename: 
+@base: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_dict_clear ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_dict_items ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_dict_keys ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_dict_values ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_ellipsis ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_false ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_free ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_getset_descr_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_getset_descr_new ##### -->
+<para>
+
+</para>
+
+@type: 
+@getset: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_getset_descriptor_new ##### -->
+<para>
+
+</para>
+
+@type: 
+@getset: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_mapping_popitem ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_member_descr_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_member_descr_new ##### -->
+<para>
+
+</para>
+
+@type: 
+@member: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_member_descriptor_new ##### -->
+<para>
+
+</para>
+
+@type: 
+@member: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_method_descr_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_method_descr_new ##### -->
+<para>
+
+</para>
+
+@type: 
+@method: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_method_descriptor_new ##### -->
+<para>
+
+</para>
+
+@type: 
+@method: 
+@Returns: 
+
+<!-- ##### FUNCTION pcl_none ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_not_implemented ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION pcl_null_error ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### MACRO pcl_object_compare_eq ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+
+<!-- ##### MACRO pcl_object_compare_ge ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+
+<!-- ##### MACRO pcl_object_compare_gt ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+
+<!-- ##### MACRO pcl_object_compare_le ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+
+<!-- ##### MACRO pcl_object_compare_lt ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+
+<!-- ##### MACRO pcl_object_compare_ne ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+
+<!-- ##### MACRO pcl_object_unref_notify ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_true ##### -->
+<para>
+
+</para>
+
+@Returns: 
+

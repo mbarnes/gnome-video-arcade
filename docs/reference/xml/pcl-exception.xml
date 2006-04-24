@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclException">
+<refmeta>
+<refentrytitle>PclException</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclException</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclException-struct">PclException</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-get-type-object">pcl_exception_get_type_object</link>   (void);
+const <link linkend="gchar">gchar</link>* <link linkend="pcl-exception-get-name">pcl_exception_get_name</link>         (<link linkend="PclObject">PclObject</link> *self);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-assertion-error">pcl_exception_assertion_error</link>   (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-attribute-error">pcl_exception_attribute_error</link>   (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-eof-error">pcl_exception_eof_error</link>         (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-floating-point-error">pcl_exception_floating_point_error</link>
+                                            (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-io-error">pcl_exception_io_error</link>          (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-import-error">pcl_exception_import_error</link>      (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-index-error">pcl_exception_index_error</link>       (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-key-error">pcl_exception_key_error</link>         (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-keyboard-interrupt">pcl_exception_keyboard_interrupt</link>
+                                            (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-memory-error">pcl_exception_memory_error</link>      (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-name-error">pcl_exception_name_error</link>        (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-not-implemented-error">pcl_exception_not_implemented_error</link>
+                                            (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-os-error">pcl_exception_os_error</link>          (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-overflow-error">pcl_exception_overflow_error</link>    (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-reference-error">pcl_exception_reference_error</link>   (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-runtime-error">pcl_exception_runtime_error</link>     (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-stop-iteration">pcl_exception_stop_iteration</link>    (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-syntax-error">pcl_exception_syntax_error</link>      (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-system-error">pcl_exception_system_error</link>      (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-system-exit">pcl_exception_system_exit</link>       (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-type-error">pcl_exception_type_error</link>        (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-unbound-local-error">pcl_exception_unbound_local_error</link>
+                                            (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-value-error">pcl_exception_value_error</link>       (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-exception-zero-division-error">pcl_exception_zero_division_error</link>
+                                            (void);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----PclException
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclException-struct"/>PclException</title>
+<indexterm><primary>PclException</primary></indexterm><programlisting>typedef struct _PclException PclException;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-get-type-object"/>pcl_exception_get_type_object ()</title>
+<indexterm><primary>pcl_exception_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_get_type_object   (void);</programlisting>
+<para>
+Returns the type object for <link linkend="PclException"><type>PclException</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the type object for <link linkend="PclException"><type>PclException</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-get-name"/>pcl_exception_get_name ()</title>
+<indexterm><primary>pcl_exception_get_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>* pcl_exception_get_name         (<link linkend="PclObject">PclObject</link> *self);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-assertion-error"/>pcl_exception_assertion_error ()</title>
+<indexterm><primary>pcl_exception_assertion_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_assertion_error   (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-attribute-error"/>pcl_exception_attribute_error ()</title>
+<indexterm><primary>pcl_exception_attribute_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_attribute_error   (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-eof-error"/>pcl_exception_eof_error ()</title>
+<indexterm><primary>pcl_exception_eof_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_eof_error         (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-floating-point-error"/>pcl_exception_floating_point_error ()</title>
+<indexterm><primary>pcl_exception_floating_point_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_floating_point_error
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-io-error"/>pcl_exception_io_error ()</title>
+<indexterm><primary>pcl_exception_io_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_io_error          (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-import-error"/>pcl_exception_import_error ()</title>
+<indexterm><primary>pcl_exception_import_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_import_error      (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-index-error"/>pcl_exception_index_error ()</title>
+<indexterm><primary>pcl_exception_index_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_index_error       (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-key-error"/>pcl_exception_key_error ()</title>
+<indexterm><primary>pcl_exception_key_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_key_error         (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-keyboard-interrupt"/>pcl_exception_keyboard_interrupt ()</title>
+<indexterm><primary>pcl_exception_keyboard_interrupt</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_keyboard_interrupt
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-memory-error"/>pcl_exception_memory_error ()</title>
+<indexterm><primary>pcl_exception_memory_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_memory_error      (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-name-error"/>pcl_exception_name_error ()</title>
+<indexterm><primary>pcl_exception_name_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_name_error        (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-not-implemented-error"/>pcl_exception_not_implemented_error ()</title>
+<indexterm><primary>pcl_exception_not_implemented_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_not_implemented_error
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-os-error"/>pcl_exception_os_error ()</title>
+<indexterm><primary>pcl_exception_os_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_os_error          (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-overflow-error"/>pcl_exception_overflow_error ()</title>
+<indexterm><primary>pcl_exception_overflow_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_overflow_error    (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-reference-error"/>pcl_exception_reference_error ()</title>
+<indexterm><primary>pcl_exception_reference_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_reference_error   (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-runtime-error"/>pcl_exception_runtime_error ()</title>
+<indexterm><primary>pcl_exception_runtime_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_runtime_error     (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-stop-iteration"/>pcl_exception_stop_iteration ()</title>
+<indexterm><primary>pcl_exception_stop_iteration</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_stop_iteration    (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-syntax-error"/>pcl_exception_syntax_error ()</title>
+<indexterm><primary>pcl_exception_syntax_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_syntax_error      (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-system-error"/>pcl_exception_system_error ()</title>
+<indexterm><primary>pcl_exception_system_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_system_error      (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-system-exit"/>pcl_exception_system_exit ()</title>
+<indexterm><primary>pcl_exception_system_exit</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_system_exit       (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-type-error"/>pcl_exception_type_error ()</title>
+<indexterm><primary>pcl_exception_type_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_type_error        (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-unbound-local-error"/>pcl_exception_unbound_local_error ()</title>
+<indexterm><primary>pcl_exception_unbound_local_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_unbound_local_error
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-value-error"/>pcl_exception_value_error ()</title>
+<indexterm><primary>pcl_exception_value_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_value_error       (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-exception-zero-division-error"/>pcl_exception_zero_division_error ()</title>
+<indexterm><primary>pcl_exception_zero_division_error</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_exception_zero_division_error
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

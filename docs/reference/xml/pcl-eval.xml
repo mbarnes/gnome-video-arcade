@@ -1,0 +1,408 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="pcl-pcl-eval">
+<refmeta>
+<refentrytitle>pcl-eval</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>pcl-eval</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-add-pending-call">pcl_add_pending_call</link>            (<link linkend="gboolean">gboolean</link> (*func) (gpointer),
+                                             <link linkend="gpointer">gpointer</link> arg);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-make-pending-calls">pcl_make_pending_calls</link>          (void);
+<link linkend="gint">gint</link>        <link linkend="pcl-get-recursion-limit">pcl_get_recursion_limit</link>         (void);
+<link linkend="void">void</link>        <link linkend="pcl-set-recursion-limit">pcl_set_recursion_limit</link>         (<link linkend="gint">gint</link> limit);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-enter-recursive-call">pcl_enter_recursive_call</link>        (void);
+<link linkend="void">void</link>        <link linkend="pcl-leave-recursive-call">pcl_leave_recursive_call</link>        (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-frame">pcl_eval_frame</link>                  (<link linkend="PclFrame">PclFrame</link> *frame);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-code">pcl_eval_code</link>                   (<link linkend="PclCode">PclCode</link> *code,
+                                             <link linkend="PclObject">PclObject</link> *globals,
+                                             <link linkend="PclObject">PclObject</link> *locals);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-code-ex">pcl_eval_code_ex</link>                (<link linkend="PclCode">PclCode</link> *code,
+                                             <link linkend="PclObject">PclObject</link> *globals,
+                                             <link linkend="PclObject">PclObject</link> *locals,
+                                             <link linkend="PclObject">PclObject</link> **arguments,
+                                             <link linkend="glong">glong</link> n_arguments_given,
+                                             <link linkend="PclObject">PclObject</link> **keywords,
+                                             <link linkend="glong">glong</link> n_keywords_given,
+                                             <link linkend="PclObject">PclObject</link> **defaults,
+                                             <link linkend="glong">glong</link> n_defaults_given,
+                                             <link linkend="PclObject">PclObject</link> *closure);
+<link linkend="PclFrame">PclFrame</link>*   <link linkend="pcl-eval-get-frame">pcl_eval_get_frame</link>              (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-get-builtins">pcl_eval_get_builtins</link>           (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-get-globals">pcl_eval_get_globals</link>            (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-get-locals">pcl_eval_get_locals</link>             (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-call-object-with-keywords">pcl_eval_call_object_with_keywords</link>
+                                            (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *arguments,
+                                             <link linkend="PclObject">PclObject</link> *keywords);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-eval-call-function">pcl_eval_call_function</link>          (<link linkend="PclFunction">PclFunction</link> *function,
+                                             const <link linkend="gchar">gchar</link> *format,
+                                             ...);
+const <link linkend="gchar">gchar</link>* <link linkend="pcl-eval-get-func-name">pcl_eval_get_func_name</link>         (<link linkend="PclObject">PclObject</link> *func);
+const <link linkend="gchar">gchar</link>* <link linkend="pcl-eval-get-func-desc">pcl_eval_get_func_desc</link>         (<link linkend="PclObject">PclObject</link> *func);
+<link linkend="void">void</link>        <link linkend="pcl-eval-set-profile">pcl_eval_set_profile</link>            (<link linkend="PclTraceFunc">PclTraceFunc</link> function,
+                                             <link linkend="PclObject">PclObject</link> *object);
+<link linkend="void">void</link>        <link linkend="pcl-eval-set-trace">pcl_eval_set_trace</link>              (<link linkend="PclTraceFunc">PclTraceFunc</link> function,
+                                             <link linkend="PclObject">PclObject</link> *object);
+#define     <link linkend="pcl-eval-call-object">pcl_eval_call_object</link>            (object, arguments)
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="pcl-add-pending-call"/>pcl_add_pending_call ()</title>
+<indexterm><primary>pcl_add_pending_call</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_add_pending_call            (<link linkend="gboolean">gboolean</link> (*func) (gpointer),
+                                             <link linkend="gpointer">gpointer</link> arg);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>func</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arg</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-make-pending-calls"/>pcl_make_pending_calls ()</title>
+<indexterm><primary>pcl_make_pending_calls</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_make_pending_calls          (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-get-recursion-limit"/>pcl_get_recursion_limit ()</title>
+<indexterm><primary>pcl_get_recursion_limit</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_get_recursion_limit         (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-set-recursion-limit"/>pcl_set_recursion_limit ()</title>
+<indexterm><primary>pcl_set_recursion_limit</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_set_recursion_limit         (<link linkend="gint">gint</link> limit);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>limit</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-enter-recursive-call"/>pcl_enter_recursive_call ()</title>
+<indexterm><primary>pcl_enter_recursive_call</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_enter_recursive_call        (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-leave-recursive-call"/>pcl_leave_recursive_call ()</title>
+<indexterm><primary>pcl_leave_recursive_call</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_leave_recursive_call        (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-frame"/>pcl_eval_frame ()</title>
+<indexterm><primary>pcl_eval_frame</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_frame                  (<link linkend="PclFrame">PclFrame</link> *frame);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>frame</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-code"/>pcl_eval_code ()</title>
+<indexterm><primary>pcl_eval_code</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_code                   (<link linkend="PclCode">PclCode</link> *code,
+                                             <link linkend="PclObject">PclObject</link> *globals,
+                                             <link linkend="PclObject">PclObject</link> *locals);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>code</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>globals</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>locals</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-code-ex"/>pcl_eval_code_ex ()</title>
+<indexterm><primary>pcl_eval_code_ex</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_code_ex                (<link linkend="PclCode">PclCode</link> *code,
+                                             <link linkend="PclObject">PclObject</link> *globals,
+                                             <link linkend="PclObject">PclObject</link> *locals,
+                                             <link linkend="PclObject">PclObject</link> **arguments,
+                                             <link linkend="glong">glong</link> n_arguments_given,
+                                             <link linkend="PclObject">PclObject</link> **keywords,
+                                             <link linkend="glong">glong</link> n_keywords_given,
+                                             <link linkend="PclObject">PclObject</link> **defaults,
+                                             <link linkend="glong">glong</link> n_defaults_given,
+                                             <link linkend="PclObject">PclObject</link> *closure);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>code</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>globals</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>locals</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arguments</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>n_arguments_given</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keywords</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>n_keywords_given</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>defaults</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>n_defaults_given</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>closure</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-get-frame"/>pcl_eval_get_frame ()</title>
+<indexterm><primary>pcl_eval_get_frame</primary></indexterm><programlisting><link linkend="PclFrame">PclFrame</link>*   pcl_eval_get_frame              (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-get-builtins"/>pcl_eval_get_builtins ()</title>
+<indexterm><primary>pcl_eval_get_builtins</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_get_builtins           (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-get-globals"/>pcl_eval_get_globals ()</title>
+<indexterm><primary>pcl_eval_get_globals</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_get_globals            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-get-locals"/>pcl_eval_get_locals ()</title>
+<indexterm><primary>pcl_eval_get_locals</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_get_locals             (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-call-object-with-keywords"/>pcl_eval_call_object_with_keywords ()</title>
+<indexterm><primary>pcl_eval_call_object_with_keywords</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_call_object_with_keywords
+                                            (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *arguments,
+                                             <link linkend="PclObject">PclObject</link> *keywords);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arguments</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keywords</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-call-function"/>pcl_eval_call_function ()</title>
+<indexterm><primary>pcl_eval_call_function</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_eval_call_function          (<link linkend="PclFunction">PclFunction</link> *function,
+                                             const <link linkend="gchar">gchar</link> *format,
+                                             ...);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>function</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-get-func-name"/>pcl_eval_get_func_name ()</title>
+<indexterm><primary>pcl_eval_get_func_name</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>* pcl_eval_get_func_name         (<link linkend="PclObject">PclObject</link> *func);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>func</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-get-func-desc"/>pcl_eval_get_func_desc ()</title>
+<indexterm><primary>pcl_eval_get_func_desc</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>* pcl_eval_get_func_desc         (<link linkend="PclObject">PclObject</link> *func);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>func</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-set-profile"/>pcl_eval_set_profile ()</title>
+<indexterm><primary>pcl_eval_set_profile</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_eval_set_profile            (<link linkend="PclTraceFunc">PclTraceFunc</link> function,
+                                             <link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>function</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-set-trace"/>pcl_eval_set_trace ()</title>
+<indexterm><primary>pcl_eval_set_trace</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_eval_set_trace              (<link linkend="PclTraceFunc">PclTraceFunc</link> function,
+                                             <link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>function</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-eval-call-object"/>pcl_eval_call_object()</title>
+<indexterm><primary>pcl_eval_call_object</primary></indexterm><programlisting>#define     pcl_eval_call_object(object, arguments)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arguments</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

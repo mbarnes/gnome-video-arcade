@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclCode">
+<refmeta>
+<refentrytitle>PclCode</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclCode</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclCode-struct">PclCode</link>;
+enum        <link linkend="PclCodeFlags">PclCodeFlags</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-code-get-type-object">pcl_code_get_type_object</link>        (void);
+<link linkend="PclCode">PclCode</link>*    <link linkend="pcl-code-new">pcl_code_new</link>                    (<link linkend="guint">guint</link> argument_count,
+                                             <link linkend="guint">guint</link> variable_count,
+                                             <link linkend="gulong">gulong</link> stack_size,
+                                             <link linkend="PclObject">PclObject</link> *instructions,
+                                             <link linkend="PclObject">PclObject</link> *lineno_table,
+                                             <link linkend="PclObject">PclObject</link> *constants,
+                                             <link linkend="PclObject">PclObject</link> *names,
+                                             <link linkend="PclObject">PclObject</link> *varnames,
+                                             <link linkend="PclObject">PclObject</link> *freevars,
+                                             <link linkend="PclObject">PclObject</link> *cellvars,
+                                             <link linkend="PclObject">PclObject</link> *filename,
+                                             <link linkend="PclObject">PclObject</link> *name,
+                                             <link linkend="gint">gint</link> first_lineno,
+                                             <link linkend="PclCodeFlags">PclCodeFlags</link> flags);
+<link linkend="gint">gint</link>        <link linkend="pcl-code-addr-to-line">pcl_code_addr_to_line</link>           (<link linkend="PclCode">PclCode</link> *code,
+                                             <link linkend="gint">gint</link> addrq);
+#define     <link linkend="PCL-CODE-GET-NUM-FREE:CAPS">PCL_CODE_GET_NUM_FREE</link>           (obj)
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----<link linkend="PclContainer">PclContainer</link>
+               +----PclCode
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclCode-struct"/>PclCode</title>
+<indexterm><primary>PclCode</primary></indexterm><programlisting>typedef struct _PclCode PclCode;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclCodeFlags"/>enum PclCodeFlags</title>
+<indexterm><primary>PclCodeFlags</primary></indexterm><programlisting>typedef enum {
+        PCL_CODE_FLAG_NEWLOCALS         = 1 &lt;&lt; 0,
+        PCL_CODE_FLAG_GENERATOR         = 1 &lt;&lt; 1,
+        PCL_CODE_FLAG_PREDICATE         = 1 &lt;&lt; 2,
+        PCL_CODE_FLAG_CONJUNCTION       = 1 &lt;&lt; 3,
+        PCL_CODE_FLAG_NOFREE            = 1 &lt;&lt; 4,
+        PCL_CODE_FLAG_VARARGS           = 1 &lt;&lt; 5,
+        PCL_CODE_FLAG_VARKWDS           = 1 &lt;&lt; 6
+} PclCodeFlags;
+</programlisting>
+<para>
+Used to check or determine characteristics of a <link linkend="PclCode"><type>PclCode</type></link> object.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry>
+<term><literal>PCL_CODE_FLAG_NEWLOCALS</literal></term>
+<listitem><simpara>
+     Code object defines its own local namespace (as opposed to sharing the
+     global namespace).
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_CODE_FLAG_GENERATOR</literal></term>
+<listitem><simpara>
+     Code object is a generator expression or a function containing a
+     <parameter>yield</parameter> statement.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_CODE_FLAG_PREDICATE</literal></term>
+<listitem><simpara>
+     Code object is a predicate function.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_CODE_FLAG_CONJUNCTION</literal></term>
+<listitem><simpara>
+     Code object is a conjunction within a predicate function.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_CODE_FLAG_NOFREE</literal></term>
+<listitem><simpara>
+     Code object contains no free variables in its own namespace or in any
+     of its nested namespaces.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_CODE_FLAG_VARARGS</literal></term>
+<listitem><simpara>
+     Code object accepts variable-length arguments.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_CODE_FLAG_VARKWDS</literal></term>
+<listitem><simpara>
+     Code object accepts variable-length keyword arguments.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-code-get-type-object"/>pcl_code_get_type_object ()</title>
+<indexterm><primary>pcl_code_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_code_get_type_object        (void);</programlisting>
+<para>
+Returns the type object for <link linkend="PclCode"><type>PclCode</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the type object for <link linkend="PclCode"><type>PclCode</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-code-new"/>pcl_code_new ()</title>
+<indexterm><primary>pcl_code_new</primary></indexterm><programlisting><link linkend="PclCode">PclCode</link>*    pcl_code_new                    (<link linkend="guint">guint</link> argument_count,
+                                             <link linkend="guint">guint</link> variable_count,
+                                             <link linkend="gulong">gulong</link> stack_size,
+                                             <link linkend="PclObject">PclObject</link> *instructions,
+                                             <link linkend="PclObject">PclObject</link> *lineno_table,
+                                             <link linkend="PclObject">PclObject</link> *constants,
+                                             <link linkend="PclObject">PclObject</link> *names,
+                                             <link linkend="PclObject">PclObject</link> *varnames,
+                                             <link linkend="PclObject">PclObject</link> *freevars,
+                                             <link linkend="PclObject">PclObject</link> *cellvars,
+                                             <link linkend="PclObject">PclObject</link> *filename,
+                                             <link linkend="PclObject">PclObject</link> *name,
+                                             <link linkend="gint">gint</link> first_lineno,
+                                             <link linkend="PclCodeFlags">PclCodeFlags</link> flags);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>argument_count</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>variable_count</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>stack_size</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>instructions</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>lineno_table</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>constants</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>names</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>varnames</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>freevars</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cellvars</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>filename</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>first_lineno</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-code-addr-to-line"/>pcl_code_addr_to_line ()</title>
+<indexterm><primary>pcl_code_addr_to_line</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_code_addr_to_line           (<link linkend="PclCode">PclCode</link> *code,
+                                             <link linkend="gint">gint</link> addrq);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>code</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>addrq</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-CODE-GET-NUM-FREE:CAPS"/>PCL_CODE_GET_NUM_FREE()</title>
+<indexterm><primary>PCL_CODE_GET_NUM_FREE</primary></indexterm><programlisting>#define     PCL_CODE_GET_NUM_FREE(obj)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

@@ -1,0 +1,935 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclObject">
+<refmeta>
+<refentrytitle>PclObject</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclObject</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclObject-struct">PclObject</link>;
+enum        <link linkend="PclObjectFlags">PclObjectFlags</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-get-type-object">pcl_object_get_type_object</link>      (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-type">pcl_object_type</link>                 (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-clone">pcl_object_clone</link>                (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-object-print">pcl_object_print</link>                (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="FILE:CAPS">FILE</link> *stream,
+                                             <link linkend="PclPrintFlags">PclPrintFlags</link> flags);
+enum        <link linkend="PclPrintFlags">PclPrintFlags</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-call">pcl_object_call</link>                 (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *args,
+                                             <link linkend="PclObject">PclObject</link> *kwds);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-call-function">pcl_object_call_function</link>        (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *format,
+                                             ...);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-call-method">pcl_object_call_method</link>          (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name,
+                                             const <link linkend="gchar">gchar</link> *format,
+                                             ...);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-call-object">pcl_object_call_object</link>          (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *args);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-copy">pcl_object_copy</link>                 (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-get-dict">pcl_object_get_dict</link>             (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="guint">guint</link>       <link linkend="pcl-object-hash">pcl_object_hash</link>                 (<link linkend="PclObject">PclObject</link> *object);
+#define     <link linkend="PCL-HASH-INVALID:CAPS">PCL_HASH_INVALID</link>
+#define     <link linkend="PCL-HASH-DEFAULT:CAPS">PCL_HASH_DEFAULT</link>
+#define     <link linkend="PCL-HASH-VALIDATE:CAPS">PCL_HASH_VALIDATE</link>               (hash)
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-repr">pcl_object_repr</link>                 (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-str">pcl_object_str</link>                  (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="guint">guint</link>       <link linkend="pcl-object-hash-pointer">pcl_object_hash_pointer</link>         (<link linkend="gpointer">gpointer</link> pointer);
+<link linkend="gint">gint</link>        <link linkend="pcl-object-compare">pcl_object_compare</link>              (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-rich-compare">pcl_object_rich_compare</link>         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclRichCompareOps">PclRichCompareOps</link> op);
+enum        <link linkend="PclRichCompareOps">PclRichCompareOps</link>;
+<link linkend="gint">gint</link>        <link linkend="pcl-object-rich-compare-bool">pcl_object_rich_compare_bool</link>    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclRichCompareOps">PclRichCompareOps</link> op);
+<link linkend="gint">gint</link>        <link linkend="pcl-object-contains">pcl_object_contains</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *value);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-iterate">pcl_object_iterate</link>              (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="glong">glong</link>       <link linkend="pcl-object-measure">pcl_object_measure</link>              (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-get-attr">pcl_object_get_attr</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *name);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-object-has-attr">pcl_object_has_attr</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *name);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-object-set-attr">pcl_object_set_attr</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *value);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-get-attr-string">pcl_object_get_attr_string</link>      (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-object-has-attr-string">pcl_object_has_attr_string</link>      (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-object-set-attr-string">pcl_object_set_attr_string</link>      (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *value);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-get-item">pcl_object_get_item</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *subscript);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-object-set-item">pcl_object_set_item</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *subscript,
+                                             <link linkend="PclObject">PclObject</link> *value);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-object-del-item">pcl_object_del_item</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *subscript);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-dir">pcl_object_dir</link>                  (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="gint">gint</link>        <link linkend="pcl-object-is-instance">pcl_object_is_instance</link>          (<link linkend="PclObject">PclObject</link> *instance,
+                                             <link linkend="PclObject">PclObject</link> *of);
+<link linkend="gint">gint</link>        <link linkend="pcl-object-is-subclass">pcl_object_is_subclass</link>          (<link linkend="PclObject">PclObject</link> *subclass,
+                                             <link linkend="PclObject">PclObject</link> *of);
+<link linkend="gint">gint</link>        <link linkend="pcl-object-is-true">pcl_object_is_true</link>              (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="gint">gint</link>        <link linkend="pcl-object-not">pcl_object_not</link>                  (<link linkend="PclObject">PclObject</link> *object);
+#define     <link linkend="PCL-DATA-GETSETS:CAPS">PCL_DATA_GETSETS</link>
+#define     <link linkend="PCL-DATA-MEMBERS:CAPS">PCL_DATA_MEMBERS</link>
+#define     <link linkend="PCL-DATA-METHODS:CAPS">PCL_DATA_METHODS</link>
+#define     <link linkend="PCL-IS-CALLABLE:CAPS">PCL_IS_CALLABLE</link>                 (obj)
+#define     <link linkend="PCL-IS-ITERABLE:CAPS">PCL_IS_ITERABLE</link>                 (obj)
+#define     <link linkend="PCL-IS-MEASURABLE:CAPS">PCL_IS_MEASURABLE</link>               (obj)
+#define     <link linkend="PCL-OBJECT-GET-FLAGS:CAPS">PCL_OBJECT_GET_FLAGS</link>            (obj)
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----PclObject
+         +----<link linkend="PclContainer">PclContainer</link>
+         +----<link linkend="PclInt">PclInt</link>
+         +----<link linkend="PclComplex">PclComplex</link>
+         +----<link linkend="PclEllipsis">PclEllipsis</link>
+         +----<link linkend="PclException">PclException</link>
+         +----<link linkend="PclFloat">PclFloat</link>
+         +----<link linkend="PclFree">PclFree</link>
+         +----<link linkend="PclLong">PclLong</link>
+         +----<link linkend="PclNone">PclNone</link>
+         +----<link linkend="PclNotImplemented">PclNotImplemented</link>
+         +----<link linkend="PclString">PclString</link>
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclObject-struct"/>PclObject</title>
+<indexterm><primary>PclObject</primary></indexterm><programlisting>typedef struct _PclObject PclObject;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclObjectFlags"/>enum PclObjectFlags</title>
+<indexterm><primary>PclObjectFlags</primary></indexterm><programlisting>typedef enum {
+        PCL_OBJECT_FLAG_SINGLETON       = 1 &lt;&lt; 0,
+        PCL_OBJECT_FLAG_RECYCLABLE      = 1 &lt;&lt; 1
+} PclObjectFlags;
+</programlisting>
+<para>
+Used to check or determine characteristics of a <link linkend="PclObject"><type>PclObject</type></link>.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry>
+<term><literal>PCL_OBJECT_FLAG_SINGLETON</literal></term>
+<listitem><simpara>
+     This is the only instance of its type. 
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_OBJECT_FLAG_RECYCLABLE</literal></term>
+<listitem><simpara>
+     A <link linkend="PclFactory"><type>PclFactory</type></link> will try to recycle this object once it is no longer
+     being used.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-get-type-object"/>pcl_object_get_type_object ()</title>
+<indexterm><primary>pcl_object_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_get_type_object      (void);</programlisting>
+<para>
+Returns the type object for <link linkend="PclObject"><type>PclObject</type></link>.  During runtime this is the built-in
+object <literal>object</literal>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the type object for <link linkend="PclObject"><type>PclObject</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-type"/>pcl_object_type ()</title>
+<indexterm><primary>pcl_object_type</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_type                 (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-clone"/>pcl_object_clone ()</title>
+<indexterm><primary>pcl_object_clone</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_clone                (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-print"/>pcl_object_print ()</title>
+<indexterm><primary>pcl_object_print</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_object_print                (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="FILE:CAPS">FILE</link> *stream,
+                                             <link linkend="PclPrintFlags">PclPrintFlags</link> flags);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>stream</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PclPrintFlags"/>enum PclPrintFlags</title>
+<indexterm><primary>PclPrintFlags</primary></indexterm><programlisting>typedef enum {
+        PCL_PRINT_FLAG_RAW      = 1 &lt;&lt; 0
+} PclPrintFlags;
+</programlisting>
+<para>
+Used to specify options for <link linkend="pcl-object-print"><function>pcl_object_print()</function></link>.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry>
+<term><literal>PCL_PRINT_FLAG_RAW</literal></term>
+<listitem><simpara>
+     Write the <link linkend="str"><function>str()</function></link> of the object instead of the <link linkend="repr"><function>repr()</function></link>.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-call"/>pcl_object_call ()</title>
+<indexterm><primary>pcl_object_call</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_call                 (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *args,
+                                             <link linkend="PclObject">PclObject</link> *kwds);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>args</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>kwds</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-call-function"/>pcl_object_call_function ()</title>
+<indexterm><primary>pcl_object_call_function</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_call_function        (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *format,
+                                             ...);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-call-method"/>pcl_object_call_method ()</title>
+<indexterm><primary>pcl_object_call_method</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_call_method          (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name,
+                                             const <link linkend="gchar">gchar</link> *format,
+                                             ...);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>...</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-call-object"/>pcl_object_call_object ()</title>
+<indexterm><primary>pcl_object_call_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_call_object          (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *args);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>args</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-copy"/>pcl_object_copy ()</title>
+<indexterm><primary>pcl_object_copy</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_copy                 (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-get-dict"/>pcl_object_get_dict ()</title>
+<indexterm><primary>pcl_object_get_dict</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_get_dict             (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-hash"/>pcl_object_hash ()</title>
+<indexterm><primary>pcl_object_hash</primary></indexterm><programlisting><link linkend="guint">guint</link>       pcl_object_hash                 (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-HASH-INVALID:CAPS"/>PCL_HASH_INVALID</title>
+<indexterm><primary>PCL_HASH_INVALID</primary></indexterm><programlisting>#define PCL_HASH_INVALID (G_MAXUINT)
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-HASH-DEFAULT:CAPS"/>PCL_HASH_DEFAULT</title>
+<indexterm><primary>PCL_HASH_DEFAULT</primary></indexterm><programlisting>#define PCL_HASH_DEFAULT (G_MAXUINT - 1)
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-HASH-VALIDATE:CAPS"/>PCL_HASH_VALIDATE()</title>
+<indexterm><primary>PCL_HASH_VALIDATE</primary></indexterm><programlisting>#define     PCL_HASH_VALIDATE(hash)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>hash</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-repr"/>pcl_object_repr ()</title>
+<indexterm><primary>pcl_object_repr</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_repr                 (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-str"/>pcl_object_str ()</title>
+<indexterm><primary>pcl_object_str</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_str                  (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-hash-pointer"/>pcl_object_hash_pointer ()</title>
+<indexterm><primary>pcl_object_hash_pointer</primary></indexterm><programlisting><link linkend="guint">guint</link>       pcl_object_hash_pointer         (<link linkend="gpointer">gpointer</link> pointer);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>pointer</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-compare"/>pcl_object_compare ()</title>
+<indexterm><primary>pcl_object_compare</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_compare              (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-rich-compare"/>pcl_object_rich_compare ()</title>
+<indexterm><primary>pcl_object_rich_compare</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_rich_compare         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclRichCompareOps">PclRichCompareOps</link> op);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>op</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PclRichCompareOps"/>enum PclRichCompareOps</title>
+<indexterm><primary>PclRichCompareOps</primary></indexterm><programlisting>typedef enum {
+        PCL_LT,
+        PCL_LE,
+        PCL_EQ,
+        PCL_NE,
+        PCL_GT,
+        PCL_GE
+} PclRichCompareOps;
+</programlisting>
+<para>
+Used to specifiy the desired rich-comparison operation.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry>
+<term><literal>PCL_LT</literal></term>
+<listitem><simpara>  Less than
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_LE</literal></term>
+<listitem><simpara>  Less than or equal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_EQ</literal></term>
+<listitem><simpara>  Equal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_NE</literal></term>
+<listitem><simpara>  Not equal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_GT</literal></term>
+<listitem><simpara>  Greater than
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>PCL_GE</literal></term>
+<listitem><simpara>  Greater than or equal
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-rich-compare-bool"/>pcl_object_rich_compare_bool ()</title>
+<indexterm><primary>pcl_object_rich_compare_bool</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_rich_compare_bool    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclRichCompareOps">PclRichCompareOps</link> op);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>op</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-contains"/>pcl_object_contains ()</title>
+<indexterm><primary>pcl_object_contains</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_contains             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *value);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-iterate"/>pcl_object_iterate ()</title>
+<indexterm><primary>pcl_object_iterate</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_iterate              (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-measure"/>pcl_object_measure ()</title>
+<indexterm><primary>pcl_object_measure</primary></indexterm><programlisting><link linkend="glong">glong</link>       pcl_object_measure              (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-get-attr"/>pcl_object_get_attr ()</title>
+<indexterm><primary>pcl_object_get_attr</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_get_attr             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-has-attr"/>pcl_object_has_attr ()</title>
+<indexterm><primary>pcl_object_has_attr</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_object_has_attr             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-set-attr"/>pcl_object_set_attr ()</title>
+<indexterm><primary>pcl_object_set_attr</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_object_set_attr             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *value);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-get-attr-string"/>pcl_object_get_attr_string ()</title>
+<indexterm><primary>pcl_object_get_attr_string</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_get_attr_string      (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-has-attr-string"/>pcl_object_has_attr_string ()</title>
+<indexterm><primary>pcl_object_has_attr_string</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_object_has_attr_string      (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-set-attr-string"/>pcl_object_set_attr_string ()</title>
+<indexterm><primary>pcl_object_set_attr_string</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_object_set_attr_string      (<link linkend="PclObject">PclObject</link> *object,
+                                             const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *value);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-get-item"/>pcl_object_get_item ()</title>
+<indexterm><primary>pcl_object_get_item</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_get_item             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *subscript);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subscript</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-set-item"/>pcl_object_set_item ()</title>
+<indexterm><primary>pcl_object_set_item</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_object_set_item             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *subscript,
+                                             <link linkend="PclObject">PclObject</link> *value);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subscript</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-del-item"/>pcl_object_del_item ()</title>
+<indexterm><primary>pcl_object_del_item</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_object_del_item             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *subscript);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subscript</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-dir"/>pcl_object_dir ()</title>
+<indexterm><primary>pcl_object_dir</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_dir                  (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-is-instance"/>pcl_object_is_instance ()</title>
+<indexterm><primary>pcl_object_is_instance</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_is_instance          (<link linkend="PclObject">PclObject</link> *instance,
+                                             <link linkend="PclObject">PclObject</link> *of);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>instance</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>of</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-is-subclass"/>pcl_object_is_subclass ()</title>
+<indexterm><primary>pcl_object_is_subclass</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_is_subclass          (<link linkend="PclObject">PclObject</link> *subclass,
+                                             <link linkend="PclObject">PclObject</link> *of);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>subclass</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>of</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-is-true"/>pcl_object_is_true ()</title>
+<indexterm><primary>pcl_object_is_true</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_is_true              (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-not"/>pcl_object_not ()</title>
+<indexterm><primary>pcl_object_not</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_not                  (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-DATA-GETSETS:CAPS"/>PCL_DATA_GETSETS</title>
+<indexterm><primary>PCL_DATA_GETSETS</primary></indexterm><programlisting>#define PCL_DATA_GETSETS        (pcl_data_getsets_quark ())
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-DATA-MEMBERS:CAPS"/>PCL_DATA_MEMBERS</title>
+<indexterm><primary>PCL_DATA_MEMBERS</primary></indexterm><programlisting>#define PCL_DATA_MEMBERS        (pcl_data_members_quark ())
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-DATA-METHODS:CAPS"/>PCL_DATA_METHODS</title>
+<indexterm><primary>PCL_DATA_METHODS</primary></indexterm><programlisting>#define PCL_DATA_METHODS        (pcl_data_methods_quark ())
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-IS-CALLABLE:CAPS"/>PCL_IS_CALLABLE()</title>
+<indexterm><primary>PCL_IS_CALLABLE</primary></indexterm><programlisting>#define     PCL_IS_CALLABLE(obj)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-IS-ITERABLE:CAPS"/>PCL_IS_ITERABLE()</title>
+<indexterm><primary>PCL_IS_ITERABLE</primary></indexterm><programlisting>#define     PCL_IS_ITERABLE(obj)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-IS-MEASURABLE:CAPS"/>PCL_IS_MEASURABLE()</title>
+<indexterm><primary>PCL_IS_MEASURABLE</primary></indexterm><programlisting>#define     PCL_IS_MEASURABLE(obj)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-OBJECT-GET-FLAGS:CAPS"/>PCL_OBJECT_GET_FLAGS()</title>
+<indexterm><primary>PCL_OBJECT_GET_FLAGS</primary></indexterm><programlisting>#define     PCL_OBJECT_GET_FLAGS(obj)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

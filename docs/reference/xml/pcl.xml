@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="pcl-pcl">
+<refmeta>
+<refentrytitle>pcl</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>pcl</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+<link linkend="void">void</link>        <link linkend="pcl-initialize">pcl_initialize</link>                  (void);
+<link linkend="void">void</link>        <link linkend="pcl-finalize">pcl_finalize</link>                    (void);
+<link linkend="void">void</link>        <link linkend="pcl-exit">pcl_exit</link>                        (<link linkend="gint">gint</link> status);
+<link linkend="gboolean">gboolean</link>    <link linkend="pcl-at-exit">pcl_at_exit</link>                     (<link linkend="GVoidFunc">GVoidFunc</link> func);
+<link linkend="PclParseInfo">PclParseInfo</link>* <link linkend="pcl-parse-input-file">pcl_parse_input_file</link>          (<link linkend="FILE:CAPS">FILE</link> *stream,
+                                             const <link linkend="gchar">gchar</link> *filename,
+                                             <link linkend="gint">gint</link> start);
+<link linkend="PclParseInfo">PclParseInfo</link>* <link linkend="pcl-parse-input-file-with-prompts">pcl_parse_input_file_with_prompts</link>
+                                            (<link linkend="FILE:CAPS">FILE</link> *stream,
+                                             const <link linkend="gchar">gchar</link> *filename,
+                                             <link linkend="gint">gint</link> start,
+                                             const <link linkend="gchar">gchar</link> *ps1,
+                                             const <link linkend="gchar">gchar</link> *ps2);
+<link linkend="PclParseInfo">PclParseInfo</link>* <link linkend="pcl-parse-input-string">pcl_parse_input_string</link>        (const <link linkend="gchar">gchar</link> *string,
+                                             <link linkend="gint">gint</link> start);
+<link linkend="void">void</link>        <link linkend="pcl-register-singleton">pcl_register_singleton</link>          (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="gpointer">gpointer</link> *p_object);
+#define     <link linkend="pcl-object-ref">pcl_object_ref</link>
+#define     <link linkend="pcl-object-unref">pcl_object_unref</link>
+#define     <link linkend="pcl-object-new">pcl_object_new</link>
+#define     <link linkend="PCL-CLEAR:CAPS">PCL_CLEAR</link>                       (obj)
+extern      const gint <link linkend="PCL-EVAL-INPUT:CAPS">PCL_EVAL_INPUT</link>;
+extern      const gint <link linkend="PCL-FILE-INPUT:CAPS">PCL_FILE_INPUT</link>;
+extern      const gint <link linkend="PCL-SINGLE-INPUT:CAPS">PCL_SINGLE_INPUT</link>;
+#define     <link linkend="PCL-RETURN-NONE:CAPS">PCL_RETURN_NONE</link>
+#define     <link linkend="PCL-RETURN-TRUE:CAPS">PCL_RETURN_TRUE</link>
+#define     <link linkend="PCL-RETURN-FALSE:CAPS">PCL_RETURN_FALSE</link>
+#define     <link linkend="PCL-MAX-BLOCKS:CAPS">PCL_MAX_BLOCKS</link>
+extern      gboolean <link linkend="PCL-OPTION-DEBUG:CAPS">PCL_OPTION_DEBUG</link>;
+extern      gboolean <link linkend="PCL-OPTION-PARSE-ONLY:CAPS">PCL_OPTION_PARSE_ONLY</link>;
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="pcl-initialize"/>pcl_initialize ()</title>
+<indexterm><primary>pcl_initialize</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_initialize                  (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-finalize"/>pcl_finalize ()</title>
+<indexterm><primary>pcl_finalize</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_finalize                    (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-exit"/>pcl_exit ()</title>
+<indexterm><primary>pcl_exit</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_exit                        (<link linkend="gint">gint</link> status);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>status</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-at-exit"/>pcl_at_exit ()</title>
+<indexterm><primary>pcl_at_exit</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    pcl_at_exit                     (<link linkend="GVoidFunc">GVoidFunc</link> func);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>func</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-parse-input-file"/>pcl_parse_input_file ()</title>
+<indexterm><primary>pcl_parse_input_file</primary></indexterm><programlisting><link linkend="PclParseInfo">PclParseInfo</link>* pcl_parse_input_file          (<link linkend="FILE:CAPS">FILE</link> *stream,
+                                             const <link linkend="gchar">gchar</link> *filename,
+                                             <link linkend="gint">gint</link> start);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>stream</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>filename</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>start</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-parse-input-file-with-prompts"/>pcl_parse_input_file_with_prompts ()</title>
+<indexterm><primary>pcl_parse_input_file_with_prompts</primary></indexterm><programlisting><link linkend="PclParseInfo">PclParseInfo</link>* pcl_parse_input_file_with_prompts
+                                            (<link linkend="FILE:CAPS">FILE</link> *stream,
+                                             const <link linkend="gchar">gchar</link> *filename,
+                                             <link linkend="gint">gint</link> start,
+                                             const <link linkend="gchar">gchar</link> *ps1,
+                                             const <link linkend="gchar">gchar</link> *ps2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>stream</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>filename</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>start</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ps1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ps2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-parse-input-string"/>pcl_parse_input_string ()</title>
+<indexterm><primary>pcl_parse_input_string</primary></indexterm><programlisting><link linkend="PclParseInfo">PclParseInfo</link>* pcl_parse_input_string        (const <link linkend="gchar">gchar</link> *string,
+                                             <link linkend="gint">gint</link> start);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>string</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>start</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-register-singleton"/>pcl_register_singleton ()</title>
+<indexterm><primary>pcl_register_singleton</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_register_singleton          (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="gpointer">gpointer</link> *p_object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p_object</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-ref"/>pcl_object_ref</title>
+<indexterm><primary>pcl_object_ref</primary></indexterm><programlisting>#define pcl_object_ref          g_object_ref
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-unref"/>pcl_object_unref</title>
+<indexterm><primary>pcl_object_unref</primary></indexterm><programlisting>#define pcl_object_unref        g_object_unref
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-new"/>pcl_object_new</title>
+<indexterm><primary>pcl_object_new</primary></indexterm><programlisting>#define pcl_object_new          g_object_new
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-CLEAR:CAPS"/>PCL_CLEAR()</title>
+<indexterm><primary>PCL_CLEAR</primary></indexterm><programlisting>#define     PCL_CLEAR(obj)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-EVAL-INPUT:CAPS"/>PCL_EVAL_INPUT</title>
+<indexterm><primary>PCL_EVAL_INPUT</primary></indexterm><programlisting>extern const gint PCL_EVAL_INPUT;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-FILE-INPUT:CAPS"/>PCL_FILE_INPUT</title>
+<indexterm><primary>PCL_FILE_INPUT</primary></indexterm><programlisting>extern const gint PCL_FILE_INPUT;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-SINGLE-INPUT:CAPS"/>PCL_SINGLE_INPUT</title>
+<indexterm><primary>PCL_SINGLE_INPUT</primary></indexterm><programlisting>extern const gint PCL_SINGLE_INPUT;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-RETURN-NONE:CAPS"/>PCL_RETURN_NONE</title>
+<indexterm><primary>PCL_RETURN_NONE</primary></indexterm><programlisting>#define PCL_RETURN_NONE         return pcl_object_ref (PCL_NONE)
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-RETURN-TRUE:CAPS"/>PCL_RETURN_TRUE</title>
+<indexterm><primary>PCL_RETURN_TRUE</primary></indexterm><programlisting>#define PCL_RETURN_TRUE         return pcl_object_ref (PCL_TRUE)
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-RETURN-FALSE:CAPS"/>PCL_RETURN_FALSE</title>
+<indexterm><primary>PCL_RETURN_FALSE</primary></indexterm><programlisting>#define PCL_RETURN_FALSE        return pcl_object_ref (PCL_FALSE)
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-MAX-BLOCKS:CAPS"/>PCL_MAX_BLOCKS</title>
+<indexterm><primary>PCL_MAX_BLOCKS</primary></indexterm><programlisting>#define PCL_MAX_BLOCKS 50
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-OPTION-DEBUG:CAPS"/>PCL_OPTION_DEBUG</title>
+<indexterm><primary>PCL_OPTION_DEBUG</primary></indexterm><programlisting>extern gboolean PCL_OPTION_DEBUG;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-OPTION-PARSE-ONLY:CAPS"/>PCL_OPTION_PARSE_ONLY</title>
+<indexterm><primary>PCL_OPTION_PARSE_ONLY</primary></indexterm><programlisting>extern gboolean PCL_OPTION_PARSE_ONLY;
+</programlisting>
+<para>
+
+</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

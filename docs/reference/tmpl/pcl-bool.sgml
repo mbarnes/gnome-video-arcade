@@ -1,0 +1,72 @@
+<!-- ##### SECTION Title ##### -->
+PclBool
+
+<!-- ##### SECTION Short_Description ##### -->
+Boolean objects
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclBool ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO PCL_TRUE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PCL_FALSE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION pcl_bool_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_bool_get_instance_true ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_bool_get_instance_false ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_bool_from_boolean ##### -->
+<para>
+
+</para>
+
+@v_boolean: 
+@Returns: 
+
+

@@ -1,0 +1,43 @@
+.\" Process this file with
+.\" groff -man -Tascii pcl.1
+.\"
+.TH PCL 1 "October 2005"
+.SH NAME
+pcl \- Predicate Constraint Language
+.SH SYNOPSIS
+.B pcl
+.RB [ \-?vdp ]
+.RB [ \-c
+.IR command ]
+.RI [ script ]
+.SH DESCRIPTION
+The Predicate Constraint Language, or PCL, is a high-level object-oriented
+programming language derived from Python, with additional facilities for
+logic programming.
+.SH OPTIONS
+.TP
+.B \-?, \-\-help
+Show help options
+.TP
+.B \-v, \-\-version
+Print version number, then exit
+.TP
+.B \-c, \-\-command
+Execute argument string, then exit
+.TP
+.B \-d, \-\-debug
+Print debug information to stderr
+.TP
+.B \-p, \-\-parse
+Just parse the input, do not execute it
+.SH BUGS
+Too many to list!  PCL is still in its infancy.
+.SH AUTHOR
+Matthew Barnes (matthew.f.barnes@boeing.com) is responsible for the
+implementation of PCL, which borrows heavily from the C implementation
+of Python.
+.PP
+Steven Cooke (steven.w.cooke@boeing.com)
+formulated the semantics of predicate functions.
+.SH SEE ALSO
+.BR python (1)

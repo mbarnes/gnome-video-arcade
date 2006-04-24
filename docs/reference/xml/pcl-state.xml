@@ -1,0 +1,261 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="pcl-pcl-state">
+<refmeta>
+<refentrytitle>pcl-state</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>pcl-state</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclInterpreterState">PclInterpreterState</link>;
+            <link linkend="PclThreadState">PclThreadState</link>;
+enum        <link linkend="PclTraceType">PclTraceType</link>;
+<link linkend="gboolean">gboolean</link>    (<link linkend="PclTraceFunc">*PclTraceFunc</link>)                 (<link linkend="PclObject">PclObject</link> *trace_object,
+                                             struct <link linkend="PclFrame">_PclFrame</link> *frame,
+                                             <link linkend="PclTraceType">PclTraceType</link> type,
+                                             <link linkend="PclObject">PclObject</link> *argument);
+<link linkend="PclInterpreterState">PclInterpreterState</link>* <link linkend="pcl-interpreter-state-new">pcl_interpreter_state_new</link>
+                                            (void);
+<link linkend="void">void</link>        <link linkend="pcl-interpreter-state-clear">pcl_interpreter_state_clear</link>     (<link linkend="PclInterpreterState">PclInterpreterState</link> *is);
+<link linkend="void">void</link>        <link linkend="pcl-interpreter-state-destroy">pcl_interpreter_state_destroy</link>   (<link linkend="PclInterpreterState">PclInterpreterState</link> *is);
+<link linkend="PclThreadState">PclThreadState</link>* <link linkend="pcl-thread-state-new">pcl_thread_state_new</link>        (<link linkend="PclInterpreterState">PclInterpreterState</link> *is);
+<link linkend="PclThreadState">PclThreadState</link>* <link linkend="pcl-thread-state-swap">pcl_thread_state_swap</link>       (<link linkend="PclThreadState">PclThreadState</link> *ts);
+<link linkend="void">void</link>        <link linkend="pcl-thread-state-clear">pcl_thread_state_clear</link>          (<link linkend="PclThreadState">PclThreadState</link> *ts);
+<link linkend="void">void</link>        <link linkend="pcl-thread-state-destroy">pcl_thread_state_destroy</link>        (<link linkend="PclThreadState">PclThreadState</link> *ts);
+<link linkend="PclThreadState">PclThreadState</link>* <link linkend="pcl-thread-state-get">pcl_thread_state_get</link>        (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-thread-state-get-dict">pcl_thread_state_get_dict</link>       (void);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclInterpreterState"/>PclInterpreterState</title>
+<indexterm><primary>PclInterpreterState</primary></indexterm><programlisting>typedef struct {
+        GSList *ts_list;
+        PclObject *modules;
+        PclObject *sysdict;
+        PclObject *builtins;
+} PclInterpreterState;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclThreadState"/>PclThreadState</title>
+<indexterm><primary>PclThreadState</primary></indexterm><programlisting>typedef struct {
+        PclInterpreterState *is;
+        struct _PclFrame *frame;
+        gint recursion_depth;
+        gint tracing;
+        gboolean use_tracing;
+
+        PclTraceFunc profile_function;
+        PclTraceFunc trace_function;
+        PclObject *profile_object;
+        PclObject *trace_object;
+
+        PclObject *exc_type;
+        PclObject *exc_value;
+        PclObject *exc_traceback;
+
+        PclObject *current_exc_type;
+        PclObject *current_exc_value;
+        PclObject *current_exc_traceback;
+
+        PclObject *dict;
+
+        GHashTable *cache;
+        GThread *thread;
+} PclThreadState;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclTraceType"/>enum PclTraceType</title>
+<indexterm><primary>PclTraceType</primary></indexterm><programlisting>typedef enum {
+        PCL_TRACE_CALL,
+        PCL_TRACE_EXCEPTION,
+        PCL_TRACE_LINE,
+        PCL_TRACE_RETURN,
+        PCL_TRACE_C_CALL,
+        PCL_TRACE_C_EXCEPTION,
+        PCL_TRACE_C_LINE
+} PclTraceType;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclTraceFunc"/>PclTraceFunc ()</title>
+<indexterm><primary>PclTraceFunc</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    (*PclTraceFunc)                 (<link linkend="PclObject">PclObject</link> *trace_object,
+                                             struct <link linkend="PclFrame">_PclFrame</link> *frame,
+                                             <link linkend="PclTraceType">PclTraceType</link> type,
+                                             <link linkend="PclObject">PclObject</link> *argument);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>trace_object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>frame</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>argument</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-interpreter-state-new"/>pcl_interpreter_state_new ()</title>
+<indexterm><primary>pcl_interpreter_state_new</primary></indexterm><programlisting><link linkend="PclInterpreterState">PclInterpreterState</link>* pcl_interpreter_state_new
+                                            (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-interpreter-state-clear"/>pcl_interpreter_state_clear ()</title>
+<indexterm><primary>pcl_interpreter_state_clear</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_interpreter_state_clear     (<link linkend="PclInterpreterState">PclInterpreterState</link> *is);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>is</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-interpreter-state-destroy"/>pcl_interpreter_state_destroy ()</title>
+<indexterm><primary>pcl_interpreter_state_destroy</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_interpreter_state_destroy   (<link linkend="PclInterpreterState">PclInterpreterState</link> *is);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>is</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-thread-state-new"/>pcl_thread_state_new ()</title>
+<indexterm><primary>pcl_thread_state_new</primary></indexterm><programlisting><link linkend="PclThreadState">PclThreadState</link>* pcl_thread_state_new        (<link linkend="PclInterpreterState">PclInterpreterState</link> *is);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>is</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-thread-state-swap"/>pcl_thread_state_swap ()</title>
+<indexterm><primary>pcl_thread_state_swap</primary></indexterm><programlisting><link linkend="PclThreadState">PclThreadState</link>* pcl_thread_state_swap       (<link linkend="PclThreadState">PclThreadState</link> *ts);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>ts</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-thread-state-clear"/>pcl_thread_state_clear ()</title>
+<indexterm><primary>pcl_thread_state_clear</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_thread_state_clear          (<link linkend="PclThreadState">PclThreadState</link> *ts);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>ts</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-thread-state-destroy"/>pcl_thread_state_destroy ()</title>
+<indexterm><primary>pcl_thread_state_destroy</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_thread_state_destroy        (<link linkend="PclThreadState">PclThreadState</link> *ts);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>ts</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-thread-state-get"/>pcl_thread_state_get ()</title>
+<indexterm><primary>pcl_thread_state_get</primary></indexterm><programlisting><link linkend="PclThreadState">PclThreadState</link>* pcl_thread_state_get        (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-thread-state-get-dict"/>pcl_thread_state_get_dict ()</title>
+<indexterm><primary>pcl_thread_state_get_dict</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_thread_state_get_dict       (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

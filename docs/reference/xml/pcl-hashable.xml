@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclHashable">
+<refmeta>
+<refentrytitle>PclHashable</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclHashable</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclHashable-struct">PclHashable</link>;
+            <link linkend="PclHashableIface">PclHashableIface</link>;
+<link linkend="guint">guint</link>       (<link linkend="PclHashableHash">*PclHashableHash</link>)              (<link linkend="PclHashable">PclHashable</link> *hashable);
+<link linkend="guint">guint</link>       <link linkend="pcl-object-hash">pcl_object_hash</link>                 (<link linkend="PclObject">PclObject</link> *object);
+#define     <link linkend="PCL-HASH-INVALID:CAPS">PCL_HASH_INVALID</link>
+#define     <link linkend="PCL-HASH-DEFAULT:CAPS">PCL_HASH_DEFAULT</link>
+#define     <link linkend="PCL-HASH-VALIDATE:CAPS">PCL_HASH_VALIDATE</link>               (hash)
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GInterface">GInterface</link>
+   +----PclHashable
+</synopsis>
+
+</refsect1>
+
+
+
+
+<refsect1>
+<title>Known Implementations</title>
+<para>
+PclHashable is implemented by
+ <link linkend="PclInt">PclInt</link>,  <link linkend="PclWeakRef">PclWeakRef</link>,  <link linkend="PclString">PclString</link>,  <link linkend="PclNone">PclNone</link>,  <link linkend="PclTuple">PclTuple</link>,  <link linkend="PclEllipsis">PclEllipsis</link>,  <link linkend="PclType">PclType</link>,  <link linkend="PclMethod">PclMethod</link>,  <link linkend="PclFree">PclFree</link>,  <link linkend="PclInstanceMethod">PclInstanceMethod</link>,  <link linkend="PclNotImplemented">PclNotImplemented</link>,  <link linkend="PclComplex">PclComplex</link>,  <link linkend="PclFrozenSet">PclFrozenSet</link>,  <link linkend="PclBool">PclBool</link>,  <link linkend="PclCode">PclCode</link> and  <link linkend="PclFloat">PclFloat</link>.</para>
+
+</refsect1>
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclHashable-struct"/>PclHashable</title>
+<indexterm><primary>PclHashable</primary></indexterm><programlisting>typedef struct _PclHashable PclHashable;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclHashableIface"/>PclHashableIface</title>
+<indexterm><primary>PclHashableIface</primary></indexterm><programlisting>typedef struct {
+        GTypeInterface parent_iface;
+        PclHashableHash hash;
+} PclHashableIface;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclHashableHash"/>PclHashableHash ()</title>
+<indexterm><primary>PclHashableHash</primary></indexterm><programlisting><link linkend="guint">guint</link>       (*PclHashableHash)              (<link linkend="PclHashable">PclHashable</link> *hashable);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>hashable</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-hash"/>pcl_object_hash ()</title>
+<indexterm><primary>pcl_object_hash</primary></indexterm><programlisting><link linkend="guint">guint</link>       pcl_object_hash                 (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-HASH-INVALID:CAPS"/>PCL_HASH_INVALID</title>
+<indexterm><primary>PCL_HASH_INVALID</primary></indexterm><programlisting>#define PCL_HASH_INVALID (G_MAXUINT)
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-HASH-DEFAULT:CAPS"/>PCL_HASH_DEFAULT</title>
+<indexterm><primary>PCL_HASH_DEFAULT</primary></indexterm><programlisting>#define PCL_HASH_DEFAULT (G_MAXUINT - 1)
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-HASH-VALIDATE:CAPS"/>PCL_HASH_VALIDATE()</title>
+<indexterm><primary>PCL_HASH_VALIDATE</primary></indexterm><programlisting>#define     PCL_HASH_VALIDATE(hash)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>hash</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

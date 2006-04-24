@@ -1,0 +1,42 @@
+<!-- ##### SECTION Title ##### -->
+PclGenerator
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclGenerator ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_generator_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_generator_new ##### -->
+<para>
+
+</para>
+
+@frame: 
+@Returns: 
+
+

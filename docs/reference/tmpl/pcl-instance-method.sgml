@@ -1,0 +1,68 @@
+<!-- ##### SECTION Title ##### -->
+PclInstanceMethod
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclInstanceMethod ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_instance_method_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_instance_method_new ##### -->
+<para>
+
+</para>
+
+@callable: 
+@instance: 
+@owner: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_INSTANCE_METHOD_GET_CALLABLE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_INSTANCE_METHOD_GET_INSTANCE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_INSTANCE_METHOD_GET_OWNER ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

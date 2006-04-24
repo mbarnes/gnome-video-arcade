@@ -1,0 +1,162 @@
+<!-- ##### SECTION Title ##### -->
+PclString
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclString ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_string_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_resize ##### -->
+<para>
+
+</para>
+
+@self: 
+@length: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_as_string ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_from_string ##### -->
+<para>
+
+</para>
+
+@v_string: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_from_string_and_size ##### -->
+<para>
+
+</para>
+
+@v_string: 
+@size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_from_format ##### -->
+<para>
+
+</para>
+
+@format: 
+@Varargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_from_format_va ##### -->
+<para>
+
+</para>
+
+@format: 
+@va: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_intern_from_string ##### -->
+<para>
+
+</para>
+
+@string: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_intern_in_place ##### -->
+<para>
+
+</para>
+
+@p_object: 
+
+
+<!-- ##### FUNCTION pcl_string_concat ##### -->
+<para>
+
+</para>
+
+@p_object: 
+@string: 
+
+
+<!-- ##### FUNCTION pcl_string_concat_and_del ##### -->
+<para>
+
+</para>
+
+@p_object: 
+@string: 
+
+
+<!-- ##### FUNCTION pcl_string_join ##### -->
+<para>
+
+</para>
+
+@separator: 
+@sequence: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_string_format ##### -->
+<para>
+
+</para>
+
+@format: 
+@args: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_STRING_AS_STRING ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_STRING_GET_SIZE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

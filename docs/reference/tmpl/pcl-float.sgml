@@ -1,0 +1,69 @@
+<!-- ##### SECTION Title ##### -->
+PclFloat
+
+<!-- ##### SECTION Short_Description ##### -->
+Floating-point objects
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclFloat ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_float_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_float_as_double ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_float_from_double ##### -->
+<para>
+
+</para>
+
+@v_double: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_float_from_string ##### -->
+<para>
+
+</para>
+
+@v_string: 
+@endptr: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_FLOAT_AS_DOUBLE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

@@ -1,0 +1,250 @@
+
+PLEASE NOTE:
+
+These instructions are specific to the BOEING VIRTUAL WARFARE CENTER's
+computer network.  Before releasing PCL to the public, this file should
+either be deleted or its contents modified to be suitable for the general
+public.  If you do delete this file, please remember to also remove HACKING
+from the EXTRA_DIST list in Makefile.am.
+
+
+Standards
+---------
+
+Throughout the development of PCL, I have tried to at least loosely follow
+the GNU Coding Standards [1], including their processes for documenting and
+releasing software.  I have also tried to utilize the GNU "autotools" suite
+(autoconf, automake, and libtool) [2], which go a long way in helping the
+developer adhere to GNU standards.  Both of the following links are
+recommended reading.  (The "autobook" material is a little dated, but it
+is still a very good "introduction" to the tools... all 26 chapters of it.)
+
+[1]  http://www.gnu.org/prep/standards/
+[2]  http://sources.redhat.com/autobook/
+
+
+Dependencies
+------------
+
+PCL relies on a few third-party software packages for configuring,
+compiling, and running the software.  It relies on a few more third-party
+software packages for developing and maintaining the software and the
+auto-generated API documentation.  All of these third-party packages are
+Free Software.  Given that, at the time of this writing, the software
+installed on the VWC unclassified machines is sorely out-of-date, you may
+need to download and install some of these packages yourself.  You can
+install them in your local home directory by running each package's
+configure script as follows:
+
+        $ ./configure --prefix=$HOME
+
+The following is a list of third-party software packages that PCL either
+relies on or can optionally utilize.  The list also indicates whether each
+package is needed by a user for simply building and running PCL (User), and
+whether it is needed by a developer for maintaining the software (Dev).
+Packages that are optional are marked as such (Opt).
+
+        Name                            User?   Dev?
+        --------------------------      ------  ------
+        GLib 2.8                        Yes     Yes
+        pkg-config                      Yes     Yes
+        gtk-doc                         Opt     Yes
+        Readline                        Opt     Opt
+        Autoconf                        No      Yes
+        Automake                        No      Yes
+        Bison                           No      Yes
+        Flex                            No      Yes
+        Libtool                         No      Yes
+
+
+Versioning
+----------
+
+Software package versions are typically broken into three numbers:
+
+        [major version].[minor version].[micro version]
+
+Incrementing a major version number implies a major shift in the evolution
+of the software.  Backwards compatibility is usually broken, and large
+portions of the software may have been rewritten.  Major version increments
+typically only happen once every few years.  The minor and micro version
+numbers should be reset to zero.
+
+Incrementing a minor version number implies an incremental improvement to
+the software.  A few new features may be present, but the developer has
+tried to maintain backwards compatibility and API stability if at all
+possible.  Minor version increments typically only happen once every few
+months.  The micro version number should be reset to zero.
+
+Incrementing a micro version number implies a maintenance update to the
+software.  There should be absolutely no new features, no changes to the
+API, and backward compatibility must be maintained.  Only bug fixes or
+documentation improvements which meet these requirements are allowed.
+To further drive the point home, it should be safe to mix and match header
+files from some version x.y.z1 with the shared library from version x.y.z2,
+where z1 <> z2.  Micro version increments happen as needed.
+
+In-house releases of PCL do not yet follow these versioning guidelines.
+They are labelled as 0.0.xx to remind people that the software is still in
+very early development and that the API is still maturing.  At the time of
+this writing, the latest in-house release is PCL 0.0.23.  I just increment
+the micro version for each new release, so the next one should be 0.0.24.
+
+I had intended to call the first public release PCL 0.1.  After that I was
+going to transition to GNOME-style versioning, whereby at any given time
+there will be a STABLE version for users to play with (indicated by an EVEN
+minor version number), and a DEVELOPMENT version for developers to hack on
+(indicated by an ODD version number).  GNOME-style versioning follows the
+guidelines outlined above, except that DEVELOPMENT versions are usually
+allowed to introduce new features and break backward compatibility if
+necessary.  STABLE versions must follow the versioning guidelines exactly.
+
+So, after PCL 0.1 has been out there for a while, and the public has had a
+chance to tinker with it and hopefully submit a few bug reports and patches,
+and after you have released a few micro updates (PCL 0.1.1, 0.1.2, etc.)
+which incorporate these bug reports and patches, and the software seems
+stable with no major problems, you should release PCL 0.2.  0.2 will be the
+first STABLE public release of PCL.  At that time, work should begin on the
+next DEVELOPMENT series of PCL releases -- 0.3.0, 0.3.1, etc. -- which will
+eventually lead to a new STABLE release (0.4).  In the meantime, someone
+should maintain the latest STABLE release (0.2) by incorporating bug fixes
+and documentation updates, and releasing STABLE micro updates from time to
+time -- 0.2.1, 0.2.2, etc. -- until the DEVELOPMENT series (0.3.x) is ready
+to declare itself STABLE (0.4).
+
+Now, PCL 1.0.  In all honesty we will probably never get there.  When the
+average computer-savvy software developer has heard of PCL; when I can open
+Linux Journal or some simliar trade publication and read about PCL; when
+there is a strong community of PCL users and possibly some independently
+written third-party modules available on the Internet... that's PCL 1.0.
+
+Few languages survive that long.  But maybe we can influence someone
+whose language *has* survived that long.  Hello, Guido.
+
+
+Debugging
+---------
+
+Here are a few tricks I either learned or built into PCL to help me track
+down bugs.  These are in no particular order.
+
+1)  When PCL dumps core when running it from the "src" directory, use the
+    following command to open a debugging session in GDB:
+
+        $ libtool --mode=execute gdb pcl core
+
+    where 'core' is the dumped core file.  It may also be called something
+    like 'core.8888', where 8888 is the Process ID (pid) of the PCL session
+    that just crashed.
+
+    I myself got really fancy and wrote a one-line script that runs GDB
+    with the most recent core file, which is almost always the one I want:
+
+        libtool --mode=execute gdb pcl `ls -t core* | head -n1`
+
+    Once in GDB, type 'bt' (or 'backtrace') to get a call stack trace from
+    the point of failure.  Use 'print' to examine variable values.
+
+2)  If the parser (pcl-parser.y) or compiler (pcl-compiler.c) or symbol
+    table (pcl-symbol-table.c) starts acting up, PCL has a --debug switch
+    that will dump a representation of the internal parse tree and symbol
+    table (among other things).  You can also say --parse to force PCL to
+    just parse the input file and stop.  This can be useful when combined
+    with the --debug switch.  Try "pcl --help" for more information about
+    command-line switches.
+
+    If you *really* get into a wrestling match with the parser, you can
+    enable Bison's trace mode by changing "yydebug = 0" to "yydebug = 1"
+    in pcl_main() and running PCL with the --debug switch.  But this is
+    rarely needed.  See the Bison manual for more details.
+
+    If the lexer (pcl-lexer.l) acts up, you can turn on Flex's debug mode
+    by adding the line "%option debug" near the line "%option stack".
+    See the Flex manual for more details.
+
+    If the virtual machine is acting funny, change the lines "#if 0" to
+    "#if 1" in pcl_eval_frame() and re-compile.  There are two instances.
+    Changing the first "#if 0" will print the current value stack and the
+    next opcode to execute for each iteration of the virtual machine's main
+    loop.  Changing the second "#if 0" will print a full representation of
+    the current call stack frame (in addition to the value stack and next
+    opcode) for each iteration of the virtual machine's main loop.  If
+    changing the second one you must also change the first one.  You will
+    want to redirect the output to a file, as this produces a tidal wave of
+    debug messages.
+
+    BTW, I never got around to updating this feature so you could toggle it
+    from the command-line without having to re-compile.  I suggest taking a
+    look at GLib's GDebugKey if you decide to try this yourself.
+
+3)  Reference leaks are a constant headache.  Objects in PCL (at the C level)
+    are reference counted manually and disposed of when their reference count
+    drops to zero.  It is a common mistake to forget to adjust an object's
+    reference count when a function or data structure takes or gives up
+    ownership of the object.
+
+    If you are using a DEVELOPMENT version of GLib (the minor version number
+    is odd; see the versioning section above), or if you configured GLib
+    with debugging features before building and installing it, like so:
+
+        glib-2.x.y$ ./configure --enable-debug
+
+    then GLib offers a handy way to track an object's reference count.
+    Just fire up a GDB session and set the symbol "g_trap_object_ref" to
+    the address of an object you want to track.  GLib will then force a
+    breakpoint every time that object's reference count changes.
+
+    If you run GDB from PCL's "src" directory you will automatically load
+    a couple GDB macros I wrote to take advantage of this debugging trick
+    in GLib.  See the file ".gdbinit" in PCL's "src" directory, and also
+    type "help gtrap" and "help gtrace" from a GDB session for more
+    information about these macros.
+
+    There is also a tool called RefDbg [3] that provides more advanced
+    features for tracking reference counts in GObject.  I have found
+    use for the tool in the past but it is a little difficult to use.
+
+[3]  http://refdbg.sourceforge.net/
+
+
+Releases
+--------
+
+Theoretically a release should be as simple as making sure all your ducks
+are in a row and typing "make dist".  Here's a checklist of things I go
+through before announcing a new PCL release.
+
+[ ]  Verify that PCL passes the regression test suite that Dave Crepps
+     wrote.  Please try to keep it up-to-date with new language features
+     or additional test cases.
+
+[ ]  Check in all your changes, and update the ChangeLog file.  I usually
+     just cut-and-paste my ChangeLog entries when asked for a check-in
+     comment.  The ChangeLog file is tedious to maintain, but it is
+     important as a written history of how the software evolved and keeping
+     it up-to-date is also a good opportunity to review your changes.
+
+[ ]  Update the version number in configure.ac and rebuild everything:
+
+        $ autoreconf; ./configure --enable-gtk-doc; make
+
+[ ]  Verify that the following command prints the correct version:
+
+        $ pcl --version
+
+[ ]  $ make dist  (produces pcl-0.0.xx.tar.gz)
+
+[ ]  Copy the auto-generated HTML files for the PCL API Reference Manual
+     to vwcws1 under the directory Programs/AST/Documentation/PCL.
+
+[ ]  Send a release announcement to the AST team.  Summarize what's new or
+     what's changed in this release of PCL, remind them of the ChangeLog
+     file and the vwcws1-hosted PCL API Reference Manual, and provide
+     instructions for building and installing PCL (because someone always
+     forgets).  And finally, attach the release "tarball" to the email.
+     Check out some of my old release announcements for examples.
+
+
+Good luck, and happy hacking!
+- mfb
+

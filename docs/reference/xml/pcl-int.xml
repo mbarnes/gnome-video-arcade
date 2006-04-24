@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclInt">
+<refmeta>
+<refentrytitle>PclInt</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclInt</refname><refpurpose>Integer objects</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclInt-struct">PclInt</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-int-get-type-object">pcl_int_get_type_object</link>         (void);
+<link linkend="glong">glong</link>       <link linkend="pcl-int-as-long">pcl_int_as_long</link>                 (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-int-from-long">pcl_int_from_long</link>               (<link linkend="glong">glong</link> v_long);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-int-from-string">pcl_int_from_string</link>             (const <link linkend="gchar">gchar</link> *v_string,
+                                             <link linkend="gchar">gchar</link> **endptr,
+                                             <link linkend="guint">guint</link> base);
+#define     <link linkend="PCL-INT-AS-LONG:CAPS">PCL_INT_AS_LONG</link>                 (obj)
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----PclInt
+               +----<link linkend="PclBool">PclBool</link>
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>Implemented Interfaces</title>
+<para>
+PclInt implements
+ <link linkend="PclNumber">PclNumber</link>.</para>
+
+</refsect1>
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclInt-struct"/>PclInt</title>
+<indexterm><primary>PclInt</primary></indexterm><programlisting>typedef struct _PclInt PclInt;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-int-get-type-object"/>pcl_int_get_type_object ()</title>
+<indexterm><primary>pcl_int_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_int_get_type_object         (void);</programlisting>
+<para>
+Returns the type object for <link linkend="PclInt"><type>PclInt</type></link>.  During runtime this is the built-in
+object <literal>int</literal>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the type object for <link linkend="PclInt"><type>PclInt</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-int-as-long"/>pcl_int_as_long ()</title>
+<indexterm><primary>pcl_int_as_long</primary></indexterm><programlisting><link linkend="glong">glong</link>       pcl_int_as_long                 (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-int-from-long"/>pcl_int_from_long ()</title>
+<indexterm><primary>pcl_int_from_long</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_int_from_long               (<link linkend="glong">glong</link> v_long);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>v_long</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-int-from-string"/>pcl_int_from_string ()</title>
+<indexterm><primary>pcl_int_from_string</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_int_from_string             (const <link linkend="gchar">gchar</link> *v_string,
+                                             <link linkend="gchar">gchar</link> **endptr,
+                                             <link linkend="guint">guint</link> base);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>v_string</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>endptr</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>base</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PCL-INT-AS-LONG:CAPS"/>PCL_INT_AS_LONG()</title>
+<indexterm><primary>PCL_INT_AS_LONG</primary></indexterm><programlisting>#define     PCL_INT_AS_LONG(obj)</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="pcl-pcl-import">
+<refmeta>
+<refentrytitle>pcl-import</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>pcl-import</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclFileDescription">PclFileDescription</link>;
+            <link linkend="PclFrozenModule">PclFrozenModule</link>;
+enum        <link linkend="PclImportType">PclImportType</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import-module">pcl_import_module</link>               (const <link linkend="gchar">gchar</link> *name);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import-module-ex">pcl_import_module_ex</link>            (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *globals,
+                                             <link linkend="PclObject">PclObject</link> *locals,
+                                             <link linkend="PclObject">PclObject</link> *fromlist);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import">pcl_import</link>                      (<link linkend="PclObject">PclObject</link> *module_name);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import-reload-module">pcl_import_reload_module</link>        (<link linkend="PclObject">PclObject</link> *module);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import-add-module">pcl_import_add_module</link>           (const <link linkend="gchar">gchar</link> *name);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import-exec-code-module">pcl_import_exec_code_module</link>     (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *code);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import-exec-code-module-ex">pcl_import_exec_code_module_ex</link>  (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *code,
+                                             const <link linkend="gchar">gchar</link> *pathname);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-import-get-module-dict">pcl_import_get_module_dict</link>      (void);
+<link linkend="void">void</link>        <link linkend="pcl-import-cleanup">pcl_import_cleanup</link>              (void);
+extern      PclFrozenModule *<link linkend="PCL-IMPORT-FROZEN-MODULES:CAPS">PCL_IMPORT_FROZEN_MODULES</link>;
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclFileDescription"/>PclFileDescription</title>
+<indexterm><primary>PclFileDescription</primary></indexterm><programlisting>typedef struct {
+        gchar *suffix;
+        gchar *mode;
+        PclImportType type;
+} PclFileDescription;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclFrozenModule"/>PclFrozenModule</title>
+<indexterm><primary>PclFrozenModule</primary></indexterm><programlisting>typedef struct {
+        gchar *name;
+        guchar *code;
+        gsize size;
+} PclFrozenModule;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclImportType"/>enum PclImportType</title>
+<indexterm><primary>PclImportType</primary></indexterm><programlisting>typedef enum {
+        PCL_IMPORT_ERROR,
+        PCL_IMPORT_SOURCE,
+        PCL_IMPORT_COMPILED,
+        PCL_IMPORT_EXTENSION,
+        PCL_IMPORT_BUILTIN,
+        PCL_IMPORT_PACKAGE,
+        PCL_IMPORT_FROZEN,
+        PCL_IMPORT_HOOK
+} PclImportType;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-module"/>pcl_import_module ()</title>
+<indexterm><primary>pcl_import_module</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import_module               (const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-module-ex"/>pcl_import_module_ex ()</title>
+<indexterm><primary>pcl_import_module_ex</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import_module_ex            (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *globals,
+                                             <link linkend="PclObject">PclObject</link> *locals,
+                                             <link linkend="PclObject">PclObject</link> *fromlist);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>globals</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>locals</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fromlist</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import"/>pcl_import ()</title>
+<indexterm><primary>pcl_import</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import                      (<link linkend="PclObject">PclObject</link> *module_name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>module_name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-reload-module"/>pcl_import_reload_module ()</title>
+<indexterm><primary>pcl_import_reload_module</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import_reload_module        (<link linkend="PclObject">PclObject</link> *module);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>module</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-add-module"/>pcl_import_add_module ()</title>
+<indexterm><primary>pcl_import_add_module</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import_add_module           (const <link linkend="gchar">gchar</link> *name);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-exec-code-module"/>pcl_import_exec_code_module ()</title>
+<indexterm><primary>pcl_import_exec_code_module</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import_exec_code_module     (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *code);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>code</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-exec-code-module-ex"/>pcl_import_exec_code_module_ex ()</title>
+<indexterm><primary>pcl_import_exec_code_module_ex</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import_exec_code_module_ex  (const <link linkend="gchar">gchar</link> *name,
+                                             <link linkend="PclObject">PclObject</link> *code,
+                                             const <link linkend="gchar">gchar</link> *pathname);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>name</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>code</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pathname</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-get-module-dict"/>pcl_import_get_module_dict ()</title>
+<indexterm><primary>pcl_import_get_module_dict</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_import_get_module_dict      (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-import-cleanup"/>pcl_import_cleanup ()</title>
+<indexterm><primary>pcl_import_cleanup</primary></indexterm><programlisting><link linkend="void">void</link>        pcl_import_cleanup              (void);</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-IMPORT-FROZEN-MODULES:CAPS"/>PCL_IMPORT_FROZEN_MODULES</title>
+<indexterm><primary>PCL_IMPORT_FROZEN_MODULES</primary></indexterm><programlisting>extern PclFrozenModule *PCL_IMPORT_FROZEN_MODULES;
+</programlisting>
+<para>
+
+</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

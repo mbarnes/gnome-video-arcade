@@ -1,0 +1,138 @@
+<!-- ##### SECTION Title ##### -->
+PclModule
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclModule ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_module_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_module_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_module_get_dict ##### -->
+<para>
+
+</para>
+
+@module: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@self: 
+
+
+<!-- ##### FUNCTION pcl_module_get_name ##### -->
+<para>
+
+</para>
+
+@module: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@self: 
+
+
+<!-- ##### FUNCTION pcl_module_get_filename ##### -->
+<para>
+
+</para>
+
+@module: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@self: 
+
+
+<!-- ##### FUNCTION pcl_module_add_int ##### -->
+<para>
+
+</para>
+
+@module: 
+@name: 
+@value: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@self: 
+
+
+<!-- ##### FUNCTION pcl_module_add_float ##### -->
+<para>
+
+</para>
+
+@module: 
+@name: 
+@value: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@self: 
+
+
+<!-- ##### FUNCTION pcl_module_add_string ##### -->
+<para>
+
+</para>
+
+@module: 
+@name: 
+@value: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@self: 
+
+
+<!-- ##### FUNCTION pcl_module_add_object ##### -->
+<para>
+
+</para>
+
+@module: 
+@name: 
+@object: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@self: 
+
+
+<!-- ##### FUNCTION pcl_module_init ##### -->
+<para>
+
+</para>
+
+@name: 
+@methods: 
+@doc: 
+@Returns: 
+
+

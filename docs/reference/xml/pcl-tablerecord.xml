@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclTableRecord">
+<refmeta>
+<refentrytitle>PclTableRecord</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclTableRecord</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclTableRecord-struct">PclTableRecord</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-tablerecord-get-type-object">pcl_tablerecord_get_type_object</link> (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-tablerecord-new">pcl_tablerecord_new</link>             (<link linkend="PclObject">PclObject</link> *data,
+                                             <link linkend="PclObject">PclObject</link> *fields,
+                                             <link linkend="glong">glong</link> num_keys);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-tablerecord-extract-key">pcl_tablerecord_extract_key</link>     (<link linkend="PclObject">PclObject</link> *object);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----<link linkend="PclContainer">PclContainer</link>
+               +----PclTableRecord
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclTableRecord-struct"/>PclTableRecord</title>
+<indexterm><primary>PclTableRecord</primary></indexterm><programlisting>typedef struct _PclTableRecord PclTableRecord;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-tablerecord-get-type-object"/>pcl_tablerecord_get_type_object ()</title>
+<indexterm><primary>pcl_tablerecord_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_tablerecord_get_type_object (void);</programlisting>
+<para>
+Returns the type object for <link linkend="PclTableRecord"><type>PclTableRecord</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the type object for <link linkend="PclTableRecord"><type>PclTableRecord</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-tablerecord-new"/>pcl_tablerecord_new ()</title>
+<indexterm><primary>pcl_tablerecord_new</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_tablerecord_new             (<link linkend="PclObject">PclObject</link> *data,
+                                             <link linkend="PclObject">PclObject</link> *fields,
+                                             <link linkend="glong">glong</link> num_keys);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fields</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>num_keys</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-tablerecord-extract-key"/>pcl_tablerecord_extract_key ()</title>
+<indexterm><primary>pcl_tablerecord_extract_key</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_tablerecord_extract_key     (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

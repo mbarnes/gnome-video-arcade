@@ -1,0 +1,91 @@
+<!-- ##### SECTION Title ##### -->
+PclFrame
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclFrame ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclTryBlock ##### -->
+<para>
+
+</para>
+
+@type: 
+@handler: 
+@level: 
+
+<!-- ##### FUNCTION pcl_frame_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_frame_new ##### -->
+<para>
+
+</para>
+
+@ts: 
+@code: 
+@globals: 
+@locals: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_frame_block_setup ##### -->
+<para>
+
+</para>
+
+@frame: 
+@type: 
+@handler: 
+@level: 
+
+
+<!-- ##### FUNCTION pcl_frame_block_pop ##### -->
+<para>
+
+</para>
+
+@frame: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_frame_fast_to_locals ##### -->
+<para>
+
+</para>
+
+@frame: 
+
+
+<!-- ##### FUNCTION pcl_frame_locals_to_fast ##### -->
+<para>
+
+</para>
+
+@frame: 
+@clear: 
+
+

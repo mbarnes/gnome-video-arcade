@@ -1,0 +1,246 @@
+/* PCL - Predicate Constraint Language
+ * Copyright (C) 2006 The Boeing Company
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ */
+
+#include "pcl.h"
+
+static gpointer method_descriptor_parent_class = NULL;
+
+static PclObject *
+method_descriptor_call (PclObject *object, PclObject *args, PclObject *kwds)
+{
+        PclMethodDescriptor *self = PCL_METHOD_DESCRIPTOR (object);
+        PclDescriptor *descriptor = PCL_DESCRIPTOR (self);
+        PclObject *method, *result;
+
+        if (self->method->flags & PCL_METHOD_FLAG_CLASS)
+        {
+                method = pcl_method_new (
+                        self->method, descriptor->type, NULL);
+                if (method == NULL)
+                        return NULL;
+                result = pcl_eval_call_object_with_keywords (
+                        method, args, kwds);
+                pcl_object_unref (method);
+                return result;
+        }
+        else
+        {
+                PclObject *arg0;
+                glong argc;
+
+                /* Make sure the first argument is acceptable as 'self'. */
+                g_assert (PCL_IS_TUPLE (args));
+                argc = PCL_TUPLE_GET_SIZE (args);
+                if (argc < 1)
+                {
+                        pcl_error_set_format (
+                                pcl_exception_type_error (),
+                                "descriptor '%s' of '%s' object "
+                                "needs an argument",
+                                PCL_IS_STRING (descriptor->name) ?
+                                PCL_STRING_AS_STRING (descriptor->name) : "?",
+                                PCL_TYPE (descriptor->type)->name);
+                        return NULL;
+                }
+                arg0 = PCL_TUPLE_GET_ITEM (args, 0);
+                if (!pcl_object_is_instance (arg0, descriptor->type))
+                {
+                        pcl_error_set_format (
+                                pcl_exception_type_error (),
+                                "descriptor '%s' requires a '%s' "
+                                "object but received a '%s'",
+                                PCL_IS_STRING (descriptor->name) ?
+                                PCL_STRING_AS_STRING (descriptor->name) : "?",
+                                PCL_TYPE (descriptor->type)->name,
+                                PCL_GET_TYPE_NAME (arg0));
+                        return NULL;
+                }
+
+                method = pcl_method_new (self->method, arg0, NULL);
+                if (method == NULL)
+                        return NULL;
+                args = pcl_tuple_get_slice (args, 1, argc);
+                if (args == NULL)
+                {
+                        pcl_object_unref (method);
+                        return NULL;
+                }
+                result = pcl_eval_call_object_with_keywords (
+                                method, args, kwds);
+                pcl_object_unref (args);
+                pcl_object_unref (method);
+                return result;
+        }
+}
+
+static PclObject *
+method_descriptor_repr (PclObject *object)
+{
+        PclDescriptor *descriptor = PCL_DESCRIPTOR (object);
+
+        return pcl_string_from_format (
+                "<method '%s' of '%s' objects>",
+                PCL_IS_STRING (descriptor->name) ?
+                PCL_STRING_AS_STRING (descriptor->name) : "?",
+                PCL_TYPE (descriptor->type)->name);
+}
+
+static PclObject *
+method_descriptor_get (PclDescriptor *descriptor,
+                       PclObject *object, PclObject *type)
+{
+        PclMethodDescriptor *self = PCL_METHOD_DESCRIPTOR (descriptor);
+
+        if (self->method->flags & PCL_METHOD_FLAG_CLASS)
+        {
+                if (type == NULL)
+                {
+                        if (object != NULL)
+                                type = PCL_GET_TYPE_OBJECT (object);
+                        else
+                        {
+                                pcl_error_set_format (
+                                        pcl_exception_type_error (),
+                                        "descriptor '%s' for type '%s' "
+                                        "needs either an object or a type",
+                                        PCL_IS_STRING (descriptor->name) ?
+                                        PCL_STRING_AS_STRING (descriptor->name)
+                                        : "?",
+                                        PCL_TYPE (descriptor->type)->name);
+                                return NULL;
+                        }
+                }
+                if (!PCL_IS_TYPE (type))
+                {
+                        pcl_error_set_format (
+                                pcl_exception_type_error (),
+                                "descriptor '%s' for type '%s' "
+                                "needs a type, not a '%s' as arg 2",
+                                PCL_IS_STRING (descriptor->name) ?
+                                PCL_STRING_AS_STRING (descriptor->name) : "?",
+                                PCL_TYPE (descriptor->type)->name,
+                                PCL_GET_TYPE_NAME (type));
+                        return NULL;
+                }
+                if (!pcl_type_is_subtype (type, descriptor->type))
+                {
+                        pcl_error_set_format (
+                                pcl_exception_type_error (),
+                                "descriptor '%s' for type '%s' "
+                                "doesn't apply to type '%s'",
+                                PCL_IS_STRING (descriptor->name) ?
+                                PCL_STRING_AS_STRING (descriptor->name) : "?",
+                                PCL_TYPE (descriptor->type)->name,
+                                PCL_TYPE (type)->name);
+                        return NULL;
+                }
+                return pcl_method_new (self->method, type, NULL);
+        }
+        else
+        {
+                if (object == NULL)
+                        return pcl_object_ref (descriptor);
+                if (PCL_GET_TYPE_OBJECT (object) != descriptor->type)
+                {
+                        pcl_error_set_format (
+                                pcl_exception_type_error (),
+                                "descriptor '%s' for '%s' objects "
+                                "doesn't apply to '%s' object",
+                                PCL_IS_STRING (descriptor->name) ?
+                                PCL_STRING_AS_STRING (descriptor->name) : "?",
+                                PCL_TYPE (descriptor->type)->name,
+                                PCL_GET_TYPE_NAME (object));
+                        return NULL;
+                }
+
+                return pcl_method_new (self->method, object, NULL);
+        }
+}
+
+static PclObject *
+method_descriptor_get_doc (PclMethodDescriptor *self, gpointer context)
+{
+        if (self->method->doc == NULL)
+                return pcl_object_ref (PCL_NONE);
+        return pcl_string_from_string (self->method->doc);
+}
+
+static void
+method_descriptor_class_init (PclMethodDescriptorClass *class)
+{
+        PclDescriptorClass *descriptor_class;
+        PclObjectClass *object_class;
+
+        method_descriptor_parent_class = g_type_class_peek_parent (class);
+
+        descriptor_class = PCL_DESCRIPTOR_CLASS (class);
+        descriptor_class->get = method_descriptor_get;
+
+        object_class = PCL_OBJECT_CLASS (class);
+        object_class->type = pcl_method_descriptor_get_type_object;
+        object_class->call = method_descriptor_call;
+        object_class->repr = method_descriptor_repr;
+}
+
+static PclGetSetDef method_descriptor_getsets[] = {
+        { "__doc__",            (PclGetFunc) method_descriptor_get_doc,
+                                (PclSetFunc) NULL },
+        { NULL }
+};
+
+GType
+pcl_method_descriptor_get_type (void)
+{
+        static GType type = 0;
+        if (G_UNLIKELY (type == 0))
+        {
+                static const GTypeInfo type_info = {
+                        sizeof (PclMethodDescriptorClass),
+                        (GBaseInitFunc) NULL,
+                        (GBaseFinalizeFunc) NULL,
+                        (GClassInitFunc) method_descriptor_class_init,
+                        (GClassFinalizeFunc) NULL,
+                        NULL,  /* class_data */
+                        sizeof (PclMethodDescriptor),
+                        0,     /* n_preallocs */
+                        (GInstanceInitFunc) NULL,
+                        NULL   /* value_table */
+                };
+
+                type = g_type_register_static (
+                        PCL_TYPE_DESCRIPTOR, "PclMethodDescriptor",
+                        &type_info, 0);
+                g_type_set_qdata (
+                        type, PCL_DATA_GETSETS, method_descriptor_getsets);
+        }
+        return type;
+}
+
+PclObject *
+pcl_method_descriptor_get_type_object (void)
+{
+        static gpointer object = NULL;
+        if (G_UNLIKELY (object == NULL))
+        {
+                object = pcl_type_new (
+                        PCL_TYPE_METHOD_DESCRIPTOR, "method_descriptor");
+                pcl_register_singleton (
+                        "<type 'method_descriptor'>", &object);
+        }
+        return object;
+}

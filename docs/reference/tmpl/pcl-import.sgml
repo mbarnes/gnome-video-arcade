@@ -1,0 +1,141 @@
+<!-- ##### SECTION Title ##### -->
+pcl-import
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclFileDescription ##### -->
+<para>
+
+</para>
+
+@suffix: 
+@mode: 
+@type: 
+
+<!-- ##### STRUCT PclFrozenModule ##### -->
+<para>
+
+</para>
+
+@name: 
+@code: 
+@size: 
+
+<!-- ##### ENUM PclImportType ##### -->
+<para>
+
+</para>
+
+@PCL_IMPORT_ERROR: 
+@PCL_IMPORT_SOURCE: 
+@PCL_IMPORT_COMPILED: 
+@PCL_IMPORT_EXTENSION: 
+@PCL_IMPORT_BUILTIN: 
+@PCL_IMPORT_PACKAGE: 
+@PCL_IMPORT_FROZEN: 
+@PCL_IMPORT_HOOK: 
+
+<!-- ##### FUNCTION pcl_import_module ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import_module_ex ##### -->
+<para>
+
+</para>
+
+@name: 
+@globals: 
+@locals: 
+@fromlist: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import ##### -->
+<para>
+
+</para>
+
+@module_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import_reload_module ##### -->
+<para>
+
+</para>
+
+@module: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import_add_module ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import_exec_code_module ##### -->
+<para>
+
+</para>
+
+@name: 
+@code: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import_exec_code_module_ex ##### -->
+<para>
+
+</para>
+
+@name: 
+@code: 
+@pathname: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import_get_module_dict ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_import_cleanup ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### VARIABLE PCL_IMPORT_FROZEN_MODULES ##### -->
+<para>
+
+</para>
+
+

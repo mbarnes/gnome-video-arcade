@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclIterable">
+<refmeta>
+<refentrytitle>PclIterable</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclIterable</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclIterable-struct">PclIterable</link>;
+            <link linkend="PclIterableIface">PclIterableIface</link>;
+<link linkend="gint">gint</link>        (<link linkend="PclIterableContains">*PclIterableContains</link>)          (<link linkend="PclIterable">PclIterable</link> *iterable,
+                                             <link linkend="PclObject">PclObject</link> *value);
+<link linkend="PclObject">PclObject</link>*  (<link linkend="PclIterableIterate">*PclIterableIterate</link>)           (<link linkend="PclIterable">PclIterable</link> *iterable);
+<link linkend="gint">gint</link>        <link linkend="pcl-object-contains">pcl_object_contains</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *value);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-object-iterate">pcl_object_iterate</link>              (<link linkend="PclObject">PclObject</link> *object);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GInterface">GInterface</link>
+   +----PclIterable
+</synopsis>
+
+</refsect1>
+
+
+<refsect1>
+<title>Known Derived Interfaces</title>
+<para>
+PclIterable is required by
+ <link linkend="PclMapping">PclMapping</link> and  <link linkend="PclSequence">PclSequence</link>.</para>
+
+</refsect1>
+
+
+<refsect1>
+<title>Known Implementations</title>
+<para>
+PclIterable is implemented by
+ <link linkend="PclString">PclString</link>,  <link linkend="PclGenerator">PclGenerator</link>,  <link linkend="PclCallableIterator">PclCallableIterator</link>,  <link linkend="PclReversed">PclReversed</link>,  <link linkend="PclDictValueIterator">PclDictValueIterator</link>,  <link linkend="PclTableRecord">PclTableRecord</link>,  <link linkend="PclIterator">PclIterator</link>,  <link linkend="PclDictKeyIterator">PclDictKeyIterator</link>,  <link linkend="PclTuple">PclTuple</link>,  <link linkend="PclDictProxy">PclDictProxy</link>,  <link linkend="PclList">PclList</link>,  <link linkend="PclBaseSet">PclBaseSet</link>,  <link linkend="PclZip">PclZip</link>,  <link linkend="PclEnumerate">PclEnumerate</link>,  <link linkend="PclSet">PclSet</link>,  <link linkend="PclFile">PclFile</link>,  <link linkend="PclDictIterator">PclDictIterator</link>,  <link linkend="PclDictItemIterator">PclDictItemIterator</link>,  <link linkend="PclFrozenSet">PclFrozenSet</link>,  <link linkend="PclTable">PclTable</link>,  <link linkend="PclSequenceIterator">PclSequenceIterator</link>,  <link linkend="PclDict">PclDict</link> and  <link linkend="PclRange">PclRange</link>.</para>
+
+</refsect1>
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclIterable-struct"/>PclIterable</title>
+<indexterm><primary>PclIterable</primary></indexterm><programlisting>typedef struct _PclIterable PclIterable;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclIterableIface"/>PclIterableIface</title>
+<indexterm><primary>PclIterableIface</primary></indexterm><programlisting>typedef struct {
+        GTypeInterface parent_iface;
+        PclIterableContains contains;
+        PclIterableIterate iterate;
+} PclIterableIface;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclIterableContains"/>PclIterableContains ()</title>
+<indexterm><primary>PclIterableContains</primary></indexterm><programlisting><link linkend="gint">gint</link>        (*PclIterableContains)          (<link linkend="PclIterable">PclIterable</link> *iterable,
+                                             <link linkend="PclObject">PclObject</link> *value);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>iterable</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="PclIterableIterate"/>PclIterableIterate ()</title>
+<indexterm><primary>PclIterableIterate</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  (*PclIterableIterate)           (<link linkend="PclIterable">PclIterable</link> *iterable);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>iterable</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-contains"/>pcl_object_contains ()</title>
+<indexterm><primary>pcl_object_contains</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_object_contains             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="PclObject">PclObject</link> *value);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-object-iterate"/>pcl_object_iterate ()</title>
+<indexterm><primary>pcl_object_iterate</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_object_iterate              (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

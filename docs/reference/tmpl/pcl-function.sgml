@@ -1,0 +1,156 @@
+<!-- ##### SECTION Title ##### -->
+PclFunction
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclFunction ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_function_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_new ##### -->
+<para>
+
+</para>
+
+@code: 
+@globals: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_get_code ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_get_globals ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_get_defaults ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_set_defaults ##### -->
+<para>
+
+</para>
+
+@self: 
+@defaults: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_get_closure ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_set_closure ##### -->
+<para>
+
+</para>
+
+@self: 
+@closure: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_function_get_module ##### -->
+<para>
+
+</para>
+
+@self: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_FUNCTION_GET_CODE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_FUNCTION_GET_GLOBALS ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_FUNCTION_GET_DEFAULTS ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_FUNCTION_GET_CLOSURE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_FUNCTION_GET_NAME ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_FUNCTION_GET_MODULE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

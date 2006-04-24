@@ -1,0 +1,157 @@
+<!-- ##### SECTION Title ##### -->
+PclFile
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclFile ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_file_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_as_file ##### -->
+<para>
+
+</para>
+
+@file: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_name ##### -->
+<para>
+
+</para>
+
+@file: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_soft_space ##### -->
+<para>
+
+</para>
+
+@file: 
+@new_flag: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_from_file ##### -->
+<para>
+
+</para>
+
+@stream: 
+@name: 
+@mode: 
+@close: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_from_string ##### -->
+<para>
+
+</para>
+
+@name: 
+@mode: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_get_line ##### -->
+<para>
+
+</para>
+
+@file: 
+@size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_set_encoding ##### -->
+<para>
+
+</para>
+
+@file: 
+@encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_write_object ##### -->
+<para>
+
+</para>
+
+@file: 
+@object: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_write_string ##### -->
+<para>
+
+</para>
+
+@file: 
+@string: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_file_as_file_descriptor ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_universal_newline_fgets ##### -->
+<para>
+
+</para>
+
+@buffer: 
+@n_bytes: 
+@stream: 
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_universal_newline_fread ##### -->
+<para>
+
+</para>
+
+@buffer: 
+@n_bytes: 
+@stream: 
+@object: 
+@Returns: 
+
+

@@ -1,0 +1,33 @@
+<!-- ##### SECTION Title ##### -->
+PclClassMethod
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclClassMethod ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION pcl_class_method_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

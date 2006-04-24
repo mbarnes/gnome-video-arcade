@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclSequence">
+<refmeta>
+<refentrytitle>PclSequence</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclSequence</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclSequence-struct">PclSequence</link>;
+            <link linkend="PclSequenceIface">PclSequenceIface</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sequence-concat">pcl_sequence_concat</link>             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="glong">glong</link>       <link linkend="pcl-sequence-count">pcl_sequence_count</link>              (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="glong">glong</link>       <link linkend="pcl-sequence-index">pcl_sequence_index</link>              (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sequence-repeat">pcl_sequence_repeat</link>             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="glong">glong</link> times);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sequence-as-list">pcl_sequence_as_list</link>            (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sequence-as-tuple">pcl_sequence_as_tuple</link>           (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sequence-in-place-concat">pcl_sequence_in_place_concat</link>    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sequence-in-place-repeat">pcl_sequence_in_place_repeat</link>    (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="glong">glong</link> times);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-sequence-get-item">pcl_sequence_get_item</link>           (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="glong">glong</link> index);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GInterface">GInterface</link>
+   +----PclSequence
+</synopsis>
+
+</refsect1>
+
+
+
+
+<refsect1>
+<title>Known Implementations</title>
+<para>
+PclSequence is implemented by
+ <link linkend="PclTuple">PclTuple</link>,  <link linkend="PclString">PclString</link> and  <link linkend="PclList">PclList</link>.</para>
+
+</refsect1>
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclSequence-struct"/>PclSequence</title>
+<indexterm><primary>PclSequence</primary></indexterm><programlisting>typedef struct _PclSequence PclSequence;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclSequenceIface"/>PclSequenceIface</title>
+<indexterm><primary>PclSequenceIface</primary></indexterm><programlisting>typedef struct {
+        GTypeInterface parent_iface;
+
+        PclObject *     (*concat)               (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*repeat)               (PclObject *object,
+                                                 glong times);
+        PclObject *     (*as_list)              (PclObject *object);
+        PclObject *     (*as_tuple)             (PclObject *object);
+
+        /* mutable type methods */
+        PclObject *     (*in_place_concat)      (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_repeat)      (PclObject *object1,
+                                                 glong times);
+} PclSequenceIface;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-concat"/>pcl_sequence_concat ()</title>
+<indexterm><primary>pcl_sequence_concat</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sequence_concat             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-count"/>pcl_sequence_count ()</title>
+<indexterm><primary>pcl_sequence_count</primary></indexterm><programlisting><link linkend="glong">glong</link>       pcl_sequence_count              (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-index"/>pcl_sequence_index ()</title>
+<indexterm><primary>pcl_sequence_index</primary></indexterm><programlisting><link linkend="glong">glong</link>       pcl_sequence_index              (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-repeat"/>pcl_sequence_repeat ()</title>
+<indexterm><primary>pcl_sequence_repeat</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sequence_repeat             (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="glong">glong</link> times);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>times</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-as-list"/>pcl_sequence_as_list ()</title>
+<indexterm><primary>pcl_sequence_as_list</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sequence_as_list            (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-as-tuple"/>pcl_sequence_as_tuple ()</title>
+<indexterm><primary>pcl_sequence_as_tuple</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sequence_as_tuple           (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-in-place-concat"/>pcl_sequence_in_place_concat ()</title>
+<indexterm><primary>pcl_sequence_in_place_concat</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sequence_in_place_concat    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-in-place-repeat"/>pcl_sequence_in_place_repeat ()</title>
+<indexterm><primary>pcl_sequence_in_place_repeat</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sequence_in_place_repeat    (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="glong">glong</link> times);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>times</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-sequence-get-item"/>pcl_sequence_get_item ()</title>
+<indexterm><primary>pcl_sequence_get_item</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_sequence_get_item           (<link linkend="PclObject">PclObject</link> *object,
+                                             <link linkend="glong">glong</link> index);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>index</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

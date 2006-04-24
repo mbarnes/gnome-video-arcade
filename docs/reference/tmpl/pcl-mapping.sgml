@@ -1,0 +1,147 @@
+<!-- ##### SECTION Title ##### -->
+PclMapping
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclMapping ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclMappingIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@keys: 
+@values: 
+@items: 
+@clear: 
+@pop_item: 
+
+<!-- ##### USER_FUNCTION PclMappingKeys ##### -->
+<para>
+
+</para>
+
+@mapping: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION PclMappingValues ##### -->
+<para>
+
+</para>
+
+@mapping: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION PclMappingItems ##### -->
+<para>
+
+</para>
+
+@mapping: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION PclMappingClear ##### -->
+<para>
+
+</para>
+
+@mapping: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION PclMappingPopItem ##### -->
+<para>
+
+</para>
+
+@mapping: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_mapping_keys ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_mapping_values ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_mapping_items ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_mapping_clear ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_mapping_pop_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_mapping_merge ##### -->
+<para>
+
+</para>
+
+@object: 
+@from: 
+@override: 
+@Returns: 
+
+
+<!-- ##### MACRO pcl_mapping_update ##### -->
+<para>
+
+</para>
+
+@object: 
+@from: 
+
+

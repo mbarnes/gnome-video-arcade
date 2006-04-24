@@ -1,0 +1,64 @@
+<!-- ##### SECTION Title ##### -->
+PclSubscriptable
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclSubscriptable ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclSubscriptableIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@get_item: 
+@set_item: 
+
+<!-- ##### FUNCTION pcl_object_get_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@subscript: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_object_set_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@subscript: 
+@value: 
+@Returns: 
+
+
+<!-- ##### MACRO pcl_object_del_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@subscript: 
+
+

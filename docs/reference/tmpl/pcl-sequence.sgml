@@ -1,0 +1,126 @@
+<!-- ##### SECTION Title ##### -->
+PclSequence
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclSequence ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclSequenceIface ##### -->
+<para>
+
+</para>
+
+@parent_iface: 
+@concat: 
+@repeat: 
+@as_list: 
+@as_tuple: 
+@in_place_concat: 
+@in_place_repeat: 
+
+<!-- ##### FUNCTION pcl_sequence_concat ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_count ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_index ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_repeat ##### -->
+<para>
+
+</para>
+
+@object: 
+@times: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_as_list ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_as_tuple ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_in_place_concat ##### -->
+<para>
+
+</para>
+
+@object1: 
+@object2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_in_place_repeat ##### -->
+<para>
+
+</para>
+
+@object: 
+@times: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_sequence_get_item ##### -->
+<para>
+
+</para>
+
+@object: 
+@index: 
+@Returns: 
+
+

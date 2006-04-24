@@ -1,0 +1,811 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclNumber">
+<refmeta>
+<refentrytitle>PclNumber</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclNumber</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclNumber-struct">PclNumber</link>;
+            <link linkend="PclNumberIface">PclNumberIface</link>;
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-as-int">pcl_number_as_int</link>               (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-as-float">pcl_number_as_float</link>             (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-as-complex">pcl_number_as_complex</link>           (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-oct">pcl_number_oct</link>                  (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-hex">pcl_number_hex</link>                  (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-add">pcl_number_add</link>                  (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-subtract">pcl_number_subtract</link>             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-multiply">pcl_number_multiply</link>             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-divide">pcl_number_divide</link>               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-divmod">pcl_number_divmod</link>               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-modulo">pcl_number_modulo</link>               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-power">pcl_number_power</link>                (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclObject">PclObject</link> *object3);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-floordiv">pcl_number_floordiv</link>             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-negative">pcl_number_negative</link>             (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-positive">pcl_number_positive</link>             (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-absolute">pcl_number_absolute</link>             (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-or">pcl_number_or</link>                   (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-xor">pcl_number_xor</link>                  (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-and">pcl_number_and</link>                  (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-lshift">pcl_number_lshift</link>               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-rshift">pcl_number_rshift</link>               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-invert">pcl_number_invert</link>               (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="gint">gint</link>        <link linkend="pcl-number-nonzero">pcl_number_nonzero</link>              (<link linkend="PclObject">PclObject</link> *object);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-add">pcl_number_in_place_add</link>         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-subtract">pcl_number_in_place_subtract</link>    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-multiply">pcl_number_in_place_multiply</link>    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-divide">pcl_number_in_place_divide</link>      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-modulo">pcl_number_in_place_modulo</link>      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-power">pcl_number_in_place_power</link>       (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclObject">PclObject</link> *object3);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-floordiv">pcl_number_in_place_floordiv</link>    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-or">pcl_number_in_place_or</link>          (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-xor">pcl_number_in_place_xor</link>         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-and">pcl_number_in_place_and</link>         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-lshift">pcl_number_in_place_lshift</link>      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-number-in-place-rshift">pcl_number_in_place_rshift</link>      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GInterface">GInterface</link>
+   +----PclNumber
+</synopsis>
+
+</refsect1>
+
+
+
+
+<refsect1>
+<title>Known Implementations</title>
+<para>
+PclNumber is implemented by
+ <link linkend="PclFrozenSet">PclFrozenSet</link>,  <link linkend="PclBool">PclBool</link>,  <link linkend="PclInt">PclInt</link>,  <link linkend="PclSet">PclSet</link>,  <link linkend="PclFloat">PclFloat</link> and  <link linkend="PclComplex">PclComplex</link>.</para>
+
+</refsect1>
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclNumber-struct"/>PclNumber</title>
+<indexterm><primary>PclNumber</primary></indexterm><programlisting>typedef struct _PclNumber PclNumber;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PclNumberIface"/>PclNumberIface</title>
+<indexterm><primary>PclNumberIface</primary></indexterm><programlisting>typedef struct {
+        GTypeInterface parent_iface;
+
+        PclObject *     (*as_int)               (PclObject *object);
+        PclObject *     (*as_float)             (PclObject *object);
+        PclObject *     (*as_complex)           (PclObject *object);
+        PclObject *     (*oct)                  (PclObject *object);
+        PclObject *     (*hex)                  (PclObject *object);
+        PclObject *     (*add)                  (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*subtract)             (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*multiply)             (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*divide)               (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*divmod)               (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*modulo)               (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*power)                (PclObject *object1,
+                                                 PclObject *object2,
+                                                 PclObject *object3);
+        PclObject *     (*floordiv)             (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*negative)             (PclObject *object);
+        PclObject *     (*positive)             (PclObject *object);
+        PclObject *     (*absolute)             (PclObject *object);
+        PclObject *     (*bitwise_or)           (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*bitwise_xor)          (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*bitwise_and)          (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*bitwise_lshift)       (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*bitwise_rshift)       (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*bitwise_invert)       (PclObject *object);
+        gint            (*nonzero)              (PclObject *object);
+
+        /* mutable type methods */
+        PclObject *     (*in_place_add)         (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_subtract)    (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_multiply)    (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_divide)      (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_divmod)      (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_modulo)      (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_power)       (PclObject *object1,
+                                                 PclObject *object2,
+                                                 PclObject *object3);
+        PclObject *     (*in_place_floordiv)    (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_or)          (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_xor)         (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_and)         (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_lshift)      (PclObject *object1,
+                                                 PclObject *object2);
+        PclObject *     (*in_place_rshift)      (PclObject *object1,
+                                                 PclObject *object2);
+} PclNumberIface;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-as-int"/>pcl_number_as_int ()</title>
+<indexterm><primary>pcl_number_as_int</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_as_int               (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-as-float"/>pcl_number_as_float ()</title>
+<indexterm><primary>pcl_number_as_float</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_as_float             (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-as-complex"/>pcl_number_as_complex ()</title>
+<indexterm><primary>pcl_number_as_complex</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_as_complex           (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-oct"/>pcl_number_oct ()</title>
+<indexterm><primary>pcl_number_oct</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_oct                  (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-hex"/>pcl_number_hex ()</title>
+<indexterm><primary>pcl_number_hex</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_hex                  (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-add"/>pcl_number_add ()</title>
+<indexterm><primary>pcl_number_add</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_add                  (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-subtract"/>pcl_number_subtract ()</title>
+<indexterm><primary>pcl_number_subtract</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_subtract             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-multiply"/>pcl_number_multiply ()</title>
+<indexterm><primary>pcl_number_multiply</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_multiply             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-divide"/>pcl_number_divide ()</title>
+<indexterm><primary>pcl_number_divide</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_divide               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-divmod"/>pcl_number_divmod ()</title>
+<indexterm><primary>pcl_number_divmod</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_divmod               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-modulo"/>pcl_number_modulo ()</title>
+<indexterm><primary>pcl_number_modulo</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_modulo               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-power"/>pcl_number_power ()</title>
+<indexterm><primary>pcl_number_power</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_power                (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclObject">PclObject</link> *object3);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object3</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-floordiv"/>pcl_number_floordiv ()</title>
+<indexterm><primary>pcl_number_floordiv</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_floordiv             (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-negative"/>pcl_number_negative ()</title>
+<indexterm><primary>pcl_number_negative</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_negative             (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-positive"/>pcl_number_positive ()</title>
+<indexterm><primary>pcl_number_positive</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_positive             (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-absolute"/>pcl_number_absolute ()</title>
+<indexterm><primary>pcl_number_absolute</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_absolute             (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-or"/>pcl_number_or ()</title>
+<indexterm><primary>pcl_number_or</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_or                   (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-xor"/>pcl_number_xor ()</title>
+<indexterm><primary>pcl_number_xor</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_xor                  (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-and"/>pcl_number_and ()</title>
+<indexterm><primary>pcl_number_and</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_and                  (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-lshift"/>pcl_number_lshift ()</title>
+<indexterm><primary>pcl_number_lshift</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_lshift               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-rshift"/>pcl_number_rshift ()</title>
+<indexterm><primary>pcl_number_rshift</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_rshift               (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-invert"/>pcl_number_invert ()</title>
+<indexterm><primary>pcl_number_invert</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_invert               (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-nonzero"/>pcl_number_nonzero ()</title>
+<indexterm><primary>pcl_number_nonzero</primary></indexterm><programlisting><link linkend="gint">gint</link>        pcl_number_nonzero              (<link linkend="PclObject">PclObject</link> *object);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-add"/>pcl_number_in_place_add ()</title>
+<indexterm><primary>pcl_number_in_place_add</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_add         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-subtract"/>pcl_number_in_place_subtract ()</title>
+<indexterm><primary>pcl_number_in_place_subtract</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_subtract    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-multiply"/>pcl_number_in_place_multiply ()</title>
+<indexterm><primary>pcl_number_in_place_multiply</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_multiply    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-divide"/>pcl_number_in_place_divide ()</title>
+<indexterm><primary>pcl_number_in_place_divide</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_divide      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-modulo"/>pcl_number_in_place_modulo ()</title>
+<indexterm><primary>pcl_number_in_place_modulo</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_modulo      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-power"/>pcl_number_in_place_power ()</title>
+<indexterm><primary>pcl_number_in_place_power</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_power       (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2,
+                                             <link linkend="PclObject">PclObject</link> *object3);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object3</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-floordiv"/>pcl_number_in_place_floordiv ()</title>
+<indexterm><primary>pcl_number_in_place_floordiv</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_floordiv    (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-or"/>pcl_number_in_place_or ()</title>
+<indexterm><primary>pcl_number_in_place_or</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_or          (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-xor"/>pcl_number_in_place_xor ()</title>
+<indexterm><primary>pcl_number_in_place_xor</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_xor         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-and"/>pcl_number_in_place_and ()</title>
+<indexterm><primary>pcl_number_in_place_and</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_and         (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-lshift"/>pcl_number_in_place_lshift ()</title>
+<indexterm><primary>pcl_number_in_place_lshift</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_lshift      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-number-in-place-rshift"/>pcl_number_in_place_rshift ()</title>
+<indexterm><primary>pcl_number_in_place_rshift</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_number_in_place_rshift      (<link linkend="PclObject">PclObject</link> *object1,
+                                             <link linkend="PclObject">PclObject</link> *object2);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>object2</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

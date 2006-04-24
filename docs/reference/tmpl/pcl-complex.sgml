@@ -1,0 +1,180 @@
+<!-- ##### SECTION Title ##### -->
+PclComplex
+
+<!-- ##### SECTION Short_Description ##### -->
+Complex floating-point objects
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT PclComplex ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT PclComplexValue ##### -->
+<para>
+
+</para>
+
+@real: 
+@imag: 
+
+<!-- ##### FUNCTION pcl_complex_get_type_object ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_as_complex ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_real_as_double ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_imag_as_double ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_from_complex ##### -->
+<para>
+
+</para>
+
+@v_complex: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_from_doubles ##### -->
+<para>
+
+</para>
+
+@real: 
+@imag: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_from_string ##### -->
+<para>
+
+</para>
+
+@v_string: 
+@endptr: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_value_add ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_value_sub ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_value_mul ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_value_div ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_value_pow ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+
+<!-- ##### FUNCTION pcl_complex_value_abs ##### -->
+<para>
+
+</para>
+
+@a: 
+@Returns: 
+
+
+<!-- ##### MACRO PCL_COMPLEX_AS_COMPLEX ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_COMPLEX_REAL_AS_DOUBLE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### MACRO PCL_COMPLEX_IMAG_AS_DOUBLE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+

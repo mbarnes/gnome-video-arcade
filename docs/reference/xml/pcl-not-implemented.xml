@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="PclNotImplemented">
+<refmeta>
+<refentrytitle>PclNotImplemented</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>PCL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>PclNotImplemented</refname><refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+#include &lt;pcl.h&gt;
+
+
+            <link linkend="PclNotImplemented-struct">PclNotImplemented</link>;
+#define     <link linkend="PCL-NOT-IMPLEMENTED:CAPS">PCL_NOT_IMPLEMENTED</link>
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-not-implemented-get-type-object">pcl_not_implemented_get_type_object</link>
+                                            (void);
+<link linkend="PclObject">PclObject</link>*  <link linkend="pcl-not-implemented-get-instance">pcl_not_implemented_get_instance</link>
+                                            (void);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="PclObject">PclObject</link>
+         +----PclNotImplemented
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="PclNotImplemented-struct"/>PclNotImplemented</title>
+<indexterm><primary>PclNotImplemented</primary></indexterm><programlisting>typedef struct _PclNotImplemented PclNotImplemented;</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="PCL-NOT-IMPLEMENTED:CAPS"/>PCL_NOT_IMPLEMENTED</title>
+<indexterm><primary>PCL_NOT_IMPLEMENTED</primary></indexterm><programlisting>#define PCL_NOT_IMPLEMENTED (pcl_not_implemented_get_instance ())
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2>
+<title><anchor id="pcl-not-implemented-get-type-object"/>pcl_not_implemented_get_type_object ()</title>
+<indexterm><primary>pcl_not_implemented_get_type_object</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_not_implemented_get_type_object
+                                            (void);</programlisting>
+<para>
+Returns the type object for <link linkend="PclNotImplemented"><type>PclNotImplemented</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the type object for <link linkend="PclNotImplemented"><type>PclNotImplemented</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="pcl-not-implemented-get-instance"/>pcl_not_implemented_get_instance ()</title>
+<indexterm><primary>pcl_not_implemented_get_instance</primary></indexterm><programlisting><link linkend="PclObject">PclObject</link>*  pcl_not_implemented_get_instance
+                                            (void);</programlisting>
+<para>
+Returns the singleton instance of <link linkend="PclNotImplemented"><type>PclNotImplemented</type></link>.  During runtime this
+is the built-in object <literal>NotImplemented</literal>.
+</para>
+<para>
+Do not call this function directly.  Instead, use <link linkend="PCL-NOT-IMPLEMENTED:CAPS"><type>PCL_NOT_IMPLEMENTED</type></link>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a borrowed reference to the singleton instance of
+         <link linkend="PclNotImplemented"><type>PclNotImplemented</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>
