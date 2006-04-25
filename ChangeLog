@@ -1,3 +1,30 @@
+2006-04-25  Matthew F. Barnes  <matthew@barnes.net>
+
+	* src/pcl-compiler.c:
+	Change PCL_OPCODE_xxx_NAME to PCL_OPCODE_xxx_LOCAL,
+		where xxx is one of { LOAD, STORE, DELETE }.
+
+	* src/pcl-eval.c: (pcl_eval_frame)
+	Define IS_DICT() macro (uses G_OBJECT_TYPE()).
+	Change PCL_OPCODE_xxx_NAME to PCL_OPCODE_xxx_LOCAL,
+		where xxx is one of { LOAD, STORE, DELETE }.
+	Rearrange switch cases to match new opcode sequence.
+	PCL_OPCODE_LIST_APPEND: Better error handling.
+	PCL_OPCODE_LOAD_LOCAL: More efficient logic.
+	PCL_OPCODE_STORE_LOCAL: Better error handling.
+	PCL_OPCODE_DELETE_LOCAL: Better error handling.
+	PCL_OPCODE_LOAD_GLOBAL: More efficient logic.
+	PCL_OPCODE_DELETE_GLOBAL: Better error handling.
+	PCL_OPCODE_LOAD_DEREF: Cosmetic changes.
+
+	* src/pcl-opcode.h:
+	Rename PCL_OPCODE_xxx_NAME to PCL_OPCODE_xxx_LOCAL,
+		where xxx is one of { LOAD, STORE, DELETE }.
+	Resequence opcode range 0x90 - 0x9F.
+
+	* src/pcl-optimizer.c: (pcl_optimize)
+	Change PCL_OPCODE_LOAD_NAME to PCL_OPCODE_LOAD_LOCAL.
+
 2006-04-20  Matthew F. Barnes  <matthew.f.barnes@boeing.com>
 
         * Released PCL 0.0.24

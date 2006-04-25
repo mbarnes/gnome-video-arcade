@@ -223,7 +223,7 @@ optimizer_load_none (OptimizerState *os, glong offset)
 {
         /* Original                     Modified
          * ---------------------------  ---------------------------
-         * LOAD_NAME None               LOAD_CONST None
+         * LOAD_LOCAL None              LOAD_CONST None
          *
          * or
          *
@@ -528,7 +528,7 @@ pcl_optimize (PclObject *bytes, PclObject *constants,
                                 optimizer_invert_comparison (&os, ii);
                                 break;
 
-                        case PCL_OPCODE_LOAD_NAME:
+                        case PCL_OPCODE_LOAD_LOCAL:
                         case PCL_OPCODE_LOAD_GLOBAL:
                                 optimizer_load_none (&os, ii);
                                 break;

@@ -110,15 +110,15 @@
 #define PCL_OPCODE_CONTINUE_LOOP        0x87  /* Absolute target address */
 
 #define PCL_OPCODE_LOAD_CONST           0x90  /* Index in const list */
-#define PCL_OPCODE_LOAD_NAME            0x91  /* Index in names list */
-#define PCL_OPCODE_STORE_NAME           0x92  /* Index in names list */
-#define PCL_OPCODE_DELETE_NAME          0x93  /* Index in names list */
-#define PCL_OPCODE_LOAD_ATTR            0x94  /* Index in names list */
-#define PCL_OPCODE_STORE_ATTR           0x95  /* Index in names list */
-#define PCL_OPCODE_DELETE_ATTR          0x96  /* Index in names list */
-#define PCL_OPCODE_LOAD_GLOBAL          0x97  /* Index in names list */
-#define PCL_OPCODE_STORE_GLOBAL         0x98  /* Index in names list */
-#define PCL_OPCODE_DELETE_GLOBAL        0x99  /* Index in names list */
+#define PCL_OPCODE_LOAD_LOCAL           0x91  /* Index in names list */
+#define PCL_OPCODE_STORE_LOCAL          0x92  /* Index in names list */
+#define PCL_OPCODE_DELETE_LOCAL         0x93  /* Index in names list */
+#define PCL_OPCODE_LOAD_GLOBAL          0x94  /* Index in names list */
+#define PCL_OPCODE_STORE_GLOBAL         0x95  /* Index in names list */
+#define PCL_OPCODE_DELETE_GLOBAL        0x96  /* Index in names list */
+#define PCL_OPCODE_LOAD_ATTR            0x97  /* Index in names list */
+#define PCL_OPCODE_STORE_ATTR           0x98  /* Index in names list */
+#define PCL_OPCODE_DELETE_ATTR          0x99  /* Index in names list */
 #define PCL_OPCODE_LOAD_FAST            0x9A  /* Index in slots list */
 #define PCL_OPCODE_STORE_FAST           0x9B  /* Index in slots list */
 #define PCL_OPCODE_DELETE_FAST          0x9C  /* Index in slots list */

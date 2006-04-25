@@ -457,7 +457,7 @@ compiler_add_variable (PclCompilerState *cs, gint action, const gchar *name)
                                         opcode = PCL_OPCODE_LOAD_GLOBAL;
                                         break;
                                 case SOURCE_DEFAULT:
-                                        opcode = PCL_OPCODE_LOAD_NAME;
+                                        opcode = PCL_OPCODE_LOAD_LOCAL;
                                         break;
                                 case SOURCE_CLOSURE:
                                         opcode = PCL_OPCODE_LOAD_DEREF;
@@ -475,7 +475,7 @@ compiler_add_variable (PclCompilerState *cs, gint action, const gchar *name)
                                         opcode = PCL_OPCODE_STORE_GLOBAL;
                                         break;
                                 case SOURCE_DEFAULT:
-                                        opcode = PCL_OPCODE_STORE_NAME;
+                                        opcode = PCL_OPCODE_STORE_LOCAL;
                                         break;
                                 case SOURCE_CLOSURE:
                                         opcode = PCL_OPCODE_STORE_DEREF;
@@ -493,7 +493,7 @@ compiler_add_variable (PclCompilerState *cs, gint action, const gchar *name)
                                         opcode = PCL_OPCODE_DELETE_GLOBAL;
                                         break;
                                 case SOURCE_DEFAULT:
-                                        opcode = PCL_OPCODE_DELETE_NAME;
+                                        opcode = PCL_OPCODE_DELETE_LOCAL;
                                         break;
                                 case SOURCE_CLOSURE:
                                         compiler_error (cs,
@@ -1931,7 +1931,7 @@ compiler_import (PclCompilerState *cs, GNode *node)
                                 name = PCL_NODE_STRING (child);
                         object = pcl_string_from_string (name);
                         index = compiler_add_name (cs, object);
-                        compiler_add_oparg (cs, PCL_OPCODE_STORE_NAME, index);
+                        compiler_add_oparg (cs, PCL_OPCODE_STORE_LOCAL, index);
                         compiler_stack_pop (cs, 1);
                         pcl_object_unref (object);
 
@@ -2604,7 +2604,7 @@ compiler_top_level_class (PclCompilerState *cs, GNode *node)
 
         name = pcl_string_intern_from_string ("__module__");
         index = compiler_add_name (cs, name);
-        compiler_add_oparg (cs, PCL_OPCODE_STORE_NAME, index);
+        compiler_add_oparg (cs, PCL_OPCODE_STORE_LOCAL, index);
         compiler_stack_pop (cs, 1);
         pcl_object_unref (name);
 

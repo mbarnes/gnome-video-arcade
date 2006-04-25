@@ -1046,6 +1046,7 @@ pcl_eval_frame (PclFrame *frame)
 
 /* Type Check Macros */
 #define IS_INT(obj)     (G_OBJECT_TYPE (obj) == PCL_TYPE_INT)
+#define IS_DICT(obj)    (G_OBJECT_TYPE (obj) == PCL_TYPE_DICT)
 #define IS_LIST(obj)    (G_OBJECT_TYPE (obj) == PCL_TYPE_LIST)
 #define IS_TUPLE(obj)   (G_OBJECT_TYPE (obj) == PCL_TYPE_TUPLE)
 
@@ -2063,14 +2064,17 @@ fast_next_opcode:
                                 break;
 
                         case PCL_OPCODE_LIST_APPEND:
-                                /* XXX Need better error handling */
                                 w = STACK_POP ();
                                 v = STACK_POP ();
-                                pcl_list_append (v, w);
+                                success = pcl_list_append (v, w);
                                 pcl_object_unref (v);
                                 pcl_object_unref (w);
-                                PREDICT (JUMP_ABSOLUTE);
-                                continue;
+                                if (success)
+                                {
+                                        PREDICT (JUMP_ABSOLUTE);
+                                        continue;
+                                }
+                                break;
 
                         case PCL_OPCODE_RAISE_EXCEPTION:
                                 u = STACK_POP ();
@@ -2264,41 +2268,132 @@ fast_next_opcode:
                                 STACK_PUSH (pcl_object_ref (x));
                                 goto fast_next_opcode;
 
-                        case PCL_OPCODE_LOAD_NAME:
-                                /* XXX Needs better error handling */
+                        case PCL_OPCODE_LOAD_LOCAL:
+                                /* XXX Hard to write this cleanly. */
                                 w = GETITEM (names, oparg);
-                                x = pcl_dict_get_item (locals, w);
-                                if (x == NULL)
-                                        x = pcl_dict_get_item (globals, w);
-                                if (x == NULL)
-                                        x = pcl_dict_get_item (builtins, w);
-                                if (x == NULL)
+                                if (locals == NULL)
                                 {
-                                        eval_format_exc_check_arg (
-                                                pcl_exception_name_error (),
-                                                NAME_ERROR_MSG, w);
+                                        pcl_error_set_format (
+                                                pcl_exception_system_error (),
+                                                "no locals when loading %s",
+                                                pcl_object_repr (w));
+                                        success = FALSE;
                                         break;
                                 }
-                                STACK_PUSH (pcl_object_ref (x));
+                                if (IS_DICT (locals))
+                                {
+                                        x = pcl_dict_get_item (locals, w);
+                                        if (x != NULL)
+                                                pcl_object_ref (x);
+                                }
+                                else
+                                {
+                                        x = pcl_object_get_item (locals, w);
+                                        if (x == NULL && pcl_error_occurred ())
+                                        {
+                                                if (!pcl_error_exception_matches (
+                                                        pcl_exception_key_error ()))
+                                                        break;
+                                                pcl_error_clear ();
+                                        }
+                                }
+                                if (x == NULL)
+                                {
+                                        x = pcl_dict_get_item (globals, w);
+                                        if (x == NULL)
+                                        {
+                                                x = pcl_dict_get_item (builtins, w);
+                                                if (x == NULL)
+                                                {
+                                                        eval_format_exc_check_arg (
+                                                                pcl_exception_name_error (),
+                                                                NAME_ERROR_MSG, w);
+                                                        break;
+                                                }
+                                        }
+                                        pcl_object_ref (x);
+                                }
+                                STACK_PUSH (x);
                                 continue;
 
-                        case PCL_OPCODE_STORE_NAME:
-                                /* XXX Needs better error handling */
+                        case PCL_OPCODE_STORE_LOCAL:
                                 w = GETITEM (names, oparg);
                                 v = STACK_POP ();
-                                success = pcl_dict_set_item (locals, w, v);
+                                if (locals == NULL)
+                                {
+                                        pcl_error_set_format (
+                                                pcl_exception_system_error (),
+                                                "no locals when storing %s",
+                                                pcl_object_repr (w));
+                                        success = FALSE;
+                                        break;
+                                }
+                                if (IS_DICT (locals))
+                                        success =
+                                        pcl_dict_set_item (locals, w, v);
+                                else
+                                        success =
+                                        pcl_object_set_item (locals, w, v);
                                 pcl_object_unref (v);
                                 if (success)
                                         continue;
                                 break;
 
-                        case PCL_OPCODE_DELETE_NAME:
-                                /* XXX Needs better error handling */
+                        case PCL_OPCODE_DELETE_LOCAL:
                                 w = GETITEM (names, oparg);
+                                if (locals != NULL)
+                                {
+                                        pcl_error_set_format (
+                                                pcl_exception_system_error (),
+                                                "no locals when deleting %s",
+                                                pcl_object_repr (w));
+                                        success = FALSE;
+                                        break;
+                                }
                                 if (!pcl_dict_del_item (locals, w))
+                                {
                                         eval_format_exc_check_arg (
                                                 pcl_exception_name_error (),
                                                 NAME_ERROR_MSG, w);
+                                        success = FALSE;
+                                }
+                                break;
+
+                        case PCL_OPCODE_LOAD_GLOBAL:
+                                w = GETITEM (names, oparg);
+                                x = pcl_dict_get_item (globals, w);
+                                if (x == NULL)
+                                {
+                                        x = pcl_dict_get_item (builtins, w);
+                                        if (x == NULL)
+                                        {
+                                                eval_format_exc_check_arg (
+                                                        pcl_exception_name_error (),
+                                                        GLOBAL_NAME_ERROR_MSG, w);
+                                                break;
+                                        }
+                                }
+                                STACK_PUSH (pcl_object_ref (x));
+                                continue;
+
+                        case PCL_OPCODE_STORE_GLOBAL:
+                                w = GETITEM (names, oparg);
+                                v = STACK_POP ();
+                                success = pcl_dict_set_item (globals, w, v);
+                                pcl_object_unref (v);
+                                if (success)
+                                        continue;
+                                break;
+
+                        case PCL_OPCODE_DELETE_GLOBAL:
+                                w = GETITEM (names, oparg);
+                                if (!pcl_dict_del_item (globals, w))
+                                {
+                                        eval_format_exc_check_arg (
+                                                pcl_exception_name_error (),
+                                                GLOBAL_NAME_ERROR_MSG, w);
+                                        success = FALSE;
+                                }
                                 break;
 
                         case PCL_OPCODE_LOAD_ATTR:
@@ -2332,38 +2427,6 @@ fast_next_opcode:
                                 pcl_object_unref (v);
                                 if (success)
                                         continue;
-                                break;
-
-                        case PCL_OPCODE_LOAD_GLOBAL:
-                                w = GETITEM (names, oparg);
-                                x = pcl_dict_get_item (globals, w);
-                                if (x == NULL)
-                                        x = pcl_dict_get_item (builtins, w);
-                                if (x == NULL)
-                                {
-                                        eval_format_exc_check_arg (
-                                                pcl_exception_name_error (),
-                                                GLOBAL_NAME_ERROR_MSG, w);
-                                        break;
-                                }
-                                STACK_PUSH (pcl_object_ref (x));
-                                continue;
-
-                        case PCL_OPCODE_STORE_GLOBAL:
-                                w = GETITEM (names, oparg);
-                                v = STACK_POP ();
-                                success = pcl_dict_set_item (globals, w, v);
-                                pcl_object_unref (v);
-                                if (success)
-                                        continue;
-                                break;
-
-                        case PCL_OPCODE_DELETE_GLOBAL:
-                                w = GETITEM (names, oparg);
-                                if (!pcl_dict_del_item (globals, w))
-                                        eval_format_exc_check_arg (
-                                                pcl_exception_name_error (),
-                                                GLOBAL_NAME_ERROR_MSG, w);
                                 break;
 
                         case PCL_OPCODE_LOAD_FAST:
@@ -2403,26 +2466,28 @@ fast_next_opcode:
                                 break;
 
                         case PCL_OPCODE_LOAD_DEREF:
-                                /* XXX Needs better error handling */
                                 x = free_slots[oparg];
-                                if ((w = pcl_cell_get (x)) != NULL)
+                                w = pcl_cell_get (x);
+                                if (w != NULL)
                                 {
                                         STACK_PUSH (w);
                                         continue;
                                 }
                                 success = FALSE;
+                                /* don't stomp existing exception */
                                 if (pcl_error_occurred ())
                                         break;
                                 if (oparg < frame->cell_count)
                                 {
                                         v = GETITEM (code->cellvars, oparg);
                                         eval_format_exc_check_arg (
-                                        pcl_exception_unbound_local_error (),
-                                        UNBOUND_LOCAL_ERROR_MSG, v);
+                                                pcl_exception_unbound_local_error (),
+                                                UNBOUND_LOCAL_ERROR_MSG, v);
                                 }
                                 else
                                 {
-                                        v = GETITEM (code->freevars,
+                                        v = pcl_tuple_get_item (
+                                                code->freevars,
                                                 oparg - frame->cell_count);
                                         eval_format_exc_check_arg (
                                                 pcl_exception_name_error (),
