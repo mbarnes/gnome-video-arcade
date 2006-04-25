@@ -23,49 +23,56 @@ static PclFactory frame_factory;
 
 static gpointer frame_parent_class = NULL;
 
-/* Helper for fast_to_locals() */
+/* Helper for pcl_frame_fast_to_locals() */
 static void
-names_to_dict (PclObject *names, glong length, PclObject *dict,
+names_to_dict (PclObject *names, glong size, PclObject *dict,
                PclObject **slots, gboolean dereference)
 {
+        PclObject *key;
+        PclObject *value;
         glong ii;
-        for (ii = 0; ii < length; ii++)
+
+        for (ii = 0; ii < size; ii++)
         {
-                PclObject *key = PCL_TUPLE_GET_ITEM (names, ii);
-                PclObject *value = slots[ii];
+                key = PCL_TUPLE_GET_ITEM (names, ii);
+                value = slots[ii];
                 if (dereference)
-                        value = pcl_cell_get (value);
+                        value = PCL_CELL_GET (value);
                 if (value == NULL)
                 {
-                        if (!pcl_dict_del_item (dict, key))
+                        if (!pcl_object_del_item (dict, key))
                                 pcl_error_clear ();
                 }
                 else
                 {
-                        if (!pcl_dict_set_item (dict, key, value))
+                        if (!pcl_object_set_item (dict, key, value))
                                 pcl_error_clear ();
                 }
         }
 }
 
-/* Helper for locals_to_fast() */
+/* Helper for pcl_frame_locals_to_fast() */
 static void
-dict_to_names (PclObject *names, glong length, PclObject *dict,
+dict_to_names (PclObject *names, glong size, PclObject *dict,
                PclObject **slots, gboolean dereference, gboolean clear)
 {
+        PclObject *key;
+        PclObject *value;
         glong ii;
-        for (ii = 0; ii < length; ii++)
+
+        for (ii = 0; ii < size; ii++)
         {
-                PclObject *key = PCL_TUPLE_GET_ITEM (names, ii);
-                PclObject *value = pcl_object_get_item (dict, key);
+                key = PCL_TUPLE_GET_ITEM (names, ii);
+                value = pcl_object_get_item (dict, key);
                 if (value == NULL)
                         pcl_error_clear ();
                 if (dereference)
                 {
                         if (value != NULL || clear)
                         {
-                                if (pcl_cell_get (slots[ii]) != value)
-                                        pcl_cell_set (slots[ii], value);
+                                if (PCL_CELL_GET (slots[ii]) != value)
+                                        if (!pcl_cell_set (slots[ii], value))
+                                                pcl_error_clear ();
                         }
                 }
                 else if (value != NULL || clear)
@@ -190,109 +197,6 @@ frame_traverse (PclContainer *container, PclTraverseFunc func,
 }
 
 static void
-frame_block_setup (PclFrame *frame, guint type, guint handler, guint level)
-{
-        PclTryBlock *block;
-        if (frame->block_count >= PCL_MAX_BLOCKS)
-                g_error ("%s: Block stack overflow", G_STRFUNC);
-        block = &frame->block[frame->block_count++];
-        block->type = type;
-        block->handler = handler;
-        block->level = level;
-}
-
-static PclTryBlock *
-frame_block_pop (PclFrame *frame)
-{
-        if (frame->block_count == 0)
-                g_error ("%s: Block stack underflow", G_STRFUNC);
-        return &frame->block[--frame->block_count];
-}
-
-static void
-frame_fast_to_locals (PclFrame *frame)
-{
-        /* Merge fast locals into frame->locals */
-        PclObject *locals, *names, **slots;
-        PclObject *error_type, *error_value, *error_traceback;
-        glong length;
-
-        if (frame == NULL)
-                return;
-
-        locals = frame->locals;
-        if (locals == NULL)
-                locals = frame->locals = pcl_dict_new ();
-        names = frame->code->varnames;
-        g_assert (PCL_IS_TUPLE (names));
-        length = PCL_TUPLE_GET_SIZE (names);
-        length = CLAMP (length, 0, frame->code->variable_count);
-        slots = frame->slots;
-
-        pcl_error_fetch (&error_type, &error_value, &error_traceback);
-        if (frame->code->variable_count > 0)
-                names_to_dict (names, length, locals, slots, FALSE);
-        if (frame->cell_count > 0 || frame->free_count > 0)
-        {
-                names = frame->code->cellvars;
-                g_assert (PCL_IS_TUPLE (names));
-                length = PCL_TUPLE_GET_SIZE (names);
-                slots += frame->code->variable_count;
-                names_to_dict (names, length, locals, slots, TRUE);
-
-                names = frame->code->freevars;
-                g_assert (PCL_IS_TUPLE (names));
-                length = PCL_TUPLE_GET_SIZE (names);
-                slots += frame->cell_count;
-                names_to_dict (names, length, locals, slots, TRUE);
-        }
-        pcl_error_restore (error_type, error_value, error_traceback);
-}
-
-static void
-frame_locals_to_fast (PclFrame *frame, gboolean clear)
-{
-        /* Merge frame->locals into fast locals */
-        PclObject *locals, *names, **slots;
-        PclObject *error_type, *error_value, *error_traceback;
-        glong length;
-
-        if (frame == NULL)
-                return;
-
-        locals = frame->locals;
-        names = frame->code->varnames;
-        if (locals == NULL || !PCL_IS_TUPLE (names))
-                return;
-        slots = frame->slots;
-        length = PCL_TUPLE_GET_SIZE (names);
-        length = CLAMP (length, 0, frame->code->variable_count);
-
-        pcl_error_fetch (&error_type, &error_value, &error_traceback);
-        if (frame->code->variable_count > 0)
-                dict_to_names (names, length, locals, slots, FALSE, clear);
-        if (frame->cell_count > 0 || frame->free_count > 0)
-        {
-                if (!PCL_IS_TUPLE (frame->code->cellvars) &&
-                        PCL_IS_TUPLE (frame->code->freevars))
-                        return;
-
-                names = frame->code->cellvars;
-                g_assert (PCL_IS_TUPLE (names));
-                length = PCL_TUPLE_GET_SIZE (names);
-                slots += frame->code->variable_count;
-                dict_to_names (names, length, locals, slots, TRUE, clear);
-
-                names = frame->code->freevars;
-                g_assert (PCL_IS_TUPLE (names));
-                length = PCL_TUPLE_GET_SIZE (names);
-                slots += frame->cell_count;
-                dict_to_names (names, length, locals, slots, TRUE, clear);
-        }
-        pcl_error_restore (error_type, error_value, error_traceback);
-}
-
-static void
 frame_class_init (PclFrameClass *class)
 {
         PclContainerClass *container_class;
@@ -300,11 +204,6 @@ frame_class_init (PclFrameClass *class)
         GObjectClass *g_object_class;
 
         frame_parent_class = g_type_class_peek_parent (class);
-
-        class->block_setup = frame_block_setup;
-        class->block_pop = frame_block_pop;
-        class->fast_to_locals = frame_fast_to_locals;
-        class->locals_to_fast = frame_locals_to_fast;
 
         container_class = PCL_CONTAINER_CLASS (class);
         container_class->traverse = frame_traverse;
@@ -482,29 +381,105 @@ pcl_frame_new (PclThreadState *ts, PclCode *code,
 void
 pcl_frame_block_setup (PclFrame *frame, guint type, guint handler, guint level)
 {
-        PclFrameClass *class = PCL_FRAME_GET_CLASS (frame);
-        class->block_setup (frame, type, handler, level);
+        PclTryBlock *block;
+
+        if (frame->block_count >= PCL_MAX_BLOCKS)
+                g_error ("%s: Block stack overflow", G_STRFUNC);
+        block = &frame->block[frame->block_count++];
+        block->type = type;
+        block->handler = handler;
+        block->level = level;
 }
 
 PclTryBlock *
 pcl_frame_block_pop (PclFrame *frame)
 {
-        PclFrameClass *class = PCL_FRAME_GET_CLASS (frame);
-        return class->block_pop (frame);
+        if (frame->block_count == 0)
+                g_error ("%s: Block stack underflow", G_STRFUNC);
+        return &frame->block[--frame->block_count];
 }
 
 void
 pcl_frame_fast_to_locals (PclFrame *frame)
 {
-        PclFrameClass *class = PCL_FRAME_GET_CLASS (frame);
-        class->fast_to_locals (frame);
+        /* Merge fast locals into frame->locals */
+        PclObject *locals, *names, **slots;
+        PclObject *error_type, *error_value, *error_traceback;
+        glong length;
+
+        if (frame == NULL)
+                return;
+
+        locals = frame->locals;
+        if (locals == NULL)
+                locals = frame->locals = pcl_dict_new ();
+        names = frame->code->varnames;
+        g_assert (PCL_IS_TUPLE (names));
+        length = PCL_TUPLE_GET_SIZE (names);
+        length = CLAMP (length, 0, frame->code->variable_count);
+        slots = frame->slots;
+
+        pcl_error_fetch (&error_type, &error_value, &error_traceback);
+        if (frame->code->variable_count > 0)
+                names_to_dict (names, length, locals, slots, FALSE);
+        if (frame->cell_count > 0 || frame->free_count > 0)
+        {
+                names = frame->code->cellvars;
+                g_assert (PCL_IS_TUPLE (names));
+                length = PCL_TUPLE_GET_SIZE (names);
+                slots += frame->code->variable_count;
+                names_to_dict (names, length, locals, slots, TRUE);
+
+                names = frame->code->freevars;
+                g_assert (PCL_IS_TUPLE (names));
+                length = PCL_TUPLE_GET_SIZE (names);
+                slots += frame->cell_count;
+                names_to_dict (names, length, locals, slots, TRUE);
+        }
+        pcl_error_restore (error_type, error_value, error_traceback);
 }
 
 void
 pcl_frame_locals_to_fast (PclFrame *frame, gboolean clear)
 {
-        PclFrameClass *class = PCL_FRAME_GET_CLASS (frame);
-        class->locals_to_fast (frame, clear);
+        /* Merge frame->locals into fast locals */
+        PclObject *locals, *names, **slots;
+        PclObject *error_type, *error_value, *error_traceback;
+        glong length;
+
+        if (frame == NULL)
+                return;
+
+        locals = frame->locals;
+        names = frame->code->varnames;
+        if (locals == NULL || !PCL_IS_TUPLE (names))
+                return;
+        slots = frame->slots;
+        length = PCL_TUPLE_GET_SIZE (names);
+        length = CLAMP (length, 0, frame->code->variable_count);
+
+        pcl_error_fetch (&error_type, &error_value, &error_traceback);
+        if (frame->code->variable_count > 0)
+                dict_to_names (names, length, locals, slots, FALSE, clear);
+        if (frame->cell_count > 0 || frame->free_count > 0)
+        {
+                if (!PCL_IS_TUPLE (frame->code->cellvars) &&
+                        PCL_IS_TUPLE (frame->code->freevars))
+                        return;
+
+                names = frame->code->cellvars;
+                g_assert (PCL_IS_TUPLE (names));
+                length = PCL_TUPLE_GET_SIZE (names);
+                slots += frame->code->variable_count;
+                dict_to_names (names, length, locals, slots, TRUE, clear);
+
+                names = frame->code->freevars;
+                g_assert (PCL_IS_TUPLE (names));
+                length = PCL_TUPLE_GET_SIZE (names);
+                slots += frame->cell_count;
+                dict_to_names (names, length, locals, slots, TRUE, clear);
+        }
+        pcl_error_restore (error_type, error_value, error_traceback);
 }
 
 void

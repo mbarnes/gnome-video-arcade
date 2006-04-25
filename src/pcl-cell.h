@@ -62,6 +62,10 @@ gboolean        pcl_cell_set                    (PclObject *self,
         (G_TYPE_INSTANCE_GET_CLASS \
         ((obj), PCL_TYPE_CELL, PclCellClass))
 
+/* Fast access macro (use carefully) */
+#define PCL_CELL_GET(obj) \
+        (PCL_CELL (obj)->reference)
+
 G_END_DECLS
 
 #endif /* PCL_CELL_H */
