@@ -1,5 +1,20 @@
 2006-04-25  Matthew F. Barnes  <matthew@barnes.net>
 
+	* src/pcl-cell.h:
+	Add a PCL_CELL_GET() fast-access macro.
+
+	* src/pcl-frame.c: (names_to_dict, dict_to_names)
+	Tweak logic to match Python.
+	Fix reference leak (use PCL_CELL_GET, not pcl_cell_get).
+
+	* src/pcl-frame.c: (pcl_frame_block_setup, pcl_frame_block_pop)
+	Remove superfluous function call; embed logic directly.
+
+	* src/pcl-frame.c: (pcl_frame_fast_to_locals, pcl_frame_locals_to_fast)
+	Remove superfluous function call; embed logic directly.
+
+2006-04-25  Matthew F. Barnes  <matthew@barnes.net>
+
 	* src/pcl-compiler.c:
 	Change PCL_OPCODE_xxx_NAME to PCL_OPCODE_xxx_LOCAL,
 		where xxx is one of { LOAD, STORE, DELETE }.
