@@ -1,3 +1,11 @@
+2006-05-31  Matthew F. Barnes  <mbarnes@redhat.com>
+
+	* pcl-eval.c: (pcl_eval_code_ex)
+	Fix logic for populating cell variable slots.
+
+	* pcl-string.c: (string_method_join)
+	Refactor logic and handle iterator arguments properly.
+
 2006-04-20  Matthew F. Barnes  <matthew.f.barnes@boeing.com>
 
         * Released PCL 0.0.24

@@ -3111,7 +3111,7 @@ pcl_eval_code_ex (PclCode *code, PclObject *globals, PclObject *locals,
         if (cell_variable_count > 0)
         {
                 gchar *arg_name, *cell_name;
-                guint ii = 0, jj = 0;
+                guint ii, jj;
 
                 if (flags & PCL_CODE_FLAG_VARARGS)
                         argument_count++;
@@ -3119,13 +3119,13 @@ pcl_eval_code_ex (PclCode *code, PclObject *globals, PclObject *locals,
                         argument_count++;
 
                 /* Check for cells that shadow arguments. */
-                while (ii < cell_variable_count && jj < argument_count)
+                for (ii = 0; ii < cell_variable_count; ii++)
                 {
                         cell_name =
                                 PCL_STRING_AS_STRING (
                                 PCL_TUPLE_GET_ITEM (
                                 cell_variable_names, ii));
-                        while (jj < argument_count)
+                        for (jj = 0; jj < argument_count; jj++)
                         {
                                 arg_name =
                                         PCL_STRING_AS_STRING (
@@ -3138,9 +3138,7 @@ pcl_eval_code_ex (PclCode *code, PclObject *globals, PclObject *locals,
                                                 slots[jj]);
                                         break;
                                 }
-                                ++jj;
                         }
-                        ++ii;
                 }
         }
 
