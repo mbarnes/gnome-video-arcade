@@ -17,7 +17,7 @@ AC_PREREQ([2.54])
 #       set pcl_binary_age and pcl_interface_age to 0
 m4_define([pcl_major_version], [0])
 m4_define([pcl_minor_version], [0])
-m4_define([pcl_micro_version], [24])
+m4_define([pcl_micro_version], [25])
 m4_define([pcl_interface_age], [0])
 m4_define([pcl_binary_age],
           [m4_eval(100 * pcl_minor_version + pcl_micro_version)])

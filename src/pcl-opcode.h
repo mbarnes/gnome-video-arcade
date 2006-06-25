@@ -76,8 +76,7 @@
 #define PCL_OPCODE_DELETE_SUBSCRIPT     0x42
 
 #define PCL_OPCODE_LOAD_CUT             0x50
-#define PCL_OPCODE_STORE_CUT            0x51
-#define PCL_OPCODE_LOAD_RESULT          0x52
+#define PCL_OPCODE_LOAD_RESULT          0x51
 
 #define PCL_OPCODE_PRINT_EXPR           0x60
 #define PCL_OPCODE_PRINT_ITEM_TO        0x61
@@ -142,7 +141,8 @@
 #define PCL_OPCODE_FOR_ITER             0xC0  /* Number of bytes to skip */
 #define PCL_OPCODE_IMPORT_FROM          0xC1  /* Index in names list */
 #define PCL_OPCODE_IMPORT_NAME          0xC2  /* Index in names list */
-#define PCL_OPCODE_EXTENDED_ARG         0xC3  /* Upper two bytes of arg */
+#define PCL_OPCODE_STORE_CUT            0xC3  /* Number of frames back */
+#define PCL_OPCODE_EXTENDED_ARG         0xC4  /* Upper two bytes of arg */
 
 #define PCL_OPCODE_HAS_ARG(opcode)      ((opcode) >= PCL_OPCODE_HAVE_ARG) 
 

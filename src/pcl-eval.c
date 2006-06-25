@@ -1937,12 +1937,6 @@ fast_next_opcode:
                                 STACK_PUSH (x);
                                 continue;
 
-                        case PCL_OPCODE_STORE_CUT:
-                                v = STACK_POP ();
-                                frame->cut = pcl_object_is_true (v);
-                                pcl_object_unref (v);
-                                continue;
-
                         case PCL_OPCODE_LOAD_RESULT:
                                 x = pcl_object_ref (frame->result);
                                 STACK_PUSH (x);
@@ -2783,6 +2777,20 @@ fast_next_opcode:
                                 JUMPBY (oparg);
                                 continue;
 
+                        case PCL_OPCODE_STORE_CUT:
+                        {
+                                PclFrame *fp = frame;
+                                while (oparg-- > 0)
+                                {
+                                        fp = fp->previous;
+                                        g_assert (fp != NULL);
+                                }
+                                v = STACK_POP ();
+                                fp->cut = pcl_object_is_true (v);
+                                pcl_object_unref (v);
+                                continue;
+                        }
+
                         case PCL_OPCODE_EXTENDED_ARG:
                                 opcode = NEXTOP ();
                                 oparg = oparg << 16 | NEXTARG ();
@@ -3176,7 +3184,7 @@ pcl_eval_code_ex (PclCode *code, PclObject *globals, PclObject *locals,
         if (cell_variable_count > 0)
         {
                 gchar *arg_name, *cell_name;
-                guint ii = 0, jj = 0;
+                guint ii, jj;
 
                 if (flags & PCL_CODE_FLAG_VARARGS)
                         argument_count++;
@@ -3184,13 +3192,13 @@ pcl_eval_code_ex (PclCode *code, PclObject *globals, PclObject *locals,
                         argument_count++;
 
                 /* Check for cells that shadow arguments. */
-                while (ii < cell_variable_count && jj < argument_count)
+                for (ii = 0; ii < cell_variable_count; ii++)
                 {
                         cell_name =
                                 PCL_STRING_AS_STRING (
                                 PCL_TUPLE_GET_ITEM (
                                 cell_variable_names, ii));
-                        while (jj < argument_count)
+                        for (jj = 0; jj < argument_count; jj++)
                         {
                                 arg_name =
                                         PCL_STRING_AS_STRING (
@@ -3203,9 +3211,7 @@ pcl_eval_code_ex (PclCode *code, PclObject *globals, PclObject *locals,
                                                 slots[jj]);
                                         break;
                                 }
-                                ++jj;
                         }
-                        ++ii;
                 }
         }
 

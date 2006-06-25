@@ -1008,60 +1008,51 @@ string_method_isupper (PclString *self)
 static PclObject *
 string_method_join (PclString *self, PclObject *object)
 {
-        gint index = 0;
-        gchar *new_str, *sep = PCL_STRING_AS_STRING (self);
-        glong length;
-        gchar **ary;
-        PclObject *retstr, *next, *iterator;
+        PclObject *iterator;
+        PclObject *next;
+        GString *buffer = NULL;
+        glong index = 0;
 
-        if (!PCL_IS_SEQUENCE (object) || !PCL_IS_ITERABLE (object))
+        iterator = pcl_object_iterate (object);
+        if (iterator == NULL)
         {
                 pcl_error_set_string (
                         pcl_exception_type_error (),
                         "argument must be an iterable sequence");
                 return NULL;
         }
-        length = pcl_object_measure (object);
-        ary = g_new0(gchar *, length + 1);
-        iterator = pcl_object_iterate (object);
-        
+
         while ((next = pcl_iterator_next (iterator)) != NULL)
         {
-                if (index < length)
+                if (!PCL_IS_STRING (next))
                 {
-                        if (PCL_IS_STRING (next))
-                                ary[index++] = PCL_STRING_AS_STRING (next);
-                        else
-                        {
-                                pcl_error_set_format (
-                                        pcl_exception_type_error (),
-                                        "sequence item %d is not a string",
-                                        index);
-                                pcl_object_unref (iterator);
-                                pcl_object_unref (next);
-                                g_free (ary);
-                                return NULL;
-                        }
+                        pcl_error_set_format (
+                                pcl_exception_type_error (),
+                                "sequence item %d is not a string", index);
+                        pcl_object_unref (iterator);
                         pcl_object_unref (next);
+                        return NULL;
                 }
+
+                if (buffer == NULL)
+                        buffer = g_string_new (PCL_STRING_AS_STRING (next));
                 else
                 {
-                        pcl_object_unref (next);
-                        break;
+                        g_string_append (buffer, PCL_STRING_AS_STRING (self));
+                        g_string_append (buffer, PCL_STRING_AS_STRING (next));
                 }
+
+                pcl_object_unref (next);
+                index++;
         }
+
         pcl_object_unref (iterator);
-        g_assert (ary[length] == NULL);
-        new_str = g_strjoinv (sep, ary);
-        g_free (ary);
-        if (new_str)
-        {
-                retstr = pcl_string_from_string (new_str);
-                g_free (new_str);
-                return retstr;
-        }
-        pcl_error_bad_internal_call ();
-        return NULL;
+
+        if (pcl_error_occurred ())
+                return NULL;
+        if (buffer == NULL)
+                return pcl_string_from_string ("");
+        return string_from_g_string (buffer);
 }
 
 static PclObject *
