@@ -1463,13 +1463,15 @@ static void
 compiler_cut (PclCompilerState *cs, GNode *node)
 {
         guint index;
+        guint depth;
 
         g_assert (PCL_NODE_TYPE (node) == PCL_NODE_TYPE_CUT);
 
         index = compiler_add_const (cs, PCL_TRUE);
+        depth = (guint) PCL_NODE_OPCODE (node);
         compiler_add_oparg (cs, PCL_OPCODE_LOAD_CONST, index);
         compiler_stack_push (cs, 1);
-        compiler_add_byte (cs, PCL_OPCODE_STORE_CUT);
+        compiler_add_oparg (cs, PCL_OPCODE_STORE_CUT, depth);
         compiler_stack_pop (cs, 1);
 }
 
@@ -1653,7 +1655,7 @@ compiler_for (PclCompilerState *cs, GNode *node)
                 compiler_stack_push (cs, 1);
                 compiler_add_byte (cs, PCL_OPCODE_DISJUNCT);
                 compiler_stack_pop (cs, 1);
-                compiler_add_byte (cs, PCL_OPCODE_STORE_CUT);
+                compiler_add_oparg (cs, PCL_OPCODE_STORE_CUT, 0);
                 compiler_stack_pop (cs, 1);
         }
 
@@ -1826,7 +1828,7 @@ compiler_if (PclCompilerState *cs, GNode *node)
                 compiler_stack_push (cs, 1);
                 compiler_add_byte (cs, PCL_OPCODE_DISJUNCT);
                 compiler_stack_pop (cs, 1);
-                compiler_add_byte (cs, PCL_OPCODE_STORE_CUT);
+                compiler_add_oparg (cs, PCL_OPCODE_STORE_CUT, 0);
                 compiler_stack_pop (cs, 1);
         }
         compiler_add_fwref (cs, PCL_OPCODE_JUMP_FORWARD, &anchor2);
@@ -1850,7 +1852,7 @@ compiler_if (PclCompilerState *cs, GNode *node)
                         compiler_stack_push (cs, 1);
                         compiler_add_byte (cs, PCL_OPCODE_DISJUNCT);
                         compiler_stack_pop (cs, 1);
-                        compiler_add_byte (cs, PCL_OPCODE_STORE_CUT);
+                        compiler_add_oparg (cs, PCL_OPCODE_STORE_CUT, 0);
                         compiler_stack_pop (cs, 1);
                 }
         }

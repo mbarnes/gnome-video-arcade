@@ -1,3 +1,22 @@
+2006-06-18  Matthew F. Barnes  <mbarnes@redhat.com>
+
+	* Fix semantics for cuts that appear after a disjunction.
+
+	* pcl-compiler.c: (compiler_cut)
+	Pass depth value from cut node to PCL_OPCODE_STORE_CUT arg.
+
+	* pcl-eval.c: (pcl_eval_frame)
+	PCL_OPCODE_STORE_CUT: Set the cut flag on the appropriate frame.
+
+	* pcl-opcode.h:
+	PCL_OPCODE_STORE_CUT now takes an argument.
+
+	* pcl-parser.y: (normalize_conjunction)
+	Tag cut nodes at depth 2 for post-processing.
+
+	* pcl-parser.y: (normalize_cut)
+	New function normalizes tagged cut nodes.
+
 2006-05-31  Matthew F. Barnes  <mbarnes@redhat.com>
 
 	* pcl-eval.c: (pcl_eval_code_ex)

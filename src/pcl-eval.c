@@ -1936,12 +1936,6 @@ fast_next_opcode:
                                 STACK_PUSH (x);
                                 continue;
 
-                        case PCL_OPCODE_STORE_CUT:
-                                v = STACK_POP ();
-                                frame->cut = pcl_object_is_true (v);
-                                pcl_object_unref (v);
-                                continue;
-
                         case PCL_OPCODE_LOAD_RESULT:
                                 x = pcl_object_ref (frame->result);
                                 STACK_PUSH (x);
@@ -2717,6 +2711,20 @@ fast_next_opcode:
                                 pcl_object_unref (v);
                                 JUMPBY (oparg);
                                 continue;
+
+                        case PCL_OPCODE_STORE_CUT:
+                        {
+                                PclFrame *fp = frame;
+                                while (oparg-- > 0)
+                                {
+                                        fp = fp->previous;
+                                        g_assert (fp != NULL);
+                                }
+                                v = STACK_POP ();
+                                fp->cut = pcl_object_is_true (v);
+                                pcl_object_unref (v);
+                                continue;
+                        }
 
                         case PCL_OPCODE_EXTENDED_ARG:
                                 opcode = NEXTOP ();

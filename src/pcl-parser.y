@@ -2532,6 +2532,33 @@ copy_to_disjunct (GNode *compound, GNode *original)
         }
 }
 
+static gboolean  /* helper for normalize_conjunction */
+normalize_cut (GNode *node)
+{
+        GNode *ancestor = node;
+        gint depth = 0;
+
+        /* Only interested in cut nodes that we tagged. */
+        if (PCL_NODE_TYPE (node) != PCL_NODE_TYPE_CUT)
+                return FALSE;
+        if (PCL_NODE_OPCODE (node) >= 0)
+                return FALSE;
+
+        /* Count the number of ancestor nodes that are conjunctions
+         * (excluding the root node).  This is the call stack depth
+         * from the conjunction that this cut is bound to.  Replace
+         * the cut node's tag value with the call stack depth. */
+        while (!G_NODE_IS_ROOT (ancestor))
+        {
+                if (PCL_NODE_TYPE (ancestor) == PCL_NODE_TYPE_CONJUNCTION)
+                        depth++;
+                ancestor = ancestor->parent;
+        }
+        PCL_NODE_OPCODE (node) = depth;
+
+        return FALSE;
+}
+
 static void
 normalize_conjunction (GNode *node)
 {
@@ -2542,6 +2569,8 @@ normalize_conjunction (GNode *node)
          * conjunction's parse tree, which is fairly expensive. */
 
         GNode *ii, *jj, *dest, *temp;
+
+        g_assert (G_NODE_IS_ROOT (node));
 
         ii = g_node_last_child (node);
 
@@ -2556,33 +2585,47 @@ normalize_conjunction (GNode *node)
 
         while (ii != NULL)
         {
-                if (PCL_NODE_TYPE (ii) == PCL_NODE_TYPE_DISJUNCTION ||
-                        PCL_NODE_TYPE (ii) == PCL_NODE_TYPE_IF)
+                switch (PCL_NODE_TYPE (ii))
                 {
-                        jj = g_node_next_sibling (ii);
-                        while (jj != NULL)
-                        {
-                                temp = jj;
-                                jj = g_node_next_sibling (jj);
-                                g_node_unlink (temp);
-                                copy_to_disjunct (ii, temp);
-                        }
-                }
-                if (PCL_NODE_TYPE (ii) == PCL_NODE_TYPE_FOR)
-                {
-                        dest = g_node_last_child (ii);
-                        jj = g_node_next_sibling (ii);
-                        while (jj != NULL)
-                        {
-                                temp = jj;
-                                jj = g_node_next_sibling (jj);
-                                g_node_unlink (temp);
-                                g_node_prepend (dest, temp);
-                        }
-                        g_node_reverse_children (dest);
+                        case PCL_NODE_TYPE_CUT:
+                                /* Tag it so we can find it again later. */
+                                PCL_NODE_OPCODE (ii) = -1;
+                                break;
+
+                        case PCL_NODE_TYPE_DISJUNCTION:
+                        case PCL_NODE_TYPE_IF:
+                                jj = g_node_next_sibling (ii);
+                                while (jj != NULL)
+                                {
+                                        temp = jj;
+                                        jj = g_node_next_sibling (jj);
+                                        g_node_unlink (temp);
+                                        copy_to_disjunct (ii, temp);
+                                }
+                                break;
+
+                        case PCL_NODE_TYPE_FOR:
+                                dest = g_node_last_child (ii);
+                                jj = g_node_next_sibling (ii);
+                                while (jj != NULL)
+                                {
+                                        temp = jj;
+                                        jj = g_node_next_sibling (jj);
+                                        g_node_unlink (temp);
+                                        g_node_prepend (dest, temp);
+                                }
+                                g_node_reverse_children (dest);
+                                break;
+
+                        default:
+                                break;
                 }
                 ii = g_node_prev_sibling (ii);
         }
+
+        g_node_traverse (
+                node, G_IN_ORDER, G_TRAVERSE_ALL, -1,
+                (GNodeTraverseFunc) normalize_cut, NULL);
 }
 
 static GList *
