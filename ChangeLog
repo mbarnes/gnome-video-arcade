@@ -1,3 +1,9 @@
+2006-06-25  Matthew F. Barnes  <mbarnes@redhat.com>
+
+	* Released PCL 0.0.25
+
+	* Rejecting Boeing's PclString and PclTuple changes for now.
+
 2006-06-18  Matthew F. Barnes  <mbarnes@redhat.com>
 
 	* Fix semantics for cuts that appear after a disjunction.
