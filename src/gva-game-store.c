@@ -13,6 +13,13 @@ struct _GameStorePrivate
         GHashTable *rom_index;
 };
 
+static GTypes column_types[] =
+{
+        G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_ROMNAME */
+        G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_TITLE */
+        G_TYPE_STRING           /* GVA_GAME_STORE_COLUMN_LAST_PLAYED */
+};
+
 static gpointer parent_class = NULL;
 
 /* Helper for gva_game_store_load_games() */
@@ -47,17 +54,17 @@ static GObject *
 game_store_constructor (GType type, guint n_construct_properties,
                         GObjectConstructParam *construct_properties)
 {
-        GType types[] = { G_TYPE_STRING, G_TYPE_STRING };
         GObject *object;
 
-        g_assert (G_N_ELEMENTS (types) == GVA_GAME_STORE_NUM_COLUMNS);
+        g_assert (G_N_ELEMENTS (column_types) == GVA_GAME_STORE_NUM_COLUMNS);
 
         /* Chain up to parent's constructor() method. */
         object = G_OBJECT_CLASS (parent_class)->constructor (
                 type, n_construct_properties, construct_properties);
 
         gtk_list_store_set_column_types (
-                GTK_LIST_STORE (object), G_N_ELEMENTS (types), types);
+                GTK_LIST_STORE (object),
+                G_N_ELEMENTS (column_types), column_types);
 
         return object;
 }

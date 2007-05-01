@@ -22,13 +22,13 @@ gva_error_quark (void)
 gchar *
 gva_xmame_get_executable (GError **error)
 {
-	gchar *executable;
+        gchar *executable;
 
-	executable = g_find_program_in_path ("xmame");
+        executable = g_find_program_in_path ("xmame");
 
-	if (executable == NULL)
-		g_set_error (error, GVA_ERROR, GVA_ERROR_XMAME,
-			_("Could not find xmame executable"));
+        if (executable == NULL)
+                g_set_error (error, GVA_ERROR, GVA_ERROR_XMAME,
+                        _("Could not find xmame executable"));
 
         return executable;
 }
