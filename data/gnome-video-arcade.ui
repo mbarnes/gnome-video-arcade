@@ -1,0 +1,25 @@
+<ui>
+  <menubar name="main-menu">
+    <menu action="game-menu">
+      <menuitem action="start"/>
+      <menuitem action="record"/>
+      <menuitem action="playback"/>
+      <separator/>
+      <menuitem action="properties"/>
+      <separator/>
+      <menuitem action="quit"/>
+    </menu>
+    <menu action="view-menu">
+    </menu>
+    <menu action="help-menu">
+      <menuitem action="contents"/>
+      <menuitem action="about"/>
+    </menu>
+  </menubar>
+  <popup name="game-popup">
+    <menuitem action="start"/>
+    <menuitem action="record"/>
+    <separator/>
+    <menuitem action="properties"/>
+  </popup>
+</ui>
