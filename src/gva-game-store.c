@@ -13,7 +13,7 @@ struct _GameStorePrivate
         GHashTable *rom_index;
 };
 
-static GTypes column_types[] =
+static GType column_types[] =
 {
         G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_ROMNAME */
         G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_TITLE */
