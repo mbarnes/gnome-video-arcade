@@ -12,13 +12,21 @@ AM_CPPFLAGS = \
 	-DG_LOG_DOMAIN=\"Gva\"
 
 gnome_video_arcade_SOURCES = \
-	gva-actions.h			\
 	gva-actions.c			\
+	gva-actions.h			\
+	gva-cell-renderer-pixbuf.c	\
+	gva-cell-renderer-pixbuf.h	\
 	gva-common.h			\
+	gva-favorites.c			\
+	gva-favorites.h			\
+	gva-game-db.c			\
+	gva-game-db.h			\
 	gva-game-store.c		\
 	gva-game-store.h		\
-	gva-tree-view.c			\
-	gva-tree-view.h			\
+	gva-main.c			\
+	gva-main.h			\
+	gva-play-back.c			\
+	gva-play-back.h			\
 	gva-ui.c			\
 	gva-ui.h			\
 	gva-util.c			\

@@ -28,6 +28,7 @@ AC_SUBST(GLADE_LIBS)
 
 # Header Checks
 AC_HEADER_STDC
+AC_CHECK_HEADERS(wordexp.h)
 
 # Program Checks
 AC_PROG_CC

@@ -29,9 +29,11 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
 
 enum
 {
+        GVA_GAME_STORE_COLUMN_INPNAME,          /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_ROMNAME,          /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_TITLE,            /* G_TYPE_STRING */
-	GVA_GAME_STORE_COLUMN_LAST_PLAYED,	/* G_TYPE_STRING */
+	GVA_GAME_STORE_COLUMN_DATE_TIME,	/* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_FAVORITE,         /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_NUM_COLUMNS
 };
 
@@ -46,11 +48,7 @@ struct _GvaGameStoreClass
 };
 
 GType                 gva_game_store_get_type   (void);
-GvaGameStore *        gva_game_store_new        (void);
-gboolean              gva_game_store_load_games (GvaGameStore *game_store,
-                                                 GError **error);
-GtkTreeRowReference * gva_game_store_lookup      (GvaGameStore *game_store,
-                                                 const gchar *romname);
+GtkTreeModel *        gva_game_store_new        (void);
 
 G_END_DECLS
 

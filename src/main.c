@@ -1,9 +1,10 @@
 #include "gva-common.h"
 
+#include <locale.h>
 #include <stdlib.h>
 #include <libintl.h>
 
-#include "gva-game-store.h"
+#include "gva-game-db.h"
 #include "gva-ui.h"
 #include "gva-xmame.h"
 
@@ -15,7 +16,7 @@ show_xmame_version (void)
         guint context_id;
         GError *error = NULL;
 
-        statusbar = gva_ui_get_statusbar ();
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
         context_id = gtk_statusbar_get_context_id (statusbar, G_STRFUNC);
 
         xmame_version = gva_xmame_get_version (&error);
@@ -34,7 +35,6 @@ show_xmame_version (void)
 gint
 main (gint argc, gchar **argv)
 {
-        GvaGameStore *game_store;
         GError *error = NULL;
 
         /* initialize locale data */
@@ -44,20 +44,17 @@ main (gint argc, gchar **argv)
 
         gtk_init (&argc, &argv);
 
-        game_store = gva_game_store_new ();
-        if (!gva_game_store_load_games (game_store, &error))
+        if (!gva_game_db_init (&error))
         {
                 g_error ("%s", error->message);
                 g_error_free (error);
         }
 
-        gva_ui_init (game_store);
+        gva_main_init ();
 
         show_xmame_version ();
 
         gtk_main ();
-
-        g_object_unref (game_store);
 
         return EXIT_SUCCESS;
 }

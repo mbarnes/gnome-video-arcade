@@ -2,7 +2,10 @@
 
 #include <stdarg.h>
 #include <string.h>
-#include <wordexp.h>  /* TODO configure should test for this */
+
+#ifdef HAVE_WORDEXP_H
+#include <wordexp.h>
+#endif
 
 #define GVA_GCONF_PREFIX        "/apps/" PACKAGE
 
@@ -165,7 +168,9 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         gchar *strout = NULL;
         gchar **lines;
         guint n_lines, ii;
+#ifdef HAVE_WORDEXP_H
         wordexp_t words;
+#endif
 
         g_return_val_if_fail (config_key != NULL, NULL);
 
@@ -200,6 +205,7 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         if (config_value == NULL)
                 return NULL;
 
+#ifdef HAVE_WORDEXP_H
         /* xmame reports shell variables like $HOME in some of its
          * configuration values, so we need to expand them ourselves. */
         if (wordexp (config_value, &words, 0) == 0)
@@ -220,8 +226,72 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
 
                 wordfree (&words);
         }
+#endif
 
         return config_value;
+}
+
+GHashTable *
+gva_xmame_get_input_files (GError **error)
+{
+        GHashTable *hash_table = NULL;
+        const gchar *basename;
+        gchar *inppath;
+        GDir *dir;
+
+        inppath = gva_xmame_get_config_value ("input_directory", error);
+        dir = (inppath != NULL) ? g_dir_open (inppath, 0, error) : NULL;
+
+        if (dir == NULL)
+                goto exit;
+
+        hash_table = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) g_free);
+
+        while ((basename = g_dir_read_name (dir)) != NULL)
+        {
+                gchar *filename;
+                gchar buffer[16];
+                GIOChannel *channel;
+                GError *local_error = NULL;
+
+                filename = g_build_filename (inppath, basename, NULL);
+
+                channel = g_io_channel_new_file (filename, "r", &local_error);
+
+                if (channel != NULL)
+                {
+                        gchar romname[16];
+                        GIOStatus status;
+
+                        status = g_io_channel_read_chars (
+                                channel, romname, sizeof (romname),
+                                NULL, &local_error);
+                        if (status == G_IO_STATUS_NORMAL)
+                                g_hash_table_insert (
+                                        hash_table, filename,
+                                        g_strdup (romname));
+                        g_io_channel_unref (channel);
+                }
+
+                if (local_error != NULL)
+                {
+                        g_free (filename);
+                        g_hash_table_destroy (hash_table);
+                        g_propagate_error (error, local_error);
+                        hash_table = NULL;
+                        break;
+                }
+        }
+
+        g_dir_close (dir);
+
+exit:
+        g_free (inppath);
+
+        return hash_table;
 }
 
 GHashTable *
@@ -309,4 +379,10 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
 gboolean
 gva_xmame_playback_game (const gchar *inpname, GError **error)
 {
+        gchar *executable;
+        gchar *arguments[4];
+
+        executable = gva_xmame_get_executable (error);
+        if (executable == NULL)
+                return FALSE;
 }

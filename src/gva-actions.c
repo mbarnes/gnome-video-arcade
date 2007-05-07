@@ -1,5 +1,7 @@
 #include "gva-actions.h"
 
+#include "gva-main.h"
+#include "gva-play-back.h"
 #include "gva-ui.h"
 #include "gva-util.h"
 #include "gva-xmame.h"
@@ -32,8 +34,15 @@ action_contents_cb (GtkAction *action)
 }
 
 static void
-action_playback_cb (GtkAction *action)
+action_play_back_cb (GtkAction *action)
 {
+        GError *error = NULL;
+
+        if (!gva_play_back_run_dialog (&error))
+        {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
 }
 
 static void
@@ -54,7 +63,7 @@ action_record_cb (GtkAction *action)
         gchar *inpname;
         GError *error = NULL;
 
-        romname = gva_ui_get_selected_game ();
+        romname = gva_main_get_selected_game ();
         inpname = gva_choose_inpname (romname);
         gva_xmame_record_game (romname, inpname, &error);
         g_free (inpname);
@@ -73,7 +82,7 @@ action_start_cb (GtkAction *action)
         gchar *romname;
         GError *error = NULL;
 
-        romname = gva_ui_get_selected_game ();
+        romname = gva_main_get_selected_game ();
         gva_xmame_run_game (romname, &error);
         g_free (romname);
 
@@ -82,6 +91,17 @@ action_start_cb (GtkAction *action)
                 g_warning ("%s", error->message);
                 g_error_free (error);
         }
+}
+
+static void
+action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
+{
+        gva_main_set_view (gtk_radio_action_get_current_value (current));
+}
+
+static void
+action_unmark_favorite_cb (GtkAction *action)
+{
 }
 
 static GtkActionEntry entries[] =
@@ -100,12 +120,12 @@ static GtkActionEntry entries[] =
           NULL,
           G_CALLBACK (action_contents_cb) },
 
-        { "playback",
+        { "play-back",
           GTK_STOCK_MEDIA_PLAY,
-          N_("Play _back..."),
+          N_("Play _Back..."),
           NULL,
           N_("Play back a previously recorded game"),
-          G_CALLBACK (action_playback_cb) },
+          G_CALLBACK (action_play_back_cb) },
 
         { "properties",
           GTK_STOCK_PROPERTIES,
@@ -157,6 +177,30 @@ static GtkActionEntry entries[] =
           NULL }
 };
 
+static GtkRadioActionEntry view_radio_entries[] =
+{
+        { "view-available",
+          NULL,
+          N_("_Available Games"),
+          NULL,
+          N_("Show all available games"),
+          0 },
+
+        { "view-favorites",
+          NULL,
+          N_("_Favorite Games"),
+          NULL,
+          N_("Only show my favorite games"),
+          1 },
+
+        { "view-results",
+          NULL,
+          N_("Search _Results"),
+          NULL,
+          N_("Show my search results"),
+          2 }
+};
+
 GtkAction *
 gva_get_action (const gchar *action_name)
 {
@@ -178,6 +222,10 @@ gva_get_action_group (void)
                 action_group = gtk_action_group_new ("main");
                 gtk_action_group_add_actions (
                         action_group, entries, G_N_ELEMENTS (entries), NULL);
+                gtk_action_group_add_radio_actions (
+                        action_group, view_radio_entries,
+                        G_N_ELEMENTS (view_radio_entries),
+                        0, G_CALLBACK (action_view_changed_cb), NULL);
         }
 
         return action_group;

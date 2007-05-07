@@ -3,13 +3,16 @@
     <menu action="game-menu">
       <menuitem action="start"/>
       <menuitem action="record"/>
-      <menuitem action="playback"/>
-      <separator/>
-      <menuitem action="properties"/>
+      <menuitem action="play-back"/>
       <separator/>
       <menuitem action="quit"/>
     </menu>
     <menu action="view-menu">
+      <menuitem action="view-available"/>
+      <menuitem action="view-favorites"/>
+      <menuitem action="view-results"/>
+      <separator/>
+      <menuitem action="properties"/>
     </menu>
     <menu action="help-menu">
       <menuitem action="contents"/>

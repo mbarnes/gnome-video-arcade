@@ -1,355 +1,288 @@
-<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
-<!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
+<!--*- mode: xml -*-->
 <glade-interface>
-
-<widget class="GtkWindow" id="main_window">
-  <property name="visible">True</property>
-  <property name="title" translatable="yes">GNOME Video Arcade</property>
-  <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
-  <property name="modal">False</property>
-  <property name="default_width">500</property>
-  <property name="default_height">400</property>
-  <property name="resizable">True</property>
-  <property name="destroy_with_parent">False</property>
-  <property name="icon_name">gnome-joystick</property>
-  <property name="decorated">True</property>
-  <property name="skip_taskbar_hint">False</property>
-  <property name="skip_pager_hint">False</property>
-  <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
-  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
-  <property name="focus_on_map">True</property>
-  <property name="urgency_hint">False</property>
-  <signal name="destroy" handler="gtk_main_quit" last_modification_time="Sat, 28 Jan 2006 05:56:17 GMT"/>
-
-  <child>
-    <widget class="GtkVBox" id="main_vbox">
-      <property name="visible">True</property>
-      <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
-
-      <child>
-	<widget class="GtkStatusbar" id="status_bar">
-	  <property name="visible">True</property>
-	  <property name="has_resize_grip">True</property>
-	</widget>
-	<packing>
-	  <property name="padding">0</property>
-	  <property name="expand">False</property>
-	  <property name="fill">False</property>
-	  <property name="pack_type">GTK_PACK_END</property>
-	</packing>
-      </child>
-
-      <child>
-	<widget class="GtkVBox" id="main_contents">
-	  <property name="border_width">12</property>
-	  <property name="visible">True</property>
-	  <property name="homogeneous">False</property>
-	  <property name="spacing">12</property>
-
-	  <child>
-	    <widget class="GtkScrolledWindow" id="games_scrolled_window">
-	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="hscrollbar_policy">GTK_POLICY_ALWAYS</property>
-	      <property name="vscrollbar_policy">GTK_POLICY_ALWAYS</property>
-	      <property name="shadow_type">GTK_SHADOW_IN</property>
-	      <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
-
-	      <child>
-		<widget class="GtkTreeView" id="games_tree_view">
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="headers_visible">True</property>
-		  <property name="rules_hint">False</property>
-		  <property name="reorderable">False</property>
-		  <property name="enable_search">True</property>
-		  <property name="fixed_height_mode">False</property>
-		  <property name="hover_selection">False</property>
-		  <property name="hover_expand">False</property>
-		</widget>
-	      </child>
-	    </widget>
-	    <packing>
-	      <property name="padding">0</property>
-	      <property name="expand">True</property>
-	      <property name="fill">True</property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkHButtonBox" id="button_box">
-	      <property name="visible">True</property>
-	      <property name="layout_style">GTK_BUTTONBOX_END</property>
-	      <property name="spacing">12</property>
-
-	      <child>
-		<widget class="GtkButton" id="properties_button">
-		  <property name="visible">True</property>
-		  <property name="sensitive">False</property>
-		  <property name="can_default">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="label">gtk-properties</property>
-		  <property name="use_stock">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		</widget>
-	      </child>
-
-	      <child>
-		<widget class="GtkButton" id="start_game_button">
-		  <property name="visible">True</property>
-		  <property name="sensitive">False</property>
-		  <property name="can_default">True</property>
-		  <property name="has_default">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="has_focus">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-
-		  <child>
-		    <widget class="GtkAlignment" id="alignment2">
-		      <property name="visible">True</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xscale">0</property>
-		      <property name="yscale">0</property>
-		      <property name="top_padding">0</property>
-		      <property name="bottom_padding">0</property>
-		      <property name="left_padding">0</property>
-		      <property name="right_padding">0</property>
-
-		      <child>
-			<widget class="GtkHBox" id="hbox2">
-			  <property name="visible">True</property>
-			  <property name="homogeneous">False</property>
-			  <property name="spacing">2</property>
-
-			  <child>
-			    <widget class="GtkImage" id="image3">
-			      <property name="visible">True</property>
-			      <property name="stock">gtk-execute</property>
-			      <property name="icon_size">4</property>
-			      <property name="xalign">0.5</property>
-			      <property name="yalign">0.5</property>
-			      <property name="xpad">0</property>
-			      <property name="ypad">0</property>
-			    </widget>
-			    <packing>
-			      <property name="padding">0</property>
-			      <property name="expand">False</property>
-			      <property name="fill">False</property>
-			    </packing>
-			  </child>
-
-			  <child>
-			    <widget class="GtkLabel" id="label2">
-			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">_Start Game</property>
-			      <property name="use_underline">True</property>
-			      <property name="use_markup">False</property>
-			      <property name="justify">GTK_JUSTIFY_LEFT</property>
-			      <property name="wrap">False</property>
-			      <property name="selectable">False</property>
-			      <property name="xalign">0.5</property>
-			      <property name="yalign">0.5</property>
-			      <property name="xpad">0</property>
-			      <property name="ypad">0</property>
-			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
-			      <property name="width_chars">-1</property>
-			      <property name="single_line_mode">False</property>
-			      <property name="angle">0</property>
-			    </widget>
-			    <packing>
-			      <property name="padding">0</property>
-			      <property name="expand">False</property>
-			      <property name="fill">False</property>
-			    </packing>
-			  </child>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-		</widget>
-	      </child>
-	    </widget>
-	    <packing>
-	      <property name="padding">0</property>
-	      <property name="expand">False</property>
-	      <property name="fill">True</property>
-	    </packing>
-	  </child>
-	</widget>
-	<packing>
-	  <property name="padding">0</property>
-	  <property name="expand">True</property>
-	  <property name="fill">True</property>
-	  <property name="pack_type">GTK_PACK_END</property>
-	</packing>
-      </child>
-    </widget>
-  </child>
-</widget>
-
-<widget class="GtkDialog" id="play_back_dialog">
-  <property name="visible">True</property>
-  <property name="title" translatable="yes">Recorded Games</property>
-  <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
-  <property name="modal">False</property>
-  <property name="resizable">True</property>
-  <property name="destroy_with_parent">False</property>
-  <property name="decorated">True</property>
-  <property name="skip_taskbar_hint">False</property>
-  <property name="skip_pager_hint">False</property>
-  <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
-  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
-  <property name="focus_on_map">True</property>
-  <property name="urgency_hint">False</property>
-  <property name="has_separator">True</property>
-
-  <child internal-child="vbox">
-    <widget class="GtkVBox" id="play_back_vbox">
-      <property name="visible">True</property>
-      <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
-
-      <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="play_back_action_area">
-	  <property name="visible">True</property>
-	  <property name="layout_style">GTK_BUTTONBOX_END</property>
-
-	  <child>
-	    <widget class="GtkButton" id="play_back_cancel_button">
-	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="label">gtk-cancel</property>
-	      <property name="use_stock">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="focus_on_click">True</property>
-	      <property name="response_id">-6</property>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkButton" id="play_back_start_game_button">
-	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="has_focus">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="focus_on_click">True</property>
-	      <property name="response_id">0</property>
-
-	      <child>
-		<widget class="GtkAlignment" id="alignment3">
-		  <property name="visible">True</property>
-		  <property name="xalign">0.5</property>
-		  <property name="yalign">0.5</property>
-		  <property name="xscale">0</property>
-		  <property name="yscale">0</property>
-		  <property name="top_padding">0</property>
-		  <property name="bottom_padding">0</property>
-		  <property name="left_padding">0</property>
-		  <property name="right_padding">0</property>
-
-		  <child>
-		    <widget class="GtkHBox" id="hbox3">
-		      <property name="visible">True</property>
-		      <property name="homogeneous">False</property>
-		      <property name="spacing">2</property>
-
-		      <child>
-			<widget class="GtkImage" id="image4">
-			  <property name="visible">True</property>
-			  <property name="stock">gtk-execute</property>
-			  <property name="icon_size">4</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">False</property>
-			  <property name="fill">False</property>
-			</packing>
-		      </child>
-
-		      <child>
-			<widget class="GtkLabel" id="label3">
-			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">_Start Game</property>
-			  <property name="use_underline">True</property>
-			  <property name="use_markup">False</property>
-			  <property name="justify">GTK_JUSTIFY_LEFT</property>
-			  <property name="wrap">False</property>
-			  <property name="selectable">False</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
-			  <property name="width_chars">-1</property>
-			  <property name="single_line_mode">False</property>
-			  <property name="angle">0</property>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">False</property>
-			  <property name="fill">False</property>
-			</packing>
-		      </child>
-		    </widget>
-		  </child>
-		</widget>
-	      </child>
-	    </widget>
-	  </child>
-	</widget>
-	<packing>
-	  <property name="padding">0</property>
-	  <property name="expand">False</property>
-	  <property name="fill">True</property>
-	  <property name="pack_type">GTK_PACK_END</property>
-	</packing>
-      </child>
-
-      <child>
-	<widget class="GtkScrolledWindow" id="play_back_scrolled_window">
-	  <property name="border_width">6</property>
-	  <property name="visible">True</property>
-	  <property name="can_focus">True</property>
-	  <property name="hscrollbar_policy">GTK_POLICY_ALWAYS</property>
-	  <property name="vscrollbar_policy">GTK_POLICY_ALWAYS</property>
-	  <property name="shadow_type">GTK_SHADOW_IN</property>
-	  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
-
-	  <child>
-	    <widget class="GtkTreeView" id="play_back_tree_view">
-	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="headers_visible">True</property>
-	      <property name="rules_hint">False</property>
-	      <property name="reorderable">False</property>
-	      <property name="enable_search">True</property>
-	      <property name="fixed_height_mode">False</property>
-	      <property name="hover_selection">False</property>
-	      <property name="hover_expand">False</property>
-	    </widget>
-	  </child>
-	</widget>
-	<packing>
-	  <property name="padding">0</property>
-	  <property name="expand">True</property>
-	  <property name="fill">True</property>
-	</packing>
-      </child>
-    </widget>
-  </child>
-</widget>
-
+  <widget class="GtkWindow" id="main-window">
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">GNOME Video Arcade</property>
+    <property name="default_width">500</property>
+    <property name="default_height">400</property>
+    <property name="icon_name">gnome-joystick</property>
+    <signal name="destroy" handler="gtk_main_quit"/>
+    <child>
+      <widget class="GtkVBox" id="main-vbox">
+        <property name="visible">True</property>
+        <child>
+          <widget class="GtkStatusbar" id="main-statusbar">
+            <property name="visible">True</property>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="pack_type">GTK_PACK_END</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkVBox" id="main-contents">
+            <property name="visible">True</property>
+            <property name="border_width">12</property>
+            <property name="spacing">12</property>
+            <child>
+              <widget class="GtkHButtonBox" id="main-top-button-box">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="spacing">3</property>
+                <property name="homogeneous">True</property>
+                <property name="layout_style">GTK_BUTTONBOX_START</property>
+                <child>
+                  <widget class="GtkToggleButton" id="main-available-button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="tooltip" translatable="yes">Show all available games</property>
+                  </widget>
+                </child>
+                <child>
+                  <widget class="GtkToggleButton" id="main-favorites-button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="tooltip" translatable="yes">Only show my favorite games</property>
+                  </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkToggleButton" id="main-results-button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="tooltip" translatable="yes">Show my search results</property>
+                  </widget>
+                  <packing>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkScrolledWindow" id="main-scrolled-window">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                <property name="shadow_type">GTK_SHADOW_IN</property>
+                <child>
+                  <widget class="GtkTreeView" id="main-tree-view">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="has_focus">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="headers_clickable">True</property>
+                    <property name="reorderable">True</property>
+                    <property name="rules_hint">True</property>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkHButtonBox" id="main-bottom-button-box">
+                <property name="visible">True</property>
+                <property name="spacing">12</property>
+                <property name="layout_style">GTK_BUTTONBOX_END</property>
+                <child>
+                  <widget class="GtkButton" id="main-properties-button">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">True</property>
+                    <property name="can_default">True</property>
+                    <property name="tooltip" translatable="yes">See more information about the selected game</property>
+                    <property name="label">gtk-properties</property>
+                    <property name="use_stock">True</property>
+                  </widget>
+                </child>
+                <child>
+                  <widget class="GtkButton" id="main-start-game-button">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">True</property>
+                    <property name="can_default">True</property>
+                    <property name="has_default">True</property>
+                    <property name="tooltip" translatable="yes">Start playing the selected game</property>
+                    <child>
+                      <widget class="GtkAlignment" id="main-start-game-button-alignment">
+                        <property name="visible">True</property>
+                        <property name="xscale">0</property>
+                        <property name="yscale">0</property>
+                        <child>
+                          <widget class="GtkHBox" id="main-start-game-button-hbox">
+                            <property name="visible">True</property>
+                            <property name="spacing">2</property>
+                            <child>
+                              <widget class="GtkImage" id="main-start-game-button-image">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-execute</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="main-start-game-button-label">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">_Start Game</property>
+                                <property name="use_underline">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="pack_type">GTK_PACK_END</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="GtkWindow" id="play-back-window">
+    <property name="title" translatable="yes">Recorded Games</property>
+    <property name="default_width">550</property>
+    <property name="default_height">250</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="transient_for">main-window</property>
+    <child>
+      <widget class="GtkVBox" id="play-back-vbox">
+        <property name="visible">True</property>
+        <property name="border_width">12</property>
+        <property name="spacing">12</property>
+        <child>
+          <widget class="GtkScrolledWindow" id="play-back-scrolled-window">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">GTK_SHADOW_IN</property>
+            <child>
+              <widget class="GtkTreeView" id="play-back-tree-view">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="reorderable">True</property>
+                <property name="rules_hint">True</property>
+              </widget>
+            </child>
+          </widget>
+        </child>
+        <child>
+          <widget class="GtkHButtonBox" id="play-back-button-box">
+            <property name="visible">True</property>
+            <property name="spacing">12</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <widget class="GtkButton" id="play-back-close-button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="tooltip" translatable="yes">Close this window</property>
+                <property name="label">gtk-close</property>
+                <property name="use_stock">True</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkButton" id="play-back-delete-button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="tooltip" translatable="yes">Delete the selected game recordings</property>
+                <property name="label">gtk-delete</property>
+                <property name="use_stock">True</property>
+              </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="play-back-button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="has_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="tooltip" translatable="yes">Play back the selected game recording</property>
+                <child>
+                  <widget class="GtkAlignment" id="play-back-button-alignment">
+                    <property name="visible">True</property>
+                    <property name="xscale">0</property>
+                    <property name="yscale">0</property>
+                    <child>
+                      <widget class="GtkHBox" id="play-back-button-hbox">
+                        <property name="visible">True</property>
+                        <property name="spacing">2</property>
+                        <child>
+                          <widget class="GtkImage" id="play-back-button-image">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-media-play</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="play-back-button-label">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Play _Back</property>
+                            <property name="use_underline">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
 </glade-interface>
