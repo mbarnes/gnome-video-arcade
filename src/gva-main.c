@@ -2,10 +2,10 @@
 
 #include <string.h>
 
-#include "gva-actions.h"
 #include "gva-cell-renderer-pixbuf.h"
 #include "gva-favorites.h"
 #include "gva-game-db.h"
+#include "gva-game-store.h"
 #include "gva-ui.h"
 
 #define GCONF_SELECTED_KEY      GVA_GCONF_PREFIX "/selected"

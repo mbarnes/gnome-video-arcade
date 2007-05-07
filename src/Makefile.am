@@ -12,8 +12,6 @@ AM_CPPFLAGS = \
 	-DG_LOG_DOMAIN=\"Gva\"
 
 gnome_video_arcade_SOURCES = \
-	gva-actions.c			\
-	gva-actions.h			\
 	gva-cell-renderer-pixbuf.c	\
 	gva-cell-renderer-pixbuf.h	\
 	gva-common.h			\
