@@ -5,6 +5,8 @@
 #include <libintl.h>
 
 #include "gva-game-db.h"
+#include "gva-main.h"
+#include "gva-play-back.h"
 #include "gva-ui.h"
 #include "gva-xmame.h"
 
@@ -28,7 +30,7 @@ show_xmame_version (void)
         else
         {
                 gtk_statusbar_push (statusbar, context_id, error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 }
 
@@ -45,12 +47,10 @@ main (gint argc, gchar **argv)
         gtk_init (&argc, &argv);
 
         if (!gva_game_db_init (&error))
-        {
                 g_error ("%s", error->message);
-                g_error_free (error);
-        }
 
         gva_main_init ();
+        gva_play_back_init ();
 
         show_xmame_version ();
 

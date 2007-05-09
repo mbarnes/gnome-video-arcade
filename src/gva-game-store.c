@@ -1,33 +1,61 @@
 #include "gva-game-store.h"
 
+#include <string.h>
+#include <time.h>
+#include "gva-time.h"
 #include "gva-xmame.h"
 
-static GType column_types[] =
-{
-        G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_INPNAME */
-        G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_ROMNAME */
-        G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_TITLE */
-        G_TYPE_STRING,          /* GVA_GAME_STORE_COLUMN_DATE_TIME */
-        G_TYPE_BOOLEAN          /* GVA_GAME_STORE_COLUMN_FAVORITE */
-};
-
 static gpointer parent_class = NULL;
+
+static gint
+game_store_time_compare (GtkTreeModel *model, GtkTreeIter *iter_a,
+                         GtkTreeIter *iter_b)
+{
+        GValue value_a;
+        GValue value_b;
+        gdouble diff;
+
+        memset (&value_a, 0, sizeof (GValue));
+        memset (&value_b, 0, sizeof (GValue));
+
+        gtk_tree_model_get_value (
+                model, iter_a, GVA_GAME_STORE_COLUMN_TIME, &value_a);
+        gtk_tree_model_get_value (
+                model, iter_b, GVA_GAME_STORE_COLUMN_TIME, &value_b);
+
+        diff = difftime (
+                *((time_t *) g_value_get_boxed (&value_a)),
+                *((time_t *) g_value_get_boxed (&value_b)));
+
+        g_value_unset (&value_a);
+        g_value_unset (&value_b);
+
+        return (diff == 0.0) ? 0 : (diff < 0.0) ? -1 : 1;
+}
 
 static GObject *
 game_store_constructor (GType type, guint n_construct_properties,
                         GObjectConstructParam *construct_properties)
 {
+        GType types[GVA_GAME_STORE_NUM_COLUMNS];
         GObject *object;
 
-        g_assert (G_N_ELEMENTS (column_types) == GVA_GAME_STORE_NUM_COLUMNS);
+        types[0] = G_TYPE_STRING;       /* GVA_GAME_STORE_COLUMN_INPFILE */
+        types[1] = G_TYPE_STRING;       /* GVA_GAME_STORE_COLUMN_ROMNAME */
+        types[2] = G_TYPE_STRING;       /* GVA_GAME_STORE_COLUMN_TITLE */
+        types[3] = GVA_TYPE_TIME;       /* GVA_GAME_STORE_COLUMN_TIME */
+        types[4] = G_TYPE_BOOLEAN;      /* GVA_GAME_STORE_COLUMN_FAVORITE */
 
         /* Chain up to parent's constructor() method. */
         object = G_OBJECT_CLASS (parent_class)->constructor (
                 type, n_construct_properties, construct_properties);
 
         gtk_list_store_set_column_types (
-                GTK_LIST_STORE (object),
-                G_N_ELEMENTS (column_types), column_types);
+                GTK_LIST_STORE (object), G_N_ELEMENTS (types), types);
+
+        gtk_tree_sortable_set_sort_func (
+                GTK_TREE_SORTABLE (object), GVA_GAME_STORE_COLUMN_TIME,
+                (GtkTreeIterCompareFunc) game_store_time_compare, NULL, NULL);
 
         return object;
 }

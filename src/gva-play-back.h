@@ -5,7 +5,7 @@
 
 G_BEGIN_DECLS
 
-gboolean        gva_play_back_run_dialog        (GError **error);
+void            gva_play_back_init              (void);
 
 G_END_DECLS
 

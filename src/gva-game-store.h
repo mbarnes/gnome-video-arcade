@@ -29,10 +29,10 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
 
 enum
 {
-        GVA_GAME_STORE_COLUMN_INPNAME,          /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_INPFILE,          /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_ROMNAME,          /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_TITLE,            /* G_TYPE_STRING */
-	GVA_GAME_STORE_COLUMN_DATE_TIME,	/* G_TYPE_STRING */
+	GVA_GAME_STORE_COLUMN_TIME,	        /* GVA_TYPE_TIME */
         GVA_GAME_STORE_COLUMN_FAVORITE,         /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_NUM_COLUMNS
 };

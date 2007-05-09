@@ -35,7 +35,7 @@ gva_choose_inpname (const gchar *romname)
                 if (error != NULL)
                 {
                         g_warning ("%s", error->message);
-                        g_error_free (error);
+                        g_clear_error (&error);
                 }
 
                 inpname = g_strdup (romname);

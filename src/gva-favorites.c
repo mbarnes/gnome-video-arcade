@@ -20,7 +20,7 @@ favorites_init (void)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         for (iter = favorites; iter != NULL; iter = iter->next)
@@ -46,7 +46,7 @@ favorites_save (void)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 }
 

@@ -37,7 +37,6 @@ gboolean
 gva_game_db_init (GError **error)
 {
         GHashTable *hash_table;
-        GtkTreeModel *model;
 
         if (db != NULL)
                 return TRUE;
@@ -46,23 +45,22 @@ gva_game_db_init (GError **error)
         if (hash_table == NULL)
                 return FALSE;
 
-        model = gva_game_store_new ();
+        db = gva_game_store_new ();
 
         index = g_hash_table_new_full (
                 g_str_hash, g_str_equal,
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) gtk_tree_row_reference_free);
 
-        db = gtk_tree_model_sort_new_with_model (model);
+        g_hash_table_foreach (hash_table, (GHFunc) game_db_insert, db);
 
+        g_hash_table_destroy (hash_table);
+
+        /* Do this AFTER the games are loaded! */
         gtk_tree_sortable_set_sort_column_id (
                 GTK_TREE_SORTABLE (db),
                 GVA_GAME_STORE_COLUMN_TITLE,
                 GTK_SORT_ASCENDING);
-
-        g_hash_table_foreach (hash_table, (GHFunc) game_db_insert, model);
-
-        g_hash_table_destroy (hash_table);
 
         return TRUE;
 }
@@ -71,7 +69,6 @@ GtkTreePath *
 gva_game_db_lookup (const gchar *romname)
 {
         GtkTreeRowReference *reference;
-        GtkTreePath *child_path, *path;
 
         g_return_val_if_fail (db != NULL, NULL);
         g_return_val_if_fail (index != NULL, NULL);
@@ -81,12 +78,7 @@ gva_game_db_lookup (const gchar *romname)
         if (reference == NULL)
                 return NULL;
 
-        child_path = gtk_tree_row_reference_get_path (reference);
-        path = gtk_tree_model_sort_convert_child_path_to_path (
-                GTK_TREE_MODEL_SORT (db), child_path);
-        gtk_tree_path_free (child_path);
-
-        return path;
+        return gtk_tree_row_reference_get_path (reference);
 }
 
 GtkTreeModel *

@@ -64,40 +64,31 @@ static void
 main_tree_view_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
                                     GtkTreePath *path, GtkTreeView *view)
 {
-        GtkTreeModelSort *sort_model;
-        GtkTreeModel *child_model;
-        GtkTreePath *child_path;
-        GtkTreeIter child_iter;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
         gboolean favorite;
         gboolean iter_set;
         gchar *romname;
 
-        sort_model = GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (view));
-        child_model = gtk_tree_model_sort_get_model (sort_model);
+        model = gtk_tree_view_get_model (view);
 
-        child_path = gtk_tree_model_sort_convert_path_to_child_path (
-                sort_model, path);
-
-        iter_set = gtk_tree_model_get_iter (
-                child_model, &child_iter, child_path);
+        iter_set = gtk_tree_model_get_iter (model, &iter, path);
         g_assert (iter_set);
         gtk_tree_model_get (
-                child_model, &child_iter,
-                GVA_GAME_STORE_COLUMN_ROMNAME, &romname,
+                model, &iter, GVA_GAME_STORE_COLUMN_ROMNAME, &romname,
                 GVA_GAME_STORE_COLUMN_FAVORITE, &favorite,-1);
 
         favorite = !favorite;
 
         gtk_list_store_set (
-                GTK_LIST_STORE (child_model), &child_iter,
+                GTK_LIST_STORE (model), &iter,
                 GVA_GAME_STORE_COLUMN_FAVORITE, favorite, -1);
         if (favorite)
                 gva_favorites_insert (romname);
         else
                 gva_favorites_remove (romname);
-        g_free (romname);
 
-        gtk_tree_path_free (child_path);
+        g_free (romname);
 }
 
 static void
@@ -127,7 +118,7 @@ main_tree_selection_changed_cb (GtkTreeSelection *selection)
                 if (error != NULL)
                 {
                         g_warning ("%s", error->message);
-                        g_error_free (error);
+                        g_clear_error (&error);
                 }
 
                 g_object_unref (client);
@@ -161,7 +152,7 @@ main_tree_select_default (GtkTreeView *view)
         else if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         if (path == NULL)

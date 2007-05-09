@@ -42,13 +42,7 @@ action_contents_cb (GtkAction *action)
 static void
 action_play_back_cb (GtkAction *action)
 {
-        GError *error = NULL;
-
-        if (!gva_play_back_run_dialog (&error))
-        {
-                g_warning ("%s", error->message);
-                g_error_free (error);
-        }
+        gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
 }
 
 static void
@@ -78,7 +72,7 @@ action_record_cb (GtkAction *action)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 }
 
@@ -95,7 +89,7 @@ action_start_cb (GtkAction *action)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 }
 
