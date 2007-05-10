@@ -12,6 +12,7 @@
 #define GVA_ACTION_PROPERTIES           (gva_ui_get_action ("properties"))
 #define GVA_ACTION_QUIT                 (gva_ui_get_action ("quit"))
 #define GVA_ACTION_RECORD               (gva_ui_get_action ("record"))
+#define GVA_ACTION_SHOW_PLAY_BACK       (gva_ui_get_action ("show-play-back"))
 #define GVA_ACTION_START                (gva_ui_get_action ("start"))
 #define GVA_ACTION_VIEW_AVAILABLE       (gva_ui_get_action ("view-available"))
 #define GVA_ACTION_VIEW_FAVORITES       (gva_ui_get_action ("view-favorites"))

@@ -2,6 +2,7 @@
 
 #include <stdarg.h>
 #include <string.h>
+#include <unistd.h>
 
 #ifdef HAVE_WORDEXP_H
 #include <wordexp.h>
@@ -376,13 +377,102 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
         return success;
 }
 
+static void
+xmame_exited (GPid pid, gint exit_status, gint *exit_status_out)
+{
+        *exit_status_out = exit_status;
+        g_spawn_close_pid (pid);
+}
+
 gboolean
 gva_xmame_playback_game (const gchar *inpname, GError **error)
 {
+        GIOChannel *channel;
         gchar *executable;
-        gchar *arguments[4];
+        gchar *argv[4];
+        gchar *buffer = NULL;
+        gint standard_input = -1;
+        gint standard_output = -1;
+        gint standard_error = -1;
+        gint exit_status = ~0;
+        gboolean success;
+        GIOStatus status;
+        GPid pid;
 
-        executable = gva_xmame_get_executable (error);
-        if (executable == NULL)
+        /* xmame asks the user to press return before it will start playing
+         * back the recorded game, so we have to go through extra trouble
+         * to supply the expected keystroke. */
+
+        g_return_val_if_fail (inpname != NULL, FALSE);
+
+        if ((executable = gva_xmame_get_executable (error)) == NULL)
                 return FALSE;
+
+        argv[0] = executable;
+        argv[1] = "-playback";
+        argv[2] = (gchar *) inpname;
+        argv[3] = NULL;
+
+        success = g_spawn_async_with_pipes (
+                NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &pid,
+                &standard_input, &standard_output, &standard_error, error);
+
+        g_free (executable);
+
+        if (!success)
+                goto exit;
+
+        /* All for this!
+         * FIXME Being lazy about error checking. */
+        write (standard_input, "\n", 1);
+
+        g_child_watch_add (pid, (GChildWatchFunc) xmame_exited, &exit_status);
+        while (exit_status == ~0)
+                g_main_context_iteration (NULL, TRUE);
+        if (exit_status == 0)
+                goto exit;
+
+        /* XXX Portability issue? */
+        channel = g_io_channel_unix_new (standard_error);
+        status = G_IO_STATUS_AGAIN;
+        while (status == G_IO_STATUS_AGAIN)
+                status = g_io_channel_read_to_end (
+                        channel, &buffer, NULL, error);
+        g_io_channel_unref (channel);
+        if (status == G_IO_STATUS_ERROR)
+                goto exit;
+        if (gva_xmame_scan_for_error (buffer, error))
+                goto exit;
+        g_free (buffer);
+        buffer = NULL;
+
+        /* XXX Portability issue? */
+        channel = g_io_channel_unix_new (standard_output);
+        status = G_IO_STATUS_AGAIN;
+        while (status == G_IO_STATUS_AGAIN)
+                status = g_io_channel_read_to_end (
+                        channel, &buffer, NULL, error);
+        g_io_channel_unref (channel);
+        if (status == G_IO_STATUS_ERROR)
+                goto exit;
+        if (gva_xmame_scan_for_error (buffer, error))
+                goto exit;
+        g_free (buffer);
+        buffer = NULL;
+
+        g_set_error (
+                error, GVA_ERROR, GVA_ERROR_XMAME,
+                "xmame exited with status (%d)", exit_status);
+
+exit:
+        if (standard_input >= 0)
+                close (standard_input);
+        if (standard_output >= 0)
+                close (standard_output);
+        if (standard_error >= 0)
+                close (standard_error);
+
+        g_free (buffer);
+
+        return (exit_status == 0);
 }

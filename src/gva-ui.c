@@ -2,6 +2,7 @@
 
 #include <glade/glade.h>
 
+#include "gva-game-store.h"
 #include "gva-main.h"
 #include "gva-play-back.h"
 #include "gva-util.h"
@@ -42,7 +43,39 @@ action_contents_cb (GtkAction *action)
 static void
 action_play_back_cb (GtkAction *action)
 {
-        gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
+        GtkTreeModel *model;
+        GtkTreeView *view;
+        GtkTreeIter iter;
+        gchar *inpname;
+        gchar *inpfile;
+        GList *list;
+        gboolean iter_set;
+        GError *error = NULL;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_PLAY_BACK_TREE_VIEW);
+
+        /* We have to use gtk_tree_selection_get_selected_rows() instead of
+         * gtk_tree_selection_get_selected() because the selection mode is
+         * GTK_SELECTION_MULTIPLE, but only one row should be selected. */
+        list = gtk_tree_selection_get_selected_rows (
+                gtk_tree_view_get_selection (view), &model);
+        g_assert (g_list_length (list) == 1);
+
+        iter_set = gtk_tree_model_get_iter (model, &iter, list->data);
+        g_assert (iter_set);
+        gtk_tree_model_get (
+                model, &iter, GVA_GAME_STORE_COLUMN_INPFILE, &inpfile, -1);
+        inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
+        g_free (inpfile);
+
+        if (!gva_xmame_playback_game (inpname, &error))
+        {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+
+        g_list_foreach (list, (GFunc) gtk_tree_path_free, NULL);
+        g_list_free (list);
 }
 
 static void
@@ -74,6 +107,12 @@ action_record_cb (GtkAction *action)
                 g_warning ("%s", error->message);
                 g_clear_error (&error);
         }
+}
+
+static void
+action_show_play_back_cb (GtkAction *action)
+{
+        gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
 }
 
 static void
@@ -124,7 +163,7 @@ static GtkActionEntry entries[] =
           GTK_STOCK_MEDIA_PLAY,
           N_("Play _Back..."),
           NULL,
-          N_("Play back a previously recorded game"),
+          N_("Play back the selected game recording"),
           G_CALLBACK (action_play_back_cb) },
 
         { "properties",
@@ -147,6 +186,13 @@ static GtkActionEntry entries[] =
           "<Control>r",
           N_("Start the selected game and record keypresses to a file"),
           G_CALLBACK (action_record_cb) },
+
+        { "show-play-back",
+          GTK_STOCK_MEDIA_PLAY,
+          N_("Play _Back..."),
+          NULL,
+          N_("Play back a previously recorded game"),
+          G_CALLBACK (action_show_play_back_cb) },
 
         { "start",
           GTK_STOCK_EXECUTE,

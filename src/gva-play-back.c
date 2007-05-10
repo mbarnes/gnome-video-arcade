@@ -17,11 +17,13 @@ play_back_tree_view_row_activated_cb (GtkTreeView *view,
                                       GtkTreePath *path,
                                       GtkTreeViewColumn *column)
 {
+        gtk_action_activate (GVA_ACTION_PLAY_BACK);
 }
 
 static void
 play_back_clicked_cb (GtkButton *button, GtkTreeView *view)
 {
+        gtk_action_activate (GVA_ACTION_PLAY_BACK);
 }
 
 static gint

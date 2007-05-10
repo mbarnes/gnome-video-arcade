@@ -3,7 +3,7 @@
     <menu action="game-menu">
       <menuitem action="start"/>
       <menuitem action="record"/>
-      <menuitem action="play-back"/>
+      <menuitem action="show-play-back"/>
       <separator/>
       <menuitem action="quit"/>
     </menu>
