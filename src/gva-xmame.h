@@ -24,6 +24,7 @@ gboolean        gva_xmame_command               (const gchar *arguments,
 gchar *         gva_xmame_get_version           (GError **error);
 gchar *         gva_xmame_get_config_value      (const gchar *config_key,
                                                  GError **error);
+GList *         gva_xmame_get_available         (GError **error);
 GHashTable *    gva_xmame_get_input_files       (GError **error);
 GHashTable *    gva_xmame_list_full             (GError **error);
 gboolean        gva_xmame_run_game              (const gchar *romname,

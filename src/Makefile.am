@@ -23,6 +23,8 @@ gnome_video_arcade_SOURCES = \
 	gva-game-store.h		\
 	gva-main.c			\
 	gva-main.h			\
+	gva-models.c			\
+	gva-models.h			\
 	gva-play-back.c			\
 	gva-play-back.h			\
 	gva-time.c			\

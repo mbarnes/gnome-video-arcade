@@ -232,6 +232,32 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         return config_value;
 }
 
+GList *
+gva_xmame_get_available (GError **error)
+{
+        gchar *romname;
+        gchar *rompath;
+        GList *list = NULL;
+        GDir *dir;
+
+        rompath = gva_xmame_get_config_value ("rompath", error);
+        dir = (rompath != NULL) ? g_dir_open (rompath, 0, error) : NULL;
+        g_free (rompath);
+
+        if (dir == NULL)
+                return NULL;
+
+        while ((romname = g_strdup (g_dir_read_name (dir))) != NULL)
+        {
+                g_strdelimit (romname, ".", '\0');
+                list = g_list_prepend (list, romname);
+        }
+
+        g_dir_close (dir);
+
+        return g_list_reverse (list);
+}
+
 GHashTable *
 gva_xmame_get_input_files (GError **error)
 {

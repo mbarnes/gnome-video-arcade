@@ -6,12 +6,10 @@
 #include "gva-favorites.h"
 #include "gva-game-db.h"
 #include "gva-game-store.h"
+#include "gva-models.h"
 #include "gva-ui.h"
 
 #define GCONF_SELECTED_KEY      GVA_GCONF_PREFIX "/selected"
-
-static GtkTreeModel *models[3];
-static gint current_model = 0;
 
 static void
 main_window_destroy_cb (GtkObject *object)
@@ -78,7 +76,14 @@ main_tree_view_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
                 model, &iter, GVA_GAME_STORE_COLUMN_ROMNAME, &romname,
                 GVA_GAME_STORE_COLUMN_FAVORITE, &favorite,-1);
 
-        favorite = !favorite;
+        favorite = !favorite;  /* Toggle */
+
+        /* Don't assume direct access to the GtkListStore. */
+        model = gva_game_db_get_model ();
+        path = gva_game_db_lookup (romname);
+        iter_set = gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_path_free (path);
+        g_assert (iter_set);
 
         gtk_list_store_set (
                 GTK_LIST_STORE (model), &iter,
@@ -146,6 +151,7 @@ main_tree_select_default (GtkTreeView *view)
 
         if (romname != NULL)
         {
+                /* FIXME This is broken! */
                 path = gva_game_db_lookup (romname);
                 g_free (romname);
         }
@@ -184,7 +190,15 @@ main_tree_search_equal (GtkTreeModel *model, gint column,
                 "abcdefghijklmnopqrstuvwxyz"
                 "0123456789";
 
+        /* XXX The 'column' argument might be wrong depending on what
+         *     model is being used.  I would expect it to always be
+         *     GVA_GAME_STORE_COLUMN_TITLE.  Not sure if this is a bug
+         *     in GTK+ or if my understanding is flawed (probably the
+         *     latter).  In any case, override the column value just
+         *     to be safe. */
+        column = GVA_GAME_STORE_COLUMN_TITLE;
         gtk_tree_model_get (model, iter, column, &title, -1);
+        g_assert (title != NULL);
 
         g_strcanon (title, valid, '?');
         str_array = g_strsplit_set (title, "?", -1);
@@ -288,6 +302,11 @@ gva_main_init (void)
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (main_tree_selection_changed_cb), NULL);
 
+        /* This sets a model for 'view'. */
+        gtk_radio_action_set_current_value (
+                GTK_RADIO_ACTION (GVA_ACTION_VIEW_AVAILABLE),
+                gva_models_get_current_model ());
+
         main_tree_select_default (view);
 }
 
@@ -307,20 +326,4 @@ gva_main_get_selected_game (void)
                         GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
 
         return romname;
-}
-
-gint
-gva_main_get_view (void)
-{
-        return current_model;
-}
-
-void
-gva_main_set_view (gint view)
-{
-        g_return_if_fail (view >= 0 && view < G_N_ELEMENTS (models));
-
-        current_model = view;
-        gtk_tree_view_set_model (
-                GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW), models[view]);
 }

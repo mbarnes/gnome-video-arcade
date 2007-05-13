@@ -2,7 +2,7 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.0.1)
+m4_define([gva_version], 0.1)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
         [matthew@barnes.net], gnome-video-arcade)

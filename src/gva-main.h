@@ -7,8 +7,6 @@ G_BEGIN_DECLS
 
 void            gva_main_init                   (void);
 gchar *         gva_main_get_selected_game      (void);
-gint            gva_main_get_view               (void);
-void            gva_main_set_view               (gint view);
 
 G_END_DECLS
 

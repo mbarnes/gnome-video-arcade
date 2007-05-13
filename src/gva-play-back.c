@@ -143,10 +143,11 @@ play_back_render_time (GtkTreeViewColumn *column, GtkCellRenderer *renderer,
 static void
 play_back_add_input_file (gchar *inpfile, gchar *romname, GtkTreeModel *model)
 {
-        struct stat statbuf;
         GtkTreePath *path;
         GtkTreeIter iter;
+        gboolean iter_set;
         gchar *title;
+        struct stat statbuf;
         time_t *time;
 
         if (g_stat (inpfile, &statbuf) != 0)
@@ -158,25 +159,21 @@ play_back_add_input_file (gchar *inpfile, gchar *romname, GtkTreeModel *model)
         time = &statbuf.st_ctime;
 
         path = gva_game_db_lookup (romname);
-        if (path != NULL)
-        {
-                gboolean iter_was_set;
-
-                iter_was_set = gtk_tree_model_get_iter (
-                        gva_game_db_get_model (), &iter, path);
-                g_assert (iter_was_set);
-
-                gtk_tree_model_get (
-                        gva_game_db_get_model (), &iter,
-                        GVA_GAME_STORE_COLUMN_TITLE, &title, -1);
-
-                gtk_tree_path_free (path);
-        }
-        else
+        if (path == NULL)
         {
                 g_warning ("%s: Game '%s' not found", inpfile, romname);
                 return;
         }
+
+        iter_set = gtk_tree_model_get_iter (
+                gva_game_db_get_model (), &iter, path);
+        g_assert (iter_set);
+
+        gtk_tree_path_free (path);
+
+        gtk_tree_model_get (
+                gva_game_db_get_model (), &iter,
+                GVA_GAME_STORE_COLUMN_TITLE, &title, -1);
 
         gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 

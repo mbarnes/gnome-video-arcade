@@ -4,6 +4,7 @@
 
 #include "gva-game-store.h"
 #include "gva-main.h"
+#include "gva-models.h"
 #include "gva-play-back.h"
 #include "gva-util.h"
 #include "gva-xmame.h"
@@ -28,7 +29,7 @@ action_about_cb (GtkAction *action)
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
                 "name", PACKAGE_NAME,
                 "version", PACKAGE_VERSION,
-                "comments", _("XMAME front-end"),
+                "comments", _("XMAME Front-End"),
                 "copyright", copyright,
                 "authors", authors,
                 "logo-icon-name", "gnome-joystick",
@@ -135,7 +136,8 @@ action_start_cb (GtkAction *action)
 static void
 action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
 {
-        gva_main_set_view (gtk_radio_action_get_current_value (current));
+        gva_models_set_current_model (
+                gtk_radio_action_get_current_value (current));
 }
 
 static void
