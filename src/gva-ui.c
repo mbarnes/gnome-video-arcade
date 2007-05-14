@@ -232,21 +232,21 @@ static GtkRadioActionEntry view_radio_entries[] =
           N_("_Available Games"),
           NULL,
           N_("Show all available games"),
-          0 },
+          GVA_MODEL_AVAILABLE },
 
         { "view-favorites",
           NULL,
           N_("_Favorite Games"),
           NULL,
           N_("Only show my favorite games"),
-          1 },
+          GVA_MODEL_FAVORITES },
 
         { "view-results",
           NULL,
           N_("Search _Results"),
           NULL,
           N_("Show my search results"),
-          2 }
+          GVA_MODEL_RESULTS }
 };
 
 static void

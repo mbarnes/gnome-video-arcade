@@ -9,7 +9,8 @@
 #include "gva-models.h"
 #include "gva-ui.h"
 
-#define GCONF_SELECTED_KEY      GVA_GCONF_PREFIX "/selected"
+#define GCONF_SELECTED_GAME_KEY         GVA_GCONF_PREFIX "/selected-game"
+#define GCONF_SELECTED_VIEW_KEY         GVA_GCONF_PREFIX "/selected-view"
 
 static void
 main_window_destroy_cb (GtkObject *object)
@@ -119,7 +120,7 @@ main_tree_selection_changed_cb (GtkTreeSelection *selection)
                 client = gconf_client_get_default ();
 
                 gconf_client_set_string (
-                        client, GCONF_SELECTED_KEY, romname, &error);
+                        client, GCONF_SELECTED_GAME_KEY, romname, &error);
                 if (error != NULL)
                 {
                         g_warning ("%s", error->message);
@@ -147,12 +148,11 @@ main_tree_select_default (GtkTreeView *view)
         client = gconf_client_get_default ();
 
         romname = gconf_client_get_string (
-                client, GCONF_SELECTED_KEY, &error);
+                client, GCONF_SELECTED_GAME_KEY, &error);
 
         if (romname != NULL)
         {
-                /* FIXME This is broken! */
-                path = gva_game_db_lookup (romname);
+                path = gva_models_get_path (romname);
                 g_free (romname);
         }
         else if (error != NULL)
@@ -164,10 +164,7 @@ main_tree_select_default (GtkTreeView *view)
         if (path == NULL)
                 path = gtk_tree_path_new_first ();
 
-        gtk_tree_selection_select_path (
-                gtk_tree_view_get_selection (view), path);
-        gtk_tree_view_scroll_to_cell (
-                view, path, NULL, TRUE, 0.5, 0.0);
+        gva_main_tree_view_select_path (path);
 
         gtk_tree_path_free (path);
 
@@ -326,4 +323,18 @@ gva_main_get_selected_game (void)
                         GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
 
         return romname;
+}
+
+void
+gva_main_tree_view_select_path (GtkTreePath *path)
+{
+        GtkTreeSelection *selection;
+        GtkTreeView *view;
+
+        g_return_if_fail (path != NULL);
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        selection = gtk_tree_view_get_selection (view);
+        gtk_tree_selection_select_path (selection, path);
+        gtk_tree_view_scroll_to_cell (view, path, NULL, TRUE, 0.5, 0.0);
 }

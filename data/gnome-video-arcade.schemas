@@ -15,8 +15,8 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gnome-video-arcade/selected</key>
-      <applyto>/schemas/apps/gnome-video-arcade/selected</applyto>
+      <key>/schemas/apps/gnome-video-arcade/selected-game</key>
+      <applyto>/schemas/apps/gnome-video-arcade/selected-game</applyto>
       <owner>gnome-video-arcade</owner>
       <type>string</type>
       <default></default>

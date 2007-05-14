@@ -14,6 +14,7 @@ typedef enum {
 
 GvaModelType    gva_models_get_current_model    (void);
 void            gva_models_set_current_model    (GvaModelType model);
+GtkTreePath *   gva_models_get_path             (const gchar *romname);
 
 G_END_DECLS
 

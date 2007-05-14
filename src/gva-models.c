@@ -3,13 +3,13 @@
 #include <gconf/gconf-client.h>
 #include "gva-game-db.h"
 #include "gva-game-store.h"
+#include "gva-main.h"
 #include "gva-ui.h"
 
 #define GCONF_MODEL_KEY         GVA_GCONF_PREFIX "/model"
 
 static gboolean initialized = FALSE;
 static GtkTreeModel *models[GVA_NUM_MODELS];
-static gint current_model = 0;
 
 static void
 models_init (void)
@@ -75,13 +75,65 @@ gva_models_set_current_model (GvaModelType model)
         if (error == NULL)
         {
                 GtkTreeView *view;
+                gchar *romname;
 
                 view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+                romname = gva_main_get_selected_game ();
                 gtk_tree_view_set_model (view, models[model]);
+                if (romname != NULL)
+                {
+                        GtkTreePath *path;
+
+                        path = gva_models_get_path (romname);
+                        if (path != NULL)
+                        {
+                                gva_main_tree_view_select_path (path);
+                                gtk_tree_path_free (path);
+                        }
+                        g_free (romname);
+                }
         }
         else
         {
                 g_warning ("%s", error->message);
                 g_error_free (error);
         }
+}
+
+GtkTreePath *
+gva_models_get_path (const gchar *romname)
+{
+        GtkTreePath *path;
+        GtkTreePath *child_path;
+
+        g_return_val_if_fail (romname != NULL, NULL);
+
+        child_path = gva_game_db_lookup (romname);
+        if (child_path == NULL)
+                return NULL;
+
+        switch (gva_models_get_current_model ())
+        {
+                case GVA_MODEL_AVAILABLE:
+                        path = gtk_tree_path_copy (child_path);
+                        break;
+
+                case GVA_MODEL_FAVORITES:
+                        path = gtk_tree_model_filter_convert_child_path_to_path (
+                                GTK_TREE_MODEL_FILTER (
+                                        models[GVA_MODEL_FAVORITES]),
+                                child_path);
+                        break;
+
+                case GVA_MODEL_RESULTS:
+                        path = NULL;  /* TODO */
+                        break;
+
+                default:
+                        g_assert_not_reached ();
+        }
+
+        gtk_tree_path_free (child_path);
+
+        return path;
 }
