@@ -8,6 +8,7 @@ G_BEGIN_DECLS
 void            gva_tree_view_init              (void);
 gchar *         gva_tree_view_get_selected_game (void);
 void            gva_tree_view_set_selected_game (const gchar *romname);
+void            gva_tree_view_refresh_favorites (void);
 
 G_END_DECLS
 

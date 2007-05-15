@@ -7,7 +7,7 @@ static GConfClient *client = NULL;
 static gboolean initialized = FALSE;
 
 static void
-favorites_init (void)
+favorites_load (void)
 {
         GSList *iter;
         GError *error = NULL;
@@ -50,11 +50,20 @@ favorites_save (void)
         }
 }
 
+GSList *
+gva_favorites_copy (void)
+{
+        if (G_UNLIKELY (!initialized))
+                favorites_load ();
+
+        return g_slist_copy (favorites);
+}
+
 void
 gva_favorites_insert (const gchar *romname)
 {
         if (G_UNLIKELY (!initialized))
-                favorites_init ();
+                favorites_load ();
 
         g_return_if_fail (romname != NULL);
 
@@ -73,7 +82,7 @@ void
 gva_favorites_remove (const gchar *romname)
 {
         if (G_UNLIKELY (!initialized))
-                favorites_init ();
+                favorites_load ();
 
         g_return_if_fail (romname != NULL);
 
@@ -88,7 +97,7 @@ gboolean
 gva_favorites_contains (const gchar *romname)
 {
         if (G_UNLIKELY (!initialized))
-                favorites_init ();
+                favorites_load ();
 
         g_return_val_if_fail (romname != NULL, FALSE);
 

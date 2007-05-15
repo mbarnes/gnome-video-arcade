@@ -13,6 +13,7 @@
 #define NUM_TREE_VIEWS 3
 
 static GtkTreeView *views[NUM_TREE_VIEWS];
+static GSList *visible_favorites = NULL;
 
 static gboolean
 tree_view_popup_menu_cb (GtkTreeView *view,
@@ -61,6 +62,20 @@ tree_view_row_activated_cb (GtkTreeView *view,
                             GtkTreeViewColumn *column)
 {
         gtk_action_activate (GVA_ACTION_START);
+}
+
+static gboolean
+tree_view_show_favorite (GtkTreeModel *model, GtkTreeIter *iter)
+{
+        gchar *romname;
+        GSList *element;
+
+        gtk_tree_model_get (
+                model, iter, GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
+        element = g_slist_find (visible_favorites, g_intern_string (romname));
+        g_free (romname);
+
+        return (element != NULL);
 }
 
 static void
@@ -271,9 +286,10 @@ tree_view_init_1 (void)  /* Favorite Games */
 
         model = gva_game_db_get_model ();
         model = gtk_tree_model_filter_new (model, NULL);
-        gtk_tree_model_filter_set_visible_column (
+        gtk_tree_model_filter_set_visible_func (
                 GTK_TREE_MODEL_FILTER (model),
-                GVA_GAME_STORE_COLUMN_FAVORITE);
+                (GtkTreeModelFilterVisibleFunc)
+                tree_view_show_favorite, NULL, NULL);
         gtk_tree_view_set_model (view, model);
 }
 
@@ -393,4 +409,15 @@ gva_tree_view_set_selected_game (const gchar *romname)
         }
 
         /* TODO: Search results view */
+}
+
+void
+gva_tree_view_refresh_favorites (void)
+{
+        GtkTreeModel *model;
+
+        g_slist_free (visible_favorites);
+        visible_favorites = gva_favorites_copy ();
+        model = gtk_tree_view_get_model (views[1]);
+        gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
 }

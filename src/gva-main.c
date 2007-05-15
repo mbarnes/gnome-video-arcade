@@ -20,6 +20,8 @@ main_notebook_switch_page_cb (GtkNotebook *notebook,
         GConfClient *client;
         GError *error = NULL;
 
+        gva_tree_view_refresh_favorites ();
+
         romname = gva_tree_view_get_selected_game ();
         if (romname != NULL)
         {
