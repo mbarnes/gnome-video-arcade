@@ -3,7 +3,7 @@
 bin_PROGRAMS = gnome-video-arcade
 
 AM_CFLAGS = \
-	-Werror -pedantic-errors \
+	-Werror \
 	@GCONF_CFLAGS@ @GLADE_CFLAGS@
 
 AM_CPPFLAGS = \
@@ -23,12 +23,12 @@ gnome_video_arcade_SOURCES = \
 	gva-game-store.h		\
 	gva-main.c			\
 	gva-main.h			\
-	gva-models.c			\
-	gva-models.h			\
 	gva-play-back.c			\
 	gva-play-back.h			\
 	gva-time.c			\
 	gva-time.h			\
+	gva-tree-view.c			\
+	gva-tree-view.h			\
 	gva-ui.c			\
 	gva-ui.h			\
 	gva-util.c			\

@@ -3,9 +3,8 @@
 #include <glade/glade.h>
 
 #include "gva-game-store.h"
-#include "gva-main.h"
-#include "gva-models.h"
 #include "gva-play-back.h"
+#include "gva-tree-view.h"
 #include "gva-util.h"
 #include "gva-xmame.h"
 
@@ -97,7 +96,7 @@ action_record_cb (GtkAction *action)
         gchar *inpname;
         GError *error = NULL;
 
-        romname = gva_main_get_selected_game ();
+        romname = gva_tree_view_get_selected_game ();
         inpname = gva_choose_inpname (romname);
         gva_xmame_record_game (romname, inpname, &error);
         g_free (inpname);
@@ -122,7 +121,7 @@ action_start_cb (GtkAction *action)
         gchar *romname;
         GError *error = NULL;
 
-        romname = gva_main_get_selected_game ();
+        romname = gva_tree_view_get_selected_game ();
         gva_xmame_run_game (romname, &error);
         g_free (romname);
 
@@ -136,7 +135,8 @@ action_start_cb (GtkAction *action)
 static void
 action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
 {
-        gva_models_set_current_model (
+        gtk_notebook_set_current_page (
+                GTK_NOTEBOOK (GVA_WIDGET_MAIN_NOTEBOOK),
                 gtk_radio_action_get_current_value (current));
 }
 
@@ -232,21 +232,21 @@ static GtkRadioActionEntry view_radio_entries[] =
           N_("_Available Games"),
           NULL,
           N_("Show all available games"),
-          GVA_MODEL_AVAILABLE },
+          0 },
 
         { "view-favorites",
           NULL,
           N_("_Favorite Games"),
           NULL,
           N_("Only show my favorite games"),
-          GVA_MODEL_FAVORITES },
+          1 },
 
         { "view-results",
           NULL,
           N_("Search _Results"),
           NULL,
           N_("Show my search results"),
-          GVA_MODEL_RESULTS }
+          2 }
 };
 
 static void
