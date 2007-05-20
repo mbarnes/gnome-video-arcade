@@ -1,3 +1,22 @@
+2007-05-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Use custom icon instead of "gnome-joystick".
+
+	* data/gnome-video-arcade.desktop.in:
+	Use custom icon instead of "gnome-joystick".
+	Change name to "Video Arcade" (drop the "GNOME").
+
+	* data/Makefile.am:
+	Install icon into $(datadir)/icons/hicolor/scalable/apps.
+
+	* src/gva-game-store.c (game_store_constructor):
+	* src/gva-game-store.h:
+	Define columns for "year", "manufacturer", and "clone-of".
+
+	* src/gva-ui.c (action_about_cb):
+	Add translator credits.
+
 2007-05-01  Matthew Barnes  <mbarnes@redhat.com>
 
 	* Initial commit.

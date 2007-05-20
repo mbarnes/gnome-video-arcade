@@ -39,12 +39,16 @@ game_store_constructor (GType type, guint n_construct_properties,
 {
         GType types[GVA_GAME_STORE_NUM_COLUMNS];
         GObject *object;
+        gint n = 0;
 
-        types[0] = G_TYPE_STRING;       /* GVA_GAME_STORE_COLUMN_INPFILE */
-        types[1] = G_TYPE_STRING;       /* GVA_GAME_STORE_COLUMN_ROMNAME */
-        types[2] = G_TYPE_STRING;       /* GVA_GAME_STORE_COLUMN_TITLE */
-        types[3] = GVA_TYPE_TIME;       /* GVA_GAME_STORE_COLUMN_TIME */
-        types[4] = G_TYPE_BOOLEAN;      /* GVA_GAME_STORE_COLUMN_FAVORITE */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_INPFILE */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_ROMNAME */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_TITLE */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_YEAR */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_MANUFACTURER */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_CLONEOF */
+        types[n++] = GVA_TYPE_TIME;    /* GVA_GAME_STORE_COLUMN_TIME */
+        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_COLUMN_FAVORITE */
 
         /* Chain up to parent's constructor() method. */
         object = G_OBJECT_CLASS (parent_class)->constructor (

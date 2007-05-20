@@ -7,7 +7,7 @@
     <property name="title" translatable="yes">GNOME Video Arcade</property>
     <property name="default_width">500</property>
     <property name="default_height">400</property>
-    <property name="icon_name">gnome-joystick</property>
+    <property name="icon_name">gnome-video-arcade</property>
     <signal name="destroy" handler="gtk_main_quit"/>
     <child>
       <widget class="GtkVBox" id="main-vbox">

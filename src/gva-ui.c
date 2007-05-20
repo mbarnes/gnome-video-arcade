@@ -31,6 +31,7 @@ action_about_cb (GtkAction *action)
                 "comments", _("XMAME Front-End"),
                 "copyright", copyright,
                 "authors", authors,
+                "translator-credits", _("translator-credits"),
                 "logo-icon-name", "gnome-joystick",
                 NULL);
 }

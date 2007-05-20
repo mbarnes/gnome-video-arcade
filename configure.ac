@@ -2,10 +2,10 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.1)
+m4_define([gva_version], 0.1.1)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
-        [matthew@barnes.net], gnome-video-arcade)
+        [mbarnes@redhat.com], gnome-video-arcade)
 
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_HEADER(config.h)
