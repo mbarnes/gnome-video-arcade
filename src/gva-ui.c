@@ -32,7 +32,7 @@ action_about_cb (GtkAction *action)
                 "copyright", copyright,
                 "authors", authors,
                 "translator-credits", _("translator-credits"),
-                "logo-icon-name", "gnome-joystick",
+                "logo-icon-name", "gnome-video-arcade",
                 NULL);
 }
 
