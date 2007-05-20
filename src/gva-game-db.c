@@ -46,6 +46,35 @@ game_db_insert (gchar *romname, gchar *title, gchar *rompath)
         gtk_tree_path_free (path);
 }
 
+static void
+game_db_update_sample (gchar *romname, GtkTreeRowReference *reference,
+                       GHashTable *samples)
+{
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeIter iter;
+        gboolean valid;
+        gboolean uses_samples;
+        gboolean have_samples;
+        gchar *status;
+
+        model = gtk_tree_row_reference_get_model (reference);
+        path = gtk_tree_row_reference_get_path (reference);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_path_free (path);
+        g_assert (valid);
+
+        status = g_hash_table_lookup (samples, romname);
+        uses_samples = (status != NULL);
+        have_samples = uses_samples && (strcmp (status, "correct") == 0);
+
+        gtk_list_store_set (
+                GTK_LIST_STORE (model), &iter,
+                GVA_GAME_STORE_COLUMN_USES_SAMPLES, uses_samples,
+                GVA_GAME_STORE_COLUMN_HAVE_SAMPLES, have_samples,
+                -1);
+}
+
 gboolean
 gva_game_db_init (GError **error)
 {
@@ -107,4 +136,24 @@ GtkTreeModel *
 gva_game_db_get_model (void)
 {
         return model;
+}
+
+gboolean
+gva_game_db_update_samples (GError **error)
+{
+        GHashTable *hash_table;
+
+        g_return_val_if_fail (model != NULL, FALSE);
+        g_return_val_if_fail (reference_ht != NULL, FALSE);
+
+        hash_table = gva_xmame_verify_sample_sets (error);
+        if (hash_table == NULL)
+                return FALSE;
+
+        g_hash_table_foreach (
+                reference_ht, (GHFunc) game_db_update_sample, hash_table);
+
+        g_hash_table_destroy (hash_table);
+
+        return TRUE;
 }

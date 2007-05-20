@@ -57,6 +57,12 @@ tree_view_button_press_cb (GtkTreeView *view,
 }
 
 static void
+tree_view_columns_changed_cb (GtkTreeView *view)
+{
+        /* TODO */
+}
+
+static void
 tree_view_row_activated_cb (GtkTreeView *view,
                             GtkTreePath *path,
                             GtkTreeViewColumn *column)
@@ -184,22 +190,61 @@ tree_view_search_equal (GtkTreeModel *model,
         return retval;
 }
 
+static GdkPixbuf *
+tree_view_get_icon_name (const gchar *icon_name)
+{
+        GtkIconTheme *icon_theme;
+        GdkPixbuf *pixbuf;
+        gboolean valid;
+        gint size;
+        GError *error = NULL;
+
+        icon_theme = gtk_icon_theme_get_default ();
+        valid = gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &size, NULL);
+        g_assert (valid);
+        pixbuf = gtk_icon_theme_load_icon (
+                icon_theme, icon_name, size, 0, &error);
+        if (pixbuf != NULL)
+        {
+                GdkPixbuf *scaled;
+
+                scaled = gdk_pixbuf_scale_simple (
+                        pixbuf, size, size, GDK_INTERP_BILINEAR);
+                g_object_unref (pixbuf);
+                pixbuf = scaled;
+        }
+        else
+        {
+                g_assert (error != NULL);
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+
+        return pixbuf;
+}
+
 static GtkTreeViewColumn *
 tree_view_column_new_favorite (GtkTreeView *view)
 {
         GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
+        GdkPixbuf *pixbuf;
+
+        pixbuf = tree_view_get_icon_name ("emblem-favorite");
 
         renderer = gva_cell_renderer_pixbuf_new ();
-        g_object_set (
-                renderer, "icon-name", "emblem-favorite",
-                "stock-size", GTK_ICON_SIZE_MENU, NULL);
+        g_object_set (renderer, "pixbuf", pixbuf, NULL);
         g_signal_connect (
                 renderer, "clicked",
                 G_CALLBACK (tree_view_favorite_clicked_cb), view);
         column = gtk_tree_view_column_new_with_attributes (
                 _("Favorite"), renderer, "sensitive",
                 GVA_GAME_STORE_COLUMN_FAVORITE, NULL);
+        gtk_tree_view_column_set_sort_column_id (
+                column, GVA_GAME_STORE_COLUMN_FAVORITE);
+
+        if (pixbuf != NULL)
+                g_object_unref (pixbuf);
 
         return column;
 }
@@ -214,6 +259,7 @@ tree_view_column_new_title (GtkTreeView *view)
         column = gtk_tree_view_column_new_with_attributes (
                 _("Title"), renderer, "text",
                 GVA_GAME_STORE_COLUMN_TITLE, NULL);
+        gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (
                 column, GVA_GAME_STORE_COLUMN_TITLE);
         gtk_tree_view_set_search_column (
@@ -221,6 +267,30 @@ tree_view_column_new_title (GtkTreeView *view)
         gtk_tree_view_set_search_equal_func (
                 view, (GtkTreeViewSearchEqualFunc)
                 tree_view_search_equal, NULL, NULL);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
+tree_view_column_new_samples (GtkTreeView *view)
+{
+        GtkCellRenderer *renderer;
+        GtkTreeViewColumn *column;
+        GdkPixbuf *pixbuf;
+
+        pixbuf = tree_view_get_icon_name ("emblem-sound");
+
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        g_object_set (renderer, "pixbuf", pixbuf, NULL);
+        column = gtk_tree_view_column_new_with_attributes (
+                _("Samples"), renderer, "visible",
+                GVA_GAME_STORE_COLUMN_USES_SAMPLES, "sensitive",
+                GVA_GAME_STORE_COLUMN_HAVE_SAMPLES, NULL);
+        gtk_tree_view_column_set_sort_column_id (
+                column, GVA_GAME_STORE_COLUMN_USES_SAMPLES);
+
+        if (pixbuf != NULL)
+                g_object_unref (pixbuf);
 
         return column;
 }
@@ -236,6 +306,10 @@ tree_view_init_common (GtkTreeView *view, const gchar *popup_path)
         g_signal_connect (
                 view, "button-press-event",
                 G_CALLBACK (tree_view_button_press_cb), menu);
+
+        g_signal_connect (
+                view, "columns-changed",
+                G_CALLBACK (tree_view_columns_changed_cb), NULL);
 
         g_signal_connect (
                 view, "popup-menu",
@@ -265,6 +339,9 @@ tree_view_init_0 (void)  /* Available Games */
         column = tree_view_column_new_title (view);
         gtk_tree_view_append_column (view, column);
 
+        column = tree_view_column_new_samples (view);
+        gtk_tree_view_append_column (view, column);
+
         model = gva_game_db_get_model ();
         gtk_tree_view_set_model (view, model);
 }
@@ -282,6 +359,9 @@ tree_view_init_1 (void)  /* Favorite Games */
         gtk_tree_view_append_column (view, column);
 
         column = tree_view_column_new_title (view);
+        gtk_tree_view_append_column (view, column);
+
+        column = tree_view_column_new_samples (view);
         gtk_tree_view_append_column (view, column);
 
         model = gva_game_db_get_model ();

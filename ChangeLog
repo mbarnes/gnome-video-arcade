@@ -1,3 +1,20 @@
+2007-05-20  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-game-db.c:
+	* src/gva-game-db.h:
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	* src/main.c:
+	Add a samples column.
+
+	* src/gva-tree-view.c:
+	Add a samples column.
+	Use smaller icons in columns.
+
+	* src/gva-xmame.c:
+	* src/gva-xmame.h:
+	Support "xmame -verifysamplesets" command.
+
 2007-05-19  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

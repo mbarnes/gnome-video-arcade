@@ -74,7 +74,7 @@ gva_xmame_scan_for_error (const gchar *xmame_output, GError **error)
         return (ii < n_lines);
 }
 
-gboolean
+gint
 gva_xmame_command (const gchar *arguments, gchar **standard_output,
                    gchar **standard_error, GError **error)
 {
@@ -88,7 +88,7 @@ gva_xmame_command (const gchar *arguments, gchar **standard_output,
         g_return_val_if_fail (arguments != NULL, FALSE);
 
         if ((executable = gva_xmame_get_executable (error)) == NULL)
-                return FALSE;
+                return -1;
 
         command_line = g_strdup_printf ("%s %s", executable, arguments);
 
@@ -123,7 +123,7 @@ exit:
         else
                 g_free (local_standard_error);
 
-        return (exit_status == 0);
+        return exit_status;
 }
 
 gchar *
@@ -135,7 +135,7 @@ gva_xmame_get_version (GError **error)
         guint n_lines, ii;
 
         /* Execute the command "${xmame} -version". */
-        if (!gva_xmame_command ("-version", &strout, NULL, error))
+        if (gva_xmame_command ("-version", &strout, NULL, error) != 0)
                 goto exit;
 
         /* Output is as follows:
@@ -176,7 +176,7 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         g_return_val_if_fail (config_key != NULL, NULL);
 
         /* Execute the command "${xmame} -showconfig". */
-        if (!gva_xmame_command ("-showconfig", &strout, NULL, error))
+        if (gva_xmame_command ("-showconfig", &strout, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
@@ -330,7 +330,7 @@ gva_xmame_list_full (GError **error)
         guint n_lines, ii;
 
         /* Execute the command "${xmame} -listfull". */
-        if (!gva_xmame_command ("-listfull", &strout, NULL, error))
+        if (gva_xmame_command ("-listfull", &strout, NULL, error) != 0)
                 goto exit;
 
         /* Output is as follows:
@@ -374,13 +374,73 @@ exit:
         return hash_table;
 }
 
+GHashTable *
+gva_xmame_verify_sample_sets (GError **error)
+{
+        GHashTable *hash_table = NULL;
+        gchar *strout = NULL;
+        gchar **lines;
+        guint n_lines, ii;
+
+        /* Execute the command "${xmame} -verifysamplesets". */
+        /* XXX What are the exit codes for this command? */
+        if (gva_xmame_command ("-verifysamplesets", &strout, NULL, error) < 0)
+                goto exit;
+
+        /* Output is as follows:
+         *
+         * name      result
+         * --------  ------
+         * romname   correct|incorrect|not found
+         * romname   correct|incorrect|not found
+         * ...
+         *
+         *
+         * Total Supported: nnnn
+         * Displayed: nnnn ...
+         * Found: nnnn ...
+         * Not found: nnnn
+         */
+
+        hash_table = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) g_free);
+
+        lines = g_strsplit_set (strout, "\n", -1);
+        n_lines = g_strv_length (lines);
+        g_assert (n_lines > 4);
+
+        for (ii = 2; ii < n_lines - 4; ii++)
+        {
+                gchar **tokens;
+
+                tokens = g_strsplit_set (lines[ii], " ", 2);
+                if (g_strv_length (tokens) == 2)
+                {
+                        gchar *key, *value;
+
+                        key = g_strdup (g_strstrip (tokens[0]));
+                        value = g_strdup (g_strstrip (tokens[1]));
+                        g_hash_table_insert (hash_table, key, value);
+                }
+                g_strfreev (tokens);
+        }
+
+        g_strfreev (lines);
+
+exit:
+        g_free (strout);
+        return hash_table;
+}
+
 gboolean
 gva_xmame_run_game (const gchar *romname, GError **error)
 {
         g_return_val_if_fail (romname != NULL, FALSE);
 
         /* Execute the command "${xmame} ${romname}". */
-        return gva_xmame_command (romname, NULL, NULL, error);
+        return (gva_xmame_command (romname, NULL, NULL, error) == 0);
 }
 
 gboolean
@@ -397,7 +457,7 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
 
         /* Execute the command "${xmame} -record ${inpname} ${romname}". */
         arguments = g_strdup_printf ("-record %s %s", inpname, romname);
-        success = gva_xmame_command (arguments, NULL, NULL, error);
+        success = (gva_xmame_command (arguments, NULL, NULL, error) == 0);
         g_free (arguments);
 
         return success;

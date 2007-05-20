@@ -49,6 +49,8 @@ game_store_constructor (GType type, guint n_construct_properties,
         types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_CLONEOF */
         types[n++] = GVA_TYPE_TIME;    /* GVA_GAME_STORE_COLUMN_TIME */
         types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_COLUMN_FAVORITE */
+        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_USES_SAMPLES */
+        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_HAVE_SAMPLES */
 
         /* Chain up to parent's constructor() method. */
         object = G_OBJECT_CLASS (parent_class)->constructor (
