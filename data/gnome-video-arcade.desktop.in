@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Video Arcade
+Comment=Play classic arcade games
+Exec=gnome-video-arcade
+Icon=gnome-video-arcade
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Game;ArcadeGame;
+StartupNotify=true

@@ -1,0 +1,30 @@
+<gconfschemafile>
+  <schemalist>
+
+    <schema>
+      <key>/schemas/apps/gnome-video-arcade/favorites</key>
+      <applyto>/schemas/apps/gnome-video-arcade/favorites</applyto>
+      <owner>gnome-video-arcade</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[]</default>
+      <locale name="C">
+        <short>Favorite games</short>
+        <long>List of the user's favorite games.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gnome-video-arcade/selected-game</key>
+      <applyto>/schemas/apps/gnome-video-arcade/selected-game</applyto>
+      <owner>gnome-video-arcade</owner>
+      <type>string</type>
+      <default></default>
+      <locale name="C">
+        <short>Selected game</short>
+        <long>The most recently selected game.</long>
+      </locale>
+    </schema>
+
+  </schemalist>
+</gconfschemafile>

@@ -1,14 +1,15 @@
 ### Process this file with automake to produce Makefile.in
 
-SUBDIRS = src docs
-
-man_MANS = pcl.1
+SUBDIRS = data po src
 
 EXTRA_DIST = \
-        HACKING         \
-        $(man_MANS)     \
-        pcl.pc.in
+	config.rpath			\
+	intltool-extract.in		\
+	intltool-merge.in		\
+	intltool-update.in		\
+	mkinstalldirs
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = pcl.pc
-$(pkgconfig_DATA): config.status
+DISTCLEANFILES = \
+	intltool-extract		\
+	intltool-merge			\
+	intltool-update

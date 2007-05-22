@@ -1,0 +1,42 @@
+<ui>
+  <menubar name="main-menu">
+    <menu action="game-menu">
+      <menuitem action="start"/>
+      <menuitem action="record"/>
+      <menuitem action="show-play-back"/>
+      <separator/>
+      <menuitem action="quit"/>
+    </menu>
+    <menu action="view-menu">
+      <menuitem action="view-available"/>
+      <menuitem action="view-favorites"/>
+      <menuitem action="view-results"/>
+      <separator/>
+      <menuitem action="properties"/>
+    </menu>
+    <menu action="help-menu">
+      <menuitem action="contents"/>
+      <menuitem action="about"/>
+    </menu>
+  </menubar>
+  <!-- A menu can only be attached to one widget, so we
+       need a separate popup menu for each tree view. -->
+  <popup name="game-popup-0">
+    <menuitem action="start"/>
+    <menuitem action="record"/>
+    <separator/>
+    <menuitem action="properties"/>
+  </popup>
+  <popup name="game-popup-1">
+    <menuitem action="start"/>
+    <menuitem action="record"/>
+    <separator/>
+    <menuitem action="properties"/>
+  </popup>
+  <popup name="game-popup-2">
+    <menuitem action="start"/>
+    <menuitem action="record"/>
+    <separator/>
+    <menuitem action="properties"/>
+  </popup>
+</ui>

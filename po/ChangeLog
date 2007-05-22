@@ -1,0 +1,7 @@
+2007-05-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* LINGUAS: Add Swedish (sv).
+
+	* POTFILES.in: Add missing files with translations.
+
+	* sv.po: Swedish translation from Daniel Nylander.

@@ -1,0 +1,177 @@
+# Swedish translation for gnome-video-arcade.
+# Copyright (C) 2007 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-video-arcade package.
+# Daniel Nylander <po@danielnylander.se>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade\n"
+"Report-Msgid-Bugs-To: matthew@barnes.net\n"
+"POT-Creation-Date: 2007-05-19 13:50-0400\n"
+"PO-Revision-Date: 2007-05-19 12:34+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/gnome-video-arcade.glade.h:1
+msgid "Close this window"
+msgstr "Stäng det här fönstret"
+
+#: ../data/gnome-video-arcade.glade.h:2
+msgid "Delete the selected game recordings"
+msgstr "Ta bort inspelningar för det markerade spelet"
+
+#: ../data/gnome-video-arcade.glade.h:3
+msgid "GNOME Video Arcade"
+msgstr "GNOME Video Arcade"
+
+#: ../data/gnome-video-arcade.glade.h:4 ../src/gva-ui.c:242
+msgid "Only show my favorite games"
+msgstr "Visa endast mina favoritspel"
+
+#: ../data/gnome-video-arcade.glade.h:5
+msgid "Play _Back"
+msgstr "Spela _upp"
+
+#: ../data/gnome-video-arcade.glade.h:6 ../src/gva-ui.c:169
+msgid "Play back the selected game recording"
+msgstr "Spela upp inspelning för det markerade spelet"
+
+#: ../data/gnome-video-arcade.glade.h:7
+msgid "Recorded Games"
+msgstr "Inspelade spel"
+
+#: ../data/gnome-video-arcade.glade.h:8
+msgid "See more information about the selected game"
+msgstr "Se mer information om det markerade spelet"
+
+#: ../data/gnome-video-arcade.glade.h:9 ../src/gva-ui.c:235
+msgid "Show all available games"
+msgstr "Visa alla tillgängliga spel"
+
+#: ../data/gnome-video-arcade.glade.h:10 ../src/gva-ui.c:249
+msgid "Show my search results"
+msgstr "Visa mina sökresultat"
+
+#: ../data/gnome-video-arcade.glade.h:11
+msgid "Start playing the selected game"
+msgstr "Starta det markerade spelet"
+
+#: ../data/gnome-video-arcade.glade.h:12
+msgid "_Start Game"
+msgstr "_Starta spel"
+
+#: ../src/gva-play-back.c:40
+msgid "Delete selected game recordings?"
+msgstr "Ta bort inspelningar för markerat spel?"
+
+#: ../src/gva-play-back.c:44
+msgid ""
+"This operation will permanently erase the recorded games you have selected.  "
+"Are you sure you want to proceed?"
+msgstr ""
+"Den här åtgärden kommer permanent att ta bort de inspelade spelet som du "
+"markerat.  Är du säker på att du vill fortsätta?"
+
+#: ../src/gva-play-back.c:48
+msgid "Do Not Delete"
+msgstr "Ta inte bort"
+
+#: ../src/gva-play-back.c:236
+msgid "Played On"
+msgstr "Spelades den"
+
+#: ../src/gva-play-back.c:248 ../src/gva-tree-view.c:215
+msgid "Title"
+msgstr "Titel"
+
+#: ../src/gva-tree-view.c:201
+msgid "Favorite"
+msgstr "Favorit"
+
+#: ../src/gva-ui.c:31
+msgid "XMAME Front-End"
+msgstr "Gränssnitt för XMAME"
+
+#: ../src/gva-ui.c:34
+msgid "translator-credits"
+msgstr ""
+
+#: ../src/gva-ui.c:153
+msgid "_About"
+msgstr "_Om"
+
+#: ../src/gva-ui.c:160
+msgid "_Contents"
+msgstr "_Innehåll"
+
+#: ../src/gva-ui.c:167 ../src/gva-ui.c:195
+msgid "Play _Back..."
+msgstr "Spela _upp..."
+
+#: ../src/gva-ui.c:174
+msgid "_Properties"
+msgstr "_Egenskaper"
+
+#: ../src/gva-ui.c:176
+msgid "Show properties about the selected game"
+msgstr "Visa egenskaperna för det markerade spelet"
+
+#: ../src/gva-ui.c:181
+msgid "_Quit"
+msgstr "_Avsluta"
+
+#: ../src/gva-ui.c:188
+msgid "_Record"
+msgstr "Spela _in"
+
+#: ../src/gva-ui.c:190
+msgid "Start the selected game and record keypresses to a file"
+msgstr ""
+"Starta det markerade spelet och spela in tangenttryckningar till en fil"
+
+#: ../src/gva-ui.c:197
+msgid "Play back a previously recorded game"
+msgstr "Spela upp ett tidigare inspelat spel"
+
+#: ../src/gva-ui.c:202
+msgid "_Start"
+msgstr "_Starta"
+
+#: ../src/gva-ui.c:204
+msgid "Start the selected game"
+msgstr "Starta markerat spel"
+
+#: ../src/gva-ui.c:209
+msgid "_Game"
+msgstr "_Spel"
+
+#: ../src/gva-ui.c:216
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../src/gva-ui.c:223
+msgid "_View"
+msgstr "_Visa"
+
+#: ../src/gva-ui.c:233
+msgid "_Available Games"
+msgstr "_Tillgängliga spel"
+
+#: ../src/gva-ui.c:240
+msgid "_Favorite Games"
+msgstr "_Favoritspel"
+
+#: ../src/gva-ui.c:247
+msgid "Search _Results"
+msgstr "Sök_resultat"
+
+#: ../src/gva-ui.c:282
+msgid "Failed to initialize user interface"
+msgstr "Misslyckades med att initiera användargränssnittet"
+
+#: ../src/gva-xmame.c:35
+msgid "Could not find xmame executable"
+msgstr "Kunde inte hitta xmame"
