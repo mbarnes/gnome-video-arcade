@@ -1,3 +1,24 @@
+2007-05-23  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-common.h:
+	Put all GConf key definitions here.
+
+	* src/gva-main.c:
+	* src/gva-tree-view.c:
+	* src/gva-ui.c:
+	* data/gnome-video-arcade.glade:
+	* data/gnome-video-arcade.ui:
+	Use a single model/filter/view stack and use different filtering
+	criteria for each application view (Available / Favorites / Results).
+
+	* src/gva-tree-view.c:
+	Make columns reorderable.
+	Distinguish between getting/setting the selected or last selected
+	game or view.  "Last selected" refers to what's stored in GConf.
+
+	* src/gva-ui.c (action_about_cb):
+	Load the logo ourselves so we can dictate the size.
+
 2007-05-20  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-game-db.c:

@@ -15,7 +15,7 @@ favorites_load (void)
         client = gconf_client_get_default ();
 
         favorites = gconf_client_get_list (
-                client, GVA_GCONF_PREFIX "/favorites",
+                client, GVA_GCONF_FAVORITES_KEY,
                 GCONF_VALUE_STRING, &error);
         if (error != NULL)
         {
@@ -41,7 +41,7 @@ favorites_save (void)
         GError *error = NULL;
 
         gconf_client_set_list (
-                client, GVA_GCONF_PREFIX "/favorites",
+                client, GVA_GCONF_FAVORITES_KEY,
                 GCONF_VALUE_STRING, favorites, &error);
         if (error != NULL)
         {

@@ -19,13 +19,10 @@
 #define GVA_ACTION_VIEW_RESULTS         (gva_ui_get_action ("view-results"))
 
 /* Main Window */
-#define GVA_WIDGET_MAIN_NOTEBOOK             GW ("main-notebook")
 #define GVA_WIDGET_MAIN_PROPERTIES_BUTTON    GW ("main-properties-button")
 #define GVA_WIDGET_MAIN_START_GAME_BUTTON    GW ("main-start-game-button")
 #define GVA_WIDGET_MAIN_STATUSBAR            GW ("main-statusbar")
-#define GVA_WIDGET_MAIN_TREE_VIEW_0          GW ("main-tree-view-0")
-#define GVA_WIDGET_MAIN_TREE_VIEW_1          GW ("main-tree-view-1")
-#define GVA_WIDGET_MAIN_TREE_VIEW_2          GW ("main-tree-view-2")
+#define GVA_WIDGET_MAIN_TREE_VIEW            GW ("main-tree-view")
 #define GVA_WIDGET_MAIN_VBOX                 GW ("main-vbox")
 #define GVA_WIDGET_MAIN_VIEW_BUTTON_0        GW ("main-view-button-0")
 #define GVA_WIDGET_MAIN_VIEW_BUTTON_1        GW ("main-view-button-1")

@@ -8,11 +8,6 @@
 #include "gva-game-store.h"
 #include "gva-ui.h"
 
-#define GCONF_SELECTED_GAME_KEY         GVA_GCONF_PREFIX "/selected-game"
-
-#define NUM_TREE_VIEWS 3
-
-static GtkTreeView *views[NUM_TREE_VIEWS];
 static GSList *visible_favorites = NULL;
 
 static gboolean
@@ -71,44 +66,47 @@ tree_view_row_activated_cb (GtkTreeView *view,
 }
 
 static gboolean
-tree_view_show_favorite (GtkTreeModel *model, GtkTreeIter *iter)
+tree_view_filter_visible (GtkTreeModel *model, GtkTreeIter *iter)
 {
         gchar *romname;
         GSList *element;
+        gboolean visible = TRUE;
 
         gtk_tree_model_get (
                 model, iter, GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
-        element = g_slist_find (visible_favorites, g_intern_string (romname));
-        g_free (romname);
 
-        return (element != NULL);
+        switch (gva_tree_view_get_selected_view ())
+        {
+                case 0:  /* Available Games */
+                        visible = TRUE;
+                        break;
+
+                case 1:  /* Favorite Games */
+                        visible = 
+                                g_slist_find (visible_favorites,
+                                g_intern_string (romname)) != NULL;
+                        break;
+
+                case 2:  /* Search Results */
+                        visible = FALSE;  /* TODO */
+                        break;
+
+                default:
+                        g_assert_not_reached ();
+        }
+
+        return visible;
 }
 
 static void
 tree_view_selection_changed_cb (GtkTreeSelection *selection)
 {
-        gchar *romname;
+        const gchar *romname;
         gboolean sensitive;
 
         romname = gva_tree_view_get_selected_game ();
         if (romname != NULL)
-        {
-                GConfClient *client;
-                GError *error = NULL;
-
-                client = gconf_client_get_default ();
-                gconf_client_set_string (
-                        client, GCONF_SELECTED_GAME_KEY, romname, &error);
-                g_object_unref (client);
-
-                if (error != NULL)
-                {
-                        g_warning ("%s", error->message);
-                        g_clear_error (&error);
-                }
-
-                g_free (romname);
-        }
+                gva_tree_view_set_last_selected_game (romname);
 
         sensitive = (gtk_tree_selection_count_selected_rows (selection) > 0);
 
@@ -240,6 +238,7 @@ tree_view_column_new_favorite (GtkTreeView *view)
         column = gtk_tree_view_column_new_with_attributes (
                 _("Favorite"), renderer, "sensitive",
                 GVA_GAME_STORE_COLUMN_FAVORITE, NULL);
+        gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (
                 column, GVA_GAME_STORE_COLUMN_FAVORITE);
 
@@ -259,14 +258,15 @@ tree_view_column_new_title (GtkTreeView *view)
         column = gtk_tree_view_column_new_with_attributes (
                 _("Title"), renderer, "text",
                 GVA_GAME_STORE_COLUMN_TITLE, NULL);
-        gtk_tree_view_column_set_expand (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_TITLE);
         gtk_tree_view_set_search_column (
                 view, GVA_GAME_STORE_COLUMN_TITLE);
         gtk_tree_view_set_search_equal_func (
                 view, (GtkTreeViewSearchEqualFunc)
                 tree_view_search_equal, NULL, NULL);
+        gtk_tree_view_column_set_expand (column, TRUE);
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (
+                column, GVA_GAME_STORE_COLUMN_TITLE);
 
         return column;
 }
@@ -286,6 +286,7 @@ tree_view_column_new_samples (GtkTreeView *view)
                 _("Samples"), renderer, "visible",
                 GVA_GAME_STORE_COLUMN_USES_SAMPLES, "sensitive",
                 GVA_GAME_STORE_COLUMN_HAVE_SAMPLES, NULL);
+        gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (
                 column, GVA_GAME_STORE_COLUMN_USES_SAMPLES);
 
@@ -295,12 +296,18 @@ tree_view_column_new_samples (GtkTreeView *view)
         return column;
 }
 
-static void
-tree_view_init_common (GtkTreeView *view, const gchar *popup_path)
+void
+gva_tree_view_init (void)
 {
+        GtkTreeViewColumn *column;
+        GtkTreeView *view;
+        GtkTreeModel *model;
         GtkMenu *menu;
+        gchar *romname;
 
-        menu = GTK_MENU (gva_ui_get_managed_widget (popup_path));
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+
+        menu = GTK_MENU (gva_ui_get_managed_widget ("/game-popup"));
         gtk_menu_attach_to_widget (menu, GTK_WIDGET (view), NULL);
 
         g_signal_connect (
@@ -322,16 +329,6 @@ tree_view_init_common (GtkTreeView *view, const gchar *popup_path)
         g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
-}
-
-static void
-tree_view_init_0 (void)  /* Available Games */
-{
-        GtkTreeViewColumn *column;
-        GtkTreeView *view = views[0];
-        GtkTreeModel *model;
-
-        tree_view_init_common (view, "/game-popup-0");
 
         column = tree_view_column_new_favorite (view);
         gtk_tree_view_append_column (view, column);
@@ -342,71 +339,146 @@ tree_view_init_0 (void)  /* Available Games */
         column = tree_view_column_new_samples (view);
         gtk_tree_view_append_column (view, column);
 
-        model = gva_game_db_get_model ();
-        gtk_tree_view_set_model (view, model);
-}
-
-static void
-tree_view_init_1 (void)  /* Favorite Games */
-{
-        GtkTreeViewColumn *column;
-        GtkTreeView *view = views[1];
-        GtkTreeModel *model;
-
-        tree_view_init_common (view, "/game-popup-1");
-
-        column = tree_view_column_new_favorite (view);
-        gtk_tree_view_append_column (view, column);
-
-        column = tree_view_column_new_title (view);
-        gtk_tree_view_append_column (view, column);
-
-        column = tree_view_column_new_samples (view);
-        gtk_tree_view_append_column (view, column);
-
+        /* Overlay a GtkTreeModelFilter on the GvaGameStore so we can
+         * filter the model appropriately for the selected view. */
         model = gva_game_db_get_model ();
         model = gtk_tree_model_filter_new (model, NULL);
         gtk_tree_model_filter_set_visible_func (
                 GTK_TREE_MODEL_FILTER (model),
                 (GtkTreeModelFilterVisibleFunc)
-                tree_view_show_favorite, NULL, NULL);
+                tree_view_filter_visible, NULL, NULL);
+
+        /* But by doing so we lose the ability to sort.  So we have
+         * to overlay a GtkTreeModelSort on the GtkTreeModelFilter
+         * to get both capabilities.  So we wind up with three layers
+         * of GtkTreeModels.  Bother. */
+        model = gtk_tree_model_sort_new_with_model (model);
+
         gtk_tree_view_set_model (view, model);
+
+        gva_tree_view_update ();
 }
 
-static void
-tree_view_init_2 (void)  /* Search Results */
+void
+gva_tree_view_update (void)
 {
-        GtkTreeViewColumn *column;
-        GtkTreeView *view = views[2];
         GtkTreeModel *model;
+        const gchar *romname;
 
-        tree_view_init_common (view, "/game-popup-2");
+        g_slist_free (visible_favorites);
+        visible_favorites = gva_favorites_copy ();
+        model = gtk_tree_view_get_model (
+                GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW));
+        model = gtk_tree_model_sort_get_model (
+                GTK_TREE_MODEL_SORT (model));
+        gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
 
-        column = tree_view_column_new_favorite (view);
-        gtk_tree_view_append_column (view, column);
-
-        column = tree_view_column_new_title (view);
-        gtk_tree_view_append_column (view, column);
-
-        model = NULL; /* TODO */
-        gtk_tree_view_set_model (view, model);
+        romname = gva_tree_view_get_last_selected_game ();
+        gva_tree_view_set_selected_game (romname);
 }
 
-static void
-tree_view_init_select_game (void)
+const gchar *
+gva_tree_view_get_selected_game (void)
 {
+        const gchar *retval = NULL;
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+
+        selection = gtk_tree_view_get_selection (
+                GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW));
+        if (gtk_tree_selection_get_selected (selection, &model, &iter))
+        {
+                gchar *romname;
+
+                gtk_tree_model_get (
+                        model, &iter,
+                        GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
+                retval = g_intern_string (romname);
+                g_free (romname);
+        }
+
+        return retval;
+}
+
+void
+gva_tree_view_set_selected_game (const gchar *romname)
+{
+        GtkTreeModel *filter_model;
+        GtkTreeModel *sorted_model;
+        GtkTreePath *gamedb_path;
+        GtkTreePath *filter_path;
+        GtkTreePath *sorted_path;
+        GtkTreeView *view;
+
+        g_return_if_fail (romname != NULL);
+
+        gamedb_path = gva_game_db_lookup (romname);
+        g_return_if_fail (gamedb_path != NULL);
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+
+        /* Dig up the GtkTreeModels we need. */
+        sorted_model = gtk_tree_view_get_model (view);
+        filter_model = gtk_tree_model_sort_get_model (
+                GTK_TREE_MODEL_SORT (sorted_model));
+
+        /* Convert the GvaGameStore path to a GtkTreeModelFilter path. */
+        filter_path = gtk_tree_model_filter_convert_child_path_to_path (
+                GTK_TREE_MODEL_FILTER (filter_model), gamedb_path);
+
+        /* If the game is visible is the current view, convert the
+         * GtkTreeModelFilter path to a GtkTreeModelSort path and put the
+         * cursor on it.  Otherwise just select the root path. */
+        if (filter_path != NULL)
+        {
+                sorted_path = gtk_tree_model_sort_convert_child_path_to_path (
+                        GTK_TREE_MODEL_SORT (sorted_model), filter_path);
+                gtk_tree_view_set_cursor (view, sorted_path, NULL, FALSE);
+                gtk_widget_grab_focus (GTK_WIDGET (view));
+                gtk_tree_path_free (filter_path);
+        }
+        else
+                sorted_path = gtk_tree_path_new_first ();
+
+        gtk_tree_view_scroll_to_cell (view, sorted_path, NULL, TRUE, 0.5, 0.0);
+        gtk_tree_path_free (sorted_path);
+
+        gva_tree_view_set_last_selected_game (romname);
+}
+
+gint
+gva_tree_view_get_selected_view (void)
+{
+        return gtk_radio_action_get_current_value (
+                GTK_RADIO_ACTION (GVA_ACTION_VIEW_AVAILABLE));
+}
+
+void
+gva_tree_view_set_selected_view (gint view)
+{
+        gtk_radio_action_set_current_value (
+                GTK_RADIO_ACTION (GVA_ACTION_VIEW_AVAILABLE), view);
+
+        gva_tree_view_set_last_selected_view (view);
+}
+
+const gchar *
+gva_tree_view_get_last_selected_game (void)
+{
+        const gchar *retval = NULL;
         GConfClient *client;
         gchar *romname;
         GError *error = NULL;
 
         client = gconf_client_get_default ();
         romname = gconf_client_get_string (
-                client, GCONF_SELECTED_GAME_KEY, &error);
+                client, GVA_GCONF_SELECTED_GAME_KEY, &error);
         g_object_unref (client);
 
         if (romname != NULL)
         {
-                gva_tree_view_set_selected_game (romname);
+                retval = g_intern_string (romname);
                 g_free (romname);
         }
         else
@@ -415,89 +487,65 @@ tree_view_init_select_game (void)
                 g_warning ("%s", error->message);
                 g_error_free (error);
         }
-}
 
-static void
-tree_view_select_path (GtkTreeView *view, GtkTreePath *path)
-{
-        g_assert (path != NULL);
-        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
-        gtk_widget_grab_focus (GTK_WIDGET (view));
-        gtk_tree_view_scroll_to_cell (view, path, NULL, TRUE, 0.5, 0.0);
+        return retval;
 }
 
 void
-gva_tree_view_init (void)
+gva_tree_view_set_last_selected_game (const gchar *romname)
 {
         GConfClient *client;
-        gchar *romname;
         GError *error = NULL;
-
-        views[0] = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW_0);
-        views[1] = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW_1);
-        views[2] = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW_2);
-
-        tree_view_init_0 ();
-        tree_view_init_1 ();
-        tree_view_init_2 ();
-
-        tree_view_init_select_game ();
-}
-
-gchar *
-gva_tree_view_get_selected_game (void)
-{
-        GtkTreeSelection *selection;
-        GtkNotebook *notebook;
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gchar *romname = NULL;
-        gint page;
-
-        notebook = GTK_NOTEBOOK (GVA_WIDGET_MAIN_NOTEBOOK);
-        page = gtk_notebook_get_current_page (notebook);
-        selection = gtk_tree_view_get_selection (views[page]);
-        if (gtk_tree_selection_get_selected (selection, &model, &iter))
-                gtk_tree_model_get (
-                        model, &iter,
-                        GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
-
-        return romname;
-}
-
-void
-gva_tree_view_set_selected_game (const gchar *romname)
-{
-        GtkTreeModel *model;
-        GtkTreePath *child_path;
-        GtkTreePath *path;
 
         g_return_if_fail (romname != NULL);
 
-        child_path = gva_game_db_lookup (romname);
-        g_return_if_fail (child_path != NULL);
+        client = gconf_client_get_default ();
+        gconf_client_set_string (
+                client, GVA_GCONF_SELECTED_GAME_KEY, romname, &error);
+        g_object_unref (client);
 
-        tree_view_select_path (views[0], child_path);
-
-        model = gtk_tree_view_get_model (views[1]);
-        path = gtk_tree_model_filter_convert_child_path_to_path (
-                GTK_TREE_MODEL_FILTER (model), child_path);
-        if (path != NULL)
+        if (error != NULL)
         {
-                tree_view_select_path (views[1], path);
-                gtk_tree_path_free (path);
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+}
+
+gint
+gva_tree_view_get_last_selected_view (void)
+{
+        GConfClient *client;
+        gint view;
+        GError *error = NULL;
+
+        client = gconf_client_get_default ();
+        view = gconf_client_get_int (
+                client, GVA_GCONF_SELECTED_VIEW_KEY, &error);
+        g_object_unref (client);
+
+        if (error != NULL)
+        {
+                g_warning ("%s", error->message);
+                g_error_free (error);
         }
 
-        /* TODO: Search results view */
+        return view;
 }
 
 void
-gva_tree_view_refresh_favorites (void)
+gva_tree_view_set_last_selected_view (gint view)
 {
-        GtkTreeModel *model;
+        GConfClient *client;
+        GError *error = NULL;
 
-        g_slist_free (visible_favorites);
-        visible_favorites = gva_favorites_copy ();
-        model = gtk_tree_view_get_model (views[1]);
-        gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
+        client = gconf_client_get_default ();
+        gconf_client_set_int (
+                client, GVA_GCONF_SELECTED_VIEW_KEY, view, &error);
+        g_object_unref (client);
+
+        if (error != NULL)
+        {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
 }

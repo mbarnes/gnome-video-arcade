@@ -19,21 +19,7 @@
       <menuitem action="about"/>
     </menu>
   </menubar>
-  <!-- A menu can only be attached to one widget, so we
-       need a separate popup menu for each tree view. -->
-  <popup name="game-popup-0">
-    <menuitem action="start"/>
-    <menuitem action="record"/>
-    <separator/>
-    <menuitem action="properties"/>
-  </popup>
-  <popup name="game-popup-1">
-    <menuitem action="start"/>
-    <menuitem action="record"/>
-    <separator/>
-    <menuitem action="properties"/>
-  </popup>
-  <popup name="game-popup-2">
+  <popup name="game-popup">
     <menuitem action="start"/>
     <menuitem action="record"/>
     <separator/>

@@ -24,6 +24,18 @@ static const gchar *copyright = "Copyright \xC2\xA9 2007 Matthew Barnes";
 static void
 action_about_cb (GtkAction *action)
 {
+        GdkPixbuf *logo;
+        GError *error = NULL;
+
+        logo = gtk_icon_theme_load_icon (
+                gtk_icon_theme_get_default (),
+                PACKAGE, 128, 0, &error);
+        if (error != NULL)
+        {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+
         gtk_show_about_dialog (
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
                 "name", PACKAGE_NAME,
@@ -32,8 +44,11 @@ action_about_cb (GtkAction *action)
                 "copyright", copyright,
                 "authors", authors,
                 "translator-credits", _("translator-credits"),
-                "logo-icon-name", "gnome-video-arcade",
+                "logo", logo,
                 NULL);
+
+        if (logo != NULL)
+                g_object_unref (logo);
 }
 
 static void
@@ -93,15 +108,16 @@ action_quit_cb (GtkAction *action)
 static void
 action_record_cb (GtkAction *action)
 {
-        gchar *romname;
+        const gchar *romname;
         gchar *inpname;
         GError *error = NULL;
 
         romname = gva_tree_view_get_selected_game ();
+        g_assert (romname != NULL);
+
         inpname = gva_choose_inpname (romname);
         gva_xmame_record_game (romname, inpname, &error);
         g_free (inpname);
-        g_free (romname);
 
         if (error != NULL)
         {
@@ -119,12 +135,13 @@ action_show_play_back_cb (GtkAction *action)
 static void
 action_start_cb (GtkAction *action)
 {
-        gchar *romname;
+        const gchar *romname;
         GError *error = NULL;
 
         romname = gva_tree_view_get_selected_game ();
+        g_assert (romname != NULL);
+
         gva_xmame_run_game (romname, &error);
-        g_free (romname);
 
         if (error != NULL)
         {
@@ -136,9 +153,9 @@ action_start_cb (GtkAction *action)
 static void
 action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
 {
-        gtk_notebook_set_current_page (
-                GTK_NOTEBOOK (GVA_WIDGET_MAIN_NOTEBOOK),
-                gtk_radio_action_get_current_value (current));
+        gva_tree_view_update ();
+        gva_tree_view_set_last_selected_view (
+                gva_tree_view_get_selected_view ());
 }
 
 static void
