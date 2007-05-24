@@ -255,6 +255,7 @@ tree_view_column_new_title (GtkTreeView *view)
         GtkTreeViewColumn *column;
 
         renderer = gtk_cell_renderer_text_new ();
+        g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         column = gtk_tree_view_column_new_with_attributes (
                 _("Title"), renderer, "text",
                 GVA_GAME_STORE_COLUMN_TITLE, NULL);
@@ -410,6 +411,7 @@ gva_tree_view_set_selected_game (const gchar *romname)
         GtkTreePath *filter_path;
         GtkTreePath *sorted_path;
         GtkTreeView *view;
+        GtkTreeIter iter;
 
         g_return_if_fail (romname != NULL);
 
@@ -427,13 +429,14 @@ gva_tree_view_set_selected_game (const gchar *romname)
         filter_path = gtk_tree_model_filter_convert_child_path_to_path (
                 GTK_TREE_MODEL_FILTER (filter_model), gamedb_path);
 
-        /* If the game is visible is the current view, convert the
+        /* If the game is visible in the current view, convert the
          * GtkTreeModelFilter path to a GtkTreeModelSort path and put the
          * cursor on it.  Otherwise just select the root path. */
         if (filter_path != NULL)
         {
                 sorted_path = gtk_tree_model_sort_convert_child_path_to_path (
                         GTK_TREE_MODEL_SORT (sorted_model), filter_path);
+                g_assert (sorted_path != NULL);
                 gtk_tree_view_set_cursor (view, sorted_path, NULL, FALSE);
                 gtk_widget_grab_focus (GTK_WIDGET (view));
                 gtk_tree_path_free (filter_path);
@@ -441,8 +444,15 @@ gva_tree_view_set_selected_game (const gchar *romname)
         else
                 sorted_path = gtk_tree_path_new_first ();
 
-        gtk_tree_view_scroll_to_cell (view, sorted_path, NULL, TRUE, 0.5, 0.0);
-        gtk_tree_path_free (sorted_path);
+        /* If we have a path to a visible game, scroll to it.  Note that
+         * we don't really need the GtkTreeIter here; we're just testing
+         * whether the path is valid. */
+        if (gtk_tree_model_get_iter (sorted_model, &iter, sorted_path))
+        {
+                gtk_tree_view_scroll_to_cell (
+                        view, sorted_path, NULL, TRUE, 0.5, 0.0);
+                gtk_tree_path_free (sorted_path);
+        }
 
         gva_tree_view_set_last_selected_game (romname);
 }
