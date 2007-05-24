@@ -1,3 +1,19 @@
+2007-05-24  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-tree-view.c (tree_view_button_press_cb):
+	Don't assume gtk_tree_view_get_path_at_pos() will succeed.
+	User may right-click on blank area of the tree view.
+
+	* src/gva-tree-view.c (tree_view_selected_changed_cb):
+	Desensitize the "record" action when nothing is selected.
+
+	* src/gva-tree-view.c (gva_tree_view_update):
+	Check the return value of gva_tree_view_get_last_selected_game()
+	for NULL, which can occur the first time the program is run.
+
+	* src/gva-tree-view.c (gva_tree_view_get_last_selected_game):
+	Don't assume GConf will give us a non-empty string.
+
 2007-05-23  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade (play-back-scrolled-window):

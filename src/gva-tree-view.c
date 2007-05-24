@@ -40,12 +40,14 @@ tree_view_button_press_cb (GtkTreeView *view,
                 /* Select the row that was clicked. */
                 valid = gtk_tree_view_get_path_at_pos (
                         view, event->x, event->y, &path, NULL, NULL, NULL);
-                g_assert (valid);
-                gtk_tree_view_set_cursor (view, path, NULL, FALSE);
-                gtk_widget_grab_focus (GTK_WIDGET (view));
-                gtk_tree_path_free (path);
+                if (valid)
+                {
+                        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+                        gtk_widget_grab_focus (GTK_WIDGET (view));
+                        gtk_tree_path_free (path);
 
-                return tree_view_popup_menu_cb (view, event, menu);
+                        return tree_view_popup_menu_cb (view, event, menu);
+                }
         }
 
         return FALSE;
@@ -111,6 +113,7 @@ tree_view_selection_changed_cb (GtkTreeSelection *selection)
         sensitive = (gtk_tree_selection_count_selected_rows (selection) > 0);
 
         gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, sensitive);
+        gtk_action_set_sensitive (GVA_ACTION_RECORD, sensitive);
         gtk_action_set_sensitive (GVA_ACTION_START, sensitive);
 }
 
@@ -375,7 +378,8 @@ gva_tree_view_update (void)
         gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
 
         romname = gva_tree_view_get_last_selected_game ();
-        gva_tree_view_set_selected_game (romname);
+        if (romname != NULL)
+                gva_tree_view_set_selected_game (romname);
 }
 
 const gchar *
@@ -491,9 +495,8 @@ gva_tree_view_get_last_selected_game (void)
                 retval = g_intern_string (romname);
                 g_free (romname);
         }
-        else
+        else if (error != NULL)
         {
-                g_assert (error != NULL);
                 g_warning ("%s", error->message);
                 g_error_free (error);
         }
