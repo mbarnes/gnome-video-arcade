@@ -244,6 +244,7 @@ gva_play_back_init (void)
 
         /* Title Column */
         renderer = gtk_cell_renderer_text_new ();
+        g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         column = gtk_tree_view_column_new_with_attributes (
                 _("Title"), renderer, "text",
                 GVA_GAME_STORE_COLUMN_TITLE, NULL);

@@ -1,5 +1,13 @@
 2007-05-23  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/gnome-video-arcade.glade (play-back-scrolled-window):
+	Set both horizontal and vertical scrollbar policies to automatic.
+
+	* src/gva-play-back.c (gva_play_back_init):
+	Put the text renderer in PANGO_ELLIPSIZE_END mode.
+
+2007-05-23  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-tree-view.c (tree_view_column_new_title):
 	Put the text renderer in PANGO_ELLIPSIZE_END mode.
 
