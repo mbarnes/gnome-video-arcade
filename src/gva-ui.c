@@ -2,6 +2,8 @@
 
 #include <glade/glade.h>
 
+#include "gva-game-db.h"
+#include "gva-favorites.h"
 #include "gva-game-store.h"
 #include "gva-play-back.h"
 #include "gva-tree-view.h"
@@ -54,6 +56,34 @@ action_about_cb (GtkAction *action)
 static void
 action_contents_cb (GtkAction *action)
 {
+}
+
+static void
+action_insert_favorite_cb (GtkAction *action)
+{
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeIter iter;
+        const gchar *romname;
+        gboolean valid;
+
+        romname = gva_tree_view_get_selected_game ();
+        g_assert (romname != NULL);
+
+        model = gva_game_db_get_model ();
+        path = gva_game_db_lookup (romname);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_path_free (path);
+        g_assert (valid);
+
+        gtk_list_store_set (
+                GTK_LIST_STORE (model), &iter,
+                GVA_GAME_STORE_COLUMN_FAVORITE, TRUE, -1);
+
+        gva_favorites_insert (romname);
+
+        gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
+        gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, TRUE);
 }
 
 static void
@@ -127,6 +157,34 @@ action_record_cb (GtkAction *action)
 }
 
 static void
+action_remove_favorite_cb (GtkAction *action)
+{
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeIter iter;
+        const gchar *romname;
+        gboolean valid;
+
+        romname = gva_tree_view_get_selected_game ();
+        g_assert (romname != NULL);
+
+        model = gva_game_db_get_model ();
+        path = gva_game_db_lookup (romname);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_path_free (path);
+        g_assert (valid);
+
+        gtk_list_store_set (
+                GTK_LIST_STORE (model), &iter,
+                GVA_GAME_STORE_COLUMN_FAVORITE, FALSE, -1);
+
+        gva_favorites_remove (romname);
+
+        gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, TRUE);
+        gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
+}
+
+static void
 action_show_play_back_cb (GtkAction *action)
 {
         gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
@@ -158,11 +216,6 @@ action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
                 gva_tree_view_get_selected_view ());
 }
 
-static void
-action_unmark_favorite_cb (GtkAction *action)
-{
-}
-
 static GtkActionEntry entries[] =
 {
         { "about",
@@ -178,6 +231,13 @@ static GtkActionEntry entries[] =
           NULL,
           NULL,
           G_CALLBACK (action_contents_cb) },
+
+        { "insert-favorite",
+          GTK_STOCK_ADD,
+          N_("Add to _Favorites"),
+          "<Control>plus",
+          N_("Add the selected game to your list of favorites"),
+          G_CALLBACK (action_insert_favorite_cb) },
 
         { "play-back",
           GTK_STOCK_MEDIA_PLAY,
@@ -206,6 +266,13 @@ static GtkActionEntry entries[] =
           "<Control>r",
           N_("Start the selected game and record keypresses to a file"),
           G_CALLBACK (action_record_cb) },
+
+        { "remove-favorite",
+          GTK_STOCK_REMOVE,
+          N_("Remove from _Favorites"),
+          "<Control>minus",
+          N_("Remove the selected game from your list of favorites"),
+          G_CALLBACK (action_remove_favorite_cb) },
 
         { "show-play-back",
           GTK_STOCK_MEDIA_PLAY,
@@ -317,7 +384,7 @@ gva_ui_get_action (const gchar *action_name)
 }
 
 GtkWidget *
-gva_ui_get_glade_widget (const gchar *widget_name)
+gva_ui_get_widget (const gchar *widget_name)
 {
         GtkWidget *widget;
 

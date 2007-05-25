@@ -1,5 +1,21 @@
 2007-05-25  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/gnome-video-arcade.ui:
+	Add menu items for adding or removing from favorites list.
+
+	* src/gva-tree-view.c (tree_view_selected_changed_cb):
+	Update visibility of "favorite" actions.
+
+	* src/gva-tree-view.c (tree_view_favorite_clicked_cb):
+	Activate "insert-favorite" or "remove-favorite" action.
+
+	* src/gva-ui.c:
+	* src/gva-ui.h:
+	Add "insert-favorite" and "remove-favorite" actions.
+	Rename gva_ui_get_glade_widget() to gva_ui_get_widget().
+
+2007-05-25  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-common.h:
 	* src/gva-xmame.c:
 	* src/gva-xmame.h:

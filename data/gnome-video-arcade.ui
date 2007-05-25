@@ -5,6 +5,9 @@
       <menuitem action="record"/>
       <menuitem action="show-play-back"/>
       <separator/>
+      <menuitem action="insert-favorite"/>
+      <menuitem action="remove-favorite"/>
+      <separator/>
       <menuitem action="quit"/>
     </menu>
     <menu action="view-menu">

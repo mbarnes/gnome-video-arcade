@@ -3,15 +3,17 @@
 
 #include "gva-common.h"
 
-#define GW(x) (gva_ui_get_glade_widget (x))
+#define GW(x) (gva_ui_get_widget (x))
 
 /* Actions */
 #define GVA_ACTION_ABOUT                (gva_ui_get_action ("about"))
 #define GVA_ACTION_CONTENTS             (gva_ui_get_action ("contents"))
+#define GVA_ACTION_INSERT_FAVORITE      (gva_ui_get_action ("insert-favorite"))
 #define GVA_ACTION_PLAY_BACK            (gva_ui_get_action ("play-back"))
 #define GVA_ACTION_PROPERTIES           (gva_ui_get_action ("properties"))
 #define GVA_ACTION_QUIT                 (gva_ui_get_action ("quit"))
 #define GVA_ACTION_RECORD               (gva_ui_get_action ("record"))
+#define GVA_ACTION_REMOVE_FAVORITE      (gva_ui_get_action ("remove-favorite"))
 #define GVA_ACTION_SHOW_PLAY_BACK       (gva_ui_get_action ("show-play-back"))
 #define GVA_ACTION_START                (gva_ui_get_action ("start"))
 #define GVA_ACTION_VIEW_AVAILABLE       (gva_ui_get_action ("view-available"))
@@ -39,7 +41,7 @@
 G_BEGIN_DECLS
 
 GtkAction *     gva_ui_get_action               (const gchar *action_name);
-GtkWidget *     gva_ui_get_glade_widget         (const gchar *widget_name);
+GtkWidget *     gva_ui_get_widget               (const gchar *widget_name);
 GtkWidget *     gva_ui_get_managed_widget       (const gchar *widget_path);
 
 G_END_DECLS

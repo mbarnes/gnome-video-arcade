@@ -104,17 +104,30 @@ static void
 tree_view_selection_changed_cb (GtkTreeSelection *selection)
 {
         const gchar *romname;
-        gboolean sensitive;
+        gboolean game_is_selected;
 
         romname = gva_tree_view_get_selected_game ();
-        if (romname != NULL)
+        game_is_selected = (romname != NULL);
+
+        if (game_is_selected)
+        {
+                gboolean favorite;
+
+                favorite = gva_favorites_contains (romname);
+                gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, !favorite);
+                gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, favorite);
+
                 gva_tree_view_set_last_selected_game (romname);
+        }
+        else
+        {
+                gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
+                gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
+        }
 
-        sensitive = (gtk_tree_selection_count_selected_rows (selection) > 0);
-
-        gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, sensitive);
-        gtk_action_set_sensitive (GVA_ACTION_RECORD, sensitive);
-        gtk_action_set_sensitive (GVA_ACTION_START, sensitive);
+        gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, game_is_selected);
+        gtk_action_set_sensitive (GVA_ACTION_RECORD, game_is_selected);
+        gtk_action_set_sensitive (GVA_ACTION_START, game_is_selected);
 }
 
 static void
@@ -122,37 +135,21 @@ tree_view_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
                                GtkTreePath *path,
                                GtkTreeView *view)
 {
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gboolean favorite;
-        gboolean valid;
-        gchar *romname;
+        const gchar *romname;
 
-        model = gtk_tree_view_get_model (view);
-        valid = gtk_tree_model_get_iter (model, &iter, path);
-        g_assert (valid);
-        gtk_tree_model_get (
-                model, &iter, GVA_GAME_STORE_COLUMN_ROMNAME, &romname,
-                GVA_GAME_STORE_COLUMN_FAVORITE, &favorite, -1);
+        /* The row that was clicked is not yet selected.  We need to
+         * select it first so that gva_tree_view_get_selected_game()
+         * returns the correct romname. */
+        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+        gtk_widget_grab_focus (GTK_WIDGET (view));
 
-        favorite = !favorite;  /* toggle */
+        romname = gva_tree_view_get_selected_game ();
+        g_assert (romname != NULL);
 
-        /* Don't assume direct access to the GtkListStore. */
-        model = gva_game_db_get_model ();
-        path = gva_game_db_lookup (romname);
-        valid = gtk_tree_model_get_iter (model, &iter, path);
-        gtk_tree_path_free (path);
-        g_assert (valid);
-
-        gtk_list_store_set (
-                GTK_LIST_STORE (model), &iter,
-                GVA_GAME_STORE_COLUMN_FAVORITE, favorite, -1);
-        if (favorite)
-                gva_favorites_insert (romname);
+        if (gva_favorites_contains (romname))
+                gtk_action_activate (GVA_ACTION_REMOVE_FAVORITE);
         else
-                gva_favorites_remove (romname);
-
-        g_free (romname);
+                gtk_action_activate (GVA_ACTION_INSERT_FAVORITE);
 }
 
 static gboolean
