@@ -1,3 +1,10 @@
+2007-05-25  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-common.h:
+	* src/gva-xmame.c:
+	* src/gva-xmame.h:
+	Minor fixes.
+
 2007-05-24  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-tree-view.c (tree_view_button_press_cb):

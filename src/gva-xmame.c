@@ -8,10 +8,6 @@
 #include <wordexp.h>
 #endif
 
-#define GVA_GCONF_PREFIX        "/apps/" PACKAGE
-
-static GHashTable *xmame_config = NULL;
-
 GQuark
 gva_error_quark (void)
 {

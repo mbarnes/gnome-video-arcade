@@ -17,7 +17,7 @@ GQuark          gva_error_quark                 (void);
 gchar *         gva_xmame_get_executable        (GError **error);
 gboolean        gva_xmame_scan_for_error        (const gchar *xmame_output,
                                                  GError **error);
-gboolean        gva_xmame_command               (const gchar *arguments,
+gint            gva_xmame_command               (const gchar *arguments,
                                                  gchar **standard_output,
                                                  gchar **standard_error,
                                                  GError **error);
