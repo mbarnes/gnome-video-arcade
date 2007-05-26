@@ -1,5 +1,14 @@
 2007-05-25  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.1.3.
+
+	* src/gva-ui.c:
+	Make accelerator keys work.
+	Add more tooltips to actions.
+	Show menu item tooltips in the statusbar.
+
+2007-05-25  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.ui:
 	Add menu items for adding or removing from favorites list.
 
