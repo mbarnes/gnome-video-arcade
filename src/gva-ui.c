@@ -2,6 +2,8 @@
 
 #include <glade/glade.h>
 
+#include "gva-game-db.h"
+#include "gva-favorites.h"
 #include "gva-game-store.h"
 #include "gva-play-back.h"
 #include "gva-tree-view.h"
@@ -12,6 +14,7 @@ static GladeXML *xml = NULL;
 static GtkUIManager *manager = NULL;
 static GtkActionGroup *action_group = NULL;
 static gboolean initialized = FALSE;
+static guint menu_tooltip_cid = 0;
 
 /* About Dialog Information */
 static const gchar *authors[] =
@@ -54,6 +57,34 @@ action_about_cb (GtkAction *action)
 static void
 action_contents_cb (GtkAction *action)
 {
+}
+
+static void
+action_insert_favorite_cb (GtkAction *action)
+{
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeIter iter;
+        const gchar *romname;
+        gboolean valid;
+
+        romname = gva_tree_view_get_selected_game ();
+        g_assert (romname != NULL);
+
+        model = gva_game_db_get_model ();
+        path = gva_game_db_lookup (romname);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_path_free (path);
+        g_assert (valid);
+
+        gtk_list_store_set (
+                GTK_LIST_STORE (model), &iter,
+                GVA_GAME_STORE_COLUMN_FAVORITE, TRUE, -1);
+
+        gva_favorites_insert (romname);
+
+        gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
+        gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, TRUE);
 }
 
 static void
@@ -127,6 +158,34 @@ action_record_cb (GtkAction *action)
 }
 
 static void
+action_remove_favorite_cb (GtkAction *action)
+{
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeIter iter;
+        const gchar *romname;
+        gboolean valid;
+
+        romname = gva_tree_view_get_selected_game ();
+        g_assert (romname != NULL);
+
+        model = gva_game_db_get_model ();
+        path = gva_game_db_lookup (romname);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_path_free (path);
+        g_assert (valid);
+
+        gtk_list_store_set (
+                GTK_LIST_STORE (model), &iter,
+                GVA_GAME_STORE_COLUMN_FAVORITE, FALSE, -1);
+
+        gva_favorites_remove (romname);
+
+        gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, TRUE);
+        gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
+}
+
+static void
 action_show_play_back_cb (GtkAction *action)
 {
         gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
@@ -158,18 +217,13 @@ action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
                 gva_tree_view_get_selected_view ());
 }
 
-static void
-action_unmark_favorite_cb (GtkAction *action)
-{
-}
-
 static GtkActionEntry entries[] =
 {
         { "about",
           GTK_STOCK_ABOUT,
           N_("_About"),
           NULL,
-          NULL,
+          N_("Show information about the application"),
           G_CALLBACK (action_about_cb) },
 
         { "contents",
@@ -178,6 +232,13 @@ static GtkActionEntry entries[] =
           NULL,
           NULL,
           G_CALLBACK (action_contents_cb) },
+
+        { "insert-favorite",
+          GTK_STOCK_ADD,
+          N_("Add to _Favorites"),
+          "<Control>plus",
+          N_("Add the selected game to my list of favorites"),
+          G_CALLBACK (action_insert_favorite_cb) },
 
         { "play-back",
           GTK_STOCK_MEDIA_PLAY,
@@ -197,7 +258,7 @@ static GtkActionEntry entries[] =
           GTK_STOCK_QUIT,
           N_("_Quit"),
           NULL,
-          NULL,
+          N_("Quit the application"),
           G_CALLBACK (action_quit_cb) },
 
         { "record",
@@ -206,6 +267,13 @@ static GtkActionEntry entries[] =
           "<Control>r",
           N_("Start the selected game and record keypresses to a file"),
           G_CALLBACK (action_record_cb) },
+
+        { "remove-favorite",
+          GTK_STOCK_REMOVE,
+          N_("Remove from _Favorites"),
+          "<Control>minus",
+          N_("Remove the selected game from my list of favorites"),
+          G_CALLBACK (action_remove_favorite_cb) },
 
         { "show-play-back",
           GTK_STOCK_MEDIA_PLAY,
@@ -268,10 +336,64 @@ static GtkRadioActionEntry view_radio_entries[] =
 };
 
 static void
+ui_menu_item_select_cb (GtkItem *item, GtkAction *action)
+{
+        GtkStatusbar *statusbar;
+        gchar *tooltip;
+
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+        g_object_get (G_OBJECT (action), "tooltip", &tooltip, NULL);
+
+        if (tooltip != NULL)
+        {
+                menu_tooltip_cid = gtk_statusbar_get_context_id (
+                        statusbar, G_STRFUNC);
+                gtk_statusbar_push (statusbar, menu_tooltip_cid, tooltip);
+                g_free (tooltip);
+        }
+}
+
+static void
+ui_menu_item_deselect_cb (GtkItem *item)
+{
+        GtkStatusbar *statusbar;
+
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+
+        if (menu_tooltip_cid != 0)
+        {
+                gtk_statusbar_pop (statusbar, menu_tooltip_cid);
+                menu_tooltip_cid = 0;
+        }
+}
+
+static void
+ui_manager_connect_proxy_cb (GtkUIManager *dont_shadow_global,
+                             GtkAction *action,
+                             GtkWidget *proxy)
+{
+        /* Make GtkMenuItems show their tooltips in the statusbar. */
+        if (GTK_IS_MENU_ITEM (proxy))
+        {
+                g_signal_connect (
+                        proxy, "select",
+                        G_CALLBACK (ui_menu_item_select_cb), action);
+                g_signal_connect (
+                        proxy, "deselect",
+                        G_CALLBACK (ui_menu_item_deselect_cb), NULL);
+        }
+}
+
+static void
 gva_ui_init (void)
 {
         GtkWidget *widget;
         gchar *filename;
+        GError *error = NULL;
+
+        /* Set this immediately so we don't cause infinite recursion
+         * when we use the GVA_WIDGET_MAIN_WINDOW macro below. */
+        initialized = TRUE;
 
         action_group = gtk_action_group_new ("main");
         gtk_action_group_add_actions (
@@ -290,15 +412,25 @@ gva_ui_init (void)
         if (filename != NULL)
         {
                 manager = gtk_ui_manager_new ();
-                gtk_ui_manager_add_ui_from_file (manager, filename, NULL);
                 gtk_ui_manager_insert_action_group (manager, action_group, 0);
+
+                gtk_window_add_accel_group (
+                        GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
+                        gtk_ui_manager_get_accel_group (manager));
+
+                g_signal_connect (
+                        manager, "connect-proxy",
+                        G_CALLBACK (ui_manager_connect_proxy_cb), NULL);
+
+                gtk_ui_manager_add_ui_from_file (manager, filename, &error);
         }
         g_free (filename);
 
+        if (error != NULL)
+                g_error ("%s", error->message);
+
         if (xml == NULL || manager == NULL)
                 g_error ("%s", _("Failed to initialize user interface"));
-
-        initialized = TRUE;
 }
 
 GtkAction *
@@ -317,7 +449,7 @@ gva_ui_get_action (const gchar *action_name)
 }
 
 GtkWidget *
-gva_ui_get_glade_widget (const gchar *widget_name)
+gva_ui_get_widget (const gchar *widget_name)
 {
         GtkWidget *widget;
 
