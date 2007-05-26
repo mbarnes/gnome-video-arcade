@@ -106,7 +106,7 @@
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="can_default">True</property>
-                    <property name="tooltip" translatable="yes">See more information about the selected game</property>
+                    <property name="tooltip" translatable="yes">Show information about the selected game</property>
                     <property name="label">gtk-properties</property>
                     <property name="use_stock">True</property>
                   </widget>
@@ -119,7 +119,7 @@
                     <property name="has_focus">True</property>
                     <property name="can_default">True</property>
                     <property name="has_default">True</property>
-                    <property name="tooltip" translatable="yes">Start playing the selected game</property>
+                    <property name="tooltip" translatable="yes">Start the selected game</property>
                     <child>
                       <widget class="GtkAlignment" id="main-start-game-button-alignment">
                         <property name="visible">True</property>

@@ -5,6 +5,7 @@
 #include "gva-game-db.h"
 #include "gva-favorites.h"
 #include "gva-game-store.h"
+#include "gva-main.h"
 #include "gva-play-back.h"
 #include "gva-tree-view.h"
 #include "gva-util.h"
@@ -14,7 +15,6 @@ static GladeXML *xml = NULL;
 static GtkUIManager *manager = NULL;
 static GtkActionGroup *action_group = NULL;
 static gboolean initialized = FALSE;
-static guint menu_tooltip_cid = 0;
 
 /* About Dialog Information */
 static const gchar *authors[] =
@@ -251,7 +251,7 @@ static GtkActionEntry entries[] =
           GTK_STOCK_PROPERTIES,
           N_("_Properties"),
           NULL,
-          N_("Show properties about the selected game"),
+          N_("Show information about the selected game"),
           G_CALLBACK (action_properties_cb) },
 
         { "quit",
@@ -336,55 +336,6 @@ static GtkRadioActionEntry view_radio_entries[] =
 };
 
 static void
-ui_menu_item_select_cb (GtkItem *item, GtkAction *action)
-{
-        GtkStatusbar *statusbar;
-        gchar *tooltip;
-
-        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
-        g_object_get (G_OBJECT (action), "tooltip", &tooltip, NULL);
-
-        if (tooltip != NULL)
-        {
-                menu_tooltip_cid = gtk_statusbar_get_context_id (
-                        statusbar, G_STRFUNC);
-                gtk_statusbar_push (statusbar, menu_tooltip_cid, tooltip);
-                g_free (tooltip);
-        }
-}
-
-static void
-ui_menu_item_deselect_cb (GtkItem *item)
-{
-        GtkStatusbar *statusbar;
-
-        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
-
-        if (menu_tooltip_cid != 0)
-        {
-                gtk_statusbar_pop (statusbar, menu_tooltip_cid);
-                menu_tooltip_cid = 0;
-        }
-}
-
-static void
-ui_manager_connect_proxy_cb (GtkUIManager *dont_shadow_global,
-                             GtkAction *action,
-                             GtkWidget *proxy)
-{
-        /* Make GtkMenuItems show their tooltips in the statusbar. */
-        if (GTK_IS_MENU_ITEM (proxy))
-        {
-                g_signal_connect (
-                        proxy, "select",
-                        G_CALLBACK (ui_menu_item_select_cb), action);
-                g_signal_connect (
-                        proxy, "deselect",
-                        G_CALLBACK (ui_menu_item_deselect_cb), NULL);
-        }
-}
-
-static void
 gva_ui_init (void)
 {
         GtkWidget *widget;
@@ -420,7 +371,7 @@ gva_ui_init (void)
 
                 g_signal_connect (
                         manager, "connect-proxy",
-                        G_CALLBACK (ui_manager_connect_proxy_cb), NULL);
+                        G_CALLBACK (gva_main_connect_proxy_cb), NULL);
 
                 gtk_ui_manager_add_ui_from_file (manager, filename, &error);
         }

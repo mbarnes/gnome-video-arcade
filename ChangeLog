@@ -1,3 +1,14 @@
+2007-05-26  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-main.c:
+	* src/gva-main.h:
+	* src/gva-ui.c:
+	Move menu item tooltip handling to gva-main.c.
+
+	* data/gnome-video-arcade.glade
+	* src/gva-ui.c:
+	Make menu and button tooltips consistent.
+
 2007-05-25  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.1.3.
