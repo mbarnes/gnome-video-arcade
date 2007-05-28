@@ -1,3 +1,18 @@
+2007-05-28  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/Makefile.am:
+	Add gva-process.[ch].
+
+	* src/gva-process.c:
+	* src/gva-process.h:
+	New source files provide a simple process abstraction.
+
+	* src/gva-xmame.c:
+	* src/gva-xmame.h:
+	Reimplement the API using GvaProcess.
+	Add gva_xmame_async_command() for asynchronous commands.
+	Make functions that run/record/playback games asynchronous.
+
 2007-05-26  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-main.c:

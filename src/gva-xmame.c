@@ -3,10 +3,70 @@
 #include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
+#include <wait.h>
 
 #ifdef HAVE_WORDEXP_H
 #include <wordexp.h>
 #endif
+
+static void
+xmame_post_game_analysis (GvaProcess *process)
+{
+        gint exit_status;
+        GError *error = NULL;
+
+        exit_status = gva_xmame_wait_for_exit (process, &error);
+
+        if (error == NULL && exit_status != 0)
+                g_set_error (
+                        &error, GVA_ERROR, GVA_ERROR_XMAME,
+                        _("xmame exited with status (%d)"), exit_status);
+
+        if (error != NULL)
+        {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+
+        gva_process_free (process);
+}
+
+static gboolean
+xmame_scan_for_error (const gchar *string, GError **error)
+{
+        gchar **lines;
+        guint n_lines, ii;
+
+        if (string == NULL)
+                return FALSE;
+
+        lines = g_strsplit_set (string, "\n", -1);
+        n_lines = g_strv_length (lines);
+
+        for (ii = 0; ii < n_lines; ii++)
+        {
+                if (strlen (g_strstrip (lines[ii])) == 0)
+                        continue;
+
+                if (g_ascii_strncasecmp (lines[ii], "error: ", 7) == 0)
+                {
+                        gchar *error_message;
+
+                        error_message = lines[ii] + 7;
+                        *error_message = g_ascii_toupper (*error_message);
+
+                        g_set_error (
+                                error, GVA_ERROR, GVA_ERROR_XMAME,
+                                "%s", error_message);
+
+                        break;
+                }
+        }
+
+        g_strfreev (lines);
+
+        return (ii < n_lines);
+}
 
 GQuark
 gva_error_quark (void)
@@ -33,114 +93,129 @@ gva_xmame_get_executable (GError **error)
         return executable;
 }
 
-gboolean
-gva_xmame_scan_for_error (const gchar *xmame_output, GError **error)
+GvaProcess *
+gva_xmame_async_command (const gchar *arguments,
+                         GvaProcessDataNotify on_stdout,
+                         GvaProcessDataNotify on_stderr,
+                         GvaProcessExitNotify on_exit,
+                         gpointer user_data,
+                         GError **error)
 {
-        gchar **lines;
-        guint n_lines, ii;
-
-        if (xmame_output == NULL)
-                return FALSE;
-
-        lines = g_strsplit_set (xmame_output, "\n", -1);
-        n_lines = g_strv_length (lines);
-
-        for (ii = 0; ii < n_lines; ii++)
-        {
-                if (strlen (g_strstrip (lines[ii])) == 0)
-                        continue;
-
-                if (g_ascii_strncasecmp (lines[ii], "error: ", 7))
-                {
-                        gchar *error_message;
-
-                        error_message = lines[ii] + 7;
-                        *error_message = g_ascii_toupper (*error_message);
-
-                        g_set_error (
-                                error, GVA_ERROR, GVA_ERROR_XMAME,
-                                "%s", error_message);
-
-                        break;
-                }
-        }
-
-        g_strfreev (lines);
-
-        return (ii < n_lines);
-}
-
-gint
-gva_xmame_command (const gchar *arguments, gchar **standard_output,
-                   gchar **standard_error, GError **error)
-{
-        gchar *local_standard_output = NULL;
-        gchar *local_standard_error = NULL;
-        gchar *executable;
+        GvaProcess *process;
         gchar *command_line;
-        gint exit_status = -1;
+        gchar *executable;
+        gchar **argv;
+        gint standard_input;
+        gint standard_output;
+        gint standard_error;
+        GPid child_pid;
         gboolean success;
 
         g_return_val_if_fail (arguments != NULL, FALSE);
 
         if ((executable = gva_xmame_get_executable (error)) == NULL)
-                return -1;
+                return NULL;
 
         command_line = g_strdup_printf ("%s %s", executable, arguments);
-
-        success = g_spawn_command_line_sync (
-                command_line, &local_standard_output,
-                &local_standard_error, &exit_status, error);
-
+        success = g_shell_parse_argv (command_line, NULL, &argv, error);
         g_free (command_line);
         g_free (executable);
 
-        if (!success || exit_status == 0 || error == NULL)
-                goto exit;
+        if (!success)
+                return NULL;
 
-        if (gva_xmame_scan_for_error (local_standard_error, error))
-                goto exit;
+        success = gdk_spawn_on_screen_with_pipes (
+                gdk_screen_get_default (), NULL, argv, NULL,
+                G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &child_pid,
+                &standard_input, &standard_output, &standard_error,
+                error);
 
-        if (gva_xmame_scan_for_error (local_standard_output, error))
-                goto exit;
+        g_strfreev (argv);
 
-        g_set_error (
-                error, GVA_ERROR, GVA_ERROR_XMAME,
-                "xmame exited with status (%d)", exit_status);
+        if (!success)
+                return NULL;
 
-exit:
-        if (standard_output != NULL)
-                *standard_output = local_standard_output;
-        else
-                g_free (local_standard_output);
+        return gva_process_new (
+                child_pid, standard_input, standard_output, standard_error,
+                on_stdout, on_stderr, on_exit, user_data);
+}
 
-        if (standard_error != NULL)
-                *standard_error = local_standard_error;
-        else
-                g_free (local_standard_error);
+gint
+gva_xmame_command (const gchar *arguments,
+                   gchar **standard_output,
+                   gchar **standard_error,
+                   GError **error)
+{
+        GvaProcess *process;
+        gint exit_status;
+
+        process = gva_xmame_async_command (
+                arguments, NULL, NULL, NULL, NULL, error);
+        if (process == NULL)
+                return -1;
+
+        exit_status = gva_xmame_wait_for_exit (process, error);
+
+        if (exit_status >= 0 && standard_output != NULL)
+                *standard_output = gva_process_read_stdout (process);
+
+        if (exit_status >= 0 && standard_error != NULL)
+                *standard_error = gva_process_read_stderr (process);
+
+        gva_process_free (process);
 
         return exit_status;
+}
+
+gint
+gva_xmame_wait_for_exit (GvaProcess *process, GError **error)
+{
+        gint exit_status;
+
+        g_return_val_if_fail (process != NULL, FALSE);
+
+        while (!gva_process_has_exited (process, &exit_status))
+                g_main_context_iteration (g_main_context_default (), TRUE);
+
+        if (xmame_scan_for_error (gva_process_peek_stderr (process), error))
+                return -1;
+
+        if (xmame_scan_for_error (gva_process_peek_stdout (process), error))
+                return -1;
+
+        if (WIFSIGNALED (exit_status))
+        {
+                g_set_error (
+                        error, GVA_ERROR, GVA_ERROR_XMAME,
+                        "Child process terminated: %s",
+                        g_strsignal (WTERMSIG (exit_status)));
+                return -1;
+        }
+
+        g_assert (WIFEXITED (exit_status));
+        return WEXITSTATUS (exit_status);
 }
 
 gchar *
 gva_xmame_get_version (GError **error)
 {
         gchar *version = NULL;
-        gchar *strout = NULL;
+        gchar *output;
         gchar **lines;
         guint n_lines, ii;
 
         /* Execute the command "${xmame} -version". */
-        if (gva_xmame_command ("-version", &strout, NULL, error) != 0)
-                goto exit;
+        if (gva_xmame_command ("-version", &output, NULL, error) != 0)
+                return NULL;
 
         /* Output is as follows:
          *
          * xmame (backend) version n.nnn (Mmm dd yyyy)
          */
 
-        lines = g_strsplit_set (strout, "\n", -1);
+        lines = g_strsplit_set (output, "\n", -1);
         n_lines = g_strv_length (lines);
+        g_free (output);
 
         for (ii = 0; ii < n_lines && version == NULL; ii++)
         {
@@ -153,8 +228,6 @@ gva_xmame_get_version (GError **error)
 
         g_strfreev (lines);
 
-exit:
-        g_free (strout);
         return version;
 }
 
@@ -162,7 +235,7 @@ gchar *
 gva_xmame_get_config_value (const gchar *config_key, GError **error)
 {
         gchar *config_value = NULL;
-        gchar *strout = NULL;
+        gchar *output;
         gchar **lines;
         guint n_lines, ii;
 #ifdef HAVE_WORDEXP_H
@@ -172,7 +245,7 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         g_return_val_if_fail (config_key != NULL, NULL);
 
         /* Execute the command "${xmame} -showconfig". */
-        if (gva_xmame_command ("-showconfig", &strout, NULL, error) != 0)
+        if (gva_xmame_command ("-showconfig", &output, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
@@ -183,8 +256,9 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
          * ...
          */
 
-        lines = g_strsplit_set (strout, "\n", -1);
+        lines = g_strsplit_set (output, "\n", -1);
         n_lines = g_strv_length (lines);
+        g_free (output);
 
         for (ii = 0; ii < n_lines; ii++)
         {
@@ -197,12 +271,11 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         }
 
         g_strfreev (lines);
-        g_free (strout);
 
+#ifdef HAVE_WORDEXP_H
         if (config_value == NULL)
                 return NULL;
 
-#ifdef HAVE_WORDEXP_H
         /* xmame reports shell variables like $HOME in some of its
          * configuration values, so we need to expand them ourselves. */
         if (wordexp (config_value, &words, 0) == 0)
@@ -321,13 +394,13 @@ GHashTable *
 gva_xmame_list_full (GError **error)
 {
         GHashTable *hash_table = NULL;
-        gchar *strout = NULL;
+        gchar *output;
         gchar **lines;
         guint n_lines, ii;
 
         /* Execute the command "${xmame} -listfull". */
-        if (gva_xmame_command ("-listfull", &strout, NULL, error) != 0)
-                goto exit;
+        if (gva_xmame_command ("-listfull", &output, NULL, error) != 0)
+                return NULL;
 
         /* Output is as follows:
          *
@@ -346,9 +419,10 @@ gva_xmame_list_full (GError **error)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) g_free);
 
-        lines = g_strsplit_set (strout, "\n", -1);
+        lines = g_strsplit_set (output, "\n", -1);
         n_lines = g_strv_length (lines);
         g_assert (n_lines > 0);
+        g_free (output);
 
         for (ii = 0; ii < n_lines; ii++)
         {
@@ -365,8 +439,6 @@ gva_xmame_list_full (GError **error)
 
         g_strfreev (lines);
 
-exit:
-        g_free (strout);
         return hash_table;
 }
 
@@ -374,14 +446,14 @@ GHashTable *
 gva_xmame_verify_sample_sets (GError **error)
 {
         GHashTable *hash_table = NULL;
-        gchar *strout = NULL;
+        gchar *output;
         gchar **lines;
         guint n_lines, ii;
 
         /* Execute the command "${xmame} -verifysamplesets". */
         /* XXX What are the exit codes for this command? */
-        if (gva_xmame_command ("-verifysamplesets", &strout, NULL, error) < 0)
-                goto exit;
+        if (gva_xmame_command ("-verifysamplesets", &output, NULL, error) < 0)
+                return NULL;
 
         /* Output is as follows:
          *
@@ -403,9 +475,10 @@ gva_xmame_verify_sample_sets (GError **error)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) g_free);
 
-        lines = g_strsplit_set (strout, "\n", -1);
+        lines = g_strsplit_set (output, "\n", -1);
         n_lines = g_strv_length (lines);
         g_assert (n_lines > 4);
+        g_free (output);
 
         for (ii = 2; ii < n_lines - 4; ii++)
         {
@@ -425,26 +498,30 @@ gva_xmame_verify_sample_sets (GError **error)
 
         g_strfreev (lines);
 
-exit:
-        g_free (strout);
         return hash_table;
 }
 
 gboolean
 gva_xmame_run_game (const gchar *romname, GError **error)
 {
+        GvaProcess *process;
+
         g_return_val_if_fail (romname != NULL, FALSE);
 
         /* Execute the command "${xmame} ${romname}". */
-        return (gva_xmame_command (romname, NULL, NULL, error) == 0);
+        process = gva_xmame_async_command (
+                romname, NULL, NULL, (GvaProcessExitNotify)
+                xmame_post_game_analysis, NULL, error);
+
+        return (process != NULL);
 }
 
 gboolean
 gva_xmame_record_game (const gchar *romname, const gchar *inpname,
                        GError **error)
 {
+        GvaProcess *process;
         gchar *arguments;
-        gboolean success;
 
         g_return_val_if_fail (romname != NULL, FALSE);
 
@@ -453,108 +530,33 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
 
         /* Execute the command "${xmame} -record ${inpname} ${romname}". */
         arguments = g_strdup_printf ("-record %s %s", inpname, romname);
-        success = (gva_xmame_command (arguments, NULL, NULL, error) == 0);
+        process = gva_xmame_async_command (
+                arguments, NULL, NULL, (GvaProcessExitNotify)
+                xmame_post_game_analysis, NULL, error);
         g_free (arguments);
 
-        return success;
-}
-
-static void
-xmame_exited (GPid pid, gint exit_status, gint *exit_status_out)
-{
-        *exit_status_out = exit_status;
-        g_spawn_close_pid (pid);
+        return (process != NULL);
 }
 
 gboolean
 gva_xmame_playback_game (const gchar *inpname, GError **error)
 {
-        GIOChannel *channel;
-        gchar *executable;
-        gchar *argv[4];
-        gchar *buffer = NULL;
-        gint standard_input = -1;
-        gint standard_output = -1;
-        gint standard_error = -1;
-        gint exit_status = ~0;
-        gboolean success;
-        GIOStatus status;
-        GPid pid;
-
-        /* xmame asks the user to press return before it will start playing
-         * back the recorded game, so we have to go through extra trouble
-         * to supply the expected keystroke. */
+        GvaProcess *process;
+        gchar *arguments;
 
         g_return_val_if_fail (inpname != NULL, FALSE);
 
-        if ((executable = gva_xmame_get_executable (error)) == NULL)
+        /* Execute the command "${xmame} -playback ${inpname}". */
+        arguments = g_strdup_printf ("-playback %s", inpname);
+        process = gva_xmame_async_command (
+                arguments, NULL, NULL, (GvaProcessExitNotify)
+                xmame_post_game_analysis, NULL, error);
+        g_free (arguments);
+
+        if (process == NULL)
                 return FALSE;
 
-        argv[0] = executable;
-        argv[1] = "-playback";
-        argv[2] = (gchar *) inpname;
-        argv[3] = NULL;
-
-        success = g_spawn_async_with_pipes (
-                NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &pid,
-                &standard_input, &standard_output, &standard_error, error);
-
-        g_free (executable);
-
-        if (!success)
-                goto exit;
-
-        /* All for this!
-         * FIXME Being lazy about error checking. */
-        write (standard_input, "\n", 1);
-
-        g_child_watch_add (pid, (GChildWatchFunc) xmame_exited, &exit_status);
-        while (exit_status == ~0)
-                g_main_context_iteration (NULL, TRUE);
-        if (exit_status == 0)
-                goto exit;
-
-        /* XXX Portability issue? */
-        channel = g_io_channel_unix_new (standard_error);
-        status = G_IO_STATUS_AGAIN;
-        while (status == G_IO_STATUS_AGAIN)
-                status = g_io_channel_read_to_end (
-                        channel, &buffer, NULL, error);
-        g_io_channel_unref (channel);
-        if (status == G_IO_STATUS_ERROR)
-                goto exit;
-        if (gva_xmame_scan_for_error (buffer, error))
-                goto exit;
-        g_free (buffer);
-        buffer = NULL;
-
-        /* XXX Portability issue? */
-        channel = g_io_channel_unix_new (standard_output);
-        status = G_IO_STATUS_AGAIN;
-        while (status == G_IO_STATUS_AGAIN)
-                status = g_io_channel_read_to_end (
-                        channel, &buffer, NULL, error);
-        g_io_channel_unref (channel);
-        if (status == G_IO_STATUS_ERROR)
-                goto exit;
-        if (gva_xmame_scan_for_error (buffer, error))
-                goto exit;
-        g_free (buffer);
-        buffer = NULL;
-
-        g_set_error (
-                error, GVA_ERROR, GVA_ERROR_XMAME,
-                "xmame exited with status (%d)", exit_status);
-
-exit:
-        if (standard_input >= 0)
-                close (standard_input);
-        if (standard_output >= 0)
-                close (standard_output);
-        if (standard_error >= 0)
-                close (standard_error);
-
-        g_free (buffer);
-
-        return (exit_status == 0);
+        /* xmame asks the user to press return before it will start playing
+         * back the game, so we have to supply the expected keystroke. */
+        return gva_process_write_stdin (process, "\n", 1, error);
 }
