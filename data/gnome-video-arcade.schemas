@@ -26,5 +26,17 @@
       </locale>
     </schema>
 
+    <schema>
+      <key>/schemas/apps/gnome-video-arcade/selected-view</key>
+      <applyto>/schemas/apps/gnome-video-arcade/selected-view</applyto>
+      <owner>gnome-video-arcade</owner>
+      <type>string</type>
+      <default></default>
+      <locale name="C">
+        <short>Selected view</short>
+        <long>The most recently selected view.</long>
+      </locale>
+    </schema>
+
   </schemalist>
 </gconfschemafile>

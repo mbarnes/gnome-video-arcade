@@ -18,9 +18,13 @@ ui_DATA = \
 	gnome-video-arcade.glade	\
 	gnome-video-arcade.ui
 
+if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) \
 	$(GCONFTOOL) --makefile-install-rule $(srcdir)/$(schema_DATA)
+else
+install-data-local:
+endif
 
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache

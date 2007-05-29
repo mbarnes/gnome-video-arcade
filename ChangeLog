@@ -1,5 +1,13 @@
 2007-05-28  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/Makefile.am:
+	Fix up schema installation rules.
+
+	* data/gnome-video-arcade.schema:
+	Add missing schema for "selected-view" key.
+
+2007-05-28  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-process.h:
 	* src/gva-process.c:
 	Combine callback typedefs into one (GvaProcessNotify).
