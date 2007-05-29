@@ -1,3 +1,34 @@
+2007-05-29  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Initial design of a preferences window.
+
+	* data/gnome-video-arcade.ui:
+	Add Edit menu with a Preferences item.
+
+	* src/Makefile.am:
+	Add gva-preferences.[ch].
+
+	* src/gva-common.h:
+	Add key names for preferences.
+
+	* src/gva-preferences.c:
+	* src/gva-preferences.h:
+	New source files implement the preferences window.
+	Preferences don't work yet.
+
+	* src/main.c (main):
+	Call gva_preferences_init().
+
+	* src/gva-ui.h:
+	Add macros for some preferences widgets.
+
+	* src/gva-ui.c:
+	Add "edit-menu" and "preferences" actions.
+
+	* src/gva-xmame.c (xmame_post_game_analysis):
+	Don't refer to self by name in error messages.
+
 2007-05-28  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/Makefile.am:

@@ -25,6 +25,8 @@ gnome_video_arcade_SOURCES = \
 	gva-main.h			\
 	gva-play-back.c			\
 	gva-play-back.h			\
+	gva-preferences.c		\
+	gva-preferences.h		\
 	gva-process.c			\
 	gva-process.h			\
 	gva-time.c			\

@@ -126,6 +126,12 @@ action_play_back_cb (GtkAction *action)
 }
 
 static void
+action_preferences_cb (GtkAction *action)
+{
+        gtk_widget_show (GVA_WIDGET_PREFERENCES_WINDOW);
+}
+
+static void
 action_properties_cb (GtkAction *action)
 {
 }
@@ -247,6 +253,13 @@ static GtkActionEntry entries[] =
           N_("Play back the selected game recording"),
           G_CALLBACK (action_play_back_cb) },
 
+        { "preferences",
+          GTK_STOCK_PREFERENCES,
+          N_("_Preferences"),
+          NULL,
+          N_("Configure the application"),
+          G_CALLBACK (action_preferences_cb) },
+
         { "properties",
           GTK_STOCK_PROPERTIES,
           N_("_Properties"),
@@ -288,6 +301,13 @@ static GtkActionEntry entries[] =
           "<Control>s",
           N_("Start the selected game"),
           G_CALLBACK (action_start_cb) },
+
+        { "edit-menu",
+          NULL,
+          N_("_Edit"),
+          NULL,
+          NULL,
+          NULL },
 
         { "game-menu",
           NULL,

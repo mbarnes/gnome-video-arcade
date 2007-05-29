@@ -10,6 +10,9 @@
       <separator/>
       <menuitem action="quit"/>
     </menu>
+    <menu action="edit-menu">
+      <menuitem action="preferences"/>
+    </menu>
     <menu action="view-menu">
       <menuitem action="view-available"/>
       <menuitem action="view-favorites"/>

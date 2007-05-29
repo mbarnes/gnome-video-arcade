@@ -7,6 +7,7 @@
 #include "gva-game-db.h"
 #include "gva-main.h"
 #include "gva-play-back.h"
+#include "gva-preferences.h"
 #include "gva-ui.h"
 #include "gva-xmame.h"
 
@@ -56,6 +57,7 @@ main (gint argc, gchar **argv)
 
         gva_main_init ();
         gva_play_back_init ();
+        gva_preferences_init ();
 
         show_xmame_version ();
 

@@ -20,7 +20,8 @@ xmame_post_game_analysis (GvaProcess *process)
         if (error == NULL && exit_status != 0)
                 g_set_error (
                         &error, GVA_ERROR, GVA_ERROR_XMAME,
-                        _("xmame exited with status (%d)"), exit_status);
+                        _("Child process exited with status (%d)"),
+                        exit_status);
 
         if (error != NULL)
         {

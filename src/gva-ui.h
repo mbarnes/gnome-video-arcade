@@ -38,6 +38,10 @@
 #define GVA_WIDGET_PLAY_BACK_TREE_VIEW       GW ("play-back-tree-view")
 #define GVA_WIDGET_PLAY_BACK_WINDOW          GW ("play-back-window")
 
+/* Preferences Window */
+#define GVA_WIDGET_PREFERENCES_CLOSE_BUTTON  GW ("preferences-close-button")
+#define GVA_WIDGET_PREFERENCES_WINDOW        GW ("preferences-window")
+
 G_BEGIN_DECLS
 
 GtkAction *     gva_ui_get_action               (const gchar *action_name);
