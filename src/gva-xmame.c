@@ -95,9 +95,9 @@ gva_xmame_get_executable (GError **error)
 
 GvaProcess *
 gva_xmame_async_command (const gchar *arguments,
-                         GvaProcessDataNotify on_stdout,
-                         GvaProcessDataNotify on_stderr,
-                         GvaProcessExitNotify on_exit,
+                         GvaProcessNotify on_stdout,
+                         GvaProcessNotify on_stderr,
+                         GvaProcessNotify on_exit,
                          gpointer user_data,
                          GError **error)
 {
@@ -137,7 +137,7 @@ gva_xmame_async_command (const gchar *arguments,
 
         return gva_process_new (
                 child_pid, standard_input, standard_output, standard_error,
-                on_stdout, on_stderr, on_exit, user_data);
+                on_stdout, on_stderr, on_exit, user_data, error);
 }
 
 gint
@@ -510,7 +510,7 @@ gva_xmame_run_game (const gchar *romname, GError **error)
 
         /* Execute the command "${xmame} ${romname}". */
         process = gva_xmame_async_command (
-                romname, NULL, NULL, (GvaProcessExitNotify)
+                romname, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
 
         return (process != NULL);
@@ -531,7 +531,7 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
         /* Execute the command "${xmame} -record ${inpname} ${romname}". */
         arguments = g_strdup_printf ("-record %s %s", inpname, romname);
         process = gva_xmame_async_command (
-                arguments, NULL, NULL, (GvaProcessExitNotify)
+                arguments, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
         g_free (arguments);
 
@@ -549,7 +549,7 @@ gva_xmame_playback_game (const gchar *inpname, GError **error)
         /* Execute the command "${xmame} -playback ${inpname}". */
         arguments = g_strdup_printf ("-playback %s", inpname);
         process = gva_xmame_async_command (
-                arguments, NULL, NULL, (GvaProcessExitNotify)
+                arguments, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
         g_free (arguments);
 

@@ -13,9 +13,9 @@ struct _GvaProcess
         guint stdout_source_id;
         guint stderr_source_id;
 
-        GvaProcessDataNotify on_stdout;
-        GvaProcessDataNotify on_stderr;
-        GvaProcessExitNotify on_exit;
+        GvaProcessNotify on_stdout;
+        GvaProcessNotify on_stderr;
+        GvaProcessNotify on_exit;
         gpointer user_data;
 
         gboolean exited;
@@ -96,24 +96,27 @@ process_data_ready (GvaProcess *process,
                     GIOCondition condition,
                     GString *string,
                     guint *source_id,
-                    GvaProcessDataNotify notify,
+                    GvaProcessNotify notify,
                     gpointer user_data)
 {
+        static gchar read_buffer[4096];
+
         if (condition & G_IO_IN)
         {
                 GIOStatus status = G_IO_STATUS_AGAIN;
-                gchar *line;
-                gsize length;
+                gsize bytes_read;
                 GError *error = NULL;
 
                 while (status == G_IO_STATUS_AGAIN)
-                        status = g_io_channel_read_line (
-                                source, &line, &length, NULL, &error);
+                        status = g_io_channel_read_chars (
+                                source, read_buffer,
+                                sizeof (read_buffer),
+                                &bytes_read, &error);
                 switch (status)
                 {
                         case G_IO_STATUS_NORMAL:
-                                g_string_append_len (string, line, length);
-                                g_free (line);
+                                g_string_append_len (
+                                        string, read_buffer, bytes_read);
                                 if (notify != NULL)
                                         notify (process, user_data);
                                 break;
@@ -168,12 +171,14 @@ gva_process_new (GPid pid,
                  gint standard_input,
                  gint standard_output,
                  gint standard_error,
-                 GvaProcessDataNotify on_stdout,
-                 GvaProcessDataNotify on_stderr,
-                 GvaProcessExitNotify on_exit,
-                 gpointer user_data)
+                 GvaProcessNotify on_stdout,
+                 GvaProcessNotify on_stderr,
+                 GvaProcessNotify on_exit,
+                 gpointer user_data,
+                 GError **error)
 {
         GvaProcess *process;
+        GIOStatus status;
 
         process = g_slice_new (GvaProcess);
         process->stdin_channel = g_io_channel_unix_new (standard_input);
@@ -192,6 +197,16 @@ gva_process_new (GPid pid,
         g_io_channel_set_close_on_unref (process->stdout_channel, TRUE);
         g_io_channel_set_close_on_unref (process->stderr_channel, TRUE);
 
+        status = g_io_channel_set_flags (
+                process->stdout_channel, G_IO_FLAG_NONBLOCK, error);
+        if (status == G_IO_STATUS_ERROR)
+                goto fail;
+
+        status = g_io_channel_set_flags (
+                process->stderr_channel, G_IO_FLAG_NONBLOCK, error);
+        if (status == G_IO_STATUS_ERROR)
+                goto fail;
+
         g_child_watch_add (pid, (GChildWatchFunc) process_exited, process);
 
         process->stdout_source_id = g_io_add_watch (
@@ -202,6 +217,10 @@ gva_process_new (GPid pid,
                 (GIOFunc) process_stderr_ready, process);
 
         return process;
+
+fail:
+        gva_process_free (process);
+        return NULL;
 }
 
 gboolean

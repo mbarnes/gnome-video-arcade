@@ -1,5 +1,22 @@
 2007-05-28  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-process.h:
+	* src/gva-process.c:
+	Combine callback typedefs into one (GvaProcessNotify).
+
+	* src/gva-process.c (gva_process_new):
+	Make stdout and stderr buffers non-blocking.
+	Add a GError parameter.
+
+	* src/gva-process.c (process_data_ready):
+	Read data into a 4K buffer instead of one line at a time.
+
+	* src/gva-xmame.c:
+	* src/gva-xmame.h:
+	Adapt.
+
+2007-05-28  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/Makefile.am:
 	Add gva-process.[ch].
 
