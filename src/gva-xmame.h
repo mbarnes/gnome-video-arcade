@@ -10,6 +10,7 @@ G_BEGIN_DECLS
 
 typedef enum
 {
+        GVA_ERROR_SYSTEM,
         GVA_ERROR_XMAME
 
 } GvaError;
@@ -41,7 +42,10 @@ gboolean        gva_xmame_run_game              (const gchar *romname,
 gboolean        gva_xmame_record_game           (const gchar *romname,
                                                  const gchar *inpname,
                                                  GError **error);
-gboolean        gva_xmame_playback_game         (const gchar *inpname,
+gboolean        gva_xmame_playback_game         (const gchar *romname,
+                                                 const gchar *inpname,
+                                                 GError **error);
+gboolean        gva_xmame_clear_state           (const gchar *romname,
                                                  GError **error);
 
 G_END_DECLS

@@ -7,7 +7,9 @@
 
 /* Actions */
 #define GVA_ACTION_ABOUT                (gva_ui_get_action ("about"))
+#define GVA_ACTION_AUTO_SAVE            (gva_ui_get_action ("auto-save"))
 #define GVA_ACTION_CONTENTS             (gva_ui_get_action ("contents"))
+#define GVA_ACTION_FULL_SCREEN          (gva_ui_get_action ("full-screen"))
 #define GVA_ACTION_INSERT_FAVORITE      (gva_ui_get_action ("insert-favorite"))
 #define GVA_ACTION_PLAY_BACK            (gva_ui_get_action ("play-back"))
 #define GVA_ACTION_PROPERTIES           (gva_ui_get_action ("properties"))
@@ -39,7 +41,9 @@
 #define GVA_WIDGET_PLAY_BACK_WINDOW          GW ("play-back-window")
 
 /* Preferences Window */
+#define GVA_WIDGET_PREFERENCES_AUTO_SAVE     GW ("preferences-auto-save")
 #define GVA_WIDGET_PREFERENCES_CLOSE_BUTTON  GW ("preferences-close-button")
+#define GVA_WIDGET_PREFERENCES_FULL_SCREEN   GW ("preferences-full-screen")
 #define GVA_WIDGET_PREFERENCES_WINDOW        GW ("preferences-window")
 
 G_BEGIN_DECLS

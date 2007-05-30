@@ -1,5 +1,6 @@
 #include "gva-xmame.h"
 
+#include <errno.h>
 #include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
@@ -8,6 +9,8 @@
 #ifdef HAVE_WORDEXP_H
 #include <wordexp.h>
 #endif
+
+#include "gva-preferences.h"
 
 static void
 xmame_post_game_analysis (GvaProcess *process)
@@ -26,7 +29,7 @@ xmame_post_game_analysis (GvaProcess *process)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         gva_process_free (process);
@@ -506,13 +509,22 @@ gboolean
 gva_xmame_run_game (const gchar *romname, GError **error)
 {
         GvaProcess *process;
+        gchar *arguments;
 
         g_return_val_if_fail (romname != NULL, FALSE);
 
         /* Execute the command "${xmame} ${romname}". */
+        arguments = g_strdup_printf (
+                "%s %s %s",
+                gva_preferences_get_auto_save () ?
+                "-autosave" : "-noautosave",
+                gva_preferences_get_full_screen () ?
+                "-fullscreen" : "-nofullscreen",
+                romname);
         process = gva_xmame_async_command (
-                romname, NULL, NULL, (GvaProcessNotify)
+                arguments, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
+        g_free (arguments);
 
         return (process != NULL);
 }
@@ -530,7 +542,11 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
                 inpname = romname;
 
         /* Execute the command "${xmame} -record ${inpname} ${romname}". */
-        arguments = g_strdup_printf ("-record %s %s", inpname, romname);
+        arguments = g_strdup_printf (
+                "%s -record %s %s",
+                gva_preferences_get_full_screen () ?
+                "-fullscreen" : "-nofullscreen",
+                inpname, romname);
         process = gva_xmame_async_command (
                 arguments, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
@@ -540,7 +556,8 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
 }
 
 gboolean
-gva_xmame_playback_game (const gchar *inpname, GError **error)
+gva_xmame_playback_game (const gchar *romname, const gchar *inpname,
+                         GError **error)
 {
         GvaProcess *process;
         gchar *arguments;
@@ -548,7 +565,11 @@ gva_xmame_playback_game (const gchar *inpname, GError **error)
         g_return_val_if_fail (inpname != NULL, FALSE);
 
         /* Execute the command "${xmame} -playback ${inpname}". */
-        arguments = g_strdup_printf ("-playback %s", inpname);
+        arguments = g_strdup_printf (
+                "%s -playback %s",
+                gva_preferences_get_full_screen () ?
+                "-fullscreen" : "-nofullscreen",
+                inpname);
         process = gva_xmame_async_command (
                 arguments, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
@@ -560,4 +581,38 @@ gva_xmame_playback_game (const gchar *inpname, GError **error)
         /* xmame asks the user to press return before it will start playing
          * back the game, so we have to supply the expected keystroke. */
         return gva_process_write_stdin (process, "\n", 1, error);
+}
+
+gboolean
+gva_xmame_clear_state (const gchar *romname, GError **error)
+{
+        gchar *basename;
+        gchar *directory;
+        gchar *filename;
+        gboolean success = TRUE;
+
+        directory = gva_xmame_get_config_value ("state_directory", error);
+        if (directory == NULL)
+                return FALSE;
+
+        basename = g_strdup_printf ("%s.sta", romname);
+        filename = g_build_filename (directory, basename, NULL);
+
+        if (g_file_test (filename, G_FILE_TEST_IS_REGULAR))
+        {
+                if (g_unlink (filename) < 0)
+                {
+                        g_set_error (
+                                error, GVA_ERROR, GVA_ERROR_SYSTEM,
+                                "Unable to delete %s: %s",
+                                filename, g_strerror (errno));
+                        success = FALSE;
+                }
+        }
+
+        g_free (filename);
+        g_free (basename);
+        g_free (directory);
+
+        return success;
 }

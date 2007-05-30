@@ -124,7 +124,7 @@ process_data_ready (GvaProcess *process,
                         case G_IO_STATUS_ERROR:
                                 g_assert (error != NULL);
                                 g_warning ("%s", error->message);
-                                g_error_free (error);
+                                g_clear_error (&error);
                                 break;
 
                         case G_IO_STATUS_EOF:

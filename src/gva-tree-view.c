@@ -215,7 +215,7 @@ tree_view_get_icon_name (const gchar *icon_name)
         {
                 g_assert (error != NULL);
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         return pixbuf;
@@ -495,7 +495,7 @@ gva_tree_view_get_last_selected_game (void)
         else if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         return retval;
@@ -517,7 +517,7 @@ gva_tree_view_set_last_selected_game (const gchar *romname)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 }
 
@@ -536,7 +536,7 @@ gva_tree_view_get_last_selected_view (void)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         return view;
@@ -556,6 +556,6 @@ gva_tree_view_set_last_selected_view (gint view)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 }

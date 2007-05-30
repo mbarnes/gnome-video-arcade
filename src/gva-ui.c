@@ -7,6 +7,7 @@
 #include "gva-game-store.h"
 #include "gva-main.h"
 #include "gva-play-back.h"
+#include "gva-preferences.h"
 #include "gva-tree-view.h"
 #include "gva-util.h"
 #include "gva-xmame.h"
@@ -36,7 +37,7 @@ action_about_cb (GtkAction *action)
         if (error != NULL)
         {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         gtk_show_about_dialog (
@@ -55,8 +56,26 @@ action_about_cb (GtkAction *action)
 }
 
 static void
+action_auto_save_cb (GtkToggleAction *action)
+{
+        gboolean active;
+
+        active = gtk_toggle_action_get_active (action);
+        gva_preferences_set_auto_save (active);
+}
+
+static void
 action_contents_cb (GtkAction *action)
 {
+}
+
+static void
+action_full_screen_cb (GtkToggleAction *action)
+{
+        gboolean active;
+
+        active = gtk_toggle_action_get_active (action);
+        gva_preferences_set_full_screen (active);
 }
 
 static void
@@ -93,8 +112,9 @@ action_play_back_cb (GtkAction *action)
         GtkTreeModel *model;
         GtkTreeView *view;
         GtkTreeIter iter;
-        gchar *inpname;
         gchar *inpfile;
+        gchar *inpname;
+        gchar *romname;
         GList *list;
         gboolean iter_set;
         GError *error = NULL;
@@ -111,15 +131,20 @@ action_play_back_cb (GtkAction *action)
         iter_set = gtk_tree_model_get_iter (model, &iter, list->data);
         g_assert (iter_set);
         gtk_tree_model_get (
-                model, &iter, GVA_GAME_STORE_COLUMN_INPFILE, &inpfile, -1);
+                model, &iter, GVA_GAME_STORE_COLUMN_INPFILE, &inpfile,
+                GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
         inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
         g_free (inpfile);
 
-        if (!gva_xmame_playback_game (inpname, &error))
+        if (!gva_xmame_playback_game (romname, inpname, &error))
         {
+                g_assert (error != NULL);
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
+
+        g_free (inpname);
+        g_free (romname);
 
         g_list_foreach (list, (GFunc) gtk_tree_path_free, NULL);
         g_list_free (list);
@@ -153,14 +178,15 @@ action_record_cb (GtkAction *action)
         g_assert (romname != NULL);
 
         inpname = gva_choose_inpname (romname);
-        gva_xmame_record_game (romname, inpname, &error);
-        g_free (inpname);
 
-        if (error != NULL)
+        if (!gva_xmame_record_game (romname, inpname, &error))
         {
+                g_assert (error != NULL);
                 g_warning ("%s", error->message);
                 g_clear_error (&error);
         }
+
+        g_free (inpname);
 }
 
 static void
@@ -206,10 +232,19 @@ action_start_cb (GtkAction *action)
         romname = gva_tree_view_get_selected_game ();
         g_assert (romname != NULL);
 
-        gva_xmame_run_game (romname, &error);
-
-        if (error != NULL)
+        if (!gva_preferences_get_auto_save ())
         {
+                if (!gva_xmame_clear_state (romname, &error))
+                {
+                        g_assert (error != NULL);
+                        g_warning ("%s", error->message);
+                        g_clear_error (&error);
+                }
+        }
+
+        if (!gva_xmame_run_game (romname, &error))
+        {
+                g_assert (error != NULL);
                 g_warning ("%s", error->message);
                 g_clear_error (&error);
         }
@@ -331,6 +366,25 @@ static GtkActionEntry entries[] =
           NULL }
 };
 
+static GtkToggleActionEntry toggle_entries[] =
+{
+        { "auto-save",
+          NULL,
+          N_("_Restore previous state when starting a game"),
+          NULL,
+          NULL,
+          G_CALLBACK (action_auto_save_cb),
+          FALSE },  /* GConf overrides this */
+
+        { "full-screen",
+          NULL,
+          N_("Start games in _fullscreen mode"),
+          NULL,
+          NULL,
+          G_CALLBACK (action_full_screen_cb),
+          FALSE }   /* GConf overrides this */
+};
+
 static GtkRadioActionEntry view_radio_entries[] =
 {
         { "view-available",
@@ -368,7 +422,11 @@ gva_ui_init (void)
 
         action_group = gtk_action_group_new ("main");
         gtk_action_group_add_actions (
-                action_group, entries, G_N_ELEMENTS (entries), NULL);
+                action_group, entries,
+                G_N_ELEMENTS (entries), NULL);
+        gtk_action_group_add_toggle_actions (
+                action_group, toggle_entries,
+                G_N_ELEMENTS (toggle_entries), NULL);
         gtk_action_group_add_radio_actions (
                 action_group, view_radio_entries,
                 G_N_ELEMENTS (view_radio_entries),

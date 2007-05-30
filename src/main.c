@@ -46,13 +46,14 @@ main (gint argc, gchar **argv)
         textdomain (PACKAGE);
 
         gtk_init (&argc, &argv);
+        gtk_window_set_default_icon_name (PACKAGE);
 
         if (!gva_game_db_init (&error))
                 g_error ("%s", error->message);
 
         if (!gva_game_db_update_samples (&error)) {
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 
         gva_main_init ();

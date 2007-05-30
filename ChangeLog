@@ -1,3 +1,35 @@
+2007-05-30  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Restructure the preferences window.
+
+	* data/gnome-video-arcade.schemas:
+	Add schemas for "auto-save" and "full-screen" keys.
+
+	* src/gva-common.h:
+	#include <glib/gstdio.h>
+
+	* src/main.c (main):
+	Set a default icon for transient windows.
+
+	* src/gva-preferences.c:
+	* src/gva-preferences.h:
+	Connect preference widgets to actions.
+	Provide read/write access to preferences.
+
+	* src/gva-ui.c:
+	Add "auto-save" and "full-screen" toggle actions.
+
+	* src/gva-ui.h:
+	Add macros for new actions and their proxy widgets.
+
+	* src/gva-xmame.c (gva_xmame_run_game), (gva_xmame_record_game),
+	(gva_xmame_playback_game):
+	Honor preferences when invoking xmame.
+
+	* src/gva-xmame.c (gva_xmame_clear_state):
+	New function deletes a game's state file.
+
 2007-05-29  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

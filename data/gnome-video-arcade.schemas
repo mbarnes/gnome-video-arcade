@@ -2,8 +2,26 @@
   <schemalist>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/auto-save</applyto>
+      <key>/schemas/apps/gnome-video-arcade/auto-save</key>
+      <owner>gnome-video-arcade</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Save and restore state</short>
+        <long>Enable automatic restore at startup and save at exit.
+        If true, the emulator will try to restore the previous state of
+        the arcade machine when starting a game.  If false, the emulator
+        will boot the arcade machine from a cold start.  This setting does
+        not apply to recording games or playing back previously recorded
+        games.  In those cases the emulator will always reboot the arcade
+        machine.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/favorites</applyto>
       <key>/schemas/apps/gnome-video-arcade/favorites</key>
-      <applyto>/schemas/apps/gnome-video-arcade/favorites</applyto>
       <owner>gnome-video-arcade</owner>
       <type>list</type>
       <list_type>string</list_type>
@@ -15,8 +33,21 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/full-screen</applyto>
+      <key>/schemas/apps/gnome-video-arcade/full-screen</key>
+      <owner>gnome-video-arcade</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Start games in full screen mode</short>
+        <long>If true, automatically switch to full screen mode when
+        starting a game.  If false, start the game in a window.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/selected-game</applyto>
       <key>/schemas/apps/gnome-video-arcade/selected-game</key>
-      <applyto>/schemas/apps/gnome-video-arcade/selected-game</applyto>
       <owner>gnome-video-arcade</owner>
       <type>string</type>
       <default></default>
@@ -27,8 +58,8 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/selected-view</applyto>
       <key>/schemas/apps/gnome-video-arcade/selected-view</key>
-      <applyto>/schemas/apps/gnome-video-arcade/selected-view</applyto>
       <owner>gnome-video-arcade</owner>
       <type>string</type>
       <default></default>

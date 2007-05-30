@@ -209,7 +209,7 @@ play_back_refresh_list (GtkWindow *window, GtkTreeView *view)
         {
                 g_assert (error != NULL);
                 g_warning ("%s", error->message);
-                g_error_free (error);
+                g_clear_error (&error);
         }
 }
 
