@@ -305,6 +305,27 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         return config_value;
 }
 
+gboolean
+gva_xmame_has_config_value (const gchar *config_key)
+{
+        gchar *config_value;
+        GError *error = NULL;
+
+        config_value = gva_xmame_get_config_value (config_key, &error);
+        if (config_value != NULL)
+        {
+                g_free (config_value);
+                return TRUE;
+        }
+        else if (error != NULL)
+        {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+
+        return FALSE;
+}
+
 GList *
 gva_xmame_get_available (GError **error)
 {
@@ -615,4 +636,16 @@ gva_xmame_clear_state (const gchar *romname, GError **error)
         g_free (directory);
 
         return success;
+}
+
+gboolean
+gva_xmame_has_auto_save (void)
+{
+        return gva_xmame_has_config_value ("autosave");
+}
+
+gboolean
+gva_xmame_has_full_screen (void)
+{
+        return gva_xmame_has_config_value ("fullscreen");
 }

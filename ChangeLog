@@ -1,3 +1,17 @@
+2007-06-02  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-preferences.c (gva_preferences_init):
+	Make the "auto-save" and "full-screen" actions insensitive if
+	xmame does not support the corresponding options.
+
+	* src/gva-xmame.c (gva_xmame_has_config_value):
+	New function returns TRUE if xmame supports the given option name.
+
+	* src/gva-xmame.c (gva_xmame_has_auto_save),
+	(gva_xmame_has_full_screen):
+	New functions use gva_xmame_has_config_value() to test for xmame's
+	capabilities.
+
 2007-05-30  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

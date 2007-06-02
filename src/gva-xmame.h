@@ -33,6 +33,7 @@ gint            gva_xmame_wait_for_exit         (GvaProcess *process,
 gchar *         gva_xmame_get_version           (GError **error);
 gchar *         gva_xmame_get_config_value      (const gchar *config_key,
                                                  GError **error);
+gboolean        gva_xmame_has_config_value      (const gchar *config_key);
 GList *         gva_xmame_get_available         (GError **error);
 GHashTable *    gva_xmame_get_input_files       (GError **error);
 GHashTable *    gva_xmame_list_full             (GError **error);
@@ -47,6 +48,8 @@ gboolean        gva_xmame_playback_game         (const gchar *romname,
                                                  GError **error);
 gboolean        gva_xmame_clear_state           (const gchar *romname,
                                                  GError **error);
+gboolean        gva_xmame_has_auto_save         (void);
+gboolean        gva_xmame_has_full_screen       (void);
 
 G_END_DECLS
 
