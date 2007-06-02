@@ -1,3 +1,16 @@
+GNOME Video Arcade 0.1.4
+========================
+
+        Released June 2, 2007
+
+        What's New
+        ----------
+        * Simple preferences dialog supporting full screen and auto save
+          options, as well as automatic detection of whether these options
+          are supported by xmame.
+        * Playing games in a window no longer freezes the UI.
+        * Make GConf schemas work.
+
 GNOME Video Arcade 0.1.3
 ========================
 

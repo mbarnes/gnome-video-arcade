@@ -530,22 +530,36 @@ gboolean
 gva_xmame_run_game (const gchar *romname, GError **error)
 {
         GvaProcess *process;
-        gchar *arguments;
+        GString *arguments;
 
         g_return_val_if_fail (romname != NULL, FALSE);
 
+        arguments = g_string_sized_new (64);
+
+        if (gva_xmame_supports_auto_save ())
+        {
+                if (gva_preferences_get_auto_save ())
+                        g_string_append (arguments, "-autosave ");
+                else
+                        g_string_append (arguments, "-noautosave ");
+        }
+
+        if (gva_xmame_supports_full_screen ())
+        {
+                if (gva_preferences_get_full_screen ())
+                        g_string_append (arguments, "-fullscreen ");
+                else
+                        g_string_append (arguments, "-nofullscreen ");
+        }
+
+        g_string_append_printf (arguments, "%s", romname);
+
         /* Execute the command "${xmame} ${romname}". */
-        arguments = g_strdup_printf (
-                "%s %s %s",
-                gva_preferences_get_auto_save () ?
-                "-autosave" : "-noautosave",
-                gva_preferences_get_full_screen () ?
-                "-fullscreen" : "-nofullscreen",
-                romname);
         process = gva_xmame_async_command (
-                arguments, NULL, NULL, (GvaProcessNotify)
+                arguments->str, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
-        g_free (arguments);
+
+        g_string_free (arguments, TRUE);
 
         return (process != NULL);
 }
@@ -555,23 +569,34 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
                        GError **error)
 {
         GvaProcess *process;
-        gchar *arguments;
+        GString *arguments;
 
         g_return_val_if_fail (romname != NULL, FALSE);
 
         if (inpname == NULL)
                 inpname = romname;
 
+        arguments = g_string_sized_new (64);
+
+        if (gva_xmame_supports_auto_save ())
+                g_string_append (arguments, "-noautosave ");
+
+        if (gva_xmame_supports_full_screen ())
+        {
+                if (gva_preferences_get_full_screen ())
+                        g_string_append (arguments, "-fullscreen ");
+                else
+                        g_string_append (arguments, "-nofullscreen ");
+        }
+
+        g_string_append_printf (arguments, "-record %s %s", inpname, romname);
+
         /* Execute the command "${xmame} -record ${inpname} ${romname}". */
-        arguments = g_strdup_printf (
-                "%s -record %s %s",
-                gva_preferences_get_full_screen () ?
-                "-fullscreen" : "-nofullscreen",
-                inpname, romname);
         process = gva_xmame_async_command (
-                arguments, NULL, NULL, (GvaProcessNotify)
+                arguments->str, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
-        g_free (arguments);
+
+        g_string_free (arguments, TRUE);
 
         return (process != NULL);
 }
@@ -581,20 +606,31 @@ gva_xmame_playback_game (const gchar *romname, const gchar *inpname,
                          GError **error)
 {
         GvaProcess *process;
-        gchar *arguments;
+        GString *arguments;
 
         g_return_val_if_fail (inpname != NULL, FALSE);
 
+        arguments = g_string_sized_new (64);
+
+        if (gva_xmame_supports_auto_save ())
+                g_string_append (arguments, "-noautosave ");
+
+        if (gva_xmame_supports_full_screen ())
+        {
+                if (gva_preferences_get_full_screen ())
+                        g_string_append (arguments, "-fullscreen ");
+                else
+                        g_string_append (arguments, "-nofullscreen ");
+        }
+
+        g_string_append_printf (arguments, "-playback %s", inpname);
+
         /* Execute the command "${xmame} -playback ${inpname}". */
-        arguments = g_strdup_printf (
-                "%s -playback %s",
-                gva_preferences_get_full_screen () ?
-                "-fullscreen" : "-nofullscreen",
-                inpname);
         process = gva_xmame_async_command (
-                arguments, NULL, NULL, (GvaProcessNotify)
+                arguments->str, NULL, NULL, (GvaProcessNotify)
                 xmame_post_game_analysis, NULL, error);
-        g_free (arguments);
+
+        g_string_free (arguments, TRUE);
 
         if (process == NULL)
                 return FALSE;
@@ -639,13 +675,13 @@ gva_xmame_clear_state (const gchar *romname, GError **error)
 }
 
 gboolean
-gva_xmame_has_auto_save (void)
+gva_xmame_supports_auto_save (void)
 {
         return gva_xmame_has_config_value ("autosave");
 }
 
 gboolean
-gva_xmame_has_full_screen (void)
+gva_xmame_supports_full_screen (void)
 {
         return gva_xmame_has_config_value ("fullscreen");
 }

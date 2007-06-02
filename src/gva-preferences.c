@@ -33,7 +33,7 @@ gva_preferences_init (void)
 
         gtk_action_set_sensitive (
                 GVA_ACTION_AUTO_SAVE,
-                gva_xmame_has_auto_save ());
+                gva_xmame_supports_auto_save ());
 
         gtk_toggle_action_set_active (
                 GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN),
@@ -41,7 +41,7 @@ gva_preferences_init (void)
 
         gtk_action_set_sensitive (
                 GVA_ACTION_FULL_SCREEN,
-                gva_xmame_has_full_screen ());
+                gva_xmame_supports_full_screen ());
 }
 
 gboolean

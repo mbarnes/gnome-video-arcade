@@ -48,8 +48,8 @@ gboolean        gva_xmame_playback_game         (const gchar *romname,
                                                  GError **error);
 gboolean        gva_xmame_clear_state           (const gchar *romname,
                                                  GError **error);
-gboolean        gva_xmame_has_auto_save         (void);
-gboolean        gva_xmame_has_full_screen       (void);
+gboolean        gva_xmame_supports_auto_save    (void);
+gboolean        gva_xmame_supports_full_screen  (void);
 
 G_END_DECLS
 

@@ -1,5 +1,23 @@
 2007-06-02  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.1.4.
+
+	* src/gva-xmame.c:
+	* src/gva-xmame.h:
+	Rename gva_xmame_has_xxx() to gva_xmame_supports_xxx().
+
+	* src/gva-xmame.c (gva_xmame_run_game), (gva_xmame_record_game),
+	(gva_xmame_playback_game):
+	Build the argument list with a GString and only use "-[no]autosave"
+	and "-[no]fullscreen" options if they're supported.
+
+	* src/gva-preferences.c (gva_preferences_init): Adapt.
+
+	* src/gva-process.c (gva_process_new):
+	Set the encoding of all three channels to NULL.
+
+2007-06-02  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-preferences.c (gva_preferences_init):
 	Make the "auto-save" and "full-screen" actions insensitive if
 	xmame does not support the corresponding options.

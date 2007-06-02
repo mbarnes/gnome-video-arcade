@@ -197,6 +197,21 @@ gva_process_new (GPid pid,
         g_io_channel_set_close_on_unref (process->stdout_channel, TRUE);
         g_io_channel_set_close_on_unref (process->stderr_channel, TRUE);
 
+        status = g_io_channel_set_encoding (
+                process->stdin_channel, NULL, error);
+        if (status == G_IO_STATUS_ERROR)
+                goto fail;
+
+        status = g_io_channel_set_encoding (
+                process->stdout_channel, NULL, error);
+        if (status == G_IO_STATUS_ERROR)
+                goto fail;
+
+        status = g_io_channel_set_encoding (
+                process->stderr_channel, NULL, error);
+        if (status == G_IO_STATUS_ERROR)
+                goto fail;
+
         status = g_io_channel_set_flags (
                 process->stdout_channel, G_IO_FLAG_NONBLOCK, error);
         if (status == G_IO_STATUS_ERROR)
