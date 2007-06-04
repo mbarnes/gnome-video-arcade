@@ -71,11 +71,7 @@ static gboolean
 tree_view_filter_visible (GtkTreeModel *model, GtkTreeIter *iter)
 {
         gchar *romname;
-        GSList *element;
         gboolean visible = TRUE;
-
-        gtk_tree_model_get (
-                model, iter, GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
 
         switch (gva_tree_view_get_selected_view ())
         {
@@ -84,9 +80,13 @@ tree_view_filter_visible (GtkTreeModel *model, GtkTreeIter *iter)
                         break;
 
                 case 1:  /* Favorite Games */
+                        gtk_tree_model_get (
+                                model, iter, GVA_GAME_STORE_COLUMN_ROMNAME,
+                                &romname, -1);
                         visible = 
                                 g_slist_find (visible_favorites,
                                 g_intern_string (romname)) != NULL;
+                        g_free (romname);
                         break;
 
                 case 2:  /* Search Results */
@@ -449,11 +449,10 @@ gva_tree_view_set_selected_game (const gchar *romname)
          * we don't really need the GtkTreeIter here; we're just testing
          * whether the path is valid. */
         if (gtk_tree_model_get_iter (sorted_model, &iter, sorted_path))
-        {
                 gtk_tree_view_scroll_to_cell (
                         view, sorted_path, NULL, TRUE, 0.5, 0.0);
-                gtk_tree_path_free (sorted_path);
-        }
+
+        gtk_tree_path_free (sorted_path);
 
         gva_tree_view_set_last_selected_game (romname);
 }
