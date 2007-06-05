@@ -415,6 +415,12 @@ exit:
         return hash_table;
 }
 
+gchar *
+gva_xmame_get_rompath (GError **error)
+{
+        return gva_xmame_get_config_value ("rompath", error);
+}
+
 GHashTable *
 gva_xmame_list_full (GError **error)
 {
@@ -460,6 +466,63 @@ gva_xmame_list_full (GError **error)
                 key = g_strdup (g_strchomp (lines[ii]));
 
                 g_hash_table_insert (hash_table, key, value);
+        }
+
+        g_strfreev (lines);
+
+        return hash_table;
+}
+
+GHashTable *
+gva_xmame_verify_rom_sets (GError **error)
+{
+        GHashTable *hash_table = NULL;
+        gchar *output;
+        gchar **lines;
+        guint n_lines, ii;
+
+        /* Execute the command "${xmame} -verifyromsets". */
+        /* XXX What are the exit codes for this command? */
+        if (gva_xmame_command ("-verifyromsets", &output, NULL, error) < 0)
+                return NULL;
+
+        /* Output is as follows:
+         *
+         * name      result
+         * --------  ------
+         * romname   best available|correct|incorrect|not found
+         * romname   best available|correct|incorrect|not found
+         * ...
+         *
+         * Total Supported: nnnn
+         * Found: nnnn ...
+         * Not found: nnnn
+         */
+
+        hash_table = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) g_free);
+
+        lines = g_strsplit_set (output, "\n", -1);
+        n_lines = g_strv_length (lines);
+        g_assert (n_lines > 4);
+        g_free (output);
+
+        for (ii = 2; ii < n_lines - 3; ii++)
+        {
+                gchar **tokens;
+
+                tokens = g_strsplit_set (lines[ii], " ", 2);
+                if (g_strv_length (tokens) == 2)
+                {
+                        gchar *key, *value;
+
+                        key = g_strdup (g_strstrip (tokens[0]));
+                        value = g_strdup (g_strstrip (tokens[1]));
+                        g_hash_table_insert (hash_table, key, value);
+                }
+                g_strfreev (tokens);
         }
 
         g_strfreev (lines);

@@ -1,3 +1,15 @@
+2007-06-05  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-game-db.c (gva_game_db_init):
+	Call gva_xmame_get_rompath() instead of gva_xmame_get_config_value().
+
+	* src/gva-xmame.[ch]: (gva_xmame_get_rompath):
+	New function calls gva_xmame_get_config_value("rompath", ...).
+
+	* src/gva-xmame.[ch]: (gva_xmame_verify_rom_sets):
+	New function invokes xmame to quickly verify ROM sets.
+	Similar to gva_xmame_verify_sample_sets().
+
 2007-06-04  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-tree-view.c (tree_view_filter_visible),

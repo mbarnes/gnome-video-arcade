@@ -36,7 +36,9 @@ gchar *         gva_xmame_get_config_value      (const gchar *config_key,
 gboolean        gva_xmame_has_config_value      (const gchar *config_key);
 GList *         gva_xmame_get_available         (GError **error);
 GHashTable *    gva_xmame_get_input_files       (GError **error);
+gchar *         gva_xmame_get_rompath           (GError **error);
 GHashTable *    gva_xmame_list_full             (GError **error);
+GHashTable *    gva_xmame_verify_rom_sets       (GError **error);
 GHashTable *    gva_xmame_verify_sample_sets    (GError **error);
 gboolean        gva_xmame_run_game              (const gchar *romname,
                                                  GError **error);

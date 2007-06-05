@@ -88,7 +88,7 @@ gva_game_db_init (GError **error)
         if (hash_table == NULL)
                 return FALSE;
 
-        rompath = gva_xmame_get_config_value ("rompath", error);
+        rompath = gva_xmame_get_rompath (error);
         if (rompath == NULL)
         {
                 g_hash_table_destroy (hash_table);
