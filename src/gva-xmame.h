@@ -15,13 +15,13 @@ typedef enum
 
 } GvaError;
 
+typedef void    (*GvaXmameVerifyFunc)           (const gchar *romname,
+                                                 const gchar *result,
+                                                 gpointer user_data);
+
 GQuark          gva_error_quark                 (void);
 gchar *         gva_xmame_get_executable        (GError **error);
 GvaProcess *    gva_xmame_async_command         (const gchar *arguments,
-                                                 GvaProcessNotify on_stdout,
-                                                 GvaProcessNotify on_stderr,
-                                                 GvaProcessNotify on_exit,
-                                                 gpointer user_data,
                                                  GError **error);
 gint            gva_xmame_command               (const gchar *arguments,
                                                  gchar **standard_output,
@@ -38,7 +38,9 @@ GList *         gva_xmame_get_available         (GError **error);
 GHashTable *    gva_xmame_get_input_files       (GError **error);
 gchar *         gva_xmame_get_rompath           (GError **error);
 GHashTable *    gva_xmame_list_full             (GError **error);
-GHashTable *    gva_xmame_verify_rom_sets       (GError **error);
+GvaProcess *    gva_xmame_verify_rom_sets       (GvaXmameVerifyFunc func,
+                                                 gpointer user_data,
+                                                 GError **error);
 GHashTable *    gva_xmame_verify_sample_sets    (GError **error);
 gboolean        gva_xmame_run_game              (const gchar *romname,
                                                  GError **error);

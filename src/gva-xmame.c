@@ -32,7 +32,7 @@ xmame_post_game_analysis (GvaProcess *process)
                 g_clear_error (&error);
         }
 
-        gva_process_free (process);
+        g_object_unref (process);
 }
 
 static gboolean
@@ -99,10 +99,6 @@ gva_xmame_get_executable (GError **error)
 
 GvaProcess *
 gva_xmame_async_command (const gchar *arguments,
-                         GvaProcessNotify on_stdout,
-                         GvaProcessNotify on_stderr,
-                         GvaProcessNotify on_exit,
-                         gpointer user_data,
                          GError **error)
 {
         GvaProcess *process;
@@ -140,8 +136,7 @@ gva_xmame_async_command (const gchar *arguments,
                 return NULL;
 
         return gva_process_new (
-                child_pid, standard_input, standard_output, standard_error,
-                on_stdout, on_stderr, on_exit, user_data, error);
+                child_pid, standard_input, standard_output, standard_error);
 }
 
 gint
@@ -153,8 +148,7 @@ gva_xmame_command (const gchar *arguments,
         GvaProcess *process;
         gint exit_status;
 
-        process = gva_xmame_async_command (
-                arguments, NULL, NULL, NULL, NULL, error);
+        process = gva_xmame_async_command (arguments, error);
         if (process == NULL)
                 return -1;
 
@@ -166,7 +160,7 @@ gva_xmame_command (const gchar *arguments,
         if (exit_status >= 0 && standard_error != NULL)
                 *standard_error = gva_process_read_stderr (process);
 
-        gva_process_free (process);
+        g_object_unref (process);
 
         return exit_status;
 }
@@ -473,18 +467,21 @@ gva_xmame_list_full (GError **error)
         return hash_table;
 }
 
-GHashTable *
-gva_xmame_verify_rom_sets (GError **error)
+typedef struct
 {
-        GHashTable *hash_table = NULL;
+        GvaXmameVerifyFunc func;
+        gpointer user_data;
+
+} XmameVerifyData;
+
+static void
+xmame_verify_rom_sets_on_exit (GvaProcess *process, XmameVerifyData *data)
+{
         gchar *output;
         gchar **lines;
         guint n_lines, ii;
 
-        /* Execute the command "${xmame} -verifyromsets". */
-        /* XXX What are the exit codes for this command? */
-        if (gva_xmame_command ("-verifyromsets", &output, NULL, error) < 0)
-                return NULL;
+        output = gva_process_read_stdout (process);
 
         /* Output is as follows:
          *
@@ -499,11 +496,6 @@ gva_xmame_verify_rom_sets (GError **error)
          * Not found: nnnn
          */
 
-        hash_table = g_hash_table_new_full (
-                g_str_hash, g_str_equal,
-                (GDestroyNotify) g_free,
-                (GDestroyNotify) g_free);
-
         lines = g_strsplit_set (output, "\n", -1);
         n_lines = g_strv_length (lines);
         g_assert (n_lines > 4);
@@ -515,19 +507,43 @@ gva_xmame_verify_rom_sets (GError **error)
 
                 tokens = g_strsplit_set (lines[ii], " ", 2);
                 if (g_strv_length (tokens) == 2)
-                {
-                        gchar *key, *value;
-
-                        key = g_strdup (g_strstrip (tokens[0]));
-                        value = g_strdup (g_strstrip (tokens[1]));
-                        g_hash_table_insert (hash_table, key, value);
-                }
+                        data->func (
+                                g_intern_string (g_strstrip (tokens[0])),
+                                g_intern_string (g_strstrip (tokens[1])),
+                                data->user_data);
                 g_strfreev (tokens);
         }
 
         g_strfreev (lines);
 
-        return hash_table;
+        g_slice_free (XmameVerifyData, data);
+}
+
+GvaProcess *
+gva_xmame_verify_rom_sets (GvaXmameVerifyFunc func,
+                           gpointer user_data,
+                           GError **error)
+{
+        GvaProcess *process;
+        XmameVerifyData *data;
+
+        g_return_val_if_fail (func != NULL, NULL);
+
+        data = g_slice_new (XmameVerifyData);
+        data->func = func;
+        data->user_data = user_data;
+
+        /* Execute the command "${xmame} -verifyromsets". */
+        process = gva_xmame_async_command ("-verifyromsets", error);
+
+        if (process == NULL)
+                g_slice_free (XmameVerifyData, data);
+        else
+                g_signal_connect (
+                        process, "exited",
+                        G_CALLBACK (xmame_verify_rom_sets_on_exit), NULL);
+
+        return process;
 }
 
 GHashTable *
@@ -618,9 +634,12 @@ gva_xmame_run_game (const gchar *romname, GError **error)
         g_string_append_printf (arguments, "%s", romname);
 
         /* Execute the command "${xmame} ${romname}". */
-        process = gva_xmame_async_command (
-                arguments->str, NULL, NULL, (GvaProcessNotify)
-                xmame_post_game_analysis, NULL, error);
+        process = gva_xmame_async_command (arguments->str, error);
+
+        if (process != NULL)
+                g_signal_connect (
+                        process, "exited",
+                        G_CALLBACK (xmame_post_game_analysis), NULL);
 
         g_string_free (arguments, TRUE);
 
@@ -655,9 +674,12 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
         g_string_append_printf (arguments, "-record %s %s", inpname, romname);
 
         /* Execute the command "${xmame} -record ${inpname} ${romname}". */
-        process = gva_xmame_async_command (
-                arguments->str, NULL, NULL, (GvaProcessNotify)
-                xmame_post_game_analysis, NULL, error);
+        process = gva_xmame_async_command (arguments->str, error);
+
+        if (process != NULL)
+                g_signal_connect (
+                        process, "exited",
+                        G_CALLBACK (xmame_post_game_analysis), NULL);
 
         g_string_free (arguments, TRUE);
 
@@ -689,9 +711,12 @@ gva_xmame_playback_game (const gchar *romname, const gchar *inpname,
         g_string_append_printf (arguments, "-playback %s", inpname);
 
         /* Execute the command "${xmame} -playback ${inpname}". */
-        process = gva_xmame_async_command (
-                arguments->str, NULL, NULL, (GvaProcessNotify)
-                xmame_post_game_analysis, NULL, error);
+        process = gva_xmame_async_command (arguments->str, error);
+
+        if (process != NULL)
+                g_signal_connect (
+                        process, "exited",
+                        G_CALLBACK (xmame_post_game_analysis), NULL);
 
         g_string_free (arguments, TRUE);
 

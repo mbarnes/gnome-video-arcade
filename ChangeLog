@@ -1,3 +1,13 @@
+2007-06-07  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-process.[ch]:
+	Make GvaProcess a GObject with signals and properties.
+
+	* src/gva-xmame.c: Adapt.
+
+	* src/gva-xmame.c (gva_xmame_verify_rom_sets):
+	Experiment with making this function asynchronous.
+
 2007-06-05  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-game-db.c (gva_game_db_init):
