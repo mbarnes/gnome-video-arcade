@@ -34,8 +34,8 @@ struct _GvaProcessPrivate
         GIOChannel *stdin_channel;
         GIOChannel *stdout_channel;
         GIOChannel *stderr_channel;
-        GString *stdout_buffer;
-        GString *stderr_buffer;
+        GQueue *stdout_lines;
+        GQueue *stderr_lines;
 
         guint child_source_id;
         guint stdout_source_id;
@@ -49,95 +49,60 @@ static gpointer parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
+process_source_removed (GvaProcess *process)
+{
+        GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
+        gint n_active_sources = 0;
+
+        g_assert (!priv->exited);
+
+        n_active_sources += (priv->child_source_id > 0);
+        n_active_sources += (priv->stdout_source_id > 0);
+        n_active_sources += (priv->stderr_source_id > 0);
+
+        if (n_active_sources == 0)
+        {
+                priv->exited = TRUE;
+                g_signal_emit (process, signals[EXITED], 0);
+        }
+}
+
+static void
 process_exited (GPid pid,
                 gint status,
                 GvaProcess *process)
 {
         GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
-        GIOStatus io_status;
-        gchar *data;
-        gsize length;
-        GError *error = NULL;
 
-        if (priv->stdout_source_id != 0)
-        {
-                g_source_remove (priv->stdout_source_id);
-                priv->stdout_source_id = 0;
-        }
-
-        if (priv->stderr_source_id != 0)
-        {
-                g_source_remove (priv->stderr_source_id);
-                priv->stderr_source_id = 0;
-        }
-
-        io_status = G_IO_STATUS_AGAIN;
-        while (io_status == G_IO_STATUS_AGAIN)
-                io_status = g_io_channel_read_to_end (
-                        priv->stdout_channel, &data, &length, &error);
-        if (io_status == G_IO_STATUS_NORMAL)
-        {
-                g_string_append_len (priv->stdout_buffer, data, length);
-                g_free (data);
-                g_signal_emit (process, signals[STDOUT_READY], 0);
-        }
-        else  /* G_IO_STATUS_ERROR */
-        {
-                g_assert (error != NULL);
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
-
-        io_status = G_IO_STATUS_AGAIN;
-        while (io_status == G_IO_STATUS_AGAIN)
-                io_status = g_io_channel_read_to_end (
-                        priv->stderr_channel, &data, &length, &error);
-        if (io_status == G_IO_STATUS_NORMAL)
-        {
-                g_string_append_len (priv->stderr_buffer, data, length);
-                g_free (data);
-                g_signal_emit (process, signals[STDERR_READY], 0);
-        }
-        else  /* G_IO_STATUS_ERROR */
-        {
-                g_assert (error != NULL);
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
-
-        priv->exited = TRUE;
+        priv->child_source_id = 0;
         priv->status = status;
-        g_spawn_close_pid (pid);
 
-        g_signal_emit (process, signals[EXITED], 0);
+        g_spawn_close_pid (pid);
 }
 
 static gboolean
 process_data_ready (GvaProcess *process,
-                    GIOChannel *source,
+                    GIOChannel *channel,
                     GIOCondition condition,
-                    GString *string,
+                    GQueue *queue,
                     guint *source_id,
                     guint signal_id)
 {
-        static gchar read_buffer[READ_BUFFER_SIZE];
-
-        if (condition & G_IO_IN)
+        while (condition & G_IO_IN || condition & G_IO_HUP)
         {
-                GIOStatus status = G_IO_STATUS_AGAIN;
-                gsize bytes_read;
+                GIOStatus status;
+                gchar *line;
+		gsize terminator_pos;
                 GError *error = NULL;
 
-                while (status == G_IO_STATUS_AGAIN)
-                        status = g_io_channel_read_chars (
-                                source, read_buffer,
-                                sizeof (read_buffer),
-                                &bytes_read, &error);
+                status = g_io_channel_read_line (
+                        channel, &line, NULL, &terminator_pos, &error);
                 switch (status)
                 {
                         case G_IO_STATUS_NORMAL:
-                                g_string_append_len (
-                                        string, read_buffer, bytes_read);
+                                g_assert (line != NULL);
+				line[terminator_pos] = '\0';
+                                g_queue_push_tail (queue, line);
                                 g_signal_emit (process, signal_id, 0);
                                 break;
 
@@ -148,16 +113,18 @@ process_data_ready (GvaProcess *process,
                                 break;
 
                         case G_IO_STATUS_EOF:
-                                g_assert (condition & G_IO_HUP);
+				g_assert (condition & G_IO_HUP);
+				condition &= ~G_IO_HUP;  /* clear HUP */
+				*source_id = 0;
+				break;
+
+                        case G_IO_STATUS_AGAIN:
                                 break;
-
-                        default:
-                                g_assert_not_reached ();
                 }
-        }
 
-        if (condition & G_IO_HUP)
-                *source_id = 0;
+		condition &= ~G_IO_IN;  /* clear IN */
+		condition |= g_io_channel_get_buffer_condition (channel);
+        }
 
         /* XXX What to do if G_IO_ERR is set? */
 
@@ -172,7 +139,7 @@ process_stdout_ready (GIOChannel *source,
         GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
 
         return process_data_ready (
-                process, source, condition, priv->stdout_buffer,
+                process, source, condition, priv->stdout_lines,
                 &priv->stdout_source_id, signals[STDOUT_READY]);
 }
 
@@ -184,7 +151,7 @@ process_stderr_ready (GIOChannel *source,
         GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
 
         return process_data_ready (
-                process, source, condition, priv->stderr_buffer,
+                process, source, condition, priv->stderr_lines,
                 &priv->stderr_source_id, signals[STDERR_READY]);
 }
 
@@ -207,77 +174,55 @@ process_set_property (GObject *object,
                 case PROP_PID:
                         /* XXX Not portable */
                         priv->pid = g_value_get_uint (value);
-                        if (priv->child_source_id > 0)
-                                g_source_remove (priv->child_source_id);
-                        priv->child_source_id  = g_child_watch_add (
-                                priv->pid, (GChildWatchFunc)
-                                process_exited, object);
+                        g_assert (priv->child_source_id == 0);
+                        priv->child_source_id = g_child_watch_add_full (
+                                G_PRIORITY_DEFAULT, priv->pid,
+                                (GChildWatchFunc) process_exited, object,
+                                (GDestroyNotify) process_source_removed);
                         return;
 
                 case PROP_STDIN:
-                        if (priv->stdin_channel != NULL)
-                        {
-                                g_io_channel_unref (priv->stdin_channel);
-                                priv->stdin_channel = NULL;
-                        }
                         if ((fd = g_value_get_int (value)) < 0)
                                 return;
                         channel = g_io_channel_unix_new (fd);
                         g_io_channel_set_close_on_unref (channel, TRUE);
                         g_io_channel_set_encoding (channel, NULL, &error);
                         CHECK_FOR_ERROR;
+                        g_assert (priv->stdin_channel == NULL);
                         priv->stdin_channel = channel;
                         return;
 
                 case PROP_STDOUT:
-                        if (priv->stdout_channel != NULL)
-                        {
-                                g_io_channel_unref (priv->stdout_channel);
-                                priv->stdout_channel = NULL;
-                        }
-                        if (priv->stdout_source_id > 0)
-                        {
-                                g_source_remove (priv->stdout_source_id);
-                                priv->stdout_source_id = 0;
-                        }
                         if ((fd = g_value_get_int (value)) < 0)
                                 return;
                         channel = g_io_channel_unix_new (fd);
                         g_io_channel_set_close_on_unref (channel, TRUE);
                         g_io_channel_set_encoding (channel, NULL, &error);
                         CHECK_FOR_ERROR;
-                        g_io_channel_set_flags (
-                                channel, G_IO_FLAG_NONBLOCK, &error);
-                        CHECK_FOR_ERROR;
-                        priv->stdout_source_id = g_io_add_watch (
-                                channel, G_IO_IN | G_IO_ERR | G_IO_HUP,
-                                (GIOFunc) process_stdout_ready, object);
+                        g_assert (priv->stdout_source_id == 0);
+                        priv->stdout_source_id = g_io_add_watch_full (
+                                channel, G_PRIORITY_DEFAULT,
+                                G_IO_IN | G_IO_ERR | G_IO_HUP,
+                                (GIOFunc) process_stdout_ready, object,
+                                (GDestroyNotify) process_source_removed);
+                        g_assert (priv->stdout_channel == NULL);
                         priv->stdout_channel = channel;
                         return;
 
                 case PROP_STDERR:
-                        if (priv->stderr_channel != NULL)
-                        {
-                                g_io_channel_unref (priv->stderr_channel);
-                                priv->stderr_channel = NULL;
-                        }
-                        if (priv->stderr_source_id > 0)
-                        {
-                                g_source_remove (priv->stderr_source_id);
-                                priv->stderr_source_id = 0;
-                        }
                         if ((fd = g_value_get_int (value)) < 0)
                                 return;
                         channel = g_io_channel_unix_new (fd);
                         g_io_channel_set_close_on_unref (channel, TRUE);
                         g_io_channel_set_encoding (channel, NULL, &error);
                         CHECK_FOR_ERROR;
-                        g_io_channel_set_flags (
-                                channel, G_IO_FLAG_NONBLOCK, &error);
-                        CHECK_FOR_ERROR;
-                        priv->stderr_source_id = g_io_add_watch (
-                                channel, G_IO_IN | G_IO_ERR | G_IO_HUP,
-                                (GIOFunc) process_stderr_ready, object);
+                        g_assert (priv->stderr_source_id == 0);
+                        priv->stderr_source_id = g_io_add_watch_full (
+                                channel, G_PRIORITY_DEFAULT,
+                                G_IO_IN | G_IO_ERR | G_IO_HUP,
+                                (GIOFunc) process_stderr_ready, object,
+                                (GDestroyNotify) process_source_removed);
+                        g_assert (priv->stderr_channel == NULL);
                         priv->stderr_channel = channel;
                         return;
         }
@@ -348,8 +293,14 @@ process_finalize (GObject *object)
         if (priv->stderr_channel != NULL)
                 g_io_channel_unref (priv->stderr_channel);
 
-        g_string_free (priv->stdout_buffer, TRUE);
-        g_string_free (priv->stderr_buffer, TRUE);
+        while (!g_queue_is_empty (priv->stdout_lines))
+                g_free (g_queue_pop_head (priv->stdout_lines));
+
+        while (!g_queue_is_empty (priv->stderr_lines))
+                g_free (g_queue_pop_head (priv->stderr_lines));
+
+        g_queue_free (priv->stdout_lines);
+        g_queue_free (priv->stderr_lines);
 
         /* Chain up to parent's finalize() method. */
         G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -471,8 +422,8 @@ process_init (GvaProcess *process)
 {
         GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
 
-        priv->stdout_buffer = g_string_sized_new (READ_BUFFER_SIZE);
-        priv->stderr_buffer = g_string_sized_new (READ_BUFFER_SIZE);
+        priv->stdout_lines = g_queue_new ();
+        priv->stderr_lines = g_queue_new ();
 }
 
 GType
@@ -556,20 +507,32 @@ gva_process_write_stdin (GvaProcess *process,
         return (status == G_IO_STATUS_NORMAL);
 }
 
-const gchar *
-gva_process_peek_stdout (GvaProcess *process)
+guint
+gva_process_stdout_num_lines (GvaProcess *process)
 {
         GvaProcessPrivate *priv;
 
-        g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
+        g_return_val_if_fail (GVA_IS_PROCESS (process), 0);
 
         priv = GVA_PROCESS_GET_PRIVATE (process);
 
-        return priv->stdout_buffer->str;
+        return g_queue_get_length (priv->stdout_lines);
+}
+
+guint
+gva_process_stderr_num_lines (GvaProcess *process)
+{
+        GvaProcessPrivate *priv;
+
+        g_return_val_if_fail (GVA_IS_PROCESS (process), 0);
+
+        priv = GVA_PROCESS_GET_PRIVATE (process);
+
+        return g_queue_get_length (priv->stderr_lines);
 }
 
 const gchar *
-gva_process_peek_stderr (GvaProcess *process)
+gva_process_stdout_peek_line (GvaProcess *process)
 {
         GvaProcessPrivate *priv;
 
@@ -577,39 +540,91 @@ gva_process_peek_stderr (GvaProcess *process)
 
         priv = GVA_PROCESS_GET_PRIVATE (process);
 
-        return priv->stderr_buffer->str;
+        return g_queue_peek_head (priv->stdout_lines);
+}
+
+const gchar *
+gva_process_stderr_peek_line (GvaProcess *process)
+{
+        GvaProcessPrivate *priv;
+
+        g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
+
+        priv = GVA_PROCESS_GET_PRIVATE (process);
+
+        return g_queue_peek_head (priv->stderr_lines);
 }
 
 gchar *
-gva_process_read_stdout (GvaProcess *process)
+gva_process_stdout_read_line (GvaProcess *process)
 {
         GvaProcessPrivate *priv;
-        gchar *data;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
         priv = GVA_PROCESS_GET_PRIVATE (process);
 
-        data = g_strdup (gva_process_peek_stdout (process));
-        g_string_truncate (priv->stdout_buffer, 0);
-
-        return data;
+        return g_queue_pop_head (priv->stdout_lines);
 }
 
 gchar *
-gva_process_read_stderr (GvaProcess *process)
+gva_process_stderr_read_line (GvaProcess *process)
 {
         GvaProcessPrivate *priv;
-        gchar *data;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
         priv = GVA_PROCESS_GET_PRIVATE (process);
 
-        data = g_strdup (gva_process_peek_stderr (process));
-        g_string_truncate (priv->stderr_buffer, 0);
+        return g_queue_pop_head (priv->stderr_lines);
+}
 
-        return data;
+gchar **
+gva_process_stdout_read_lines (GvaProcess *process)
+{
+        guint num_lines, ii;
+        gchar **lines = NULL;
+
+        g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
+
+        num_lines = gva_process_stdout_num_lines (process);
+
+        if (num_lines > 0)
+        {
+                lines = g_new0 (gchar *, num_lines + 1);
+
+                for (ii = 0; ii < num_lines; ii++)
+                {
+                        lines[ii] = gva_process_stdout_read_line (process);
+                        g_assert (lines[ii] != NULL);
+                }
+        }
+
+        return lines;
+}
+
+gchar **
+gva_process_stderr_read_lines (GvaProcess *process)
+{
+        guint num_lines, ii;
+        gchar **lines = NULL;
+
+        g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
+
+        num_lines = gva_process_stderr_num_lines (process);
+
+        if (num_lines > 0)
+        {
+                lines = g_new0 (gchar *, num_lines + 1);
+
+                for (ii = 0; ii < num_lines; ii++)
+                {
+                        lines[ii] = gva_process_stderr_read_line (process);
+                        g_assert (lines[ii] != NULL);
+                }
+        }
+
+        return lines;
 }
 
 gboolean

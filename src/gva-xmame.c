@@ -12,42 +12,17 @@
 
 #include "gva-preferences.h"
 
-static void
-xmame_post_game_analysis (GvaProcess *process)
-{
-        gint exit_status;
-        GError *error = NULL;
-
-        exit_status = gva_xmame_wait_for_exit (process, &error);
-
-        if (error == NULL && exit_status != 0)
-                g_set_error (
-                        &error, GVA_ERROR, GVA_ERROR_XMAME,
-                        _("Child process exited with status (%d)"),
-                        exit_status);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
-
-        g_object_unref (process);
-}
-
 static gboolean
-xmame_scan_for_error (const gchar *string, GError **error)
+xmame_scan_for_error (gchar **lines, GError **error)
 {
-        gchar **lines;
-        guint n_lines, ii;
+        guint num_lines, ii;
 
-        if (string == NULL)
+        if (lines == NULL)
                 return FALSE;
 
-        lines = g_strsplit_set (string, "\n", -1);
-        n_lines = g_strv_length (lines);
+        num_lines = g_strv_length (lines);
 
-        for (ii = 0; ii < n_lines; ii++)
+        for (ii = 0; ii < num_lines; ii++)
         {
                 if (strlen (g_strstrip (lines[ii])) == 0)
                         continue;
@@ -69,7 +44,48 @@ xmame_scan_for_error (const gchar *string, GError **error)
 
         g_strfreev (lines);
 
-        return (ii < n_lines);
+        return (ii < num_lines);
+}
+
+static void
+xmame_post_game_analysis (GvaProcess *process)
+{
+        gint exit_status;
+        GError *error = NULL;
+
+        exit_status = gva_xmame_wait_for_exit (process, &error);
+
+        if (error == NULL && exit_status != 0)
+        {
+                gchar **lines;
+
+                lines = gva_process_stdout_read_lines (process);
+                xmame_scan_for_error (lines, &error);
+                g_strfreev (lines);
+        }
+
+        if (error == NULL && exit_status != 0)
+        {
+                gchar **lines;
+
+                lines = gva_process_stderr_read_lines (process);
+                xmame_scan_for_error (lines, &error);
+                g_strfreev (lines);
+        }
+
+        if (error == NULL && exit_status != 0)
+                g_set_error (
+                        &error, GVA_ERROR, GVA_ERROR_XMAME,
+                        _("Child process exited with status (%d)"),
+                        exit_status);
+
+        if (error != NULL)
+        {
+                g_warning ("%s", error->message);
+                g_clear_error (&error);
+        }
+
+        g_object_unref (process);
 }
 
 GQuark
@@ -141,10 +157,12 @@ gva_xmame_async_command (const gchar *arguments,
 
 gint
 gva_xmame_command (const gchar *arguments,
-                   gchar **standard_output,
-                   gchar **standard_error,
+                   gchar ***stdout_lines,
+                   gchar ***stderr_lines,
                    GError **error)
 {
+        gchar **local_stdout_lines = NULL;
+        gchar **local_stderr_lines = NULL;
         GvaProcess *process;
         gint exit_status;
 
@@ -153,13 +171,31 @@ gva_xmame_command (const gchar *arguments,
                 return -1;
 
         exit_status = gva_xmame_wait_for_exit (process, error);
+        if (exit_status < 0)
+                goto fail;
 
-        if (exit_status >= 0 && standard_output != NULL)
-                *standard_output = gva_process_read_stdout (process);
+        local_stdout_lines = gva_process_stdout_read_lines (process);
+        local_stderr_lines = gva_process_stderr_read_lines (process);
 
-        if (exit_status >= 0 && standard_error != NULL)
-                *standard_error = gva_process_read_stderr (process);
+        if (exit_status != 0)
+                if (xmame_scan_for_error (local_stdout_lines, error))
+                        exit_status = -1;
 
+        if (exit_status != 0)
+                if (xmame_scan_for_error (local_stderr_lines, error))
+                        exit_status = -1;
+
+        if (exit_status >= 0 && stdout_lines != NULL)
+                *stdout_lines = local_stdout_lines;
+        else
+                g_strfreev (local_stdout_lines);
+
+        if (exit_status >= 0 && stderr_lines != NULL)
+                *stderr_lines = local_stderr_lines;
+        else
+                g_strfreev (local_stderr_lines);
+
+fail:
         g_object_unref (process);
 
         return exit_status;
@@ -174,12 +210,6 @@ gva_xmame_wait_for_exit (GvaProcess *process, GError **error)
 
         while (!gva_process_has_exited (process, &exit_status))
                 g_main_context_iteration (g_main_context_default (), TRUE);
-
-        if (xmame_scan_for_error (gva_process_peek_stderr (process), error))
-                return -1;
-
-        if (xmame_scan_for_error (gva_process_peek_stdout (process), error))
-                return -1;
 
         if (WIFSIGNALED (exit_status))
         {
@@ -198,12 +228,11 @@ gchar *
 gva_xmame_get_version (GError **error)
 {
         gchar *version = NULL;
-        gchar *output;
         gchar **lines;
-        guint n_lines, ii;
+        guint num_lines, ii;
 
         /* Execute the command "${xmame} -version". */
-        if (gva_xmame_command ("-version", &output, NULL, error) != 0)
+        if (gva_xmame_command ("-version", &lines, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
@@ -211,11 +240,9 @@ gva_xmame_get_version (GError **error)
          * xmame (backend) version n.nnn (Mmm dd yyyy)
          */
 
-        lines = g_strsplit_set (output, "\n", -1);
-        n_lines = g_strv_length (lines);
-        g_free (output);
+        num_lines = g_strv_length (lines);
 
-        for (ii = 0; ii < n_lines && version == NULL; ii++)
+        for (ii = 0; ii < num_lines && version == NULL; ii++)
         {
                 if (strstr (lines[ii], "xmame") == NULL)
                         continue;
@@ -233,9 +260,8 @@ gchar *
 gva_xmame_get_config_value (const gchar *config_key, GError **error)
 {
         gchar *config_value = NULL;
-        gchar *output;
         gchar **lines;
-        guint n_lines, ii;
+        guint num_lines, ii;
 #ifdef HAVE_WORDEXP_H
         wordexp_t words;
 #endif
@@ -243,7 +269,7 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
         g_return_val_if_fail (config_key != NULL, NULL);
 
         /* Execute the command "${xmame} -showconfig". */
-        if (gva_xmame_command ("-showconfig", &output, NULL, error) != 0)
+        if (gva_xmame_command ("-showconfig", &lines, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
@@ -254,11 +280,9 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
          * ...
          */
 
-        lines = g_strsplit_set (output, "\n", -1);
-        n_lines = g_strv_length (lines);
-        g_free (output);
+        num_lines = g_strv_length (lines);
 
-        for (ii = 0; ii < n_lines; ii++)
+        for (ii = 0; ii < num_lines; ii++)
         {
                 if (g_str_has_prefix (lines[ii], config_key))
                 {
@@ -272,7 +296,7 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
 
 #ifdef HAVE_WORDEXP_H
         if (config_value == NULL)
-                return NULL;
+                goto exit;
 
         /* xmame reports shell variables like $HOME in some of its
          * configuration values, so we need to expand them ourselves. */
@@ -295,6 +319,12 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
                 wordfree (&words);
         }
 #endif
+
+exit:
+        if (config_value == NULL)
+                g_set_error (
+                        error, GVA_ERROR, GVA_ERROR_XMAME,
+                        _("%s: No such configuration key"), config_key);
 
         return config_value;
 }
@@ -419,12 +449,11 @@ GHashTable *
 gva_xmame_list_full (GError **error)
 {
         GHashTable *hash_table = NULL;
-        gchar *output;
         gchar **lines;
-        guint n_lines, ii;
+        guint num_lines, ii;
 
         /* Execute the command "${xmame} -listfull". */
-        if (gva_xmame_command ("-listfull", &output, NULL, error) != 0)
+        if (gva_xmame_command ("-listfull", &lines, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
@@ -444,12 +473,10 @@ gva_xmame_list_full (GError **error)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) g_free);
 
-        lines = g_strsplit_set (output, "\n", -1);
-        n_lines = g_strv_length (lines);
-        g_assert (n_lines > 0);
-        g_free (output);
+        num_lines = g_strv_length (lines);
+        g_assert (num_lines > 0);
 
-        for (ii = 0; ii < n_lines; ii++)
+        for (ii = 0; ii < num_lines; ii++)
         {
                 gchar *key, *value, *cp;
 
@@ -477,11 +504,10 @@ typedef struct
 static void
 xmame_verify_rom_sets_on_exit (GvaProcess *process, XmameVerifyData *data)
 {
-        gchar *output;
         gchar **lines;
-        guint n_lines, ii;
+        guint num_lines, ii;
 
-        output = gva_process_read_stdout (process);
+        lines = gva_process_stdout_read_lines (process);
 
         /* Output is as follows:
          *
@@ -496,12 +522,10 @@ xmame_verify_rom_sets_on_exit (GvaProcess *process, XmameVerifyData *data)
          * Not found: nnnn
          */
 
-        lines = g_strsplit_set (output, "\n", -1);
-        n_lines = g_strv_length (lines);
-        g_assert (n_lines > 4);
-        g_free (output);
+        num_lines = g_strv_length (lines);
+        g_assert (num_lines > 4);
 
-        for (ii = 2; ii < n_lines - 3; ii++)
+        for (ii = 2; ii < num_lines - 3; ii++)
         {
                 gchar **tokens;
 
@@ -550,13 +574,12 @@ GHashTable *
 gva_xmame_verify_sample_sets (GError **error)
 {
         GHashTable *hash_table = NULL;
-        gchar *output;
         gchar **lines;
-        guint n_lines, ii;
+        guint num_lines, ii;
 
         /* Execute the command "${xmame} -verifysamplesets". */
         /* XXX What are the exit codes for this command? */
-        if (gva_xmame_command ("-verifysamplesets", &output, NULL, error) < 0)
+        if (gva_xmame_command ("-verifysamplesets", &lines, NULL, error) < 0)
                 return NULL;
 
         /* Output is as follows:
@@ -579,12 +602,10 @@ gva_xmame_verify_sample_sets (GError **error)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) g_free);
 
-        lines = g_strsplit_set (output, "\n", -1);
-        n_lines = g_strv_length (lines);
-        g_assert (n_lines > 4);
-        g_free (output);
+        num_lines = g_strv_length (lines);
+        g_assert (num_lines > 4);
 
-        for (ii = 2; ii < n_lines - 4; ii++)
+        for (ii = 2; ii < num_lines - 4; ii++)
         {
                 gchar **tokens;
 

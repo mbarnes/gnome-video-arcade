@@ -50,10 +50,14 @@ gboolean        gva_process_write_stdin         (GvaProcess *process,
                                                  const gchar *data,
                                                  gssize length,
                                                  GError **error);
-const gchar *   gva_process_peek_stdout         (GvaProcess *process);
-const gchar *   gva_process_peek_stderr         (GvaProcess *process);
-gchar *         gva_process_read_stdout         (GvaProcess *process);
-gchar *         gva_process_read_stderr         (GvaProcess *process);
+guint           gva_process_stdout_num_lines    (GvaProcess *process);
+guint           gva_process_stderr_num_lines    (GvaProcess *process);
+const gchar *   gva_process_stdout_peek_line    (GvaProcess *process);
+const gchar *   gva_process_stderr_peek_line    (GvaProcess *process);
+gchar *         gva_process_stdout_read_line    (GvaProcess *process);
+gchar *         gva_process_stderr_read_line    (GvaProcess *process);
+gchar **        gva_process_stdout_read_lines   (GvaProcess *process);
+gchar **        gva_process_stderr_read_lines   (GvaProcess *process);
 gboolean        gva_process_has_exited          (GvaProcess *process,
                                                  gint *status);
 

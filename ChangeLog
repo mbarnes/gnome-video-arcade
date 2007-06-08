@@ -1,3 +1,10 @@
+2007-06-08  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-process.[ch]:
+	Implement a more line-oriented API.
+
+	* src/gva-xmame.c: Adapt and simplify.
+
 2007-06-07  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-process.[ch]:

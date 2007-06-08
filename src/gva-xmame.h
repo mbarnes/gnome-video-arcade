@@ -24,8 +24,8 @@ gchar *         gva_xmame_get_executable        (GError **error);
 GvaProcess *    gva_xmame_async_command         (const gchar *arguments,
                                                  GError **error);
 gint            gva_xmame_command               (const gchar *arguments,
-                                                 gchar **standard_output,
-                                                 gchar **standard_error,
+                                                 gchar ***stdout_lines,
+                                                 gchar ***stderr_lines,
                                                  GError **error);
 gint            gva_xmame_wait_for_exit         (GvaProcess *process,
                                                  GError **error);
