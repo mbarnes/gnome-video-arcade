@@ -42,8 +42,6 @@ xmame_scan_for_error (gchar **lines, GError **error)
                 }
         }
 
-        g_strfreev (lines);
-
         return (ii < num_lines);
 }
 

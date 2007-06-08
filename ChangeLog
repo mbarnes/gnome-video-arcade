@@ -1,5 +1,10 @@
 2007-06-08  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-xmame.c (xmame_scan_for_error):
+	Fix a double free.
+
+2007-06-08  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-process.[ch]:
 	Implement a more line-oriented API.
 
