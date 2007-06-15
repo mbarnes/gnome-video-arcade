@@ -453,6 +453,7 @@ gva_tree_view_set_selected_game (const gchar *romname)
                         view, sorted_path, NULL, TRUE, 0.5, 0.0);
 
         gtk_tree_path_free (sorted_path);
+        gtk_tree_path_free (gamedb_path);
 
         gva_tree_view_set_last_selected_game (romname);
 }
