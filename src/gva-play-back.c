@@ -6,6 +6,7 @@
 #include <time.h>
 #include <sys/stat.h>
 
+#include "gva-error.h"
 #include "gva-game-db.h"
 #include "gva-game-store.h"
 #include "gva-time.h"
@@ -63,15 +64,15 @@ play_back_delete_inpfile (GtkTreeRowReference *reference)
         GtkTreeModel *model;
         GtkTreePath *path;
         GtkTreeIter iter;
-        gboolean iter_set;
+        gboolean valid;
         gchar *inpfile;
 
         model = gtk_tree_row_reference_get_model (reference);
 
         path = gtk_tree_row_reference_get_path (reference);
-        iter_set = gtk_tree_model_get_iter (model, &iter, path);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
         gtk_tree_path_free (path);
-        g_assert (iter_set);
+        g_assert (valid);
 
         gtk_tree_model_get (
                 model, &iter, GVA_GAME_STORE_COLUMN_INPFILE, &inpfile, -1);
@@ -145,7 +146,7 @@ play_back_add_input_file (gchar *inpfile, gchar *romname, GtkTreeModel *model)
 {
         GtkTreePath *path;
         GtkTreeIter iter;
-        gboolean iter_set;
+        gboolean valid;
         gchar *title;
         struct stat statbuf;
         time_t *time;
@@ -165,9 +166,9 @@ play_back_add_input_file (gchar *inpfile, gchar *romname, GtkTreeModel *model)
                 return;
         }
 
-        iter_set = gtk_tree_model_get_iter (
+        valid = gtk_tree_model_get_iter (
                 gva_game_db_get_model (), &iter, path);
-        g_assert (iter_set);
+        g_assert (valid);
 
         gtk_tree_path_free (path);
 
@@ -195,6 +196,8 @@ play_back_refresh_list (GtkWindow *window, GtkTreeView *view)
         GError *error = NULL;
 
         hash_table = gva_xmame_get_input_files (&error);
+        gva_error_handle (&error);
+
         if (hash_table != NULL)
         {
                 GtkTreeModel *model;
@@ -204,12 +207,6 @@ play_back_refresh_list (GtkWindow *window, GtkTreeView *view)
                 g_hash_table_foreach (
                         hash_table, (GHFunc) play_back_add_input_file, model);
                 g_hash_table_destroy (hash_table);
-        }
-        else
-        {
-                g_assert (error != NULL);
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
         }
 }
 

@@ -26,19 +26,31 @@ G_BEGIN_DECLS
 
 typedef struct _GvaProcess GvaProcess;
 typedef struct _GvaProcessClass GvaProcessClass;
+typedef struct _GvaProcessPrivate GvaProcessPrivate;
 
 struct _GvaProcess
 {
         GObject parent;
+
+        GError *error;
+        GvaProcessPrivate *priv;
 };
 
 struct _GvaProcessClass
 {
         GObjectClass parent_class;
 
-        void (*stdout_ready) (GvaProcess *process);
-        void (*stderr_ready) (GvaProcess *process);
-        void (*exited) (GvaProcess *process);
+        /* Methods */
+        const gchar *   (*stdout_peek_line)     (GvaProcess *process);
+        const gchar *   (*stderr_peek_line)     (GvaProcess *process);
+        gchar *         (*stdout_read_line)     (GvaProcess *process);
+        gchar *         (*stderr_read_line)     (GvaProcess *process);
+
+        /* Signals */
+        void            (*stdout_ready)         (GvaProcess *process);
+        void            (*stderr_ready)         (GvaProcess *process);
+        void            (*exited)               (GvaProcess *process,
+                                                 gint status);
 };
 
 GType           gva_process_get_type            (void);
@@ -46,6 +58,8 @@ GvaProcess *    gva_process_new                 (GPid pid,
                                                  gint standard_input,
                                                  gint standard_output,
                                                  gint standard_error);
+GvaProcess *    gva_process_spawn               (const gchar *command_line,
+                                                 GError **error);
 gboolean        gva_process_write_stdin         (GvaProcess *process,
                                                  const gchar *data,
                                                  gssize length,

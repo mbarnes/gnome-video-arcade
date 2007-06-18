@@ -1,5 +1,6 @@
 #include "gva-util.h"
 
+#include "gva-error.h"
 #include "gva-xmame.h"
 
 static gboolean
@@ -32,12 +33,7 @@ gva_choose_inpname (const gchar *romname)
 
         if (inppath == NULL || !inpname_exists (inppath, romname))
         {
-                if (error != NULL)
-                {
-                        g_warning ("%s", error->message);
-                        g_clear_error (&error);
-                }
-
+                gva_error_handle (&error);
                 inpname = g_strdup (romname);
         }
         else while (TRUE)

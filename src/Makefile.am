@@ -15,6 +15,8 @@ gnome_video_arcade_SOURCES = \
 	gva-cell-renderer-pixbuf.c	\
 	gva-cell-renderer-pixbuf.h	\
 	gva-common.h			\
+	gva-error.c			\
+	gva-error.h			\
 	gva-favorites.c			\
 	gva-favorites.h			\
 	gva-game-db.c			\
@@ -23,6 +25,8 @@ gnome_video_arcade_SOURCES = \
 	gva-game-store.h		\
 	gva-main.c			\
 	gva-main.h			\
+	gva-mame-process.c		\
+	gva-mame-process.h		\
 	gva-play-back.c			\
 	gva-play-back.h			\
 	gva-preferences.c		\

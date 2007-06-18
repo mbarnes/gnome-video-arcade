@@ -3,7 +3,7 @@
 #include <string.h>
 #include <wait.h>
 
-#define READ_BUFFER_SIZE (65536) /* 16K */
+#include "gva-error.h"
 
 #define GVA_PROCESS_GET_PRIVATE(obj) \
         (G_TYPE_INSTANCE_GET_PRIVATE \
@@ -26,8 +26,6 @@ enum {
         LAST_SIGNAL
 };
 
-typedef struct _GvaProcessPrivate GvaProcessPrivate;
-
 struct _GvaProcessPrivate
 {
         GPid pid;  /* XXX assume this is a gint, not portable */
@@ -49,21 +47,35 @@ static gpointer parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
+process_propagate_error (GvaProcess *process, GError *error)
+{
+        if (error != NULL)
+        {
+                if (process->error == NULL)
+                        g_propagate_error (&process->error, error);
+                else
+                        g_error_free (error);
+        }
+}
+
+static void
 process_source_removed (GvaProcess *process)
 {
-        GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
         gint n_active_sources = 0;
 
-        g_assert (!priv->exited);
+        g_assert (!process->priv->exited);
 
-        n_active_sources += (priv->child_source_id > 0);
-        n_active_sources += (priv->stdout_source_id > 0);
-        n_active_sources += (priv->stderr_source_id > 0);
+        n_active_sources += (process->priv->child_source_id > 0);
+        n_active_sources += (process->priv->stdout_source_id > 0);
+        n_active_sources += (process->priv->stderr_source_id > 0);
 
         if (n_active_sources == 0)
         {
-                priv->exited = TRUE;
-                g_signal_emit (process, signals[EXITED], 0);
+                process->priv->exited = TRUE;
+
+                g_signal_emit (
+                        process, signals[EXITED], 0,
+                        process->priv->status);
         }
 }
 
@@ -72,12 +84,21 @@ process_exited (GPid pid,
                 gint status,
                 GvaProcess *process)
 {
-        GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
-
-        priv->child_source_id = 0;
-        priv->status = status;
+        process->priv->child_source_id = 0;
+        process->priv->status = status;
 
         g_spawn_close_pid (pid);
+
+        if (WIFSIGNALED (status))
+        {
+                GError *error = NULL;
+
+                g_set_error (
+                        &error, GVA_ERROR, GVA_ERROR_SYSTEM,
+                        "Child process terminated: %s",
+                        g_strsignal (WTERMSIG (status)));
+                process_propagate_error (process, error);
+        }
 }
 
 static gboolean
@@ -108,8 +129,7 @@ process_data_ready (GvaProcess *process,
 
                         case G_IO_STATUS_ERROR:
                                 g_assert (error != NULL);
-                                g_warning ("%s", error->message);
-                                g_clear_error (&error);
+                                process_propagate_error (process, error);
                                 break;
 
                         case G_IO_STATUS_EOF:
@@ -136,11 +156,9 @@ process_stdout_ready (GIOChannel *source,
                       GIOCondition condition,
                       GvaProcess *process)
 {
-        GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
-
         return process_data_ready (
-                process, source, condition, priv->stdout_lines,
-                &priv->stdout_source_id, signals[STDOUT_READY]);
+                process, source, condition, process->priv->stdout_lines,
+                &process->priv->stdout_source_id, signals[STDOUT_READY]);
 }
 
 static gboolean
@@ -148,11 +166,9 @@ process_stderr_ready (GIOChannel *source,
                       GIOCondition condition,
                       GvaProcess *process)
 {
-        GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
-
         return process_data_ready (
-                process, source, condition, priv->stderr_lines,
-                &priv->stderr_source_id, signals[STDERR_READY]);
+                process, source, condition, process->priv->stderr_lines,
+                &process->priv->stderr_source_id, signals[STDERR_READY]);
 }
 
 static void
@@ -284,26 +300,52 @@ process_get_property (GObject *object,
 static void
 process_finalize (GObject *object)
 {
-        GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (object);
+        GvaProcess *process = GVA_PROCESS (object);
 
-        if (priv->stdin_channel != NULL)
-                g_io_channel_unref (priv->stdin_channel);
-        if (priv->stdout_channel != NULL)
-                g_io_channel_unref (priv->stdout_channel);
-        if (priv->stderr_channel != NULL)
-                g_io_channel_unref (priv->stderr_channel);
+        gva_error_handle (&process->error);
 
-        while (!g_queue_is_empty (priv->stdout_lines))
-                g_free (g_queue_pop_head (priv->stdout_lines));
+        if (process->priv->stdin_channel != NULL)
+                g_io_channel_unref (process->priv->stdin_channel);
+        if (process->priv->stdout_channel != NULL)
+                g_io_channel_unref (process->priv->stdout_channel);
+        if (process->priv->stderr_channel != NULL)
+                g_io_channel_unref (process->priv->stderr_channel);
 
-        while (!g_queue_is_empty (priv->stderr_lines))
-                g_free (g_queue_pop_head (priv->stderr_lines));
+        while (!g_queue_is_empty (process->priv->stdout_lines))
+                g_free (g_queue_pop_head (process->priv->stdout_lines));
 
-        g_queue_free (priv->stdout_lines);
-        g_queue_free (priv->stderr_lines);
+        while (!g_queue_is_empty (process->priv->stderr_lines))
+                g_free (g_queue_pop_head (process->priv->stderr_lines));
+
+        g_queue_free (process->priv->stdout_lines);
+        g_queue_free (process->priv->stderr_lines);
 
         /* Chain up to parent's finalize() method. */
         G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static const gchar *
+process_stdout_peek_line (GvaProcess *process)
+{
+        return g_queue_peek_head (process->priv->stdout_lines);
+}
+
+static const gchar *
+process_stderr_peek_line (GvaProcess *process)
+{
+        return g_queue_peek_head (process->priv->stderr_lines);
+}
+
+static gchar *
+process_stdout_read_line (GvaProcess *process)
+{
+        return g_queue_pop_head (process->priv->stdout_lines);
+}
+
+static gchar *
+process_stderr_read_line (GvaProcess *process)
+{
+        return g_queue_pop_head (process->priv->stderr_lines);
 }
 
 static void
@@ -318,6 +360,11 @@ process_class_init (GvaProcessClass *class)
         object_class->set_property = process_set_property;
         object_class->get_property = process_get_property;
         object_class->finalize = process_finalize;
+
+        class->stdout_peek_line = process_stdout_peek_line;
+        class->stderr_peek_line = process_stderr_peek_line;
+        class->stdout_read_line = process_stdout_read_line;
+        class->stderr_read_line = process_stderr_read_line;
 
         g_object_class_install_property (
                 object_class,
@@ -390,9 +437,7 @@ process_class_init (GvaProcessClass *class)
                 G_STRUCT_OFFSET (GvaProcessClass, stdout_ready),
                 NULL, NULL,
                 g_cclosure_marshal_VOID__VOID,
-                G_TYPE_NONE,
-                0,
-                NULL);
+                G_TYPE_NONE, 0);
 
         signals[STDERR_READY] = g_signal_new (
                 "stderr-ready",
@@ -401,9 +446,7 @@ process_class_init (GvaProcessClass *class)
                 G_STRUCT_OFFSET (GvaProcessClass, stderr_ready),
                 NULL, NULL,
                 g_cclosure_marshal_VOID__VOID,
-                G_TYPE_NONE,
-                0,
-                NULL);
+                G_TYPE_NONE, 0);
 
         signals[EXITED] = g_signal_new (
                 "exited",
@@ -411,19 +454,18 @@ process_class_init (GvaProcessClass *class)
                 G_SIGNAL_RUN_LAST,
                 G_STRUCT_OFFSET (GvaProcessClass, stderr_ready),
                 NULL, NULL,
-                g_cclosure_marshal_VOID__VOID,
-                G_TYPE_NONE,
-                0,
-                NULL);
+                g_cclosure_marshal_VOID__INT,
+                G_TYPE_NONE, 1,
+                G_TYPE_INT);
 }
 
 static void
 process_init (GvaProcess *process)
 {
-        GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (process);
+        process->priv = GVA_PROCESS_GET_PRIVATE (process);
 
-        priv->stdout_lines = g_queue_new ();
-        priv->stderr_lines = g_queue_new ();
+        process->priv->stdout_lines = g_queue_new ();
+        process->priv->stderr_lines = g_queue_new ();
 }
 
 GType
@@ -443,7 +485,7 @@ gva_process_get_type (void)
                         sizeof (GvaProcess),
                         0,     /* n_preallocs */
                         (GInstanceInitFunc) process_init,
-                        NULL
+                        NULL   /* value_table */
                 };
 
                 type = g_type_register_static (
@@ -472,24 +514,52 @@ gva_process_new (GPid pid,
                 NULL);
 }
 
+GvaProcess *
+gva_process_spawn (const gchar *command_line,
+                   GError **error)
+{
+        gchar **argv;
+        gint standard_input;
+        gint standard_output;
+        gint standard_error;
+        GPid child_pid;
+        gboolean success;
+
+        g_return_val_if_fail (command_line != NULL, NULL);
+
+        success = g_shell_parse_argv (command_line, NULL, &argv, error);
+
+        if (!success)
+                return NULL;
+
+        success = gdk_spawn_on_screen_with_pipes (
+                gdk_screen_get_default (), NULL, argv, NULL,
+                G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &child_pid,
+                &standard_input, &standard_output, &standard_error,
+                error);
+
+        if (!success)
+                return NULL;
+
+        return gva_process_new (
+                child_pid, standard_input, standard_output, standard_error);
+}
+
 gboolean
 gva_process_write_stdin (GvaProcess *process,
                          const gchar *data,
                          gssize length,
                          GError **error)
 {
-        GvaProcessPrivate *priv;
         GIOStatus status = G_IO_STATUS_AGAIN;
         gsize bytes_written;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), FALSE);
         g_return_val_if_fail (data != NULL, FALSE);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
-
         while (status == G_IO_STATUS_AGAIN)
                 status = g_io_channel_write_chars (
-                        priv->stdin_channel, data,
+                        process->priv->stdin_channel, data,
                         length, &bytes_written, error);
         if (status == G_IO_STATUS_NORMAL)
         {
@@ -500,7 +570,7 @@ gva_process_write_stdin (GvaProcess *process,
                 status = G_IO_STATUS_AGAIN;
                 while (status == G_IO_STATUS_AGAIN)
                         status = g_io_channel_flush (
-                                priv->stdin_channel, error);
+                                process->priv->stdin_channel, error);
         }
         g_assert (status != G_IO_STATUS_EOF);
 
@@ -510,73 +580,65 @@ gva_process_write_stdin (GvaProcess *process,
 guint
 gva_process_stdout_num_lines (GvaProcess *process)
 {
-        GvaProcessPrivate *priv;
-
         g_return_val_if_fail (GVA_IS_PROCESS (process), 0);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
-
-        return g_queue_get_length (priv->stdout_lines);
+        return g_queue_get_length (process->priv->stdout_lines);
 }
 
 guint
 gva_process_stderr_num_lines (GvaProcess *process)
 {
-        GvaProcessPrivate *priv;
-
         g_return_val_if_fail (GVA_IS_PROCESS (process), 0);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
-
-        return g_queue_get_length (priv->stderr_lines);
+        return g_queue_get_length (process->priv->stderr_lines);
 }
 
 const gchar *
 gva_process_stdout_peek_line (GvaProcess *process)
 {
-        GvaProcessPrivate *priv;
+        GvaProcessClass *class;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
-
-        return g_queue_peek_head (priv->stdout_lines);
+        class = GVA_PROCESS_GET_CLASS (process);
+        g_return_val_if_fail (class->stdout_peek_line != NULL, NULL);
+        return class->stdout_peek_line (process);
 }
 
 const gchar *
 gva_process_stderr_peek_line (GvaProcess *process)
 {
-        GvaProcessPrivate *priv;
+        GvaProcessClass *class;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
-
-        return g_queue_peek_head (priv->stderr_lines);
+        class = GVA_PROCESS_GET_CLASS (process);
+        g_return_val_if_fail (class->stderr_peek_line != NULL, NULL);
+        return class->stderr_peek_line (process);
 }
 
 gchar *
 gva_process_stdout_read_line (GvaProcess *process)
 {
-        GvaProcessPrivate *priv;
+        GvaProcessClass *class;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
-
-        return g_queue_pop_head (priv->stdout_lines);
+        class = GVA_PROCESS_GET_CLASS (process);
+        g_return_val_if_fail (class->stdout_read_line != NULL, NULL);
+        return class->stdout_read_line (process);
 }
 
 gchar *
 gva_process_stderr_read_line (GvaProcess *process)
 {
-        GvaProcessPrivate *priv;
+        GvaProcessClass *class;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
-
-        return g_queue_pop_head (priv->stderr_lines);
+        class = GVA_PROCESS_GET_CLASS (process);
+        g_return_val_if_fail (class->stderr_read_line != NULL, NULL);
+        return class->stderr_read_line (process);
 }
 
 gchar **
@@ -630,14 +692,10 @@ gva_process_stderr_read_lines (GvaProcess *process)
 gboolean
 gva_process_has_exited (GvaProcess *process, gint *status)
 {
-        GvaProcessPrivate *priv;
-
         g_return_val_if_fail (GVA_IS_PROCESS (process), FALSE);
 
-        priv = GVA_PROCESS_GET_PRIVATE (process);
+        if (process->priv->exited && status != NULL)
+                *status = process->priv->status;
 
-        if (priv->exited && status != NULL)
-                *status = priv->status;
-
-        return priv->exited;
+        return process->priv->exited;
 }

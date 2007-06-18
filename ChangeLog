@@ -1,3 +1,48 @@
+2007-06-18  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/Makefile.am:
+	Add gva-error.[ch] and gva-mame-process.[ch].
+
+	* src/gva-favorites.c:
+	* src/gva-play-back.c:
+	* src/gva-preferences.c:
+	* src/gva-tree-view.c:
+	* src/gva-ui.c:
+	* src/gva-util.c:
+	* src/gva-xmame.c:
+	Pass GErrors to gva_error_handle().
+
+	* src/gva-process.c:
+	* src/gva-process.h:
+	Add a GError to the GvaProcess structure.
+	Add a private pointer to the GvaProcess structure.
+	Check for termination due to signal on process exit.
+	Include status value in "exited" signal.
+	Convert peek/read line functions to class methods.
+
+	* src/gva-process.c (gva_process_spawn):
+	New function spawns a GvaProcess with the given command line.
+
+	* src/gva-mame-process.c:
+	* src/gva-mame-process.h:
+	New source files subclass GvaProcess.
+	Check for errors when reading or peeking at lines.
+
+	* src/gva-game-db.c:
+	Load available romnames synchronously.
+	Load game titles and sample information asynchronously.
+
+	* src/gva-tree-view.c (tree_view_load_data):
+	Kick off multiple processes that load data asynchronously.
+	Keep the tree view widget insensitive until titles are loaded.
+
+	* src/gva-xmame.c:
+	* src/gva-xmame.h:
+	Move error detection routines to GvaProcess or GvaMameProcess.
+	Make the API more asynchronous by spawning a GvaMameProcess.
+
+	* src/gva-ui.c: Adapt.
+
 2007-06-14  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-tree-view.c (gva_tree_view_set_selected_game):

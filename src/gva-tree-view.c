@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "gva-cell-renderer-pixbuf.h"
+#include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-game-db.h"
 #include "gva-game-store.h"
@@ -202,6 +203,8 @@ tree_view_get_icon_name (const gchar *icon_name)
         g_assert (valid);
         pixbuf = gtk_icon_theme_load_icon (
                 icon_theme, icon_name, size, 0, &error);
+        gva_error_handle (&error);
+
         if (pixbuf != NULL)
         {
                 GdkPixbuf *scaled;
@@ -210,12 +213,6 @@ tree_view_get_icon_name (const gchar *icon_name)
                         pixbuf, size, size, GDK_INTERP_BILINEAR);
                 g_object_unref (pixbuf);
                 pixbuf = scaled;
-        }
-        else
-        {
-                g_assert (error != NULL);
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
         }
 
         return pixbuf;
@@ -297,6 +294,57 @@ tree_view_column_new_samples (GtkTreeView *view)
         return column;
 }
 
+static void
+tree_view_samples_added (GvaProcess *process, gint status)
+{
+        g_object_unref (process);
+}
+
+static void
+tree_view_titles_added (GvaProcess *process, gint status)
+{
+        GtkTreeModel *model;
+
+        model = gva_game_db_get_model ();
+
+        gtk_tree_sortable_set_sort_column_id (
+                GTK_TREE_SORTABLE (model),
+                GVA_GAME_STORE_COLUMN_TITLE,
+                GTK_SORT_ASCENDING);
+
+        gva_tree_view_update ();
+
+        gtk_widget_set_sensitive (
+                GVA_WIDGET_MAIN_TREE_VIEW, TRUE);
+
+        g_object_unref (process);
+}
+
+static gboolean
+tree_view_load_data (void)
+{
+        GvaProcess *process;
+        GError *error = NULL;
+
+        process = gva_game_db_update_samples (&error);
+        gva_error_handle (&error);
+
+        if (process != NULL)
+                g_signal_connect (
+                        process, "exited",
+                        G_CALLBACK (tree_view_samples_added), NULL);
+
+        process = gva_game_db_update_titles (&error);
+        gva_error_handle (&error);
+
+        if (process != NULL)
+                g_signal_connect (
+                        process, "exited",
+                        G_CALLBACK (tree_view_titles_added), NULL);
+
+        return FALSE;
+}
+
 void
 gva_tree_view_init (void)
 {
@@ -357,7 +405,7 @@ gva_tree_view_init (void)
 
         gtk_tree_view_set_model (view, model);
 
-        gva_tree_view_update ();
+        g_idle_add ((GSourceFunc) tree_view_load_data, NULL);
 }
 
 void
@@ -485,17 +533,13 @@ gva_tree_view_get_last_selected_game (void)
         client = gconf_client_get_default ();
         romname = gconf_client_get_string (
                 client, GVA_GCONF_SELECTED_GAME_KEY, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
 
         if (romname != NULL)
         {
                 retval = g_intern_string (romname);
                 g_free (romname);
-        }
-        else if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
         }
 
         return retval;
@@ -512,13 +556,8 @@ gva_tree_view_set_last_selected_game (const gchar *romname)
         client = gconf_client_get_default ();
         gconf_client_set_string (
                 client, GVA_GCONF_SELECTED_GAME_KEY, romname, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
 }
 
 gint
@@ -531,13 +570,8 @@ gva_tree_view_get_last_selected_view (void)
         client = gconf_client_get_default ();
         view = gconf_client_get_int (
                 client, GVA_GCONF_SELECTED_VIEW_KEY, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
 
         return view;
 }
@@ -551,11 +585,6 @@ gva_tree_view_set_last_selected_view (gint view)
         client = gconf_client_get_default ();
         gconf_client_set_int (
                 client, GVA_GCONF_SELECTED_VIEW_KEY, view, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
 }

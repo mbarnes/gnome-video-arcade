@@ -2,6 +2,8 @@
 
 #include <string.h>
 
+#include "gva-error.h"
+
 static GSList *favorites = NULL;
 static GConfClient *client = NULL;
 static gboolean initialized = FALSE;
@@ -17,11 +19,7 @@ favorites_load (void)
         favorites = gconf_client_get_list (
                 client, GVA_GCONF_FAVORITES_KEY,
                 GCONF_VALUE_STRING, &error);
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
+        gva_error_handle (&error);
 
         for (iter = favorites; iter != NULL; iter = iter->next)
         {
@@ -43,11 +41,7 @@ favorites_save (void)
         gconf_client_set_list (
                 client, GVA_GCONF_FAVORITES_KEY,
                 GCONF_VALUE_STRING, favorites, &error);
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
+        gva_error_handle (&error);
 }
 
 GSList *

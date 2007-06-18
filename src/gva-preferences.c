@@ -1,5 +1,6 @@
 #include "gva-preferences.h"
 
+#include "gva-error.h"
 #include "gva-ui.h"
 #include "gva-xmame.h"
 
@@ -54,13 +55,8 @@ gva_preferences_get_auto_save (void)
         client = gconf_client_get_default ();
         auto_save = gconf_client_get_bool (
                 client, GVA_GCONF_AUTO_SAVE_KEY, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
 
         return auto_save;
 }
@@ -74,13 +70,8 @@ gva_preferences_set_auto_save (gboolean auto_save)
         client = gconf_client_get_default ();
         gconf_client_set_bool (
                 client, GVA_GCONF_AUTO_SAVE_KEY, auto_save, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
 }
 
 gboolean
@@ -93,13 +84,8 @@ gva_preferences_get_full_screen (void)
         client = gconf_client_get_default ();
         full_screen = gconf_client_get_bool (
                 client, GVA_GCONF_FULL_SCREEN_KEY, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
 
         return full_screen;
 }
@@ -113,11 +99,6 @@ gva_preferences_set_full_screen (gboolean full_screen)
         client = gconf_client_get_default ();
         gconf_client_set_bool (
                 client, GVA_GCONF_FULL_SCREEN_KEY, full_screen, &error);
+        gva_error_handle (&error);
         g_object_unref (client);
-
-        if (error != NULL)
-        {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
 }

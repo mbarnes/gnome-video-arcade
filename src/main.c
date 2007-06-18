@@ -51,11 +51,6 @@ main (gint argc, gchar **argv)
         if (!gva_game_db_init (&error))
                 g_error ("%s", error->message);
 
-        if (!gva_game_db_update_samples (&error)) {
-                g_warning ("%s", error->message);
-                g_clear_error (&error);
-        }
-
         gva_main_init ();
         gva_play_back_init ();
         gva_preferences_init ();
