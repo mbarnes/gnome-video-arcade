@@ -77,6 +77,21 @@ game_store_class_init (GvaGameStoreClass *class)
         object_class->constructor = game_store_constructor;
 }
 
+static void
+game_store_init (GvaGameStore *game_store)
+{
+        GHashTable *index;
+
+        index = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) gtk_tree_row_reference_free);
+
+        g_object_set_data_full (
+                G_OBJECT (game_store), "index", index,
+                (GDestroyNotify) g_hash_table_destroy);
+}
+
 GType
 gva_game_store_get_type (void)
 {
@@ -93,7 +108,7 @@ gva_game_store_get_type (void)
                         NULL,  /* class_data */
                         sizeof (GvaGameStore),
                         0,     /* n_preallocs */
-                        (GInstanceInitFunc) NULL,
+                        (GInstanceInitFunc) game_store_init,
                         NULL   /* value_table */
                 };
 
@@ -108,4 +123,50 @@ GtkTreeModel *
 gva_game_store_new (void)
 {
         return g_object_new (GVA_TYPE_GAME_STORE, NULL);
+}
+
+void
+gva_game_store_index_add (GvaGameStore *game_store,
+                          const gchar *index_key,
+                          GtkTreeIter *iter)
+{
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GHashTable *index;
+
+        g_return_if_fail (game_store != NULL);
+        g_return_if_fail (index_key != NULL);
+        g_return_if_fail (iter != NULL);
+
+        model = GTK_TREE_MODEL (game_store);
+
+        index = g_object_get_data (G_OBJECT (game_store), "index");
+        g_assert (index != NULL);
+
+        path = gtk_tree_model_get_path (model, iter);
+        g_return_if_fail (path != NULL);
+        g_hash_table_insert (
+                index, g_strdup (index_key),
+                gtk_tree_row_reference_new (model, path));
+        gtk_tree_path_free (path);
+}
+
+GtkTreePath *
+gva_game_store_index_lookup (GvaGameStore *game_store,
+                             const gchar *index_key)
+{
+        GtkTreeRowReference *reference;
+        GHashTable *index;
+
+        g_return_val_if_fail (game_store != NULL, NULL);
+        g_return_val_if_fail (index_key != NULL, NULL);
+
+        index = g_object_get_data (G_OBJECT (game_store), "index");
+        g_assert (index != NULL);
+
+        reference = g_hash_table_lookup (index, index_key);
+        if (reference == NULL)
+                return NULL;
+
+        return gtk_tree_row_reference_get_path (reference);
 }

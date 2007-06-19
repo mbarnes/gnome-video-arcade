@@ -52,8 +52,13 @@ struct _GvaGameStoreClass
         GtkListStoreClass parent_class;
 };
 
-GType                 gva_game_store_get_type   (void);
-GtkTreeModel *        gva_game_store_new        (void);
+GType           gva_game_store_get_type         (void);
+GtkTreeModel *  gva_game_store_new              (void);
+void            gva_game_store_index_add        (GvaGameStore *game_store,
+                                                 const gchar *index_key,
+                                                 GtkTreeIter *iter);
+GtkTreePath *   gva_game_store_index_lookup     (GvaGameStore *game_store,
+                                                 const gchar *index_key);
 
 G_END_DECLS
 

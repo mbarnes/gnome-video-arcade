@@ -4,16 +4,14 @@
 #include "gva-game-store.h"
 #include "gva-xmame.h"
 
-static GtkTreeModel *model = NULL;
-static GHashTable *reference_ht = NULL;
-
 static void
 game_db_insert (const gchar *romname)
 {
-        GtkTreeRowReference *reference;
-        GtkTreePath *path;
+        GtkTreeModel *model;
         GtkTreeIter iter;
         gboolean favorite;
+
+        model = gva_game_db_get_model ();
 
         favorite = gva_favorites_contains (romname);
 
@@ -25,12 +23,7 @@ game_db_insert (const gchar *romname)
                 GVA_GAME_STORE_COLUMN_FAVORITE, favorite,
                 -1);
 
-        path = gtk_tree_model_get_path (model, &iter);
-        g_assert (path != NULL);
-        reference = gtk_tree_row_reference_new (model, path);
-        g_assert (reference != NULL);
-        g_hash_table_insert (reference_ht, g_strdup (romname), reference);
-        gtk_tree_path_free (path);
+        gva_game_store_index_add (GVA_GAME_STORE (model), romname, &iter);
 }
 
 static void
@@ -42,10 +35,12 @@ game_db_add_sample (const gchar *romname, const gchar *status)
 
         if (path != NULL)
         {
+                GtkTreeModel *model;
                 GtkTreeIter iter;
                 gboolean have_samples;
                 gboolean valid;
 
+                model = gva_game_db_get_model ();
                 valid = gtk_tree_model_get_iter (model, &iter, path);
                 gtk_tree_path_free (path);
                 g_assert (valid);
@@ -69,9 +64,11 @@ game_db_add_title (const gchar *romname, const gchar *title)
 
         if (path != NULL)
         {
+                GtkTreeModel *model;
                 GtkTreeIter iter;
                 gboolean valid;
 
+                model = gva_game_db_get_model ();
                 valid = gtk_tree_model_get_iter (model, &iter, path);
                 gtk_tree_path_free (path);
                 g_assert (valid);
@@ -88,19 +85,9 @@ gva_game_db_init (GError **error)
         GvaProcess *process;
         GPtrArray *array;
 
-        if (model != NULL)
-                return TRUE;
-
         array = gva_xmame_get_romset_files (error);
         if (array == NULL)
                 return FALSE;
-
-        model = gva_game_store_new ();
-
-        reference_ht = g_hash_table_new_full (
-                g_str_hash, g_str_equal,
-                (GDestroyNotify) g_free,
-                (GDestroyNotify) gtk_tree_row_reference_free);
 
         g_ptr_array_foreach (array, (GFunc) game_db_insert, NULL);
         g_ptr_array_foreach (array, (GFunc) g_free, NULL);
@@ -112,22 +99,23 @@ gva_game_db_init (GError **error)
 GtkTreePath *
 gva_game_db_lookup (const gchar *romname)
 {
-        GtkTreeRowReference *reference;
+        GtkTreeModel *model;
 
-        g_return_val_if_fail (model != NULL, NULL);
         g_return_val_if_fail (romname != NULL, NULL);
-        g_return_val_if_fail (reference_ht != NULL, NULL);
 
-        reference = g_hash_table_lookup (reference_ht, romname);
-        if (reference == NULL)
-                return NULL;
+        model = gva_game_db_get_model ();
 
-        return gtk_tree_row_reference_get_path (reference);
+        return gva_game_store_index_lookup (GVA_GAME_STORE (model), romname);
 }
 
 GtkTreeModel *
 gva_game_db_get_model (void)
 {
+        static GtkTreeModel *model = NULL;
+
+        if (G_UNLIKELY (model == NULL))
+                model = gva_game_store_new ();
+
         return model;
 }
 

@@ -125,8 +125,10 @@ play_back_selection_changed_cb (GtkTreeSelection *tree_selection)
 }
 
 static void
-play_back_render_time (GtkTreeViewColumn *column, GtkCellRenderer *renderer,
-                       GtkTreeModel *model, GtkTreeIter *iter)
+play_back_render_time (GtkTreeViewColumn *column,
+                       GtkCellRenderer *renderer,
+                       GtkTreeModel *model,
+                       GtkTreeIter *iter)
 {
         GValue value;
         gchar text[256];
@@ -142,11 +144,14 @@ play_back_render_time (GtkTreeViewColumn *column, GtkCellRenderer *renderer,
 }
 
 static void
-play_back_add_input_file (gchar *inpfile, gchar *romname, GtkTreeModel *model)
+play_back_add_input_file (const gchar *inpfile,
+                          const gchar *romname,
+                          GtkTreeModel *model)
 {
         GtkTreePath *path;
         GtkTreeIter iter;
         gboolean valid;
+        gchar *inpname;
         gchar *title;
         struct stat statbuf;
         time_t *time;
@@ -185,6 +190,10 @@ play_back_add_input_file (gchar *inpfile, gchar *romname, GtkTreeModel *model)
                 GVA_GAME_STORE_COLUMN_TITLE, title,
                 GVA_GAME_STORE_COLUMN_TIME, time,
                 -1);
+
+        inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
+        gva_game_store_index_add (GVA_GAME_STORE (model), inpname, &iter);
+        g_free (inpname);
 
         g_free (title);
 }

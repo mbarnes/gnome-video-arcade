@@ -1,3 +1,19 @@
+2007-06-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	Embed an index (hash table) of tree row references.
+	Provide an API for adding to and querying the index.
+
+	* src/gva-play-back.c (play_back_add_input_file):
+	Build a game store index of input file names.
+
+	* src/gva-game-db.c:
+	Use GvaGameStore's new embedded index.
+
+	* src/gva-game-db.c (gva_game_db_get_model):
+	The game database now lives here.
+
 2007-06-18  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/Makefile.am:
