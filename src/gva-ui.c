@@ -27,12 +27,13 @@ static const gchar *authors[] =
 static const gchar *copyright = "Copyright \xC2\xA9 2007 Matthew Barnes";
 
 static void
-record_game_exited (GvaProcess *process, gint status)
+record_game_exited (GvaProcess *process, gint status, gchar *inpname)
 {
         if (process->error == NULL)
-                gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
+                gva_play_back_show (inpname);
 
         g_object_unref (process);
+        g_free (inpname);
 }
 
 static void
@@ -194,9 +195,7 @@ action_record_cb (GtkAction *action)
         if (process != NULL)
                 g_signal_connect_after (
                         process, "exited",
-                        G_CALLBACK (record_game_exited), NULL);
-
-        g_free (inpname);
+                        G_CALLBACK (record_game_exited), inpname);
 }
 
 static void
@@ -230,7 +229,7 @@ action_remove_favorite_cb (GtkAction *action)
 static void
 action_show_play_back_cb (GtkAction *action)
 {
-        gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
+        gva_play_back_show (NULL);
 }
 
 static void

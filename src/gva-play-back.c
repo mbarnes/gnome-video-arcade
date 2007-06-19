@@ -146,7 +146,7 @@ play_back_render_time (GtkTreeViewColumn *column,
 static void
 play_back_add_input_file (const gchar *inpfile,
                           const gchar *romname,
-                          GtkTreeModel *model)
+                          GvaGameStore *game_store)
 {
         GtkTreePath *path;
         GtkTreeIter iter;
@@ -181,10 +181,10 @@ play_back_add_input_file (const gchar *inpfile,
                 gva_game_db_get_model (), &iter,
                 GVA_GAME_STORE_COLUMN_TITLE, &title, -1);
 
-        gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+        gtk_list_store_append (GTK_LIST_STORE (game_store), &iter);
 
         gtk_list_store_set (
-                GTK_LIST_STORE (model), &iter,
+                GTK_LIST_STORE (game_store), &iter,
                 GVA_GAME_STORE_COLUMN_INPFILE, inpfile,
                 GVA_GAME_STORE_COLUMN_ROMNAME, romname,
                 GVA_GAME_STORE_COLUMN_TITLE, title,
@@ -192,31 +192,10 @@ play_back_add_input_file (const gchar *inpfile,
                 -1);
 
         inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
-        gva_game_store_index_add (GVA_GAME_STORE (model), inpname, &iter);
+        gva_game_store_index_insert (game_store, inpname, &iter);
         g_free (inpname);
 
         g_free (title);
-}
-
-static void
-play_back_refresh_list (GtkWindow *window, GtkTreeView *view)
-{
-        GHashTable *hash_table;
-        GError *error = NULL;
-
-        hash_table = gva_xmame_get_input_files (&error);
-        gva_error_handle (&error);
-
-        if (hash_table != NULL)
-        {
-                GtkTreeModel *model;
-
-                model = gtk_tree_view_get_model (view);
-                gtk_list_store_clear (GTK_LIST_STORE (model));
-                g_hash_table_foreach (
-                        hash_table, (GHFunc) play_back_add_input_file, model);
-                g_hash_table_destroy (hash_table);
-        }
 }
 
 void
@@ -265,9 +244,6 @@ gva_play_back_init (void)
                 GVA_WIDGET_PLAY_BACK_TREE_VIEW, "row-activated",
                 G_CALLBACK (play_back_tree_view_row_activated_cb), NULL);
         g_signal_connect (
-                GVA_WIDGET_PLAY_BACK_WINDOW, "show",
-                G_CALLBACK (play_back_refresh_list), view);
-        g_signal_connect (
                 GVA_WIDGET_PLAY_BACK_BUTTON, "clicked",
                 G_CALLBACK (play_back_clicked_cb), view);
         g_signal_connect (
@@ -281,4 +257,46 @@ gva_play_back_init (void)
                 G_CALLBACK (play_back_selection_changed_cb), NULL);
 
         play_back_selection_changed_cb (gtk_tree_view_get_selection (view));
+}
+
+void
+gva_play_back_show (const gchar *inpname)
+{
+        GHashTable *hash_table;
+        GvaGameStore *game_store;
+        GtkTreeView *view;
+        GError *error = NULL;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_PLAY_BACK_TREE_VIEW);
+        game_store = GVA_GAME_STORE (gtk_tree_view_get_model (view));
+
+        hash_table = gva_xmame_get_input_files (&error);
+        gva_error_handle (&error);
+
+        if (hash_table != NULL)
+        {
+                gva_game_store_clear (game_store);
+                g_hash_table_foreach (
+                        hash_table, (GHFunc) play_back_add_input_file,
+                        game_store);
+                g_hash_table_destroy (hash_table);
+        }
+
+        if (inpname != NULL)
+        {
+                GtkTreePath *path;
+
+                path = gva_game_store_index_lookup (game_store, inpname);
+
+                if (path != NULL)
+                {
+                        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+                        gtk_tree_view_scroll_to_cell (
+                                view, path, NULL, TRUE, 0.5, 0.0);
+                        gtk_widget_grab_focus (GTK_WIDGET (view));
+                        gtk_tree_path_free (path);
+                }
+        }
+
+        gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
 }

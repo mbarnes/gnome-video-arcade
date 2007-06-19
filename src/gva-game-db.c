@@ -23,7 +23,7 @@ game_db_insert (const gchar *romname)
                 GVA_GAME_STORE_COLUMN_FAVORITE, favorite,
                 -1);
 
-        gva_game_store_index_add (GVA_GAME_STORE (model), romname, &iter);
+        gva_game_store_index_insert (GVA_GAME_STORE (model), romname, &iter);
 }
 
 static void

@@ -6,6 +6,7 @@
 G_BEGIN_DECLS
 
 void            gva_play_back_init              (void);
+void            gva_play_back_show              (const gchar *inpname);
 
 G_END_DECLS
 

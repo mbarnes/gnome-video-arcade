@@ -1,5 +1,17 @@
 2007-06-19  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-game-store.c (gva_game_store_clear):
+	New function clears both the list store and the index.
+
+	* src/gva-play-back.c (gva_play_back_show):
+	New function refreshes the recorded game list, selects the given
+	input file name (if given), and shows the Recorded Games window.
+
+	* src/gva-ui.c (record_game_exited), (action_show_play_back_cb):
+	Call gva_play_back_show() instead of gtk_widget_show().
+
+2007-06-19  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-game-store.c:
 	* src/gva-game-store.h:
 	Embed an index (hash table) of tree row references.
