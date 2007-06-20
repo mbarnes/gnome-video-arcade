@@ -1,3 +1,7 @@
+2007-06-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* POTFILES.in: Add src/gva-mame-process.c.
+
 2007-05-19  Matthew Barnes  <mbarnes@redhat.com>
 
 	* LINGUAS: Add Swedish (sv).

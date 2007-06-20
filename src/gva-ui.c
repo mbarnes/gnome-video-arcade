@@ -336,7 +336,7 @@ static GtkActionEntry entries[] =
           G_CALLBACK (action_show_play_back_cb) },
 
         { "start",
-          GTK_STOCK_EXECUTE,
+          "gnome-joystick",
           N_("_Start"),
           "<Control>s",
           N_("Start the selected game"),

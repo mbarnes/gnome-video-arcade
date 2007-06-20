@@ -1,5 +1,14 @@
 2007-06-19  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/main.c (main):
+	Use gtk_init_with_args() to initialize GTK+.
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-ui.c:
+	Use "gnome-joystick" for the start game icon.
+
+2007-06-19  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-game-store.c (gva_game_store_clear):
 	New function clears both the list store and the index.
 

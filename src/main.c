@@ -45,7 +45,11 @@ main (gint argc, gchar **argv)
         bindtextdomain (PACKAGE, LOCALEDIR);
         textdomain (PACKAGE);
 
-        gtk_init (&argc, &argv);
+        gtk_init_with_args (
+                &argc, &argv, NULL, NULL, GETTEXT_PACKAGE, &error);
+        if (error != NULL)
+                g_error ("%s", error->message);
+        
         gtk_window_set_default_icon_name (PACKAGE);
 
         if (!gva_game_db_init (&error))
