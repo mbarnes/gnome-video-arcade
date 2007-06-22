@@ -138,7 +138,7 @@
                             <child>
                               <widget class="GtkImage" id="main-start-game-button-image">
                                 <property name="visible">True</property>
-                                <property name="icon_name">gnome-joystick</property>
+                                <property name="stock">gtk-execute</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
