@@ -1,3 +1,12 @@
+2007-06-21  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.2.0
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-ui.c:
+	Revert previous change; not all icon themes represent
+	"gnome-joystick" as a joystick.  Too bad.
+
 2007-06-19  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/main.c (main):
