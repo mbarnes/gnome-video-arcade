@@ -1,3 +1,11 @@
+2007-06-26  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Add version checks for GLib and GTK+. (Gianni Moschini)
+
+	* src/Makefile.am:
+	Add GLIB_CFLAGS, GLIB_GLIBS, GTK_CFLAGS, and GTK_LIBS.
+
 2007-06-21  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.2.0

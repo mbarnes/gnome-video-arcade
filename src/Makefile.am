@@ -4,6 +4,7 @@ bin_PROGRAMS = gnome-video-arcade
 
 AM_CFLAGS = \
 	-Werror \
+	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
 	@GCONF_CFLAGS@ @GLADE_CFLAGS@
 
 AM_CPPFLAGS = \
@@ -46,4 +47,5 @@ gnome_video_arcade_SOURCES = \
 	main.c
 
 gnome_video_arcade_LDADD = \
+	@GLIB_LIBS@ @GTK_LIBS@ \
 	@GCONF_LIBS@ @GLADE_LIBS@
