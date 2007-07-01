@@ -115,6 +115,8 @@ tree_view_selection_changed_cb (GtkTreeSelection *selection)
                 gboolean favorite;
 
                 favorite = gva_favorites_contains (romname);
+                gtk_action_set_sensitive (GVA_ACTION_GO_BACK, TRUE);
+                gtk_action_set_sensitive (GVA_ACTION_GO_FORWARD, TRUE);
                 gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, !favorite);
                 gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, favorite);
 
@@ -122,6 +124,8 @@ tree_view_selection_changed_cb (GtkTreeSelection *selection)
         }
         else
         {
+                gtk_action_set_sensitive (GVA_ACTION_GO_BACK, FALSE);
+                gtk_action_set_sensitive (GVA_ACTION_GO_FORWARD, FALSE);
                 gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
                 gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
         }

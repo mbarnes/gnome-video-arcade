@@ -34,6 +34,8 @@ gnome_video_arcade_SOURCES = \
 	gva-preferences.h		\
 	gva-process.c			\
 	gva-process.h			\
+	gva-properties.h		\
+	gva-properties.c		\
 	gva-time.c			\
 	gva-time.h			\
 	gva-tree-view.c			\

@@ -1,3 +1,28 @@
+2007-07-01  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Design a skeletal Properties window.
+
+	* src/Makefile.am:
+	Add gva-properties.[ch].
+
+	* src/main.c (main):
+	Call gva_properties_init().
+
+	* src/gva-tree-view.c (tree_view_selection_changed_cb):
+	Update sensitivity of the "go-back" and "go-forward" actions.
+
+	* src/gva-ui.h:
+	Add "go-back" and "go-forward" action macros.
+	Add various "properties" widget macros.
+
+	* src/gva-ui.c:
+	Add "go-back" and "go-forward" actions, which move the tree view
+	cursor back or forward (respectively) one row.
+
+	* src/gva-ui.c (action_properties_cb):
+	Show the Properties window.
+
 2007-06-26  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:

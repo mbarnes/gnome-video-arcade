@@ -10,6 +10,8 @@
 #define GVA_ACTION_AUTO_SAVE            (gva_ui_get_action ("auto-save"))
 #define GVA_ACTION_CONTENTS             (gva_ui_get_action ("contents"))
 #define GVA_ACTION_FULL_SCREEN          (gva_ui_get_action ("full-screen"))
+#define GVA_ACTION_GO_BACK              (gva_ui_get_action ("go-back"))
+#define GVA_ACTION_GO_FORWARD           (gva_ui_get_action ("go-forward"))
 #define GVA_ACTION_INSERT_FAVORITE      (gva_ui_get_action ("insert-favorite"))
 #define GVA_ACTION_PLAY_BACK            (gva_ui_get_action ("play-back"))
 #define GVA_ACTION_PROPERTIES           (gva_ui_get_action ("properties"))
@@ -45,6 +47,13 @@
 #define GVA_WIDGET_PREFERENCES_CLOSE_BUTTON  GW ("preferences-close-button")
 #define GVA_WIDGET_PREFERENCES_FULL_SCREEN   GW ("preferences-full-screen")
 #define GVA_WIDGET_PREFERENCES_WINDOW        GW ("preferences-window")
+
+/* Properties Window */
+#define GVA_WIDGET_PROPERTIES_BACK_BUTTON    GW ("properties-back-button")
+#define GVA_WIDGET_PROPERTIES_CLOSE_BUTTON   GW ("properties-close-button")
+#define GVA_WIDGET_PROPERTIES_FORWARD_BUTTON GW ("properties-forward-button")
+#define GVA_WIDGET_PROPERTIES_HEADER         GW ("properties-header")
+#define GVA_WIDGET_PROPERTIES_WINDOW         GW ("properties-window")
 
 G_BEGIN_DECLS
 

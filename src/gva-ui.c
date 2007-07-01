@@ -86,6 +86,62 @@ action_full_screen_cb (GtkToggleAction *action)
 }
 
 static void
+action_go_back_cb (GtkAction *action)
+{
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeView *view;
+        GtkTreeIter iter;
+        gboolean valid;
+        gint n_nodes;
+        gint index;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        selection = gtk_tree_view_get_selection (view);
+        valid = gtk_tree_selection_get_selected (selection, &model, &iter);
+        n_nodes = gtk_tree_model_iter_n_children (model, NULL);
+        g_return_if_fail (valid);
+
+        path = gtk_tree_model_get_path (model, &iter);
+        index = gtk_tree_path_get_indices (path)[0];
+        index = (index + n_nodes - 1) % n_nodes;
+        gtk_tree_path_free (path);
+
+        path = gtk_tree_path_new_from_indices (index, -1);
+        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+        gtk_tree_path_free (path);
+}
+
+static void
+action_go_forward_cb (GtkAction *action)
+{
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeView *view;
+        GtkTreeIter iter;
+        gboolean valid;
+        gint n_nodes;
+        gint index;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        selection = gtk_tree_view_get_selection (view);
+        valid = gtk_tree_selection_get_selected (selection, &model, &iter);
+        n_nodes = gtk_tree_model_iter_n_children (model, NULL);
+        g_return_if_fail (valid);
+
+        path = gtk_tree_model_get_path (model, &iter);
+        index = gtk_tree_path_get_indices (path)[0];
+        index = (index + n_nodes + 1) % n_nodes;
+        gtk_tree_path_free (path);
+
+        path = gtk_tree_path_new_from_indices (index, -1);
+        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+        gtk_tree_path_free (path);
+}
+
+static void
 action_insert_favorite_cb (GtkAction *action)
 {
         GtkTreeModel *model;
@@ -168,6 +224,7 @@ action_preferences_cb (GtkAction *action)
 static void
 action_properties_cb (GtkAction *action)
 {
+        gtk_widget_show (GVA_WIDGET_PROPERTIES_WINDOW);
 }
 
 static void
@@ -278,6 +335,20 @@ static GtkActionEntry entries[] =
           NULL,
           NULL,
           G_CALLBACK (action_contents_cb) },
+
+        { "go-back",
+          GTK_STOCK_GO_BACK,
+          N_("_Back"),
+          "<Alt>leftarrow",
+          N_("Show information about the next game in the list"),
+          G_CALLBACK (action_go_back_cb) },
+
+        { "go-forward",
+          GTK_STOCK_GO_FORWARD,
+          N_("_Forward"),
+          "<Alt>rightarrow",
+          N_("Show information about the previous game in the list"),
+          G_CALLBACK (action_go_forward_cb) },
 
         { "insert-favorite",
           GTK_STOCK_ADD,
