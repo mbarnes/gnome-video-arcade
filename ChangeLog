@@ -9,6 +9,10 @@
 	* src/main.c (main):
 	Call gva_properties_init().
 
+	* src/gva-properties.c:
+	* src/gva-properties.h:
+	New source files implement the properties window.
+
 	* src/gva-tree-view.c (tree_view_selection_changed_cb):
 	Update sensitivity of the "go-back" and "go-forward" actions.
 
