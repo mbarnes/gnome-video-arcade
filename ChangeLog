@@ -1,5 +1,20 @@
 2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-parser.c:
+	Compare canonical representations of element and attribute names.
+	Shaves a few seconds off the parsing time, down to ~11s for me.
+
+	* src/gva-game-db.c (gva_game_db_update_data):
+	Remove this function; it just calls gva_game_db_update_data().
+
+	* src/gva-tree-view.c:
+	While game properties are being loaded:
+	  - Display a statusbar message to that effect.
+	  - Disable the "properties" action.
+	Emit a GtkTreeSelection "changed" signal when done.
+
+2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-process.c (gva_process_get_time_elapsed):
 	New function returns approximate time elapsed since process started.
 

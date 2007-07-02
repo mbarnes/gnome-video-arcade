@@ -7,9 +7,11 @@
 #include "gva-favorites.h"
 #include "gva-game-db.h"
 #include "gva-game-store.h"
+#include "gva-parser.h"
 #include "gva-ui.h"
 
 static GSList *visible_favorites = NULL;
+static gboolean properties_loaded = FALSE;
 
 static gboolean
 tree_view_popup_menu_cb (GtkTreeView *view,
@@ -130,7 +132,9 @@ tree_view_selection_changed_cb (GtkTreeSelection *selection)
                 gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
         }
 
-        gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, game_is_selected);
+        gtk_action_set_sensitive (
+                GVA_ACTION_PROPERTIES,
+                game_is_selected && properties_loaded);
         gtk_action_set_sensitive (GVA_ACTION_RECORD, game_is_selected);
         gtk_action_set_sensitive (GVA_ACTION_START, game_is_selected);
 }
@@ -299,8 +303,24 @@ tree_view_column_new_samples (GtkTreeView *view)
 }
 
 static void
-tree_view_data_added (GvaProcess *process, gint status)
+tree_view_data_added (GvaProcess *process, gint status, gpointer user_data)
 {
+        GtkTreeView *view;
+        GtkTreeSelection *selection;
+        GtkStatusbar *statusbar;
+        guint context_id;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+        context_id = GPOINTER_TO_UINT (user_data);
+
+        gtk_statusbar_pop (statusbar, context_id);
+
+        properties_loaded = TRUE;
+
+        selection = gtk_tree_view_get_selection (view);
+        g_signal_emit_by_name (selection, "changed");
+
         g_object_unref (process);
 }
 
@@ -333,16 +353,25 @@ tree_view_titles_added (GvaProcess *process, gint status)
 static gboolean
 tree_view_load_data (void)
 {
+        GtkStatusbar *statusbar;
         GvaProcess *process;
+        guint context_id;
         GError *error = NULL;
 
-        process = gva_game_db_update_data (&error);
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+        context_id = gtk_statusbar_get_context_id (statusbar, G_STRFUNC);
+
+        gtk_statusbar_push (
+                statusbar, context_id, _("Loading game properties..."));
+
+        process = gva_parse_game_data (&error);
         gva_error_handle (&error);
 
         if (process != NULL)
                 g_signal_connect (
                         process, "exited",
-                        G_CALLBACK (tree_view_data_added), NULL);
+                        G_CALLBACK (tree_view_data_added),
+                        GUINT_TO_POINTER (context_id));
 
         process = gva_game_db_update_samples (&error);
         gva_error_handle (&error);

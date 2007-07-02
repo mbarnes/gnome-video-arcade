@@ -14,6 +14,24 @@ typedef struct
 
 } ParserData;
 
+/* Canonical names of elements and attributes */
+static struct
+{
+        const gchar *cloneof;
+        const gchar *description;
+        const gchar *game;
+        const gchar *history;
+        const gchar *mame;
+        const gchar *manufacturer;
+        const gchar *name;
+        const gchar *romof;
+        const gchar *runnable;
+        const gchar *sampleof;
+        const gchar *sourcefile;
+        const gchar *year;
+
+} intern;
+
 static void
 parser_error_missing_required_attribute (GMarkupParseContext *context,
                                          const gchar *attribute_name,
@@ -43,14 +61,25 @@ parser_attribute_lookup (const gchar *lookup_name,
 {
         gint ii;
 
-        if (attribute_name == NULL || attribute_value == NULL)
-                return NULL;
-
         for (ii = 0; attribute_name[ii] != NULL; ii++)
-                if (strcmp (lookup_name, attribute_name[ii]) == 0)
+                if (lookup_name == attribute_name[ii])
                         return attribute_value[ii];
 
         return default_value;
+}
+
+static const gchar **
+parser_intern_attribute_names (const gchar **attribute_name)
+{
+        const gchar **interned;
+        guint length, ii;
+
+        length = g_strv_length ((gchar **) attribute_name);
+        interned = g_new0 (const gchar *, length + 1);
+        for (ii = 0; ii < length; ii++)
+                interned[ii] = g_intern_string (attribute_name[ii]);
+
+        return interned;
 }
 
 static void
@@ -62,6 +91,7 @@ parser_start_element_game (GMarkupParseContext *context,
 {
         GtkTreeIter iter;
         gboolean valid;
+        const gchar **normalized;
 
         const gchar *name;
         const gchar *sourcefile;
@@ -72,12 +102,12 @@ parser_start_element_game (GMarkupParseContext *context,
 
         g_assert (data->path == NULL);
 
-        name = LOOKUP_ATTRIBUTE ("name", NULL);
-        sourcefile = LOOKUP_ATTRIBUTE ("sourcefile", NULL);
-        runnable = LOOKUP_ATTRIBUTE ("runnable", "yes");
-        cloneof = LOOKUP_ATTRIBUTE ("cloneof", NULL);
-        romof = LOOKUP_ATTRIBUTE ("romof", NULL);
-        sampleof = LOOKUP_ATTRIBUTE ("sampleof", NULL);
+        name = LOOKUP_ATTRIBUTE (intern.name, NULL);
+        sourcefile = LOOKUP_ATTRIBUTE (intern.sourcefile, NULL);
+        runnable = LOOKUP_ATTRIBUTE (intern.runnable, "yes");
+        cloneof = LOOKUP_ATTRIBUTE (intern.cloneof, NULL);
+        romof = LOOKUP_ATTRIBUTE (intern.romof, NULL);
+        sampleof = LOOKUP_ATTRIBUTE (intern.sampleof, NULL);
         g_assert (runnable != NULL);
 
         if (name == NULL)
@@ -113,13 +143,19 @@ parser_start_element (GMarkupParseContext *context,
                       GError **error)
 {
         ParserData *data = user_data;
+        gint ii;
+
+        element_name = g_intern_string (element_name);
+        attribute_name = parser_intern_attribute_names (attribute_name);
 
         /* Check these in decreasing order of likelihood. */
 
-        if (strcmp (element_name, "game") == 0)
+        if (element_name == intern.game)
                 parser_start_element_game (
                         context, attribute_name,
                         attribute_value, data, error);
+
+        g_free (attribute_name);
 }
 
 static void
@@ -142,9 +178,11 @@ parser_end_element (GMarkupParseContext *context,
 {
         ParserData *data = user_data;
 
+        element_name = g_intern_string (element_name);
+
         /* Check these in decreasing order of likelihood. */
 
-        if (strcmp (element_name, "game") == 0)
+        if (element_name == intern.game)
                 parser_end_element_game (context, data, error);
 }
 
@@ -164,25 +202,27 @@ parser_text (GMarkupParseContext *context,
                 return;
 
         element_name = g_markup_parse_context_get_element (context);
+        element_name = g_intern_string (element_name);
+
         valid = gtk_tree_model_get_iter (data->model, &iter, data->path);
         g_assert (valid);
 
-        if (strcmp (element_name, "description") == 0)
+        if (element_name == intern.description)
                 gtk_list_store_set (
                         GTK_LIST_STORE (data->model), &iter,
                         GVA_GAME_STORE_COLUMN_DESCRIPTION, text, -1);
 
-        if (strcmp (element_name, "year") == 0)
+        else if (element_name == intern.year)
                 gtk_list_store_set (
                         GTK_LIST_STORE (data->model), &iter,
                         GVA_GAME_STORE_COLUMN_YEAR, text, -1);
 
-        if (strcmp (element_name, "manufacturer") == 0)
+        else if (element_name == intern.manufacturer)
                 gtk_list_store_set (
                         GTK_LIST_STORE (data->model), &iter,
                         GVA_GAME_STORE_COLUMN_MANUFACTURER, text, -1);
 
-        if (strcmp (element_name, "history") == 0)
+        else if (element_name == intern.history)
                 gtk_list_store_set (
                         GTK_LIST_STORE (data->model), &iter,
                         GVA_GAME_STORE_COLUMN_HISTORY, text, -1);
@@ -259,6 +299,20 @@ gva_parse_game_data (GError **error)
 {
         GvaProcess *process;
         ParserData *data;
+
+        /* Initialize the list of canonical names. */
+        intern.cloneof      = g_intern_static_string ("cloneof");
+        intern.description  = g_intern_static_string ("description");
+        intern.game         = g_intern_static_string ("game");
+        intern.history      = g_intern_static_string ("history");
+        intern.mame         = g_intern_static_string ("mame");
+        intern.manufacturer = g_intern_static_string ("manufacturer");
+        intern.name         = g_intern_static_string ("name");
+        intern.romof        = g_intern_static_string ("romof");
+        intern.runnable     = g_intern_static_string ("runnable");
+        intern.sampleof     = g_intern_static_string ("sampleof");
+        intern.sourcefile   = g_intern_static_string ("sourcefile");
+        intern.year         = g_intern_static_string ("year");
 
         process = gva_xmame_list_xml (error);
         if (process == NULL)

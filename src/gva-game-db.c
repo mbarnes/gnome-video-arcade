@@ -121,12 +121,6 @@ gva_game_db_get_model (void)
 }
 
 GvaProcess *
-gva_game_db_update_data (GError **error)
-{
-        return gva_parse_game_data (error);
-}
-
-GvaProcess *
 gva_game_db_update_samples (GError **error)
 {
         return gva_xmame_verify_sample_sets (
