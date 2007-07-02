@@ -75,8 +75,10 @@ parser_start_element_game (GMarkupParseContext *context,
         name = LOOKUP_ATTRIBUTE ("name", NULL);
         sourcefile = LOOKUP_ATTRIBUTE ("sourcefile", NULL);
         runnable = LOOKUP_ATTRIBUTE ("runnable", "yes");
+        cloneof = LOOKUP_ATTRIBUTE ("cloneof", NULL);
         romof = LOOKUP_ATTRIBUTE ("romof", NULL);
         sampleof = LOOKUP_ATTRIBUTE ("sampleof", NULL);
+        g_assert (runnable != NULL);
 
         if (name == NULL)
         {
@@ -237,9 +239,17 @@ parser_exit (GvaProcess *process,
              gint status,
              ParserData *data)
 {
+        GTimeVal time_elapsed;
+
         if (process->error == NULL)
                 g_markup_parse_context_end_parse (
                         data->context, &process->error);
+
+        gva_process_get_time_elapsed (process, &time_elapsed);
+
+        g_message (
+                "XML parsing completed in %d.%d seconds",
+                time_elapsed.tv_sec, time_elapsed.tv_usec / 100000);
 
         parser_data_free (data);
 }

@@ -39,6 +39,8 @@ struct _GvaProcessPrivate
         guint stdout_source_id;
         guint stderr_source_id;
 
+        GTimeVal start_time;
+
         gboolean exited;
         gint status;
 };
@@ -452,6 +454,8 @@ process_init (GvaProcess *process)
 
         process->priv->stdout_lines = g_queue_new ();
         process->priv->stderr_lines = g_queue_new ();
+
+        g_get_current_time (&process->priv->start_time);
 }
 
 GType
@@ -660,4 +664,15 @@ gva_process_has_exited (GvaProcess *process, gint *status)
                 *status = process->priv->status;
 
         return process->priv->exited;
+}
+
+void
+gva_process_get_time_elapsed (GvaProcess *process, GTimeVal *time_elapsed)
+{
+        g_return_if_fail (GVA_IS_PROCESS (process));
+        g_return_if_fail (time_elapsed != NULL);
+
+        g_get_current_time (time_elapsed);
+        time_elapsed->tv_sec -= process->priv->start_time.tv_sec;
+        g_time_val_add (time_elapsed, -process->priv->start_time.tv_usec);
 }

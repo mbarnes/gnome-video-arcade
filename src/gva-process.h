@@ -70,6 +70,8 @@ gchar **        gva_process_stdout_read_lines   (GvaProcess *process);
 gchar **        gva_process_stderr_read_lines   (GvaProcess *process);
 gboolean        gva_process_has_exited          (GvaProcess *process,
                                                  gint *status);
+void            gva_process_get_time_elapsed    (GvaProcess *process,
+                                                 GTimeVal *time_elapsed);
 
 G_END_DECLS
 

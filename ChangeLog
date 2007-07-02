@@ -1,3 +1,14 @@
+2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-process.c (gva_process_get_time_elapsed):
+	New function returns approximate time elapsed since process started.
+
+	* src/gva-parser.c (parser_exit):
+	Print time elapsed, to help me measure and tune performance.
+
+	* src/gva-parser.c (parser_start_element_game):
+	Forgot to lookup the "cloneof" attribute.
+
 2007-07-01  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/Makefile.am:
