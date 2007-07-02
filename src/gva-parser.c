@@ -223,7 +223,7 @@ parser_data_new (void)
 {
         ParserData *data;
 
-        data = g_slice_new (ParserData);
+        data = g_slice_new0 (ParserData);
         data->context = g_markup_parse_context_new (&parser, 0, data, NULL);
         data->model = gva_game_db_get_model ();
 
