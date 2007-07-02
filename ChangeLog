@@ -1,5 +1,16 @@
 2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
 
+	* configure.ac:
+	Add --with-history-file and --with-mameinfo-file options.
+	These options don't do anything but they will be used to parse
+	the history.dat and mameinfo.dat files ourselves, since recent
+	MAME releases no longer use them.
+
+	* gva-parser.c:
+	Refactor the logic a bit.
+
+2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-parser.c:
 	Compare canonical representations of element and attribute names.
 	Shaves a few seconds off the parsing time, down to ~11s for me.

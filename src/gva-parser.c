@@ -10,7 +10,8 @@ typedef struct
 {
         GMarkupParseContext *context;
         GtkTreeModel *model;
-        GtkTreePath *path;
+        GtkTreeIter iter;
+        gboolean iter_set;
 
 } ParserData;
 
@@ -49,25 +50,6 @@ parser_error_missing_required_attribute (GMarkupParseContext *context,
                 element_name, line_number, attribute_name);
 }
 
-/* Convenience Macro */
-#define LOOKUP_ATTRIBUTE(name, def) \
-        parser_attribute_lookup (name, attribute_name, attribute_value, def)
-
-static const gchar *
-parser_attribute_lookup (const gchar *lookup_name,
-                         const gchar **attribute_name,
-                         const gchar **attribute_value,
-                         const gchar *default_value)
-{
-        gint ii;
-
-        for (ii = 0; attribute_name[ii] != NULL; ii++)
-                if (lookup_name == attribute_name[ii])
-                        return attribute_value[ii];
-
-        return default_value;
-}
-
 static const gchar **
 parser_intern_attribute_names (const gchar **attribute_name)
 {
@@ -89,26 +71,33 @@ parser_start_element_game (GMarkupParseContext *context,
                            ParserData *data,
                            GError **error)
 {
-        GtkTreeIter iter;
-        gboolean valid;
-        const gchar **normalized;
+        GtkTreePath *path;
+        gint ii;
 
-        const gchar *name;
-        const gchar *sourcefile;
-        const gchar *runnable;
-        const gchar *cloneof;
-        const gchar *romof;
-        const gchar *sampleof;
+        const gchar *name = NULL;
+        const gchar *sourcefile = NULL;
+        const gchar *runnable = "yes";
+        const gchar *cloneof = NULL;
+        const gchar *romof = NULL;
+        const gchar *sampleof = NULL;
 
-        g_assert (data->path == NULL);
+        g_assert (!data->iter_set);
 
-        name = LOOKUP_ATTRIBUTE (intern.name, NULL);
-        sourcefile = LOOKUP_ATTRIBUTE (intern.sourcefile, NULL);
-        runnable = LOOKUP_ATTRIBUTE (intern.runnable, "yes");
-        cloneof = LOOKUP_ATTRIBUTE (intern.cloneof, NULL);
-        romof = LOOKUP_ATTRIBUTE (intern.romof, NULL);
-        sampleof = LOOKUP_ATTRIBUTE (intern.sampleof, NULL);
-        g_assert (runnable != NULL);
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                if (attribute_name[ii] == intern.name)
+                        name = attribute_value[ii];
+                else if (attribute_name[ii] == intern.sourcefile)
+                        sourcefile = attribute_value[ii];
+                else if (attribute_name[ii] == intern.runnable)
+                        runnable = attribute_value[ii];
+                else if (attribute_name[ii] == intern.cloneof)
+                        cloneof = attribute_value[ii];
+                else if (attribute_name[ii] == intern.romof)
+                        romof = attribute_value[ii];
+                else if (attribute_name[ii] == intern.sampleof)
+                        sampleof = attribute_value[ii];
+        }
 
         if (name == NULL)
         {
@@ -117,15 +106,16 @@ parser_start_element_game (GMarkupParseContext *context,
                 return;
         }
 
-        data->path = gva_game_db_lookup (name);
-        if (data->path == NULL)
+        path = gva_game_db_lookup (name);
+        if (path == NULL)
                 return;
-
-        valid = gtk_tree_model_get_iter (data->model, &iter, data->path);
-        g_assert (valid);
+        data->iter_set = gtk_tree_model_get_iter (
+                data->model, &data->iter, path);
+        g_assert (data->iter_set);
+        gtk_tree_path_free (path);
 
         gtk_list_store_set (
-                GTK_LIST_STORE (data->model), &iter,
+                GTK_LIST_STORE (data->model), &data->iter,
                 GVA_GAME_STORE_COLUMN_NAME, name,
                 GVA_GAME_STORE_COLUMN_SOURCEFILE, sourcefile,
                 GVA_GAME_STORE_COLUMN_RUNNABLE, strcmp (runnable, "yes") == 0,
@@ -163,11 +153,7 @@ parser_end_element_game (GMarkupParseContext *context,
                          ParserData *data,
                          GError **error)
 {
-        if (data->path != NULL)
-        {
-                gtk_tree_path_free (data->path);
-                data->path = NULL;
-        }
+        data->iter_set = FALSE;
 }
 
 static void
@@ -195,36 +181,31 @@ parser_text (GMarkupParseContext *context,
 {
         ParserData *data = user_data;
         const gchar *element_name;
-        GtkTreeIter iter;
-        gboolean valid;
 
-        if (data->path == NULL)
+        if (!data->iter_set)
                 return;
 
         element_name = g_markup_parse_context_get_element (context);
         element_name = g_intern_string (element_name);
 
-        valid = gtk_tree_model_get_iter (data->model, &iter, data->path);
-        g_assert (valid);
-
         if (element_name == intern.description)
                 gtk_list_store_set (
-                        GTK_LIST_STORE (data->model), &iter,
+                        GTK_LIST_STORE (data->model), &data->iter,
                         GVA_GAME_STORE_COLUMN_DESCRIPTION, text, -1);
 
         else if (element_name == intern.year)
                 gtk_list_store_set (
-                        GTK_LIST_STORE (data->model), &iter,
+                        GTK_LIST_STORE (data->model), &data->iter,
                         GVA_GAME_STORE_COLUMN_YEAR, text, -1);
 
         else if (element_name == intern.manufacturer)
                 gtk_list_store_set (
-                        GTK_LIST_STORE (data->model), &iter,
+                        GTK_LIST_STORE (data->model), &data->iter,
                         GVA_GAME_STORE_COLUMN_MANUFACTURER, text, -1);
 
         else if (element_name == intern.history)
                 gtk_list_store_set (
-                        GTK_LIST_STORE (data->model), &iter,
+                        GTK_LIST_STORE (data->model), &data->iter,
                         GVA_GAME_STORE_COLUMN_HISTORY, text, -1);
 }
 
@@ -245,7 +226,6 @@ parser_data_new (void)
         data = g_slice_new (ParserData);
         data->context = g_markup_parse_context_new (&parser, 0, data, NULL);
         data->model = gva_game_db_get_model ();
-        data->path = NULL;
 
         return data;
 }
@@ -254,8 +234,6 @@ static void
 parser_data_free (ParserData *data)
 {
         g_markup_parse_context_free (data->context);
-        if (data->path != NULL)
-                gtk_tree_path_free (data->path);
         g_slice_free (ParserData, data);
 }
 

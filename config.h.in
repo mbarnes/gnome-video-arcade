@@ -51,6 +51,12 @@
 /* Define to 1 if you have the <wordexp.h> header file. */
 #undef HAVE_WORDEXP_H
 
+/* Location of the arcade history file */
+#undef HISTORY_FILE
+
+/* Location of the MAME information file */
+#undef MAMEINFO_FILE
+
 /* Name of package */
 #undef PACKAGE
 
