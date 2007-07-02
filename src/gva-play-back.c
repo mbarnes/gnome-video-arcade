@@ -179,15 +179,15 @@ play_back_add_input_file (const gchar *inpfile,
 
         gtk_tree_model_get (
                 gva_game_db_get_model (), &iter,
-                GVA_GAME_STORE_COLUMN_TITLE, &title, -1);
+                GVA_GAME_STORE_COLUMN_DESCRIPTION, &title, -1);
 
         gtk_list_store_append (GTK_LIST_STORE (game_store), &iter);
 
         gtk_list_store_set (
                 GTK_LIST_STORE (game_store), &iter,
                 GVA_GAME_STORE_COLUMN_INPFILE, inpfile,
-                GVA_GAME_STORE_COLUMN_ROMNAME, romname,
-                GVA_GAME_STORE_COLUMN_TITLE, title,
+                GVA_GAME_STORE_COLUMN_NAME, romname,
+                GVA_GAME_STORE_COLUMN_DESCRIPTION, title,
                 GVA_GAME_STORE_COLUMN_TIME, time,
                 -1);
 
@@ -232,9 +232,9 @@ gva_play_back_init (void)
         g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         column = gtk_tree_view_column_new_with_attributes (
                 _("Title"), renderer, "text",
-                GVA_GAME_STORE_COLUMN_TITLE, NULL);
+                GVA_GAME_STORE_COLUMN_DESCRIPTION, NULL);
         gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_TITLE);
+                column, GVA_GAME_STORE_COLUMN_DESCRIPTION);
         gtk_tree_view_append_column (view, column);
 
         g_signal_connect (

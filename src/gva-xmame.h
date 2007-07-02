@@ -24,6 +24,7 @@ GPtrArray *     gva_xmame_get_romset_files      (GError **error);
 GvaProcess *    gva_xmame_list_full             (GvaXmameCallback callback,
                                                  gpointer user_data,
                                                  GError **error);
+GvaProcess *    gva_xmame_list_xml              (GError **error);
 GvaProcess *    gva_xmame_verify_rom_sets       (GvaXmameCallback callback,
                                                  gpointer user_data,
                                                  GError **error);

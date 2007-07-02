@@ -53,6 +53,8 @@
 #define GVA_WIDGET_PROPERTIES_CLOSE_BUTTON   GW ("properties-close-button")
 #define GVA_WIDGET_PROPERTIES_FORWARD_BUTTON GW ("properties-forward-button")
 #define GVA_WIDGET_PROPERTIES_HEADER         GW ("properties-header")
+#define GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW \
+                                            GW ("properties-history-text-view")
 #define GVA_WIDGET_PROPERTIES_WINDOW         GW ("properties-window")
 
 G_BEGIN_DECLS

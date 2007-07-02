@@ -54,14 +54,19 @@ game_store_constructor (GType type,
         GObject *object;
         gint n = 0;
 
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_INPFILE */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_ROMNAME */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_TITLE */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_NAME */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_SOURCEFILE */
+        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_COLUMN_RUNNABLE */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_CLONEOF */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_ROMOF */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_SAMPLEOF */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_DESCRIPTION */
         types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_YEAR */
         types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_MANUFACTURER */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_CLONEOF */
-        types[n++] = GVA_TYPE_TIME;    /* GVA_GAME_STORE_COLUMN_TIME */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_HISTORY */
         types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_COLUMN_FAVORITE */
+        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_INPFILE */
+        types[n++] = GVA_TYPE_TIME;    /* GVA_GAME_STORE_COLUMN_TIME */
         types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_USES_SAMPLES */
         types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_HAVE_SAMPLES */
 

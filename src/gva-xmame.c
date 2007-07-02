@@ -377,6 +377,13 @@ gva_xmame_list_full (GvaXmameCallback callback,
         return process;
 }
 
+GvaProcess *
+gva_xmame_list_xml (GError **error)
+{
+        /* Execute the command "${xmame} -listxml". */
+        return gva_mame_process_spawn ("-listxml", error);
+}
+
 static void
 xmame_verify_rom_sets_on_exit (GvaProcess *process,
                                gint status,

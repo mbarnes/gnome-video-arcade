@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include "gva-game-store.h"
+#include "gva-parser.h"
 #include "gva-xmame.h"
 
 static void
@@ -19,7 +20,7 @@ game_db_insert (const gchar *romname)
 
         gtk_list_store_set (
                 GTK_LIST_STORE (model), &iter,
-                GVA_GAME_STORE_COLUMN_ROMNAME, romname,
+                GVA_GAME_STORE_COLUMN_NAME, romname,
                 GVA_GAME_STORE_COLUMN_FAVORITE, favorite,
                 -1);
 
@@ -75,7 +76,7 @@ game_db_add_title (const gchar *romname, const gchar *title)
 
                 gtk_list_store_set (
                         GTK_LIST_STORE (model), &iter,
-                        GVA_GAME_STORE_COLUMN_TITLE, title, -1);
+                        GVA_GAME_STORE_COLUMN_DESCRIPTION, title, -1);
         }
 }
 
@@ -117,6 +118,12 @@ gva_game_db_get_model (void)
                 model = gva_game_store_new ();
 
         return model;
+}
+
+GvaProcess *
+gva_game_db_update_data (GError **error)
+{
+        return gva_parse_game_data (error);
 }
 
 GvaProcess *

@@ -324,18 +324,6 @@ process_finalize (GObject *object)
         G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static const gchar *
-process_stdout_peek_line (GvaProcess *process)
-{
-        return g_queue_peek_head (process->priv->stdout_lines);
-}
-
-static const gchar *
-process_stderr_peek_line (GvaProcess *process)
-{
-        return g_queue_peek_head (process->priv->stderr_lines);
-}
-
 static gchar *
 process_stdout_read_line (GvaProcess *process)
 {
@@ -361,8 +349,6 @@ process_class_init (GvaProcessClass *class)
         object_class->get_property = process_get_property;
         object_class->finalize = process_finalize;
 
-        class->stdout_peek_line = process_stdout_peek_line;
-        class->stderr_peek_line = process_stderr_peek_line;
         class->stdout_read_line = process_stdout_read_line;
         class->stderr_read_line = process_stderr_read_line;
 
@@ -591,30 +577,6 @@ gva_process_stderr_num_lines (GvaProcess *process)
         g_return_val_if_fail (GVA_IS_PROCESS (process), 0);
 
         return g_queue_get_length (process->priv->stderr_lines);
-}
-
-const gchar *
-gva_process_stdout_peek_line (GvaProcess *process)
-{
-        GvaProcessClass *class;
-
-        g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
-
-        class = GVA_PROCESS_GET_CLASS (process);
-        g_return_val_if_fail (class->stdout_peek_line != NULL, NULL);
-        return class->stdout_peek_line (process);
-}
-
-const gchar *
-gva_process_stderr_peek_line (GvaProcess *process)
-{
-        GvaProcessClass *class;
-
-        g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
-
-        class = GVA_PROCESS_GET_CLASS (process);
-        g_return_val_if_fail (class->stderr_peek_line != NULL, NULL);
-        return class->stderr_peek_line (process);
 }
 
 gchar *

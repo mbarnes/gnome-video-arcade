@@ -82,7 +82,7 @@ tree_view_filter_visible (GtkTreeModel *model, GtkTreeIter *iter)
 
                 case 1:  /* Favorite Games */
                         gtk_tree_model_get (
-                                model, iter, GVA_GAME_STORE_COLUMN_ROMNAME,
+                                model, iter, GVA_GAME_STORE_COLUMN_NAME,
                                 &romname, -1);
                         visible = 
                                 g_slist_find (visible_favorites,
@@ -175,7 +175,7 @@ tree_view_search_equal (GtkTreeModel *model,
                       "abcdefghijklmnopqrstuvwxyz"
                       "0123456789";
 
-        g_assert (column == GVA_GAME_STORE_COLUMN_TITLE);
+        g_assert (column == GVA_GAME_STORE_COLUMN_DESCRIPTION);
         gtk_tree_model_get (model, iter, column, &title, -1);
         g_assert (title != NULL);
 
@@ -259,16 +259,16 @@ tree_view_column_new_title (GtkTreeView *view)
         g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         column = gtk_tree_view_column_new_with_attributes (
                 _("Title"), renderer, "text",
-                GVA_GAME_STORE_COLUMN_TITLE, NULL);
+                GVA_GAME_STORE_COLUMN_DESCRIPTION, NULL);
         gtk_tree_view_set_search_column (
-                view, GVA_GAME_STORE_COLUMN_TITLE);
+                view, GVA_GAME_STORE_COLUMN_DESCRIPTION);
         gtk_tree_view_set_search_equal_func (
                 view, (GtkTreeViewSearchEqualFunc)
                 tree_view_search_equal, NULL, NULL);
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_TITLE);
+                column, GVA_GAME_STORE_COLUMN_DESCRIPTION);
 
         return column;
 }
@@ -299,6 +299,12 @@ tree_view_column_new_samples (GtkTreeView *view)
 }
 
 static void
+tree_view_data_added (GvaProcess *process, gint status)
+{
+        g_object_unref (process);
+}
+
+static void
 tree_view_samples_added (GvaProcess *process, gint status)
 {
         g_object_unref (process);
@@ -313,7 +319,7 @@ tree_view_titles_added (GvaProcess *process, gint status)
 
         gtk_tree_sortable_set_sort_column_id (
                 GTK_TREE_SORTABLE (model),
-                GVA_GAME_STORE_COLUMN_TITLE,
+                GVA_GAME_STORE_COLUMN_DESCRIPTION,
                 GTK_SORT_ASCENDING);
 
         gva_tree_view_update ();
@@ -329,6 +335,14 @@ tree_view_load_data (void)
 {
         GvaProcess *process;
         GError *error = NULL;
+
+        process = gva_game_db_update_data (&error);
+        gva_error_handle (&error);
+
+        if (process != NULL)
+                g_signal_connect (
+                        process, "exited",
+                        G_CALLBACK (tree_view_data_added), NULL);
 
         process = gva_game_db_update_samples (&error);
         gva_error_handle (&error);
@@ -447,7 +461,7 @@ gva_tree_view_get_selected_game (void)
 
                 gtk_tree_model_get (
                         model, &iter,
-                        GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
+                        GVA_GAME_STORE_COLUMN_NAME, &romname, -1);
                 retval = g_intern_string (romname);
                 g_free (romname);
         }

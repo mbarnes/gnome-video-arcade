@@ -8,7 +8,7 @@ properties_update_header (GtkTreeModel *model,
                           GtkTreeIter *iter)
 {
         GtkLabel *label;
-        gchar *title;
+        gchar *description;
         gchar *manufacturer;
         gchar *year;
         gchar *markup;
@@ -17,12 +17,12 @@ properties_update_header (GtkTreeModel *model,
 
         gtk_tree_model_get (
                 model, iter,
-                GVA_GAME_STORE_COLUMN_TITLE, &title,
+                GVA_GAME_STORE_COLUMN_DESCRIPTION, &description,
                 GVA_GAME_STORE_COLUMN_MANUFACTURER, &manufacturer,
                 GVA_GAME_STORE_COLUMN_YEAR, &year, -1);
 
-        if (title == NULL)
-                title = g_strdup (_("(Game Description Unknown)"));
+        if (description == NULL)
+                description = g_strdup (_("(Game Description Unknown)"));
 
         if (manufacturer == NULL)
                 manufacturer = g_strdup (_("(Manufacturer Unknown)"));
@@ -31,14 +31,36 @@ properties_update_header (GtkTreeModel *model,
                 year = g_strdup (_("(Year Unknown)"));
 
         markup = g_markup_printf_escaped (
-                "<big><b>%s</b></big>\n%s, %s",
-                title, manufacturer, year);
+                "<big><b>%s</b></big>\n<small>%s, %s</small>",
+                description, manufacturer, year);
         gtk_label_set_markup (label, markup);
         g_free (markup);
 
-        g_free (title);
+        g_free (description);
         g_free (manufacturer);
         g_free (year);
+}
+
+static void
+properties_update_history (GtkTreeModel *model,
+                           GtkTreeIter *iter)
+{
+        GtkTextView *view;
+        GtkTextBuffer *buffer;
+        gchar *history;
+
+        view = GTK_TEXT_VIEW (GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW);
+
+        gtk_tree_model_get (
+                model, iter, GVA_GAME_STORE_COLUMN_HISTORY, &history, -1);
+
+        if (history == NULL)
+                history = g_strdup (_("History not available"));
+
+        buffer = gtk_text_view_get_buffer (view);
+        gtk_text_buffer_set_text (buffer, history, -1);
+
+        g_free (history);
 }
 
 static void
@@ -52,6 +74,7 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
                 return;
 
         properties_update_header (model, &iter);
+        properties_update_history (model, &iter);
 }
 
 void

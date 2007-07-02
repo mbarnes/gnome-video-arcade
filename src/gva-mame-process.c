@@ -36,32 +36,6 @@ exit:
         g_free (copy);
 }
 
-static const gchar *
-mame_process_stdout_peek_line (GvaProcess *process)
-{
-        const gchar *line;
-
-        /* Chain up to parent's stdout_peek_line() method. */
-        line = GVA_PROCESS_CLASS (parent_class)->stdout_peek_line (process);
-
-        mame_process_check_for_error (process, line);
-
-        return line;
-}
-
-static const gchar *
-mame_process_stderr_peek_line (GvaProcess *process)
-{
-        const gchar *line;
-
-        /* Chain up to parent's stderr_peek_line() method. */
-        line = GVA_PROCESS_CLASS (parent_class)->stderr_peek_line (process);
-
-        mame_process_check_for_error (process, line);
-
-        return line;
-}
-
 static gchar *
 mame_process_stdout_read_line (GvaProcess *process)
 {
@@ -113,8 +87,6 @@ mame_process_class_init (GvaProcessClass *class)
         parent_class = g_type_class_peek_parent (class);
 
         process_class = GVA_PROCESS_CLASS (class);
-        process_class->stdout_peek_line = mame_process_stdout_peek_line;
-        process_class->stderr_peek_line = mame_process_stderr_peek_line;
         process_class->stdout_read_line = mame_process_stdout_read_line;
         process_class->stderr_read_line = mame_process_stderr_read_line;
         process_class->exited = mame_process_exited;

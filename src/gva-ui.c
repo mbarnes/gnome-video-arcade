@@ -196,7 +196,7 @@ action_play_back_cb (GtkAction *action)
         g_assert (valid);
         gtk_tree_model_get (
                 model, &iter, GVA_GAME_STORE_COLUMN_INPFILE, &inpfile,
-                GVA_GAME_STORE_COLUMN_ROMNAME, &romname, -1);
+                GVA_GAME_STORE_COLUMN_NAME, &romname, -1);
         inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
         g_free (inpfile);
 

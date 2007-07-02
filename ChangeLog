@@ -1,5 +1,47 @@
 2007-07-01  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/Makefile.am:
+	Add gva-parser.[ch].
+
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	Add a bunch more columns to the tree model.
+	Rename TITLE column to DESCRIPTION.
+	Rename ROMNAME column to NAME.
+
+	* src/gva-game-db.c: Adapt.
+
+	* src/gva-play-back.c: Adapt.
+
+	* src/gva-properties.c: Adapt.
+
+	* src/gva-tree-view.c: Adapt.
+
+	* src/gva-ui.c: Adapt.
+
+	* src/gva-process.c:
+	* src/gva-process.h:
+	* src/gva-mame-process.c:
+	Remove the unused "peek" methods from GvaProcessClass.
+
+	* src/gva-game-db (gva_game_db_update_data):
+	Call gva_parse_game_data().
+
+	* src/gva-parser.c:
+	* src/gva-parser.h:
+	New source files parse MAME's -listxml output.
+
+	* src/gva-properties.c (properties_update_header):
+	Display manufacturer and year in smaller font.
+
+	* src/gva-properties.c (properties_update_history):
+	New function shows history information for the selected game.
+
+	* src/gva-xmame.c (gva_xmame_list_xml):
+	New function invokes MAME's -listxml feature.
+
+2007-07-01  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.glade:
 	Rework the forward and back buttons.
 

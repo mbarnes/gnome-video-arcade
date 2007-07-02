@@ -41,8 +41,6 @@ struct _GvaProcessClass
         GObjectClass parent_class;
 
         /* Methods */
-        const gchar *   (*stdout_peek_line)     (GvaProcess *process);
-        const gchar *   (*stderr_peek_line)     (GvaProcess *process);
         gchar *         (*stdout_read_line)     (GvaProcess *process);
         gchar *         (*stderr_read_line)     (GvaProcess *process);
 
@@ -66,8 +64,6 @@ gboolean        gva_process_write_stdin         (GvaProcess *process,
                                                  GError **error);
 guint           gva_process_stdout_num_lines    (GvaProcess *process);
 guint           gva_process_stderr_num_lines    (GvaProcess *process);
-const gchar *   gva_process_stdout_peek_line    (GvaProcess *process);
-const gchar *   gva_process_stderr_peek_line    (GvaProcess *process);
 gchar *         gva_process_stdout_read_line    (GvaProcess *process);
 gchar *         gva_process_stderr_read_line    (GvaProcess *process);
 gchar **        gva_process_stdout_read_lines   (GvaProcess *process);
