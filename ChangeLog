@@ -1,6 +1,14 @@
 2007-07-01  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:
+	Rework the forward and back buttons.
+
+	* src/gva-ui.c:
+	Reword the tooltips for "go-back" and "go-forward" actions.
+
+2007-07-01  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
 	Design a skeletal Properties window.
 
 	* src/Makefile.am:

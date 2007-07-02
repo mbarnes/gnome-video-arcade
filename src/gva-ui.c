@@ -340,14 +340,14 @@ static GtkActionEntry entries[] =
           GTK_STOCK_GO_BACK,
           N_("_Back"),
           "<Alt>leftarrow",
-          N_("Show information about the next game in the list"),
+          N_("Show previous game"),
           G_CALLBACK (action_go_back_cb) },
 
         { "go-forward",
           GTK_STOCK_GO_FORWARD,
           N_("_Forward"),
           "<Alt>rightarrow",
-          N_("Show information about the previous game in the list"),
+          N_("Show next game"),
           G_CALLBACK (action_go_forward_cb) },
 
         { "insert-favorite",
