@@ -1,3 +1,10 @@
+2007-07-03  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-parser.c:
+	For attribute names, it turns out that just comparing the strings
+	directly is faster than lookup up the canonical representation of
+	each attribute name on every pass.
+
 2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-process.c (process_set_property):

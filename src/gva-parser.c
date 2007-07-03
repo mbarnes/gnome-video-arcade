@@ -21,20 +21,14 @@ typedef struct
 
 } ParserData;
 
-/* Canonical names of elements and attributes */
+/* Canonical names of elements */
 static struct
 {
-        const gchar *cloneof;
         const gchar *description;
         const gchar *game;
         const gchar *history;
         const gchar *mame;
         const gchar *manufacturer;
-        const gchar *name;
-        const gchar *romof;
-        const gchar *runnable;
-        const gchar *sampleof;
-        const gchar *sourcefile;
         const gchar *year;
 
 } intern;
@@ -56,20 +50,6 @@ parser_error_missing_required_attribute (GMarkupParseContext *context,
                 element_name, line_number, attribute_name);
 }
 
-static const gchar **
-parser_intern_attribute_names (const gchar **attribute_name)
-{
-        const gchar **interned;
-        guint length, ii;
-
-        length = g_strv_length ((gchar **) attribute_name);
-        interned = g_new0 (const gchar *, length + 1);
-        for (ii = 0; ii < length; ii++)
-                interned[ii] = g_intern_string (attribute_name[ii]);
-
-        return interned;
-}
-
 static void
 parser_start_element_game (GMarkupParseContext *context,
                            const gchar **attribute_name,
@@ -89,19 +69,22 @@ parser_start_element_game (GMarkupParseContext *context,
 
         g_assert (!data->iter_set);
 
+        /* For attribute names, it turns out that just comparing the
+         * strings directly is faster than looking up the canonical
+         * representation of each attribute name on every pass. */
         for (ii = 0; attribute_name[ii] != NULL; ii++)
         {
-                if (attribute_name[ii] == intern.name)
+                if (strcmp (attribute_name[ii], "name") == 0)
                         name = attribute_value[ii];
-                else if (attribute_name[ii] == intern.sourcefile)
+                else if (strcmp (attribute_name[ii], "sourcefile") == 0)
                         sourcefile = attribute_value[ii];
-                else if (attribute_name[ii] == intern.runnable)
+                else if (strcmp (attribute_name[ii], "runnable") == 0)
                         runnable = attribute_value[ii];
-                else if (attribute_name[ii] == intern.cloneof)
+                else if (strcmp (attribute_name[ii], "cloneof") == 0)
                         cloneof = attribute_value[ii];
-                else if (attribute_name[ii] == intern.romof)
+                else if (strcmp (attribute_name[ii], "romof") == 0)
                         romof = attribute_value[ii];
-                else if (attribute_name[ii] == intern.sampleof)
+                else if (strcmp (attribute_name[ii], "sampleof") == 0)
                         sampleof = attribute_value[ii];
         }
 
@@ -144,7 +127,6 @@ parser_start_element (GMarkupParseContext *context,
         element_name = g_intern_string (element_name);
         g_assert (data->element_stack_depth < MAX_ELEMENT_DEPTH);
         data->element_stack[data->element_stack_depth++] = element_name;
-        attribute_name = parser_intern_attribute_names (attribute_name);
 
         /* Check these in decreasing order of likelihood. */
 
@@ -152,8 +134,6 @@ parser_start_element (GMarkupParseContext *context,
                 parser_start_element_game (
                         context, attribute_name,
                         attribute_value, data, error);
-
-        g_free (attribute_name);
 }
 
 static void
@@ -288,17 +268,11 @@ gva_parse_game_data (GError **error)
         ParserData *data;
 
         /* Initialize the list of canonical names. */
-        intern.cloneof      = g_intern_static_string ("cloneof");
         intern.description  = g_intern_static_string ("description");
         intern.game         = g_intern_static_string ("game");
         intern.history      = g_intern_static_string ("history");
         intern.mame         = g_intern_static_string ("mame");
         intern.manufacturer = g_intern_static_string ("manufacturer");
-        intern.name         = g_intern_static_string ("name");
-        intern.romof        = g_intern_static_string ("romof");
-        intern.runnable     = g_intern_static_string ("runnable");
-        intern.sampleof     = g_intern_static_string ("sampleof");
-        intern.sourcefile   = g_intern_static_string ("sourcefile");
         intern.year         = g_intern_static_string ("year");
 
         process = gva_xmame_list_xml (error);
