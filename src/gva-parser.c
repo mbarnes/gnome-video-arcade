@@ -6,12 +6,18 @@
 #include "gva-game-store.h"
 #include "gva-xmame.h"
 
+/* Based on MAME's DTD */
+#define MAX_ELEMENT_DEPTH 4
+
 typedef struct
 {
         GMarkupParseContext *context;
         GtkTreeModel *model;
         GtkTreeIter iter;
         gboolean iter_set;
+
+        const gchar *element_stack[MAX_ELEMENT_DEPTH];
+        guint element_stack_depth;
 
 } ParserData;
 
@@ -136,6 +142,8 @@ parser_start_element (GMarkupParseContext *context,
         gint ii;
 
         element_name = g_intern_string (element_name);
+        g_assert (data->element_stack_depth < MAX_ELEMENT_DEPTH);
+        data->element_stack[data->element_stack_depth++] = element_name;
         attribute_name = parser_intern_attribute_names (attribute_name);
 
         /* Check these in decreasing order of likelihood. */
@@ -164,7 +172,8 @@ parser_end_element (GMarkupParseContext *context,
 {
         ParserData *data = user_data;
 
-        element_name = g_intern_string (element_name);
+        g_assert (data->element_stack_depth > 0);
+        element_name = data->element_stack[--data->element_stack_depth];
 
         /* Check these in decreasing order of likelihood. */
 
@@ -185,8 +194,8 @@ parser_text (GMarkupParseContext *context,
         if (!data->iter_set)
                 return;
 
-        element_name = g_markup_parse_context_get_element (context);
-        element_name = g_intern_string (element_name);
+        g_assert (data->element_stack_depth > 0);
+        element_name = data->element_stack[data->element_stack_depth - 1];
 
         if (element_name == intern.description)
                 gtk_list_store_set (

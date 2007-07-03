@@ -1,12 +1,22 @@
 2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-process.c (process_set_property):
+	Set the watch priorities of the stdout and stderr streams to low
+	so the UI remains responsive while game properties are loading.
+
+	* src/gva-parser.c:
+	Maintain our own stack of interned element names.
+	Shaves a couple more seconds off the parsing time.
+
+2007-07-02  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac:
 	Add --with-history-file and --with-mameinfo-file options.
 	These options don't do anything but they will be used to parse
 	the history.dat and mameinfo.dat files ourselves, since recent
 	MAME releases no longer use them.
 
-	* gva-parser.c:
+	* src/gva-parser.c:
 	Refactor the logic a bit.
 
 2007-07-02  Matthew Barnes  <mbarnes@redhat.com>

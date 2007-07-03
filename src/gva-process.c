@@ -219,7 +219,7 @@ process_set_property (GObject *object,
                         CHECK_FOR_ERROR;
                         g_assert (priv->stdout_source_id == 0);
                         priv->stdout_source_id = g_io_add_watch_full (
-                                channel, G_PRIORITY_DEFAULT,
+                                channel, G_PRIORITY_LOW,
                                 G_IO_IN | G_IO_ERR | G_IO_HUP,
                                 (GIOFunc) process_stdout_ready, object,
                                 (GDestroyNotify) process_source_removed);
@@ -236,7 +236,7 @@ process_set_property (GObject *object,
                         CHECK_FOR_ERROR;
                         g_assert (priv->stderr_source_id == 0);
                         priv->stderr_source_id = g_io_add_watch_full (
-                                channel, G_PRIORITY_DEFAULT,
+                                channel, G_PRIORITY_LOW,
                                 G_IO_IN | G_IO_ERR | G_IO_HUP,
                                 (GIOFunc) process_stderr_ready, object,
                                 (GDestroyNotify) process_source_removed);
