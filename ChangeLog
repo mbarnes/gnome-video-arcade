@@ -1,5 +1,28 @@
 2007-07-03  Matthew Barnes  <mbarnes@redhat.com>
 
+	* configure.ac:
+	Drop support for --with-mameinfo-file.
+	Users aren't going to care about that information.
+
+	* src/gva-error.h:
+	Add GVA_ERROR_CONFIG.
+
+	* src/gva-parser.c:
+	Don't rely on MAME for arcade history.
+	Recent versions have dropped support for it.
+
+	* src/gva-properties.c (properties_update_history):
+	Fetch history information from gva_game_db_get_history().
+	Try looking up "cloneof" field if "name" field comes up empty.
+
+	* src/gva-game-db.c (gva_game_db_init):
+	Build an index of the arcade history file.
+
+	* src/gva-game-db.c (gva_game_db_get_history):
+	New function reads an entry from the arcade history file.
+
+2007-07-03  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-parser.c:
 	For attribute names, it turns out that just comparing the strings
 	directly is faster than lookup up the canonical representation of

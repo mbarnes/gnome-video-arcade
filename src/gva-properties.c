@@ -1,5 +1,6 @@
 #include "gva-properties.h"
 
+#include "gva-game-db.h"
 #include "gva-game-store.h"
 #include "gva-ui.h"
 
@@ -48,19 +49,39 @@ properties_update_history (GtkTreeModel *model,
         GtkTextView *view;
         GtkTextBuffer *buffer;
         gchar *history;
+        gchar *name;
+        gchar *cloneof;
+        GError *error = NULL;
 
         view = GTK_TEXT_VIEW (GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW);
+        buffer = gtk_text_view_get_buffer (view);
 
         gtk_tree_model_get (
-                model, iter, GVA_GAME_STORE_COLUMN_HISTORY, &history, -1);
+                model, iter, GVA_GAME_STORE_COLUMN_NAME, &name,
+                GVA_GAME_STORE_COLUMN_CLONEOF, &cloneof, -1);
+
+        history = gva_game_db_get_history (name, &error);
+        if (history == NULL && error == NULL && cloneof != NULL)
+                history = gva_game_db_get_history (cloneof, &error);
 
         if (history == NULL)
-                history = g_strdup (_("History not available"));
+        {
+                if (error != NULL)
+                {
+                        history = g_strdup_printf (
+                                _("Error while fetching history:\n%s"),
+                                error->message);
+                        g_clear_error (&error);
+                }
+                else
+                        history = g_strdup (_("History not available"));
+        }
 
-        buffer = gtk_text_view_get_buffer (view);
         gtk_text_buffer_set_text (buffer, history, -1);
 
         g_free (history);
+        g_free (cloneof);
+        g_free (name);
 }
 
 static void
@@ -82,6 +103,7 @@ gva_properties_init (void)
 {
         GtkWindow *window;
         GtkTreeView *view;
+        GError *error = NULL;
 
         window = GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW);
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);

@@ -26,7 +26,6 @@ static struct
 {
         const gchar *description;
         const gchar *game;
-        const gchar *history;
         const gchar *mame;
         const gchar *manufacturer;
         const gchar *year;
@@ -191,11 +190,6 @@ parser_text (GMarkupParseContext *context,
                 gtk_list_store_set (
                         GTK_LIST_STORE (data->model), &data->iter,
                         GVA_GAME_STORE_COLUMN_MANUFACTURER, text, -1);
-
-        else if (element_name == intern.history)
-                gtk_list_store_set (
-                        GTK_LIST_STORE (data->model), &data->iter,
-                        GVA_GAME_STORE_COLUMN_HISTORY, text, -1);
 }
 
 static GMarkupParser parser =
@@ -270,7 +264,6 @@ gva_parse_game_data (GError **error)
         /* Initialize the list of canonical names. */
         intern.description  = g_intern_static_string ("description");
         intern.game         = g_intern_static_string ("game");
-        intern.history      = g_intern_static_string ("history");
         intern.mame         = g_intern_static_string ("mame");
         intern.manufacturer = g_intern_static_string ("manufacturer");
         intern.year         = g_intern_static_string ("year");

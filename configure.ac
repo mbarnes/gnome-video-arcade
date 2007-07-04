@@ -67,25 +67,10 @@ if test "x${with_history}" = "xyes"; then
         AC_MSG_ERROR([--with-history-file missing PATH argument])
 fi
 if test "x${with_history}" != "xno"; then
-        AC_DEFINE_UNQUOTED(HISTORY_FILE, $with_history,
+        AC_DEFINE_UNQUOTED(HISTORY_FILE, "$with_history",
                 [Location of the arcade history file])
 fi
 AC_MSG_RESULT($with_history)
-
-# --with-mameinfo-file=PATH
-AC_MSG_CHECKING([for MAME information file])
-AC_ARG_WITH([mameinfo-file],
-        AC_HELP_STRING([--with-mameinfo-file=PATH],
-        [path to MAME information file (usually named 'mameinfo.dat')]),
-        with_mameinfo="$withval", with_mameinfo="no")
-if test "x${with_mameinfo}" = "xyes"; then
-        AC_MSG_ERROR([--with-mameinfo-file missing PATH argument])
-fi
-if test "x${with_mameinfo}" != "xno"; then
-        AC_DEFINE_UNQUOTED(MAMEINFO_FILE, $with_mameinfo,
-                [Location of the MAME information file])
-fi
-AC_MSG_RESULT($with_mameinfo)
 
 AC_CONFIG_FILES([Makefile data/Makefile src/Makefile po/Makefile.in])
 AC_OUTPUT

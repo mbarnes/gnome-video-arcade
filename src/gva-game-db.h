@@ -11,6 +11,8 @@ GtkTreePath *   gva_game_db_lookup              (const gchar *romname);
 GtkTreeModel *  gva_game_db_get_model           (void);
 GvaProcess *    gva_game_db_update_samples      (GError **error);
 GvaProcess *    gva_game_db_update_titles       (GError **error);
+gchar *         gva_game_db_get_history         (const gchar *romname,
+                                                 GError **error);
 
 G_END_DECLS
 
