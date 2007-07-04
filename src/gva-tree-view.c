@@ -7,6 +7,7 @@
 #include "gva-favorites.h"
 #include "gva-game-db.h"
 #include "gva-game-store.h"
+#include "gva-main.h"
 #include "gva-parser.h"
 #include "gva-ui.h"
 
@@ -307,14 +308,10 @@ tree_view_data_added (GvaProcess *process, gint status, gpointer user_data)
 {
         GtkTreeView *view;
         GtkTreeSelection *selection;
-        GtkStatusbar *statusbar;
-        guint context_id;
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
-        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
-        context_id = GPOINTER_TO_UINT (user_data);
 
-        gtk_statusbar_pop (statusbar, context_id);
+        gva_main_statusbar_pop (GPOINTER_TO_UINT (user_data));
 
         properties_loaded = TRUE;
 
@@ -353,16 +350,14 @@ tree_view_titles_added (GvaProcess *process, gint status)
 static gboolean
 tree_view_load_data (void)
 {
-        GtkStatusbar *statusbar;
         GvaProcess *process;
         guint context_id;
         GError *error = NULL;
 
-        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
-        context_id = gtk_statusbar_get_context_id (statusbar, G_STRFUNC);
+        context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
 
-        gtk_statusbar_push (
-                statusbar, context_id, _("Loading game properties..."));
+        gva_main_statusbar_push (
+                context_id, "%s", _("Loading game properties..."));
 
         process = gva_parse_game_data (&error);
         gva_error_handle (&error);

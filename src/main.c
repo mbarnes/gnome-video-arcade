@@ -15,23 +15,21 @@
 void
 show_xmame_version (void)
 {
-        GtkStatusbar *statusbar;
         gchar *xmame_version;
         guint context_id;
         GError *error = NULL;
 
-        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
-        context_id = gtk_statusbar_get_context_id (statusbar, G_STRFUNC);
+        context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
 
         xmame_version = gva_xmame_get_version (&error);
         if (xmame_version != NULL)
         {
-                gtk_statusbar_push (statusbar, context_id, xmame_version);
+                gva_main_statusbar_push (context_id, "%s", xmame_version);
                 g_free (xmame_version);
         }
         else
         {
-                gtk_statusbar_push (statusbar, context_id, error->message);
+                gva_main_statusbar_push (context_id, "%s", error->message);
                 g_clear_error (&error);
         }
 }

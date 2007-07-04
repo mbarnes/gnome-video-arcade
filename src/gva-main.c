@@ -1,5 +1,7 @@
 #include "gva-main.h"
 
+#include <stdarg.h>
+
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 
@@ -8,26 +10,18 @@ static guint menu_tooltip_cid;
 static void
 main_menu_item_select_cb (GtkItem *item, GtkAction *action)
 {
-        GtkStatusbar *statusbar;
         gchar *tooltip;
 
-        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
         g_object_get (G_OBJECT (action), "tooltip", &tooltip, NULL);
-
         if (tooltip != NULL)
-        {
-                gtk_statusbar_push (statusbar, menu_tooltip_cid, tooltip);
-                g_free (tooltip);
-        }
+                gva_main_statusbar_push (menu_tooltip_cid, "%s", tooltip);
+        g_free (tooltip);
 }
 
 static void
 main_menu_item_deselect_cb (GtkItem *item)
 {
-        GtkStatusbar *statusbar;
-
-        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
-        gtk_statusbar_pop (statusbar, menu_tooltip_cid);
+        gva_main_statusbar_pop (menu_tooltip_cid);
 }
 
 static void
@@ -93,7 +87,63 @@ gva_main_connect_proxy_cb (GtkUIManager *manager,
                         proxy, "deselect",
                         G_CALLBACK (main_menu_item_deselect_cb), NULL);
 
-                menu_tooltip_cid = gtk_statusbar_get_context_id (
-                        statusbar, G_STRFUNC);
+                menu_tooltip_cid =
+                        gva_main_statusbar_get_context_id (G_STRFUNC);
         }
+}
+
+guint
+gva_main_statusbar_get_context_id (const gchar *context)
+{
+        GtkStatusbar *statusbar;
+
+        g_return_val_if_fail (context != NULL, 0);
+
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+
+        return gtk_statusbar_get_context_id (statusbar, context);
+}
+
+guint
+gva_main_statusbar_push (guint context_id,
+                         const gchar *format,
+                         ...)
+{
+        GtkStatusbar *statusbar;
+        guint message_id;
+        va_list args;
+        gchar *text;
+
+        g_return_val_if_fail (format != NULL, 0);
+
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+
+        va_start (args, format);
+        text = g_strdup_vprintf (format, args);
+        message_id = gtk_statusbar_push (statusbar, context_id, text);
+        g_free (text);
+        va_end (args);
+
+        return message_id;
+}
+
+void
+gva_main_statusbar_pop (guint context_id)
+{
+        GtkStatusbar *statusbar;
+
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+
+        gtk_statusbar_pop (statusbar, context_id);
+}
+
+void
+gva_main_statusbar_remove (guint context_id,
+                           guint message_id)
+{
+        GtkStatusbar *statusbar;
+
+        statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
+
+        gtk_statusbar_remove (statusbar, context_id, message_id);
 }

@@ -1,5 +1,15 @@
 2007-07-04  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-main.c:
+	Add a more convenient statusbar API.
+
+	* src/main.c:
+	* src/gva-main.c:
+	* src/gva-tree-view.c:
+	Use the new statusbar API.
+
+2007-07-04  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.glade:
 	Properties window tweaks.
 
