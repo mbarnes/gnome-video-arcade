@@ -3,6 +3,9 @@
 #include "gva-error.h"
 #include "gva-xmame.h"
 
+#define GCONF_MONOSPACE_FONT_NAME_KEY \
+        "/desktop/gnome/interface/monospace_font_name"
+
 static gboolean
 inpname_exists (const gchar *inppath, const gchar *inpname)
 {
@@ -74,4 +77,21 @@ gva_find_data_file (const gchar *basename)
         }
 
         return NULL;
+}
+
+gchar *
+gva_get_monospace_font_name (void)
+{
+        GConfClient *client;
+        PangoFontDescription *desc;
+        gchar *font_name;
+        GError *error = NULL;
+
+        client = gconf_client_get_default ();
+        font_name = gconf_client_get_string (
+                client, GCONF_MONOSPACE_FONT_NAME_KEY, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+
+        return font_name;
 }

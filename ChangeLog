@@ -1,3 +1,14 @@
+2007-07-04  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Properties window tweaks.
+
+	* src/gva-properties.c (gva_properties_init):
+	Display arcade history in monospaced font.
+
+	* src/gva-util.c (gva_get_monospace_font_name):
+	New function retrieves preferred monospace font name.
+
 2007-07-03  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:

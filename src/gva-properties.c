@@ -3,6 +3,7 @@
 #include "gva-game-db.h"
 #include "gva-game-store.h"
 #include "gva-ui.h"
+#include "gva-util.h"
 
 static void
 properties_update_header (GtkTreeModel *model,
@@ -103,10 +104,14 @@ gva_properties_init (void)
 {
         GtkWindow *window;
         GtkTreeView *view;
+        GtkWidget *text_view;
+        PangoFontDescription *desc;
+        gchar *font_name;
         GError *error = NULL;
 
         window = GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW);
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        text_view = GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW;
 
         gtk_action_connect_proxy (
                 GVA_ACTION_GO_BACK,
@@ -127,4 +132,10 @@ gva_properties_init (void)
         g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (properties_selection_changed_cb), NULL);
+
+        font_name = gva_get_monospace_font_name ();
+        desc = pango_font_description_from_string (font_name);
+        gtk_widget_modify_font (text_view, desc);
+        pango_font_description_free (desc);
+        g_free (font_name);
 }

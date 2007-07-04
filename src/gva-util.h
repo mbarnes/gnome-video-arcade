@@ -7,6 +7,7 @@ G_BEGIN_DECLS
 
 gchar *         gva_choose_inpname              (const gchar *romname);
 gchar *         gva_find_data_file              (const gchar *basename);
+gchar *         gva_get_monospace_font_name     (void);
 
 G_END_DECLS
 
