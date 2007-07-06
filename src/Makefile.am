@@ -5,7 +5,8 @@ bin_PROGRAMS = gnome-video-arcade
 AM_CFLAGS = \
 	-Werror \
 	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
-	@GCONF_CFLAGS@ @GLADE_CFLAGS@
+	@GCONF_CFLAGS@ @GLADE_CFLAGS@ \
+	@SQLITE_CFLAGS@
 
 AM_CPPFLAGS = \
 	-DDATADIR=\""$(datadir)"\" \
@@ -16,6 +17,8 @@ gnome_video_arcade_SOURCES = \
 	gva-cell-renderer-pixbuf.c	\
 	gva-cell-renderer-pixbuf.h	\
 	gva-common.h			\
+	gva-db.c			\
+	gva-db.h			\
 	gva-error.c			\
 	gva-error.h			\
 	gva-favorites.c			\
@@ -52,4 +55,5 @@ gnome_video_arcade_SOURCES = \
 
 gnome_video_arcade_LDADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
-	@GCONF_LIBS@ @GLADE_LIBS@
+	@GCONF_LIBS@ @GLADE_LIBS@ \
+	@SQLITE_LIBS@

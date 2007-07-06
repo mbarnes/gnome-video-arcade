@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <libintl.h>
 
+#include "gva-db.h"
 #include "gva-game-db.h"
 #include "gva-main.h"
 #include "gva-play-back.h"
@@ -50,6 +51,9 @@ main (gint argc, gchar **argv)
                 g_error ("%s", error->message);
         
         gtk_window_set_default_icon_name (PACKAGE);
+
+        if (!gva_db_init (&error))
+                g_error ("%s", error->message);
 
         if (!gva_game_db_init (&error))
                 g_error ("%s", error->message);

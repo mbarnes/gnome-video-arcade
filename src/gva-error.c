@@ -11,6 +11,17 @@ gva_error_quark (void)
         return quark;
 }
 
+GQuark
+gva_sqlite_error_quark (void)
+{
+        static GQuark quark = 0;
+
+        if (G_UNLIKELY (quark == 0))
+                quark = g_quark_from_static_string ("gva-sqlite-error-quark");
+
+        return quark;
+}
+
 void
 gva_error_handle (GError **error)
 {

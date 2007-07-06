@@ -2,6 +2,7 @@
 
 #include <errno.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <wait.h>
@@ -119,6 +120,40 @@ gva_xmame_get_version (GError **error)
         g_strfreev (lines);
 
         return version;
+}
+
+gint
+gva_xmame_get_total_supported (GError **error)
+{
+        gchar **lines;
+        guint num_lines, ii;
+        gint total_supported = 0;
+
+        /* Execute the command "${xmame} -list". */
+        if (gva_xmame_command ("-list", &lines, NULL, error) != 0)
+                return -1;
+
+        /* Output is as follows:
+         *
+         * xmame currently supports:
+         * romname   romname   romname   romname   romname   ...
+         * romname   romname   romname   romname   romname   ...
+         * romname   romname   romname   romname   romname   ...
+         *
+         * Total Supported: nnnn
+         */
+
+        num_lines = g_strv_length (lines);
+
+        for (ii = 0; ii < num_lines; ii++)
+        {
+                if (g_str_has_prefix (lines[ii], "Total Supported:"))
+                        total_supported = strtol (lines[ii] + 16, NULL, 10);
+        }
+
+        g_strfreev (lines);
+
+        return total_supported;
 }
 
 gchar *

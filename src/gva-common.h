@@ -11,6 +11,7 @@
 #include <gtk/gtk.h>
 
 #include <gconf/gconf-client.h>
+#include <sqlite3.h>
 
 #define GVA_GCONF_PREFIX                "/apps/" PACKAGE
 #define GVA_GCONF_AUTO_SAVE_KEY         GVA_GCONF_PREFIX "/auto-save"
