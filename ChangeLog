@@ -1,3 +1,10 @@
+2007-07-10  Matthew Barnes  <mbarnes@redhat.com>
+
+	* Relicense the code under the terms of the GNU GPL v3.
+
+	* Add a copyright notice and copying permission statement
+	  to each of the source code files.
+
 2007-07-09  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:
