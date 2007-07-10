@@ -1,3 +1,51 @@
+2007-07-09  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Add an invisible progress bar next to the status bar.
+
+	* src/Makefile.am:
+	Add gva-history.[ch].
+	Remove gva-parser.[ch].
+
+	* src/main.c:
+	Add database_needs_rebuilt(), which is not yet used.
+	Only initialize the history module if HISTORY_FILE is defined.
+
+	* src/gva-db.[ch]:
+	Merge the XML parser into the database module.
+	Add gva_db_build() to initiate the parsing process.
+	Other small improvements to the parsing logic.
+
+	* src/gva-game-db.[ch]:
+	Split arcade history API into a separate module.
+
+	* src/gva-game-store.[ch]:
+	Add columns to match the "game" table in the SQLite database.
+	Initial cut at populating the GvaGameStore via an SQL query.
+	Still much more work to be done here...
+
+	* src/gva-parser.[ch]:
+	Remove these files; parser merged into database module.
+
+	* src/gva-process.[ch]:
+	Remove the "exited" and "status" properties.
+	Add a "progress" property and API for getting and setting.
+
+	* src/gva-process.c (process_data_ready):
+	Simplify the logic to read one line per call.
+	Takes longer to parse the XML data but is less CPU intensive.
+	Not sure about this yet, I might revert it.
+
+	* src/gva-process.c (process_class_init):
+	Fix typos in "exited" signal registration.
+
+	* src/gva-ui.h:
+	Add GVA_WIDGET_MAIN_PROGRESSBAR.
+
+	* src/gva-properties.c:
+	* src/gva-tree-view.c:
+	Adapt to API changes.
+
 2007-07-06  Matthew Barnes  <mbarnes@redhat.com>
 
 	** Phase one of adding an SQLite games database.

@@ -2,13 +2,13 @@
 
 #include <string.h>
 
+#include "gva-db.h"
 #include "gva-cell-renderer-pixbuf.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-game-db.h"
 #include "gva-game-store.h"
 #include "gva-main.h"
-#include "gva-parser.h"
 #include "gva-ui.h"
 
 static GSList *visible_favorites = NULL;
@@ -307,7 +307,9 @@ static void
 tree_view_data_added (GvaProcess *process, gint status, gpointer user_data)
 {
         GtkTreeView *view;
+        GtkTreeModel *model;
         GtkTreeSelection *selection;
+        GError *error = NULL;
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 
@@ -317,6 +319,10 @@ tree_view_data_added (GvaProcess *process, gint status, gpointer user_data)
 
         selection = gtk_tree_view_get_selection (view);
         g_signal_emit_by_name (selection, "changed");
+
+        model = gva_game_db_get_model ();
+        gva_game_store_populate (GVA_GAME_STORE (model), &error);
+        gva_error_handle (&error);
 
         g_object_unref (process);
 }
@@ -359,7 +365,7 @@ tree_view_load_data (void)
         gva_main_statusbar_push (
                 context_id, "%s", _("Loading game properties..."));
 
-        process = gva_parse_game_data (&error);
+        process = gva_db_build (&error);
         gva_error_handle (&error);
 
         if (process != NULL)

@@ -5,6 +5,7 @@ GNOME Video Arcade 0.2.1
 
         What's New
         ----------
+        * Program now uses an SQLite database to manage game information.
         * Basic properties window with game history (if available).
 
 GNOME Video Arcade 0.2.0

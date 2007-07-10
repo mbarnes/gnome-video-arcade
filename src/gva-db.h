@@ -2,10 +2,12 @@
 #define GVA_DB_H
 
 #include "gva-common.h"
+#include "gva-process.h"
 
 G_BEGIN_DECLS
 
 gboolean        gva_db_init                     (GError **error);
+GvaProcess *    gva_db_build                    (GError **error);
 gboolean        gva_db_execute                  (const gchar *sql,
                                                  GError **error);
 gboolean        gva_db_prepare                  (const gchar *sql,

@@ -5,7 +5,15 @@
 #include "gva-time.h"
 #include "gva-xmame.h"
 
+enum {
+        POPULATE_BEGIN,
+        POPULATE_PROGRESS,
+        POPULATE_END,
+        LAST_SIGNAL
+};
+
 static gpointer parent_class = NULL;
+static guint signals[LAST_SIGNAL] = { 0 };
 
 static GHashTable *
 game_store_get_index (GvaGameStore *game_store)
@@ -54,21 +62,48 @@ game_store_constructor (GType type,
         GObject *object;
         gint n = 0;
 
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_NAME */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_SOURCEFILE */
-        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_COLUMN_RUNNABLE */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_CLONEOF */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_ROMOF */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_SAMPLEOF */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_DESCRIPTION */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_YEAR */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_MANUFACTURER */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_HISTORY */
-        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_COLUMN_FAVORITE */
-        types[n++] = G_TYPE_STRING;    /* GVA_GAME_STORE_COLUMN_INPFILE */
-        types[n++] = GVA_TYPE_TIME;    /* GVA_GAME_STORE_COLUMN_TIME */
-        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_USES_SAMPLES */
-        types[n++] = G_TYPE_BOOLEAN;   /* GVA_GAME_STORE_HAVE_SAMPLES */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_NAME */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_SOURCEFILE */
+        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_RUNNABLE */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_CLONEOF */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_ROMOF */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_ROMSET */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_SAMPLEOF */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_SAMPLESET */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DESCRIPTION */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_YEAR */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_MANUFACTURER */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_HISTORY */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_VIDEO_SCREEN */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_VIDEO_ORIENTATION */
+        types[n++] = G_TYPE_INT;        /* COLUMN_VIDEO_WIDTH */
+        types[n++] = G_TYPE_INT;        /* COLUMN_VIDEO_HEIGHT */
+        types[n++] = G_TYPE_INT;        /* COLUMN_VIDEO_ASPECTX */
+        types[n++] = G_TYPE_INT;        /* COLUMN_VIDEO_ASPECTY */
+        types[n++] = G_TYPE_INT;        /* COLUMN_VIDEO_REFRESH */
+        types[n++] = G_TYPE_INT;        /* COLUMN_SOUND_CHANNELS */
+        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_SERVICE */
+        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_TILT */
+        types[n++] = G_TYPE_INT;        /* COLUMN_INPUT_PLAYERS */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_INPUT_CONTROL */
+        types[n++] = G_TYPE_INT;        /* COLUMN_INPUT_BUTTONS */
+        types[n++] = G_TYPE_INT;        /* COLUMN_INPUT_COINS */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_STATUS */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_EMULATION */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_COLOR */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SOUND */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_GRAPHIC */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_COCKTAIL */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_PROTECTION */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SAVESTATE */
+        types[n++] = G_TYPE_INT;        /* COLUMN_DRIVER_PALETTESIZE */
+        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
+        types[n++] = G_TYPE_STRING;     /* COLUMN_INPFILE */
+        types[n++] = GVA_TYPE_TIME;     /* COLUMN_TIME */
+        types[n++] = G_TYPE_BOOLEAN;    /* USES_SAMPLES */
+        types[n++] = G_TYPE_BOOLEAN;    /* HAVE_SAMPLES */
+
+        g_assert (n == GVA_GAME_STORE_NUM_COLUMNS);
 
         /* Chain up to parent's constructor() method. */
         object = G_OBJECT_CLASS (parent_class)->constructor (
@@ -93,6 +128,31 @@ game_store_class_init (GvaGameStoreClass *class)
 
         object_class = G_OBJECT_CLASS (class);
         object_class->constructor = game_store_constructor;
+
+        signals[POPULATE_BEGIN] = g_signal_new (
+                "populate-begin",
+                G_TYPE_FROM_CLASS (class),
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL,
+                g_cclosure_marshal_VOID__VOID,
+                G_TYPE_NONE, 0);
+
+        signals[POPULATE_PROGRESS] = g_signal_new (
+                "populate-progress",
+                G_TYPE_FROM_CLASS (class),
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL,
+                g_cclosure_marshal_VOID__INT,
+                G_TYPE_NONE, 1,
+                G_TYPE_INT);
+
+        signals[POPULATE_END] = g_signal_new (
+                "populate-end",
+                G_TYPE_FROM_CLASS (class),
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL,
+                g_cclosure_marshal_VOID__VOID,
+                G_TYPE_NONE, 0);
 }
 
 static void
@@ -150,6 +210,131 @@ gva_game_store_clear (GvaGameStore *game_store)
 
         g_hash_table_remove_all (game_store_get_index (game_store));
         gtk_list_store_clear (GTK_LIST_STORE (game_store));
+}
+
+typedef struct
+{
+        GvaGameStore *game_store;
+        sqlite3_stmt *stmt;
+        GValue value;
+
+} PopulateData;
+
+static PopulateData *
+populate_data_new (GvaGameStore *game_store,
+                   sqlite3_stmt *stmt)
+{
+        PopulateData *data;
+
+        data = g_slice_new0 (PopulateData);
+        data->game_store = game_store;
+        data->stmt = stmt;
+
+        return data;
+}
+
+static void
+populate_data_free (PopulateData *data)
+{
+        g_slice_free (PopulateData, data);
+}
+
+static gboolean
+game_store_populate_idle_cb (PopulateData *data)
+{
+        GtkListStore *list_store;
+        GtkTreeIter iter;
+        gint n_columns, ii;
+        gint errcode;
+        static gint rows = 0;
+
+        errcode = sqlite3_step (data->stmt);
+
+        if (errcode == SQLITE_DONE)
+        {
+                sqlite3_finalize (data->stmt);
+                populate_data_free (data);
+                return FALSE;
+        }
+
+        if (errcode != SQLITE_ROW)
+        {
+                sqlite3_finalize (data->stmt);
+                populate_data_free (data);
+                return FALSE;
+        }
+
+        list_store = GTK_LIST_STORE (data->game_store);
+        n_columns = sqlite3_column_count (data->stmt);
+
+        gtk_list_store_append (list_store, &iter);
+
+        for (ii = 0; ii < n_columns; ii++)
+        {
+                GType type;
+
+                type = gtk_tree_model_get_column_type (
+                        GTK_TREE_MODEL (list_store), ii);
+
+                g_value_init (&data->value, type);
+
+                if (type == G_TYPE_BOOLEAN)
+                {
+                        const gchar *text;
+
+                        text = (const gchar *)
+                                sqlite3_column_text (data->stmt, ii);
+                        g_value_set_boolean (
+                                &data->value,
+                                g_ascii_strcasecmp (text, "yes") == 0);
+                        /*gtk_list_store_set_value (
+                                list_store, &iter, ii, &data->value);*/
+                }
+                else if (type == G_TYPE_INT)
+                {
+                        g_value_set_int (
+                                &data->value,
+                                sqlite3_column_int (data->stmt, ii));
+                        /*gtk_list_store_set_value (
+                                list_store, &iter, ii, &data->value);*/
+                }
+                else if (type == G_TYPE_STRING)
+                {
+                        g_value_set_string (
+                                &data->value, (const gchar *)
+                                sqlite3_column_text (data->stmt, ii));
+                        /*gtk_list_store_set_value (
+                                list_store, &iter, ii, &data->value);*/
+                }
+                else
+                {
+                        g_warning (
+                                "Unexpected type '%s' for column %d",
+                                G_VALUE_TYPE_NAME (&data->value), ii);
+                }
+
+                g_value_unset (&data->value);
+        }
+
+        g_print ("Populating %d rows\r", ++rows);
+
+        return TRUE;
+}
+
+guint
+gva_game_store_populate (GvaGameStore *game_store,
+                         GError **error)
+{
+        sqlite3_stmt *stmt;
+
+        g_return_val_if_fail (GVA_IS_GAME_STORE (game_store), 0);
+
+        if (!gva_db_prepare ("SELECT * FROM game", &stmt, error))
+                return 0;
+
+        return g_idle_add (
+                (GSourceFunc) game_store_populate_idle_cb,
+                populate_data_new (game_store, stmt));
 }
 
 void

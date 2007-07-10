@@ -29,21 +29,46 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
 
 enum
 {
-        GVA_GAME_STORE_COLUMN_NAME,             /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_SOURCEFILE,       /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_RUNNABLE,         /* G_TYPE_BOOLEAN */
-        GVA_GAME_STORE_COLUMN_CLONEOF,          /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_ROMOF,            /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_SAMPLEOF,         /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_DESCRIPTION,      /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_YEAR,             /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_MANUFACTURER,     /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_HISTORY,          /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_FAVORITE,         /* G_TYPE_BOOLEAN */
-        GVA_GAME_STORE_COLUMN_INPFILE,          /* G_TYPE_STRING */
-        GVA_GAME_STORE_COLUMN_TIME,             /* GVA_TYPE_TIME */
-        GVA_GAME_STORE_COLUMN_USES_SAMPLES,     /* G_TYPE_BOOLEAN */
-        GVA_GAME_STORE_COLUMN_HAVE_SAMPLES,     /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_NAME,               /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_SOURCEFILE,         /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_RUNNABLE,           /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_CLONEOF,            /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_ROMOF,              /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_ROMSET,             /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_SAMPLEOF,           /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_SAMPLESET,          /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DESCRIPTION,        /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_YEAR,               /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_MANUFACTURER,       /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_HISTORY,            /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_VIDEO_SCREEN,       /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_VIDEO_ORIENTATION,  /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_VIDEO_WIDTH,        /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_VIDEO_HEIGHT,       /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_VIDEO_ASPECTX,      /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_VIDEO_ASPECTY,      /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_VIDEO_REFRESH,      /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_SOUND_CHANNELS,     /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_INPUT_SERVICE,      /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_INPUT_TILT,         /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_INPUT_PLAYERS,      /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_INPUT_CONTROL,      /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_INPUT_BUTTONS,      /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_INPUT_COINS,        /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_DRIVER_STATUS,      /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_EMULATION,   /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_COLOR,       /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_SOUND,       /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_GRAPHIC,     /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_COCKTAIL,    /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_PROTECTION,  /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_SAVESTATE,   /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_DRIVER_PALETTESIZE, /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_FAVORITE,           /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_INPFILE,            /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_TIME,               /* GVA_TYPE_TIME */
+        GVA_GAME_STORE_COLUMN_USES_SAMPLES,       /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_HAVE_SAMPLES,       /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_NUM_COLUMNS
 };
 
@@ -60,6 +85,8 @@ struct _GvaGameStoreClass
 GType           gva_game_store_get_type         (void);
 GtkTreeModel *  gva_game_store_new              (void);
 void            gva_game_store_clear            (GvaGameStore *game_store);
+guint           gva_game_store_populate         (GvaGameStore *game_store,
+                                                 GError **error);
 void            gva_game_store_index_insert     (GvaGameStore *game_store,
                                                  const gchar *key,
                                                  GtkTreeIter *iter);

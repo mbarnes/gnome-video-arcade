@@ -114,7 +114,7 @@ gva_xmame_get_version (GError **error)
                         continue;
                 if (strstr (lines[ii], "version") == NULL)
                         continue;
-                version = g_strdup (lines[ii]);
+                version = g_strdup (g_strstrip (lines[ii]));
         }
 
         g_strfreev (lines);

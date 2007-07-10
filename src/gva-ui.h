@@ -25,6 +25,7 @@
 #define GVA_ACTION_VIEW_RESULTS         (gva_ui_get_action ("view-results"))
 
 /* Main Window */
+#define GVA_WIDGET_MAIN_PROGRESSBAR          GW ("main-progressbar")
 #define GVA_WIDGET_MAIN_PROPERTIES_BUTTON    GW ("main-properties-button")
 #define GVA_WIDGET_MAIN_START_GAME_BUTTON    GW ("main-start-game-button")
 #define GVA_WIDGET_MAIN_STATUSBAR            GW ("main-statusbar")

@@ -15,8 +15,7 @@ enum {
         PROP_STDIN,
         PROP_STDOUT,
         PROP_STDERR,
-        PROP_EXITED,
-        PROP_STATUS
+        PROP_PROGRESS
 };
 
 enum {
@@ -41,6 +40,7 @@ struct _GvaProcessPrivate
 
         GTimeVal start_time;
 
+        gdouble progress;
         gboolean exited;
         gint status;
 };
@@ -73,6 +73,8 @@ process_source_removed (GvaProcess *process)
 
         if (n_active_sources == 0)
         {
+                gva_process_set_progress (process, 1.0);
+
                 process->priv->exited = TRUE;
 
                 g_signal_emit (
@@ -111,46 +113,32 @@ process_data_ready (GvaProcess *process,
                     guint *source_id,
                     guint signal_id)
 {
-        while (condition & G_IO_IN || condition & G_IO_HUP)
+        if (condition & G_IO_IN)
         {
                 GIOStatus status;
                 gchar *line;
-		gsize terminator_pos;
                 GError *error = NULL;
 
                 status = g_io_channel_read_line (
-                        channel, &line, NULL, &terminator_pos, &error);
-                switch (status)
+                        channel, &line, NULL, NULL, &error);
+                if (status == G_IO_STATUS_NORMAL)
                 {
-                        case G_IO_STATUS_NORMAL:
-                                g_assert (line != NULL);
-				line[terminator_pos] = '\0';
-                                g_queue_push_tail (queue, line);
-                                g_signal_emit (process, signal_id, 0);
-                                break;
-
-                        case G_IO_STATUS_ERROR:
-                                g_assert (error != NULL);
-                                process_propagate_error (process, error);
-                                break;
-
-                        case G_IO_STATUS_EOF:
-				g_assert (condition & G_IO_HUP);
-				condition &= ~G_IO_HUP;  /* clear HUP */
-				*source_id = 0;
-				break;
-
-                        case G_IO_STATUS_AGAIN:
-                                break;
+                        g_assert (line != NULL);
+                        g_queue_push_tail (queue, line);
+                        g_signal_emit (process, signal_id, 0);
+                }
+                else
+                {
+                        g_assert (error != NULL);
+                        process_propagate_error (process, error);
                 }
 
-		condition &= ~G_IO_IN;  /* clear IN */
-		condition |= g_io_channel_get_buffer_condition (channel);
+                return TRUE;
         }
 
-        /* XXX What to do if G_IO_ERR is set? */
+        *source_id = 0;
 
-        return (*source_id != 0);
+        return FALSE;
 }
 
 static gboolean
@@ -219,8 +207,7 @@ process_set_property (GObject *object,
                         CHECK_FOR_ERROR;
                         g_assert (priv->stdout_source_id == 0);
                         priv->stdout_source_id = g_io_add_watch_full (
-                                channel, G_PRIORITY_LOW,
-                                G_IO_IN | G_IO_ERR | G_IO_HUP,
+                                channel, G_PRIORITY_LOW, G_IO_IN | G_IO_HUP,
                                 (GIOFunc) process_stdout_ready, object,
                                 (GDestroyNotify) process_source_removed);
                         g_assert (priv->stdout_channel == NULL);
@@ -236,12 +223,16 @@ process_set_property (GObject *object,
                         CHECK_FOR_ERROR;
                         g_assert (priv->stderr_source_id == 0);
                         priv->stderr_source_id = g_io_add_watch_full (
-                                channel, G_PRIORITY_LOW,
-                                G_IO_IN | G_IO_ERR | G_IO_HUP,
+                                channel, G_PRIORITY_LOW, G_IO_IN | G_IO_HUP,
                                 (GIOFunc) process_stderr_ready, object,
                                 (GDestroyNotify) process_source_removed);
                         g_assert (priv->stderr_channel == NULL);
                         priv->stderr_channel = channel;
+                        return;
+
+                case PROP_PROGRESS:
+                        priv->progress = g_value_get_double (value);
+                        g_object_notify (object, "progress");
                         return;
         }
 
@@ -287,12 +278,8 @@ process_get_property (GObject *object,
                                 g_io_channel_unix_get_fd (channel) : -1);
                         return;
 
-                case PROP_EXITED:
-                        g_value_set_boolean (value, priv->exited);
-                        return;
-
-                case PROP_STATUS:
-                        g_value_set_int (value, priv->status);
+                case PROP_PROGRESS:
+                        g_value_set_double (value, priv->progress);
                         return;
         }
 
@@ -400,23 +387,13 @@ process_class_init (GvaProcessClass *class)
 
         g_object_class_install_property (
                 object_class,
-                PROP_EXITED,
-                g_param_spec_boolean (
-                        "exited",
+                PROP_PROGRESS,
+                g_param_spec_double (
+                        "progress",
                         NULL,
                         NULL,
-                        FALSE,
-                        G_PARAM_READABLE));
-
-        g_object_class_install_property (
-                object_class,
-                PROP_STATUS,
-                g_param_spec_int (
-                        "status",
-                        NULL,
-                        NULL,
-                        G_MININT, G_MAXINT, -1,
-                        G_PARAM_READABLE));
+                        0.0, 1.0, 0.0,
+                        G_PARAM_READWRITE));
 
         signals[STDOUT_READY] = g_signal_new (
                 "stdout-ready",
@@ -439,8 +416,8 @@ process_class_init (GvaProcessClass *class)
         signals[EXITED] = g_signal_new (
                 "exited",
                 G_TYPE_FROM_CLASS (class),
-                G_SIGNAL_RUN_LAST,
-                G_STRUCT_OFFSET (GvaProcessClass, stderr_ready),
+                G_SIGNAL_RUN_FIRST,
+                G_STRUCT_OFFSET (GvaProcessClass, exited),
                 NULL, NULL,
                 g_cclosure_marshal_VOID__INT,
                 G_TYPE_NONE, 1,
@@ -653,6 +630,27 @@ gva_process_stderr_read_lines (GvaProcess *process)
         }
 
         return lines;
+}
+
+gdouble
+gva_process_get_progress (GvaProcess *process)
+{
+        gdouble progress;
+
+        g_return_val_if_fail (GVA_IS_PROCESS (process), 0.0);
+
+        g_object_get (process, "progress", &progress, NULL);
+
+        return progress;
+}
+
+void
+gva_process_set_progress (GvaProcess *process,
+                          gdouble progress)
+{
+        g_return_if_fail (GVA_IS_PROCESS (process));
+
+        g_object_set (process, "progress", progress, NULL);
 }
 
 gboolean

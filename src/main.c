@@ -1,11 +1,13 @@
 #include "gva-common.h"
 
+#include <libintl.h>
 #include <locale.h>
 #include <stdlib.h>
-#include <libintl.h>
+#include <string.h>
 
 #include "gva-db.h"
 #include "gva-game-db.h"
+#include "gva-history.h"
 #include "gva-main.h"
 #include "gva-play-back.h"
 #include "gva-preferences.h"
@@ -13,7 +15,24 @@
 #include "gva-ui.h"
 #include "gva-xmame.h"
 
-void
+static gboolean
+database_needs_rebuilt (void)
+{
+        gchar *build;
+        gchar *version;
+        GError *error = NULL;
+
+        gva_db_get_build (&build, &error);
+        gva_error_handle (&error);
+
+        version = gva_xmame_get_version (&error);
+        gva_error_handle (&error);
+
+        return (build == NULL) || (version == NULL) ||
+                (strstr (version, build) == NULL);
+}
+
+static void
 show_xmame_version (void)
 {
         gchar *xmame_version;
@@ -57,6 +76,11 @@ main (gint argc, gchar **argv)
 
         if (!gva_game_db_init (&error))
                 g_error ("%s", error->message);
+
+#ifdef HISTORY_FILE
+        gva_history_init (&error);
+        gva_error_handle (&error);
+#endif
 
         gva_main_init ();
         gva_play_back_init ();

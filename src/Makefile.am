@@ -27,12 +27,12 @@ gnome_video_arcade_SOURCES = \
 	gva-game-db.h			\
 	gva-game-store.c		\
 	gva-game-store.h		\
+	gva-history.c			\
+	gva-history.h			\
 	gva-main.c			\
 	gva-main.h			\
 	gva-mame-process.c		\
 	gva-mame-process.h		\
-	gva-parser.c			\
-	gva-parser.h			\
 	gva-play-back.c			\
 	gva-play-back.h			\
 	gva-preferences.c		\

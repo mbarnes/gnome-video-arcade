@@ -1,7 +1,7 @@
 #include "gva-properties.h"
 
-#include "gva-game-db.h"
 #include "gva-game-store.h"
+#include "gva-history.h"
 #include "gva-ui.h"
 #include "gva-util.h"
 
@@ -61,9 +61,9 @@ properties_update_history (GtkTreeModel *model,
                 model, iter, GVA_GAME_STORE_COLUMN_NAME, &name,
                 GVA_GAME_STORE_COLUMN_CLONEOF, &cloneof, -1);
 
-        history = gva_game_db_get_history (name, &error);
+        history = gva_history_lookup (name, &error);
         if (history == NULL && error == NULL && cloneof != NULL)
-                history = gva_game_db_get_history (cloneof, &error);
+                history = gva_history_lookup (cloneof, &error);
 
         if (history == NULL)
         {
