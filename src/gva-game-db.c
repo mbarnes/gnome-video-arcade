@@ -57,7 +57,6 @@ game_db_add_sample (const gchar *romname, const gchar *status)
         {
                 GtkTreeModel *model;
                 GtkTreeIter iter;
-                gboolean have_samples;
                 gboolean valid;
 
                 model = gva_game_db_get_model ();
@@ -65,13 +64,9 @@ game_db_add_sample (const gchar *romname, const gchar *status)
                 gtk_tree_path_free (path);
                 g_assert (valid);
 
-                have_samples = (strcmp (status, "correct") == 0);
-
                 gtk_list_store_set (
                         GTK_LIST_STORE (model), &iter,
-                        GVA_GAME_STORE_COLUMN_USES_SAMPLES, TRUE,
-                        GVA_GAME_STORE_COLUMN_HAVE_SAMPLES, have_samples,
-                        -1);
+                        GVA_GAME_STORE_COLUMN_SAMPLESET, status, -1);
         }
 }
 

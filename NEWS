@@ -1,4 +1,4 @@
-GNOME Video Arcade 0.2.1
+GNOME Video Arcade 0.3.0
 ========================
 
         Released July ??, 2007
@@ -8,6 +8,7 @@ GNOME Video Arcade 0.2.1
         * Relicense code under the terms of the GNU GPL v3.
         * Program now uses an SQLite database to manage game information.
         * Basic properties window with game history (if available).
+        * Remember column order in main window.
 
 GNOME Video Arcade 0.2.0
 ========================

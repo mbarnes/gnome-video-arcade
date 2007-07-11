@@ -82,6 +82,8 @@ main (gint argc, gchar **argv)
         bindtextdomain (PACKAGE, LOCALEDIR);
         textdomain (PACKAGE);
 
+        g_thread_init (NULL);
+
         gtk_init_with_args (
                 &argc, &argv, NULL, NULL, GETTEXT_PACKAGE, &error);
         if (error != NULL)

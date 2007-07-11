@@ -1,3 +1,33 @@
+2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.schemas:
+	Add "columns" key.
+
+	* src/Makefile.am:
+	Add gva-columns.[ch].
+
+	* src/main.c (main):
+	Call g_thread_init() to silence a runtime warning.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_COLUMNS_KEY.
+
+	* src/gva-game-db.c (game_db_add_sample):
+	Put status in the "SAMPLESET" column.
+
+	* src/gva-game-store.[ch]:
+	Remove "USES_SAMPLES" and "HAVE_SAMPLES" columns.
+
+	* src/gva-columns.[ch]:
+	New source files construct and manage tree view columns.
+
+	* src/gva-tree-view.c (tree_view_columns_changed_cb):
+	Call gva_columns_save() when not in destruction.
+
+	* src/gva-tree-view.c:
+	Move the column construction functions to gva-columns.c.
+	Now we simply call gva_columns_load() from gva_tree_view_init().
+
 2007-07-10  Matthew Barnes  <mbarnes@redhat.com>
 
 	* Relicense the code under the terms of the GNU GPL v3.

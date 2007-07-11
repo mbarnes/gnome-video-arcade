@@ -21,7 +21,7 @@
 #include <string.h>
 
 #include "gva-db.h"
-#include "gva-cell-renderer-pixbuf.h"
+#include "gva-columns.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-game-db.h"
@@ -78,7 +78,10 @@ tree_view_button_press_cb (GtkTreeView *view,
 static void
 tree_view_columns_changed_cb (GtkTreeView *view)
 {
-        /* TODO */
+        /* This signal gets emitted during shutdown as each column is
+         * destroyed.  We don't want to save columns during this phase. */
+        if (!(GTK_OBJECT_FLAGS (view) & GTK_IN_DESTRUCTION))
+                gva_columns_save (view);
 }
 
 static void
@@ -158,28 +161,6 @@ tree_view_selection_changed_cb (GtkTreeSelection *selection)
         gtk_action_set_sensitive (GVA_ACTION_START, game_is_selected);
 }
 
-static void
-tree_view_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
-                               GtkTreePath *path,
-                               GtkTreeView *view)
-{
-        const gchar *romname;
-
-        /* The row that was clicked is not yet selected.  We need to
-         * select it first so that gva_tree_view_get_selected_game()
-         * returns the correct romname. */
-        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
-        gtk_widget_grab_focus (GTK_WIDGET (view));
-
-        romname = gva_tree_view_get_selected_game ();
-        g_assert (romname != NULL);
-
-        if (gva_favorites_contains (romname))
-                gtk_action_activate (GVA_ACTION_REMOVE_FAVORITE);
-        else
-                gtk_action_activate (GVA_ACTION_INSERT_FAVORITE);
-}
-
 static gboolean
 tree_view_search_equal (GtkTreeModel *model,
                         gint column,
@@ -214,111 +195,6 @@ tree_view_search_equal (GtkTreeModel *model,
         g_free (title);
 
         return retval;
-}
-
-static GdkPixbuf *
-tree_view_get_icon_name (const gchar *icon_name)
-{
-        GtkIconTheme *icon_theme;
-        GdkPixbuf *pixbuf;
-        gboolean valid;
-        gint size;
-        GError *error = NULL;
-
-        icon_theme = gtk_icon_theme_get_default ();
-        valid = gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &size, NULL);
-        g_assert (valid);
-        pixbuf = gtk_icon_theme_load_icon (
-                icon_theme, icon_name, size, 0, &error);
-        gva_error_handle (&error);
-
-        if (pixbuf != NULL)
-        {
-                GdkPixbuf *scaled;
-
-                scaled = gdk_pixbuf_scale_simple (
-                        pixbuf, size, size, GDK_INTERP_BILINEAR);
-                g_object_unref (pixbuf);
-                pixbuf = scaled;
-        }
-
-        return pixbuf;
-}
-
-static GtkTreeViewColumn *
-tree_view_column_new_favorite (GtkTreeView *view)
-{
-        GtkCellRenderer *renderer;
-        GtkTreeViewColumn *column;
-        GdkPixbuf *pixbuf;
-
-        pixbuf = tree_view_get_icon_name ("emblem-favorite");
-
-        renderer = gva_cell_renderer_pixbuf_new ();
-        g_object_set (renderer, "pixbuf", pixbuf, NULL);
-        g_signal_connect (
-                renderer, "clicked",
-                G_CALLBACK (tree_view_favorite_clicked_cb), view);
-        column = gtk_tree_view_column_new_with_attributes (
-                _("Favorite"), renderer, "sensitive",
-                GVA_GAME_STORE_COLUMN_FAVORITE, NULL);
-        gtk_tree_view_column_set_reorderable (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_FAVORITE);
-
-        if (pixbuf != NULL)
-                g_object_unref (pixbuf);
-
-        return column;
-}
-
-static GtkTreeViewColumn *
-tree_view_column_new_title (GtkTreeView *view)
-{
-        GtkCellRenderer *renderer;
-        GtkTreeViewColumn *column;
-
-        renderer = gtk_cell_renderer_text_new ();
-        g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-        column = gtk_tree_view_column_new_with_attributes (
-                _("Title"), renderer, "text",
-                GVA_GAME_STORE_COLUMN_DESCRIPTION, NULL);
-        gtk_tree_view_set_search_column (
-                view, GVA_GAME_STORE_COLUMN_DESCRIPTION);
-        gtk_tree_view_set_search_equal_func (
-                view, (GtkTreeViewSearchEqualFunc)
-                tree_view_search_equal, NULL, NULL);
-        gtk_tree_view_column_set_expand (column, TRUE);
-        gtk_tree_view_column_set_reorderable (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_DESCRIPTION);
-
-        return column;
-}
-
-static GtkTreeViewColumn *
-tree_view_column_new_samples (GtkTreeView *view)
-{
-        GtkCellRenderer *renderer;
-        GtkTreeViewColumn *column;
-        GdkPixbuf *pixbuf;
-
-        pixbuf = tree_view_get_icon_name ("emblem-sound");
-
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        g_object_set (renderer, "pixbuf", pixbuf, NULL);
-        column = gtk_tree_view_column_new_with_attributes (
-                _("Samples"), renderer, "visible",
-                GVA_GAME_STORE_COLUMN_USES_SAMPLES, "sensitive",
-                GVA_GAME_STORE_COLUMN_HAVE_SAMPLES, NULL);
-        gtk_tree_view_column_set_reorderable (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_USES_SAMPLES);
-
-        if (pixbuf != NULL)
-                g_object_unref (pixbuf);
-
-        return column;
 }
 
 static void
@@ -414,13 +290,16 @@ tree_view_load_data (void)
 void
 gva_tree_view_init (void)
 {
-        GtkTreeViewColumn *column;
         GtkTreeView *view;
         GtkTreeModel *model;
         GtkMenu *menu;
         gchar *romname;
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+
+        /* Load columns before we connect to signals to avoid trapping
+         * spurious "columns-changed" signals during loading. */
+        gva_columns_load (view);
 
         menu = GTK_MENU (gva_ui_get_managed_widget ("/game-popup"));
         gtk_menu_attach_to_widget (menu, GTK_WIDGET (view), NULL);
@@ -444,15 +323,6 @@ gva_tree_view_init (void)
         g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
-
-        column = tree_view_column_new_favorite (view);
-        gtk_tree_view_append_column (view, column);
-
-        column = tree_view_column_new_title (view);
-        gtk_tree_view_append_column (view, column);
-
-        column = tree_view_column_new_samples (view);
-        gtk_tree_view_append_column (view, column);
 
         /* Overlay a GtkTreeModelFilter on the GvaGameStore so we can
          * filter the model appropriately for the selected view. */

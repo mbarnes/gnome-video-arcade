@@ -118,8 +118,6 @@ game_store_constructor (GType type,
         types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
         types[n++] = G_TYPE_STRING;     /* COLUMN_INPFILE */
         types[n++] = GVA_TYPE_TIME;     /* COLUMN_TIME */
-        types[n++] = G_TYPE_BOOLEAN;    /* USES_SAMPLES */
-        types[n++] = G_TYPE_BOOLEAN;    /* HAVE_SAMPLES */
 
         g_assert (n == GVA_GAME_STORE_NUM_COLUMNS);
 

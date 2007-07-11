@@ -20,6 +20,19 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/columns</applyto>
+      <key>/schemas/apps/gnome-video-arcade/columns</key>
+      <owner>gnome-video-arcade</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[favorite,description,sampleset]</default>
+      <locale name="C">
+        <short>Column names</short>
+        <long>List of column names to display.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/favorites</applyto>
       <key>/schemas/apps/gnome-video-arcade/favorites</key>
       <owner>gnome-video-arcade</owner>
