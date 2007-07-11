@@ -1,5 +1,22 @@
 2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-game-store.c (gva_game_store_new_from_query):
+	New UNTESTED function creates a GvaGameStore from an SQL query.
+
+	* src/gva-game-store.c (gva_game_store_populate):
+	Remove this function; superseded by gva_game_store_new_from_query().
+
+	* src/gva-columns.c (gva_columns_lookup_id):
+	New function returns the ID of the given column name.
+
+	* src/gva-error.h:
+	Add GVA_ERROR_QUERY.
+
+	* src/gva-tree-view.c (tree_view_data_added):
+	Remove the call to gva_game_store_populate().
+
+2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-db.c (db_parser_bind_text):
 	Convert the text to UTF-8 and stop quoting it.
 	Be more error tolerant.

@@ -101,8 +101,11 @@ struct _GvaGameStoreClass
 
 GType           gva_game_store_get_type         (void);
 GtkTreeModel *  gva_game_store_new              (void);
+GtkTreeModel *  gva_game_store_new_from_query   (const gchar *sql,
+                                                 GError **error);
 void            gva_game_store_clear            (GvaGameStore *game_store);
-guint           gva_game_store_populate         (GvaGameStore *game_store,
+gboolean        gva_game_store_append_result    (GvaGameStore *game_store,
+                                                 sqlite3_stmt *stmt,
                                                  GError **error);
 void            gva_game_store_index_insert     (GvaGameStore *game_store,
                                                  const gchar *key,

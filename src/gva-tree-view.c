@@ -203,7 +203,6 @@ tree_view_data_added (GvaProcess *process, gint status, gpointer user_data)
         GtkTreeView *view;
         GtkTreeModel *model;
         GtkTreeSelection *selection;
-        GError *error = NULL;
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 
@@ -213,10 +212,6 @@ tree_view_data_added (GvaProcess *process, gint status, gpointer user_data)
 
         selection = gtk_tree_view_get_selection (view);
         g_signal_emit_by_name (selection, "changed");
-
-        model = gva_game_db_get_model ();
-        gva_game_store_populate (GVA_GAME_STORE (model), &error);
-        gva_error_handle (&error);
 
         g_object_unref (process);
 }

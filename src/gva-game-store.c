@@ -20,6 +20,8 @@
 
 #include <string.h>
 #include <time.h>
+
+#include "gva-error.h"
 #include "gva-time.h"
 #include "gva-xmame.h"
 
@@ -219,6 +221,139 @@ gva_game_store_new (void)
         return g_object_new (GVA_TYPE_GAME_STORE, NULL);
 }
 
+GtkTreeModel *
+gva_game_store_new_from_query (const gchar *sql,
+                               GError **error)
+{
+        GtkTreeModel *model;
+        sqlite3_stmt *stmt;
+        GvaGameStoreColumn *column_ids;
+        GValue *column_values;
+        gint n_columns, ii;
+        gint name_column = -1;
+        gint errcode;
+
+        g_return_val_if_fail (sql != NULL, NULL);
+
+        /* Prepare to execute the query. */
+
+        if (!gva_db_prepare (sql, &stmt, error))
+                return NULL;
+
+        model = gva_game_store_new ();
+        n_columns = sqlite3_column_count (stmt);
+        column_ids = g_newa (GvaGameStoreColumn, n_columns);
+        column_values = g_new0 (GValue, n_columns);
+
+        for (ii = 0; ii < n_columns; ii++)
+        {
+                GType type;
+                const gchar *column_name;
+
+                column_name = sqlite3_column_name (stmt, ii);
+                if (!gva_columns_lookup_id (column_name, &column_ids[ii]))
+                {
+                        g_set_error (
+                                error, GVA_ERROR, GVA_ERROR_QUERY,
+                                "Unrecognized column \"%s\"",
+                                column_name);
+                        goto fail;
+                }
+                if (column_ids[ii] == GVA_GAME_STORE_COLUMN_NAME)
+                        name_column = ii;
+
+                type = gtk_tree_model_get_column_type (model, column_ids[ii]);
+                g_value_init (&column_values[ii], type);
+        }
+
+        if (name_column < 0)
+        {
+                g_set_error (
+                        error, GVA_ERROR, GVA_ERROR_QUERY,
+                        "Query result must include a \"name\" column");
+                goto fail;
+        }
+
+        /* Execute the query. */
+
+        while ((errcode = sqlite3_step (stmt)) == SQLITE_ROW)
+        {
+                GtkTreeIter iter;
+
+                /* Append a new row to the list store. */
+                gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
+                /* Populate the row with available values. */
+                for (ii = 0; ii < n_columns; ii++)
+                {
+                        GValue *value;
+                        GType type;
+
+                        value = &column_values[ii];
+                        type = G_VALUE_TYPE (value);
+
+                        if (type == G_TYPE_BOOLEAN)
+                        {
+                                const gchar *text;
+                                gboolean v_boolean;
+
+                                text = sqlite3_column_text (stmt, ii);
+                                v_boolean = (strcmp (text, "yes") == 0);
+                                g_value_set_boolean (value, v_boolean);
+                        }
+                        else if (type == G_TYPE_INT)
+                        {
+                                gint v_int;
+
+                                v_int = sqlite3_column_int (stmt, ii);
+                                g_value_set_int (value, v_int);
+                        }
+                        else if (type == G_TYPE_STRING)
+                        {
+                                const gchar *v_string;
+
+                                v_string = sqlite3_column_text (stmt, ii);
+                                g_value_set_string (value, v_string);
+                        }
+                        else
+                        {
+                                g_assert_not_reached ();
+                        }
+
+                        gtk_list_store_set_value (
+                                GTK_LIST_STORE (model), &iter, ii, value);
+                }
+
+                /* Add an entry for this row to the index. */
+                gva_game_store_index_insert (
+                        GVA_GAME_STORE (model),
+                        sqlite3_column_text (stmt, name_column), &iter);
+
+                /* Keep the UI responsive. */
+                g_main_context_iteration (NULL, FALSE);
+        }
+
+        /* Query complete. */
+
+        if (errcode == SQLITE_DONE)
+                goto exit;
+
+        gva_db_set_error (error, 0, NULL);
+
+fail:
+        g_object_unref (model);
+        model = NULL;
+
+exit:
+        for (ii = 0; ii < n_columns; ii++)
+                g_value_unset (&column_values[ii]);
+
+        g_free (column_values);
+        sqlite3_finalize (stmt);
+
+        return model;
+}
+
 void
 gva_game_store_clear (GvaGameStore *game_store)
 {
@@ -226,131 +361,6 @@ gva_game_store_clear (GvaGameStore *game_store)
 
         g_hash_table_remove_all (game_store_get_index (game_store));
         gtk_list_store_clear (GTK_LIST_STORE (game_store));
-}
-
-typedef struct
-{
-        GvaGameStore *game_store;
-        sqlite3_stmt *stmt;
-        GValue value;
-
-} PopulateData;
-
-static PopulateData *
-populate_data_new (GvaGameStore *game_store,
-                   sqlite3_stmt *stmt)
-{
-        PopulateData *data;
-
-        data = g_slice_new0 (PopulateData);
-        data->game_store = game_store;
-        data->stmt = stmt;
-
-        return data;
-}
-
-static void
-populate_data_free (PopulateData *data)
-{
-        g_slice_free (PopulateData, data);
-}
-
-static gboolean
-game_store_populate_idle_cb (PopulateData *data)
-{
-        GtkListStore *list_store;
-        GtkTreeIter iter;
-        gint n_columns, ii;
-        gint errcode;
-        static gint rows = 0;
-
-        errcode = sqlite3_step (data->stmt);
-
-        if (errcode == SQLITE_DONE)
-        {
-                sqlite3_finalize (data->stmt);
-                populate_data_free (data);
-                return FALSE;
-        }
-
-        if (errcode != SQLITE_ROW)
-        {
-                sqlite3_finalize (data->stmt);
-                populate_data_free (data);
-                return FALSE;
-        }
-
-        list_store = GTK_LIST_STORE (data->game_store);
-        n_columns = sqlite3_column_count (data->stmt);
-
-        gtk_list_store_append (list_store, &iter);
-
-        for (ii = 0; ii < n_columns; ii++)
-        {
-                GType type;
-
-                type = gtk_tree_model_get_column_type (
-                        GTK_TREE_MODEL (list_store), ii);
-
-                g_value_init (&data->value, type);
-
-                if (type == G_TYPE_BOOLEAN)
-                {
-                        const gchar *text;
-
-                        text = (const gchar *)
-                                sqlite3_column_text (data->stmt, ii);
-                        g_value_set_boolean (
-                                &data->value,
-                                g_ascii_strcasecmp (text, "yes") == 0);
-                        /*gtk_list_store_set_value (
-                                list_store, &iter, ii, &data->value);*/
-                }
-                else if (type == G_TYPE_INT)
-                {
-                        g_value_set_int (
-                                &data->value,
-                                sqlite3_column_int (data->stmt, ii));
-                        /*gtk_list_store_set_value (
-                                list_store, &iter, ii, &data->value);*/
-                }
-                else if (type == G_TYPE_STRING)
-                {
-                        g_value_set_string (
-                                &data->value, (const gchar *)
-                                sqlite3_column_text (data->stmt, ii));
-                        /*gtk_list_store_set_value (
-                                list_store, &iter, ii, &data->value);*/
-                }
-                else
-                {
-                        g_warning (
-                                "Unexpected type '%s' for column %d",
-                                G_VALUE_TYPE_NAME (&data->value), ii);
-                }
-
-                g_value_unset (&data->value);
-        }
-
-        g_print ("Populating %d rows\r", ++rows);
-
-        return TRUE;
-}
-
-guint
-gva_game_store_populate (GvaGameStore *game_store,
-                         GError **error)
-{
-        sqlite3_stmt *stmt;
-
-        g_return_val_if_fail (GVA_IS_GAME_STORE (game_store), 0);
-
-        if (!gva_db_prepare ("SELECT * FROM game", &stmt, error))
-                return 0;
-
-        return g_idle_add (
-                (GSourceFunc) game_store_populate_idle_cb,
-                populate_data_new (game_store, stmt));
 }
 
 void

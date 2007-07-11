@@ -235,6 +235,27 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "time",               NULL }
 };
 
+gboolean
+gva_columns_lookup_id (const gchar *column_name,
+                       GvaGameStoreColumn *column_id)
+{
+        gint ii;
+
+        g_return_val_if_fail (column_name != NULL, FALSE);
+        g_return_val_if_fail (column_id != NULL, FALSE);
+
+        for (ii = 0; ii < G_N_ELEMENTS (column_info); ii++)
+        {
+                if (strcmp (column_name, column_info[ii].name) == 0)
+                {
+                        *column_id = (GvaGameStoreColumn) ii;
+                        return TRUE;
+                }
+        }
+
+        return FALSE;
+}
+
 GtkTreeViewColumn *
 gva_columns_new_from_id (GvaGameStoreColumn column_id)
 {
@@ -256,13 +277,12 @@ gva_columns_new_from_id (GvaGameStoreColumn column_id)
 GtkTreeViewColumn *
 gva_columns_new_from_name (const gchar *column_name)
 {
-        gint ii;
+        GvaGameStoreColumn column_id;
 
-        for (ii = 0; ii < G_N_ELEMENTS (column_info); ii++)
-                if (strcmp (column_name, column_info[ii].name) == 0)
-                        break;
+        if (!gva_columns_lookup_id (column_name, &column_id))
+                return NULL;
 
-        return gva_columns_new_from_id ((GvaGameStoreColumn) ii);
+        return gva_columns_new_from_id (column_id);
 }
 
 void

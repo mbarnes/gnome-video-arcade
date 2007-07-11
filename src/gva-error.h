@@ -29,6 +29,7 @@ G_BEGIN_DECLS
 typedef enum
 {
         GVA_ERROR_CONFIG,
+        GVA_ERROR_QUERY,
         GVA_ERROR_SYSTEM,
         GVA_ERROR_XMAME
 
