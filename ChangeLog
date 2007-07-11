@@ -1,5 +1,15 @@
 2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-db.c (db_parser_bind_text):
+	Convert the text to UTF-8 and stop quoting it.
+	Be more error tolerant.
+
+	* src/gva-columns.c (gva_columns_load):
+	Fall back to the default columns if the GConf list is empty.
+	Fix a memory leak.
+
+2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.schemas:
 	Add "columns" key.
 

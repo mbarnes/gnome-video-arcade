@@ -173,13 +173,20 @@ db_parser_bind_text (ParserData *data,
                      const gchar *value)
 {
         gint errcode;
+        GError *error = NULL;
 
         errcode = sqlite3_bind_text (
-                data->stmt,
-                sqlite3_bind_parameter_index (data->stmt, param),
-                sqlite3_mprintf ("%Q", value), -1, sqlite3_free);
+                data->stmt, sqlite3_bind_parameter_index (data->stmt, param),
+                g_locale_to_utf8 (value, -1, NULL, NULL, &error), -1, g_free);
 
-        ASSERT_OK (errcode);
+        /* Handle conversion errors. */
+        gva_error_handle (&error);
+
+        if (errcode != SQLITE_OK)
+        {
+                gva_db_set_error (&error, 0, NULL);
+                gva_error_handle (&error);
+        }
 }
 
 static void

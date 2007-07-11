@@ -281,6 +281,20 @@ gva_columns_load (GtkTreeView *view)
         gva_error_handle (&error);
         g_object_unref (client);
 
+        /* Restore the GConf default if the list comes back empty. */
+        if (list == NULL)
+        {
+                list = g_slist_prepend (
+                        list, g_strdup (column_info
+                        [GVA_GAME_STORE_COLUMN_SAMPLESET].name));
+                list = g_slist_prepend (
+                        list, g_strdup (column_info
+                        [GVA_GAME_STORE_COLUMN_DESCRIPTION].name));
+                list = g_slist_prepend (
+                        list, g_strdup (column_info
+                        [GVA_GAME_STORE_COLUMN_FAVORITE].name));
+        }
+
         for (iter = list; iter != NULL; iter = iter->next)
         {
                 GtkTreeViewColumn *column;
@@ -289,6 +303,7 @@ gva_columns_load (GtkTreeView *view)
                 gtk_tree_view_append_column (view, column);
         }
 
+        g_slist_foreach (list, (GFunc) g_free, NULL);
         g_slist_free (list);
 }
 
