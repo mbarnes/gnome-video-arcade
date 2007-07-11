@@ -11,6 +11,7 @@
       <menuitem action="quit"/>
     </menu>
     <menu action="edit-menu">
+      <menuitem action="search"/>
       <menuitem action="preferences"/>
     </menu>
     <menu action="view-menu">

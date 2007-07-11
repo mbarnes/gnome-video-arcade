@@ -1,5 +1,12 @@
 2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/gnome-video-arcade.glade:
+	* data/gnome-video-arcade.ui:
+	* src/gva-ui.c:
+	Add hooks for a search window.
+
+2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-game-store.c (gva_game_store_new_from_query):
 	New UNTESTED function creates a GvaGameStore from an SQL query.
 

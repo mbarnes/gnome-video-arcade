@@ -302,6 +302,12 @@ action_remove_favorite_cb (GtkAction *action)
 }
 
 static void
+action_search_cb (GtkAction *action)
+{
+        /* TODO */
+}
+
+static void
 action_show_play_back_cb (GtkAction *action)
 {
         gva_play_back_show (NULL);
@@ -416,6 +422,13 @@ static GtkActionEntry entries[] =
           "<Control>minus",
           N_("Remove the selected game from my list of favorites"),
           G_CALLBACK (action_remove_favorite_cb) },
+
+        { "search",
+          GTK_STOCK_FIND,
+          N_("S_earch..."),
+          NULL,
+          N_("Show a custom list of games"),
+          G_CALLBACK (action_search_cb) },
 
         { "show-play-back",
           GTK_STOCK_MEDIA_PLAY,
