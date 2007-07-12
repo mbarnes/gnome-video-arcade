@@ -113,3 +113,15 @@ gva_get_monospace_font_name (void)
 
         return font_name;
 }
+
+void
+gva_get_time_elapsed (GTimeVal *start_time,
+                      GTimeVal *time_elapsed)
+{
+        g_return_if_fail (start_time != NULL);
+        g_return_if_fail (time_elapsed != NULL);
+
+        g_get_current_time (time_elapsed);
+        time_elapsed->tv_sec -= start_time->tv_sec;
+        g_time_val_add (time_elapsed, -start_time->tv_usec);
+}

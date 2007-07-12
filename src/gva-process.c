@@ -22,6 +22,7 @@
 #include <wait.h>
 
 #include "gva-error.h"
+#include "gva-util.h"
 
 #define GVA_PROCESS_GET_PRIVATE(obj) \
         (G_TYPE_INSTANCE_GET_PRIVATE \
@@ -688,7 +689,5 @@ gva_process_get_time_elapsed (GvaProcess *process, GTimeVal *time_elapsed)
         g_return_if_fail (GVA_IS_PROCESS (process));
         g_return_if_fail (time_elapsed != NULL);
 
-        g_get_current_time (time_elapsed);
-        time_elapsed->tv_sec -= process->priv->start_time.tv_sec;
-        g_time_val_add (time_elapsed, -process->priv->start_time.tv_usec);
+        gva_get_time_elapsed (&process->priv->start_time, time_elapsed);
 }

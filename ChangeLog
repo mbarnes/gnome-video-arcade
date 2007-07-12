@@ -1,3 +1,21 @@
+2007-07-12  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Changed my mind; remove the search button from the main window.
+	Edit -> Search menu item still remains.
+
+	* src/gva-columns.c (gva_columns_load):
+	Call gva_columns_get_selected().
+
+	* src/gva-columns.c (gva_columns_get_selected):
+	New function returns visible column names as a string array.
+
+	* src/gva-process.c (gva_process_get_time_elapsed):
+	Call gva_get_time_elapsed().
+
+	* src/gva-util.c (gva_get_time_elapsed):
+	New function return the time elapsed since a start time.
+
 2007-07-11  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

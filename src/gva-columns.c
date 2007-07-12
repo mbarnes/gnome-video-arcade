@@ -288,43 +288,41 @@ gva_columns_new_from_name (const gchar *column_name)
 void
 gva_columns_load (GtkTreeView *view)
 {
-        GSList *list, *iter;
+        gchar **column_names;
+        guint length, ii;
         GConfClient *client;
         GError *error = NULL;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
 
-        client = gconf_client_get_default ();
-        list = gconf_client_get_list (
-                client, GVA_GCONF_COLUMNS_KEY,
-                GCONF_VALUE_STRING, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        column_names = gva_columns_get_selected (&length);
 
         /* Restore the GConf default if the list comes back empty. */
-        if (list == NULL)
-        {
-                list = g_slist_prepend (
-                        list, g_strdup (column_info
-                        [GVA_GAME_STORE_COLUMN_SAMPLESET].name));
-                list = g_slist_prepend (
-                        list, g_strdup (column_info
-                        [GVA_GAME_STORE_COLUMN_DESCRIPTION].name));
-                list = g_slist_prepend (
-                        list, g_strdup (column_info
-                        [GVA_GAME_STORE_COLUMN_FAVORITE].name));
-        }
-
-        for (iter = list; iter != NULL; iter = iter->next)
+        if (length == 0)
         {
                 GtkTreeViewColumn *column;
 
-                column = gva_columns_new_from_name (iter->data);
+                column = gva_columns_new_from_id (
+                        GVA_GAME_STORE_COLUMN_FAVORITE);
+                gtk_tree_view_append_column (view, column);
+
+                column = gva_columns_new_from_id (
+                        GVA_GAME_STORE_COLUMN_DESCRIPTION);
+                gtk_tree_view_append_column (view, column);
+
+                column = gva_columns_new_from_id (
+                        GVA_GAME_STORE_COLUMN_SAMPLESET);
+                gtk_tree_view_append_column (view, column);
+        }
+        else for (ii = 0; ii < length; ii++)
+        {
+                GtkTreeViewColumn *column;
+
+                column = gva_columns_new_from_name (column_names[ii]);
                 gtk_tree_view_append_column (view, column);
         }
 
-        g_slist_foreach (list, (GFunc) g_free, NULL);
-        g_slist_free (list);
+        g_strfreev (column_names);
 }
 
 void
@@ -360,4 +358,34 @@ gva_columns_save (GtkTreeView *view)
         g_object_unref (client);
 
         g_slist_free (list);
+}
+
+gchar **
+gva_columns_get_selected (guint *length)
+{
+        GConfClient *client;
+        GSList *list;
+        gchar **column_names;
+        gint ii;
+        GError *error = NULL;
+
+        client = gconf_client_get_default ();
+        list = gconf_client_get_list (
+                client, GVA_GCONF_COLUMNS_KEY,
+                GCONF_VALUE_STRING, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+
+        column_names = g_new0 (gchar *, g_slist_length (list) + 1);
+
+        for (ii = 0; list != NULL; ii++)
+        {
+                column_names[ii] = list->data;
+                list = g_slist_delete_link (list, list);
+        }
+
+        if (length != NULL)
+                *length = g_strv_length (column_names);
+
+        return column_names;
 }
