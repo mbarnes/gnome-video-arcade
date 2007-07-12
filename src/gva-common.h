@@ -38,5 +38,13 @@
 #define GVA_GCONF_FULL_SCREEN_KEY       GVA_GCONF_PREFIX "/full-screen"
 #define GVA_GCONF_SELECTED_GAME_KEY     GVA_GCONF_PREFIX "/selected-game"
 #define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"
+#define GVA_GCONF_VERSION_KEY           GVA_GCONF_PREFIX "/version"
+
+G_BEGIN_DECLS
+
+/* Command Line Options */
+extern gboolean opt_build_database;
+
+G_END_DECLS
 
 #endif /* GVA_COMMON_H */

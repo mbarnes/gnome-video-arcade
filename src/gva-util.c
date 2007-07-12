@@ -97,6 +97,36 @@ gva_find_data_file (const gchar *basename)
         return NULL;
 }
 
+const gchar *
+gva_get_last_version (void)
+{
+        static gchar *last_version = NULL;
+        static gboolean first_time = TRUE;
+
+        if (G_UNLIKELY (first_time))
+        {
+                GConfClient *client;
+                GError *error = NULL;
+
+                client = gconf_client_get_default ();
+
+                last_version = gconf_client_get_string (
+                        client, GVA_GCONF_VERSION_KEY, &error);
+                gva_error_handle (&error);
+
+                gconf_client_set_string (
+                        client, GVA_GCONF_VERSION_KEY,
+                        PACKAGE_VERSION, &error);
+                gva_error_handle (&error);
+
+                g_object_unref (client);
+
+                first_time = FALSE;
+        }
+
+        return last_version;
+}
+
 gchar *
 gva_get_monospace_font_name (void)
 {

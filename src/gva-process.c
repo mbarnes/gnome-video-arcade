@@ -59,7 +59,7 @@ struct _GvaProcessPrivate
 
         GTimeVal start_time;
 
-        gdouble progress;
+        guint progress;
         gboolean exited;
         gint status;
 };
@@ -92,8 +92,6 @@ process_source_removed (GvaProcess *process)
 
         if (n_active_sources == 0)
         {
-                gva_process_set_progress (process, 1.0);
-
                 process->priv->exited = TRUE;
 
                 g_signal_emit (
@@ -250,7 +248,7 @@ process_set_property (GObject *object,
                         return;
 
                 case PROP_PROGRESS:
-                        priv->progress = g_value_get_double (value);
+                        priv->progress = g_value_get_uint (value);
                         g_object_notify (object, "progress");
                         return;
         }
@@ -298,7 +296,7 @@ process_get_property (GObject *object,
                         return;
 
                 case PROP_PROGRESS:
-                        g_value_set_double (value, priv->progress);
+                        g_value_set_uint (value, priv->progress);
                         return;
         }
 
@@ -407,11 +405,11 @@ process_class_init (GvaProcessClass *class)
         g_object_class_install_property (
                 object_class,
                 PROP_PROGRESS,
-                g_param_spec_double (
+                g_param_spec_uint (
                         "progress",
                         NULL,
                         NULL,
-                        0.0, 1.0, 0.0,
+                        0, G_MAXUINT, 0,
                         G_PARAM_READWRITE));
 
         signals[STDOUT_READY] = g_signal_new (
@@ -651,10 +649,10 @@ gva_process_stderr_read_lines (GvaProcess *process)
         return lines;
 }
 
-gdouble
+guint
 gva_process_get_progress (GvaProcess *process)
 {
-        gdouble progress;
+        guint progress;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), 0.0);
 
@@ -665,7 +663,7 @@ gva_process_get_progress (GvaProcess *process)
 
 void
 gva_process_set_progress (GvaProcess *process,
-                          gdouble progress)
+                          guint progress)
 {
         g_return_if_fail (GVA_IS_PROCESS (process));
 

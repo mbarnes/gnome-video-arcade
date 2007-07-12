@@ -21,6 +21,7 @@
 #include <string.h>
 
 #include "gva-error.h"
+#include "gva-util.h"
 #include "gva-xmame.h"
 
 #define ASSERT_OK(code) \
@@ -68,7 +69,11 @@
                 "driver_cocktail, " \
                 "driver_protection, " \
                 "driver_savestate, " \
-                "driver_palettesize)"
+                "driver_palettesize);"
+
+#define SQL_CLEAR_TABLES \
+        "DELETE FROM mame;" \
+        "DELETE FROM game;"
 
 #define SQL_INSERT_GAME \
         "INSERT INTO game VALUES (" \
@@ -118,6 +123,7 @@ struct _ParserData
 
         const gchar *element_stack[MAX_ELEMENT_DEPTH];
         guint element_stack_depth;
+        guint progress;
 };
 
 /* Canonical names of XML elements and attributes */
@@ -438,6 +444,8 @@ db_parser_end_element_game (ParserData *data,
 
         ASSERT_OK (sqlite3_reset (data->stmt));
         ASSERT_OK (sqlite3_clear_bindings (data->stmt));
+
+        gva_process_set_progress (data->process, ++data->progress);
 }
 
 static void
@@ -545,7 +553,7 @@ db_parser_exit (GvaProcess *process,
         gva_process_get_time_elapsed (process, &time_elapsed);
 
         g_message (
-                "XML parsing completed in %d.%d seconds",
+                "Database built in %d.%d seconds",
                 time_elapsed.tv_sec, time_elapsed.tv_usec / 100000);
 
         db_parser_data_free (data);
@@ -556,6 +564,12 @@ db_create_tables (GError **error)
 {
         return gva_db_execute (SQL_CREATE_TABLE_MAME, error)
                 && gva_db_execute (SQL_CREATE_TABLE_GAME, error);
+}
+
+static gboolean
+db_clear_tables (GError **error)
+{
+        return gva_db_execute (SQL_CLEAR_TABLES, error);
 }
 
 gboolean
@@ -582,10 +596,9 @@ gva_db_init (GError **error)
 GvaProcess *
 gva_db_build (GError **error)
 {
+        const gchar *filename;
         GvaProcess *process;
         ParserData *data;
-
-        g_return_val_if_fail (db != NULL, NULL);
 
         /* Initialize the list of canonical names. */
         intern.aspectx      = g_intern_static_string ("aspectx");
@@ -627,6 +640,9 @@ gva_db_build (GError **error)
         intern.video        = g_intern_static_string ("video");
         intern.width        = g_intern_static_string ("width");
         intern.year         = g_intern_static_string ("year");
+
+        if (!db_clear_tables (error))
+                return NULL;
 
         process = gva_xmame_list_xml (error);
         if (process == NULL)
@@ -735,6 +751,58 @@ gva_db_get_filename (void)
                         g_get_user_data_dir (), PACKAGE ".db", NULL);
 
         return filename;
+}
+
+gboolean
+gva_db_needs_rebuilt (void)
+{
+        GConfClient *client;
+        gchar *db_build_id = NULL;
+        gchar *mame_version = NULL;
+        const gchar *reason;
+        gboolean rebuild;
+        GError *error = NULL;
+
+#define TEST_CASE(expr) \
+        if ((rebuild = (expr))) goto exit;
+
+        /* Begin test cases for rebuilding the games database.
+         * The macro tests whether the database SHOULD be rebuilt. */
+
+        reason = "the user requested it";
+        TEST_CASE (opt_build_database);
+
+        reason = PACKAGE_NAME "'s version changed";
+        TEST_CASE (gva_get_last_version () == NULL);
+        TEST_CASE (strcmp (gva_get_last_version (), PACKAGE_VERSION) != 0);
+
+        reason = "the database does not have a build ID";
+        gva_db_get_build (&db_build_id, &error);
+        gva_error_handle (&error);
+        TEST_CASE (db_build_id == NULL);
+
+        reason = "the MAME version could not be determined";
+        mame_version = gva_xmame_get_version (&error);
+        gva_error_handle (&error);
+        TEST_CASE (mame_version == NULL);
+
+        reason = "the database build ID does not match the MAME version";
+        TEST_CASE (strstr (mame_version, db_build_id) == NULL);
+
+        /* ... add more tests here ... */
+
+#undef TEST_CASE
+
+exit:
+        if (rebuild)
+                g_message ("Building database because %s.", reason);
+        else
+                g_message ("Database seems up-to-date; no rebuild necessary.");
+
+        g_free (db_build_id);
+        g_free (mame_version);
+
+        return rebuild;
 }
 
 void

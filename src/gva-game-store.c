@@ -22,6 +22,7 @@
 #include <time.h>
 
 #include "gva-error.h"
+#include "gva-favorites.h"
 #include "gva-time.h"
 #include "gva-xmame.h"
 
@@ -229,6 +230,7 @@ gva_game_store_new_from_query (const gchar *sql,
         sqlite3_stmt *stmt;
         GvaGameStoreColumn *column_ids;
         GValue *column_values;
+        const gchar *name;
         gint n_columns, ii;
         gint name_column = -1;
         gint errcode;
@@ -243,7 +245,7 @@ gva_game_store_new_from_query (const gchar *sql,
         model = gva_game_store_new ();
         n_columns = sqlite3_column_count (stmt);
         column_ids = g_newa (GvaGameStoreColumn, n_columns);
-        column_values = g_new0 (GValue, n_columns);
+        column_values = g_new0 (GValue, n_columns + 1);
 
         for (ii = 0; ii < n_columns; ii++)
         {
@@ -265,6 +267,10 @@ gva_game_store_new_from_query (const gchar *sql,
                 type = gtk_tree_model_get_column_type (model, column_ids[ii]);
                 g_value_init (&column_values[ii], type);
         }
+
+        /* Tack on an extra value for favorites.  This information is not
+         * stored in the database so we want to supply it for every query. */
+        g_value_init (&column_values[n_columns], G_TYPE_BOOLEAN);
 
         if (name_column < 0)
         {
@@ -324,10 +330,15 @@ gva_game_store_new_from_query (const gchar *sql,
                                 GTK_LIST_STORE (model), &iter, ii, value);
                 }
 
+                name = sqlite3_column_text (stmt, name_column);
+
+                g_value_set_boolean (
+                        &column_values[n_columns],
+                        gva_favorites_contains (name));
+
                 /* Add an entry for this row to the index. */
                 gva_game_store_index_insert (
-                        GVA_GAME_STORE (model),
-                        sqlite3_column_text (stmt, name_column), &iter);
+                        GVA_GAME_STORE (model), g_strdup (name), &iter);
 
                 /* Keep the UI responsive. */
                 g_main_context_iteration (NULL, FALSE);

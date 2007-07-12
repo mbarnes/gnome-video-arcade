@@ -34,7 +34,7 @@ gint            gva_xmame_command               (const gchar *arguments,
                                                  GError **error);
 
 gchar *         gva_xmame_get_version           (GError **error);
-gint            gva_xmame_get_total_supported   (GError **error);
+guint           gva_xmame_get_total_supported   (GError **error);
 gchar *         gva_xmame_get_config_value      (const gchar *config_key,
                                                  GError **error);
 gboolean        gva_xmame_has_config_value      (const gchar *config_key);

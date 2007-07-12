@@ -20,10 +20,43 @@
 
 #include <stdarg.h>
 
+#include "gva-db.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 
 static guint menu_tooltip_cid;
+
+static void
+main_build_database_exited_cb (GvaProcess *process,
+                               gint status,
+                               gpointer user_data)
+{
+        guint context_id = GPOINTER_TO_UINT (user_data);
+
+        gva_main_statusbar_pop (context_id);
+        gtk_widget_hide (GVA_WIDGET_MAIN_PROGRESS_BAR);
+}
+
+static void
+main_build_database_progress_cb (GvaProcess *process,
+                                 GParamSpec *pspec,
+                                 gpointer user_data)
+{
+        guint total_supported = GPOINTER_TO_UINT (user_data);
+        GtkProgressBar *progress_bar;
+        gdouble fraction = 0.0;
+
+        if (total_supported != 0)
+        {
+                guint progress;
+
+                progress = gva_process_get_progress (process);
+                fraction = (gdouble) progress / (gdouble) total_supported;
+        }
+
+        progress_bar = GTK_PROGRESS_BAR (GVA_WIDGET_MAIN_PROGRESS_BAR);
+        gtk_progress_bar_set_fraction (progress_bar, fraction);
+}
 
 static void
 main_menu_item_select_cb (GtkItem *item, GtkAction *action)
@@ -84,6 +117,36 @@ gva_main_init (void)
 
         gva_tree_view_set_selected_view (
                 gva_tree_view_get_last_selected_view ());
+}
+
+GvaProcess *
+gva_main_build_database (GError **error)
+{
+        GvaProcess *process;
+        guint context_id;
+        guint total_supported;
+
+        process = gva_db_build (error);
+        if (process == NULL)
+                return FALSE;
+
+        context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
+        total_supported = gva_xmame_get_total_supported (NULL);
+
+        gva_main_statusbar_push (context_id, _("Building game database..."));
+        gtk_widget_show (GVA_WIDGET_MAIN_PROGRESS_BAR);
+
+        g_signal_connect (
+                process, "exited",
+                G_CALLBACK (main_build_database_exited_cb),
+                GUINT_TO_POINTER (context_id));
+
+        g_signal_connect (
+                process, "notify::progress",
+                G_CALLBACK (main_build_database_progress_cb),
+                GUINT_TO_POINTER (total_supported));
+
+        return process;
 }
 
 void

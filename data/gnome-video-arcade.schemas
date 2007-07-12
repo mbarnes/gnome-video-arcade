@@ -82,5 +82,16 @@
       </locale>
     </schema>
 
+    <schema>
+      <applyto>/apps/gnome-video-arcade/version</applyto>
+      <key>/schemas/apps/gnome-video-arcade/version</key>
+      <owner>gnome-video-arcade</owner>
+      <type>string</type>
+      <locale name="C">
+        <short>Program version</short>
+        <long>The most recently run version of GNOME Video Arcade.</long>
+      </locale>
+    </schema>
+
   </schemalist>
 </gconfschemafile>

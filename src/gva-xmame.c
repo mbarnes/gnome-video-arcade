@@ -140,16 +140,16 @@ gva_xmame_get_version (GError **error)
         return version;
 }
 
-gint
+guint
 gva_xmame_get_total_supported (GError **error)
 {
         gchar **lines;
         guint num_lines, ii;
-        gint total_supported = 0;
+        guint total_supported = 0;
 
         /* Execute the command "${xmame} -list". */
         if (gva_xmame_command ("-list", &lines, NULL, error) != 0)
-                return -1;
+                return 0;
 
         /* Output is as follows:
          *
@@ -166,7 +166,7 @@ gva_xmame_get_total_supported (GError **error)
         for (ii = 0; ii < num_lines; ii++)
         {
                 if (g_str_has_prefix (lines[ii], "Total Supported:"))
-                        total_supported = strtol (lines[ii] + 16, NULL, 10);
+                        total_supported = strtoul (lines[ii] + 16, NULL, 10);
         }
 
         g_strfreev (lines);

@@ -33,43 +33,50 @@
 #include "gva-ui.h"
 #include "gva-xmame.h"
 
+/* Command Line Options */
+gboolean opt_build_database;
+
+static GOptionEntry entries[] =
+{
+        { "build-database", 'b', 0,
+          G_OPTION_ARG_NONE, &opt_build_database,
+          N_("Build the games database"), NULL },
+
+        { NULL }
+};
+
 static gboolean
-database_needs_rebuilt (void)
+start (void)
 {
-        gchar *build;
-        gchar *version;
-        GError *error = NULL;
-
-        gva_db_get_build (&build, &error);
-        gva_error_handle (&error);
-
-        version = gva_xmame_get_version (&error);
-        gva_error_handle (&error);
-
-        return (build == NULL) || (version == NULL) ||
-                (strstr (version, build) == NULL);
-}
-
-static void
-show_xmame_version (void)
-{
-        gchar *xmame_version;
+        GvaProcess *process = NULL;
+        gchar *mame_version;
         guint context_id;
         GError *error = NULL;
 
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
+        mame_version = gva_xmame_get_version (&error);
+        gva_error_handle (&error);
 
-        xmame_version = gva_xmame_get_version (&error);
-        if (xmame_version != NULL)
+        if (mame_version != NULL)
         {
-                gva_main_statusbar_push (context_id, "%s", xmame_version);
-                g_free (xmame_version);
+                gva_main_statusbar_push (context_id, "%s", mame_version);
+                g_free (mame_version);
         }
-        else
+
+        if (gva_db_needs_rebuilt ())
         {
-                gva_main_statusbar_push (context_id, "%s", error->message);
-                g_clear_error (&error);
+                process = gva_main_build_database (&error);
+                gva_error_handle (&error);
         }
+
+        if (process != NULL)
+        {
+                while (!gva_process_has_exited (process, NULL))
+                        g_main_context_iteration (NULL, FALSE);
+                g_object_unref (process);
+        }
+
+        return FALSE;
 }
 
 gint
@@ -85,7 +92,7 @@ main (gint argc, gchar **argv)
         g_thread_init (NULL);
 
         gtk_init_with_args (
-                &argc, &argv, NULL, NULL, GETTEXT_PACKAGE, &error);
+                &argc, &argv, NULL, entries, GETTEXT_PACKAGE, &error);
         if (error != NULL)
                 g_error ("%s", error->message);
         
@@ -107,7 +114,7 @@ main (gint argc, gchar **argv)
         gva_preferences_init ();
         gva_properties_init ();
 
-        show_xmame_version ();
+        g_idle_add ((GSourceFunc) start, NULL);
 
         gtk_main ();
 

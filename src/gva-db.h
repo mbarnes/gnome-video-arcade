@@ -34,6 +34,7 @@ gboolean        gva_db_prepare                  (const gchar *sql,
 gboolean        gva_db_get_build                (gchar **build,
                                                  GError **error);
 const gchar *   gva_db_get_filename             (void);
+gboolean        gva_db_needs_rebuilt            (void);
 void            gva_db_set_error                (GError **error,
                                                  gint code,
                                                  const gchar *message);

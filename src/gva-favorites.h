@@ -24,9 +24,9 @@
 G_BEGIN_DECLS
 
 GSList *        gva_favorites_copy              (void);
-void            gva_favorites_insert            (const gchar *romname);
-void            gva_favorites_remove            (const gchar *romname);
-gboolean        gva_favorites_contains          (const gchar *romname);
+void            gva_favorites_insert            (const gchar *name);
+void            gva_favorites_remove            (const gchar *name);
+gboolean        gva_favorites_contains          (const gchar *name);
 
 G_END_DECLS
 

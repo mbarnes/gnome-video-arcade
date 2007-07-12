@@ -254,15 +254,6 @@ tree_view_load_data (void)
         gva_main_statusbar_push (
                 context_id, "%s", _("Loading game properties..."));
 
-        process = gva_db_build (&error);
-        gva_error_handle (&error);
-
-        if (process != NULL)
-                g_signal_connect (
-                        process, "exited",
-                        G_CALLBACK (tree_view_data_added),
-                        GUINT_TO_POINTER (context_id));
-
         process = gva_game_db_update_samples (&error);
         gva_error_handle (&error);
 

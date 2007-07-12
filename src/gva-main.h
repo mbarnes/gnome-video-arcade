@@ -20,10 +20,12 @@
 #define GVA_MAIN_H
 
 #include "gva-common.h"
+#include "gva-process.h"
 
 G_BEGIN_DECLS
 
 void          gva_main_init                     (void);
+GvaProcess *  gva_main_build_database           (GError **error);
 void          gva_main_connect_proxy_cb         (GtkUIManager *manager,
                                                  GtkAction *action,
                                                  GtkWidget *proxy);

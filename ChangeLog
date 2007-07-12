@@ -1,5 +1,55 @@
 2007-07-12  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/gnome-video-arcade.schemas:
+	Add "version" key.
+
+	* src/main.c:
+	Support a --build-database command-line option.
+
+	* src/main.c (start):
+	New function kicks off the party when the main loop starts.
+	It currently just starts a database rebuild as needed.
+
+	* src/gva-common.h:
+	Expose command-line option values.
+
+	* src/gva-db.c (db_parser_end_element_game):
+	Report parsing progress to the GvaProcess.
+
+	* src/gva-db.c (gva_db_build):
+	Clear all tables before building the database.
+
+	* src/gva-db.c (gva_db_needs_rebuilt):
+	New functions runs a series of tests to figure out whether the
+	database needs to be rebuilt.  It also states its rationale for
+	recommending a rebuild to stdout.
+
+	* src/gva-favorites.c:
+	Prefer "name" over "romname".
+
+	* src/gva-game-store.c (gva_game_store_new_from_query):
+	Always populate the game store with favorites, since favorites
+	are stored in GConf and not the database.
+
+	* src/gva-main.c (gva_main_build_database):
+	New function initiates a database rebuild and reports progress
+	to a progress bar widget.
+
+	* src/gva-process.c:
+	Make the progress property an unsigned integer.
+
+	* src/gva-tree-view.c (tree_view_load_data):
+	Remove the call to gva_db_build().
+	This breaks the "properties" action for now.
+
+	* src/gva-util.c (gva_get_last_version):
+	New function returns what version of GVA we ran last time.
+
+	* src/gva-xmame.c (gva_xmame_get_total_supported):
+	Return an _unsigned_ integer, and zero on error.
+
+2007-07-12  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.glade:
 	Changed my mind; remove the search button from the main window.
 	Edit -> Search menu item still remains.

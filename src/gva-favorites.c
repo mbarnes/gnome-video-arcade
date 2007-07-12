@@ -41,9 +41,9 @@ favorites_load (void)
 
         for (iter = favorites; iter != NULL; iter = iter->next)
         {
-                gchar *romname = iter->data;
-                iter->data = (gchar *) g_intern_string (romname);
-                g_free (romname);
+                gchar *name = iter->data;
+                iter->data = (gchar *) g_intern_string (name);
+                g_free (name);
         }
 
         favorites = g_slist_sort (favorites, (GCompareFunc) strcmp);
@@ -72,48 +72,48 @@ gva_favorites_copy (void)
 }
 
 void
-gva_favorites_insert (const gchar *romname)
+gva_favorites_insert (const gchar *name)
 {
         if (G_UNLIKELY (!initialized))
                 favorites_load ();
 
-        g_return_if_fail (romname != NULL);
+        g_return_if_fail (name != NULL);
 
-        romname = g_intern_string (romname);
+        name = g_intern_string (name);
 
-        if (g_slist_find (favorites, romname) != NULL)
+        if (g_slist_find (favorites, name) != NULL)
                 return;
 
         favorites = g_slist_insert_sorted (
-                favorites, (gchar *) romname, (GCompareFunc) strcmp);
+                favorites, (gchar *) name, (GCompareFunc) strcmp);
 
         favorites_save ();
 }
 
 void
-gva_favorites_remove (const gchar *romname)
+gva_favorites_remove (const gchar *name)
 {
         if (G_UNLIKELY (!initialized))
                 favorites_load ();
 
-        g_return_if_fail (romname != NULL);
+        g_return_if_fail (name != NULL);
 
-        romname = g_intern_string (romname);
+        name = g_intern_string (name);
 
-        favorites = g_slist_remove_all (favorites, romname);
+        favorites = g_slist_remove_all (favorites, name);
 
         favorites_save ();
 }
 
 gboolean
-gva_favorites_contains (const gchar *romname)
+gva_favorites_contains (const gchar *name)
 {
         if (G_UNLIKELY (!initialized))
                 favorites_load ();
 
-        g_return_val_if_fail (romname != NULL, FALSE);
+        g_return_val_if_fail (name != NULL, FALSE);
 
-        romname = g_intern_string (romname);
+        name = g_intern_string (name);
 
-        return (g_slist_find (favorites, romname) != NULL);
+        return (g_slist_find (favorites, name) != NULL);
 }
