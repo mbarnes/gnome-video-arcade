@@ -285,6 +285,7 @@ gva_game_store_new_from_query (const gchar *sql,
         while ((errcode = sqlite3_step (stmt)) == SQLITE_ROW)
         {
                 GtkTreeIter iter;
+                GValue *value;
 
                 /* Append a new row to the list store. */
                 gtk_list_store_append (GTK_LIST_STORE (model), &iter);
@@ -292,7 +293,6 @@ gva_game_store_new_from_query (const gchar *sql,
                 /* Populate the row with available values. */
                 for (ii = 0; ii < n_columns; ii++)
                 {
-                        GValue *value;
                         GType type;
 
                         value = &column_values[ii];
@@ -327,14 +327,17 @@ gva_game_store_new_from_query (const gchar *sql,
                         }
 
                         gtk_list_store_set_value (
-                                GTK_LIST_STORE (model), &iter, ii, value);
+                                GTK_LIST_STORE (model), &iter,
+                                column_ids[ii], value);
                 }
 
                 name = sqlite3_column_text (stmt, name_column);
 
-                g_value_set_boolean (
-                        &column_values[n_columns],
-                        gva_favorites_contains (name));
+                value = &column_values[n_columns];
+                g_value_set_boolean (value, gva_favorites_contains (name));
+                gtk_list_store_set_value (
+                        GTK_LIST_STORE (model), &iter,
+                        GVA_GAME_STORE_COLUMN_FAVORITE, value);
 
                 /* Add an entry for this row to the index. */
                 gva_game_store_index_insert (
