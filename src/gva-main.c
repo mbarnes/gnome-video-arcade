@@ -115,8 +115,12 @@ gva_main_init (void)
                 GVA_WIDGET_MAIN_WINDOW, "destroy",
                 G_CALLBACK (main_window_destroy_cb), NULL);
 
-        gva_tree_view_set_selected_view (
-                gva_tree_view_get_last_selected_view ());
+        gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
+        gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
+        gtk_action_set_sensitive (GVA_ACTION_START, FALSE);
+
+        gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
+        gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
 }
 
 GvaProcess *

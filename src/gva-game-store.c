@@ -48,6 +48,37 @@ game_store_get_index (GvaGameStore *game_store)
 }
 
 static gint
+game_store_description_compare (GtkTreeModel *model,
+                                GtkTreeIter *iter_a,
+                                GtkTreeIter *iter_b)
+{
+        GValue value_a;
+        GValue value_b;
+        const gchar *string_a;
+        const gchar *string_b;
+        gint result = 0;
+
+        memset (&value_a, 0, sizeof (GValue));
+        memset (&value_b, 0, sizeof (GValue));
+
+        gtk_tree_model_get_value (
+                model, iter_a, GVA_GAME_STORE_COLUMN_DESCRIPTION, &value_a);
+        gtk_tree_model_get_value (
+                model, iter_b, GVA_GAME_STORE_COLUMN_DESCRIPTION, &value_b);
+
+        string_a = g_value_get_string (&value_a);
+        string_b = g_value_get_string (&value_b);
+
+        if (string_a != NULL && string_b != NULL)
+                result = strcmp (string_a, string_b);
+
+        g_value_unset (&value_a);
+        g_value_unset (&value_b);
+
+        return result;
+}
+
+static gint
 game_store_time_compare (GtkTreeModel *model,
                          GtkTreeIter *iter_a,
                          GtkTreeIter *iter_b)
@@ -84,6 +115,7 @@ game_store_constructor (GType type,
         gint n = 0;
 
         types[n++] = G_TYPE_STRING;     /* COLUMN_NAME */
+        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
         types[n++] = G_TYPE_STRING;     /* COLUMN_SOURCEFILE */
         types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_RUNNABLE */
         types[n++] = G_TYPE_STRING;     /* COLUMN_CLONEOF */
@@ -118,7 +150,6 @@ game_store_constructor (GType type,
         types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_PROTECTION */
         types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SAVESTATE */
         types[n++] = G_TYPE_INT;        /* COLUMN_DRIVER_PALETTESIZE */
-        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
         types[n++] = G_TYPE_STRING;     /* COLUMN_INPFILE */
         types[n++] = GVA_TYPE_TIME;     /* COLUMN_TIME */
 
@@ -130,6 +161,10 @@ game_store_constructor (GType type,
 
         gtk_list_store_set_column_types (
                 GTK_LIST_STORE (object), G_N_ELEMENTS (types), types);
+
+        gtk_tree_sortable_set_default_sort_func (
+                GTK_TREE_SORTABLE (object), (GtkTreeIterCompareFunc)
+                game_store_description_compare, NULL, NULL);
 
         gtk_tree_sortable_set_sort_func (
                 GTK_TREE_SORTABLE (object), GVA_GAME_STORE_COLUMN_TIME,

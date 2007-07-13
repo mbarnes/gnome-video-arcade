@@ -49,6 +49,7 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
 enum _GvaGameStoreColumn
 {
         GVA_GAME_STORE_COLUMN_NAME,               /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_FAVORITE,           /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_SOURCEFILE,         /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_RUNNABLE,           /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_CLONEOF,            /* G_TYPE_STRING */
@@ -83,7 +84,6 @@ enum _GvaGameStoreColumn
         GVA_GAME_STORE_COLUMN_DRIVER_PROTECTION,  /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_DRIVER_SAVESTATE,   /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_DRIVER_PALETTESIZE, /* G_TYPE_INT */
-        GVA_GAME_STORE_COLUMN_FAVORITE,           /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_INPFILE,            /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_TIME,               /* GVA_TYPE_TIME */
         GVA_GAME_STORE_NUM_COLUMNS
@@ -104,9 +104,6 @@ GtkTreeModel *  gva_game_store_new              (void);
 GtkTreeModel *  gva_game_store_new_from_query   (const gchar *sql,
                                                  GError **error);
 void            gva_game_store_clear            (GvaGameStore *game_store);
-gboolean        gva_game_store_append_result    (GvaGameStore *game_store,
-                                                 sqlite3_stmt *stmt,
-                                                 GError **error);
 void            gva_game_store_index_insert     (GvaGameStore *game_store,
                                                  const gchar *key,
                                                  GtkTreeIter *iter);

@@ -31,7 +31,7 @@
 #define MAX_ELEMENT_DEPTH 4
 
 #define SQL_CREATE_TABLE_MAME \
-        "CREATE TABLE IF NOT EXISTS mame (build)"
+        "CREATE TABLE IF NOT EXISTS mame (build);"
 
 #define SQL_CREATE_TABLE_GAME \
         "CREATE TABLE IF NOT EXISTS game (" \
@@ -71,10 +71,6 @@
                 "driver_savestate, " \
                 "driver_palettesize);"
 
-#define SQL_CLEAR_TABLES \
-        "DELETE FROM mame;" \
-        "DELETE FROM game;"
-
 #define SQL_INSERT_GAME \
         "INSERT INTO game VALUES (" \
                 "@name, " \
@@ -113,6 +109,9 @@
                 "@driver_savestate, " \
                 "@driver_palettesize);"
 
+#define SQL_DELETE_NOT_FOUND \
+        "DELETE FROM game WHERE romset == \"not found\";"
+
 typedef struct _ParserData ParserData;
 
 struct _ParserData
@@ -120,6 +119,11 @@ struct _ParserData
         GMarkupParseContext *context;
         GvaProcess *process;
         sqlite3_stmt *stmt;
+
+        GHashTable *romsets;
+        GHashTable *samplesets;
+        GvaProcess *verify_romsets;
+        GvaProcess *verify_samplesets;
 
         const gchar *element_stack[MAX_ELEMENT_DEPTH];
         guint element_stack_depth;
@@ -432,10 +436,6 @@ static void
 db_parser_end_element_game (ParserData *data,
                             GError **error)
 {
-        /* XXX Lookup real values here. */
-        db_parser_bind_text (data, "@romset", "unknown");
-        db_parser_bind_text (data, "@sampleset", "unknown");
-
         if (sqlite3_step (data->stmt) != SQLITE_DONE)
         {
                 gva_db_set_error (error, 0, NULL);
@@ -489,6 +489,64 @@ db_parser_text (GMarkupParseContext *context,
                 db_parser_bind_text (data, "@year", text);
 }
 
+static void
+db_verify_update_foreach (const gchar *status,
+                          GString *names,
+                          const gchar *column)
+{
+        gchar *sql;
+        GError *error = NULL;
+
+        sql = g_strdup_printf (
+                "UPDATE game SET %s=\"%s\" WHERE name IN (%s)",
+                column, status, names->str);
+        gva_db_execute (sql, &error);
+        gva_error_handle (&error);
+        g_free (sql);
+}
+
+static void
+db_verify_update_status (GvaProcess *process,
+                         GHashTable *hash_table,
+                         gchar *column)
+{
+        if (process == NULL)
+                return;
+
+        while (!gva_process_has_exited (process, NULL))
+                g_main_context_iteration (NULL, TRUE);
+
+        if (process->error != NULL)
+                return;
+
+        g_hash_table_foreach (
+                hash_table, (GHFunc) db_verify_update_foreach, column);
+}
+
+static void
+db_verify_insert_status (const gchar *name,
+                         const gchar *status,
+                         GHashTable *hash_table)
+{
+        GString *string;
+
+        string = g_hash_table_lookup (hash_table, status);
+        if (string != NULL)
+                g_string_append_printf (string, ", \"%s\"", name);
+        else
+        {
+                string = g_string_sized_new (1024);
+                g_string_printf (string, "\"%s\"", name);
+                g_hash_table_insert (hash_table, g_strdup (status), string);
+        }
+}
+
+static void
+db_verify_string_free (GString *string)
+{
+        g_string_free (string, TRUE);
+}
+
 static GMarkupParser parser =
 {
         db_parser_start_element,
@@ -509,6 +567,26 @@ db_parser_data_new (GvaProcess *process)
         data->context = g_markup_parse_context_new (&parser, 0, data, NULL);
         data->process = g_object_ref (process);
 
+        data->romsets = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) db_verify_string_free);
+
+        data->samplesets = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) db_verify_string_free);
+
+        data->verify_romsets = gva_xmame_verify_romsets (
+                (GvaXmameCallback) db_verify_insert_status,
+                data->romsets, &error);
+        gva_error_handle (&error);
+
+        data->verify_samplesets = gva_xmame_verify_samplesets (
+                (GvaXmameCallback) db_verify_insert_status,
+                data->samplesets, &error);
+        gva_error_handle (&error);
+
         if (!gva_db_prepare (SQL_INSERT_GAME, &data->stmt, &error))
                 g_error ("%s", error->message);
 
@@ -521,6 +599,16 @@ db_parser_data_free (ParserData *data)
         g_markup_parse_context_free (data->context);
         g_object_unref (data->process);
         sqlite3_finalize (data->stmt);
+
+        g_hash_table_destroy (data->romsets);
+        g_hash_table_destroy (data->samplesets);
+
+        if (data->verify_romsets != NULL)
+                g_object_unref (data->verify_romsets);
+
+        if (data->verify_samplesets != NULL)
+                g_object_unref (data->verify_samplesets);
+
         g_slice_free (ParserData, data);
 }
 
@@ -550,10 +638,16 @@ db_parser_exit (GvaProcess *process,
                 g_markup_parse_context_end_parse (
                         data->context, &process->error);
 
+        db_verify_update_status (
+                data->verify_romsets, data->romsets, "romset");
+        db_verify_update_status (
+                data->verify_samplesets, data->samplesets, "sampleset");
+        gva_db_execute (SQL_DELETE_NOT_FOUND, &process->error);
+
         gva_process_get_time_elapsed (process, &time_elapsed);
 
         g_message (
-                "Database built in %d.%d seconds",
+                "Database built in %d.%d seconds.",
                 time_elapsed.tv_sec, time_elapsed.tv_usec / 100000);
 
         db_parser_data_free (data);
@@ -566,31 +660,49 @@ db_create_tables (GError **error)
                 && gva_db_execute (SQL_CREATE_TABLE_GAME, error);
 }
 
-static gboolean
-db_clear_tables (GError **error)
+static void
+db_function_isfavorite (sqlite3_context *context,
+                        gint n_values,
+                        sqlite3_value **values)
 {
-        return gva_db_execute (SQL_CLEAR_TABLES, error);
+        const gchar *name;
+
+        g_assert (n_values == 1);
+
+        name = (const gchar *) sqlite3_value_text (values[0]);
+        if (gva_favorites_contains (name))
+                sqlite3_result_text (context, "yes", -1, SQLITE_STATIC);
+        else
+                sqlite3_result_text (context, "no", -1, SQLITE_STATIC);
 }
 
 gboolean
 gva_db_init (GError **error)
 {
         const gchar *filename;
+        gint errcode;
 
         g_return_val_if_fail (db == NULL, FALSE);
 
         filename = gva_db_get_filename ();
 
         if (sqlite3_open (filename, &db) != SQLITE_OK)
-        {
-                gva_db_set_error (error, 0, NULL);
-                sqlite3_close (db);
-                db = NULL;
+                goto fail;
 
-                return FALSE;
-        }
+        errcode = sqlite3_create_function (
+                db, "isfavorite", 1, SQLITE_ANY, NULL,
+                db_function_isfavorite, NULL, NULL);
+        if (errcode != SQLITE_OK)
+                goto fail;
 
         return db_create_tables (error);
+
+fail:
+        gva_db_set_error (error, 0, NULL);
+        sqlite3_close (db);
+        db = NULL;
+
+        return FALSE;
 }
 
 GvaProcess *
@@ -599,6 +711,8 @@ gva_db_build (GError **error)
         const gchar *filename;
         GvaProcess *process;
         ParserData *data;
+
+        g_return_val_if_fail (db != NULL, NULL);
 
         /* Initialize the list of canonical names. */
         intern.aspectx      = g_intern_static_string ("aspectx");
@@ -641,7 +755,7 @@ gva_db_build (GError **error)
         intern.width        = g_intern_static_string ("width");
         intern.year         = g_intern_static_string ("year");
 
-        if (!db_clear_tables (error))
+        if (!gva_db_reset (error))
                 return NULL;
 
         process = gva_xmame_list_xml (error);
@@ -659,6 +773,24 @@ gva_db_build (GError **error)
                 G_CALLBACK (db_parser_exit), data);
 
         return process;
+}
+
+gboolean
+gva_db_reset (GError **error)
+{
+        const gchar *filename;
+
+        g_return_val_if_fail (db != NULL, FALSE);
+
+        filename = gva_db_get_filename ();
+
+        sqlite3_close (db);
+        db = NULL;
+
+        if (g_file_test (filename, G_FILE_TEST_EXISTS))
+                g_remove (filename);
+
+        return gva_db_init (error);
 }
 
 gboolean

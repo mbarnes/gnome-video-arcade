@@ -1,3 +1,56 @@
+2007-07-13  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.schemas:
+	Add "sort-column" key.
+
+	* src/Makefile.am:
+	Remove gva-game-db.[ch].
+
+	* src/main.c:
+	Disable the "view" actions while building the database.
+	Force a tree view update after the database is built.
+
+	* src/gva-columns.c (gva_columns_lookup_name):
+	New function returns the name of the given given column ID.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_SORT_COLUMN_KEY.
+
+	* src/gva-db.c:
+	Verify ROM sets and sample sets while parsing XML data.
+	Merge the results into the database when XML parsing is done.
+	Register an isfavorite() function in the database.
+
+	* src/gva-game-db.[ch]:
+	Remove these files.
+
+	* src/gva-main.c (gva_main_init):
+	Disable some actions until we're up and running.
+
+	* src/gva-game-store.c (game_store_constructor):
+	Register a default sort function (sorts on description).
+
+	* src/gva-play-back.c:
+	Prefer "name" over "romname".
+	Adapt to gva-game-db.c going away.
+
+	* src/gva-properties.c (properties_selection_changed_cb):
+	Query the database for the needed game information.
+
+	* src/gva-tree-view.c:
+	Prefer "name" over "romname".
+	Remember sort column and order across sessions.
+	Switching views is now a database query; swap out the old
+	tree model for a fresh one.  No need to pile filter and sort
+	models on to our game store.  Clean and elegant.
+
+	* src/gva-ui.c:
+	Prefer "name" over "romname".
+
+	* src/gva-xmame.c:
+	Prefer "name" over "romname".
+	Remove some obsolete functions.
+
 2007-07-12  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-game-store.c (gva_game_store_new_from_query):

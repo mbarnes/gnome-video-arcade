@@ -24,7 +24,6 @@
 #include <string.h>
 
 #include "gva-db.h"
-#include "gva-game-db.h"
 #include "gva-history.h"
 #include "gva-main.h"
 #include "gva-play-back.h"
@@ -51,6 +50,7 @@ start (void)
         GvaProcess *process = NULL;
         gchar *mame_version;
         guint context_id;
+        gint last_view;
         GError *error = NULL;
 
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
@@ -71,10 +71,25 @@ start (void)
 
         if (process != NULL)
         {
+                gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, FALSE);
+                gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, FALSE);
+                gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, FALSE);
+
                 while (!gva_process_has_exited (process, NULL))
                         g_main_context_iteration (NULL, FALSE);
                 g_object_unref (process);
+
+                gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
+                gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
+                gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
         }
+
+        /* Force a tree view update. */
+        last_view = gva_tree_view_get_last_selected_view ();
+        if (last_view == gva_tree_view_get_selected_view ())
+                gva_tree_view_update ();
+        else
+                gva_tree_view_set_selected_view (last_view);
 
         return FALSE;
 }
@@ -101,18 +116,15 @@ main (gint argc, gchar **argv)
         if (!gva_db_init (&error))
                 g_error ("%s", error->message);
 
-        if (!gva_game_db_init (&error))
-                g_error ("%s", error->message);
+        gva_main_init ();
+        gva_play_back_init ();
+        gva_preferences_init ();
+        gva_properties_init ();
 
 #ifdef HISTORY_FILE
         gva_history_init (&error);
         gva_error_handle (&error);
 #endif
-
-        gva_main_init ();
-        gva_play_back_init ();
-        gva_preferences_init ();
-        gva_properties_init ();
 
         g_idle_add ((GSourceFunc) start, NULL);
 

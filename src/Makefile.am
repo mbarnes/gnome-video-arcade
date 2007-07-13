@@ -25,8 +25,6 @@ gnome_video_arcade_SOURCES = \
 	gva-error.h			\
 	gva-favorites.c			\
 	gva-favorites.h			\
-	gva-game-db.c			\
-	gva-game-db.h			\
 	gva-game-store.c		\
 	gva-game-store.h		\
 	gva-history.c			\

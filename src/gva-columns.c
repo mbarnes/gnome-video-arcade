@@ -196,6 +196,7 @@ static struct
 column_info[GVA_GAME_STORE_NUM_COLUMNS] =
 {
         { "name",               NULL },
+        { "favorite",           columns_factory_favorite },
         { "sourcefile",         NULL },
         { "runnable",           NULL },
         { "cloneof",            NULL },
@@ -230,31 +231,9 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "driver_protection",  NULL },
         { "driver_savestate",   NULL },
         { "driver_palettesize", NULL },
-        { "favorite",           columns_factory_favorite },
         { "inpfile",            NULL },
         { "time",               NULL }
 };
-
-gboolean
-gva_columns_lookup_id (const gchar *column_name,
-                       GvaGameStoreColumn *column_id)
-{
-        gint ii;
-
-        g_return_val_if_fail (column_name != NULL, FALSE);
-        g_return_val_if_fail (column_id != NULL, FALSE);
-
-        for (ii = 0; ii < G_N_ELEMENTS (column_info); ii++)
-        {
-                if (strcmp (column_name, column_info[ii].name) == 0)
-                {
-                        *column_id = (GvaGameStoreColumn) ii;
-                        return TRUE;
-                }
-        }
-
-        return FALSE;
-}
 
 GtkTreeViewColumn *
 gva_columns_new_from_id (GvaGameStoreColumn column_id)
@@ -283,6 +262,36 @@ gva_columns_new_from_name (const gchar *column_name)
                 return NULL;
 
         return gva_columns_new_from_id (column_id);
+}
+
+gboolean
+gva_columns_lookup_id (const gchar *column_name,
+                       GvaGameStoreColumn *column_id)
+{
+        gint ii;
+
+        g_return_val_if_fail (column_name != NULL, FALSE);
+        g_return_val_if_fail (column_id != NULL, FALSE);
+
+        for (ii = 0; ii < G_N_ELEMENTS (column_info); ii++)
+        {
+                if (strcmp (column_name, column_info[ii].name) == 0)
+                {
+                        *column_id = (GvaGameStoreColumn) ii;
+                        return TRUE;
+                }
+        }
+
+        return FALSE;
+}
+
+const gchar *
+gva_columns_lookup_name (GvaGameStoreColumn column_id)
+{
+        if (CLAMP (column_id, 0, G_N_ELEMENTS (column_info)) != column_id)
+                return FALSE;
+
+        return column_info[column_id].name;
 }
 
 void

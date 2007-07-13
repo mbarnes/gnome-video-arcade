@@ -22,7 +22,6 @@
 
 #include "gva-error.h"
 #include "gva-favorites.h"
-#include "gva-game-db.h"
 #include "gva-game-store.h"
 #include "gva-main.h"
 #include "gva-play-back.h"
@@ -165,14 +164,14 @@ action_insert_favorite_cb (GtkAction *action)
         GtkTreeModel *model;
         GtkTreePath *path;
         GtkTreeIter iter;
-        const gchar *romname;
+        const gchar *name;
         gboolean valid;
 
-        romname = gva_tree_view_get_selected_game ();
-        g_assert (romname != NULL);
+        name = gva_tree_view_get_selected_game ();
+        g_assert (name != NULL);
 
-        model = gva_game_db_get_model ();
-        path = gva_game_db_lookup (romname);
+        model = gva_tree_view_get_model ();
+        path = gva_tree_view_lookup (name);
         valid = gtk_tree_model_get_iter (model, &iter, path);
         gtk_tree_path_free (path);
         g_assert (valid);
@@ -181,7 +180,7 @@ action_insert_favorite_cb (GtkAction *action)
                 GTK_LIST_STORE (model), &iter,
                 GVA_GAME_STORE_COLUMN_FAVORITE, TRUE, -1);
 
-        gva_favorites_insert (romname);
+        gva_favorites_insert (name);
 
         gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, TRUE);
@@ -196,7 +195,7 @@ action_play_back_cb (GtkAction *action)
         GtkTreeIter iter;
         gchar *inpfile;
         gchar *inpname;
-        gchar *romname;
+        gchar *name;
         GList *list;
         gboolean valid;
         GError *error = NULL;
@@ -214,11 +213,11 @@ action_play_back_cb (GtkAction *action)
         g_assert (valid);
         gtk_tree_model_get (
                 model, &iter, GVA_GAME_STORE_COLUMN_INPFILE, &inpfile,
-                GVA_GAME_STORE_COLUMN_NAME, &romname, -1);
+                GVA_GAME_STORE_COLUMN_NAME, &name, -1);
         inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
         g_free (inpfile);
 
-        process = gva_xmame_playback_game (romname, inpname, &error);
+        process = gva_xmame_playback_game (name, inpname, &error);
         gva_error_handle (&error);
 
         if (process != NULL)
@@ -227,7 +226,7 @@ action_play_back_cb (GtkAction *action)
                         G_CALLBACK (g_object_unref), NULL);
 
         g_free (inpname);
-        g_free (romname);
+        g_free (name);
 
         g_list_foreach (list, (GFunc) gtk_tree_path_free, NULL);
         g_list_free (list);
@@ -255,16 +254,16 @@ static void
 action_record_cb (GtkAction *action)
 {
         GvaProcess *process;
-        const gchar *romname;
+        const gchar *name;
         gchar *inpname;
         GError *error = NULL;
 
-        romname = gva_tree_view_get_selected_game ();
-        g_assert (romname != NULL);
+        name = gva_tree_view_get_selected_game ();
+        g_assert (name != NULL);
 
-        inpname = gva_choose_inpname (romname);
+        inpname = gva_choose_inpname (name);
 
-        process = gva_xmame_record_game (romname, inpname, &error);
+        process = gva_xmame_record_game (name, inpname, &error);
         gva_error_handle (&error);
 
         if (process != NULL)
@@ -279,14 +278,14 @@ action_remove_favorite_cb (GtkAction *action)
         GtkTreeModel *model;
         GtkTreePath *path;
         GtkTreeIter iter;
-        const gchar *romname;
+        const gchar *name;
         gboolean valid;
 
-        romname = gva_tree_view_get_selected_game ();
-        g_assert (romname != NULL);
+        name = gva_tree_view_get_selected_game ();
+        g_assert (name != NULL);
 
-        model = gva_game_db_get_model ();
-        path = gva_game_db_lookup (romname);
+        model = gva_tree_view_get_model ();
+        path = gva_tree_view_lookup (name);
         valid = gtk_tree_model_get_iter (model, &iter, path);
         gtk_tree_path_free (path);
         g_assert (valid);
@@ -295,7 +294,7 @@ action_remove_favorite_cb (GtkAction *action)
                 GTK_LIST_STORE (model), &iter,
                 GVA_GAME_STORE_COLUMN_FAVORITE, FALSE, -1);
 
-        gva_favorites_remove (romname);
+        gva_favorites_remove (name);
 
         gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, TRUE);
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
@@ -317,17 +316,17 @@ static void
 action_start_cb (GtkAction *action)
 {
         GvaProcess *process;
-        const gchar *romname;
+        const gchar *name;
         GError *error = NULL;
 
-        romname = gva_tree_view_get_selected_game ();
-        g_assert (romname != NULL);
+        name = gva_tree_view_get_selected_game ();
+        g_assert (name != NULL);
 
         if (!gva_preferences_get_auto_save ())
-                if (!gva_xmame_clear_state (romname, &error))
+                if (!gva_xmame_clear_state (name, &error))
                         gva_error_handle (&error);
 
-        process = gva_xmame_run_game (romname, &error);
+        process = gva_xmame_run_game (name, &error);
         gva_error_handle (&error);
 
         if (process != NULL)
@@ -339,7 +338,11 @@ action_start_cb (GtkAction *action)
 static void
 action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
 {
-        gva_tree_view_update ();
+        GError *error = NULL;
+
+        gva_tree_view_update (&error);
+        gva_error_handle (&error);
+
         gva_tree_view_set_last_selected_view (
                 gva_tree_view_get_selected_view ());
 }

@@ -20,8 +20,12 @@
 
 #include "gva-game-store.h"
 #include "gva-history.h"
+#include "gva-tree-view.h"
 #include "gva-ui.h"
 #include "gva-util.h"
+
+#define SQL_SELECT_NAME \
+        "SELECT * FROM game WHERE name = \"%s\""
 
 static void
 properties_update_header (GtkTreeModel *model,
@@ -107,14 +111,34 @@ static void
 properties_selection_changed_cb (GtkTreeSelection *selection)
 {
         GtkTreeModel *model;
-        GtkTreeIter iter;
+        const gchar *name;
+        gchar *sql;
+        GError *error = NULL;
+
+        name = gva_tree_view_get_selected_game ();
 
         /* Leave the window alone if a game is not selected. */
-        if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+        if (name == NULL)
                 return;
 
-        properties_update_header (model, &iter);
-        properties_update_history (model, &iter);
+        sql = g_strdup_printf (SQL_SELECT_NAME, name);
+        model = gva_game_store_new_from_query (sql, &error);
+        gva_error_handle (&error);
+        g_free (sql);
+
+        if (model != NULL)
+        {
+                GtkTreeIter iter;
+                gboolean valid;
+
+                valid = gtk_tree_model_get_iter_first (model, &iter);
+                g_assert (valid);
+
+                properties_update_header (model, &iter);
+                properties_update_history (model, &iter);
+
+                g_object_unref (model);
+        }
 }
 
 void

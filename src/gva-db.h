@@ -26,6 +26,7 @@ G_BEGIN_DECLS
 
 gboolean        gva_db_init                     (GError **error);
 GvaProcess *    gva_db_build                    (GError **error);
+gboolean        gva_db_reset                    (GError **error);
 gboolean        gva_db_execute                  (const gchar *sql,
                                                  GError **error);
 gboolean        gva_db_prepare                  (const gchar *sql,

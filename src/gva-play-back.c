@@ -25,9 +25,9 @@
 #include <sys/stat.h>
 
 #include "gva-error.h"
-#include "gva-game-db.h"
 #include "gva-game-store.h"
 #include "gva-time.h"
+#include "gva-tree-view.h"
 #include "gva-ui.h"
 #include "gva-xmame.h"
 
@@ -163,7 +163,7 @@ play_back_render_time (GtkTreeViewColumn *column,
 
 static void
 play_back_add_input_file (const gchar *inpfile,
-                          const gchar *romname,
+                          const gchar *name,
                           GvaGameStore *game_store)
 {
         GtkTreePath *path;
@@ -182,21 +182,21 @@ play_back_add_input_file (const gchar *inpfile,
 
         time = &statbuf.st_ctime;
 
-        path = gva_game_db_lookup (romname);
+        path = gva_tree_view_lookup (name);
         if (path == NULL)
         {
-                g_warning ("%s: Game '%s' not found", inpfile, romname);
+                g_warning ("%s: Game '%s' not found", inpfile, name);
                 return;
         }
 
         valid = gtk_tree_model_get_iter (
-                gva_game_db_get_model (), &iter, path);
+                gva_tree_view_get_model (), &iter, path);
         g_assert (valid);
 
         gtk_tree_path_free (path);
 
         gtk_tree_model_get (
-                gva_game_db_get_model (), &iter,
+                gva_tree_view_get_model (), &iter,
                 GVA_GAME_STORE_COLUMN_DESCRIPTION, &title, -1);
 
         gtk_list_store_append (GTK_LIST_STORE (game_store), &iter);
@@ -204,7 +204,7 @@ play_back_add_input_file (const gchar *inpfile,
         gtk_list_store_set (
                 GTK_LIST_STORE (game_store), &iter,
                 GVA_GAME_STORE_COLUMN_INPFILE, inpfile,
-                GVA_GAME_STORE_COLUMN_NAME, romname,
+                GVA_GAME_STORE_COLUMN_NAME, name,
                 GVA_GAME_STORE_COLUMN_DESCRIPTION, title,
                 GVA_GAME_STORE_COLUMN_TIME, time,
                 -1);

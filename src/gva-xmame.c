@@ -297,16 +297,16 @@ gva_xmame_get_input_files (GError **error)
 
                 if (channel != NULL)
                 {
-                        gchar romname[16];
+                        gchar name[16];
                         GIOStatus status;
 
                         status = g_io_channel_read_chars (
-                                channel, romname, sizeof (romname),
+                                channel, name, sizeof (name),
                                 NULL, &local_error);
                         if (status == G_IO_STATUS_NORMAL)
                                 g_hash_table_insert (
                                         hash_table, filename,
-                                        g_strdup (romname));
+                                        g_strdup (name));
                         g_io_channel_unref (channel);
                 }
 
@@ -328,108 +328,6 @@ exit:
         return hash_table;
 }
 
-GPtrArray *
-gva_xmame_get_romset_files (GError **error)
-{
-        gchar *romname;
-        gchar *rompath;
-        GPtrArray *array;
-        GDir *dir;
-
-        rompath = gva_xmame_get_config_value ("rompath", error);
-        dir = (rompath != NULL) ? g_dir_open (rompath, 0, error) : NULL;
-        g_free (rompath);
-
-        if (dir == NULL)
-                return NULL;
-
-        array = g_ptr_array_new ();
-
-        while ((romname = g_strdup (g_dir_read_name (dir))) != NULL)
-        {
-                g_strdelimit (romname, ".", '\0');
-                g_ptr_array_add (array, romname);
-        }
-
-        g_dir_close (dir);
-
-        return array;
-}
-
-static void
-xmame_list_full_read (GvaProcess *process,
-                      XmameAsyncData *data)
-{
-        gchar *line;
-
-        /* Output is as follows:
-         *
-         * name      description
-         * --------  -----------
-         * romname   "Full Game Title"
-         * romname   "Full Game Title"
-         * ...
-         *
-         * Total Supported: nnnn
-         */
-
-        line = gva_process_stdout_read_line (process);
-        data->lineno++;
-
-        if (data->lineno > 2)
-        {
-                gchar *cp;
-
-                cp = strchr (line, '"');
-                if (cp != NULL && strchr (cp + 1, '"') != NULL)
-                {
-                        gchar *romname, *title;
-
-                        title = g_strdelimit (cp, "\"", '\0') + 1;
-                        romname = g_strchomp (line);
-
-                        data->callback (romname, title, data->user_data);
-                }
-        }
-
-        g_free (line);
-}
-
-static void
-xmame_list_full_exit (GvaProcess *process,
-                      gint status,
-                      XmameAsyncData *data)
-{
-        xmame_async_data_free (data);
-}
-
-GvaProcess *
-gva_xmame_list_full (GvaXmameCallback callback,
-                     gpointer user_data,
-                     GError **error)
-{
-        GvaProcess *process;
-        XmameAsyncData *data;
-
-        g_return_val_if_fail (callback != NULL, NULL);
-
-        /* Execute the command "${xmame} -listfull". */
-        process = gva_mame_process_spawn ("-listfull", error);
-        if (process == NULL)
-                return NULL;
-
-        data = xmame_async_data_new (callback, user_data);
-
-        g_signal_connect (
-                process, "stdout-ready",
-                G_CALLBACK (xmame_list_full_read), data);
-        g_signal_connect (
-                process, "exited",
-                G_CALLBACK (xmame_list_full_exit), data);
-
-        return process;
-}
-
 GvaProcess *
 gva_xmame_list_xml (GError **error)
 {
@@ -438,76 +336,8 @@ gva_xmame_list_xml (GError **error)
 }
 
 static void
-xmame_verify_rom_sets_on_exit (GvaProcess *process,
-                               gint status,
-                               XmameAsyncData *data)
-{
-        gchar **lines;
-        guint num_lines, ii;
-
-        lines = gva_process_stdout_read_lines (process);
-
-        /* Output is as follows:
-         *
-         * name      result
-         * --------  ------
-         * romname   best available|correct|incorrect|not found
-         * romname   best available|correct|incorrect|not found
-         * ...
-         *
-         * Total Supported: nnnn
-         * Found: nnnn ...
-         * Not found: nnnn
-         */
-
-        num_lines = g_strv_length (lines);
-        g_assert (num_lines > 4);
-
-        for (ii = 2; ii < num_lines - 3; ii++)
-        {
-                gchar **tokens;
-
-                tokens = g_strsplit_set (lines[ii], " ", 2);
-                if (g_strv_length (tokens) == 2)
-                        data->callback (
-                                g_intern_string (g_strstrip (tokens[0])),
-                                g_intern_string (g_strstrip (tokens[1])),
-                                data->user_data);
-                g_strfreev (tokens);
-        }
-
-        g_strfreev (lines);
-
-        xmame_async_data_free (data);
-}
-
-GvaProcess *
-gva_xmame_verify_rom_sets (GvaXmameCallback callback,
-                           gpointer user_data,
-                           GError **error)
-{
-        GvaProcess *process;
-        XmameAsyncData *data;
-
-        g_return_val_if_fail (callback != NULL, NULL);
-
-        /* Execute the command "${xmame} -verifyromsets". */
-        process = gva_mame_process_spawn ("-verifyromsets", error);
-        if (process == NULL)
-                return NULL;
-
-        data = xmame_async_data_new (callback, user_data);
-
-        g_signal_connect (
-                process, "exited",
-                G_CALLBACK (xmame_verify_rom_sets_on_exit), data);
-
-        return process;
-}
-
-static void
-xmame_verify_sample_sets_read (GvaProcess *process,
-                               XmameAsyncData *data)
+xmame_verify_read (GvaProcess *process,
+                   XmameAsyncData *data)
 {
         gchar *line;
 
@@ -527,7 +357,12 @@ xmame_verify_sample_sets_read (GvaProcess *process,
          */
 
         line = gva_process_stdout_read_line (process);
-        data->lineno++;
+
+        /* Stop parsing when we see a blank line. */
+        if (data->lineno < 0 || *g_strchomp (line) == '\0')
+                data->lineno = -1;
+        else
+                data->lineno++;
 
         if (data->lineno > 2)
         {
@@ -536,12 +371,12 @@ xmame_verify_sample_sets_read (GvaProcess *process,
                 tokens = g_strsplit_set (line, " ", 2);
                 if (g_strv_length (tokens) == 2)
                 {
-                        gchar *romname, *status;
+                        gchar *name, *status;
 
-                        romname = g_strstrip (tokens[0]);
+                        name = g_strstrip (tokens[0]);
                         status = g_strstrip (tokens[1]);
 
-                        data->callback (romname, status, data->user_data);
+                        data->callback (name, status, data->user_data);
                 }
                 g_strfreev (tokens);
         }
@@ -550,17 +385,44 @@ xmame_verify_sample_sets_read (GvaProcess *process,
 }
 
 static void
-xmame_verify_sample_sets_exit (GvaProcess *process,
-                               gint status,
-                               XmameAsyncData *data)
+xmame_verify_exit (GvaProcess *process,
+                   gint status,
+                   XmameAsyncData *data)
 {
         xmame_async_data_free (data);
 }
 
 GvaProcess *
-gva_xmame_verify_sample_sets (GvaXmameCallback callback,
-                              gpointer user_data,
-                              GError **error)
+gva_xmame_verify_romsets (GvaXmameCallback callback,
+                          gpointer user_data,
+                          GError **error)
+{
+        GvaProcess *process;
+        XmameAsyncData *data;
+
+        g_return_val_if_fail (callback != NULL, NULL);
+
+        /* Execute the command "${xmame} -verifyromsets". */
+        process = gva_mame_process_spawn ("-verifyromsets", error);
+        if (process == NULL)
+                return NULL;
+
+        data = xmame_async_data_new (callback, user_data);
+
+        g_signal_connect (
+                process, "stdout-ready",
+                G_CALLBACK (xmame_verify_read), data);
+        g_signal_connect (
+                process, "exited",
+                G_CALLBACK (xmame_verify_exit), data);
+
+        return process;
+}
+
+GvaProcess *
+gva_xmame_verify_samplesets (GvaXmameCallback callback,
+                             gpointer user_data,
+                             GError **error)
 {
         GvaProcess *process;
         XmameAsyncData *data;
@@ -576,21 +438,21 @@ gva_xmame_verify_sample_sets (GvaXmameCallback callback,
 
         g_signal_connect (
                 process, "stdout-ready",
-                G_CALLBACK (xmame_verify_sample_sets_read), data);
+                G_CALLBACK (xmame_verify_read), data);
         g_signal_connect (
                 process, "exited",
-                G_CALLBACK (xmame_verify_sample_sets_exit), data);
+                G_CALLBACK (xmame_verify_exit), data);
 
         return process;
 }
 
 GvaProcess *
-gva_xmame_run_game (const gchar *romname, GError **error)
+gva_xmame_run_game (const gchar *name, GError **error)
 {
         GvaProcess *process;
         GString *arguments;
 
-        g_return_val_if_fail (romname != NULL, FALSE);
+        g_return_val_if_fail (name != NULL, FALSE);
 
         arguments = g_string_sized_new (64);
 
@@ -610,9 +472,9 @@ gva_xmame_run_game (const gchar *romname, GError **error)
                         g_string_append (arguments, "-nofullscreen ");
         }
 
-        g_string_append_printf (arguments, "%s", romname);
+        g_string_append_printf (arguments, "%s", name);
 
-        /* Execute the command "${xmame} ${romname}". */
+        /* Execute the command "${xmame} ${name}". */
         process = gva_mame_process_spawn (arguments->str, error);
 
         g_string_free (arguments, TRUE);
@@ -621,16 +483,16 @@ gva_xmame_run_game (const gchar *romname, GError **error)
 }
 
 GvaProcess *
-gva_xmame_record_game (const gchar *romname, const gchar *inpname,
+gva_xmame_record_game (const gchar *name, const gchar *inpname,
                        GError **error)
 {
         GvaProcess *process;
         GString *arguments;
 
-        g_return_val_if_fail (romname != NULL, FALSE);
+        g_return_val_if_fail (name != NULL, FALSE);
 
         if (inpname == NULL)
-                inpname = romname;
+                inpname = name;
 
         arguments = g_string_sized_new (64);
 
@@ -645,9 +507,9 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
                         g_string_append (arguments, "-nofullscreen ");
         }
 
-        g_string_append_printf (arguments, "-record %s %s", inpname, romname);
+        g_string_append_printf (arguments, "-record %s %s", inpname, name);
 
-        /* Execute the command "${xmame} -record ${inpname} ${romname}". */
+        /* Execute the command "${xmame} -record ${inpname} ${name}". */
         process = gva_mame_process_spawn (arguments->str, error);
 
         g_string_free (arguments, TRUE);
@@ -656,7 +518,7 @@ gva_xmame_record_game (const gchar *romname, const gchar *inpname,
 }
 
 GvaProcess *
-gva_xmame_playback_game (const gchar *romname, const gchar *inpname,
+gva_xmame_playback_game (const gchar *name, const gchar *inpname,
                          GError **error)
 {
         GvaProcess *process;
@@ -696,7 +558,7 @@ gva_xmame_playback_game (const gchar *romname, const gchar *inpname,
 }
 
 gboolean
-gva_xmame_clear_state (const gchar *romname, GError **error)
+gva_xmame_clear_state (const gchar *name, GError **error)
 {
         gchar *basename;
         gchar *directory;
@@ -707,7 +569,7 @@ gva_xmame_clear_state (const gchar *romname, GError **error)
         if (directory == NULL)
                 return FALSE;
 
-        basename = g_strdup_printf ("%s.sta", romname);
+        basename = g_strdup_printf ("%s.sta", name);
         filename = g_build_filename (directory, basename, NULL);
 
         if (g_file_test (filename, G_FILE_TEST_IS_REGULAR))

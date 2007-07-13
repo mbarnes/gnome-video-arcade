@@ -83,6 +83,23 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/sort-column</applyto>
+      <key>/schemas/apps/gnome-video-arcade/sort-column</key>
+      <owner>gnome-video-arcade</owner>
+      <type>pair</type>
+      <car_type>string</car_type>
+      <cdr_type>bool</cdr_type>
+      <default>default,false</default>
+      <locale name="C">
+        <short>Sort column and sort order</short>
+        <long>The first value is the most recently sorted column name
+        (or "default" for default sorting), and the second value is the
+        sort order.  True indicates descending order; False indicates
+        ascending order.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/version</applyto>
       <key>/schemas/apps/gnome-video-arcade/version</key>
       <owner>gnome-video-arcade</owner>
