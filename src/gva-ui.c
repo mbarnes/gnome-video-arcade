@@ -26,6 +26,7 @@
 #include "gva-main.h"
 #include "gva-play-back.h"
 #include "gva-preferences.h"
+#include "gva-process.h"
 #include "gva-tree-view.h"
 #include "gva-util.h"
 #include "gva-xmame.h"
@@ -247,6 +248,7 @@ action_properties_cb (GtkAction *action)
 static void
 action_quit_cb (GtkAction *action)
 {
+        gva_process_kill_all ();
         gtk_main_quit ();
 }
 

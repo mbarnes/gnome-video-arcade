@@ -1,3 +1,24 @@
+2007-07-14  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/main.c (start):
+	Use gtk_main_iteration() instead of g_main_context_iteration()
+	to check whether we've quit the main loop.  This can happen if
+	an impatient user quits the application while the database is
+	building.
+
+	* src/gva-process.c (gva_process_kill):
+	New function sends SIGKILL to the given process.
+
+	* src/gva-process.c (gva_process_kill_all):
+	New function kills all active child processes.
+
+	* src/gva-main.c (gva_main_init):
+	Desensitive the "view" actions.  Eliminates an opportunity to
+	change views before a database build begins.
+
+	* src/gva-ui.c (action_quit_cb):
+	Call gva_process_kill_all().
+
 2007-07-13  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.schemas:

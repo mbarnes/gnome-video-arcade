@@ -18,6 +18,8 @@
 
 #include "gva-process.h"
 
+#include <errno.h>
+#include <signal.h>
 #include <string.h>
 #include <wait.h>
 
@@ -66,6 +68,7 @@ struct _GvaProcessPrivate
 
 static gpointer parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
+static GSList *active_list = NULL;
 
 static void
 process_propagate_error (GvaProcess *process, GError *error)
@@ -92,11 +95,18 @@ process_source_removed (GvaProcess *process)
 
         if (n_active_sources == 0)
         {
+                GSList *link;
+
                 process->priv->exited = TRUE;
 
                 g_signal_emit (
                         process, signals[EXITED], 0,
                         process->priv->status);
+
+                link = g_slist_find (active_list, process);
+                g_assert (link != NULL);
+                g_object_unref (link->data);
+                active_list = g_slist_delete_link (active_list, link);
         }
 }
 
@@ -450,6 +460,7 @@ process_init (GvaProcess *process)
         process->priv->stderr_lines = g_queue_new ();
 
         g_get_current_time (&process->priv->start_time);
+        active_list = g_slist_prepend (active_list, g_object_ref (process));
 }
 
 GType
@@ -679,6 +690,30 @@ gva_process_has_exited (GvaProcess *process, gint *status)
                 *status = process->priv->status;
 
         return process->priv->exited;
+}
+
+void
+gva_process_kill (GvaProcess *process)
+{
+        GPid pid;
+
+        g_return_if_fail (GVA_IS_PROCESS (process));
+
+        /* XXX Using SIGKILL here because xmame appears to ignore SIGINT
+         *     and SIGTERM.  A friendlier approach for an arbitrary process
+         *     might be to use SIGTERM first.  Then, if it hasn't exited
+         *     after a reasonable duration, SIGKILL. */
+
+        pid = process->priv->pid;
+        g_message ("Sending KILL signal to process %d.", pid);
+        if (kill (pid, SIGKILL) < 0)
+                g_warning ("%s", g_strerror (errno));
+}
+
+void
+gva_process_kill_all (void)
+{
+        g_slist_foreach (active_list, (GFunc) gva_process_kill, NULL);
 }
 
 void

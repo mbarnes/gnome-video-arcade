@@ -513,6 +513,7 @@ db_verify_update_status (GvaProcess *process,
         if (process == NULL)
                 return;
 
+        /* Wait for the process to exit. */
         while (!gva_process_has_exited (process, NULL))
                 g_main_context_iteration (NULL, TRUE);
 

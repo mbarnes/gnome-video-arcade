@@ -91,6 +91,8 @@ void            gva_process_set_progress        (GvaProcess *process,
                                                  guint progress);
 gboolean        gva_process_has_exited          (GvaProcess *process,
                                                  gint *status);
+void            gva_process_kill                (GvaProcess *process);
+void            gva_process_kill_all            (void);
 void            gva_process_get_time_elapsed    (GvaProcess *process,
                                                  GTimeVal *time_elapsed);
 

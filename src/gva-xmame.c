@@ -76,8 +76,9 @@ gva_xmame_command (const gchar *arguments,
         if (process == NULL)
                 return -1;
 
+        /* Wait for the process to exit. */
         while (!gva_process_has_exited (process, &status))
-                g_main_context_iteration (g_main_context_default (), TRUE);
+                g_main_context_iteration (NULL, TRUE);
 
         local_stdout_lines = gva_process_stdout_read_lines (process);
         local_stderr_lines = gva_process_stderr_read_lines (process);

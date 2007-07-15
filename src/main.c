@@ -71,18 +71,19 @@ start (void)
 
         if (process != NULL)
         {
-                gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, FALSE);
-                gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, FALSE);
-                gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, FALSE);
+                gboolean main_loop_quit;
 
                 while (!gva_process_has_exited (process, NULL))
-                        g_main_context_iteration (NULL, FALSE);
+                        main_loop_quit = gtk_main_iteration ();
                 g_object_unref (process);
 
-                gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
-                gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
-                gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
+                if (main_loop_quit)
+                        return FALSE;
         }
+
+        gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
+        gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
+        gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
 
         /* Force a tree view update. */
         last_view = gva_tree_view_get_last_selected_view ();
