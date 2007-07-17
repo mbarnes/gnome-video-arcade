@@ -1,4 +1,11 @@
+2007-07-17  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-ui.c (action_about_cb):
+	Add a License button to the About dialog.
+
 2007-07-14  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.3.0
 
 	* src/main.c (start):
 	Use gtk_main_iteration() instead of g_main_context_iteration()
