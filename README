@@ -1,0 +1,85 @@
+GNOME Video Arcade
+==================
+
+Written by Matthew Barnes <mbarnes@redhat.com>
+
+GNOME Video Arcade is a clean and simple MAME front-end for the
+GNOME Desktop Environment.
+
+This project is targeted towards non-technical arcade enthusiasts
+who just want to easily play classic arcade games on their desktop.
+Though it may be suitable for use in custom arcade cabinets, the
+project is not designed for that purpose.
+
+
+Dependencies
+------------
+
+GNOME Video Arcade has a few external dependencies which need to be
+installed prior to compiling the source code:
+
+   - xmame (obviously)
+
+       I plan to also support sdlmame in the near future.
+
+   - The header files for GTK+ version 2.10 (or higher).
+
+       The GTK+ header files should be available from your GNU/Linux
+       distribution as a "development" package. The exact package
+       name varies by distribution, but it should be something
+       similar to gtk2-devel or libgtk2.0-dev.
+
+   - The header files for SQLite version 3.x.
+
+       This should also be available from your distribution as a
+       "development" package. The package is named sqlite-devel,
+       libsqlite3-dev or similar.
+
+   - history.dat (optional)
+
+       This file, available from http://www.arcade-history.com,
+       contains historical information as well as tips and tricks
+       for many arcade games. GNOME Video Arcade can utilize this
+       information in its Properties window.
+
+
+Installation
+------------
+
+The INSTALL file has some generic but detailed installation
+instructions that are applicable to most Free Software packages,
+including GNOME Video Arcade. This section supplements the INSTALL
+file with information specific to GNOME Video Arcade.
+
+These instructions are written specifically for GNOME Video Arcade
+version 0.3.0 and may change in forthcoming releases.
+
+The standard installation procedure looks like this:
+
+   $ cd /path/to/gnome-video-arcade-0.3.0
+   $ ./configure
+   $ make
+   $ su -c "make install"
+   (Prompted for root password)
+
+   To start: Applications -> Games -> Video Arcade
+
+Currently, the only configure option specific to GNOME Video Arcade
+is --with-history-file, for specifying the location of a history.dat
+file as mentioned above. Usage looks something like this:
+
+   $ ./configure --with-history-file=/usr/share/xmame/history.dat
+
+Future versions may require you to provide a path to the MAME
+executable you wish to use, either xmame or sdlmame.
+
+
+Usage
+-----
+
+GNOME Video Arcade does not currently have a help document, however
+it is designed to be simple and easy to use. Please feel free to
+email me with any questions, bugs, or suggestions.
+
+
+                              - Matthew Barnes <mbarnes@redhat.com>
