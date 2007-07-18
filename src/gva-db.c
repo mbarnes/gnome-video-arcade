@@ -21,8 +21,8 @@
 #include <string.h>
 
 #include "gva-error.h"
+#include "gva-mame.h"
 #include "gva-util.h"
-#include "gva-xmame.h"
 
 #define ASSERT_OK(code) \
         if ((code) != SQLITE_OK) g_error ("%s", sqlite3_errmsg (db));
@@ -578,13 +578,13 @@ db_parser_data_new (GvaProcess *process)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) db_verify_string_free);
 
-        data->verify_romsets = gva_xmame_verify_romsets (
-                (GvaXmameCallback) db_verify_insert_status,
+        data->verify_romsets = gva_mame_verify_romsets (
+                (GvaMameCallback) db_verify_insert_status,
                 data->romsets, &error);
         gva_error_handle (&error);
 
-        data->verify_samplesets = gva_xmame_verify_samplesets (
-                (GvaXmameCallback) db_verify_insert_status,
+        data->verify_samplesets = gva_mame_verify_samplesets (
+                (GvaMameCallback) db_verify_insert_status,
                 data->samplesets, &error);
         gva_error_handle (&error);
 
@@ -759,7 +759,7 @@ gva_db_build (GError **error)
         if (!gva_db_reset (error))
                 return NULL;
 
-        process = gva_xmame_list_xml (error);
+        process = gva_mame_list_xml (error);
         if (process == NULL)
                 return NULL;
 
@@ -915,7 +915,7 @@ gva_db_needs_rebuilt (void)
         TEST_CASE (db_build_id == NULL);
 
         reason = "the MAME version could not be determined";
-        mame_version = gva_xmame_get_version (&error);
+        mame_version = gva_mame_get_version (&error);
         gva_error_handle (&error);
         TEST_CASE (mame_version == NULL);
 

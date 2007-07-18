@@ -26,11 +26,11 @@
 #include "gva-db.h"
 #include "gva-history.h"
 #include "gva-main.h"
+#include "gva-mame.h"
 #include "gva-play-back.h"
 #include "gva-preferences.h"
 #include "gva-properties.h"
 #include "gva-ui.h"
-#include "gva-xmame.h"
 
 /* Command Line Options */
 gboolean opt_build_database;
@@ -54,7 +54,7 @@ start (void)
         GError *error = NULL;
 
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
-        mame_version = gva_xmame_get_version (&error);
+        mame_version = gva_mame_get_version (&error);
         gva_error_handle (&error);
 
         if (mame_version != NULL)

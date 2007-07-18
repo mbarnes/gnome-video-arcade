@@ -31,8 +31,12 @@ gnome_video_arcade_SOURCES = \
 	gva-history.h			\
 	gva-main.c			\
 	gva-main.h			\
+	gva-mame-common.c		\
+	gva-mame-common.h		\
 	gva-mame-process.c		\
 	gva-mame-process.h		\
+	gva-mame-xmame.c		\
+	gva-mame.h			\
 	gva-play-back.c			\
 	gva-play-back.h			\
 	gva-preferences.c		\
@@ -49,8 +53,6 @@ gnome_video_arcade_SOURCES = \
 	gva-ui.h			\
 	gva-util.c			\
 	gva-util.h			\
-	gva-xmame.c			\
-	gva-xmame.h			\
 	main.c
 
 gnome_video_arcade_LDADD = \

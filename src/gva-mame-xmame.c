@@ -16,7 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "gva-xmame.h"
+/* XMAME backend for GNOME Video Arcade */
+
+#include "gva-mame.h"
 
 #include <errno.h>
 #include <stdarg.h>
@@ -30,42 +32,15 @@
 #endif
 
 #include "gva-error.h"
+#include "gva-mame-common.h"
 #include "gva-mame-process.h"
 #include "gva-preferences.h"
 
-typedef struct
-{
-        GvaXmameCallback callback;
-        gpointer user_data;
-        gint lineno;
-
-} XmameAsyncData;
-
-static XmameAsyncData *
-xmame_async_data_new (GvaXmameCallback callback,
-                      gpointer user_data)
-{
-        XmameAsyncData *data;
-
-        data = g_slice_new (XmameAsyncData);
-        data->callback = callback;
-        data->user_data = user_data;
-        data->lineno = 0;
-
-        return data;
-}
-
-static void
-xmame_async_data_free (XmameAsyncData *data)
-{
-        g_slice_free (XmameAsyncData, data);
-}
-
 gint
-gva_xmame_command (const gchar *arguments,
-                   gchar ***stdout_lines,
-                   gchar ***stderr_lines,
-                   GError **error)
+gva_mame_command (const gchar *arguments,
+                  gchar ***stdout_lines,
+                  gchar ***stderr_lines,
+                  GError **error)
 {
         gchar **local_stdout_lines = NULL;
         gchar **local_stderr_lines = NULL;
@@ -110,14 +85,14 @@ fail:
 }
 
 gchar *
-gva_xmame_get_version (GError **error)
+gva_mame_get_version (GError **error)
 {
         gchar *version = NULL;
         gchar **lines;
         guint num_lines, ii;
 
-        /* Execute the command "${xmame} -version". */
-        if (gva_xmame_command ("-version", &lines, NULL, error) != 0)
+        /* Execute the command "${mame} -version". */
+        if (gva_mame_command ("-version", &lines, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
@@ -142,14 +117,14 @@ gva_xmame_get_version (GError **error)
 }
 
 guint
-gva_xmame_get_total_supported (GError **error)
+gva_mame_get_total_supported (GError **error)
 {
         gchar **lines;
         guint num_lines, ii;
         guint total_supported = 0;
 
-        /* Execute the command "${xmame} -list". */
-        if (gva_xmame_command ("-list", &lines, NULL, error) != 0)
+        /* Execute the command "${mame} -list". */
+        if (gva_mame_command ("-list", &lines, NULL, error) != 0)
                 return 0;
 
         /* Output is as follows:
@@ -176,7 +151,8 @@ gva_xmame_get_total_supported (GError **error)
 }
 
 gchar *
-gva_xmame_get_config_value (const gchar *config_key, GError **error)
+gva_mame_get_config_value (const gchar *config_key,
+                           GError **error)
 {
         gchar *config_value = NULL;
         gchar **lines;
@@ -187,8 +163,8 @@ gva_xmame_get_config_value (const gchar *config_key, GError **error)
 
         g_return_val_if_fail (config_key != NULL, NULL);
 
-        /* Execute the command "${xmame} -showconfig". */
-        if (gva_xmame_command ("-showconfig", &lines, NULL, error) != 0)
+        /* Execute the command "${mame} -showconfig". */
+        if (gva_mame_command ("-showconfig", &lines, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
@@ -249,12 +225,12 @@ exit:
 }
 
 gboolean
-gva_xmame_has_config_value (const gchar *config_key)
+gva_mame_has_config_value (const gchar *config_key)
 {
         gchar *config_value;
         GError *error = NULL;
 
-        config_value = gva_xmame_get_config_value (config_key, &error);
+        config_value = gva_mame_get_config_value (config_key, &error);
         gva_error_handle (&error);
 
         if (config_value != NULL)
@@ -267,14 +243,14 @@ gva_xmame_has_config_value (const gchar *config_key)
 }
 
 GHashTable *
-gva_xmame_get_input_files (GError **error)
+gva_mame_get_input_files (GError **error)
 {
         GHashTable *hash_table = NULL;
         const gchar *basename;
         gchar *inppath;
         GDir *dir;
 
-        inppath = gva_xmame_get_config_value ("input_directory", error);
+        inppath = gva_mame_get_config_value ("input_directory", error);
         dir = (inppath != NULL) ? g_dir_open (inppath, 0, error) : NULL;
 
         if (dir == NULL)
@@ -330,15 +306,15 @@ exit:
 }
 
 GvaProcess *
-gva_xmame_list_xml (GError **error)
+gva_mame_list_xml (GError **error)
 {
-        /* Execute the command "${xmame} -listxml". */
+        /* Execute the command "${mame} -listxml". */
         return gva_mame_process_spawn ("-listxml", error);
 }
 
 static void
-xmame_verify_read (GvaProcess *process,
-                   XmameAsyncData *data)
+mame_verify_read (GvaProcess *process,
+                  GvaMameAsyncData *data)
 {
         gchar *line;
 
@@ -386,69 +362,70 @@ xmame_verify_read (GvaProcess *process,
 }
 
 static void
-xmame_verify_exit (GvaProcess *process,
-                   gint status,
-                   XmameAsyncData *data)
+mame_verify_exit (GvaProcess *process,
+                  gint status,
+                  GvaMameAsyncData *data)
 {
-        xmame_async_data_free (data);
+        gva_mame_async_data_free (data);
 }
 
 GvaProcess *
-gva_xmame_verify_romsets (GvaXmameCallback callback,
-                          gpointer user_data,
-                          GError **error)
+gva_mame_verify_romsets (GvaMameCallback callback,
+                         gpointer user_data,
+                         GError **error)
 {
         GvaProcess *process;
-        XmameAsyncData *data;
+        GvaMameAsyncData *data;
 
         g_return_val_if_fail (callback != NULL, NULL);
 
-        /* Execute the command "${xmame} -verifyromsets". */
+        /* Execute the command "${mame} -verifyromsets". */
         process = gva_mame_process_spawn ("-verifyromsets", error);
         if (process == NULL)
                 return NULL;
 
-        data = xmame_async_data_new (callback, user_data);
+        data = gva_mame_async_data_new (callback, user_data);
 
         g_signal_connect (
                 process, "stdout-ready",
-                G_CALLBACK (xmame_verify_read), data);
+                G_CALLBACK (mame_verify_read), data);
         g_signal_connect (
                 process, "exited",
-                G_CALLBACK (xmame_verify_exit), data);
+                G_CALLBACK (mame_verify_exit), data);
 
         return process;
 }
 
 GvaProcess *
-gva_xmame_verify_samplesets (GvaXmameCallback callback,
-                             gpointer user_data,
-                             GError **error)
+gva_mame_verify_samplesets (GvaMameCallback callback,
+                            gpointer user_data,
+                            GError **error)
 {
         GvaProcess *process;
-        XmameAsyncData *data;
+        GvaMameAsyncData *data;
 
         g_return_val_if_fail (callback != NULL, NULL);
 
-        /* Execute the command "${xmame} -verifysamplesets". */
+        /* Execute the command "${mame} -verifysamplesets". */
         process = gva_mame_process_spawn ("-verifysamplesets", error);
         if (process == NULL)
                 return NULL;
 
-        data = xmame_async_data_new (callback, user_data);
+        data = gva_mame_async_data_new (callback, user_data);
 
         g_signal_connect (
                 process, "stdout-ready",
-                G_CALLBACK (xmame_verify_read), data);
+                G_CALLBACK (mame_verify_read), data);
         g_signal_connect (
                 process, "exited",
-                G_CALLBACK (xmame_verify_exit), data);
+                G_CALLBACK (mame_verify_exit), data);
 
         return process;
 }
 
 GvaProcess *
-gva_xmame_run_game (const gchar *name, GError **error)
+gva_mame_run_game (const gchar *name,
+                   GError **error)
 {
         GvaProcess *process;
         GString *arguments;
@@ -457,7 +434,7 @@ gva_xmame_run_game (const gchar *name, GError **error)
 
         arguments = g_string_sized_new (64);
 
-        if (gva_xmame_supports_auto_save ())
+        if (gva_mame_supports_auto_save ())
         {
                 if (gva_preferences_get_auto_save ())
                         g_string_append (arguments, "-autosave ");
@@ -465,7 +442,7 @@ gva_xmame_run_game (const gchar *name, GError **error)
                         g_string_append (arguments, "-noautosave ");
         }
 
-        if (gva_xmame_supports_full_screen ())
+        if (gva_mame_supports_full_screen ())
         {
                 if (gva_preferences_get_full_screen ())
                         g_string_append (arguments, "-fullscreen ");
@@ -475,7 +452,7 @@ gva_xmame_run_game (const gchar *name, GError **error)
 
         g_string_append_printf (arguments, "%s", name);
 
-        /* Execute the command "${xmame} ${name}". */
+        /* Execute the command "${mame} ${name}". */
         process = gva_mame_process_spawn (arguments->str, error);
 
         g_string_free (arguments, TRUE);
@@ -484,8 +461,9 @@ gva_xmame_run_game (const gchar *name, GError **error)
 }
 
 GvaProcess *
-gva_xmame_record_game (const gchar *name, const gchar *inpname,
-                       GError **error)
+gva_mame_record_game (const gchar *name,
+                      const gchar *inpname,
+                      GError **error)
 {
         GvaProcess *process;
         GString *arguments;
@@ -497,10 +475,10 @@ gva_xmame_record_game (const gchar *name, const gchar *inpname,
 
         arguments = g_string_sized_new (64);
 
-        if (gva_xmame_supports_auto_save ())
+        if (gva_mame_supports_auto_save ())
                 g_string_append (arguments, "-noautosave ");
 
-        if (gva_xmame_supports_full_screen ())
+        if (gva_mame_supports_full_screen ())
         {
                 if (gva_preferences_get_full_screen ())
                         g_string_append (arguments, "-fullscreen ");
@@ -510,7 +488,7 @@ gva_xmame_record_game (const gchar *name, const gchar *inpname,
 
         g_string_append_printf (arguments, "-record %s %s", inpname, name);
 
-        /* Execute the command "${xmame} -record ${inpname} ${name}". */
+        /* Execute the command "${mame} -record ${inpname} ${name}". */
         process = gva_mame_process_spawn (arguments->str, error);
 
         g_string_free (arguments, TRUE);
@@ -519,8 +497,9 @@ gva_xmame_record_game (const gchar *name, const gchar *inpname,
 }
 
 GvaProcess *
-gva_xmame_playback_game (const gchar *name, const gchar *inpname,
-                         GError **error)
+gva_mame_playback_game (const gchar *name,
+                        const gchar *inpname,
+                        GError **error)
 {
         GvaProcess *process;
         GString *arguments;
@@ -529,10 +508,10 @@ gva_xmame_playback_game (const gchar *name, const gchar *inpname,
 
         arguments = g_string_sized_new (64);
 
-        if (gva_xmame_supports_auto_save ())
+        if (gva_mame_supports_auto_save ())
                 g_string_append (arguments, "-noautosave ");
 
-        if (gva_xmame_supports_full_screen ())
+        if (gva_mame_supports_full_screen ())
         {
                 if (gva_preferences_get_full_screen ())
                         g_string_append (arguments, "-fullscreen ");
@@ -542,7 +521,7 @@ gva_xmame_playback_game (const gchar *name, const gchar *inpname,
 
         g_string_append_printf (arguments, "-playback %s", inpname);
 
-        /* Execute the command "${xmame} -playback ${inpname}". */
+        /* Execute the command "${mame} -playback ${inpname}". */
         process = gva_mame_process_spawn (arguments->str, error);
 
         g_string_free (arguments, TRUE);
@@ -559,14 +538,15 @@ gva_xmame_playback_game (const gchar *name, const gchar *inpname,
 }
 
 gboolean
-gva_xmame_clear_state (const gchar *name, GError **error)
+gva_mame_clear_state (const gchar *name,
+                      GError **error)
 {
         gchar *basename;
         gchar *directory;
         gchar *filename;
         gboolean success = TRUE;
 
-        directory = gva_xmame_get_config_value ("state_directory", error);
+        directory = gva_mame_get_config_value ("state_directory", error);
         if (directory == NULL)
                 return FALSE;
 
@@ -593,13 +573,13 @@ gva_xmame_clear_state (const gchar *name, GError **error)
 }
 
 gboolean
-gva_xmame_supports_auto_save (void)
+gva_mame_supports_auto_save (void)
 {
-        return gva_xmame_has_config_value ("autosave");
+        return gva_mame_has_config_value ("autosave");
 }
 
 gboolean
-gva_xmame_supports_full_screen (void)
+gva_mame_supports_full_screen (void)
 {
-        return gva_xmame_has_config_value ("fullscreen");
+        return gva_mame_has_config_value ("fullscreen");
 }

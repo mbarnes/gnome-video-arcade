@@ -24,12 +24,12 @@
 #include "gva-favorites.h"
 #include "gva-game-store.h"
 #include "gva-main.h"
+#include "gva-mame.h"
 #include "gva-play-back.h"
 #include "gva-preferences.h"
 #include "gva-process.h"
 #include "gva-tree-view.h"
 #include "gva-util.h"
-#include "gva-xmame.h"
 
 static GladeXML *xml = NULL;
 static GtkUIManager *manager = NULL;
@@ -233,7 +233,7 @@ action_play_back_cb (GtkAction *action)
         inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
         g_free (inpfile);
 
-        process = gva_xmame_playback_game (name, inpname, &error);
+        process = gva_mame_playback_game (name, inpname, &error);
         gva_error_handle (&error);
 
         if (process != NULL)
@@ -280,7 +280,7 @@ action_record_cb (GtkAction *action)
 
         inpname = gva_choose_inpname (name);
 
-        process = gva_xmame_record_game (name, inpname, &error);
+        process = gva_mame_record_game (name, inpname, &error);
         gva_error_handle (&error);
 
         if (process != NULL)
@@ -340,10 +340,10 @@ action_start_cb (GtkAction *action)
         g_assert (name != NULL);
 
         if (!gva_preferences_get_auto_save ())
-                if (!gva_xmame_clear_state (name, &error))
+                if (!gva_mame_clear_state (name, &error))
                         gva_error_handle (&error);
 
-        process = gva_xmame_run_game (name, &error);
+        process = gva_mame_run_game (name, &error);
         gva_error_handle (&error);
 
         if (process != NULL)

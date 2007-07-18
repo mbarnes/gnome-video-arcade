@@ -24,7 +24,6 @@
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-time.h"
-#include "gva-xmame.h"
 
 enum {
         POPULATE_BEGIN,

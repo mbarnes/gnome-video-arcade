@@ -19,7 +19,7 @@
 #include "gva-util.h"
 
 #include "gva-error.h"
-#include "gva-xmame.h"
+#include "gva-mame.h"
 
 #define GCONF_MONOSPACE_FONT_NAME_KEY \
         "/desktop/gnome/interface/monospace_font_name"
@@ -50,7 +50,7 @@ gva_choose_inpname (const gchar *romname)
 
         g_return_val_if_fail (romname != NULL, NULL);
 
-        inppath = gva_xmame_get_config_value ("input_directory", &error);
+        inppath = gva_mame_get_config_value ("input_directory", &error);
 
         if (inppath == NULL || !inpname_exists (inppath, romname))
         {

@@ -26,10 +26,10 @@
 
 #include "gva-error.h"
 #include "gva-game-store.h"
+#include "gva-mame.h"
 #include "gva-time.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
-#include "gva-xmame.h"
 
 static void
 play_back_tree_view_row_activated_cb (GtkTreeView *view,
@@ -288,7 +288,7 @@ gva_play_back_show (const gchar *inpname)
         view = GTK_TREE_VIEW (GVA_WIDGET_PLAY_BACK_TREE_VIEW);
         game_store = GVA_GAME_STORE (gtk_tree_view_get_model (view));
 
-        hash_table = gva_xmame_get_input_files (&error);
+        hash_table = gva_mame_get_input_files (&error);
         gva_error_handle (&error);
 
         if (hash_table != NULL)

@@ -138,7 +138,7 @@ gva_main_build_database (GError **error)
                 return FALSE;
 
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
-        total_supported = gva_xmame_get_total_supported (NULL);
+        total_supported = gva_mame_get_total_supported (NULL);
 
         gva_main_statusbar_push (context_id, _("Building game database..."));
         gtk_widget_show (GVA_WIDGET_MAIN_PROGRESS_BAR);

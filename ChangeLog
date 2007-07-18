@@ -1,5 +1,27 @@
 2007-07-18  Matthew Barnes  <mbarnes@redhat.com>
 
+	** Make preparations for adding multiple MAME backends.
+
+	* src/Makefile.am:
+	Add gva-mame-common.[ch].
+	Rename gva-xmame.h to gva-mame.h.
+	Rename gva-xmame.c to gva-mame-xmame.c.
+
+	* src/main.c:
+	* src/gva-db.c:
+	* src/gva-play-back.c:
+	* src/gva-preferences.c:
+	* src/gva-main.c:
+	* src/gva-mame-xmame.c:
+	* src/gva-ui.c:
+	* src/gva-util.c:
+	Change "xmame" prefixes to "mame".
+
+	* src/gva-mame-common.[ch]:
+	New source files implement functions common to all MAME backends.
+
+2007-07-18  Matthew Barnes  <mbarnes@redhat.com>
+
 	* README: First draft.
 
 2007-07-17  Matthew Barnes  <mbarnes@redhat.com>

@@ -19,8 +19,8 @@
 #include "gva-preferences.h"
 
 #include "gva-error.h"
+#include "gva-mame.h"
 #include "gva-ui.h"
-#include "gva-xmame.h"
 
 void
 gva_preferences_init (void)
@@ -52,7 +52,7 @@ gva_preferences_init (void)
 
         gtk_action_set_sensitive (
                 GVA_ACTION_AUTO_SAVE,
-                gva_xmame_supports_auto_save ());
+                gva_mame_supports_auto_save ());
 
         gtk_toggle_action_set_active (
                 GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN),
@@ -60,7 +60,7 @@ gva_preferences_init (void)
 
         gtk_action_set_sensitive (
                 GVA_ACTION_FULL_SCREEN,
-                gva_xmame_supports_full_screen ());
+                gva_mame_supports_full_screen ());
 }
 
 gboolean
