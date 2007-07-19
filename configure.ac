@@ -2,7 +2,7 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.3.0)
+m4_define([gva_version], 0.4)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
         [mbarnes@redhat.com], gnome-video-arcade)
@@ -51,7 +51,27 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_INTLTOOL
 AC_PROG_LIBTOOL
+AC_PATH_PROG(BASENAME, basename)
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
+
+# MAME Program
+AC_ARG_VAR([MAME], [MAME command])
+AC_PATH_PROGS([MAME], [sdlmame xmame],, [$PATH:/usr/local/games:/usr/games])
+case `$BASENAME $MAME` in
+        sdlmame*) MAME_BACKEND='gva-mame-sdlmame.$(OBJEXT)' ;;
+        xmame*)   MAME_BACKEND='gva-mame-xmame.$(OBJEXT)' ;;
+        *)        AC_MSG_ERROR([
+
+        Unable to find a MAME program.
+
+        Please install either sdlmame or xmame, or specify
+        the MAME command with a MAME environment variable.
+
+        e.g. MAME=/path/to/program/xmame.x11 ./configure
+]) ;;
+esac
+AC_SUBST([MAME_BACKEND])
+AC_DEFINE_UNQUOTED(MAME_PROGRAM, "$MAME", [Location of the MAME program])
 
 # Localization
 AH_TEMPLATE(GETTEXT_PACKAGE, [Package name for gettext])

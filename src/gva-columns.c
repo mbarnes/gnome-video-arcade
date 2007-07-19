@@ -68,7 +68,7 @@ columns_sampleset_set_properties (GtkTreeViewColumn *column,
         gtk_tree_model_get (model, iter, column_id, &sampleset, -1);
 
         visible = (sampleset != NULL);
-        sensitive = visible && (strcmp (sampleset, "correct") == 0);
+        sensitive = visible && (strcmp (sampleset, "good") == 0);
 
         g_object_set (
                 renderer, "sensitive", sensitive, "visible", visible, NULL);
@@ -207,19 +207,10 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "description",        columns_factory_description },
         { "year",               NULL },
         { "manufacturer",       NULL },
-        { "history",            NULL },
-        { "video_screen",       NULL },
-        { "video_orientation",  NULL },
-        { "video_width",        NULL },
-        { "video_height",       NULL },
-        { "video_aspectx",      NULL },
-        { "video_aspecty",      NULL },
-        { "video_refresh",      NULL },
         { "sound_channels",     NULL },
         { "input_service",      NULL },
         { "input_tilt",         NULL },
         { "input_players",      NULL },
-        { "input_control",      NULL },
         { "input_buttons",      NULL },
         { "input_coins",        NULL },
         { "driver_status",      NULL },

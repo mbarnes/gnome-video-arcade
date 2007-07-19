@@ -57,6 +57,9 @@
 /* Location of the arcade history file */
 #undef HISTORY_FILE
 
+/* Location of the MAME program */
+#undef MAME_PROGRAM
+
 /* Name of package */
 #undef PACKAGE
 

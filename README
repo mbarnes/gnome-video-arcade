@@ -18,9 +18,14 @@ Dependencies
 GNOME Video Arcade has a few external dependencies which need to be
 installed prior to compiling the source code:
 
-   - xmame (obviously)
+   - sdlmame or xmame
 
-       I plan to also support sdlmame in the near future.
+       These may be available as pre-compiled packages from your
+       GNU/Linux distribution.  If not, you can download and compile
+       the source code yourself.
+
+          sdlmame:  http://rbelmont.mameworld.info/?page_id=163
+          xmame:    http://x.mame.net/
 
    - The header files for GTK+ version 2.10 (or higher).
 
@@ -52,11 +57,11 @@ including GNOME Video Arcade. This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.3.0 and may change in forthcoming releases.
+version 0.4.0 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.3.0
+   $ cd /path/to/gnome-video-arcade-0.4.0
    $ ./configure
    $ make
    $ su -c "make install"
@@ -64,14 +69,17 @@ The standard installation procedure looks like this:
 
    To start: Applications -> Games -> Video Arcade
 
+The MAME program name must begin with "sdlmame" or "xmame".  If
+the configure script cannot find the MAME program, you can tell
+it where the MAME program is like this:
+
+   $ MAME=/path/to/program/sdlmame ./configure
+
 Currently, the only configure option specific to GNOME Video Arcade
 is --with-history-file, for specifying the location of a history.dat
 file as mentioned above. Usage looks something like this:
 
    $ ./configure --with-history-file=/usr/share/xmame/history.dat
-
-Future versions may require you to provide a path to the MAME
-executable you wish to use, either xmame or sdlmame.
 
 
 Usage

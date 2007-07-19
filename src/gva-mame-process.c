@@ -92,7 +92,7 @@ mame_process_exited (GvaProcess *process, gint status)
 
         if (WIFEXITED (status) && WEXITSTATUS (status) != 0)
                 g_set_error (
-                        &process->error, GVA_ERROR, GVA_ERROR_XMAME,
+                        &process->error, GVA_ERROR, GVA_ERROR_MAME,
                         _("Child process exited with status (%d)"),
                         WEXITSTATUS (status));
 }
@@ -137,40 +137,17 @@ gva_mame_process_get_type (void)
         return type;
 }
 
-gchar *
-gva_mame_process_get_executable (GError **error)
-{
-        gchar *executable;
-
-        executable = g_find_program_in_path ("xmame");
-
-        if (executable == NULL)
-                g_set_error (error, GVA_ERROR, GVA_ERROR_XMAME,
-                        _("Could not find xmame executable"));
-
-        return executable;
-}
-
 GvaProcess *
 gva_mame_process_spawn (const gchar *arguments, GError **error)
 {
         GvaProcess *process;
         gchar *command_line;
-        gchar *executable;
 
         g_return_val_if_fail (arguments != NULL, FALSE);
 
-        executable = gva_mame_process_get_executable (error);
-
-        if (executable == NULL)
-                return NULL;
-
-        command_line = g_strdup_printf ("%s %s", executable, arguments);
-
+        command_line = g_strdup_printf ("%s %s", MAME_PROGRAM, arguments);
         process = gva_process_spawn (command_line, error);
-
         g_free (command_line);
-        g_free (executable);
 
         return process;
 }

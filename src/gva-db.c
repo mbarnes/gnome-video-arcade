@@ -46,19 +46,10 @@
                 "description NOT NULL, " \
                 "year, " \
                 "manufacturer NOT NULL, " \
-                "history, " \
-                "video_screen NOT NULL, " \
-                "video_orientation, " \
-                "video_width, " \
-                "video_height, " \
-                "video_aspectx, " \
-                "video_aspecty, " \
-                "video_refresh, " \
                 "sound_channels, " \
                 "input_service DEFAULT 'no', " \
                 "input_tilt DEFAULT 'no', " \
                 "input_players, " \
-                "input_control, " \
                 "input_buttons, " \
                 "input_coins, " \
                 "driver_status, " \
@@ -84,19 +75,10 @@
                 "@description, " \
                 "@year, " \
                 "@manufacturer, " \
-                "@history, " \
-                "@video_screen, " \
-                "@video_orientation, " \
-                "@video_width, " \
-                "@video_height, " \
-                "@video_aspectx, " \
-                "@video_aspecty, " \
-                "@video_refresh, " \
                 "@sound_channels, " \
                 "@input_service, " \
                 "@input_tilt, " \
                 "@input_players, " \
-                "@input_control, " \
                 "@input_buttons, " \
                 "@input_coins, " \
                 "@driver_status, " \
@@ -122,8 +104,8 @@ struct _ParserData
 
         GHashTable *romsets;
         GHashTable *samplesets;
-        GvaProcess *verify_romsets;
-        GvaProcess *verify_samplesets;
+        GvaProcess *verify_roms;
+        GvaProcess *verify_samples;
 
         const gchar *element_stack[MAX_ELEMENT_DEPTH];
         guint element_stack_depth;
@@ -149,7 +131,6 @@ static struct
         const gchar *game;
         const gchar *graphic;
         const gchar *height;
-        const gchar *history;
         const gchar *input;
         const gchar *mame;
         const gchar *manufacturer;
@@ -169,7 +150,6 @@ static struct
         const gchar *sourcefile;
         const gchar *status;
         const gchar *tilt;
-        const gchar *video;
         const gchar *width;
         const gchar *year;
 
@@ -292,8 +272,6 @@ db_parser_start_element_input (ParserData *data,
                         param = "@input_tilt";
                 else if (attribute_name[ii] == intern.players)
                         param = "@input_players";
-                else if (attribute_name[ii] == intern.control)
-                        param = "@input_control";
                 else if (attribute_name[ii] == intern.buttons)
                         param = "@input_buttons";
                 else if (attribute_name[ii] == intern.coins)
@@ -351,39 +329,6 @@ db_parser_start_element_sound (ParserData *data,
 }
 
 static void
-db_parser_start_element_video (ParserData *data,
-                               const gchar **attribute_name,
-                               const gchar **attribute_value,
-                               GError **error)
-{
-        gint ii;
-
-        for (ii = 0; attribute_name[ii] != NULL; ii++)
-        {
-                const gchar *param;
-
-                if (attribute_name[ii] == intern.screen)
-                        param = "@video_screen";
-                else if (attribute_name[ii] == intern.orientation)
-                        param = "@video_orientation";
-                else if (attribute_name[ii] == intern.width)
-                        param = "@video_width";
-                else if (attribute_name[ii] == intern.height)
-                        param = "@video_height";
-                else if (attribute_name[ii] == intern.aspectx)
-                        param = "@video_aspectx";
-                else if (attribute_name[ii] == intern.aspecty)
-                        param = "@video_aspecty";
-                else if (attribute_name[ii] == intern.refresh)
-                        param = "@video_refresh";
-                else
-                        continue;
-
-                db_parser_bind_text (data, param, attribute_value[ii]);
-        }
-}
-
-static void
 db_parser_start_element (GMarkupParseContext *context,
                          const gchar *element_name,
                          const gchar **attribute_name,
@@ -425,10 +370,6 @@ db_parser_start_element (GMarkupParseContext *context,
 
         else if (element_name == intern.sound)
                 db_parser_start_element_sound (
-                        data, attribute_name, attribute_value, error);
-
-        else if (element_name == intern.video)
-                db_parser_start_element_video (
                         data, attribute_name, attribute_value, error);
 }
 
@@ -478,9 +419,6 @@ db_parser_text (GMarkupParseContext *context,
 
         if (element_name == intern.description)
                 db_parser_bind_text (data, "@description", text);
-
-        else if (element_name == intern.history)
-                db_parser_bind_text (data, "@history", text);
 
         else if (element_name == intern.manufacturer)
                 db_parser_bind_text (data, "@manufacturer", text);
@@ -578,12 +516,12 @@ db_parser_data_new (GvaProcess *process)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) db_verify_string_free);
 
-        data->verify_romsets = gva_mame_verify_romsets (
+        data->verify_roms = gva_mame_verify_roms (
                 (GvaMameCallback) db_verify_insert_status,
                 data->romsets, &error);
         gva_error_handle (&error);
 
-        data->verify_samplesets = gva_mame_verify_samplesets (
+        data->verify_samples = gva_mame_verify_samples (
                 (GvaMameCallback) db_verify_insert_status,
                 data->samplesets, &error);
         gva_error_handle (&error);
@@ -604,11 +542,11 @@ db_parser_data_free (ParserData *data)
         g_hash_table_destroy (data->romsets);
         g_hash_table_destroy (data->samplesets);
 
-        if (data->verify_romsets != NULL)
-                g_object_unref (data->verify_romsets);
+        if (data->verify_roms != NULL)
+                g_object_unref (data->verify_roms);
 
-        if (data->verify_samplesets != NULL)
-                g_object_unref (data->verify_samplesets);
+        if (data->verify_samples != NULL)
+                g_object_unref (data->verify_samples);
 
         g_slice_free (ParserData, data);
 }
@@ -640,9 +578,9 @@ db_parser_exit (GvaProcess *process,
                         data->context, &process->error);
 
         db_verify_update_status (
-                data->verify_romsets, data->romsets, "romset");
+                data->verify_roms, data->romsets, "romset");
         db_verify_update_status (
-                data->verify_samplesets, data->samplesets, "sampleset");
+                data->verify_samples, data->samplesets, "sampleset");
         gva_db_execute (SQL_DELETE_NOT_FOUND, &process->error);
 
         gva_process_get_time_elapsed (process, &time_elapsed);
@@ -732,7 +670,6 @@ gva_db_build (GError **error)
         intern.game         = g_intern_static_string ("game");
         intern.graphic      = g_intern_static_string ("graphic");
         intern.height       = g_intern_static_string ("height");
-        intern.history      = g_intern_static_string ("history");
         intern.input        = g_intern_static_string ("input");
         intern.mame         = g_intern_static_string ("mame");
         intern.manufacturer = g_intern_static_string ("manufacturer");
@@ -752,7 +689,6 @@ gva_db_build (GError **error)
         intern.sourcefile   = g_intern_static_string ("sourcefile");
         intern.status       = g_intern_static_string ("status");
         intern.tilt         = g_intern_static_string ("tilt");
-        intern.video        = g_intern_static_string ("video");
         intern.width        = g_intern_static_string ("width");
         intern.year         = g_intern_static_string ("year");
 

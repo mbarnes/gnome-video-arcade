@@ -52,6 +52,7 @@ main_build_database_progress_cb (GvaProcess *process,
 
                 progress = gva_process_get_progress (process);
                 fraction = (gdouble) progress / (gdouble) total_supported;
+                fraction = CLAMP (fraction, 0.0, 1.0);
         }
 
         progress_bar = GTK_PROGRESS_BAR (GVA_WIDGET_MAIN_PROGRESS_BAR);

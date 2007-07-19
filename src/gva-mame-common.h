@@ -32,12 +32,16 @@ struct _GvaMameAsyncData
 {
         GvaMameCallback callback;
         gpointer user_data;
-        gint lineno;
 };
 
 GvaMameAsyncData * gva_mame_async_data_new      (GvaMameCallback callback,
                                                  gpointer user_data);
 void               gva_mame_async_data_free     (GvaMameAsyncData *data);
+
+gint               gva_mame_command             (const gchar *arguments,
+                                                 gchar ***stdout_lines,
+                                                 gchar ***stderr_lines,
+                                                 GError **error);
 
 G_END_DECLS
 

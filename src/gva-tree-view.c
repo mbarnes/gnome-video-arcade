@@ -284,11 +284,14 @@ gva_tree_view_run_query (const gchar *expr,
         }
 
         columns = g_strjoinv (", ", strv);
-        g_string_printf (string, "SELECT name, %s FROM game", columns);
+        g_string_printf (string, "SELECT name, %s FROM game ", columns);
         g_free (columns);
 
+        g_string_append_printf (
+                string, "WHERE (romset IN (\"good\", \"best available\"))");
+
         if (expr != NULL)
-                g_string_append_printf (string, " WHERE %s", expr);
+                g_string_append_printf (string, " AND (%s)", expr);
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         window = gtk_widget_get_parent_window (GTK_WIDGET (view));

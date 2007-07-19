@@ -57,7 +57,6 @@ struct _GvaMameProcessClass
 };
 
 GType           gva_mame_process_get_type       (void);
-gchar *         gva_mame_process_get_executable (GError **error);
 GvaProcess *    gva_mame_process_spawn          (const gchar *arguments,
                                                  GError **error);
 

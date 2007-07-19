@@ -35,7 +35,6 @@ gnome_video_arcade_SOURCES = \
 	gva-mame-common.h		\
 	gva-mame-process.c		\
 	gva-mame-process.h		\
-	gva-mame-xmame.c		\
 	gva-mame.h			\
 	gva-play-back.c			\
 	gva-play-back.h			\
@@ -55,7 +54,14 @@ gnome_video_arcade_SOURCES = \
 	gva-util.h			\
 	main.c
 
+EXTRA_gnome_video_arcade_SOURCES = \
+	gva-mame-sdlmame.c		\
+	gva-mame-xmame.c
+
 gnome_video_arcade_LDADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
 	@GCONF_LIBS@ @GLADE_LIBS@ \
-	@SQLITE_LIBS@
+	@MAME_BACKEND@ @SQLITE_LIBS@
+
+gnome_video_arcade_DEPENDENCIES = \
+	@MAME_BACKEND@

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* XMAME backend */
+/* SDLMAME backend */
 
 #include "gva-mame.h"
 
@@ -30,24 +30,28 @@ gva_mame_get_version (GError **error)
 {
         gchar *version = NULL;
         gchar **lines;
+        gchar *cp;
 
-        /* Execute the command "${mame} -version". */
-        if (gva_mame_command ("-version", &lines, NULL, error) != 0)
+        /* Execute the command "${mame} -help". */
+        if (gva_mame_command ("-help", &lines, NULL, error) != 0)
                 return NULL;
 
         /* Output is as follows:
          *
-         * xmame (backend) version 0.xxx (Mmm dd yyyy)
+         * M.A.M.E. v0.xxx (Mmm dd yyyy) - Multiple Arcade Machine Emulator
+         * Copyright (x) 1997-2007 by Nicola Salmoria and the MAME Team
+         * ...
          */
 
         if (lines[0] == NULL)
                 goto exit;
-        if (strstr (lines[0], "xmame") == NULL)
-                goto exit;
-        if (strstr (lines[0], "version") == NULL)
-                goto exit;
 
-        version = g_strdup (g_strstrip (lines[0]));
+        cp = strstr (lines[0], " - Multiple Arcade Machine Emulator");
+        if (cp != NULL)
+        {
+                *cp = '\0';
+                version = g_strdup (lines[0]);
+        }
 
 exit:
         if (version == NULL)
@@ -72,20 +76,16 @@ gva_mame_get_total_supported (GError **error)
 
         /* Output is as follows:
          *
-         * name      description
-         * --------  -----------
+         * Name:     Description:
          * puckman   "PuckMan (Japan set 1, Probably Bootleg)"
          * puckmana  "PuckMan (Japan set 2)"
          * puckmanf  "PuckMan (Japan set 1 with speedup hack)"
          * ...
-         *
-         *
-         * Total Supported: xxxx
          */
 
         num_lines = g_strv_length (lines);
         g_strfreev (lines);
 
-        /* Count the lines, excluding the header and footer. */
-        return (num_lines > 4) ? num_lines - 4 : 0;
+        /* Count the lines, excluding the header. */
+        return (num_lines > 1) ? num_lines - 1 : 0;
 }

@@ -60,7 +60,8 @@ gva_preferences_init (void)
 
         gtk_action_set_sensitive (
                 GVA_ACTION_FULL_SCREEN,
-                gva_mame_supports_full_screen ());
+                gva_mame_supports_full_screen () ||
+                gva_mame_supports_window ());
 }
 
 gboolean

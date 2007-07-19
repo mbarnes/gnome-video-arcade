@@ -16,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* Common interface for MAME backends. */
+
 #ifndef GVA_MAME_H
 #define GVA_MAME_H
 
@@ -28,11 +30,6 @@ typedef void    (*GvaMameCallback)              (const gchar *name,
                                                  const gchar *game_data,
                                                  gpointer user_data);
 
-gint            gva_mame_command                (const gchar *arguments,
-                                                 gchar ***stdout_lines,
-                                                 gchar ***stderr_lines,
-                                                 GError **error);
-
 gchar *         gva_mame_get_version            (GError **error);
 guint           gva_mame_get_total_supported    (GError **error);
 gchar *         gva_mame_get_config_value       (const gchar *config_key,
@@ -40,10 +37,10 @@ gchar *         gva_mame_get_config_value       (const gchar *config_key,
 gboolean        gva_mame_has_config_value       (const gchar *config_key);
 GHashTable *    gva_mame_get_input_files        (GError **error);
 GvaProcess *    gva_mame_list_xml               (GError **error);
-GvaProcess *    gva_mame_verify_romsets         (GvaMameCallback callback,
+GvaProcess *    gva_mame_verify_roms            (GvaMameCallback callback,
                                                  gpointer user_data,
                                                  GError **error);
-GvaProcess *    gva_mame_verify_samplesets      (GvaMameCallback callback,
+GvaProcess *    gva_mame_verify_samples         (GvaMameCallback callback,
                                                  gpointer user_data,
                                                  GError **error);
 GvaProcess *    gva_mame_run_game               (const gchar *name,
@@ -54,10 +51,19 @@ GvaProcess *    gva_mame_record_game            (const gchar *name,
 GvaProcess *    gva_mame_playback_game          (const gchar *name,
                                                  const gchar *inpname,
                                                  GError **error);
-gboolean        gva_mame_clear_state            (const gchar *name,
-                                                 GError **error);
-gboolean        gva_mame_supports_auto_save     (void);
-gboolean        gva_mame_supports_full_screen   (void);
+gchar *         gva_mame_get_save_state_file    (const gchar *name);
+void            gva_mame_delete_save_state      (const gchar *name);
+
+/* Test for supported options */
+
+#define gva_mame_supports_auto_save() \
+        (gva_mame_has_config_value ("autosave"))
+
+#define gva_mame_supports_full_screen() \
+        (gva_mame_has_config_value ("fullscreen"))
+
+#define gva_mame_supports_window() \
+        (gva_mame_has_config_value ("window"))
 
 G_END_DECLS
 

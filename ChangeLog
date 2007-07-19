@@ -1,3 +1,69 @@
+2007-07-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Locate the MAME program and choose the appropriate backend.
+
+	* src/Makefile.am:
+	Distribute both MAME backends but only compile one.
+
+	* src/gva-columns.c:
+	* src/gva-db.c:
+	* src/gva-game-store.[ch]:
+	Recent MAME versions have changed the format of display and
+	control-related XML data.  Just drop those columns from the
+	database for now, until I can sort this out.
+
+	* src/gva-error.h:
+	Remove GVA_ERROR_XMAME to GVA_ERROR_MAME.
+
+	* src/gva-main.c (main_build_database_process_cb):
+	Clamp the fraction value between 0.0 and 1.0.
+
+	* src/gva-preference.c (gva_preference_init):
+	Check for both -fullscreen and -window options.
+
+	* src/gva-mame-common.c (gva_mame_has_config_value):
+	Suppress warnings about unknown configuration keys.
+
+	* src/gva-mame-common.c (mame_verify_read):
+	Simpler implementation using strtok().
+
+	* src/gva-mame-common.c (gva_mame_verify_roms):
+	Renamed function now invokes "-verifyroms".  Support for
+	"-verifyromsets" was dropped in recent MAME versions.
+
+	* src/gva-mame-common.c (gva_mame_verify_samples):
+	Renamed function now invokes "-verifysamples".  Support for
+	"-verifysamplesets" was dropped in recent MAME versions.
+
+	* src/gva-mame-common.c (gva_mame_run_game), (gva_mame_record_game),
+	(gva_mame_playback_game):
+	Test for both -fullscreen and -window options.
+
+	* src/gva-mame-common.c (gva_mame_get_save_state_file):
+	New function tries to find the save state file for a game.
+	The location of these files changed in recent MAME versions.
+
+	* src/gva-mame-process.c (gva_mame_process_get_executable):
+	Remove this function; use MAME_PROGRAM from config.h instead.
+
+	* src/gva-mame-sdlmame.c:
+	New source file implements the sdlmame backend.
+
+	* src/gva-mame-xmame.c:
+	Move all functions except gva_mame_get_version() and
+	gva_mame_get_total_supported() into gva-mame-common.c.
+
+	* src/gva-mame-xmame.c (gva_mame_get_version):
+	* src/gva-mame-xmame.c (gva_mame_get_total_supported):
+	Simpler implementation.
+
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Only select "good" or "best available" romsets.
+
+	* src/gva-ui.c (action_about_cb):
+	Change comment to "MAME Front-End" (not just XMAME).
+
 2007-07-18  Matthew Barnes  <mbarnes@redhat.com>
 
 	** Make preparations for adding multiple MAME backends.

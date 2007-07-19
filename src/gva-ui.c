@@ -82,7 +82,7 @@ action_about_cb (GtkAction *action)
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
                 "name", PACKAGE_NAME,
                 "version", PACKAGE_VERSION,
-                "comments", _("XMAME Front-End"),
+                "comments", _("MAME Front-End"),
                 "copyright", copyright,
                 "license", license,
                 "wrap-license", TRUE,
@@ -340,8 +340,7 @@ action_start_cb (GtkAction *action)
         g_assert (name != NULL);
 
         if (!gva_preferences_get_auto_save ())
-                if (!gva_mame_clear_state (name, &error))
-                        gva_error_handle (&error);
+                gva_mame_delete_save_state (name);
 
         process = gva_mame_run_game (name, &error);
         gva_error_handle (&error);
