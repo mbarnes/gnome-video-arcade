@@ -1,3 +1,23 @@
+2007-07-20  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-db.c:
+	Add CHECK constraints to the table definitions.
+
+	* src/gva-db.c (db_parser_bind_text):
+	Take a sqlite3_stmt argument instead of ParserData.
+
+	* src/gva-db.c (db_parser_read):
+	Kill the process if an error occurs.
+
+	* src/gva-mame-process.c (mame_process_check_for_error):
+	Duplicate the string on the stack.
+
+	* src/gva-properties.c (properties_update_header):
+	Show the manufacturer and year the way MAME does.
+
+	* src/gva-ui.c (action_about_cb):
+	Monkey with the About dialog comment again.
+
 2007-07-19  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:
@@ -14,7 +34,7 @@
 	database for now, until I can sort this out.
 
 	* src/gva-error.h:
-	Remove GVA_ERROR_XMAME to GVA_ERROR_MAME.
+	Rename GVA_ERROR_XMAME to GVA_ERROR_MAME.
 
 	* src/gva-main.c (main_build_database_process_cb):
 	Clamp the fraction value between 0.0 and 1.0.

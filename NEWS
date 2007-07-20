@@ -5,7 +5,9 @@ GNOME Video Arcade 0.3.1
 
         What's New
         ----------
-        Preliminary support for sdlmame.
+        * Preliminary support for sdlmame.
+        * License button in the About dialog.
+        * The README file now has some installation instructions.
 
 GNOME Video Arcade 0.3.0
 ========================

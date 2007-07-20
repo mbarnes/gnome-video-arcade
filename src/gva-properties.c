@@ -55,8 +55,8 @@ properties_update_header (GtkTreeModel *model,
                 year = g_strdup (_("(Year Unknown)"));
 
         markup = g_markup_printf_escaped (
-                "<big><b>%s</b></big>\n<small>%s, %s</small>",
-                description, manufacturer, year);
+                "<big><b>%s</b></big>\n<small>%s %s</small>",
+                description, year, manufacturer);
         gtk_label_set_markup (label, markup);
         g_free (markup);
 

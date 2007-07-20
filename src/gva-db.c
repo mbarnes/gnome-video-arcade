@@ -31,35 +31,61 @@
 #define MAX_ELEMENT_DEPTH 4
 
 #define SQL_CREATE_TABLE_MAME \
-        "CREATE TABLE IF NOT EXISTS mame (build);"
+        "CREATE TABLE IF NOT EXISTS mame (" \
+                "build, " \
+                "debug DEFAULT 'no' " \
+                "CHECK (debug in ('yes', 'no')));"
 
 #define SQL_CREATE_TABLE_GAME \
         "CREATE TABLE IF NOT EXISTS game (" \
                 "name PRIMARY KEY, " \
                 "sourcefile, " \
-                "runnable DEFAULT 'yes', " \
+                "runnable DEFAULT 'yes' " \
+                "CHECK (runnable in ('yes', 'no')), " \
                 "cloneof, " \
                 "romof, " \
-                "romset, " \
+                "romset " \
+                "CHECK (romset in " \
+                "('good', 'best available', 'bad')), " \
                 "sampleof, " \
-                "sampleset, " \
+                "sampleset " \
+                "CHECK (sampleset in " \
+                "('good', 'best available', 'bad')), " \
                 "description NOT NULL, " \
                 "year, " \
                 "manufacturer NOT NULL, " \
                 "sound_channels, " \
-                "input_service DEFAULT 'no', " \
-                "input_tilt DEFAULT 'no', " \
+                "input_service DEFAULT 'no' " \
+                "CHECK (input_service in ('yes', 'no')), " \
+                "input_tilt DEFAULT 'no' " \
+                "CHECK (input_tilt in ('yes', 'no')), " \
                 "input_players, " \
                 "input_buttons, " \
                 "input_coins, " \
-                "driver_status, " \
-                "driver_emulation, " \
-                "driver_color, " \
-                "driver_sound, " \
-                "driver_graphic, " \
-                "driver_cocktail, " \
-                "driver_protection, " \
-                "driver_savestate, " \
+                "driver_status " \
+                "CHECK (driver_status in " \
+                "('good', 'imperfect', 'preliminary')), " \
+                "driver_emulation " \
+                "CHECK (driver_emulation in " \
+                "('good', 'imperfect', 'preliminary')), " \
+                "driver_color " \
+                "CHECK (driver_color in " \
+                "('good', 'imperfect', 'preliminary')), " \
+                "driver_sound " \
+                "CHECK (driver_sound in " \
+                "('good', 'imperfect', 'preliminary')), " \
+                "driver_graphic " \
+                "CHECK (driver_graphic in " \
+                "('good', 'imperfect', 'preliminary')), " \
+                "driver_cocktail " \
+                "CHECK (driver_cocktail in " \
+                "('good', 'imperfect', 'preliminary')), " \
+                "driver_protection " \
+                "CHECK (driver_protection in " \
+                "('good', 'imperfect', 'preliminary')), " \
+                "driver_savestate " \
+                "CHECK (driver_savestate in " \
+                "('supported', 'unsupported')), " \
                 "driver_palettesize);"
 
 #define SQL_INSERT_GAME \
@@ -158,7 +184,7 @@ static struct
 static sqlite3 *db = NULL;
 
 static void
-db_parser_bind_text (ParserData *data,
+db_parser_bind_text (sqlite3_stmt *stmt,
                      const gchar *param,
                      const gchar *value)
 {
@@ -166,7 +192,7 @@ db_parser_bind_text (ParserData *data,
         GError *error = NULL;
 
         errcode = sqlite3_bind_text (
-                data->stmt, sqlite3_bind_parameter_index (data->stmt, param),
+                stmt, sqlite3_bind_parameter_index (stmt, param),
                 g_locale_to_utf8 (value, -1, NULL, NULL, &error), -1, g_free);
 
         /* Handle conversion errors. */
@@ -212,7 +238,7 @@ db_parser_start_element_driver (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data, param, attribute_value[ii]);
+                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
         }
 }
 
@@ -225,7 +251,7 @@ db_parser_start_element_game (ParserData *data,
         gint ii;
 
         /* Bind default values. */
-        db_parser_bind_text (data, "@runnable", "yes");
+        db_parser_bind_text (data->stmt, "@runnable", "yes");
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
         {
@@ -246,7 +272,7 @@ db_parser_start_element_game (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data, param, attribute_value[ii]);
+                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
         }
 }
 
@@ -259,8 +285,8 @@ db_parser_start_element_input (ParserData *data,
         gint ii;
 
         /* Bind default values. */
-        db_parser_bind_text (data, "@input_service", "no");
-        db_parser_bind_text (data, "@input_tilt", "no");
+        db_parser_bind_text (data->stmt, "@input_service", "no");
+        db_parser_bind_text (data->stmt, "@input_tilt", "no");
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
         {
@@ -279,7 +305,7 @@ db_parser_start_element_input (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data, param, attribute_value[ii]);
+                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
         }
 }
 
@@ -301,7 +327,7 @@ db_parser_start_element_mame (ParserData *data,
                 char *sql;
 
                 sql = sqlite3_mprintf (
-                        "INSERT INTO mame VALUES (%Q)", build);
+                        "INSERT INTO mame (build) VALUES (%Q)", build);
                 gva_db_execute (sql, error);
                 sqlite3_free (sql);
         }
@@ -324,7 +350,7 @@ db_parser_start_element_sound (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data, param, attribute_value[ii]);
+                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
         }
 }
 
@@ -418,13 +444,13 @@ db_parser_text (GMarkupParseContext *context,
         element_name = data->element_stack[data->element_stack_depth - 1];
 
         if (element_name == intern.description)
-                db_parser_bind_text (data, "@description", text);
+                db_parser_bind_text (data->stmt, "@description", text);
 
         else if (element_name == intern.manufacturer)
-                db_parser_bind_text (data, "@manufacturer", text);
+                db_parser_bind_text (data->stmt, "@manufacturer", text);
 
         else if (element_name == intern.year)
-                db_parser_bind_text (data, "@year", text);
+                db_parser_bind_text (data->stmt, "@year", text);
 }
 
 static void
@@ -557,11 +583,16 @@ db_parser_read (GvaProcess *process,
 {
         gchar *line;
 
+        if (process->error != NULL)
+        {
+                gva_process_kill (process);
+                return;
+        }
+
         line = gva_process_stdout_read_line (process);
 
-        if (process->error == NULL)
-                g_markup_parse_context_parse (
-                        data->context, line, -1, &process->error);
+        g_markup_parse_context_parse (
+                data->context, line, -1, &process->error);
 
         g_free (line);
 }

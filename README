@@ -27,14 +27,14 @@ installed prior to compiling the source code:
           sdlmame:  http://rbelmont.mameworld.info/?page_id=163
           xmame:    http://x.mame.net/
 
-   - The header files for GTK+ version 2.10 (or higher).
+   - Header files for GTK+ version 2.10 (or higher).
 
        The GTK+ header files should be available from your GNU/Linux
        distribution as a "development" package. The exact package
        name varies by distribution, but it should be something
        similar to gtk2-devel or libgtk2.0-dev.
 
-   - The header files for SQLite version 3.x.
+   - Header files for SQLite version 3.x.
 
        This should also be available from your distribution as a
        "development" package. The package is named sqlite-devel,

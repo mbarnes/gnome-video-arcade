@@ -33,10 +33,11 @@ mame_process_check_for_error (GvaProcess *process, const gchar *line)
         if (process->error != NULL)
                 return;
 
-        copy = g_strdup (line);
+        copy = g_alloca (strlen (line) + 1);
+        strcpy (copy, line);
 
         if (strlen (g_strstrip (copy)) == 0)
-                goto exit;
+                return;
 
         if (g_ascii_strncasecmp (copy, "error: ", 7) == 0)
         {
@@ -49,9 +50,6 @@ mame_process_check_for_error (GvaProcess *process, const gchar *line)
                         &process->error, GVA_ERROR, GVA_ERROR_SYSTEM,
                         "%s", error_message);
         }
-
-exit:
-        g_free (copy);
 }
 
 static gchar *
