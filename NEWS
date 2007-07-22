@@ -8,6 +8,7 @@ GNOME Video Arcade 0.3.1
         * Preliminary support for sdlmame.
         * License button in the About dialog.
         * The README file now has some installation instructions.
+        * Customize column order and visiblility in Preferences window.
 
 GNOME Video Arcade 0.3.0
 ========================

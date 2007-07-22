@@ -156,11 +156,11 @@ gva_properties_init (void)
         text_view = GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW;
 
         gtk_action_connect_proxy (
-                GVA_ACTION_GO_BACK,
+                GVA_ACTION_PREVIOUS_GAME,
                 GVA_WIDGET_PROPERTIES_BACK_BUTTON);
 
         gtk_action_connect_proxy (
-                GVA_ACTION_GO_FORWARD,
+                GVA_ACTION_NEXT_GAME,
                 GVA_WIDGET_PROPERTIES_FORWARD_BUTTON);
 
         g_signal_connect (

@@ -119,62 +119,6 @@ action_full_screen_cb (GtkToggleAction *action)
 }
 
 static void
-action_go_back_cb (GtkAction *action)
-{
-        GtkTreeSelection *selection;
-        GtkTreeModel *model;
-        GtkTreePath *path;
-        GtkTreeView *view;
-        GtkTreeIter iter;
-        gboolean valid;
-        gint n_nodes;
-        gint index;
-
-        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
-        selection = gtk_tree_view_get_selection (view);
-        valid = gtk_tree_selection_get_selected (selection, &model, &iter);
-        n_nodes = gtk_tree_model_iter_n_children (model, NULL);
-        g_return_if_fail (valid);
-
-        path = gtk_tree_model_get_path (model, &iter);
-        index = gtk_tree_path_get_indices (path)[0];
-        index = (index + n_nodes - 1) % n_nodes;
-        gtk_tree_path_free (path);
-
-        path = gtk_tree_path_new_from_indices (index, -1);
-        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
-        gtk_tree_path_free (path);
-}
-
-static void
-action_go_forward_cb (GtkAction *action)
-{
-        GtkTreeSelection *selection;
-        GtkTreeModel *model;
-        GtkTreePath *path;
-        GtkTreeView *view;
-        GtkTreeIter iter;
-        gboolean valid;
-        gint n_nodes;
-        gint index;
-
-        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
-        selection = gtk_tree_view_get_selection (view);
-        valid = gtk_tree_selection_get_selected (selection, &model, &iter);
-        n_nodes = gtk_tree_model_iter_n_children (model, NULL);
-        g_return_if_fail (valid);
-
-        path = gtk_tree_model_get_path (model, &iter);
-        index = gtk_tree_path_get_indices (path)[0];
-        index = (index + n_nodes + 1) % n_nodes;
-        gtk_tree_path_free (path);
-
-        path = gtk_tree_path_new_from_indices (index, -1);
-        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
-        gtk_tree_path_free (path);
-}
-
-static void
 action_insert_favorite_cb (GtkAction *action)
 {
         GtkTreeModel *model;
@@ -200,6 +144,34 @@ action_insert_favorite_cb (GtkAction *action)
 
         gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, TRUE);
+}
+
+static void
+action_next_game_cb (GtkAction *action)
+{
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeView *view;
+        GtkTreeIter iter;
+        gboolean valid;
+        gint n_nodes;
+        gint index;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        selection = gtk_tree_view_get_selection (view);
+        valid = gtk_tree_selection_get_selected (selection, &model, &iter);
+        n_nodes = gtk_tree_model_iter_n_children (model, NULL);
+        g_return_if_fail (valid);
+
+        path = gtk_tree_model_get_path (model, &iter);
+        index = gtk_tree_path_get_indices (path)[0];
+        index = (index + n_nodes + 1) % n_nodes;
+        gtk_tree_path_free (path);
+
+        path = gtk_tree_path_new_from_indices (index, -1);
+        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+        gtk_tree_path_free (path);
 }
 
 static void
@@ -252,6 +224,34 @@ static void
 action_preferences_cb (GtkAction *action)
 {
         gtk_widget_show (GVA_WIDGET_PREFERENCES_WINDOW);
+}
+
+static void
+action_previous_game_cb (GtkAction *action)
+{
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeView *view;
+        GtkTreeIter iter;
+        gboolean valid;
+        gint n_nodes;
+        gint index;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        selection = gtk_tree_view_get_selection (view);
+        valid = gtk_tree_selection_get_selected (selection, &model, &iter);
+        n_nodes = gtk_tree_model_iter_n_children (model, NULL);
+        g_return_if_fail (valid);
+
+        path = gtk_tree_model_get_path (model, &iter);
+        index = gtk_tree_path_get_indices (path)[0];
+        index = (index + n_nodes - 1) % n_nodes;
+        gtk_tree_path_free (path);
+
+        path = gtk_tree_path_new_from_indices (index, -1);
+        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+        gtk_tree_path_free (path);
 }
 
 static void
@@ -379,26 +379,19 @@ static GtkActionEntry entries[] =
           NULL,
           G_CALLBACK (action_contents_cb) },
 
-        { "go-back",
-          GTK_STOCK_GO_BACK,
-          N_("_Back"),
-          "<Alt>leftarrow",
-          N_("Show previous game"),
-          G_CALLBACK (action_go_back_cb) },
-
-        { "go-forward",
-          GTK_STOCK_GO_FORWARD,
-          N_("_Forward"),
-          "<Alt>rightarrow",
-          N_("Show next game"),
-          G_CALLBACK (action_go_forward_cb) },
-
         { "insert-favorite",
           GTK_STOCK_ADD,
           N_("Add to _Favorites"),
           "<Control>plus",
           N_("Add the selected game to my list of favorites"),
           G_CALLBACK (action_insert_favorite_cb) },
+
+        { "next-game",
+          GTK_STOCK_GO_FORWARD,
+          NULL,
+          "<Alt>rightarrow",
+          N_("Show next game"),
+          G_CALLBACK (action_next_game_cb) },
 
         { "play-back",
           GTK_STOCK_MEDIA_PLAY,
@@ -413,6 +406,13 @@ static GtkActionEntry entries[] =
           NULL,
           N_("Configure the application"),
           G_CALLBACK (action_preferences_cb) },
+
+        { "previous-game",
+          GTK_STOCK_GO_BACK,
+          NULL,
+          "<Alt>leftarrow",
+          N_("Show previous game"),
+          G_CALLBACK (action_previous_game_cb) },
 
         { "properties",
           GTK_STOCK_PROPERTIES,

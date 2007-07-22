@@ -258,8 +258,9 @@ process_set_property (GObject *object,
                         return;
 
                 case PROP_PROGRESS:
-                        priv->progress = g_value_get_uint (value);
-                        g_object_notify (object, "progress");
+                        gva_process_set_progress (
+                                GVA_PROCESS (object),
+                                g_value_get_uint (value));
                         return;
         }
 
@@ -306,7 +307,9 @@ process_get_property (GObject *object,
                         return;
 
                 case PROP_PROGRESS:
-                        g_value_set_uint (value, priv->progress);
+                        g_value_set_uint (
+                                value, gva_process_get_progress (
+                                GVA_PROCESS (object)));
                         return;
         }
 
@@ -663,13 +666,9 @@ gva_process_stderr_read_lines (GvaProcess *process)
 guint
 gva_process_get_progress (GvaProcess *process)
 {
-        guint progress;
-
         g_return_val_if_fail (GVA_IS_PROCESS (process), 0.0);
 
-        g_object_get (process, "progress", &progress, NULL);
-
-        return progress;
+        return process->priv->progress;
 }
 
 void
@@ -678,7 +677,8 @@ gva_process_set_progress (GvaProcess *process,
 {
         g_return_if_fail (GVA_IS_PROCESS (process));
 
-        g_object_set (process, "progress", progress, NULL);
+        process->priv->progress = progress;
+        g_object_notify (G_OBJECT (process), "progress");
 }
 
 gboolean

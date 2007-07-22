@@ -21,17 +21,16 @@
 
 #include "gva-common.h"
 
-#define GW(x) (gva_ui_get_widget (x))
-
 /* Actions */
 #define GVA_ACTION_ABOUT                (gva_ui_get_action ("about"))
 #define GVA_ACTION_AUTO_SAVE            (gva_ui_get_action ("auto-save"))
 #define GVA_ACTION_CONTENTS             (gva_ui_get_action ("contents"))
 #define GVA_ACTION_FULL_SCREEN          (gva_ui_get_action ("full-screen"))
-#define GVA_ACTION_GO_BACK              (gva_ui_get_action ("go-back"))
-#define GVA_ACTION_GO_FORWARD           (gva_ui_get_action ("go-forward"))
 #define GVA_ACTION_INSERT_FAVORITE      (gva_ui_get_action ("insert-favorite"))
+#define GVA_ACTION_NEXT_GAME            (gva_ui_get_action ("next-game"))
 #define GVA_ACTION_PLAY_BACK            (gva_ui_get_action ("play-back"))
+#define GVA_ACTION_PREFERENCES          (gva_ui_get_action ("preferences"))
+#define GVA_ACTION_PREVIOUS_GAME        (gva_ui_get_action ("previous-game"))
 #define GVA_ACTION_PROPERTIES           (gva_ui_get_action ("properties"))
 #define GVA_ACTION_QUIT                 (gva_ui_get_action ("quit"))
 #define GVA_ACTION_RECORD               (gva_ui_get_action ("record"))
@@ -43,38 +42,72 @@
 #define GVA_ACTION_VIEW_RESULTS         (gva_ui_get_action ("view-results"))
 
 /* Main Window */
-#define GVA_WIDGET_MAIN_PROGRESS_BAR         GW ("main-progress-bar")
-#define GVA_WIDGET_MAIN_PROPERTIES_BUTTON    GW ("main-properties-button")
-#define GVA_WIDGET_MAIN_START_GAME_BUTTON    GW ("main-start-game-button")
-#define GVA_WIDGET_MAIN_STATUSBAR            GW ("main-statusbar")
-#define GVA_WIDGET_MAIN_TREE_VIEW            GW ("main-tree-view")
-#define GVA_WIDGET_MAIN_VBOX                 GW ("main-vbox")
-#define GVA_WIDGET_MAIN_VIEW_BUTTON_0        GW ("main-view-button-0")
-#define GVA_WIDGET_MAIN_VIEW_BUTTON_1        GW ("main-view-button-1")
-#define GVA_WIDGET_MAIN_VIEW_BUTTON_2        GW ("main-view-button-2")
-#define GVA_WIDGET_MAIN_WINDOW               GW ("main-window")
+#define GVA_WIDGET_MAIN_PROGRESS_BAR \
+        (gva_ui_get_widget ("main-progress-bar"))
+#define GVA_WIDGET_MAIN_PROPERTIES_BUTTON \
+        (gva_ui_get_widget ("main-properties-button"))
+#define GVA_WIDGET_MAIN_START_GAME_BUTTON \
+        (gva_ui_get_widget ("main-start-game-button"))
+#define GVA_WIDGET_MAIN_STATUSBAR \
+        (gva_ui_get_widget ("main-statusbar"))
+#define GVA_WIDGET_MAIN_TREE_VIEW \
+        (gva_ui_get_widget ("main-tree-view"))
+#define GVA_WIDGET_MAIN_VBOX \
+        (gva_ui_get_widget ("main-vbox"))
+#define GVA_WIDGET_MAIN_VIEW_BUTTON_0 \
+        (gva_ui_get_widget ("main-view-button-0"))
+#define GVA_WIDGET_MAIN_VIEW_BUTTON_1 \
+        (gva_ui_get_widget ("main-view-button-1"))
+#define GVA_WIDGET_MAIN_VIEW_BUTTON_2 \
+        (gva_ui_get_widget ("main-view-button-2"))
+#define GVA_WIDGET_MAIN_WINDOW \
+        (gva_ui_get_widget ("main-window"))
 
 /* Play Back Window */
-#define GVA_WIDGET_PLAY_BACK_BUTTON          GW ("play-back-button")
-#define GVA_WIDGET_PLAY_BACK_CLOSE_BUTTON    GW ("play-back-close-button")
-#define GVA_WIDGET_PLAY_BACK_DELETE_BUTTON   GW ("play-back-delete-button")
-#define GVA_WIDGET_PLAY_BACK_TREE_VIEW       GW ("play-back-tree-view")
-#define GVA_WIDGET_PLAY_BACK_WINDOW          GW ("play-back-window")
+#define GVA_WIDGET_PLAY_BACK_BUTTON \
+        (gva_ui_get_widget ("play-back-button"))
+#define GVA_WIDGET_PLAY_BACK_CLOSE_BUTTON \
+        (gva_ui_get_widget ("play-back-close-button"))
+#define GVA_WIDGET_PLAY_BACK_DELETE_BUTTON \
+        (gva_ui_get_widget ("play-back-delete-button"))
+#define GVA_WIDGET_PLAY_BACK_TREE_VIEW \
+        (gva_ui_get_widget ("play-back-tree-view"))
+#define GVA_WIDGET_PLAY_BACK_WINDOW \
+        (gva_ui_get_widget ("play-back-window"))
 
 /* Preferences Window */
-#define GVA_WIDGET_PREFERENCES_AUTO_SAVE     GW ("preferences-auto-save")
-#define GVA_WIDGET_PREFERENCES_CLOSE_BUTTON  GW ("preferences-close-button")
-#define GVA_WIDGET_PREFERENCES_FULL_SCREEN   GW ("preferences-full-screen")
-#define GVA_WIDGET_PREFERENCES_WINDOW        GW ("preferences-window")
+#define GVA_WIDGET_PREFERENCES_AUTO_SAVE \
+        (gva_ui_get_widget ("preferences-auto-save"))
+#define GVA_WIDGET_PREFERENCES_CLOSE_BUTTON \
+        (gva_ui_get_widget ("preferences-close-button"))
+#define GVA_WIDGET_PREFERENCES_COLUMNS_HIDE_BUTTON \
+        (gva_ui_get_widget ("preferences-columns-hide-button"))
+#define GVA_WIDGET_PREFERENCES_COLUMNS_MOVE_DOWN_BUTTON \
+        (gva_ui_get_widget ("preferences-columns-move-down-button"))
+#define GVA_WIDGET_PREFERENCES_COLUMNS_MOVE_UP_BUTTON \
+        (gva_ui_get_widget ("preferences-columns-move-up-button"))
+#define GVA_WIDGET_PREFERENCES_COLUMNS_SHOW_BUTTON \
+        (gva_ui_get_widget ("preferences-columns-show-button"))
+#define GVA_WIDGET_PREFERENCES_COLUMNS_TREE_VIEW \
+        (gva_ui_get_widget ("preferences-columns-tree-view"))
+#define GVA_WIDGET_PREFERENCES_FULL_SCREEN \
+        (gva_ui_get_widget ("preferences-full-screen"))
+#define GVA_WIDGET_PREFERENCES_WINDOW \
+        (gva_ui_get_widget ("preferences-window"))
 
 /* Properties Window */
-#define GVA_WIDGET_PROPERTIES_BACK_BUTTON    GW ("properties-back-button")
-#define GVA_WIDGET_PROPERTIES_CLOSE_BUTTON   GW ("properties-close-button")
-#define GVA_WIDGET_PROPERTIES_FORWARD_BUTTON GW ("properties-forward-button")
-#define GVA_WIDGET_PROPERTIES_HEADER         GW ("properties-header")
+#define GVA_WIDGET_PROPERTIES_BACK_BUTTON \
+        (gva_ui_get_widget ("properties-back-button"))
+#define GVA_WIDGET_PROPERTIES_CLOSE_BUTTON \
+        (gva_ui_get_widget ("properties-close-button"))
+#define GVA_WIDGET_PROPERTIES_FORWARD_BUTTON \
+        (gva_ui_get_widget ("properties-forward-button"))
+#define GVA_WIDGET_PROPERTIES_HEADER \
+        (gva_ui_get_widget ("properties-header"))
 #define GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW \
-                                            GW ("properties-history-text-view")
-#define GVA_WIDGET_PROPERTIES_WINDOW         GW ("properties-window")
+        (gva_ui_get_widget ("properties-history-text-view"))
+#define GVA_WIDGET_PROPERTIES_WINDOW \
+        (gva_ui_get_widget ("properties-window"))
 
 G_BEGIN_DECLS
 

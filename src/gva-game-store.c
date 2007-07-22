@@ -25,15 +25,7 @@
 #include "gva-favorites.h"
 #include "gva-time.h"
 
-enum {
-        POPULATE_BEGIN,
-        POPULATE_PROGRESS,
-        POPULATE_END,
-        LAST_SIGNAL
-};
-
 static gpointer parent_class = NULL;
-static guint signals[LAST_SIGNAL] = { 0 };
 
 static GHashTable *
 game_store_get_index (GvaGameStore *game_store)
@@ -172,31 +164,6 @@ game_store_class_init (GvaGameStoreClass *class)
 
         object_class = G_OBJECT_CLASS (class);
         object_class->constructor = game_store_constructor;
-
-        signals[POPULATE_BEGIN] = g_signal_new (
-                "populate-begin",
-                G_TYPE_FROM_CLASS (class),
-                G_SIGNAL_RUN_LAST,
-                0, NULL, NULL,
-                g_cclosure_marshal_VOID__VOID,
-                G_TYPE_NONE, 0);
-
-        signals[POPULATE_PROGRESS] = g_signal_new (
-                "populate-progress",
-                G_TYPE_FROM_CLASS (class),
-                G_SIGNAL_RUN_LAST,
-                0, NULL, NULL,
-                g_cclosure_marshal_VOID__INT,
-                G_TYPE_NONE, 1,
-                G_TYPE_INT);
-
-        signals[POPULATE_END] = g_signal_new (
-                "populate-end",
-                G_TYPE_FROM_CLASS (class),
-                G_SIGNAL_RUN_LAST,
-                0, NULL, NULL,
-                g_cclosure_marshal_VOID__VOID,
-                G_TYPE_NONE, 0);
 }
 
 static void

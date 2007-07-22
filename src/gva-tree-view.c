@@ -74,9 +74,10 @@ tree_view_button_press_cb (GtkTreeView *view,
 static void
 tree_view_columns_changed_cb (GtkTreeView *view)
 {
-        /* This signal gets emitted during shutdown as each column is
-         * destroyed.  We don't want to save columns during this phase. */
-        if (!(GTK_OBJECT_FLAGS (view) & GTK_IN_DESTRUCTION))
+        /* Stop the emission if the tree view is being destroyed. */
+        if (GTK_OBJECT_FLAGS (view) & GTK_IN_DESTRUCTION)
+                g_signal_stop_emission_by_name (view, "columns-changed");
+        else
                 gva_columns_save (view);
 }
 
@@ -102,8 +103,8 @@ tree_view_selection_changed_cb (GtkTreeSelection *selection)
                 gboolean favorite;
 
                 favorite = gva_favorites_contains (name);
-                gtk_action_set_sensitive (GVA_ACTION_GO_BACK, TRUE);
-                gtk_action_set_sensitive (GVA_ACTION_GO_FORWARD, TRUE);
+                gtk_action_set_sensitive (GVA_ACTION_NEXT_GAME, TRUE);
+                gtk_action_set_sensitive (GVA_ACTION_PREVIOUS_GAME, TRUE);
                 gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, !favorite);
                 gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, favorite);
 
@@ -111,8 +112,8 @@ tree_view_selection_changed_cb (GtkTreeSelection *selection)
         }
         else
         {
-                gtk_action_set_sensitive (GVA_ACTION_GO_BACK, FALSE);
-                gtk_action_set_sensitive (GVA_ACTION_GO_FORWARD, FALSE);
+                gtk_action_set_sensitive (GVA_ACTION_NEXT_GAME, FALSE);
+                gtk_action_set_sensitive (GVA_ACTION_PREVIOUS_GAME, FALSE);
                 gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
                 gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
         }

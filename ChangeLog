@@ -1,3 +1,31 @@
+2007-07-21  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-preferences.c:
+	Add a new "columns" page to the Preferences window that allows
+	you to customize the order and visibility of columns in the main
+	window.  Visibility is not yet saved in GConf.
+
+	* src/gva-game-store.c:
+	Remove unused signals.
+
+	* src/gva-process.c (process_set_property),
+	(gva_process_get_progress), (gva_process_set_progress):
+	Give the get/set functions direct access to the progress value.
+	Call gva_process_set_progress() when setting the "progress" property.
+
+	* src/gva-properties.c (gva_properties_init):
+	* src/gva-tree-view.c (tree_view_selection_changed_cb):
+	* src/gva-ui.[ch]:
+	Rename the "go-back" and "go-forward" actions to "previous-game"
+	and "next-game" (respectively).
+
+	* src/gva-tree-view.c (tree_view_columns_changed_cb):
+	Stop the signal emission if the tree view is being destroyed.
+
+	* src/gva-ui.h:
+	Ditch the "GW" macro; widget names are getting too long.
+
 2007-07-20  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-db.c:
