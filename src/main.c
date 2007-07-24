@@ -108,10 +108,9 @@ main (gint argc, gchar **argv)
 {
         GError *error = NULL;
 
-        /* initialize locale data */
-        setlocale (LC_ALL, "");
-        bindtextdomain (PACKAGE, LOCALEDIR);
-        textdomain (PACKAGE);
+        bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+        textdomain (GETTEXT_PACKAGE);
 
         g_thread_init (NULL);
 

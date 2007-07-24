@@ -1,3 +1,16 @@
+2007-07-24  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.4.1
+
+	* data/gnome-video-arcade.glade:
+	Placeholder labels don't need to be translated.
+
+	* src/main.c (main):
+	Fix gettext initialization.
+
+	* src/gva-ui.c (gva_ui_init):
+	Set translation domain on the GtkActionGroup.
+
 2007-07-23  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.4
