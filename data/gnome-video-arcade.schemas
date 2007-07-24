@@ -2,6 +2,20 @@
   <schemalist>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/all-columns</applyto>
+      <key>/schemas/apps/gnome-video-arcade/all-columns</key>
+      <owner>gnome-video-arcade</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[favorite,description]</default>
+      <locale name="C">
+        <short>All available column names</short>
+        <long>List of all available column names.  The user may choose
+        to only display a subset of them (see "columns").</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/auto-save</applyto>
       <key>/schemas/apps/gnome-video-arcade/auto-save</key>
       <owner>gnome-video-arcade</owner>
@@ -25,7 +39,7 @@
       <owner>gnome-video-arcade</owner>
       <type>list</type>
       <list_type>string</list_type>
-      <default>[favorite,description,sampleset]</default>
+      <default>[favorite,description]</default>
       <locale name="C">
         <short>Column names</short>
         <long>List of column names to display.</long>

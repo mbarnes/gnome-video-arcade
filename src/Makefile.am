@@ -16,6 +16,8 @@ AM_CPPFLAGS = \
 gnome_video_arcade_SOURCES = \
 	gva-cell-renderer-pixbuf.c	\
 	gva-cell-renderer-pixbuf.h	\
+	gva-column-manager.c		\
+	gva-column-manager.h		\
 	gva-columns.c			\
 	gva-columns.h			\
 	gva-common.h			\

@@ -1,11 +1,11 @@
-GNOME Video Arcade 0.3.1
-========================
+GNOME Video Arcade 0.4
+======================
 
-        Released July ?? 2007
+        Released July 24 2007
 
         What's New
         ----------
-        * Preliminary support for sdlmame.
+        * Support both xmame and sdlmame.
         * License button in the About dialog.
         * The README file now has some installation instructions.
         * Customize column order and visiblility in Preferences window.

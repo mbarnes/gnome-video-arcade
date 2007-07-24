@@ -80,7 +80,8 @@ gva_cell_renderer_pixbuf_get_type (void)
 
         if (G_UNLIKELY (type == 0))
         {
-                static const GTypeInfo type_info = {
+                static const GTypeInfo type_info =
+                {
                         sizeof (GvaCellRendererPixbufClass),
                         (GBaseInitFunc) NULL,
                         (GBaseFinalizeFunc) NULL,

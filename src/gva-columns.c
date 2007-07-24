@@ -161,6 +161,46 @@ columns_factory_favorite (GvaGameStoreColumn column_id)
 }
 
 static GtkTreeViewColumn *
+columns_factory_manufacturer (GvaGameStoreColumn column_id)
+{
+        GtkCellRenderer *renderer;
+        GtkTreeViewColumn *column;
+
+        renderer = gtk_cell_renderer_text_new ();
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("Manufacturer"));
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_add_attribute (
+                column, renderer, "text", column_id);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
+columns_factory_name (GvaGameStoreColumn column_id)
+{
+        GtkCellRenderer *renderer;
+        GtkTreeViewColumn *column;
+
+        renderer = gtk_cell_renderer_text_new ();
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("ROM Name"));
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_add_attribute (
+                column, renderer, "text", column_id);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
 columns_factory_sampleset (GvaGameStoreColumn column_id)
 {
         GtkCellRenderer *renderer;
@@ -188,6 +228,26 @@ columns_factory_sampleset (GvaGameStoreColumn column_id)
         return column;
 }
 
+static GtkTreeViewColumn *
+columns_factory_year (GvaGameStoreColumn column_id)
+{
+        GtkCellRenderer *renderer;
+        GtkTreeViewColumn *column;
+
+        renderer = gtk_cell_renderer_text_new ();
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("Year"));
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_add_attribute (
+                column, renderer, "text", column_id);
+
+        return column;
+}
+
 static struct
 {
         const gchar *name;
@@ -195,7 +255,7 @@ static struct
 }
 column_info[GVA_GAME_STORE_NUM_COLUMNS] =
 {
-        { "name",               NULL },
+        { "name",               columns_factory_name },
         { "favorite",           columns_factory_favorite },
         { "sourcefile",         NULL },
         { "runnable",           NULL },
@@ -205,8 +265,8 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "sampleof",           NULL },
         { "sampleset",          columns_factory_sampleset },
         { "description",        columns_factory_description },
-        { "year",               NULL },
-        { "manufacturer",       NULL },
+        { "year",               columns_factory_year },
+        { "manufacturer",       columns_factory_manufacturer },
         { "sound_channels",     NULL },
         { "input_service",      NULL },
         { "input_tilt",         NULL },
@@ -224,6 +284,16 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "driver_palettesize", NULL },
         { "inpfile",            NULL },
         { "time",               NULL }
+};
+
+static gchar *default_column_order[] =
+{
+        "favorite",
+        "description",
+        "year",
+        "manufacturer",
+        "name",
+        "sampleset"
 };
 
 GtkTreeViewColumn *
@@ -285,84 +355,135 @@ gva_columns_lookup_name (GvaGameStoreColumn column_id)
         return column_info[column_id].name;
 }
 
+/* Helper for gva_columns_load() */
+static gboolean
+columns_load_remove_name (GSList **p_list, const gchar *name)
+{
+        GSList *link;
+
+        link = g_slist_find_custom (*p_list, name, (GCompareFunc) strcmp);
+
+        if (link == NULL)
+                return FALSE;
+
+        g_free (link->data);
+        *p_list = g_slist_delete_link (*p_list, link);
+
+        return TRUE;
+}
+
 void
 gva_columns_load (GtkTreeView *view)
 {
-        gchar **column_names;
-        guint length, ii;
         GConfClient *client;
+        GSList *all_columns;
+        GSList *new_columns;
+        GSList *visible_columns;
+        gint ii;
         GError *error = NULL;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
 
-        column_names = gva_columns_get_selected (&length);
+        client = gconf_client_get_default ();
+        all_columns = gconf_client_get_list (
+                client, GVA_GCONF_ALL_COLUMNS_KEY, GCONF_VALUE_STRING, &error);
+        gva_error_handle (&error);
+        visible_columns = gconf_client_get_list (
+                client, GVA_GCONF_COLUMNS_KEY, GCONF_VALUE_STRING, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
 
-        /* Restore the GConf default if the list comes back empty. */
-        if (length == 0)
+        new_columns = NULL;
+        for (ii = 0; ii < G_N_ELEMENTS (default_column_order); ii++)
         {
-                GtkTreeViewColumn *column;
-
-                column = gva_columns_new_from_id (
-                        GVA_GAME_STORE_COLUMN_FAVORITE);
-                gtk_tree_view_append_column (view, column);
-
-                column = gva_columns_new_from_id (
-                        GVA_GAME_STORE_COLUMN_DESCRIPTION);
-                gtk_tree_view_append_column (view, column);
-
-                column = gva_columns_new_from_id (
-                        GVA_GAME_STORE_COLUMN_SAMPLESET);
-                gtk_tree_view_append_column (view, column);
-        }
-        else for (ii = 0; ii < length; ii++)
-        {
-                GtkTreeViewColumn *column;
-
-                column = gva_columns_new_from_name (column_names[ii]);
-                gtk_tree_view_append_column (view, column);
+                gchar *name = g_strdup (default_column_order[ii]);
+                new_columns = g_slist_append (new_columns, name);
         }
 
-        g_strfreev (column_names);
+        while (all_columns != NULL)
+        {
+                gchar *name = all_columns->data;
+                GtkTreeViewColumn *column;
+                gboolean visible;
+
+                column = gva_columns_new_from_name (name);
+                columns_load_remove_name (&new_columns, name);
+                visible = columns_load_remove_name (&visible_columns, name);
+
+                g_free (name);
+                all_columns = g_slist_delete_link (all_columns, all_columns);
+
+                if (column != NULL)
+                {
+                        gtk_tree_view_column_set_visible (column, visible);
+                        gtk_tree_view_append_column (view, column);
+
+                        g_signal_connect_swapped (
+                                column, "notify::visible",
+                                G_CALLBACK (gva_columns_save), view);
+                }
+        }
+
+        while (new_columns != NULL)
+        {
+                gchar *name = new_columns->data;
+                GtkTreeViewColumn *column;
+
+                column = gva_columns_new_from_name (name);
+
+                g_free (name);
+                new_columns = g_slist_delete_link (new_columns, new_columns);
+
+                if (column != NULL)
+                {
+                        gtk_tree_view_column_set_visible (column, FALSE);
+                        gtk_tree_view_append_column (view, column);
+
+                        g_signal_connect_swapped (
+                                column, "notify::visible",
+                                G_CALLBACK (gva_columns_save), view);
+                }
+        }
+
+        g_slist_foreach (visible_columns, (GFunc) g_free, NULL);
+        g_slist_free (visible_columns);
+
+        gva_columns_save (view);
 }
 
 void
 gva_columns_save (GtkTreeView *view)
 {
-        GList *columns, *iter;
-        GSList *list = NULL;
         GConfClient *client;
+        GSList *list;
         GError *error = NULL;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
 
-        columns = gtk_tree_view_get_columns (view);
-
-        if (columns == NULL)
-                return;
-
-        for (iter = columns; iter != NULL; iter = iter->next)
-        {
-                gpointer data;
-
-                data = g_object_get_data (iter->data, "name");
-                list = g_slist_append (list, data);
-        }
-
-        g_list_free (columns);
-
         client = gconf_client_get_default ();
+
+        list = gva_columns_get_names (view, FALSE);
+        gconf_client_set_list (
+                client, GVA_GCONF_ALL_COLUMNS_KEY,
+                GCONF_VALUE_STRING, list, &error);
+        gva_error_handle (&error);
+        g_slist_free (list);
+
+        list = gva_columns_get_names (view, TRUE);
         gconf_client_set_list (
                 client, GVA_GCONF_COLUMNS_KEY,
                 GCONF_VALUE_STRING, list, &error);
         gva_error_handle (&error);
-        g_object_unref (client);
-
         g_slist_free (list);
+
+        g_object_unref (client);
 }
 
 gchar **
 gva_columns_get_selected (guint *length)
 {
+        /* XXX Kill this function. */
+
         GConfClient *client;
         GSList *list;
         gchar **column_names;
@@ -371,7 +492,7 @@ gva_columns_get_selected (guint *length)
 
         client = gconf_client_get_default ();
         list = gconf_client_get_list (
-                client, GVA_GCONF_COLUMNS_KEY,
+                client, GVA_GCONF_ALL_COLUMNS_KEY,
                 GCONF_VALUE_STRING, &error);
         gva_error_handle (&error);
         g_object_unref (client);
@@ -388,4 +509,33 @@ gva_columns_get_selected (guint *length)
                 *length = g_strv_length (column_names);
 
         return column_names;
+}
+
+GSList *
+gva_columns_get_names (GtkTreeView *view,
+                       gboolean visible_only)
+{
+        GList *list;
+        GSList *names = NULL;
+
+        g_return_val_if_fail (GTK_IS_TREE_VIEW (view), NULL);
+
+        list = g_list_reverse (gtk_tree_view_get_columns (view));
+
+        while (list != NULL)
+        {
+                GtkTreeViewColumn *column = list->data;
+                gboolean visible;
+
+                visible = gtk_tree_view_column_get_visible (column);
+
+                if (visible || !visible_only)
+                        names = g_slist_prepend (
+                                names, g_object_get_data (
+                                G_OBJECT (column), "name"));
+
+                list = g_list_delete_link (list, list);
+        }
+
+        return names;
 }

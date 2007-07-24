@@ -32,6 +32,7 @@
 #include <gconf/gconf-client.h>
 
 #define GVA_GCONF_PREFIX                "/apps/" PACKAGE
+#define GVA_GCONF_ALL_COLUMNS_KEY       GVA_GCONF_PREFIX "/all-columns"
 #define GVA_GCONF_AUTO_SAVE_KEY         GVA_GCONF_PREFIX "/auto-save"
 #define GVA_GCONF_COLUMNS_KEY           GVA_GCONF_PREFIX "/columns"
 #define GVA_GCONF_FAVORITES_KEY         GVA_GCONF_PREFIX "/favorites"

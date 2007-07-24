@@ -80,16 +80,8 @@
         (gva_ui_get_widget ("preferences-auto-save"))
 #define GVA_WIDGET_PREFERENCES_CLOSE_BUTTON \
         (gva_ui_get_widget ("preferences-close-button"))
-#define GVA_WIDGET_PREFERENCES_COLUMNS_HIDE_BUTTON \
-        (gva_ui_get_widget ("preferences-columns-hide-button"))
-#define GVA_WIDGET_PREFERENCES_COLUMNS_MOVE_DOWN_BUTTON \
-        (gva_ui_get_widget ("preferences-columns-move-down-button"))
-#define GVA_WIDGET_PREFERENCES_COLUMNS_MOVE_UP_BUTTON \
-        (gva_ui_get_widget ("preferences-columns-move-up-button"))
-#define GVA_WIDGET_PREFERENCES_COLUMNS_SHOW_BUTTON \
-        (gva_ui_get_widget ("preferences-columns-show-button"))
-#define GVA_WIDGET_PREFERENCES_COLUMNS_TREE_VIEW \
-        (gva_ui_get_widget ("preferences-columns-tree-view"))
+#define GVA_WIDGET_PREFERENCES_COLUMNS_INNER_VBOX \
+        (gva_ui_get_widget ("preferences-columns-inner-vbox"))
 #define GVA_WIDGET_PREFERENCES_FULL_SCREEN \
         (gva_ui_get_widget ("preferences-full-screen"))
 #define GVA_WIDGET_PREFERENCES_WINDOW \

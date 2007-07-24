@@ -473,7 +473,8 @@ gva_process_get_type (void)
 
         if (G_UNLIKELY (type == 0))
         {
-                static const GTypeInfo type_info = {
+                static const GTypeInfo type_info =
+                {
                         sizeof (GvaProcessClass),
                         (GBaseInitFunc) NULL,
                         (GBaseFinalizeFunc) NULL,

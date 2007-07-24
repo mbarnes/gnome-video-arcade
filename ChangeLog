@@ -1,3 +1,35 @@
+2007-07-23  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-preferences.c:
+	Use a GvaColumnManager widget for selecting columns.
+	Unfortunately this widget can't be directly loaded with glade.
+
+	* data/gnome-video-arcade.schemas:
+	Add "all-columns" key.
+
+	* src/Makefile.am:
+	Add gva-column-manager.[ch].
+
+	* src/gva-common.h:
+	Add GVA_GCONF_ALL_COLUMNS_KEY.
+
+	* src/gva-column-manager.[ch]:
+	New source files implement a GtkTreeViewColumn chooser widget.
+	Allows columns to be rearranged and their visiblity toggled.
+
+	* src/gva-columns.c:
+	Add columns for "manufacturer", "name", and "year".
+
+	* src/gva-columns.c (gva_columns_load), (gva_columns_save):
+	Rewrite the logic to utilize the new GConf key.
+
+	* src/gva-columns.c (gva_columns_get_names):
+	New function extracts column names from a GtkTreeView.
+
+	* src/gva-ui.h:
+	Remove widgets we no longer need direct access to.
+
 2007-07-21  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:
