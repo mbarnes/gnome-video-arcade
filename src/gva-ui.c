@@ -547,6 +547,8 @@ gva_ui_init (void)
         initialized = TRUE;
 
         action_group = gtk_action_group_new ("main");
+        gtk_action_group_set_translation_domain (
+                action_group, GETTEXT_PACKAGE);
         gtk_action_group_add_actions (
                 action_group, entries,
                 G_N_ELEMENTS (entries), NULL);

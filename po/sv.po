@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "Report-Msgid-Bugs-To: matthew@barnes.net\n"
-"POT-Creation-Date: 2007-05-19 13:50-0400\n"
-"PO-Revision-Date: 2007-05-19 12:34+0100\n"
+"POT-Creation-Date: 2007-07-24 12:20-0400\n"
+"PO-Revision-Date: 2007-07-24 11:10+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -16,58 +16,192 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/gnome-video-arcade.glade.h:1
+msgid "<b>Columns</b>"
+msgstr "<b>Kolumner</b>"
+
+#: ../data/gnome-video-arcade.glade.h:2
+msgid "<b>General</b>"
+msgstr "<b>Allmänt</b>"
+
+#: ../data/gnome-video-arcade.glade.h:3
+msgid ""
+"<big><b>Game Description</b></big>\n"
+"Manufacturer, Year"
+msgstr ""
+"<big><b>Spelbeskrivning</b></big>\n"
+"Tillverkare, År"
+
+#: ../data/gnome-video-arcade.glade.h:5
+msgid ""
+"<small><i>NOTE: Setting this will not take effect until the second time the "
+"game is started.  It does not apply to recording or playing back games.</i></"
+"small>"
+msgstr ""
+"<small><i>OBSERVERA: Denna inställning kommer inte att bli aktiverad förrän "
+"nästa gång som spelet startas.  Den gäller inte för inspelning eller "
+"uppspelning av spel.</i></small>"
+
+#: ../data/gnome-video-arcade.glade.h:6
+msgid "Choose the order of information to appear in the game list."
+msgstr "Välj ordningen som informationen ska visas i spellistan."
+
+#: ../data/gnome-video-arcade.glade.h:7
 msgid "Close this window"
 msgstr "Stäng det här fönstret"
 
-#: ../data/gnome-video-arcade.glade.h:2
+#: ../data/gnome-video-arcade.glade.h:8
+msgid "Columns"
+msgstr "Kolumner"
+
+#: ../data/gnome-video-arcade.glade.h:9
 msgid "Delete the selected game recordings"
 msgstr "Ta bort inspelningar för det markerade spelet"
 
-#: ../data/gnome-video-arcade.glade.h:3
+#: ../data/gnome-video-arcade.glade.h:10
 msgid "GNOME Video Arcade"
 msgstr "GNOME Video Arcade"
 
-#: ../data/gnome-video-arcade.glade.h:4 ../src/gva-ui.c:242
+#: ../data/gnome-video-arcade.glade.h:11
+msgid "Gallery"
+msgstr "Galleri"
+
+#: ../data/gnome-video-arcade.glade.h:12
+msgid "General"
+msgstr "Allmänt"
+
+#: ../data/gnome-video-arcade.glade.h:13
+msgid "History"
+msgstr "Historik"
+
+#: ../data/gnome-video-arcade.glade.h:14 ../src/gva-ui.c:527
 msgid "Only show my favorite games"
 msgstr "Visa endast mina favoritspel"
 
-#: ../data/gnome-video-arcade.glade.h:5
+#: ../data/gnome-video-arcade.glade.h:15
 msgid "Play _Back"
 msgstr "Spela _upp"
 
-#: ../data/gnome-video-arcade.glade.h:6 ../src/gva-ui.c:169
+#: ../data/gnome-video-arcade.glade.h:16 ../src/gva-ui.c:400
 msgid "Play back the selected game recording"
 msgstr "Spela upp inspelning för det markerade spelet"
 
-#: ../data/gnome-video-arcade.glade.h:7
+#: ../data/gnome-video-arcade.glade.h:17
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: ../data/gnome-video-arcade.glade.h:18
+msgid "Properties"
+msgstr "Egenskaper"
+
+#: ../data/gnome-video-arcade.glade.h:19
 msgid "Recorded Games"
 msgstr "Inspelade spel"
 
-#: ../data/gnome-video-arcade.glade.h:8
-msgid "See more information about the selected game"
-msgstr "Se mer information om det markerade spelet"
-
-#: ../data/gnome-video-arcade.glade.h:9 ../src/gva-ui.c:235
+#: ../data/gnome-video-arcade.glade.h:20 ../src/gva-ui.c:520
 msgid "Show all available games"
 msgstr "Visa alla tillgängliga spel"
 
-#: ../data/gnome-video-arcade.glade.h:10 ../src/gva-ui.c:249
+#: ../data/gnome-video-arcade.glade.h:21 ../src/gva-ui.c:421
+msgid "Show information about the selected game"
+msgstr "Visa information om det markerade spelet"
+
+#: ../data/gnome-video-arcade.glade.h:22 ../src/gva-ui.c:534
 msgid "Show my search results"
 msgstr "Visa mina sökresultat"
 
-#: ../data/gnome-video-arcade.glade.h:11
-msgid "Start playing the selected game"
-msgstr "Starta det markerade spelet"
+#: ../data/gnome-video-arcade.glade.h:23 ../src/gva-ui.c:393
+msgid "Show next game"
+msgstr "Visa nästa spel"
 
-#: ../data/gnome-video-arcade.glade.h:12
+#: ../data/gnome-video-arcade.glade.h:24 ../src/gva-ui.c:414
+msgid "Show previous game"
+msgstr "Visa föregående spel"
+
+#: ../data/gnome-video-arcade.glade.h:25 ../src/gva-ui.c:463
+msgid "Start the selected game"
+msgstr "Starta markerat spel"
+
+#: ../data/gnome-video-arcade.glade.h:26
+msgid "Technical"
+msgstr "Techniskt"
+
+#: ../data/gnome-video-arcade.glade.h:27
 msgid "_Start Game"
 msgstr "_Starta spel"
 
-#: ../src/gva-play-back.c:40
+#: ../data/gnome-video-arcade.glade.h:28
+msgid "gtk-close"
+msgstr "Stäng"
+
+#: ../src/gva-column-manager.c:584
+msgid "Move _Up"
+msgstr "Flytta _uppåt"
+
+#: ../src/gva-column-manager.c:597
+msgid "Move _Down"
+msgstr "Flytta _nedåt"
+
+#: ../src/gva-column-manager.c:610
+msgid "_Show"
+msgstr "_Visa"
+
+#: ../src/gva-column-manager.c:619
+msgid "_Hide"
+msgstr "_Dölj"
+
+#: ../src/gva-columns.c:123 ../src/gva-play-back.c:252
+msgid "Title"
+msgstr "Titel"
+
+#: ../src/gva-columns.c:147
+msgid "Favorite"
+msgstr "Favorit"
+
+#: ../src/gva-columns.c:174
+msgid "Manufacturer"
+msgstr "Tillverkare"
+
+#: ../src/gva-columns.c:194
+msgid "ROM Name"
+msgstr "ROM-namn"
+
+#: ../src/gva-columns.c:218
+msgid "Samples"
+msgstr "Samplingar"
+
+#: ../src/gva-columns.c:242
+msgid "Year"
+msgstr "År"
+
+#: ../src/gva-history.c:44
+msgid "This program is not configured to show arcade history information."
+msgstr ""
+"Det här programmet är inte konfigurerat att visa information om "
+"arkadhistorik."
+
+#: ../src/gva-main.c:144
+msgid "Building game database..."
+msgstr "Bygger speldatabasen..."
+
+#: ../src/gva-mame-common.c:176
+#, c-format
+msgid "%s: No such configuration key"
+msgstr "%s: Ingen sådan konfigurationsnyckel"
+
+#: ../src/gva-mame-process.c:94
+#, c-format
+msgid "Child process exited with status (%d)"
+msgstr "Barnprocessen avslutades med status (%d)"
+
+#: ../src/gva-mame-sdlmame.c:60 ../src/gva-mame-xmame.c:56
+msgid "Could not determine emulator version"
+msgstr "Kunde inte fastställa emulatorns version"
+
+#: ../src/gva-play-back.c:59
 msgid "Delete selected game recordings?"
 msgstr "Ta bort inspelningar för markerat spel?"
 
-#: ../src/gva-play-back.c:44
+#: ../src/gva-play-back.c:63
 msgid ""
 "This operation will permanently erase the recorded games you have selected.  "
 "Are you sure you want to proceed?"
@@ -75,103 +209,183 @@ msgstr ""
 "Den här åtgärden kommer permanent att ta bort de inspelade spelet som du "
 "markerat.  Är du säker på att du vill fortsätta?"
 
-#: ../src/gva-play-back.c:48
+#: ../src/gva-play-back.c:67
 msgid "Do Not Delete"
 msgstr "Ta inte bort"
 
-#: ../src/gva-play-back.c:236
+#: ../src/gva-play-back.c:239
 msgid "Played On"
 msgstr "Spelades den"
 
-#: ../src/gva-play-back.c:248 ../src/gva-tree-view.c:215
-msgid "Title"
-msgstr "Titel"
+#: ../src/gva-properties.c:49
+msgid "(Game Description Unknown)"
+msgstr "(Spelbeskrivningen är okänd)"
 
-#: ../src/gva-tree-view.c:201
-msgid "Favorite"
-msgstr "Favorit"
+#: ../src/gva-properties.c:52
+msgid "(Manufacturer Unknown)"
+msgstr "(Tillverkaren är okänd)"
 
-#: ../src/gva-ui.c:31
-msgid "XMAME Front-End"
-msgstr "Gränssnitt för XMAME"
+#: ../src/gva-properties.c:55
+msgid "(Year Unknown)"
+msgstr "(Året är okänt)"
 
-#: ../src/gva-ui.c:34
-msgid "translator-credits"
+#: ../src/gva-properties.c:95
+#, c-format
+msgid ""
+"Error while fetching history:\n"
+"%s"
 msgstr ""
+"Fel vid hämtning av historik:\n"
+"%s"
 
-#: ../src/gva-ui.c:153
+#: ../src/gva-properties.c:100
+msgid "History not available"
+msgstr "Historik är inte tillgänglig"
+
+#: ../src/gva-ui.c:85
+msgid "M.A.M.E. Front-End"
+msgstr "Gränssnitt för M.A.M.E."
+
+#: ../src/gva-ui.c:90
+msgid "translator-credits"
+msgstr "Daniel Nylander <po@danielnylander.se>"
+
+#: ../src/gva-ui.c:370
 msgid "_About"
 msgstr "_Om"
 
-#: ../src/gva-ui.c:160
+#: ../src/gva-ui.c:372
+msgid "Show information about the application"
+msgstr "Visa information om programmet"
+
+#: ../src/gva-ui.c:377
 msgid "_Contents"
 msgstr "_Innehåll"
 
-#: ../src/gva-ui.c:167 ../src/gva-ui.c:195
+#: ../src/gva-ui.c:384
+msgid "Add to _Favorites"
+msgstr "Lägg till i _favoriter"
+
+#: ../src/gva-ui.c:386
+msgid "Add the selected game to my list of favorites"
+msgstr "Lägg till markerat spel i min favoritlista"
+
+#: ../src/gva-ui.c:398 ../src/gva-ui.c:454
 msgid "Play _Back..."
 msgstr "Spela _upp..."
 
-#: ../src/gva-ui.c:174
+#: ../src/gva-ui.c:405
+msgid "_Preferences"
+msgstr "_Inställningar"
+
+#: ../src/gva-ui.c:407
+msgid "Configure the application"
+msgstr "Konfigurera programmet"
+
+#: ../src/gva-ui.c:419
 msgid "_Properties"
 msgstr "_Egenskaper"
 
-#: ../src/gva-ui.c:176
-msgid "Show properties about the selected game"
-msgstr "Visa egenskaperna för det markerade spelet"
-
-#: ../src/gva-ui.c:181
+#: ../src/gva-ui.c:426
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: ../src/gva-ui.c:188
+#: ../src/gva-ui.c:428
+msgid "Quit the application"
+msgstr "Avsluta programmet"
+
+#: ../src/gva-ui.c:433
 msgid "_Record"
 msgstr "Spela _in"
 
-#: ../src/gva-ui.c:190
+#: ../src/gva-ui.c:435
 msgid "Start the selected game and record keypresses to a file"
 msgstr ""
 "Starta det markerade spelet och spela in tangenttryckningar till en fil"
 
-#: ../src/gva-ui.c:197
+#: ../src/gva-ui.c:440
+msgid "Remove from _Favorites"
+msgstr "Ta bort från _favoriter"
+
+#: ../src/gva-ui.c:442
+msgid "Remove the selected game from my list of favorites"
+msgstr "Ta bort det markerade spelet från min favoritlista"
+
+#: ../src/gva-ui.c:447
+msgid "S_earch..."
+msgstr "Sö_k..."
+
+#: ../src/gva-ui.c:449
+msgid "Show a custom list of games"
+msgstr "Visa en anpassad spellista"
+
+#: ../src/gva-ui.c:456
 msgid "Play back a previously recorded game"
 msgstr "Spela upp ett tidigare inspelat spel"
 
-#: ../src/gva-ui.c:202
+#: ../src/gva-ui.c:461
 msgid "_Start"
 msgstr "_Starta"
 
-#: ../src/gva-ui.c:204
-msgid "Start the selected game"
-msgstr "Starta markerat spel"
+#: ../src/gva-ui.c:468
+msgid "_Edit"
+msgstr "R_edigera"
 
-#: ../src/gva-ui.c:209
+#: ../src/gva-ui.c:475
 msgid "_Game"
 msgstr "_Spel"
 
-#: ../src/gva-ui.c:216
+#: ../src/gva-ui.c:482
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/gva-ui.c:223
+#: ../src/gva-ui.c:489
 msgid "_View"
 msgstr "_Visa"
 
-#: ../src/gva-ui.c:233
+#: ../src/gva-ui.c:499
+msgid "_Restore previous state when starting a game"
+msgstr "Å_terställ föregående tillstånd för start av spel"
+
+#: ../src/gva-ui.c:507
+msgid "Start games in _fullscreen mode"
+msgstr "Starta spel i _helskärmsläge"
+
+#: ../src/gva-ui.c:518
 msgid "_Available Games"
 msgstr "_Tillgängliga spel"
 
-#: ../src/gva-ui.c:240
+#: ../src/gva-ui.c:525
 msgid "_Favorite Games"
 msgstr "_Favoritspel"
 
-#: ../src/gva-ui.c:247
+#: ../src/gva-ui.c:532
 msgid "Search _Results"
 msgstr "Sök_resultat"
 
-#: ../src/gva-ui.c:282
+#: ../src/gva-ui.c:590
 msgid "Failed to initialize user interface"
 msgstr "Misslyckades med att initiera användargränssnittet"
 
-#: ../src/gva-xmame.c:35
-msgid "Could not find xmame executable"
-msgstr "Kunde inte hitta xmame"
+#: ../src/main.c:43
+msgid "Build the games database"
+msgstr "Bygg speldatabasen"
+
+#: ../src/main.c:47
+msgid "Show which emulator will be used"
+msgstr "Visa vilken emulator som kommer att användas"
+
+#~ msgid "(auto-save) GtkUIManager supplies the label"
+#~ msgstr "(auto-save) GtkUIManager anger etiketten"
+
+#~ msgid "(full-screen) GtkUIManager supplies the label"
+#~ msgstr "(full-screen) GtkUIManager anger etiketten"
+
+#~ msgid "Start playing the selected game"
+#~ msgstr "Starta det markerade spelet"
+
+#~ msgid "Show properties about the selected game"
+#~ msgstr "Visa egenskaperna för det markerade spelet"
+
+#~ msgid "Could not find xmame executable"
+#~ msgstr "Kunde inte hitta xmame"
