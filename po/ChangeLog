@@ -1,3 +1,7 @@
+2007-07-23  Matthew Barnes  <mbarnes@redhat.com>
+
+	* POTFILES.in: Add missing files with translations.
+
 2007-07-14  Matthew Barnes  <mbarnes@redhat.com>
 
 	* POTFILES.in: Add missing files with translations.
