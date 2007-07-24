@@ -67,7 +67,7 @@ columns_sampleset_set_properties (GtkTreeViewColumn *column,
         column_id = gtk_tree_view_column_get_sort_column_id (column);
         gtk_tree_model_get (model, iter, column_id, &sampleset, -1);
 
-        visible = (sampleset != NULL);
+        visible = (sampleset != NULL && *sampleset != '\0');
         sensitive = visible && (strcmp (sampleset, "good") == 0);
 
         g_object_set (
@@ -424,6 +424,29 @@ gva_columns_load (GtkTreeView *view)
                 }
         }
 
+        while (visible_columns != NULL)
+        {
+                gchar *name = visible_columns->data;
+                GtkTreeViewColumn *column;
+
+                column = gva_columns_new_from_name (name);
+                columns_load_remove_name (&new_columns, name);
+
+                g_free (name);
+                visible_columns = g_slist_delete_link (
+                        visible_columns, visible_columns);
+
+                if (column != NULL)
+                {
+                        gtk_tree_view_column_set_visible (column, TRUE);
+                        gtk_tree_view_append_column (view, column);
+
+                        g_signal_connect_swapped (
+                                column, "notify::visible",
+                                G_CALLBACK (gva_columns_save), view);
+                }
+        }
+
         while (new_columns != NULL)
         {
                 gchar *name = new_columns->data;
@@ -444,9 +467,6 @@ gva_columns_load (GtkTreeView *view)
                                 G_CALLBACK (gva_columns_save), view);
                 }
         }
-
-        g_slist_foreach (visible_columns, (GFunc) g_free, NULL);
-        g_slist_free (visible_columns);
 
         gva_columns_save (view);
 }
@@ -477,38 +497,6 @@ gva_columns_save (GtkTreeView *view)
         g_slist_free (list);
 
         g_object_unref (client);
-}
-
-gchar **
-gva_columns_get_selected (guint *length)
-{
-        /* XXX Kill this function. */
-
-        GConfClient *client;
-        GSList *list;
-        gchar **column_names;
-        gint ii;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        list = gconf_client_get_list (
-                client, GVA_GCONF_ALL_COLUMNS_KEY,
-                GCONF_VALUE_STRING, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-
-        column_names = g_new0 (gchar *, g_slist_length (list) + 1);
-
-        for (ii = 0; list != NULL; ii++)
-        {
-                column_names[ii] = list->data;
-                list = g_slist_delete_link (list, list);
-        }
-
-        if (length != NULL)
-                *length = g_strv_length (column_names);
-
-        return column_names;
 }
 
 GSList *

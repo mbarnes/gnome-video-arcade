@@ -82,7 +82,7 @@ action_about_cb (GtkAction *action)
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
                 "name", PACKAGE_NAME,
                 "version", PACKAGE_VERSION,
-                "comments", _("A Front-End for M.A.M.E."),
+                "comments", _("M.A.M.E. Front-End"),
                 "copyright", copyright,
                 "license", license,
                 "wrap-license", TRUE,

@@ -28,6 +28,9 @@
 #include "gva-main.h"
 #include "gva-ui.h"
 
+#define SQL_SELECT_GAMES \
+        "SELECT %s FROM game WHERE (romset IN ('good', 'best available'))"
+
 static gboolean
 tree_view_popup_menu_cb (GtkTreeView *view,
                          GdkEventButton *event,
@@ -223,7 +226,6 @@ gva_tree_view_update (GError **error)
 {
         const gchar *name;
         const gchar *expr;
-        gboolean success;
 
         switch (gva_tree_view_get_selected_view ())
         {
@@ -243,15 +245,14 @@ gva_tree_view_update (GError **error)
                         g_assert_not_reached ();
         }
 
-        success = gva_tree_view_run_query (expr, error);
-
-        if (!success)
+        if (!gva_tree_view_run_query (expr, error))
                 return FALSE;
 
         name = gva_tree_view_get_last_selected_game ();
         if (name != NULL)
                 gva_tree_view_set_selected_game (name);
 
+        return TRUE;
 }
 
 gboolean
@@ -266,35 +267,34 @@ gva_tree_view_run_query (const gchar *expr,
         GdkDisplay *display;
         GdkWindow *window;
         GString *string;
-        guint length, ii;
+        GSList *list;
+        const gchar **strv;
         gchar *columns;
-        gchar **strv;
+        gint ii = 0;
 
-        string = g_string_sized_new (256);
-        strv = gva_columns_get_selected (&length);
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 
-        /* The "game" table has no "favorite" column, so we need to replace
-         * it with an expression that derives it. */
-        for (ii = 0; ii < length; ii++)
+        /* Build a comma-separated list of column names. */
+        list = gva_columns_get_names (view, FALSE);
+        strv = g_new0 (const gchar *, g_slist_length (list) + 1);
+        while (list != NULL)
         {
-                if (strcmp (strv[ii], "favorite") == 0)
-                {
-                        g_free (strv[ii]);
-                        strv[ii] = g_strdup ("isfavorite(name) AS favorite");
-                }
+                if (strcmp (list->data, "favorite") == 0)
+                        strv[ii++] = "isfavorite(name) AS favorite";
+                else
+                        strv[ii++] = list->data;
+                list = g_slist_delete_link (list, list);
         }
+        columns = g_strjoinv (", ", (gchar **) strv);
+        g_free (strv);
 
-        columns = g_strjoinv (", ", strv);
-        g_string_printf (string, "SELECT name, %s FROM game ", columns);
+        string = g_string_new (NULL);
+        g_string_printf (string, SQL_SELECT_GAMES, columns);
         g_free (columns);
-
-        g_string_append_printf (
-                string, "WHERE (romset IN (\"good\", \"best available\"))");
 
         if (expr != NULL)
                 g_string_append_printf (string, " AND (%s)", expr);
 
-        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         window = gtk_widget_get_parent_window (GTK_WIDGET (view));
         display = gtk_widget_get_display (GTK_WIDGET (view));
         cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
@@ -307,7 +307,6 @@ gva_tree_view_run_query (const gchar *expr,
 
         gdk_cursor_unref (cursor);
         g_string_free (string, TRUE);
-        g_strfreev (strv);
 
         if (model == NULL)
                 return FALSE;

@@ -225,8 +225,8 @@ column_manager_row_deleted_cb (GtkTreeModel *model,
         /* Second phase of drag-and-drop reordering. */
 
         GvaColumnManagerPrivate *priv = manager->priv;
-        GtkTreeView *view;
         GtkTreeViewColumn *column;
+        GtkTreeView *view;
         GtkTreeIter iter;
         gboolean valid;
 
@@ -254,6 +254,12 @@ column_manager_row_deleted_cb (GtkTreeModel *model,
         else
                 gtk_tree_view_move_column_after (view, column, NULL);
 
+        gtk_tree_path_free (path);
+
+        path = gtk_tree_row_reference_get_path (priv->move_reference);
+        gtk_tree_view_set_cursor (priv->tree_view, path, NULL, FALSE);
+        gtk_tree_path_free (path);
+
         g_object_unref (column);
 
         gtk_tree_row_reference_free (priv->move_reference);
@@ -273,14 +279,7 @@ column_manager_selection_changed_cb (GtkTreeSelection *selection,
         gint last, index;
 
         if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-        {
-                /* If nothing is selected, desensitize the buttons. */
-                gtk_widget_set_sensitive (priv->move_up_button, FALSE);
-                gtk_widget_set_sensitive (priv->move_down_button, FALSE);
-                gtk_widget_set_sensitive (priv->show_button, FALSE);
-                gtk_widget_set_sensitive (priv->hide_button, FALSE);
                 return;
-        }
 
         path = gtk_tree_model_get_path (model, &iter);
         gtk_tree_model_get (model, &iter, 0, &column, -1);

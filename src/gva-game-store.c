@@ -297,7 +297,8 @@ gva_game_store_new_from_query (const gchar *sql,
                                 gboolean v_boolean;
 
                                 text = sqlite3_column_text (stmt, ii);
-                                v_boolean = (strcmp (text, "yes") == 0);
+                                v_boolean = (text != NULL) &&
+                                        (strcmp (text, "yes") == 0);
                                 g_value_set_boolean (value, v_boolean);
                         }
                         else if (type == G_TYPE_INT)
@@ -312,6 +313,8 @@ gva_game_store_new_from_query (const gchar *sql,
                                 const gchar *v_string;
 
                                 v_string = sqlite3_column_text (stmt, ii);
+                                if (v_string == NULL)
+                                        v_string = "";
                                 g_value_set_string (value, v_string);
                         }
                         else

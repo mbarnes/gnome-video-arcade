@@ -103,7 +103,7 @@
       <type>pair</type>
       <car_type>string</car_type>
       <cdr_type>bool</cdr_type>
-      <default>default,false</default>
+      <default>(default,false)</default>
       <locale name="C">
         <short>Sort column and sort order</short>
         <long>The first value is the most recently sorted column name

@@ -1,5 +1,39 @@
 2007-07-23  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.4
+
+	* data/gnome-video-arcade.schema:
+	Fix default value for "sort-column" key.
+
+	* src/main.c:
+	* src/gva-common.h:
+	Add --which-emulator command-line option.
+	Prints the emulator pathname (a.k.a. MAME_PROGRAM) and exits.
+
+	* src/gva-column-manager.c (column_manager_row_deleted_cb):
+	Select the moved row after drag-and-drop.
+
+	* src/gva-column-manager.c (column_manager_selection_changed_cb):
+	Don't desensitize the buttons if nothing is selected; it screws up
+	the widget state of the "Move Up" / "Move Down" buttons.
+
+	* src/gva-columns.c (columns_sampleset_set_properties):
+	Check for both NULL and empty sampleset strings.
+
+	* src/gva-columns.c (gva_columns_load):
+	Improve the migration logic.
+
+	* src/gva-columns.c (gva_columns_get_selected):
+	Remove this function.
+
+	* src/gva-game-store.c (gva_game_store_new_from_query):
+	Check for NULL result from sqlite3_column_text().
+
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Refactor to not use gva_columns_get_selected().
+
+2007-07-23  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.glade:
 	* src/gva-preferences.c:
 	Use a GvaColumnManager widget for selecting columns.

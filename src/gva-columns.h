@@ -31,7 +31,6 @@ gboolean             gva_columns_lookup_id     (const gchar *column_name,
 const gchar *        gva_columns_lookup_name   (GvaGameStoreColumn column_id);
 void                 gva_columns_load          (GtkTreeView *view);
 void                 gva_columns_save          (GtkTreeView *view);
-gchar **             gva_columns_get_selected  (guint *length);
 GSList *             gva_columns_get_names     (GtkTreeView *view,
                                                 gboolean visible_only);
 

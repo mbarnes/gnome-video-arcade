@@ -34,12 +34,17 @@
 
 /* Command Line Options */
 gboolean opt_build_database;
+gboolean opt_which_emulator;
 
 static GOptionEntry entries[] =
 {
         { "build-database", 'b', 0,
           G_OPTION_ARG_NONE, &opt_build_database,
           N_("Build the games database"), NULL },
+
+        { "which-emulator", 'w', 0,
+          G_OPTION_ARG_NONE, &opt_which_emulator,
+          N_("Show which emulator will be used"), NULL },
 
         { NULL }
 };
@@ -88,7 +93,10 @@ start (void)
         /* Force a tree view update. */
         last_view = gva_tree_view_get_last_selected_view ();
         if (last_view == gva_tree_view_get_selected_view ())
-                gva_tree_view_update ();
+        {
+                gva_tree_view_update (&error);
+                gva_error_handle (&error);
+        }
         else
                 gva_tree_view_set_selected_view (last_view);
 
@@ -111,6 +119,12 @@ main (gint argc, gchar **argv)
                 &argc, &argv, NULL, entries, GETTEXT_PACKAGE, &error);
         if (error != NULL)
                 g_error ("%s", error->message);
+
+        if (opt_which_emulator)
+        {
+                g_print ("%s\n", MAME_PROGRAM);
+                exit (0);
+        }
         
         gtk_window_set_default_icon_name (PACKAGE);
 
