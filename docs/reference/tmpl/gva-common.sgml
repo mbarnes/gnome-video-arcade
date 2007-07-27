@@ -1,0 +1,101 @@
+<!-- ##### SECTION Title ##### -->
+gva-common
+
+<!-- ##### SECTION Short_Description ##### -->
+Common Definitions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GVA_GCONF_PREFIX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_ALL_COLUMNS_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_AUTO_SAVE_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_COLUMNS_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_FAVORITES_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_FULL_SCREEN_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_SELECTED_GAME_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_SELECTED_VIEW_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_SORT_COLUMN_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_GCONF_VERSION_KEY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### VARIABLE opt_build_database ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE opt_which_emulator ##### -->
+<para>
+
+</para>
+
+

@@ -1,0 +1,38 @@
+<!-- ##### SECTION Title ##### -->
+gva-history
+
+<!-- ##### SECTION Short_Description ##### -->
+Arcade History Management
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_history_init ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_history_lookup ##### -->
+<para>
+
+</para>
+
+@name: 
+@error: 
+@Returns: 
+
+

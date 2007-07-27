@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<book id="index" xmlns:xi="http://www.w3.org/2003/XInclude">
+  <bookinfo>
+    <title>GNOME Video Arcade Reference Manual</title>
+    <xi:include href="version.xml"/>
+  </bookinfo>
+
+  <chapter>
+    <title>User Interface</title>
+    <xi:include href="xml/gva-main.xml"/>
+    <xi:include href="xml/gva-play-back.xml"/>
+    <xi:include href="xml/gva-preferences.xml"/>
+    <xi:include href="xml/gva-properties.xml"/>
+    <xi:include href="xml/gva-tree-view.xml"/>
+    <xi:include href="xml/gva-ui.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>Infrastructure</title>
+    <xi:include href="xml/gva-columns.xml"/>
+    <xi:include href="xml/gva-common.xml"/>
+    <xi:include href="xml/gva-db.xml"/>
+    <xi:include href="xml/gva-error.xml"/>
+    <xi:include href="xml/gva-favorites.xml"/>
+    <xi:include href="xml/gva-history.xml"/>
+    <xi:include href="xml/gva-mame-common.xml"/>
+    <xi:include href="xml/gva-mame.xml"/>
+    <xi:include href="xml/gva-time.xml"/>
+    <xi:include href="xml/gva-util.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>Objects and Widgets</title>
+    <xi:include href="xml/gva-cell-renderer-pixbuf.xml"/>
+    <xi:include href="xml/gva-column-manager.xml"/>
+    <xi:include href="xml/gva-game-store.xml"/>
+    <xi:include href="xml/gva-mame-process.xml"/>
+    <xi:include href="xml/gva-process.xml"/>
+  </chapter>
+
+  <index>
+    <title>Index</title>
+  </index>
+</book>

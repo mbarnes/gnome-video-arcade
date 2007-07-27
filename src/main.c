@@ -32,10 +32,6 @@
 #include "gva-properties.h"
 #include "gva-ui.h"
 
-/* Command Line Options */
-gboolean opt_build_database;
-gboolean opt_which_emulator;
-
 static GOptionEntry entries[] =
 {
         { "build-database", 'b', 0,

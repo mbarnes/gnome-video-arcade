@@ -1,0 +1,84 @@
+<!-- ##### SECTION Title ##### -->
+gva-main
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_main_init ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_main_build_database ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_main_connect_proxy_cb ##### -->
+<para>
+
+</para>
+
+@manager: 
+@action: 
+@proxy: 
+
+
+<!-- ##### FUNCTION gva_main_statusbar_get_context_id ##### -->
+<para>
+
+</para>
+
+@context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_main_statusbar_push ##### -->
+<para>
+
+</para>
+
+@context_id: 
+@format: 
+@Varargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_main_statusbar_pop ##### -->
+<para>
+
+</para>
+
+@context_id: 
+
+
+<!-- ##### FUNCTION gva_main_statusbar_remove ##### -->
+<para>
+
+</para>
+
+@context_id: 
+@message_id: 
+
+

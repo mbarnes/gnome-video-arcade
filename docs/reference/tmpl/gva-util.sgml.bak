@@ -1,0 +1,64 @@
+<!-- ##### SECTION Title ##### -->
+gva-util
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_choose_inpname ##### -->
+<para>
+
+</para>
+
+@romname: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_find_data_file ##### -->
+<para>
+
+</para>
+
+@basename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_get_last_version ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_get_monospace_font_name ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_get_time_elapsed ##### -->
+<para>
+
+</para>
+
+@start_time: 
+@time_elapsed: 
+
+

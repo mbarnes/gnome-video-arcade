@@ -1,0 +1,103 @@
+<!-- ##### SECTION Title ##### -->
+gva-db
+
+<!-- ##### SECTION Short_Description ##### -->
+Database Management
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_db_init ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_build ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_reset ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_execute ##### -->
+<para>
+
+</para>
+
+@sql: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_prepare ##### -->
+<para>
+
+</para>
+
+@sql: 
+@stmt: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_get_build ##### -->
+<para>
+
+</para>
+
+@build: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_get_filename ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_needs_rebuilt ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_set_error ##### -->
+<para>
+
+</para>
+
+@error: 
+@code: 
+@message: 
+
+

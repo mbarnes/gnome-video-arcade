@@ -1,0 +1,354 @@
+<!-- ##### SECTION Title ##### -->
+gva-ui
+
+<!-- ##### SECTION Short_Description ##### -->
+User Interface Support
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GVA_ACTION_ABOUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_AUTO_SAVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_CONTENTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_FULL_SCREEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_INSERT_FAVORITE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_NEXT_GAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_PLAY_BACK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_PREFERENCES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_PREVIOUS_GAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_PROPERTIES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_QUIT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_RECORD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_REMOVE_FAVORITE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_SHOW_PLAY_BACK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_START ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_VIEW_AVAILABLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_VIEW_FAVORITES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_ACTION_VIEW_RESULTS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_PROGRESS_BAR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_PROPERTIES_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_START_GAME_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_STATUSBAR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_TREE_VIEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_VBOX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_VIEW_BUTTON_0 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_VIEW_BUTTON_1 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_VIEW_BUTTON_2 ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_MAIN_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PLAY_BACK_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PLAY_BACK_CLOSE_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PLAY_BACK_DELETE_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PLAY_BACK_TREE_VIEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PLAY_BACK_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PREFERENCES_AUTO_SAVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PREFERENCES_CLOSE_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PREFERENCES_COLUMNS_INNER_VBOX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PREFERENCES_FULL_SCREEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PREFERENCES_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PROPERTIES_BACK_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PROPERTIES_CLOSE_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PROPERTIES_FORWARD_BUTTON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PROPERTIES_HEADER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GVA_WIDGET_PROPERTIES_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_ui_get_action ##### -->
+<para>
+
+</para>
+
+@action_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_ui_get_widget ##### -->
+<para>
+
+</para>
+
+@widget_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_ui_get_managed_widget ##### -->
+<para>
+
+</para>
+
+@widget_path: 
+@Returns: 
+
+

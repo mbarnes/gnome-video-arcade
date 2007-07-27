@@ -1,0 +1,78 @@
+<!-- ##### SECTION Title ##### -->
+GvaGameStore
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GvaGameStore ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GvaGameStoreClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+
+<!-- ##### FUNCTION gva_game_store_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_game_store_new_from_query ##### -->
+<para>
+
+</para>
+
+@sql: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_game_store_clear ##### -->
+<para>
+
+</para>
+
+@game_store: 
+
+
+<!-- ##### FUNCTION gva_game_store_index_insert ##### -->
+<para>
+
+</para>
+
+@game_store: 
+@key: 
+@iter: 
+
+
+<!-- ##### FUNCTION gva_game_store_index_lookup ##### -->
+<para>
+
+</para>
+
+@game_store: 
+@key: 
+@Returns: 
+
+

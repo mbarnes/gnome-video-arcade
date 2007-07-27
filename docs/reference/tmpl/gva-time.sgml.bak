@@ -1,0 +1,45 @@
+<!-- ##### SECTION Title ##### -->
+gva-time
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GVA_TYPE_TIME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_time_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_time_set_tree_sortable_func ##### -->
+<para>
+
+</para>
+
+@sortable: 
+@sort_column_id: 
+
+

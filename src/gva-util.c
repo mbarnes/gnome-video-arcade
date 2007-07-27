@@ -24,6 +24,10 @@
 #define GCONF_MONOSPACE_FONT_NAME_KEY \
         "/desktop/gnome/interface/monospace_font_name"
 
+/* Command Line Options */
+gboolean opt_build_database;
+gboolean opt_which_emulator;
+
 static gboolean
 inpname_exists (const gchar *inppath, const gchar *inpname)
 {

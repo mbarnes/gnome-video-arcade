@@ -1,6 +1,6 @@
 ### Process this file with automake to produce Makefile.in
 
-SUBDIRS = data po src
+SUBDIRS = data po src docs
 
 EXTRA_DIST = \
 	config.rpath			\

@@ -82,6 +82,7 @@ AM_GLIB_GNU_GETTEXT
 
 # Miscellaneous
 AM_GCONF_SOURCE_2
+GTK_DOC_CHECK(1.6)
 
 # Optional Features
 
@@ -100,5 +101,13 @@ if test "x${with_history}" != "xno"; then
 fi
 AC_MSG_RESULT($with_history)
 
-AC_CONFIG_FILES([Makefile data/Makefile src/Makefile po/Makefile.in])
+AC_CONFIG_FILES([
+        Makefile
+        data/Makefile
+        docs/Makefile
+        docs/reference/Makefile
+        docs/reference/version.xml
+        po/Makefile.in
+        src/Makefile
+])
 AC_OUTPUT

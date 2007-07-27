@@ -1,0 +1,59 @@
+<!-- ##### SECTION Title ##### -->
+gva-mame-common
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GvaMameAsyncData ##### -->
+<para>
+
+</para>
+
+@callback: 
+@user_data: 
+
+<!-- ##### FUNCTION gva_mame_async_data_new ##### -->
+<para>
+
+</para>
+
+@callback: 
+@user_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_async_data_free ##### -->
+<para>
+
+</para>
+
+@data: 
+
+
+<!-- ##### FUNCTION gva_mame_command ##### -->
+<para>
+
+</para>
+
+@arguments: 
+@stdout_lines: 
+@stderr_lines: 
+@error: 
+@Returns: 
+
+

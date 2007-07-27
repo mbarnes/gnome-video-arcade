@@ -1,0 +1,52 @@
+<!-- ##### SECTION Title ##### -->
+gva-favorites
+
+<!-- ##### SECTION Short_Description ##### -->
+Favorite Games Management
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_favorites_copy ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_favorites_insert ##### -->
+<para>
+
+</para>
+
+@name: 
+
+
+<!-- ##### FUNCTION gva_favorites_remove ##### -->
+<para>
+
+</para>
+
+@name: 
+
+
+<!-- ##### FUNCTION gva_favorites_contains ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+

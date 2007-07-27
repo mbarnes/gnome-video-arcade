@@ -1,0 +1,13 @@
+#include <gva-cell-renderer-pixbuf.h>
+#include <gva-column-manager.h>
+#include <gva-game-store.h>
+#include <gva-mame-process.h>
+#include <gva-process.h>
+#include <gva-time.h>
+
+gva_cell_renderer_pixbuf_get_type
+gva_column_manager_get_type
+gva_game_store_get_type
+gva_mame_process_get_type
+gva_process_get_type
+gva_time_get_type

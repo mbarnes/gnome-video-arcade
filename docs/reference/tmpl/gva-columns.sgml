@@ -1,0 +1,82 @@
+<!-- ##### SECTION Title ##### -->
+gva-columns
+
+<!-- ##### SECTION Short_Description ##### -->
+Column Creation and Persistence
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_columns_new_from_id ##### -->
+<para>
+
+</para>
+
+@column_id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_columns_new_from_name ##### -->
+<para>
+
+</para>
+
+@column_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_columns_lookup_id ##### -->
+<para>
+
+</para>
+
+@column_name: 
+@column_id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_columns_lookup_name ##### -->
+<para>
+
+</para>
+
+@column_id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_columns_load ##### -->
+<para>
+
+</para>
+
+@view: 
+
+
+<!-- ##### FUNCTION gva_columns_save ##### -->
+<para>
+
+</para>
+
+@view: 
+
+
+<!-- ##### FUNCTION gva_columns_get_names ##### -->
+<para>
+
+</para>
+
+@view: 
+@visible_only: 
+@Returns: 
+
+

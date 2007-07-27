@@ -1,0 +1,230 @@
+<!-- ##### SECTION Title ##### -->
+GvaProcess
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GvaProcessPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GvaProcess ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GvaProcess::exited ##### -->
+<para>
+
+</para>
+
+@gvaprocess: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GvaProcess::stderr-ready ##### -->
+<para>
+
+</para>
+
+@gvaprocess: the object which received the signal.
+
+<!-- ##### SIGNAL GvaProcess::stdout-ready ##### -->
+<para>
+
+</para>
+
+@gvaprocess: the object which received the signal.
+
+<!-- ##### ARG GvaProcess:pid ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaProcess:progress ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaProcess:stderr ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaProcess:stdin ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaProcess:stdout ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT GvaProcessClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@stdout_read_line: 
+@stderr_read_line: 
+@stdout_ready: 
+@stderr_ready: 
+@exited: 
+
+<!-- ##### FUNCTION gva_process_new ##### -->
+<para>
+
+</para>
+
+@pid: 
+@standard_input: 
+@standard_output: 
+@standard_error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_spawn ##### -->
+<para>
+
+</para>
+
+@command_line: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_write_stdin ##### -->
+<para>
+
+</para>
+
+@process: 
+@data: 
+@length: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_stdout_num_lines ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_stderr_num_lines ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_stdout_read_line ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_stderr_read_line ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_stdout_read_lines ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_stderr_read_lines ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_get_progress ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_set_progress ##### -->
+<para>
+
+</para>
+
+@process: 
+@progress: 
+
+
+<!-- ##### FUNCTION gva_process_has_exited ##### -->
+<para>
+
+</para>
+
+@process: 
+@status: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_process_kill ##### -->
+<para>
+
+</para>
+
+@process: 
+
+
+<!-- ##### FUNCTION gva_process_kill_all ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_process_get_time_elapsed ##### -->
+<para>
+
+</para>
+
+@process: 
+@time_elapsed: 
+
+

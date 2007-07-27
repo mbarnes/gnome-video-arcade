@@ -1,0 +1,60 @@
+<!-- ##### SECTION Title ##### -->
+gva-preferences
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_preferences_init ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_preferences_get_auto_save ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_preferences_set_auto_save ##### -->
+<para>
+
+</para>
+
+@auto_save: 
+
+
+<!-- ##### FUNCTION gva_preferences_get_full_screen ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_preferences_set_full_screen ##### -->
+<para>
+
+</para>
+
+@full_screen: 
+
+

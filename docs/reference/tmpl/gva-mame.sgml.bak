@@ -1,0 +1,178 @@
+<!-- ##### SECTION Title ##### -->
+gva-mame
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### USER_FUNCTION GvaMameCallback ##### -->
+<para>
+
+</para>
+
+@name: 
+@game_data: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gva_mame_get_version ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_get_total_supported ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_get_config_value ##### -->
+<para>
+
+</para>
+
+@config_key: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_has_config_value ##### -->
+<para>
+
+</para>
+
+@config_key: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_get_input_files ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_list_xml ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_verify_roms ##### -->
+<para>
+
+</para>
+
+@callback: 
+@user_data: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_verify_samples ##### -->
+<para>
+
+</para>
+
+@callback: 
+@user_data: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_run_game ##### -->
+<para>
+
+</para>
+
+@name: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_record_game ##### -->
+<para>
+
+</para>
+
+@name: 
+@inpname: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_playback_game ##### -->
+<para>
+
+</para>
+
+@name: 
+@inpname: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_get_save_state_file ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_delete_save_state ##### -->
+<para>
+
+</para>
+
+@name: 
+
+
+<!-- ##### MACRO gva_mame_supports_auto_save ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gva_mame_supports_full_screen ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gva_mame_supports_window ##### -->
+<para>
+
+</para>
+
+
+
