@@ -45,7 +45,7 @@ static GOptionEntry entries[] =
         { NULL }
 };
 
-static gboolean
+static void
 start (void)
 {
         GvaProcess *process = NULL;
@@ -79,7 +79,7 @@ start (void)
                 g_object_unref (process);
 
                 if (main_loop_quit)
-                        return FALSE;
+                        return;
         }
 
         gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
@@ -95,8 +95,6 @@ start (void)
         }
         else
                 gva_tree_view_set_selected_view (last_view);
-
-        return FALSE;
 }
 
 gint
@@ -136,7 +134,7 @@ main (gint argc, gchar **argv)
         gva_error_handle (&error);
 #endif
 
-        g_idle_add ((GSourceFunc) start, NULL);
+        gtk_init_add ((GtkFunction) start, NULL);
 
         gtk_main ();
 

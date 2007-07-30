@@ -1,5 +1,23 @@
 2007-07-29  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-db.c (gva_db_build):
+	Start a database transaction.
+
+	* src/gva-db.c (db_parser_exit):
+	Commit the transaction if no error occurred, otherwise rollback.
+
+	* src/gva-db.c (gva_db_transaction_begin),
+	(gva_db_transaction_commit), (gva_db_transaction_rollback):
+	New functions are pretty self-explanatory.
+
+	* src/gva-process.c (process_data_ready):
+	Keep on reading if there's more to be read.
+
+	* src/main.c (main):
+	Invoke start() by way of gtk_init_add() instead of g_idle_add().
+
+2007-07-29  Matthew Barnes  <mbarnes@redhat.com>
+
 	* Add some more developer documentation.
 	* Move section documentation to header files.
 

@@ -142,23 +142,30 @@ process_data_ready (GvaProcess *process,
 {
         if (condition & G_IO_IN)
         {
-                GIOStatus status;
-                gchar *line;
-                GError *error = NULL;
+                do
+                {
+                        GIOStatus status;
+                        gchar *line;
+                        GError *error = NULL;
 
-                status = g_io_channel_read_line (
-                        channel, &line, NULL, NULL, &error);
-                if (status == G_IO_STATUS_NORMAL)
-                {
-                        g_assert (line != NULL);
-                        g_queue_push_tail (queue, line);
-                        g_signal_emit (process, signal_id, 0);
+                        status = g_io_channel_read_line (
+                                channel, &line, NULL, NULL, &error);
+                        if (status == G_IO_STATUS_NORMAL)
+                        {
+                                g_assert (line != NULL);
+                                g_queue_push_tail (queue, line);
+                                g_signal_emit (process, signal_id, 0);
+                        }
+                        else
+                        {
+                                g_assert (error != NULL);
+                                process_propagate_error (process, error);
+                        }
+
+                        condition =
+                                g_io_channel_get_buffer_condition (channel);
                 }
-                else
-                {
-                        g_assert (error != NULL);
-                        process_propagate_error (process, error);
-                }
+                while (condition & G_IO_IN);
 
                 return TRUE;
         }

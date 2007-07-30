@@ -602,23 +602,34 @@ db_parser_exit (GvaProcess *process,
                 gint status,
                 ParserData *data)
 {
-        GTimeVal time_elapsed;
+        GError *error = NULL;
 
         if (process->error == NULL)
+        {
+                GTimeVal time_elapsed;
+
                 g_markup_parse_context_end_parse (
                         data->context, &process->error);
+                gva_db_transaction_commit (&error);
+                gva_error_handle (&error);
 
-        db_verify_update_status (
-                data->verify_roms, data->romsets, "romset");
-        db_verify_update_status (
-                data->verify_samples, data->samplesets, "sampleset");
-        gva_db_execute (SQL_DELETE_NOT_FOUND, &process->error);
+                db_verify_update_status (
+                        data->verify_roms, data->romsets, "romset");
+                db_verify_update_status (
+                        data->verify_samples, data->samplesets, "sampleset");
+                gva_db_execute (SQL_DELETE_NOT_FOUND, &process->error);
 
-        gva_process_get_time_elapsed (process, &time_elapsed);
+                gva_process_get_time_elapsed (process, &time_elapsed);
 
-        g_message (
-                "Database built in %d.%d seconds.",
-                time_elapsed.tv_sec, time_elapsed.tv_usec / 100000);
+                g_message (
+                        "Database built in %d.%d seconds.",
+                        time_elapsed.tv_sec, time_elapsed.tv_usec / 100000);
+        }
+        else
+        {
+                gva_db_transaction_rollback (&error);
+                gva_error_handle (&error);
+        }
 
         db_parser_data_free (data);
 }
@@ -730,6 +741,12 @@ gva_db_build (GError **error)
         if (process == NULL)
                 return NULL;
 
+        if (!gva_db_transaction_begin (error))
+        {
+                g_object_unref (process);
+                return NULL;
+        }
+
         data = db_parser_data_new (process);
 
         g_signal_connect (
@@ -780,6 +797,24 @@ gva_db_execute (const gchar *sql,
         }
 
         return (errcode == SQLITE_OK);
+}
+
+gboolean
+gva_db_transaction_begin (GError **error)
+{
+        return gva_db_execute ("BEGIN TRANSACTION", error);
+}
+
+gboolean
+gva_db_transaction_commit (GError **error)
+{
+        return gva_db_execute ("COMMIT TRANSACTION", error);
+}
+
+gboolean
+gva_db_transaction_rollback (GError **error)
+{
+        return gva_db_execute ("ROLLBACK TRANSACTION", error);
 }
 
 gboolean
