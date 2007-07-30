@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-GvaCellRendererPixbuf
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Renders a clickable pixbuf in a cell
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

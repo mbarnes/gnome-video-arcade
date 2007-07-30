@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-column-manager
+ * @short_description: Manages the columns of a #GtkTreeView
+ **/
+
 #ifndef GVA_COLUMN_MANAGER_H
 #define GVA_COLUMN_MANAGER_H
 

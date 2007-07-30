@@ -263,8 +263,8 @@ gva_mame_command
 <SECTION>
 <FILE>gva-time</FILE>
 GVA_TYPE_TIME
+<SUBSECTION Private>
 gva_time_get_type
-gva_time_set_tree_sortable_func
 </SECTION>
 
 <SECTION>

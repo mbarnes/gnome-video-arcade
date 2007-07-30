@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-ui
+ * @short_description: User Interface Support
+ **/
+
 #ifndef GVA_UI_H
 #define GVA_UI_H
 

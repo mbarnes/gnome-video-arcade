@@ -16,7 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* Common interface for MAME backends. */
+/**
+ * SECTION: gva-mame
+ * @short_description: MAME Communication Backend
+ **/
 
 #ifndef GVA_MAME_H
 #define GVA_MAME_H

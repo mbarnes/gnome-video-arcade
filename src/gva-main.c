@@ -82,6 +82,13 @@ main_window_destroy_cb (GtkObject *object)
         gtk_action_activate (GVA_ACTION_QUIT);
 }
 
+/**
+ * gva_main_init:
+ *
+ * Initializes the main window.
+ *
+ * This function should be called once when the application starts.
+ **/
 void
 gva_main_init (void)
 {
@@ -127,6 +134,18 @@ gva_main_init (void)
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
 }
 
+/**
+ * gva_main_build_database:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Begins the lengthy process of constructing the games database.
+ * The function displays a progress bar in the main status bar that
+ * tracks the database construction.  The function is asynchronous;
+ * it returns immediately with a #GvaProcess that emits an "%exited"
+ * signal when the process is complete.
+ *
+ * Returns: a new #GvaProcess
+ **/
 GvaProcess *
 gva_main_build_database (GError **error)
 {
@@ -157,6 +176,16 @@ gva_main_build_database (GError **error)
         return process;
 }
 
+/**
+ * gva_main_connect_proxy_cb:
+ * @manager: a #GtkUIManager
+ * @action: a #GtkAction
+ * @proxy: a #GtkWidget
+ *
+ * Callback for @manager's "%connect-proxy" signal.  The function configures
+ * main menu items to display the appropriate tooltip in the status bar when
+ * the mouse hovers over them.  @action supplies the tooltip.
+ **/
 void
 gva_main_connect_proxy_cb (GtkUIManager *manager,
                            GtkAction *action,
@@ -181,18 +210,48 @@ gva_main_connect_proxy_cb (GtkUIManager *manager,
         }
 }
 
+/**
+ * gva_main_statusbar_get_context_id:
+ * @context_description: textual description of what context the new
+ * message is being used in
+ *
+ * Thin wrapper for gtk_statusbar_get_context_id() that uses the main
+ * window's status bar.
+ *
+ * Returns a new context identifier, given a description of the actual
+ * context.  Note that the description is <emphasis>not</emphasis> shown
+ * in the UI.
+ *
+ * Returns: a context identifier
+ **/
 guint
-gva_main_statusbar_get_context_id (const gchar *context)
+gva_main_statusbar_get_context_id (const gchar *context_description)
 {
         GtkStatusbar *statusbar;
 
-        g_return_val_if_fail (context != NULL, 0);
+        g_return_val_if_fail (context_description != NULL, 0);
 
         statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
 
-        return gtk_statusbar_get_context_id (statusbar, context);
+        return gtk_statusbar_get_context_id (statusbar, context_description);
 }
 
+/**
+ * gva_main_statusbar_push:
+ * @context_id: a context identifier
+ * @format: a standard <function>printf()</function> format string
+ * @...: the arguments to insert into the format string
+ *
+ * Thin wrapper for gtk_statusbar_push() that uses the main window's
+ * status bar.
+ *
+ * Pushes a new message onto the status bar's stack.  As a convenience,
+ * the function takes a <function>printf()</function>-style format string
+ * and variable length argument list.
+ *
+ * Returns: a message identifier that can be used with
+ * gva_main_statusbar_remove()
+ **/
 guint
 gva_main_statusbar_push (guint context_id,
                          const gchar *format,
@@ -216,6 +275,19 @@ gva_main_statusbar_push (guint context_id,
         return message_id;
 }
 
+/**
+ * gva_main_statusbar_pop:
+ * @context_id: a context identifier
+ *
+ * Thin wrapper for gtk_statusbar_pop() that uses the main window's
+ * status bar.
+ *
+ * Removes the first message in the status bar's stack with the given
+ * context id.
+ *
+ * Note that this may not change the displayed message, if the message
+ * at the top of the stack has a different context id.
+ **/
 void
 gva_main_statusbar_pop (guint context_id)
 {
@@ -226,6 +298,17 @@ gva_main_statusbar_pop (guint context_id)
         gtk_statusbar_pop (statusbar, context_id);
 }
 
+/**
+ * gva_main_statusbar_remove:
+ * @context_id: a context identifier
+ * @message_id: a message identifier
+ *
+ * Thin wrapper for gtk_statusbar_remove() that uses the main window's
+ * status bar.
+ *
+ * Forces the removal of a message from a status bar's stack.  The exact
+ * @context_id and @message_id must be specified.
+ **/
 void
 gva_main_statusbar_remove (guint context_id,
                            guint message_id)

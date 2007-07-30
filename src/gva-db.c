@@ -848,7 +848,7 @@ gva_db_get_filename (void)
 
         if (G_UNLIKELY (filename == NULL))
                 filename = g_build_filename (
-                        g_get_user_data_dir (), PACKAGE ".db", NULL);
+                        gva_get_user_data_dir (), "games.db", NULL);
 
         return filename;
 }

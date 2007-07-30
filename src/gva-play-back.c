@@ -216,6 +216,13 @@ play_back_add_input_file (const gchar *inpfile,
         g_free (title);
 }
 
+/**
+ * gva_play_back_init:
+ *
+ * Initializes the Recorded Games window.
+ *
+ * This function should be called once when the application starts.
+ **/
 void
 gva_play_back_init (void)
 {
@@ -277,6 +284,14 @@ gva_play_back_init (void)
         play_back_selection_changed_cb (gtk_tree_view_get_selection (view));
 }
 
+/**
+ * gva_play_back_show:
+ * @inpname: an input filename or %NULL
+ *
+ * Refreshes the contents of the Recorded Games window, attempts to
+ * select the row corresponding to @inpname (if @inpname is not %NULL),
+ * and finally shows the window.
+ **/
 void
 gva_play_back_show (const gchar *inpname)
 {

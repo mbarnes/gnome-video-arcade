@@ -1,8 +1,6 @@
 <!-- ##### SECTION Title ##### -->
-GvaCellRendererPixbuf
 
 <!-- ##### SECTION Short_Description ##### -->
-
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -30,14 +28,6 @@ GvaCellRendererPixbuf
 
 @gvacellrendererpixbuf: the object which received the signal.
 @arg1: 
-
-<!-- ##### STRUCT GvaCellRendererPixbufClass ##### -->
-<para>
-
-</para>
-
-@parent_class: 
-@clicked: 
 
 <!-- ##### FUNCTION gva_cell_renderer_pixbuf_new ##### -->
 <para>

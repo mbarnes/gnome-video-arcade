@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-favorites
+ * @short_description: Favorite Games Management
+ **/
+
 #ifndef GVA_FAVORITES_H
 #define GVA_FAVORITES_H
 
@@ -24,9 +29,9 @@
 G_BEGIN_DECLS
 
 GSList *        gva_favorites_copy              (void);
-void            gva_favorites_insert            (const gchar *name);
-void            gva_favorites_remove            (const gchar *name);
-gboolean        gva_favorites_contains          (const gchar *name);
+void            gva_favorites_insert            (const gchar *game);
+void            gva_favorites_remove            (const gchar *game);
+gboolean        gva_favorites_contains          (const gchar *game);
 
 G_END_DECLS
 

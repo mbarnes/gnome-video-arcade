@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-properties
+ * @short_description: Properties Window
+ **/
+
 #ifndef GVA_PROPERTIES_H
 #define GVA_PROPERTIES_H
 

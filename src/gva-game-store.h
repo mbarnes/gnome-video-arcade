@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-game-store
+ * @short_description: A #GtkTreeModel that stores game information
+ **/
+
 #ifndef GVA_GAME_STORE_H
 #define GVA_GAME_STORE_H
 

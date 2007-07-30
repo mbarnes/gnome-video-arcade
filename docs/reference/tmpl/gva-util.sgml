@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-gva-util
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Miscellaneous Utilities
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -22,7 +22,7 @@ Miscellaneous Utilities
 
 </para>
 
-@romname: 
+@game: 
 @Returns: 
 
 

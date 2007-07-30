@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-gva-time
+
 
 <!-- ##### SECTION Short_Description ##### -->
-A GBoxed type representing time_t
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -19,25 +19,7 @@ A GBoxed type representing time_t
 
 <!-- ##### MACRO GVA_TYPE_TIME ##### -->
 <para>
-
 </para>
 
-
-
-<!-- ##### FUNCTION gva_time_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION gva_time_set_tree_sortable_func ##### -->
-<para>
-
-</para>
-
-@sortable: 
-@sort_column_id: 
 
 

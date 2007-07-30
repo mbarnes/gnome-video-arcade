@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-GvaColumnManager
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Manages the columns of a GtkTreeView
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-mame-process
+ * @short_description: An abstraction of a UNIX process running MAME
+ **/
+
 #ifndef GVA_MAME_PROCESS_H
 #define GVA_MAME_PROCESS_H
 

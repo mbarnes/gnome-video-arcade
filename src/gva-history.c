@@ -51,28 +51,39 @@ history_file_open (GError **error)
 static void
 history_file_mark (const gchar *line, gint64 offset)
 {
-        gchar **names;
+        gchar **games;
         guint length, ii;
 
         g_array_append_val (history_file_offset_array, offset);
 
         /* Skip "$info=" prefix. */
-        names = g_strsplit (line + 6, ",", -1);
-        length = g_strv_length (names);
+        games = g_strsplit (line + 6, ",", -1);
+        length = g_strv_length (games);
 
         for (ii = 0; ii < length; ii++)
         {
-                if (*g_strstrip (names[ii]) == '\0')
+                if (*g_strstrip (games[ii]) == '\0')
                         continue;
 
                 g_hash_table_insert (
-                        history_file_offset_table, g_strdup (names[ii]),
+                        history_file_offset_table, g_strdup (games[ii]),
                         GUINT_TO_POINTER (history_file_offset_array->len - 1));
         }
 
-        g_strfreev (names);
+        g_strfreev (games);
 }
 
+/**
+ * gva_history_init:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Scans the arcade history file and creates an index of games.  If an
+ * error occurs, it returns %FALSE and sets @error.
+ *
+ * This function should be called once when the application starts.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
 gboolean
 gva_history_init (GError **error)
 {
@@ -120,8 +131,18 @@ gva_history_init (GError **error)
         return (status == G_IO_STATUS_EOF);
 }
 
+/**
+ * gva_history_lookup:
+ * @game: the name of a game
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns arcade history information for @game.  If an error occurs,
+ * it returns %FALSE and sets @error.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
 gchar *
-gva_history_lookup (const gchar *name,
+gva_history_lookup (const gchar *game,
                     GError **error)
 {
         GIOChannel *channel;
@@ -133,7 +154,7 @@ gva_history_lookup (const gchar *name,
         gint64 offset;
         guint index;
 
-        g_return_val_if_fail (name != NULL, NULL);
+        g_return_val_if_fail (game != NULL, NULL);
         g_return_val_if_fail (history_file_offset_array != NULL, NULL);
         g_return_val_if_fail (history_file_offset_table != NULL, NULL);
 
@@ -146,7 +167,7 @@ gva_history_lookup (const gchar *name,
         free_history = TRUE;  /* assume failure */
 
         if (!g_hash_table_lookup_extended (
-                history_file_offset_table, name, &key, &value))
+                history_file_offset_table, game, &key, &value))
                 goto exit;
 
         index = GPOINTER_TO_UINT (value);

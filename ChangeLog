@@ -1,3 +1,17 @@
+2007-07-29  Matthew Barnes  <mbarnes@redhat.com>
+
+	* Add some more developer documentation.
+	* Move section documentation to header files.
+
+	* src/gva-db.c (gva_db_get_filename):
+	Call gva_get_user_data_dir().
+	Move SQLite database file to
+	${user_data_dir}/applications/${package}/games.db.
+
+	* src/gva-util.c (gva_get_user_data_dir):
+	New function returns the user-specific data directory for this
+	application.
+
 2007-07-26  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:

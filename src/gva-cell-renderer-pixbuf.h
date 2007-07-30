@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-cell-renderer-pixbuf
+ * @short_description: A clickable #GtkCellRendererPixbuf
+ **/
+
 #ifndef GVA_CELL_RENDERER_PIXBUF_H
 #define GVA_CELL_RENDERER_PIXBUF_H
 

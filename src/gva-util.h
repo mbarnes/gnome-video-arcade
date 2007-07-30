@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-util
+ * @short_description: Miscellaneous Utilities
+ **/
+
 #ifndef GVA_UTIL_H
 #define GVA_UTIL_H
 
@@ -23,12 +28,13 @@
 
 G_BEGIN_DECLS
 
-gchar *         gva_choose_inpname              (const gchar *romname);
+gchar *         gva_choose_inpname              (const gchar *game);
 gchar *         gva_find_data_file              (const gchar *basename);
 const gchar *   gva_get_last_version            (void);
 gchar *         gva_get_monospace_font_name     (void);
 void            gva_get_time_elapsed            (GTimeVal *start_time,
                                                  GTimeVal *time_elapsed);
+const gchar *   gva_get_user_data_dir           (void);
 
 G_END_DECLS
 

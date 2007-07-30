@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-db
+ * @short_description: Database Management
+ **/
+
 #ifndef GVA_DB_H
 #define GVA_DB_H
 

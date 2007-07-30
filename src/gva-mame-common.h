@@ -16,10 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-mame-common
+ * @short_description: Definitions common to all MAME backends
+ **/
+
 #ifndef GVA_MAME_COMMON_H
 #define GVA_MAME_COMMON_H
-
-/* Definitions and utilities common to all MAME backends. */
 
 #include "gva-common.h"
 #include "gva-mame.h"

@@ -18,6 +18,8 @@
 
 #include "gva-util.h"
 
+#include <errno.h>
+
 #include "gva-error.h"
 #include "gva-mame.h"
 
@@ -44,26 +46,37 @@ inpname_exists (const gchar *inppath, const gchar *inpname)
         return exists;
 }
 
+/**
+ * gva_choose_inpname:
+ * @game: the name of a game
+ *
+ * Returns the name of a MAME input file for @game that does not already
+ * exist.  For example, given the game "pacman" the function will return
+ * the first filename that does not already exist: "pacman.inp",
+ * "pacman-1.inp", "pacman-2.inp", etc.
+ *
+ * Returns value: a newly-allocated input filename for @game
+ **/
 gchar *
-gva_choose_inpname (const gchar *romname)
+gva_choose_inpname (const gchar *game)
 {
         gchar *inpname;
         gchar *inppath;
         gint nn = 1;
         GError *error = NULL;
 
-        g_return_val_if_fail (romname != NULL, NULL);
+        g_return_val_if_fail (game != NULL, NULL);
 
         inppath = gva_mame_get_config_value ("input_directory", &error);
 
-        if (inppath == NULL || !inpname_exists (inppath, romname))
+        if (inppath == NULL || !inpname_exists (inppath, game))
         {
                 gva_error_handle (&error);
-                inpname = g_strdup (romname);
+                inpname = g_strdup (game);
         }
         else while (TRUE)
         {
-                inpname = g_strdup_printf ("%s-%d", romname, nn++);
+                inpname = g_strdup_printf ("%s-%d", game, nn++);
                 if (!inpname_exists (inppath, inpname))
                         break;
                 g_free (inpname);
@@ -74,6 +87,18 @@ gva_choose_inpname (const gchar *romname)
         return inpname;
 }
 
+/**
+ * gva_find_data_file:
+ * @basename: the base name of the file to search for
+ *
+ * Searches for a file named @basename in a number of standard system-wide
+ * directories and returns a newly-allocated string containing the path to
+ * the first match.  The string should be freed with g_free().  If no match
+ * is found the function returns %NULL.
+ *
+ * Returns: the pathname of the first match, or %NULL if no match was
+ *          found
+ **/
 gchar *
 gva_find_data_file (const gchar *basename)
 {
@@ -101,6 +126,14 @@ gva_find_data_file (const gchar *basename)
         return NULL;
 }
 
+/**
+ * gva_get_last_version:
+ *
+ * Returns the most recently run version of GNOME Video Arcade prior to
+ * the current run.  This is used to detect GNOME Video Arcade upgrades.
+ *
+ * Returns: the most recently run version of GNOME Video Arcade
+ **/
 const gchar *
 gva_get_last_version (void)
 {
@@ -131,6 +164,14 @@ gva_get_last_version (void)
         return last_version;
 }
 
+/**
+ * gva_get_monospace_font_name:
+ *
+ * Returns the user's preferred fixed-width font name.  The return value
+ * is a newly-allocated string and should be freed with g_free().
+ *
+ * Returns: the name of a fixed-width font
+ */
 gchar *
 gva_get_monospace_font_name (void)
 {
@@ -148,6 +189,14 @@ gva_get_monospace_font_name (void)
         return font_name;
 }
 
+/**
+ * gva_get_time_elapsed:
+ * @start_time: a start time
+ * @time_elapsed: location to put the time elasped
+ *
+ * Writes the time elapsed since @start_time to @time_elapsed.
+ * Set the start time by calling g_get_current_time().
+ **/
 void
 gva_get_time_elapsed (GTimeVal *start_time,
                       GTimeVal *time_elapsed)
@@ -158,4 +207,30 @@ gva_get_time_elapsed (GTimeVal *start_time,
         g_get_current_time (time_elapsed);
         time_elapsed->tv_sec -= start_time->tv_sec;
         g_time_val_add (time_elapsed, -start_time->tv_usec);
+}
+
+/**
+ * gva_get_user_data_dir:
+ *
+ * Returns the directory where user-specific application data is stored.
+ * The function also creates the directory the first time it is called.
+ **/
+const gchar *
+gva_get_user_data_dir (void)
+{
+        static gchar *user_data_dir = NULL;
+
+        if (G_UNLIKELY (user_data_dir == NULL))
+        {
+                user_data_dir = g_build_filename (
+                        g_get_user_data_dir (),
+                        "applications", PACKAGE, NULL);
+
+                if (g_mkdir_with_parents (user_data_dir, 0777) < 0)
+                        g_warning (
+                                "Unable to create %s: %s",
+                                user_data_dir, g_strerror (errno));
+        }
+
+        return user_data_dir;
 }

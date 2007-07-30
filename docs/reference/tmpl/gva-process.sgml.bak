@@ -1,8 +1,6 @@
 <!-- ##### SECTION Title ##### -->
-GvaProcess
 
 <!-- ##### SECTION Short_Description ##### -->
-
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -75,18 +73,6 @@ GvaProcess
 <para>
 
 </para>
-
-<!-- ##### STRUCT GvaProcessClass ##### -->
-<para>
-
-</para>
-
-@parent_class: 
-@stdout_read_line: 
-@stderr_read_line: 
-@stdout_ready: 
-@stderr_ready: 
-@exited: 
 
 <!-- ##### FUNCTION gva_process_new ##### -->
 <para>

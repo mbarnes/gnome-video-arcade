@@ -1,8 +1,6 @@
 <!-- ##### SECTION Title ##### -->
-GvaMameProcess
 
 <!-- ##### SECTION Short_Description ##### -->
-
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -22,13 +20,6 @@ GvaMameProcess
 
 </para>
 
-
-<!-- ##### STRUCT GvaMameProcessClass ##### -->
-<para>
-
-</para>
-
-@parent_class: 
 
 <!-- ##### FUNCTION gva_mame_process_spawn ##### -->
 <para>

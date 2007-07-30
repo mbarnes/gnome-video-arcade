@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-main
+ * @short_description: Main Window
+ **/
+
 #ifndef GVA_MAIN_H
 #define GVA_MAIN_H
 
@@ -29,7 +34,7 @@ GvaProcess *  gva_main_build_database           (GError **error);
 void          gva_main_connect_proxy_cb         (GtkUIManager *manager,
                                                  GtkAction *action,
                                                  GtkWidget *proxy);
-guint         gva_main_statusbar_get_context_id (const gchar *context);
+guint         gva_main_statusbar_get_context_id (const gchar *context_description);
 guint         gva_main_statusbar_push           (guint context_id,
                                                  const gchar *format,
                                                  ...);

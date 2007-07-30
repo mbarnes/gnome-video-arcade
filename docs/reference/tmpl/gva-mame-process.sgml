@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-GvaMameProcess
+
 
 <!-- ##### SECTION Short_Description ##### -->
-An abstraction of a UNIX process running MAME
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

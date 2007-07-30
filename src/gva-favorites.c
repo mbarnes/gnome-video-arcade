@@ -41,9 +41,9 @@ favorites_load (void)
 
         for (iter = favorites; iter != NULL; iter = iter->next)
         {
-                gchar *name = iter->data;
-                iter->data = (gchar *) g_intern_string (name);
-                g_free (name);
+                gchar *game = iter->data;
+                iter->data = (gchar *) g_intern_string (game);
+                g_free (game);
         }
 
         favorites = g_slist_sort (favorites, (GCompareFunc) strcmp);
@@ -62,6 +62,14 @@ favorites_save (void)
         gva_error_handle (&error);
 }
 
+/**
+ * gva_favorites_copy:
+ *
+ * Returns a copy of the favorite games list.  The contents of the list
+ * must not be freed.  The list itself should be freed with g_slist_free().
+ *
+ * Returns: a copy of the favorite games list
+ **/
 GSList *
 gva_favorites_copy (void)
 {
@@ -71,49 +79,69 @@ gva_favorites_copy (void)
         return g_slist_copy (favorites);
 }
 
+/**
+ * gva_favorites_insert:
+ * @game: the name of a game
+ *
+ * Inserts @game into the favorite games list.
+ **/
 void
-gva_favorites_insert (const gchar *name)
+gva_favorites_insert (const gchar *game)
 {
         if (G_UNLIKELY (!initialized))
                 favorites_load ();
 
-        g_return_if_fail (name != NULL);
+        g_return_if_fail (game != NULL);
 
-        name = g_intern_string (name);
+        game = g_intern_string (game);
 
-        if (g_slist_find (favorites, name) != NULL)
+        if (g_slist_find (favorites, game) != NULL)
                 return;
 
         favorites = g_slist_insert_sorted (
-                favorites, (gchar *) name, (GCompareFunc) strcmp);
+                favorites, (gchar *) game, (GCompareFunc) strcmp);
 
         favorites_save ();
 }
 
+/**
+ * gva_favorites_remove:
+ * @game: the name of a game
+ *
+ * Removes @game from the favorite games list.
+ **/
 void
-gva_favorites_remove (const gchar *name)
+gva_favorites_remove (const gchar *game)
 {
         if (G_UNLIKELY (!initialized))
                 favorites_load ();
 
-        g_return_if_fail (name != NULL);
+        g_return_if_fail (game != NULL);
 
-        name = g_intern_string (name);
+        game = g_intern_string (game);
 
-        favorites = g_slist_remove_all (favorites, name);
+        favorites = g_slist_remove_all (favorites, game);
 
         favorites_save ();
 }
 
+/**
+ * gva_favorites_contains:
+ * @game: the name of a game
+ *
+ * Returns %TRUE if the favorite games list contains @game.
+ *
+ * Returns: %TRUE if @game is a favorite, otherwise %FALSE
+ **/
 gboolean
-gva_favorites_contains (const gchar *name)
+gva_favorites_contains (const gchar *game)
 {
         if (G_UNLIKELY (!initialized))
                 favorites_load ();
 
-        g_return_val_if_fail (name != NULL, FALSE);
+        g_return_val_if_fail (game != NULL, FALSE);
 
-        name = g_intern_string (name);
+        game = g_intern_string (game);
 
-        return (g_slist_find (favorites, name) != NULL);
+        return (g_slist_find (favorites, game) != NULL);
 }

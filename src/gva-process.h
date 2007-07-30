@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-process
+ * @short_description: An abstraction of a UNIX process
+ **/
+
 #ifndef GVA_PROCESS_H
 #define GVA_PROCESS_H
 

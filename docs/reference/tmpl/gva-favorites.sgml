@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-gva-favorites
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Favorite Games Management
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -30,7 +30,7 @@ Favorite Games Management
 
 </para>
 
-@name: 
+@game: 
 
 
 <!-- ##### FUNCTION gva_favorites_remove ##### -->
@@ -38,7 +38,7 @@ Favorite Games Management
 
 </para>
 
-@name: 
+@game: 
 
 
 <!-- ##### FUNCTION gva_favorites_contains ##### -->
@@ -46,7 +46,7 @@ Favorite Games Management
 
 </para>
 
-@name: 
+@game: 
 @Returns: 
 
 

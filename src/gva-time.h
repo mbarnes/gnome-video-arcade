@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-time
+ * @short_description: A #GBoxed type for time_t
+ **/
+
 #ifndef GVA_TIME_H
 #define GVA_TIME_H
 
@@ -28,13 +33,16 @@
  * of G_TYPE_BOXED.
  */
 
+/**
+ * GVA_TYPE_TIME:
+ *
+ * The #GType for a boxed type holding a <type>time_t</type> value.
+ **/
 #define GVA_TYPE_TIME   (gva_time_get_type ())
 
 G_BEGIN_DECLS
 
 GType           gva_time_get_type               (void);
-void            gva_time_set_tree_sortable_func (GtkTreeSortable *sortable,
-                                                 gint sort_column_id);
 
 G_END_DECLS
 

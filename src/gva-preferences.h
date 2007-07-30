@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-preferences
+ * @short_description: Preferences Window
+ **/
+
 #ifndef GVA_PREFERENCES_H
 #define GVA_PREFERENCES_H
 

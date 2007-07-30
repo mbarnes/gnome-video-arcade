@@ -70,6 +70,13 @@ preferences_init_columns (void)
                 column_manager, TRUE, TRUE, 0);
 }
 
+/**
+ * gva_preferences_init:
+ *
+ * Initializes the Preferences window.
+ *
+ * This function should be called once when the application starts.
+ **/
 void
 gva_preferences_init (void)
 {
@@ -90,6 +97,14 @@ gva_preferences_init (void)
         preferences_init_columns ();
 }
 
+/**
+ * gva_preferences_get_auto_save:
+ *
+ * Returns the user's preference for whether to restore the emulated
+ * machine's previous state when starting a game.
+ *
+ * Returns: %TRUE to restore state, %FALSE to cold boot
+ **/
 gboolean
 gva_preferences_get_auto_save (void)
 {
@@ -106,6 +121,16 @@ gva_preferences_get_auto_save (void)
         return auto_save;
 }
 
+/**
+ * gva_preferences_set_auto_save:
+ * @auto_save: the user's preference
+ *
+ * Accepts the user's preference for whether to restore the emulated
+ * machine's previous state when starting a game.
+ *
+ * The preference is stored in GConf key
+ * <filename>/apps/gnome-video-arcade/auto-save</filename>.
+ **/
 void
 gva_preferences_set_auto_save (gboolean auto_save)
 {
@@ -119,6 +144,14 @@ gva_preferences_set_auto_save (gboolean auto_save)
         g_object_unref (client);
 }
 
+/**
+ * gva_preferences_get_full_screen:
+ *
+ * Returns the user's preference for whether to start games in full
+ * screen mode.
+ *
+ * Returns: %TRUE to start in full screen mode, %FALSE to start in a window
+ **/
 gboolean
 gva_preferences_get_full_screen (void)
 {
@@ -135,6 +168,16 @@ gva_preferences_get_full_screen (void)
         return full_screen;
 }
 
+/**
+ * gva_preferences_set_full_screen:
+ * @full_screen: the user's preference
+ *
+ * Accepts the user's preference for whether to start games in full
+ * screen mode.
+ *
+ * The preference is stored in GConf key
+ * <filename>/apps/gnome-video-arcade/full-screen</filename>.
+ **/
 void
 gva_preferences_set_full_screen (gboolean full_screen)
 {

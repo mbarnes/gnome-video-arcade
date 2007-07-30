@@ -1,8 +1,8 @@
 <!-- ##### SECTION Title ##### -->
-gva-history
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Arcade History Management
+
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -31,7 +31,7 @@ Arcade History Management
 
 </para>
 
-@name: 
+@game: 
 @error: 
 @Returns: 
 

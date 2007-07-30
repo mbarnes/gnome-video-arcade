@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-history
+ * @short_description: Arcade History Management
+ **/
+
 #ifndef GVA_HISTORY_H
 #define GVA_HISTORY_H
 
@@ -24,7 +29,7 @@
 G_BEGIN_DECLS
 
 gboolean        gva_history_init                (GError **error);
-gchar *         gva_history_lookup              (const gchar *name,
+gchar *         gva_history_lookup              (const gchar *game,
                                                  GError **error);
 
 G_END_DECLS

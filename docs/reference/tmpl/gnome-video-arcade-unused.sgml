@@ -39,3 +39,18 @@
 @stderr_ready: 
 @exited: 
 
+<!-- ##### FUNCTION gva_time_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gva_time_set_tree_sortable_func ##### -->
+<para>
+
+</para>
+
+@sortable: 
+@sort_column_id: 
+

@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-tree-view
+ * @short_description: Main Tree View
+ **/
+
 #ifndef GVA_TREE_VIEW_H
 #define GVA_TREE_VIEW_H
 

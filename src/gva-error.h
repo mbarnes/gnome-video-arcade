@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-error
+ * @short_description: Error Management
+ **/
+
 #ifndef GVA_ERROR_H
 #define GVA_ERROR_H
 

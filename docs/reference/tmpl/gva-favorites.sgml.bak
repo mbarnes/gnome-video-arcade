@@ -1,20 +1,16 @@
 <!-- ##### SECTION Title ##### -->
-gva-favorites
 
 <!-- ##### SECTION Short_Description ##### -->
-
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -32,7 +28,7 @@ gva-favorites
 
 </para>
 
-@name: 
+@game: 
 
 
 <!-- ##### FUNCTION gva_favorites_remove ##### -->
@@ -40,7 +36,7 @@ gva-favorites
 
 </para>
 
-@name: 
+@game: 
 
 
 <!-- ##### FUNCTION gva_favorites_contains ##### -->
@@ -48,7 +44,7 @@ gva-favorites
 
 </para>
 
-@name: 
+@game: 
 @Returns: 
 
 

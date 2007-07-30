@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-play-back
+ * @short_description: Recorded Games Window
+ **/
+
 #ifndef GVA_PLAY_BACK_H
 #define GVA_PLAY_BACK_H
 

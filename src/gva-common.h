@@ -16,6 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION: gva-common
+ * @short_description: Common Definitions
+ **/
+
 #ifndef GVA_COMMON_H
 #define GVA_COMMON_H
 

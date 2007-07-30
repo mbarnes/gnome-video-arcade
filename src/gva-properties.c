@@ -141,6 +141,13 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
         }
 }
 
+/**
+ * gva_properties_init:
+ *
+ * Initializes the Properties window.
+ *
+ * This function should be called once when the application starts.
+ **/
 void
 gva_properties_init (void)
 {
