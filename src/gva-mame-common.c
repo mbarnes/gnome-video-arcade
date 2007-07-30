@@ -63,7 +63,8 @@ gva_mame_command (const gchar *arguments,
         GvaProcess *process;
         gint status;
 
-        process = gva_mame_process_spawn (arguments, error);
+        process = gva_mame_process_spawn (
+                arguments, G_PRIORITY_DEFAULT_IDLE, error);
         if (process == NULL)
                 return -1;
 
@@ -275,7 +276,8 @@ GvaProcess *
 gva_mame_list_xml (GError **error)
 {
         /* Execute the command "${mame} -listxml". */
-        return gva_mame_process_spawn ("-listxml", error);
+        return gva_mame_process_spawn (
+                "-listxml", G_PRIORITY_DEFAULT_IDLE, error);
 }
 
 static void
@@ -350,7 +352,8 @@ gva_mame_verify_roms (GvaMameCallback callback,
         g_return_val_if_fail (callback != NULL, NULL);
 
         /* Execute the command "${mame} -verifyroms". */
-        process = gva_mame_process_spawn ("-verifyroms", error);
+        process = gva_mame_process_spawn (
+                "-verifyroms", G_PRIORITY_LOW, error);
         if (process == NULL)
                 return NULL;
 
@@ -377,7 +380,8 @@ gva_mame_verify_samples (GvaMameCallback callback,
         g_return_val_if_fail (callback != NULL, NULL);
 
         /* Execute the command "${mame} -verifysamples". */
-        process = gva_mame_process_spawn ("-verifysamples", error);
+        process = gva_mame_process_spawn (
+                "-verifysamples", G_PRIORITY_LOW, error);
         if (process == NULL)
                 return NULL;
 
@@ -434,7 +438,8 @@ gva_mame_run_game (const gchar *name,
         g_string_append_printf (arguments, "%s", name);
 
         /* Execute the command "${mame} ${name}". */
-        process = gva_mame_process_spawn (arguments->str, error);
+        process = gva_mame_process_spawn (
+                arguments->str, G_PRIORITY_LOW, error);
 
         g_string_free (arguments, TRUE);
 
@@ -482,7 +487,8 @@ gva_mame_record_game (const gchar *name,
         g_string_append_printf (arguments, "-record %s %s", inpname, name);
 
         /* Execute the command "${mame} -record ${inpname} ${name}". */
-        process = gva_mame_process_spawn (arguments->str, error);
+        process = gva_mame_process_spawn (
+                arguments->str, G_PRIORITY_LOW, error);
 
         g_string_free (arguments, TRUE);
 
@@ -527,7 +533,8 @@ gva_mame_playback_game (const gchar *name,
         g_string_append_printf (arguments, "-playback %s", inpname);
 
         /* Execute the command "${mame} -playback ${inpname}". */
-        process = gva_mame_process_spawn (arguments->str, error);
+        process = gva_mame_process_spawn (
+                arguments->str, G_PRIORITY_LOW, error);
 
         g_string_free (arguments, TRUE);
 

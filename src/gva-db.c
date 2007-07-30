@@ -610,14 +610,15 @@ db_parser_exit (GvaProcess *process,
 
                 g_markup_parse_context_end_parse (
                         data->context, &process->error);
-                gva_db_transaction_commit (&error);
-                gva_error_handle (&error);
 
                 db_verify_update_status (
                         data->verify_roms, data->romsets, "romset");
                 db_verify_update_status (
                         data->verify_samples, data->samplesets, "sampleset");
                 gva_db_execute (SQL_DELETE_NOT_FOUND, &process->error);
+
+                gva_db_transaction_commit (&error);
+                gva_error_handle (&error);
 
                 gva_process_get_time_elapsed (process, &time_elapsed);
 

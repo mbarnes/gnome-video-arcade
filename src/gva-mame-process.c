@@ -137,7 +137,9 @@ gva_mame_process_get_type (void)
 }
 
 GvaProcess *
-gva_mame_process_spawn (const gchar *arguments, GError **error)
+gva_mame_process_spawn (const gchar *arguments,
+                        gint priority,
+                        GError **error)
 {
         GvaProcess *process;
         gchar *command_line;
@@ -145,7 +147,7 @@ gva_mame_process_spawn (const gchar *arguments, GError **error)
         g_return_val_if_fail (arguments != NULL, FALSE);
 
         command_line = g_strdup_printf ("%s %s", MAME_PROGRAM, arguments);
-        process = gva_process_spawn (command_line, error);
+        process = gva_process_spawn (command_line, priority, error);
         g_free (command_line);
 
         return process;

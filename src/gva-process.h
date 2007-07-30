@@ -76,10 +76,12 @@ struct _GvaProcessClass
 
 GType           gva_process_get_type            (void);
 GvaProcess *    gva_process_new                 (GPid pid,
+                                                 gint priority,
                                                  gint standard_input,
                                                  gint standard_output,
                                                  gint standard_error);
 GvaProcess *    gva_process_spawn               (const gchar *command_line,
+                                                 gint priority,
                                                  GError **error);
 gboolean        gva_process_write_stdin         (GvaProcess *process,
                                                  const gchar *data,

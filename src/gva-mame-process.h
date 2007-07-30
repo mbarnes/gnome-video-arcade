@@ -63,6 +63,7 @@ struct _GvaMameProcessClass
 
 GType           gva_mame_process_get_type       (void);
 GvaProcess *    gva_mame_process_spawn          (const gchar *arguments,
+                                                 gint priority,
                                                  GError **error);
 
 G_END_DECLS

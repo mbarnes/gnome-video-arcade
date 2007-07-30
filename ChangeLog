@@ -1,3 +1,24 @@
+2007-07-30  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-db.c (db_parser_exit):
+	Commit the transaction *after* verify results are inserted.
+
+	* src/gva-process.c:
+	Add a "priority" property (default: G_PRIORITY_DEFAULT_IDLE).
+	Add I/O watches at the requested priority.
+
+	* src/gva-process.c (gva_process_new), (gva_process_spawn):
+	* src/gva-mame-process.c (gva_mame_process_spawn):
+	Add a "priority" parameter.
+
+	* src/gva-mame-common (gva_mame_command), (gva_mame_list_xml):
+	Spawn the MAME process at G_PRIORITY_DEFAULT_IDLE.
+
+	* src/gva-mame-common (gva_mame_verify_roms),
+	(gva_mame_verify_samples), (gva_mame_run_game),
+	(gva_mame_record_game), (gva_mame_playback_game):
+	Spawn the MAME process at G_PRIORITY_LOW.
+
 2007-07-29  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-db.c (gva_db_build):

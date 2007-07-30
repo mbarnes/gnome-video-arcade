@@ -36,6 +36,7 @@ enum {
         PROP_STDIN,
         PROP_STDOUT,
         PROP_STDERR,
+        PROP_PRIORITY,
         PROP_PROGRESS
 };
 
@@ -49,6 +50,7 @@ enum {
 struct _GvaProcessPrivate
 {
         GPid pid;  /* XXX assume this is a gint, not portable */
+        gint priority;
         GIOChannel *stdin_channel;
         GIOChannel *stdout_channel;
         GIOChannel *stderr_channel;
@@ -69,6 +71,24 @@ struct _GvaProcessPrivate
 static gpointer parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
 static GSList *active_list = NULL;
+
+static GIOChannel *
+process_new_channel (gint fd)
+{
+        GIOChannel *channel = NULL;
+
+        if (fd > 0)
+        {
+                GError *error = NULL;
+
+                channel = g_io_channel_unix_new (fd);
+                g_io_channel_set_close_on_unref (channel, TRUE);
+                g_io_channel_set_encoding (channel, NULL, &error);
+                gva_error_handle (&error);
+        }
+
+        return channel;
+}
 
 static void
 process_propagate_error (GvaProcess *process, GError *error)
@@ -195,6 +215,38 @@ process_stderr_ready (GIOChannel *source,
                 &process->priv->stderr_source_id, signals[STDERR_READY]);
 }
 
+static GObject *
+process_constructor (GType type,
+                     guint n_construct_properties,
+                     GObjectConstructParam *construct_properties)
+{
+        GvaProcessPrivate *priv;
+        GObject *object;
+
+        /* Chain up to parent's constructor() method. */
+        object = G_OBJECT_CLASS (parent_class)->constructor (
+                type, n_construct_properties, construct_properties);
+
+        priv = GVA_PROCESS_GET_PRIVATE (object);
+
+        priv->child_source_id = g_child_watch_add_full (
+                priv->priority, priv->pid,
+                (GChildWatchFunc) process_exited, object,
+                (GDestroyNotify) process_source_removed);
+
+        priv->stdout_source_id = g_io_add_watch_full (
+                priv->stdout_channel, priv->priority,
+                G_IO_IN | G_IO_HUP, (GIOFunc) process_stdout_ready,
+                object, (GDestroyNotify) process_source_removed);
+
+        priv->stderr_source_id = g_io_add_watch_full (
+                priv->stderr_channel, priv->priority,
+                G_IO_IN | G_IO_HUP, (GIOFunc) process_stderr_ready,
+                object, (GDestroyNotify) process_source_removed);
+
+        return object;
+}
+
 static void
 process_set_property (GObject *object,
                       guint property_id,
@@ -202,66 +254,32 @@ process_set_property (GObject *object,
                       GParamSpec *pspec)
 {
         GvaProcessPrivate *priv = GVA_PROCESS_GET_PRIVATE (object);
-        GIOChannel *channel;
         gint fd;
-        GError *error = NULL;
-
-#define CHECK_FOR_ERROR \
-        if (error != NULL) g_error ("%s: %s", G_STRLOC, error->message)
 
         switch (property_id)
         {
                 case PROP_PID:
                         /* XXX Not portable */
                         priv->pid = g_value_get_uint (value);
-                        g_assert (priv->child_source_id == 0);
-                        priv->child_source_id = g_child_watch_add_full (
-                                G_PRIORITY_DEFAULT, priv->pid,
-                                (GChildWatchFunc) process_exited, object,
-                                (GDestroyNotify) process_source_removed);
                         return;
 
                 case PROP_STDIN:
-                        if ((fd = g_value_get_int (value)) < 0)
-                                return;
-                        channel = g_io_channel_unix_new (fd);
-                        g_io_channel_set_close_on_unref (channel, TRUE);
-                        g_io_channel_set_encoding (channel, NULL, &error);
-                        CHECK_FOR_ERROR;
-                        g_assert (priv->stdin_channel == NULL);
-                        priv->stdin_channel = channel;
+                        fd = g_value_get_int (value);
+                        priv->stdin_channel = process_new_channel (fd);
                         return;
 
                 case PROP_STDOUT:
-                        if ((fd = g_value_get_int (value)) < 0)
-                                return;
-                        channel = g_io_channel_unix_new (fd);
-                        g_io_channel_set_close_on_unref (channel, TRUE);
-                        g_io_channel_set_encoding (channel, NULL, &error);
-                        CHECK_FOR_ERROR;
-                        g_assert (priv->stdout_source_id == 0);
-                        priv->stdout_source_id = g_io_add_watch_full (
-                                channel, G_PRIORITY_LOW, G_IO_IN | G_IO_HUP,
-                                (GIOFunc) process_stdout_ready, object,
-                                (GDestroyNotify) process_source_removed);
-                        g_assert (priv->stdout_channel == NULL);
-                        priv->stdout_channel = channel;
+                        fd = g_value_get_int (value);
+                        priv->stdout_channel = process_new_channel (fd);
                         return;
 
                 case PROP_STDERR:
-                        if ((fd = g_value_get_int (value)) < 0)
-                                return;
-                        channel = g_io_channel_unix_new (fd);
-                        g_io_channel_set_close_on_unref (channel, TRUE);
-                        g_io_channel_set_encoding (channel, NULL, &error);
-                        CHECK_FOR_ERROR;
-                        g_assert (priv->stderr_source_id == 0);
-                        priv->stderr_source_id = g_io_add_watch_full (
-                                channel, G_PRIORITY_LOW, G_IO_IN | G_IO_HUP,
-                                (GIOFunc) process_stderr_ready, object,
-                                (GDestroyNotify) process_source_removed);
-                        g_assert (priv->stderr_channel == NULL);
-                        priv->stderr_channel = channel;
+                        fd = g_value_get_int (value);
+                        priv->stderr_channel = process_new_channel (fd);
+                        return;
+
+                case PROP_PRIORITY:
+                        priv->priority = g_value_get_int (value);
                         return;
 
                 case PROP_PROGRESS:
@@ -273,7 +291,6 @@ process_set_property (GObject *object,
 
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 
-#undef CHECK_FOR_ERROR
 }
 
 static void
@@ -311,6 +328,10 @@ process_get_property (GObject *object,
                         g_value_set_int (
                                 value, (channel != NULL) ?
                                 g_io_channel_unix_get_fd (channel) : -1);
+                        return;
+
+                case PROP_PRIORITY:
+                        g_value_set_int (value, priv->priority);
                         return;
 
                 case PROP_PROGRESS:
@@ -371,6 +392,7 @@ process_class_init (GvaProcessClass *class)
         g_type_class_add_private (class, sizeof (GvaProcessPrivate));
 
         object_class = G_OBJECT_CLASS (class);
+        object_class->constructor = process_constructor;
         object_class->set_property = process_set_property;
         object_class->get_property = process_get_property;
         object_class->finalize = process_finalize;
@@ -419,6 +441,18 @@ process_class_init (GvaProcessClass *class)
                         NULL,
                         NULL,
                         -1, G_MAXINT, -1,
+                        G_PARAM_READWRITE |
+                        G_PARAM_CONSTRUCT_ONLY));
+
+        g_object_class_install_property (
+                object_class,
+                PROP_PRIORITY,
+                g_param_spec_int (
+                        "priority",
+                        NULL,
+                        NULL,
+                        G_MININT, G_MAXINT,
+                        G_PRIORITY_DEFAULT_IDLE,
                         G_PARAM_READWRITE |
                         G_PARAM_CONSTRUCT_ONLY));
 
@@ -503,6 +537,7 @@ gva_process_get_type (void)
 
 GvaProcess *
 gva_process_new (GPid pid,
+                 gint priority,
                  gint standard_input,
                  gint standard_output,
                  gint standard_error)
@@ -514,6 +549,7 @@ gva_process_new (GPid pid,
         return g_object_new (
                 GVA_TYPE_PROCESS,
                 "pid", pid,
+                "priority", priority,
                 "stdin", standard_input,
                 "stdout", standard_output,
                 "stderr", standard_error,
@@ -522,6 +558,7 @@ gva_process_new (GPid pid,
 
 GvaProcess *
 gva_process_spawn (const gchar *command_line,
+                   gint priority,
                    GError **error)
 {
         gchar **argv;
@@ -548,7 +585,8 @@ gva_process_spawn (const gchar *command_line,
                 return NULL;
 
         return gva_process_new (
-                child_pid, standard_input, standard_output, standard_error);
+                child_pid, priority, standard_input,
+                standard_output, standard_error);
 }
 
 gboolean
