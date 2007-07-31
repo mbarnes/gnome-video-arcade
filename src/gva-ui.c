@@ -67,6 +67,13 @@ record_game_exited (GvaProcess *process, gint status, gchar *inpname)
         g_free (inpname);
 }
 
+/**
+ * GVA_ACTION_ABOUT:
+ *
+ * Activation of this action displays the application's About dialog.
+ *
+ * Main menu item: Help -> About
+ **/
 static void
 action_about_cb (GtkAction *action)
 {
@@ -95,6 +102,12 @@ action_about_cb (GtkAction *action)
                 g_object_unref (logo);
 }
 
+/**
+ * GVA_ACTION_AUTO_SAVE:
+ *
+ * This toggle action tracks the user's preference for whether to
+ * restore the emulated machine's previous state when starting a game.
+ **/
 static void
 action_auto_save_cb (GtkToggleAction *action)
 {
@@ -104,11 +117,25 @@ action_auto_save_cb (GtkToggleAction *action)
         gva_preferences_set_auto_save (active);
 }
 
+/**
+ * GVA_ACTION_CONTENTS:
+ *
+ * Activation of this action opens the user documentation for GNOME
+ * Video Arcade.  (XXX Doesn't work yet; documentation is not written.)
+ *
+ * Main menu item: Help -> Contents
+ **/
 static void
 action_contents_cb (GtkAction *action)
 {
 }
 
+/**
+ * GVA_ACTION_FULL_SCREEN:
+ *
+ * This toggle action tracks the user's preference for whether to
+ * start games in full screen mode.
+ **/
 static void
 action_full_screen_cb (GtkToggleAction *action)
 {
@@ -118,6 +145,14 @@ action_full_screen_cb (GtkToggleAction *action)
         gva_preferences_set_full_screen (active);
 }
 
+/**
+ * GVA_ACTION_INSERT_FAVORITE:
+ *
+ * Activation of this action adds the currently selected game to the
+ * user's list of favorites.
+ *
+ * Main menu item: Game -> Add to Favorites
+ **/
 static void
 action_insert_favorite_cb (GtkAction *action)
 {
@@ -146,6 +181,12 @@ action_insert_favorite_cb (GtkAction *action)
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, TRUE);
 }
 
+/**
+ * GVA_ACTION_NEXT_GAME:
+ *
+ * Activation of this action selects the next game, rolling over to
+ * the first game if necessary.
+ **/
 static void
 action_next_game_cb (GtkAction *action)
 {
@@ -174,6 +215,11 @@ action_next_game_cb (GtkAction *action)
         gtk_tree_path_free (path);
 }
 
+/**
+ * GVA_ACTION_PLAY_BACK:
+ *
+ * Activation of this action plays back the selected game recording.
+ **/
 static void
 action_play_back_cb (GtkAction *action)
 {
@@ -220,12 +266,25 @@ action_play_back_cb (GtkAction *action)
         g_list_free (list);
 }
 
+/**
+ * GVA_ACTION_PREFERENCES:
+ *
+ * Activation of this action makes the "Preferences" window visible.
+ *
+ * Main menu item: Edit -> Preferences
+ **/
 static void
 action_preferences_cb (GtkAction *action)
 {
         gtk_widget_show (GVA_WIDGET_PREFERENCES_WINDOW);
 }
 
+/**
+ * GVA_ACTION_PREVIOUS_GAME:
+ *
+ * Activation of this action selects the previous game, rolling over to
+ * the last game if necessary.
+ **/
 static void
 action_previous_game_cb (GtkAction *action)
 {
@@ -254,12 +313,26 @@ action_previous_game_cb (GtkAction *action)
         gtk_tree_path_free (path);
 }
 
+/**
+ * GVA_ACTION_PROPERTIES:
+ *
+ * Activation of this action makes the "Properties" window visible.
+ *
+ * Main menu item: View -> Properties
+ **/
 static void
 action_properties_cb (GtkAction *action)
 {
         gtk_widget_show (GVA_WIDGET_PROPERTIES_WINDOW);
 }
 
+/**
+ * GVA_ACTION_QUIT:
+ *
+ * Activation of this action initiates application shutdown.
+ *
+ * Main menu item: Game -> Quit
+ **/
 static void
 action_quit_cb (GtkAction *action)
 {
@@ -267,6 +340,15 @@ action_quit_cb (GtkAction *action)
         gtk_main_quit ();
 }
 
+/**
+ * GVA_ACTION_RECORD:
+ *
+ * Activation of this action starts the selected game with MAME recording
+ * user inputs to a file.  The "Recorded Games" window will automatically
+ * be displayed when the user exits the game.
+ *
+ * Main menu item: Game -> Record
+ **/
 static void
 action_record_cb (GtkAction *action)
 {
@@ -289,6 +371,14 @@ action_record_cb (GtkAction *action)
                         G_CALLBACK (record_game_exited), inpname);
 }
 
+/**
+ * GVA_ACTION_REMOVE_FAVORITE:
+ *
+ * Activation of this action removes the currently selected game from
+ * the user's list of favorites.
+ *
+ * Main menu item: Game -> Remove from Favorites
+ **/
 static void
 action_remove_favorite_cb (GtkAction *action)
 {
@@ -317,18 +407,38 @@ action_remove_favorite_cb (GtkAction *action)
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
 }
 
+/**
+ * GVA_ACTION_SEARCH:
+ *
+ * This action is not yet implemented.  In a future version of GNOME
+ * Video Arcade it will display the advanced search interface.
+ **/
 static void
 action_search_cb (GtkAction *action)
 {
         /* TODO */
 }
 
+/**
+ * GVA_ACTION_SHOW_PLAY_BACK:
+ *
+ * Activation of this action makes the "Recorded Games" window visible.
+ *
+ * Main menu item: Game -> Play Back...
+ **/
 static void
 action_show_play_back_cb (GtkAction *action)
 {
         gva_play_back_show (NULL);
 }
 
+/**
+ * GVA_ACTION_START:
+ *
+ * Activation of this action starts the selected game.
+ *
+ * Main menu item: Game -> Start
+ **/
 static void
 action_start_cb (GtkAction *action)
 {
@@ -351,6 +461,30 @@ action_start_cb (GtkAction *action)
                         G_CALLBACK (g_object_unref), NULL);
 }
 
+/**
+ * GVA_ACTION_VIEW_AVAILABLE:
+ *
+ * Activation of this action queries the database for all available games.
+ *
+ * Main menu item: View -> Available Games
+ **/
+
+/**
+ * GVA_ACTION_VIEW_FAVORITES:
+ *
+ * Activation of this action queries the database for the user's favorite
+ * games.
+ *
+ * Main menu item: View -> Favorite Games
+ **/
+
+/**
+ * GVA_ACTION_VIEW_RESULTS:
+ *
+ * Activation of this action executes a custom database query.
+ *
+ * Main menu item: View -> Search Results
+ **/
 static void
 action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
 {
@@ -593,6 +727,17 @@ gva_ui_init (void)
                 g_error ("%s", _("Failed to initialize user interface"));
 }
 
+/**
+ * gva_ui_get_action:
+ * @action_name: the name of a #GtkAction
+ *
+ * Returns the #GtkAction named @action_name from the resident
+ * #GtkUIManager.  Failure to find the action indicates a programming
+ * error and causes the application to abort, so the return value is
+ * guaranteed to be valid.
+ *
+ * Returns: the #GtkAction named @action_name
+ **/
 GtkAction *
 gva_ui_get_action (const gchar *action_name)
 {
@@ -608,6 +753,17 @@ gva_ui_get_action (const gchar *action_name)
         return action;
 }
 
+/**
+ * gva_ui_get_widget:
+ * @widget_name: the name of a #GtkWidget
+ *
+ * Returns the #GtkWidget named @widget_name from the UI specification.
+ * Failure to find the widget indicates a programming error and causes
+ * the application to abort, so the return value is guaranteed to be
+ * valid.
+ *
+ * Returns: the #GtkWidget named @widget_name
+ **/
 GtkWidget *
 gva_ui_get_widget (const gchar *widget_name)
 {
@@ -623,6 +779,17 @@ gva_ui_get_widget (const gchar *widget_name)
         return widget;
 }
 
+/**
+ * gva_ui_get_managed_widget:
+ * @widget_path: the path to the managed #GtkWidget
+ *
+ * Returns the #GtkWidget located at @widget_path from the resident
+ * #GtkUIManager.  Failure to find the widget indicates a programming
+ * error and causes the application to abort, so the return value is
+ * guaranteed to be valid.
+ *
+ * Returns: the #GtkWidget located at @widget_path
+ **/
 GtkWidget *
 gva_ui_get_managed_widget (const gchar *widget_path)
 {

@@ -1,3 +1,11 @@
+2007-07-31  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	Don't list GVA_WIDGET_* symbols in the Reference Manual.
+
+	* src/gva-ui.c:
+	Document the actions.
+
 2007-07-30  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:
