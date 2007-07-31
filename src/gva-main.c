@@ -76,12 +76,6 @@ main_menu_item_deselect_cb (GtkItem *item)
         gva_main_statusbar_pop (menu_tooltip_cid);
 }
 
-static void
-main_window_destroy_cb (GtkObject *object)
-{
-        gtk_action_activate (GVA_ACTION_QUIT);
-}
-
 /**
  * gva_main_init:
  *
@@ -118,10 +112,6 @@ gva_main_init (void)
         gtk_action_connect_proxy (
                 GVA_ACTION_START,
                 GVA_WIDGET_MAIN_START_GAME_BUTTON);
-
-        g_signal_connect (
-                GVA_WIDGET_MAIN_WINDOW, "destroy",
-                G_CALLBACK (main_window_destroy_cb), NULL);
 
         gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
@@ -318,4 +308,18 @@ gva_main_statusbar_remove (guint context_id,
         statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
 
         gtk_statusbar_remove (statusbar, context_id, message_id);
+}
+
+/**
+ * gva_main_window_destroy_cb:
+ * @window: the main window
+ *
+ * Handler for #GtkObject::destroy signals to the main window.
+ *
+ * Activates the #GVA_ACTION_QUIT action.
+ **/
+void
+gva_main_window_destroy_cb (GtkWindow *window)
+{
+        gtk_action_activate (GVA_ACTION_QUIT);
 }

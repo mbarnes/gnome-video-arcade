@@ -80,19 +80,6 @@ preferences_init_columns (void)
 void
 gva_preferences_init (void)
 {
-        GtkWindow *window;
-        gboolean active;
-
-        window = GTK_WINDOW (GVA_WIDGET_PREFERENCES_WINDOW);
-
-        g_signal_connect (
-                GVA_WIDGET_PREFERENCES_WINDOW, "delete-event",
-                G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-        g_signal_connect_swapped (
-                GVA_WIDGET_PREFERENCES_CLOSE_BUTTON, "clicked",
-                G_CALLBACK (gtk_widget_hide), window);
-
         preferences_init_general ();
         preferences_init_columns ();
 }
@@ -191,3 +178,18 @@ gva_preferences_set_full_screen (gboolean full_screen)
         g_object_unref (client);
 }
 
+/**
+ * gva_preferences_close_clicked_cb:
+ * @window: the "Preferences" window
+ * @button: the "Close" button
+ *
+ * Handler for #GtkButton::clicked signals to the "Close" button.
+ *
+ * Hides @window.
+ **/
+void
+gva_preferences_close_clicked_cb (GtkWindow *window,
+                                  GtkButton *button)
+{
+        gtk_widget_hide (GTK_WIDGET (window));
+}

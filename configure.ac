@@ -2,7 +2,7 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.4.1)
+m4_define([gva_version], 0.4.2)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
         [mbarnes@redhat.com], gnome-video-arcade)
@@ -32,7 +32,7 @@ PKG_CHECK_MODULES(GCONF, $GCONF_MODULES)
 AC_SUBST(GCONF_CFLAGS)
 AC_SUBST(GCONF_LIBS)
 
-GLADE_MODULES="libglade-2.0 >= 2.0.0"
+GLADE_MODULES="libglade-2.0 >= 2.6.0"
 PKG_CHECK_MODULES(GLADE, $GLADE_MODULES)
 AC_SUBST(GLADE_CFLAGS)
 AC_SUBST(GLADE_LIBS)

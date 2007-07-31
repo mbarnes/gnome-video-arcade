@@ -31,6 +31,17 @@ G_BEGIN_DECLS
 void            gva_play_back_init              (void);
 void            gva_play_back_show              (const gchar *inpname);
 
+/* Signal Handlers */
+
+void            gva_play_back_clicked_cb        (GtkButton *button);
+void            gva_play_back_close_clicked_cb  (GtkWindow *window,
+                                                 GtkButton *button);
+void            gva_play_back_delete_clicked_cb (GtkTreeView *view,
+                                                 GtkButton *button);
+void            gva_play_back_row_activated_cb  (GtkTreeView *view,
+                                                 GtkTreePath *path,
+                                                 GtkTreeViewColumn *column);
+
 G_END_DECLS
 
 #endif /* GVA_PLAY_BACK_H */

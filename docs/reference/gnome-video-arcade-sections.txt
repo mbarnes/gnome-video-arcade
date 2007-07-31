@@ -131,6 +131,7 @@ gva_main_statusbar_get_context_id
 gva_main_statusbar_push
 gva_main_statusbar_pop
 gva_main_statusbar_remove
+gva_main_window_destroy_cb
 </SECTION>
 
 <SECTION>
@@ -188,6 +189,10 @@ gva_ui_get_managed_widget
 <FILE>gva-play-back</FILE>
 gva_play_back_init
 gva_play_back_show
+gva_play_back_clicked_cb
+gva_play_back_close_clicked_cb
+gva_play_back_delete_clicked_cb
+gva_play_back_row_activated_cb
 </SECTION>
 
 <SECTION>
@@ -244,6 +249,7 @@ gva_preferences_get_auto_save
 gva_preferences_set_auto_save
 gva_preferences_get_full_screen
 gva_preferences_set_full_screen
+gva_preferences_close_clicked_cb
 </SECTION>
 
 <SECTION>
@@ -278,6 +284,7 @@ gva_favorites_contains
 <SECTION>
 <FILE>gva-properties</FILE>
 gva_properties_init
+gva_properties_close_clicked_cb
 </SECTION>
 
 <SECTION>

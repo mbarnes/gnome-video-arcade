@@ -56,3 +56,12 @@
 @full_screen: 
 
 
+<!-- ##### FUNCTION gva_preferences_close_clicked_cb ##### -->
+<para>
+
+</para>
+
+@window: 
+@button: 
+
+

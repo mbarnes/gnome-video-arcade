@@ -9,9 +9,11 @@ AM_CFLAGS = \
 	@SQLITE_CFLAGS@
 
 AM_CPPFLAGS = \
-	-DDATADIR=\""$(datadir)"\" \
 	-DLOCALEDIR=\""$(datadir)/locale/"\" \
 	-DG_LOG_DOMAIN=\"Gva\"
+
+AM_LDFLAGS = \
+	-export-dynamic
 
 gnome_video_arcade_SOURCES = \
 	gva-cell-renderer-pixbuf.c	\

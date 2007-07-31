@@ -562,7 +562,10 @@ gva_ui_init (void)
 
         filename = gva_find_data_file (PACKAGE ".glade");
         if (filename != NULL)
+        {
                 xml = glade_xml_new (filename, NULL, NULL);
+                glade_xml_signal_autoconnect (xml);
+        }
         g_free (filename);
 
         filename = gva_find_data_file (PACKAGE ".ui");

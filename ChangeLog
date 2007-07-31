@@ -1,5 +1,28 @@
 2007-07-30  Matthew Barnes  <mbarnes@redhat.com>
 
+	* configure.ac:
+	Bump libglade requirement from 2.0.0 to 2.6.0.
+
+	* data/gnome-video-arcade.glade:
+	Specify signal handlers for various widgets.
+
+	* src/Makefile.am:
+	Add linker flag -export-dynamic so that libglade can find
+	the signal handler functions when it auto-connects signals.
+
+	* src/gva-ui (gva_ui_init):
+	Call glade_xml_signal_autoconnect().
+
+	* src/gva-main.c (gva_main_init):
+	* src/gva-play-back.c (gva_play_back_init):
+	* src/gva-preferences.c (gva_preferences_init):
+	* src/gva-properties.c (gva_properties_init):
+	Remove explicit connection of (most) signals and let libglade
+	auto-connect them at startup.
+	Document the new public signal handler functions.
+
+2007-07-30  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-db.c (db_parser_exit):
 	Commit the transaction *after* verify results are inserted.
 

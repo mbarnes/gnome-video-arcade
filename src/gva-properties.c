@@ -171,14 +171,6 @@ gva_properties_init (void)
                 GVA_WIDGET_PROPERTIES_FORWARD_BUTTON);
 
         g_signal_connect (
-                GVA_WIDGET_PROPERTIES_WINDOW, "delete_event",
-                G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-        g_signal_connect_swapped (
-                GVA_WIDGET_PROPERTIES_CLOSE_BUTTON, "clicked",
-                G_CALLBACK (gtk_widget_hide), window);
-
-        g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (properties_selection_changed_cb), NULL);
 
@@ -187,4 +179,20 @@ gva_properties_init (void)
         gtk_widget_modify_font (text_view, desc);
         pango_font_description_free (desc);
         g_free (font_name);
+}
+
+/**
+ * gva_properties_close_clicked_cb:
+ * @window: the "Properties" window
+ * @button: the "Close" button
+ *
+ * Handler for #GtkButton::clicked signals to the "Close" button.
+ *
+ * Hides @window.
+ **/
+void
+gva_properties_close_clicked_cb (GtkWindow *window,
+                                 GtkButton *button)
+{
+        gtk_widget_hide (GTK_WIDGET (window));
 }

@@ -1,3 +1,13 @@
+GNOME Video Arcade 0.4.2
+========================
+
+        Released August ?? 2007
+
+        What's New
+        ----------
+        * Faster construction of the game database.
+        * Generate developer docs from source code using Gtk-Doc.
+
 GNOME Video Arcade 0.4.1
 ========================
 

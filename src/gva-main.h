@@ -42,6 +42,10 @@ void          gva_main_statusbar_pop            (guint context_id);
 void          gva_main_statusbar_remove         (guint context_id,
                                                  guint message_id);
 
+/* Signal Handlers */
+
+void          gva_main_window_destroy_cb        (GtkWindow *window);
+
 G_END_DECLS
 
 #endif /* GVA_MAIN_H */

@@ -31,20 +31,6 @@
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 
-static void
-play_back_tree_view_row_activated_cb (GtkTreeView *view,
-                                      GtkTreePath *path,
-                                      GtkTreeViewColumn *column)
-{
-        gtk_action_activate (GVA_ACTION_PLAY_BACK);
-}
-
-static void
-play_back_clicked_cb (GtkButton *button, GtkTreeView *view)
-{
-        gtk_action_activate (GVA_ACTION_PLAY_BACK);
-}
-
 static gint
 play_back_confirm_deletion (void)
 {
@@ -103,30 +89,6 @@ play_back_delete_inpfile (GtkTreeRowReference *reference)
                 g_warning ("%s: %s", inpfile, g_strerror (errno));
 
         g_free (inpfile);
-}
-
-static void
-play_back_delete_clicked_cb (GtkButton *button, GtkTreeView *view)
-{
-        GtkTreeModel *model;
-        GList *list, *iter;
-
-        if (play_back_confirm_deletion () != GTK_RESPONSE_ACCEPT)
-                return;
-
-        list = gtk_tree_selection_get_selected_rows (
-                gtk_tree_view_get_selection (view), &model);
-        for (iter = list; iter != NULL; iter = iter->next)
-        {
-                GtkTreePath *path = iter->data;
-
-                iter->data = gtk_tree_row_reference_new (model, path);
-                gtk_tree_path_free (path);
-        }
-
-        g_list_foreach (list, (GFunc) play_back_delete_inpfile, NULL);
-        g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
-        g_list_free (list);
 }
 
 static void
@@ -263,21 +225,6 @@ gva_play_back_init (void)
         gtk_tree_view_append_column (view, column);
 
         g_signal_connect (
-                GVA_WIDGET_PLAY_BACK_WINDOW, "delete_event",
-                G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-        g_signal_connect (
-                GVA_WIDGET_PLAY_BACK_TREE_VIEW, "row-activated",
-                G_CALLBACK (play_back_tree_view_row_activated_cb), NULL);
-        g_signal_connect (
-                GVA_WIDGET_PLAY_BACK_BUTTON, "clicked",
-                G_CALLBACK (play_back_clicked_cb), view);
-        g_signal_connect (
-                GVA_WIDGET_PLAY_BACK_DELETE_BUTTON, "clicked",
-                G_CALLBACK (play_back_delete_clicked_cb), view);
-        g_signal_connect_swapped (
-                GVA_WIDGET_PLAY_BACK_CLOSE_BUTTON, "clicked",
-                G_CALLBACK (gtk_widget_hide), window);
-        g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (play_back_selection_changed_cb), NULL);
 
@@ -332,4 +279,89 @@ gva_play_back_show (const gchar *inpname)
         }
 
         gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
+}
+
+/**
+ * gva_play_back_clicked_cb:
+ * @button: the "Play Back" button
+ *
+ * Handler for #GtkButton::clicked signals to the "Play Back" button.
+ *
+ * Activates the #GVA_ACTION_PLAY_BACK action.
+ **/
+void
+gva_play_back_clicked_cb (GtkButton *button)
+{
+        gtk_action_activate (GVA_ACTION_PLAY_BACK);
+}
+
+/**
+ * gva_play_back_close_clicked_cb:
+ * @window: the "Recorded Games" window
+ * @button: the "Close" button
+ *
+ * Handler for #GtkButton::clicked signals to the "Close" button.
+ *
+ * Hides @window.
+ **/
+void
+gva_play_back_close_clicked_cb (GtkWindow *window,
+                                GtkButton *button)
+{
+        gtk_widget_hide (GTK_WIDGET (window));
+}
+
+/**
+ * gva_play_back_delete_clicked_cb:
+ * @view: the "Recorded Games" tree view
+ * @button: the "Delete" button
+ *
+ * Handler for #GtkButton::clicked signals to the "Delete" button.
+ *
+ * Displays a confirmation dialog, then deletes the MAME input files
+ * corresponding to the selected rows in @view.
+ *
+ **/
+void
+gva_play_back_delete_clicked_cb (GtkTreeView *view,
+                                 GtkButton *button)
+{
+        GtkTreeModel *model;
+        GList *list, *iter;
+
+        if (play_back_confirm_deletion () != GTK_RESPONSE_ACCEPT)
+                return;
+
+        list = gtk_tree_selection_get_selected_rows (
+                gtk_tree_view_get_selection (view), &model);
+        for (iter = list; iter != NULL; iter = iter->next)
+        {
+                GtkTreePath *path = iter->data;
+
+                iter->data = gtk_tree_row_reference_new (model, path);
+                gtk_tree_path_free (path);
+        }
+
+        g_list_foreach (list, (GFunc) play_back_delete_inpfile, NULL);
+        g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
+        g_list_free (list);
+}
+
+/**
+ * gva_play_back_row_activated_cb:
+ * @view: the "Recorded Games" tree view
+ * @path: the #GtkTreePath for the activated row
+ * @column: the #GtkTreeViewColumn in which the activation occurred
+ *
+ * Handler for #GtkTreeView::row-activated signals to the "Recorded Games"
+ * tree view.
+ *
+ * Activates the #GVA_ACTION_PLAY_BACK action.
+ **/
+void
+gva_play_back_row_activated_cb (GtkTreeView *view,
+                                GtkTreePath *path,
+                                GtkTreeViewColumn *column)
+{
+        gtk_action_activate (GVA_ACTION_PLAY_BACK);
 }

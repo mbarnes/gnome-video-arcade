@@ -8,6 +8,7 @@
     <property name="default_width">500</property>
     <property name="default_height">400</property>
     <property name="icon_name">gnome-video-arcade</property>
+    <signal name="destroy" handler="gva_main_window_destroy_cb"/>
     <child>
       <widget class="GtkVBox" id="main-vbox">
         <property name="visible">True</property>
@@ -59,7 +60,6 @@
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip" translatable="yes">Show all available games</property>
-                    <property name="response_id">0</property>
                   </widget>
                 </child>
                 <child>
@@ -69,7 +69,6 @@
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip" translatable="yes">Only show my favorite games</property>
-                    <property name="response_id">0</property>
                   </widget>
                   <packing>
                     <property name="position">1</property>
@@ -82,7 +81,6 @@
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip" translatable="yes">Show my search results</property>
-                    <property name="response_id">0</property>
                   </widget>
                   <packing>
                     <property name="position">2</property>
@@ -128,7 +126,6 @@
                     <property name="can_default">True</property>
                     <property name="tooltip" translatable="yes">Show information about the selected game</property>
                     <property name="use_stock">True</property>
-                    <property name="response_id">0</property>
                   </widget>
                   <packing>
                     <property name="position">1</property>
@@ -143,7 +140,6 @@
                     <property name="can_default">True</property>
                     <property name="has_default">True</property>
                     <property name="tooltip" translatable="yes">Start the selected game</property>
-                    <property name="response_id">0</property>
                     <child>
                       <widget class="GtkAlignment" id="main-start-game-button-alignment">
                         <property name="visible">True</property>
@@ -204,6 +200,7 @@
     <property name="default_height">250</property>
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
+    <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
     <child>
       <widget class="GtkVBox" id="play-back-vbox">
         <property name="visible">True</property>
@@ -222,6 +219,7 @@
                 <property name="can_focus">True</property>
                 <property name="reorderable">True</property>
                 <property name="rules_hint">True</property>
+                <signal name="row_activated" handler="gva_play_back_row_activated_cb"/>
               </widget>
             </child>
           </widget>
@@ -239,7 +237,7 @@
                 <property name="tooltip" translatable="yes">Close this window</property>
                 <property name="label">gtk-close</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
+                <signal name="clicked" handler="gva_play_back_close_clicked_cb" object="play-back-window"/>
               </widget>
             </child>
             <child>
@@ -250,7 +248,7 @@
                 <property name="tooltip" translatable="yes">Delete the selected game recordings</property>
                 <property name="label">gtk-delete</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
+                <signal name="clicked" handler="gva_play_back_delete_clicked_cb" object="play-back-tree-view"/>
               </widget>
               <packing>
                 <property name="position">1</property>
@@ -266,7 +264,7 @@
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip" translatable="yes">Play back the selected game recording</property>
-                <property name="response_id">0</property>
+                <signal name="clicked" handler="gva_play_back_clicked_cb"/>
                 <child>
                   <widget class="GtkAlignment" id="play-back-button-alignment">
                     <property name="visible">True</property>
@@ -322,6 +320,7 @@
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
+    <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
     <child>
       <widget class="GtkVBox" id="preferences-vbox">
         <property name="visible">True</property>
@@ -369,7 +368,6 @@
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="label">(full-screen) GtkUIManager supplies the label</property>
                             <property name="use_underline">True</property>
-                            <property name="response_id">0</property>
                             <property name="draw_indicator">True</property>
                           </widget>
                           <packing>
@@ -383,7 +381,6 @@
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="label">(auto-save) GtkUIManager supplies the label</property>
                             <property name="use_underline">True</property>
-                            <property name="response_id">0</property>
                             <property name="draw_indicator">True</property>
                           </widget>
                           <packing>
@@ -527,7 +524,7 @@
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="label">gtk-close</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
+                <signal name="clicked" handler="gva_preferences_close_clicked_cb" object="preferences-window"/>
               </widget>
             </child>
           </widget>
@@ -548,6 +545,7 @@
     <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
+    <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
     <child>
       <widget class="GtkVBox" id="properties-vbox">
         <property name="visible">True</property>
@@ -564,21 +562,6 @@
               <placeholder/>
             </child>
             <child>
-              <widget class="GtkLabel" id="properties-header">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
-Manufacturer, Year</property>
-                <property name="use_markup">True</property>
-                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-              </widget>
-              <packing>
-                <property name="bottom_attach">2</property>
-              </packing>
-            </child>
-            <child>
               <widget class="GtkHBox" id="properties-hbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -591,7 +574,6 @@ Manufacturer, Year</property>
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip" translatable="yes">Show previous game</property>
-                    <property name="response_id">0</property>
                     <child>
                       <widget class="GtkImage" id="properties-back-button-image">
                         <property name="visible">True</property>
@@ -612,7 +594,6 @@ Manufacturer, Year</property>
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip" translatable="yes">Show next game</property>
-                    <property name="response_id">0</property>
                     <child>
                       <widget class="GtkImage" id="properties-forward-button-image">
                         <property name="visible">True</property>
@@ -633,6 +614,21 @@ Manufacturer, Year</property>
                 <property name="right_attach">2</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="properties-header">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
+Manufacturer, Year</property>
+                <property name="use_markup">True</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+              </widget>
+              <packing>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
           </widget>
@@ -834,7 +830,7 @@ Manufacturer, Year</property>
                 <property name="tooltip" translatable="yes">Close this window</property>
                 <property name="label">gtk-close</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
+                <signal name="clicked" handler="gva_properties_close_clicked_cb" object="properties-window"/>
               </widget>
               <packing>
                 <property name="expand">False</property>

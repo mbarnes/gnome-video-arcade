@@ -30,6 +30,11 @@ G_BEGIN_DECLS
 
 void            gva_properties_init             (void);
 
+/* Signal Handlers */
+
+void            gva_properties_close_clicked_cb (GtkWindow *window,
+                                                 GtkButton *button);
+
 G_END_DECLS
 
 #endif /* GVA_PROPERTIES_H */
