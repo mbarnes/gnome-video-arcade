@@ -380,12 +380,6 @@ column_manager_constructor (GType type,
         gtk_box_set_spacing (GTK_BOX (object), 6);
         gtk_widget_show_all (GTK_WIDGET (object));
 
-        g_signal_connect_swapped (
-                priv->managed_view, "columns-changed",
-                G_CALLBACK (column_manager_update_view), object);
-
-        column_manager_update_view (GVA_COLUMN_MANAGER (object));
-
         return object;
 }
 
@@ -395,19 +389,12 @@ column_manager_set_property (GObject *object,
                              const GValue *value,
                              GParamSpec *pspec)
 {
-        GvaColumnManagerPrivate *priv;
-
-        priv = GVA_COLUMN_MANAGER_GET_PRIVATE (object);
-
         switch (property_id)
         {
                 case PROP_MANAGED_VIEW:
-                        g_assert (priv->managed_view == NULL);
-                        /* XXX GLib 2.12 declares the return type of
-                         *     g_value_dup_object() as GObject instead
-                         *     of gpointer.  Fixed in GLib 2.14. */
-                        priv->managed_view = (gpointer)
-                                g_value_dup_object (value);
+                        gva_column_manager_set_managed_view (
+                                GVA_COLUMN_MANAGER (object),
+                                g_value_get_object (value));
                         return;
         }
 
@@ -420,14 +407,12 @@ column_manager_get_property (GObject *object,
                              GValue *value,
                              GParamSpec *pspec)
 {
-        GvaColumnManagerPrivate *priv;
-
-        priv = GVA_COLUMN_MANAGER_GET_PRIVATE (object);
-
         switch (property_id)
         {
                 case PROP_MANAGED_VIEW:
-                        g_value_set_object (value, priv->managed_view);
+                        g_value_set_object (
+                                value, gva_column_manager_get_managed_view (
+                                GVA_COLUMN_MANAGER (object)));
                         return;
         }
 
@@ -448,8 +433,12 @@ column_manager_dispose (GObject *object)
 
         if (priv->managed_view != NULL)
         {
+                g_signal_handlers_disconnect_by_func (
+                        priv->managed_view,
+                        column_manager_update_view, manager);
+
                 g_object_unref (priv->managed_view);
-                priv->managed_view = NULL;
+                manager->priv->managed_view = NULL;
         }
 
         if (priv->list_store != NULL)
@@ -525,10 +514,9 @@ column_manager_class_init (GvaColumnManagerClass *class)
                 PROP_MANAGED_VIEW,
                 g_param_spec_object (
                         "managed-view",
-                        NULL,
-                        NULL,
+                        _("Managed View"),
+                        _("The GtkTreeView being managed"),
                         GTK_TYPE_TREE_VIEW,
-                        G_PARAM_CONSTRUCT_ONLY |
                         G_PARAM_READWRITE));
 }
 
@@ -665,4 +653,43 @@ gva_column_manager_new (GtkTreeView *managed_view)
 
         return g_object_new (
                 GVA_TYPE_COLUMN_MANAGER, "managed-view", managed_view, NULL);
+}
+
+GtkTreeView *
+gva_column_manager_get_managed_view (GvaColumnManager *manager)
+{
+        g_return_val_if_fail (GVA_IS_COLUMN_MANAGER (manager), NULL);
+
+        return manager->priv->managed_view;
+}
+
+void
+gva_column_manager_set_managed_view (GvaColumnManager *manager,
+                                     GtkTreeView *managed_view)
+{
+        g_return_if_fail (GVA_IS_COLUMN_MANAGER (manager));
+
+        if (managed_view != NULL)
+                g_return_if_fail (GTK_IS_TREE_VIEW (managed_view));
+
+        if (manager->priv->managed_view != NULL)
+        {
+                g_signal_handlers_disconnect_by_func (
+                        manager->priv->managed_view,
+                        column_manager_update_view, manager);
+
+                g_object_unref (manager->priv->managed_view);
+                manager->priv->managed_view = NULL;
+        }
+
+        if (managed_view != NULL)
+        {
+                g_signal_connect_swapped (
+                        managed_view, "columns-changed",
+                        G_CALLBACK (column_manager_update_view), manager);
+
+                manager->priv->managed_view = g_object_ref (managed_view);
+
+                column_manager_update_view (manager);
+        }
 }

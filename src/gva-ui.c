@@ -19,7 +19,9 @@
 #include "gva-ui.h"
 
 #include <glade/glade.h>
+#include <glade/glade-build.h>
 
+#include "gva-column-manager.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-game-store.h"
@@ -670,7 +672,7 @@ static GtkRadioActionEntry view_radio_entries[] =
 };
 
 static void
-gva_ui_init (void)
+ui_init (void)
 {
         GtkWidget *widget;
         gchar *filename;
@@ -694,13 +696,22 @@ gva_ui_init (void)
                 G_N_ELEMENTS (view_radio_entries),
                 0, G_CALLBACK (action_view_changed_cb), NULL);
 
+#define REGISTER_WIDGET(type) \
+        (glade_register_widget \
+        ((type), glade_standard_build_widget, NULL, NULL))
+
         filename = gva_find_data_file (PACKAGE ".glade");
         if (filename != NULL)
         {
+                REGISTER_WIDGET (GVA_TYPE_COLUMN_MANAGER);
+
+                glade_provide ("gva");
                 xml = glade_xml_new (filename, NULL, NULL);
                 glade_xml_signal_autoconnect (xml);
         }
         g_free (filename);
+
+#undef REGISTER_WIDGET
 
         filename = gva_find_data_file (PACKAGE ".ui");
         if (filename != NULL)
@@ -746,7 +757,7 @@ gva_ui_get_action (const gchar *action_name)
         g_return_val_if_fail (action_name != NULL, NULL);
 
         if (G_UNLIKELY (!initialized))
-                gva_ui_init ();
+                ui_init ();
 
         action = gtk_action_group_get_action (action_group, action_name);
         g_assert (action != NULL);
@@ -772,7 +783,7 @@ gva_ui_get_widget (const gchar *widget_name)
         g_return_val_if_fail (widget_name != NULL, NULL);
 
         if (G_UNLIKELY (!initialized))
-                gva_ui_init ();
+                ui_init ();
 
         widget = glade_xml_get_widget (xml, widget_name);
         g_assert (widget != NULL);
@@ -798,7 +809,7 @@ gva_ui_get_managed_widget (const gchar *widget_path)
         g_return_val_if_fail (widget_path != NULL, NULL);
 
         if (G_UNLIKELY (!initialized))
-                gva_ui_init ();
+                ui_init ();
 
         widget = gtk_ui_manager_get_widget (manager, widget_path);
         g_assert (widget != NULL);

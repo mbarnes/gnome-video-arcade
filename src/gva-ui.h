@@ -85,8 +85,6 @@
         (gva_ui_get_widget ("preferences-auto-save"))
 #define GVA_WIDGET_PREFERENCES_CLOSE_BUTTON \
         (gva_ui_get_widget ("preferences-close-button"))
-#define GVA_WIDGET_PREFERENCES_COLUMNS_INNER_VBOX \
-        (gva_ui_get_widget ("preferences-columns-inner-vbox"))
 #define GVA_WIDGET_PREFERENCES_FULL_SCREEN \
         (gva_ui_get_widget ("preferences-full-screen"))
 #define GVA_WIDGET_PREFERENCES_WINDOW \

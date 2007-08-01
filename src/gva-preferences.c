@@ -23,8 +23,15 @@
 #include "gva-mame.h"
 #include "gva-ui.h"
 
-static void
-preferences_init_general (void)
+/**
+ * gva_preferences_init:
+ *
+ * Initializes the Preferences window.
+ *
+ * This function should be called once when the application starts.
+ **/
+void
+gva_preferences_init (void)
 {
         /* Auto Save */
 
@@ -54,34 +61,6 @@ preferences_init_general (void)
         gtk_toggle_action_set_active (
                 GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN),
                 gva_preferences_get_full_screen ());
-}
-
-static void
-preferences_init_columns (void)
-{
-        GtkWidget *column_manager;
-        GtkTreeView *view;
-
-        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
-        column_manager = gva_column_manager_new (view);
-
-        gtk_box_pack_start (
-                GTK_BOX (GVA_WIDGET_PREFERENCES_COLUMNS_INNER_VBOX),
-                column_manager, TRUE, TRUE, 0);
-}
-
-/**
- * gva_preferences_init:
- *
- * Initializes the Preferences window.
- *
- * This function should be called once when the application starts.
- **/
-void
-gva_preferences_init (void)
-{
-        preferences_init_general ();
-        preferences_init_columns ();
 }
 
 /**

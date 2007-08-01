@@ -2,6 +2,10 @@
 
 SUBDIRS = data po src docs
 
+if MAINTAINER_MODE
+SUBDIRS += maint
+endif
+
 EXTRA_DIST = \
 	config.rpath			\
 	intltool-extract.in		\

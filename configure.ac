@@ -42,6 +42,11 @@ PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
 AC_SUBST(SQLITE_CFLAGS)
 AC_SUBST(SQLITE_LIBS)
 
+if test "$USE_MAINTAINER_MODE" = "yes"; then
+GLADEUI_MODULES="gladeui-1.0 >= 3.0.0"
+PKG_CHECK_MODULES(GLADEUI, $GLADEUI_MODULES)
+fi
+
 # Header Checks
 AC_HEADER_STDC
 AC_CHECK_HEADERS(wordexp.h)
@@ -53,6 +58,7 @@ AC_PROG_INTLTOOL
 AC_PROG_LIBTOOL
 AC_PATH_PROG(BASENAME, basename)
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
+AC_PATH_PROG(PKGCONFIG, pkg-config)
 
 # MAME Program
 AC_ARG_VAR([MAME], [MAME command])
@@ -92,10 +98,10 @@ AC_ARG_WITH([history-file],
         AC_HELP_STRING([--with-history-file=PATH],
         [path to arcade history file (usually named 'history.dat')]),
         with_history="$withval", with_history="no")
-if test "x${with_history}" = "xyes"; then
+if test "$with_history" = "yes"; then
         AC_MSG_ERROR([--with-history-file missing PATH argument])
 fi
-if test "x${with_history}" != "xno"; then
+if test "$with_history" != "no"; then
         AC_DEFINE_UNQUOTED(HISTORY_FILE, "$with_history",
                 [Location of the arcade history file])
 fi
@@ -107,6 +113,7 @@ AC_CONFIG_FILES([
         docs/Makefile
         docs/reference/Makefile
         docs/reference/version.xml
+        maint/Makefile
         po/Makefile.in
         src/Makefile
 ])

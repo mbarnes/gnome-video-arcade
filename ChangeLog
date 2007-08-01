@@ -1,3 +1,33 @@
+2007-08-01  Matthew Barnes  <mbarnes@redhat.com>
+
+	* INSTALL:
+	Updated instructions from automake 1.10.
+
+	* configure.ac:
+	* Makefile.am:
+	Activate the new "maint" directory when in maintainer mode.
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-preferences.c:
+	Load the GvaColumnManager directly from the Glade XML file.
+
+	* src/gva-column-manager.c:
+	Allow the "managed-view" property to be set at any time.
+
+	* src/gva-ui.h:
+	No longer need access to "preferences-columns-inner-vbox".
+
+	* src/gva-ui.c (gva_ui_init):
+	Register custom widgets with libglade.
+	Let libglade know that we provide the "gva" library.
+
+	* maint/Makefile.am:
+	Installs a Glade widget plugin for GNOME Video Arcade.
+	Only builds in maintainer mode.
+
+	* maint/gva.xml:
+	Glade catalog file for custom GNOME Video Arcade widgets.
+
 2007-07-31  Matthew Barnes  <mbarnes@redhat.com>
 
 	* docs/references/gnome-video-arcade-sections.txt:

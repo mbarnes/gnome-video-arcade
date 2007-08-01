@@ -1,0 +1,17 @@
+<glade-catalog name="gva" library="gladegva" depends="gtk+" book="gnome-video-arcade">
+
+  <glade-widget-classes>
+
+    <glade-widget-class name="GvaColumnManager" generic-name="column-manager" title="Column Manager">
+      <properties>
+        <property id="managed-view"/>
+      </properties>
+    </glade-widget-class>
+
+  </glade-widget-classes>
+
+  <glade-widget-group name="gva-widgets" title="GNOME Video Arcade">
+    <glade-widget-class-ref name="GvaColumnManager"/>
+  </glade-widget-group>
+
+</glade-catalog>
