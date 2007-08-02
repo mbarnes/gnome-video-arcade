@@ -1,3 +1,23 @@
+2007-08-02  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Connect to some of the tree view signals.
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	* src/gva-tree-view.h:
+	Add tree view signal handlers to Gtk-Doc output.
+
+	* src/gva-columns.c (gva_columns_load):
+	Block "columns-changed" signals while loading columns.
+
+	* src/gva-columns.c (gva_columns_save):
+	Abort the save if the tree view is being destroyed.
+
+	* src/gva-tree-view.c:
+	Fix a crash when pressing the context menu _keyboard_ button.
+	Expose signal handlers so Glade can auto-connect them.
+	Document some of the public functions.
+
 2007-08-01  Matthew Barnes  <mbarnes@redhat.com>
 
 	* INSTALL:

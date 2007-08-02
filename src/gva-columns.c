@@ -384,6 +384,12 @@ gva_columns_load (GtkTreeView *view)
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
 
+        /* Adding columns to the tree view will cause it to emit
+         * "columns-changed" signals, for which gva_columns_save() is a
+         * handler.  Prevent the handler from modifying GConf keys while
+         * we're loading. */
+        g_signal_handlers_block_by_func (view, gva_columns_save, NULL);
+
         client = gconf_client_get_default ();
         all_columns = gconf_client_get_list (
                 client, GVA_GCONF_ALL_COLUMNS_KEY, GCONF_VALUE_STRING, &error);
@@ -468,6 +474,8 @@ gva_columns_load (GtkTreeView *view)
                 }
         }
 
+        g_signal_handlers_unblock_by_func (view, gva_columns_save, NULL);
+
         gva_columns_save (view);
 }
 
@@ -479,6 +487,11 @@ gva_columns_save (GtkTreeView *view)
         GError *error = NULL;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
+
+        /* This function is also a "columns-changed" signal handler.
+         * Abort the save if the tree view is being destroyed. */
+        if (GTK_OBJECT_FLAGS (view) & GTK_IN_DESTRUCTION)
+                return;
 
         client = gconf_client_get_default ();
 

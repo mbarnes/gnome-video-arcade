@@ -29,7 +29,7 @@
 
 </para>
 
-@name: 
+@game: 
 @Returns: 
 
 
@@ -73,7 +73,7 @@
 
 </para>
 
-@name: 
+@game: 
 
 
 <!-- ##### FUNCTION gva_tree_view_get_selected_view ##### -->
@@ -105,7 +105,7 @@
 
 </para>
 
-@name: 
+@game: 
 
 
 <!-- ##### FUNCTION gva_tree_view_get_last_selected_view ##### -->
@@ -140,5 +140,34 @@
 
 @column_id: 
 @order: 
+
+
+<!-- ##### FUNCTION gva_tree_view_button_press_event_cb ##### -->
+<para>
+
+</para>
+
+@view: 
+@event: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_tree_view_popup_menu_cb ##### -->
+<para>
+
+</para>
+
+@view: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_tree_view_row_activated_cb ##### -->
+<para>
+
+</para>
+
+@view: 
+@path: 
+@column: 
 
 

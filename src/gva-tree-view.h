@@ -30,23 +30,32 @@
 G_BEGIN_DECLS
 
 void           gva_tree_view_init                    (void);
-GtkTreePath *  gva_tree_view_lookup                  (const gchar *name);
+GtkTreePath *  gva_tree_view_lookup                  (const gchar *game);
 gboolean       gva_tree_view_update                  (GError **error);
 gboolean       gva_tree_view_run_query               (const gchar *expr,
                                                       GError **error);
 GtkTreeModel * gva_tree_view_get_model               (void);
 const gchar *  gva_tree_view_get_selected_game       (void);
-void           gva_tree_view_set_selected_game       (const gchar *name);
+void           gva_tree_view_set_selected_game       (const gchar *game);
 gint           gva_tree_view_get_selected_view       (void);
 void           gva_tree_view_set_selected_view       (gint view);
 const gchar *  gva_tree_view_get_last_selected_game  (void);
-void           gva_tree_view_set_last_selected_game  (const gchar *name);
+void           gva_tree_view_set_last_selected_game  (const gchar *game);
 gint           gva_tree_view_get_last_selected_view  (void);
 void           gva_tree_view_set_last_selected_view  (gint view);
 void           gva_tree_view_get_last_sort_column_id (GvaGameStoreColumn *column_id,
                                                       GtkSortType *order);
 void           gva_tree_view_set_last_sort_column_id (GvaGameStoreColumn column_id,
                                                       GtkSortType order);
+
+/* Signal Handlers */
+
+gboolean       gva_tree_view_button_press_event_cb   (GtkTreeView *view,
+                                                      GdkEventButton *event);
+gboolean       gva_tree_view_popup_menu_cb           (GtkTreeView *view);
+void           gva_tree_view_row_activated_cb        (GtkTreeView *view,
+                                                      GtkTreePath *path,
+                                                      GtkTreeViewColumn *column);
 
 G_END_DECLS
 

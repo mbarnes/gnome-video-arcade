@@ -111,6 +111,10 @@
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="headers_clickable">True</property>
                     <property name="rules_hint">True</property>
+                    <signal name="popup_menu" handler="gva_tree_view_popup_menu_cb"/>
+                    <signal name="button_press_event" handler="gva_tree_view_button_press_event_cb"/>
+                    <signal name="row_activated" handler="gva_tree_view_row_activated_cb"/>
+                    <signal name="columns_changed" handler="gva_columns_save"/>
                   </widget>
                 </child>
               </widget>
@@ -582,21 +586,6 @@
               <placeholder/>
             </child>
             <child>
-              <widget class="GtkLabel" id="properties-header">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
-Manufacturer, Year</property>
-                <property name="use_markup">True</property>
-                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-              </widget>
-              <packing>
-                <property name="bottom_attach">2</property>
-              </packing>
-            </child>
-            <child>
               <widget class="GtkHBox" id="properties-hbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -651,6 +640,21 @@ Manufacturer, Year</property>
                 <property name="right_attach">2</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="properties-header">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
+Manufacturer, Year</property>
+                <property name="use_markup">True</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+              </widget>
+              <packing>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
           </widget>

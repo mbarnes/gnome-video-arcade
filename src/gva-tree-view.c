@@ -32,10 +32,12 @@
         "SELECT %s FROM game WHERE (romset IN ('good', 'best available'))"
 
 static gboolean
-tree_view_popup_menu_cb (GtkTreeView *view,
-                         GdkEventButton *event,
-                         GtkMenu *menu)
+tree_view_show_popup_menu (GdkEventButton *event)
 {
+        GtkMenu *menu;
+
+        menu = GTK_MENU (gva_ui_get_managed_widget ("/game-popup"));
+
         if (event != NULL)
                 gtk_menu_popup (
                         menu, NULL, NULL, NULL, NULL,
@@ -46,50 +48,6 @@ tree_view_popup_menu_cb (GtkTreeView *view,
                         0, gtk_get_current_event_time ());
 
         return TRUE;
-}
-
-static gboolean
-tree_view_button_press_cb (GtkTreeView *view,
-                           GdkEventButton *event,
-                           GtkMenu *menu)
-{
-        if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
-        {
-                GtkTreePath *path;
-                gboolean valid;
-
-                /* Select the row that was clicked. */
-                valid = gtk_tree_view_get_path_at_pos (
-                        view, event->x, event->y, &path, NULL, NULL, NULL);
-                if (valid)
-                {
-                        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
-                        gtk_widget_grab_focus (GTK_WIDGET (view));
-                        gtk_tree_path_free (path);
-
-                        return tree_view_popup_menu_cb (view, event, menu);
-                }
-        }
-
-        return FALSE;
-}
-
-static void
-tree_view_columns_changed_cb (GtkTreeView *view)
-{
-        /* Stop the emission if the tree view is being destroyed. */
-        if (GTK_OBJECT_FLAGS (view) & GTK_IN_DESTRUCTION)
-                g_signal_stop_emission_by_name (view, "columns-changed");
-        else
-                gva_columns_save (view);
-}
-
-static void
-tree_view_row_activated_cb (GtkTreeView *view,
-                            GtkTreePath *path,
-                            GtkTreeViewColumn *column)
-{
-        gtk_action_activate (GVA_ACTION_START);
 }
 
 static void
@@ -172,6 +130,13 @@ tree_view_search_equal (GtkTreeModel *model,
         return retval;
 }
 
+/**
+ * gva_tree_view_init:
+ *
+ * Initializes the main tree view.
+ *
+ * This function should be called once when the application starts.
+ **/
 void
 gva_tree_view_init (void)
 {
@@ -181,46 +146,47 @@ gva_tree_view_init (void)
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 
-        /* Load columns before we connect to signals to avoid trapping
-         * spurious "columns-changed" signals during loading. */
-        gva_columns_load (view);
-
         menu = GTK_MENU (gva_ui_get_managed_widget ("/game-popup"));
         gtk_menu_attach_to_widget (menu, GTK_WIDGET (view), NULL);
 
         g_signal_connect (
-                view, "button-press-event",
-                G_CALLBACK (tree_view_button_press_cb), menu);
-
-        g_signal_connect (
-                view, "columns-changed",
-                G_CALLBACK (tree_view_columns_changed_cb), NULL);
-
-        g_signal_connect (
-                view, "popup-menu",
-                G_CALLBACK (tree_view_popup_menu_cb), NULL);
-
-        g_signal_connect (
-                view, "row-activated",
-                G_CALLBACK (tree_view_row_activated_cb), NULL);
-
-        g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
+
+        gva_columns_load (view);
 }
 
+/**
+ * gva_tree_view_lookup:
+ * @game: the name of a game
+ *
+ * Looks up @game in the tree view's store and returns a #GtkTreePath
+ * to the corresponding row, or %NULL if @game was not found.
+ *
+ * Returns: a #GtkTreePath to the row corresponding to @game, or %NULL
+ **/
 GtkTreePath *
-gva_tree_view_lookup (const gchar *name)
+gva_tree_view_lookup (const gchar *game)
 {
         GtkTreeModel *model;
 
-        g_return_val_if_fail (name != NULL, NULL);
+        g_return_val_if_fail (game != NULL, NULL);
 
         model = gva_tree_view_get_model ();
 
-        return gva_game_store_index_lookup (GVA_GAME_STORE (model), name);
+        return gva_game_store_index_lookup (GVA_GAME_STORE (model), game);
 }
 
+/**
+ * gva_tree_view_update:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Refreshes the contents of the tree view by querying the game database
+ * using criteria appropriate for the currently selected view.  If an
+ * error occurs, it returns %FALSE and sets @error.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
 gboolean
 gva_tree_view_update (GError **error)
 {
@@ -255,6 +221,16 @@ gva_tree_view_update (GError **error)
         return TRUE;
 }
 
+/**
+ * gva_tree_view_run_query:
+ * @expr: an SQL "where" expression
+ * @error: return location for a #GError, or %NULL
+ *
+ * Similar to gva_tree_view_update() but applies custom criteria to the game
+ * database query.  If an error occurs, it returns %FALSE and sets @error.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
 gboolean
 gva_tree_view_run_query (const gchar *expr,
                          GError **error)
@@ -326,6 +302,16 @@ gva_tree_view_run_query (const gchar *expr,
         return TRUE;
 }
 
+/**
+ * gva_tree_view_get_model:
+ *
+ * Thin wrapper for gtk_tree_view_get_model() that uses the main tree view.
+ *
+ * Returns the model the main tree view is based on.  Returns %NULL if the
+ * model is unset.
+ *
+ * Returns: a #GtkTreeModel, or %NULL if the model is unset
+ **/
 GtkTreeModel *
 gva_tree_view_get_model (void)
 {
@@ -336,6 +322,14 @@ gva_tree_view_get_model (void)
         return gtk_tree_view_get_model (view);
 }
 
+/**
+ * gva_tree_view_get_selected_game:
+ *
+ * Returns the name of the game corresponding to the currently selected row,
+ * or %NULL if no row is selected.
+ *
+ * Returns: the name of the selected game, or %NULL if no game is selected
+ **/
 const gchar *
 gva_tree_view_get_selected_game (void)
 {
@@ -348,30 +342,39 @@ gva_tree_view_get_selected_game (void)
                 GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW));
         if (gtk_tree_selection_get_selected (selection, &model, &iter))
         {
-                gchar *name;
+                gchar *game;
 
                 gtk_tree_model_get (
                         model, &iter,
-                        GVA_GAME_STORE_COLUMN_NAME, &name, -1);
-                retval = g_intern_string (name);
-                g_free (name);
+                        GVA_GAME_STORE_COLUMN_NAME, &game, -1);
+                retval = g_intern_string (game);
+                g_free (game);
         }
 
         return retval;
 }
 
+/**
+ * gva_tree_view_set_selected_game:
+ * @game: the name of a game
+ *
+ * Selects the row corresponding to @game.  If the row is invisible in the
+ * current view, select the first row instead.  The function also calls
+ * gva_tree_view_set_last_selected_game() so that the selected game will be
+ * persistent across sessions.
+ **/
 void
-gva_tree_view_set_selected_game (const gchar *name)
+gva_tree_view_set_selected_game (const gchar *game)
 {
         GtkTreeModel *model;
         GtkTreeView *view;
         GtkTreePath *path;
         GtkTreeIter iter;
 
-        g_return_if_fail (name != NULL);
+        g_return_if_fail (game != NULL);
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
-        path = gva_tree_view_lookup (name);
+        path = gva_tree_view_lookup (game);
 
         /* If the game is visible in the current view, put the cursor on it.
          * Otherwise just select the root path. */
@@ -393,9 +396,22 @@ gva_tree_view_set_selected_game (const gchar *name)
 
         gtk_tree_path_free (path);
 
-        gva_tree_view_set_last_selected_game (name);
+        gva_tree_view_set_last_selected_game (game);
 }
 
+/**
+ * gva_tree_view_get_selected_view:
+ *
+ * Returns the index of the currently selected view.
+ *
+ * <itemizedlist>
+ *   <listitem>0 = Available Games</listitem>
+ *   <listitem>1 = Favorite Games</listitem>
+ *   <listitem>2 = Search Results</listitem>
+ * </itemizedlist>
+ *
+ * Returns: the index of the currently selected view
+ **/
 gint
 gva_tree_view_get_selected_view (void)
 {
@@ -525,4 +541,74 @@ gva_tree_view_set_last_sort_column_id (GvaGameStoreColumn column_id,
                 &column_name, &descending, &error);
         gva_error_handle (&error);
         g_object_unref (client);
+}
+
+/**
+ * gva_tree_view_button_press_event_cb:
+ * @view: the main tree view
+ * @event: a #GdkEventButton
+ *
+ * Handler for #GtkWidget::button-press-event signals to the main tree view.
+ *
+ * On right-click, selects the row that was clicked and shows a popup menu.
+ *
+ * Returns: %TRUE if the popup menu was shown, %FALSE otherwise
+ **/
+gboolean
+gva_tree_view_button_press_event_cb (GtkTreeView *view,
+                                     GdkEventButton *event)
+{
+        if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
+        {
+                GtkTreePath *path;
+                gboolean valid;
+
+                /* Select the row that was clicked. */
+                valid = gtk_tree_view_get_path_at_pos (
+                        view, event->x, event->y, &path, NULL, NULL, NULL);
+                if (valid)
+                {
+                        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+                        gtk_widget_grab_focus (GTK_WIDGET (view));
+                        gtk_tree_path_free (path);
+
+                        return tree_view_show_popup_menu (event);
+                }
+        }
+
+        return FALSE;
+}
+
+/**
+ * gva_tree_view_popup_menu_cb:
+ * @view: the main tree view
+ *
+ * Handler for #GtkWidget::popup-menu signals to the main tree view.
+ *
+ * Shows a popup menu.
+ *
+ * Returns: %TRUE
+ **/
+gboolean
+gva_tree_view_popup_menu_cb (GtkTreeView *view)
+{
+        return tree_view_show_popup_menu (NULL);
+}
+
+/**
+ * gva_tree_view_row_activated_cb:
+ * @view: the main tree view
+ * @path: the #GtkTreePath for the activated row
+ * @column: the #GtkTreeViewColumn in which the activation occurred
+ *
+ * Handler for #GtkTreeView::row-activated signals to the main tree view.
+ *
+ * Activates the #GVA_ACTION_START action.
+ **/
+void
+gva_tree_view_row_activated_cb (GtkTreeView *view,
+                                GtkTreePath *path,
+                                GtkTreeViewColumn *column)
+{
+        gtk_action_activate (GVA_ACTION_START);
 }
