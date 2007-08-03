@@ -26,11 +26,37 @@
 
 #include "gva-common.h"
 
+/**
+ * GVA_ERROR:
+ *
+ * Error domain for general operations in GNOME Video Arcade.  Errors
+ * in this domain will be from the #GvaError enumeration.  See #GError
+ * for information on error domains.
+ **/
 #define GVA_ERROR               gva_error_quark ()
+
+/**
+ * GVA_SQLITE_ERROR:
+ *
+ * Error domain for SQLite operations in GNOME Video Arcade.  Errors
+ * in this domain will be from SQLite's own
+ * <ulink url="http://www.sqlite.org/capi3ref.html&num;SQLITE_ERROR">
+ * result codes</ulink>.  See #GError for information on error domains.
+ **/
 #define GVA_SQLITE_ERROR        gva_sqlite_error_quark ()
 
 G_BEGIN_DECLS
 
+/**
+ * GvaError:
+ *
+ * Error codes for general operations in GNOME Video Arcade.
+ * 
+ * GVA_ERROR_CONFIG:    Configuration error.
+ * GVA_ERROR_MAME:      Error from a MAME process.
+ * GVA_ERROR_QUERY:     SQL query error.
+ * GVA_ERROR_SYSTEM:    System-level error.
+ **/  
 typedef enum
 {
         GVA_ERROR_CONFIG,

@@ -40,6 +40,13 @@ gva_sqlite_error_quark (void)
         return quark;
 }
 
+/**
+ * gva_error_handle:
+ * @error: a #GError
+ *
+ * If @error has been set, issues a warning message to standard error.
+ * Otherwise the function does nothing.
+ **/
 void
 gva_error_handle (GError **error)
 {

@@ -17,3 +17,5 @@ DISTCLEANFILES = \
 	intltool-extract		\
 	intltool-merge			\
 	intltool-update
+
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc

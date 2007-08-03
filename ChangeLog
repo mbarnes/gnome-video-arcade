@@ -1,5 +1,18 @@
 2007-08-02  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.4.2
+
+	* README: Mention --enable-gtk-doc.
+
+	* Makefile.am:
+	Distcheck should enable Gtk-Doc.
+
+	* src/gva-error.[ch]:
+	* src/gva-tree-view.c:
+	Document this stuff.
+
+2007-08-02  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.glade:
 	Connect to some of the tree view signals.
 

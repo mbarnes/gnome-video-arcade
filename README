@@ -81,6 +81,10 @@ file as mentioned above. Usage looks something like this:
 
    $ ./configure --with-history-file=/usr/share/xmame/history.dat
 
+The --enable-gtk-doc configure option tells "make" to generate
+developer documentation while building GNOME Video Arcade.  Once
+installed, the documentation can be viewed through Devhelp.
+
 
 Usage
 -----
