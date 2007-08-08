@@ -1,3 +1,15 @@
+2007-08-07  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Don't need to check for pkg-config.
+
+	* maint/Makefile.am:
+	Install a widget icon for Glade.
+	Use $(PKG_CONFIG) instead of $(PKGCONFIG).
+
+	* maint/widget-gva-column-manager.png:
+	GvaColumnManager widget icon for Glade.
+
 2007-08-02  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.4.2
