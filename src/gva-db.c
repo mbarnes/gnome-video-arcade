@@ -88,6 +88,88 @@
                 "('supported', 'unsupported')), " \
                 "driver_palettesize);"
 
+#define SQL_CREATE_TABLE_BIOSSET \
+        "CREATE TABLE IF NOT EXISTS biosset (" \
+                "game NOT NULL, " \
+                "name NOT NULL, " \
+                "description NOT NULL, " \
+                "default_ DEFAULT 'no' " \
+                "CHECK (default_ in ('yes', 'no')));"
+
+#define SQL_CREATE_TABLE_ROM \
+        "CREATE TABLE IF NOT EXISTS rom (" \
+                "game NOT NULL, " \
+                "name NOT NULL, " \
+                "bios, " \
+                "size NOT NULL, " \
+                "crc, " \
+                "md5, " \
+                "sha1, " \
+                "merge, " \
+                "region, " \
+                "offset, " \
+                "status DEFAULT 'good' " \
+                "CHECK (status in ('baddump', 'nodump', 'good')), " \
+                "dispose DEFAULT 'no' " \
+                "CHECK (dispose in ('yes', 'no')));"
+
+#define SQL_CREATE_TABLE_DISK \
+        "CREATE TABLE IF NOT EXISTS disk (" \
+                "game NOT NULL, " \
+                "name NOT NULL, " \
+                "md5, " \
+                "sha1, " \
+                "merge, " \
+                "region, " \
+                "index_, " \
+                "status DEFAULT 'good' " \
+                "CHECK (status in ('baddump', 'nodump', 'good')));"
+
+#define SQL_CREATE_TABLE_SAMPLE \
+        "CREATE TABLE IF NOT EXISTS sample (" \
+                "game NOT NULL, " \
+                "name NOT NULL);"
+
+#define SQL_CREATE_TABLE_CHIP \
+        "CREATE TABLE IF NOT EXISTS chip (" \
+                "game NOT NULL, " \
+                "name NOT NULL, " \
+                "type NOT NULL " \
+                "CHECK (type in ('cpu', 'audio')), " \
+                "clock);"
+
+#define SQL_CREATE_TABLE_DISPLAY \
+        "CREATE TABLE IF NOT EXISTS display (" \
+                "game NOT NULL, " \
+                "type NOT NULL " \
+                "CHECK (type in ('raster', 'vector')), " \
+                "rotate NOT NULL " \
+                "CHECK (rotate in ('0', '90', '180', '270')), " \
+                "flipx DEFAULT 'no' " \
+                "CHECK (flipx in ('yes', 'no')), " \
+                "width, " \
+                "height, " \
+                "refresh NOT NULL);"
+
+#define SQL_CREATE_TABLE_CONTROL \
+        "CREATE TABLE IF NOT EXISTS control (" \
+                "game NOT NULL, " \
+                "type NOT NULL, " \
+                "minimum, " \
+                "maximum, " \
+                "sensitivity, " \
+                "keydelta, " \
+                "reverse DEFAULT 'no' " \
+                "CHECK (reverse in ('yes', 'no')));"
+
+#define SQL_CREATE_TABLE_DIPVALUE \
+        "CREATE TABLE IF NOT EXISTS dipvalue (" \
+                "game NOT NULL, " \
+                "dipswitch NOT NULL, " \
+                "name NOT NULL, " \
+                "default_ DEFAULT 'no' " \
+                "CHECK (default_ in ('yes', 'no')));"
+
 #define SQL_INSERT_GAME \
         "INSERT INTO game VALUES (" \
                 "@name, " \
@@ -117,6 +199,78 @@
                 "@driver_savestate, " \
                 "@driver_palettesize);"
 
+#define SQL_INSERT_BIOSSET \
+        "INSERT INTO biosset VALUES (" \
+                "@game, " \
+                "@name, " \
+                "@description, " \
+                "@default_);"
+
+#define SQL_INSERT_ROM \
+        "INSERT INTO rom VALUES (" \
+                "@game, " \
+                "@name, " \
+                "@bios, " \
+                "@size, " \
+                "@crc, " \
+                "@md5, " \
+                "@sha1, " \
+                "@merge, " \
+                "@region, " \
+                "@offset, " \
+                "@status, " \
+                "@dispose);"
+
+#define SQL_INSERT_DISK \
+        "INSERT INTO disk VALUES (" \
+                "@game, " \
+                "@name, " \
+                "@md5, " \
+                "@sha1, " \
+                "@merge, " \
+                "@region, " \
+                "@index_, " \
+                "@status);"
+
+#define SQL_INSERT_SAMPLE \
+        "INSERT INTO sample VALUES (" \
+                "@game, " \
+                "@name);"
+
+#define SQL_INSERT_CHIP \
+        "INSERT INTO chip VALUES (" \
+                "@game, " \
+                "@name, " \
+                "@type, " \
+                "@clock);"
+
+#define SQL_INSERT_DISPLAY \
+        "INSERT INTO display VALUES (" \
+                "@game, " \
+                "@type, " \
+                "@rotate, " \
+                "@flipx, " \
+                "@width, " \
+                "@height, " \
+                "@refresh);"
+
+#define SQL_INSERT_CONTROL \
+        "INSERT INTO control VALUES (" \
+                "@game, " \
+                "@type, " \
+                "@minimum, " \
+                "@maximum, " \
+                "@sensitivity, " \
+                "@keydelta, " \
+                "@reverse);"
+
+#define SQL_INSERT_DIPVALUE \
+        "INSERT INTO dipvalue VALUES (" \
+                "@game, " \
+                "@dipswitch, " \
+                "@name, " \
+                "@default_);"
+
 #define SQL_DELETE_NOT_FOUND \
         "DELETE FROM game WHERE romset == \"not found\";"
 
@@ -126,7 +280,15 @@ struct _ParserData
 {
         GMarkupParseContext *context;
         GvaProcess *process;
-        sqlite3_stmt *stmt;
+        sqlite3_stmt *insert_game_stmt;
+        sqlite3_stmt *insert_biosset_stmt;
+        sqlite3_stmt *insert_rom_stmt;
+        sqlite3_stmt *insert_disk_stmt;
+        sqlite3_stmt *insert_sample_stmt;
+        sqlite3_stmt *insert_chip_stmt;
+        sqlite3_stmt *insert_display_stmt;
+        sqlite3_stmt *insert_control_stmt;
+        sqlite3_stmt *insert_dipvalue_stmt;
 
         GHashTable *romsets;
         GHashTable *samplesets;
@@ -136,6 +298,8 @@ struct _ParserData
         const gchar *element_stack[MAX_ELEMENT_DEPTH];
         guint element_stack_depth;
         guint progress;
+        gchar *dipswitch;
+        gchar *game;
 };
 
 /* Canonical names of XML elements and attributes */
@@ -143,39 +307,67 @@ static struct
 {
         const gchar *aspectx;
         const gchar *aspecty;
+        const gchar *bios;
+        const gchar *biosset;
         const gchar *build;
         const gchar *buttons;
         const gchar *channels;
+        const gchar *chip;
+        const gchar *clock;
         const gchar *cloneof;
         const gchar *cocktail;
         const gchar *coins;
         const gchar *color;
         const gchar *control;
+        const gchar *crc;
+        const gchar *default_;
         const gchar *description;
+        const gchar *dipswitch;
+        const gchar *dipvalue;
+        const gchar *disk;
+        const gchar *display;
+        const gchar *dispose;
         const gchar *driver;
         const gchar *emulation;
+        const gchar *flipx;
         const gchar *game;
         const gchar *graphic;
         const gchar *height;
+        const gchar *index_;
         const gchar *input;
+        const gchar *keydelta;
         const gchar *mame;
         const gchar *manufacturer;
+        const gchar *maximum;
+        const gchar *md5;
+        const gchar *merge;
+        const gchar *minimum;
         const gchar *name;
+        const gchar *offset;
         const gchar *orientation;
         const gchar *palettesize;
         const gchar *players;
         const gchar *protection;
         const gchar *refresh;
+        const gchar *region;
+        const gchar *reverse;
+        const gchar *rom;
         const gchar *romof;
+        const gchar *rotate;
         const gchar *runnable;
+        const gchar *sample;
         const gchar *sampleof;
         const gchar *savestate;
         const gchar *screen;
+        const gchar *sensitivity;
         const gchar *service;
+        const gchar *sha1;
+        const gchar *size;
         const gchar *sound;
         const gchar *sourcefile;
         const gchar *status;
         const gchar *tilt;
+        const gchar *type;
         const gchar *width;
         const gchar *year;
 
@@ -205,12 +397,244 @@ db_parser_bind_text (sqlite3_stmt *stmt,
         }
 }
 
+static gboolean
+db_parser_exec_stmt (sqlite3_stmt *stmt,
+                     GError **error)
+{
+        if (sqlite3_step (stmt) != SQLITE_DONE)
+        {
+                gva_db_set_error (error, 0, NULL);
+                return FALSE;
+        }
+
+        ASSERT_OK (sqlite3_reset (stmt));
+        ASSERT_OK (sqlite3_clear_bindings (stmt));
+
+        return TRUE;
+}
+
+static void
+db_parser_start_element_biosset (ParserData *data,
+                                 const gchar **attribute_name,
+                                 const gchar **attribute_value,
+                                 GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_biosset_stmt;
+        gint ii;
+
+        /* Bind default values. */
+        db_parser_bind_text (stmt, "@default_", "no");
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else if (attribute_name[ii] == intern.description)
+                        param = "@description";
+                else if (attribute_name[ii] == intern.default_)
+                        param = "@default_";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
+db_parser_start_element_chip (ParserData *data,
+                              const gchar **attribute_name,
+                              const gchar **attribute_value,
+                              GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_chip_stmt;
+        gint ii;
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else if (attribute_name[ii] == intern.type)
+                        param = "@type";
+                else if (attribute_name[ii] == intern.clock)
+                        param = "@clock";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
+db_parser_start_element_control (ParserData *data,
+                                 const gchar **attribute_name,
+                                 const gchar **attribute_value,
+                                 GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_control_stmt;
+        gint ii;
+
+        /* Bind default values. */
+        db_parser_bind_text (stmt, "@reverse", "no");
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.type)
+                        param = "@type";
+                else if (attribute_name[ii] == intern.minimum)
+                        param = "@minimum";
+                else if (attribute_name[ii] == intern.maximum)
+                        param = "@maximum";
+                else if (attribute_name[ii] == intern.sensitivity)
+                        param = "@sensitivity";
+                else if (attribute_name[ii] == intern.keydelta)
+                        param = "@keydelta";
+                else if (attribute_name[ii] == intern.reverse)
+                        param = "@reverse";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
+db_parser_start_element_dipswitch (ParserData *data,
+                                   const gchar **attribute_name,
+                                   const gchar **attribute_value,
+                                   GError **error)
+{
+        gint ii;
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+                if (attribute_name[ii] == intern.name)
+                        data->dipswitch = g_strdup (attribute_value[ii]);
+}
+
+static void
+db_parser_start_element_dipvalue (ParserData *data,
+                                  const gchar **attribute_name,
+                                  const gchar **attribute_value,
+                                  GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_dipvalue_stmt;
+        gint ii;
+
+        /* Bind default values. */
+        db_parser_bind_text (stmt, "@default_", "no");
+
+        db_parser_bind_text (stmt, "@game", data->game);
+        db_parser_bind_text (stmt, "@dipswitch", data->dipswitch);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else if (attribute_name[ii] == intern.default_)
+                        param = "@default_";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
+db_parser_start_element_disk (ParserData *data,
+                              const gchar **attribute_name,
+                              const gchar **attribute_value,
+                              GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_disk_stmt;
+        gint ii;
+
+        /* Bind default values. */
+        db_parser_bind_text (stmt, "@status", "good");
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else if (attribute_name[ii] == intern.md5)
+                        param = "@md5";
+                else if (attribute_name[ii] == intern.sha1)
+                        param = "@sha1";
+                else if (attribute_name[ii] == intern.merge)
+                        param = "@merge";
+                else if (attribute_name[ii] == intern.region)
+                        param = "@region";
+                else if (attribute_name[ii] == intern.index_)
+                        param = "@index_";
+                else if (attribute_name[ii] == intern.status)
+                        param = "@status";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
+db_parser_start_element_display (ParserData *data,
+                                 const gchar **attribute_name,
+                                 const gchar **attribute_value,
+                                 GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_display_stmt;
+        gint ii;
+
+        /* Bind default values. */
+        db_parser_bind_text (stmt, "@flipx", "no");
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.type)
+                        param = "@type";
+                else if (attribute_name[ii] == intern.rotate)
+                        param = "@rotate";
+                else if (attribute_name[ii] == intern.flipx)
+                        param = "@flipx";
+                else if (attribute_name[ii] == intern.width)
+                        param = "@width";
+                else if (attribute_name[ii] == intern.height)
+                        param = "@height";
+                else if (attribute_name[ii] == intern.refresh)
+                        param = "@refresh";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
 static void
 db_parser_start_element_driver (ParserData *data,
                                 const gchar **attribute_name,
                                 const gchar **attribute_value,
                                 GError **error)
 {
+        sqlite3_stmt *stmt = data->insert_game_stmt;
         gint ii;
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
@@ -238,7 +662,7 @@ db_parser_start_element_driver (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
         }
 }
 
@@ -248,17 +672,21 @@ db_parser_start_element_game (ParserData *data,
                               const gchar **attribute_value,
                               GError **error)
 {
+        sqlite3_stmt *stmt = data->insert_game_stmt;
         gint ii;
 
         /* Bind default values. */
-        db_parser_bind_text (data->stmt, "@runnable", "yes");
+        db_parser_bind_text (stmt, "@runnable", "yes");
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
         {
                 const gchar *param;
 
                 if (attribute_name[ii] == intern.name)
+                {
                         param = "@name";
+                        data->game = g_strdup (attribute_value[ii]);
+                }
                 else if (attribute_name[ii] == intern.sourcefile)
                         param = "@sourcefile";
                 else if (attribute_name[ii] == intern.runnable)
@@ -272,7 +700,7 @@ db_parser_start_element_game (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
         }
 }
 
@@ -282,11 +710,12 @@ db_parser_start_element_input (ParserData *data,
                                const gchar **attribute_value,
                                GError **error)
 {
+        sqlite3_stmt *stmt = data->insert_game_stmt;
         gint ii;
 
         /* Bind default values. */
-        db_parser_bind_text (data->stmt, "@input_service", "no");
-        db_parser_bind_text (data->stmt, "@input_tilt", "no");
+        db_parser_bind_text (stmt, "@input_service", "no");
+        db_parser_bind_text (stmt, "@input_tilt", "no");
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
         {
@@ -305,7 +734,7 @@ db_parser_start_element_input (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
         }
 }
 
@@ -334,11 +763,84 @@ db_parser_start_element_mame (ParserData *data,
 }
 
 static void
+db_parser_start_element_rom (ParserData *data,
+                             const gchar **attribute_name,
+                             const gchar **attribute_value,
+                             GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_rom_stmt;
+        gint ii;
+
+        /* Bind default values. */
+        db_parser_bind_text (stmt, "@status", "good");
+        db_parser_bind_text (stmt, "@dispose", "no");
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else if (attribute_name[ii] == intern.bios)
+                        param = "@bios";
+                else if (attribute_name[ii] == intern.size)
+                        param = "@size";
+                else if (attribute_name[ii] == intern.crc)
+                        param = "@crc";
+                else if (attribute_name[ii] == intern.md5)
+                        param = "@md5";
+                else if (attribute_name[ii] == intern.sha1)
+                        param = "@sha1";
+                else if (attribute_name[ii] == intern.merge)
+                        param = "@merge";
+                else if (attribute_name[ii] == intern.region)
+                        param = "@region";
+                else if (attribute_name[ii] == intern.offset)
+                        param = "@offset";
+                else if (attribute_name[ii] == intern.status)
+                        param = "@status";
+                else if (attribute_name[ii] == intern.dispose)
+                        param = "@dispose";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
+db_parser_start_element_sample (ParserData *data,
+                                const gchar **attribute_name,
+                                const gchar **attribute_value,
+                                GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_sample_stmt;
+        gint ii;
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
 db_parser_start_element_sound (ParserData *data,
                                const gchar **attribute_name,
                                const gchar **attribute_value,
                                GError **error)
 {
+        sqlite3_stmt *stmt = data->insert_game_stmt;
         gint ii;
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
@@ -350,7 +852,7 @@ db_parser_start_element_sound (ParserData *data,
                 else
                         continue;
 
-                db_parser_bind_text (data->stmt, param, attribute_value[ii]);
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
         }
 }
 
@@ -378,7 +880,35 @@ db_parser_start_element (GMarkupParseContext *context,
                 interned_name[ii] = g_intern_string (attribute_name[ii]);
         attribute_name = interned_name;
 
-        if (element_name == intern.driver)
+        if (element_name == intern.biosset)
+                db_parser_start_element_biosset (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.chip)
+                db_parser_start_element_chip (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.control)
+                db_parser_start_element_control (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.dipswitch)
+                db_parser_start_element_dipswitch (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.dipvalue)
+                db_parser_start_element_dipvalue (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.disk)
+                db_parser_start_element_disk (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.display)
+                db_parser_start_element_display (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.driver)
                 db_parser_start_element_driver (
                         data, attribute_name, attribute_value, error);
 
@@ -394,25 +924,38 @@ db_parser_start_element (GMarkupParseContext *context,
                 db_parser_start_element_mame (
                         data, attribute_name, attribute_value, error);
 
+        else if (element_name == intern.rom)
+                db_parser_start_element_rom (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.sample)
+                db_parser_start_element_sample (
+                        data, attribute_name, attribute_value, error);
+
         else if (element_name == intern.sound)
                 db_parser_start_element_sound (
                         data, attribute_name, attribute_value, error);
 }
 
 static void
+db_parser_end_element_dipswitch (ParserData *data,
+                                 GError **error)
+{
+        g_free (data->dipswitch);
+        data->dipswitch = NULL;
+}
+
+static void
 db_parser_end_element_game (ParserData *data,
                             GError **error)
 {
-        if (sqlite3_step (data->stmt) != SQLITE_DONE)
-        {
-                gva_db_set_error (error, 0, NULL);
+        if (!db_parser_exec_stmt (data->insert_game_stmt, error))
                 return;
-        }
-
-        ASSERT_OK (sqlite3_reset (data->stmt));
-        ASSERT_OK (sqlite3_clear_bindings (data->stmt));
 
         gva_process_set_progress (data->process, ++data->progress);
+
+        g_free (data->game);
+        data->game = NULL;
 }
 
 static void
@@ -426,8 +969,35 @@ db_parser_end_element (GMarkupParseContext *context,
         g_assert (data->element_stack_depth > 0);
         element_name = data->element_stack[--data->element_stack_depth];
 
-        if (element_name == intern.game)
+        if (element_name == intern.biosset)
+                db_parser_exec_stmt (data->insert_biosset_stmt, error);
+
+        else if (element_name == intern.chip)
+                db_parser_exec_stmt (data->insert_chip_stmt, error);
+
+        else if (element_name == intern.control)
+                db_parser_exec_stmt (data->insert_control_stmt, error);
+
+        else if (element_name == intern.dipswitch)
+                db_parser_end_element_dipswitch (data, error);
+
+        else if (element_name == intern.dipvalue)
+                db_parser_exec_stmt (data->insert_dipvalue_stmt, error);
+
+        else if (element_name == intern.disk)
+                db_parser_exec_stmt (data->insert_disk_stmt, error);
+
+        else if (element_name == intern.display)
+                db_parser_exec_stmt (data->insert_display_stmt, error);
+
+        else if (element_name == intern.game)
                 db_parser_end_element_game (data, error);
+
+        else if (element_name == intern.rom)
+                db_parser_exec_stmt (data->insert_rom_stmt, error);
+
+        else if (element_name == intern.sample)
+                db_parser_exec_stmt (data->insert_sample_stmt, error);
 }
 
 static void
@@ -438,19 +1008,20 @@ db_parser_text (GMarkupParseContext *context,
                 GError **error)
 {
         ParserData *data = user_data;
+        sqlite3_stmt *stmt = data->insert_game_stmt;
         const gchar *element_name;
 
         g_assert (data->element_stack_depth > 0);
         element_name = data->element_stack[data->element_stack_depth - 1];
 
         if (element_name == intern.description)
-                db_parser_bind_text (data->stmt, "@description", text);
+                db_parser_bind_text (stmt, "@description", text);
 
         else if (element_name == intern.manufacturer)
-                db_parser_bind_text (data->stmt, "@manufacturer", text);
+                db_parser_bind_text (stmt, "@manufacturer", text);
 
         else if (element_name == intern.year)
-                db_parser_bind_text (data->stmt, "@year", text);
+                db_parser_bind_text (stmt, "@year", text);
 }
 
 static void
@@ -552,7 +1123,31 @@ db_parser_data_new (GvaProcess *process)
                 data->samplesets, &error);
         gva_error_handle (&error);
 
-        if (!gva_db_prepare (SQL_INSERT_GAME, &data->stmt, &error))
+        if (!gva_db_prepare (SQL_INSERT_GAME, &data->insert_game_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_BIOSSET, &data->insert_biosset_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_ROM, &data->insert_rom_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_DISK, &data->insert_disk_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_SAMPLE, &data->insert_sample_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_CHIP, &data->insert_chip_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_DISPLAY, &data->insert_display_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_CONTROL, &data->insert_control_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_DIPVALUE, &data->insert_dipvalue_stmt, &error))
                 g_error ("%s", error->message);
 
         return data;
@@ -563,7 +1158,16 @@ db_parser_data_free (ParserData *data)
 {
         g_markup_parse_context_free (data->context);
         g_object_unref (data->process);
-        sqlite3_finalize (data->stmt);
+
+        sqlite3_finalize (data->insert_game_stmt);
+        sqlite3_finalize (data->insert_biosset_stmt);
+        sqlite3_finalize (data->insert_rom_stmt);
+        sqlite3_finalize (data->insert_disk_stmt);
+        sqlite3_finalize (data->insert_sample_stmt);
+        sqlite3_finalize (data->insert_chip_stmt);
+        sqlite3_finalize (data->insert_display_stmt);
+        sqlite3_finalize (data->insert_control_stmt);
+        sqlite3_finalize (data->insert_dipvalue_stmt);
 
         g_hash_table_destroy (data->romsets);
         g_hash_table_destroy (data->samplesets);
@@ -573,6 +1177,9 @@ db_parser_data_free (ParserData *data)
 
         if (data->verify_samples != NULL)
                 g_object_unref (data->verify_samples);
+
+        g_free (data->dipswitch);
+        g_free (data->game);
 
         g_slice_free (ParserData, data);
 }
@@ -639,7 +1246,15 @@ static gboolean
 db_create_tables (GError **error)
 {
         return gva_db_execute (SQL_CREATE_TABLE_MAME, error)
-                && gva_db_execute (SQL_CREATE_TABLE_GAME, error);
+                && gva_db_execute (SQL_CREATE_TABLE_GAME, error)
+                && gva_db_execute (SQL_CREATE_TABLE_BIOSSET, error)
+                && gva_db_execute (SQL_CREATE_TABLE_ROM, error)
+                && gva_db_execute (SQL_CREATE_TABLE_DISK, error)
+                && gva_db_execute (SQL_CREATE_TABLE_SAMPLE, error)
+                && gva_db_execute (SQL_CREATE_TABLE_CHIP, error)
+                && gva_db_execute (SQL_CREATE_TABLE_DISPLAY, error)
+                && gva_db_execute (SQL_CREATE_TABLE_CONTROL, error)
+                && gva_db_execute (SQL_CREATE_TABLE_DIPVALUE, error);
 }
 
 static void
@@ -699,39 +1314,67 @@ gva_db_build (GError **error)
         /* Initialize the list of canonical names. */
         intern.aspectx      = g_intern_static_string ("aspectx");
         intern.aspecty      = g_intern_static_string ("aspecty");
+        intern.bios         = g_intern_static_string ("bios");
+        intern.biosset      = g_intern_static_string ("biosset");
         intern.build        = g_intern_static_string ("build");
         intern.buttons      = g_intern_static_string ("buttons");
         intern.channels     = g_intern_static_string ("channels");
+        intern.chip         = g_intern_static_string ("chip");
+        intern.clock        = g_intern_static_string ("clock");
         intern.cloneof      = g_intern_static_string ("cloneof");
         intern.cocktail     = g_intern_static_string ("cocktail");
         intern.coins        = g_intern_static_string ("coins");
         intern.color        = g_intern_static_string ("color");
         intern.control      = g_intern_static_string ("control");
+        intern.crc          = g_intern_static_string ("crc");
+        intern.default_     = g_intern_static_string ("default_");
         intern.description  = g_intern_static_string ("description");
+        intern.dipswitch    = g_intern_static_string ("dipswitch");
+        intern.dipvalue     = g_intern_static_string ("dipvalue");
+        intern.disk         = g_intern_static_string ("disk");
+        intern.display      = g_intern_static_string ("display");
+        intern.dispose      = g_intern_static_string ("dispose");
         intern.driver       = g_intern_static_string ("driver");
         intern.emulation    = g_intern_static_string ("emulation");
+        intern.flipx        = g_intern_static_string ("flipx");
         intern.game         = g_intern_static_string ("game");
         intern.graphic      = g_intern_static_string ("graphic");
         intern.height       = g_intern_static_string ("height");
+        intern.index_       = g_intern_static_string ("index_");
         intern.input        = g_intern_static_string ("input");
+        intern.keydelta     = g_intern_static_string ("keydelta");
         intern.mame         = g_intern_static_string ("mame");
         intern.manufacturer = g_intern_static_string ("manufacturer");
+        intern.maximum      = g_intern_static_string ("maximum");
+        intern.md5          = g_intern_static_string ("md5");
+        intern.merge        = g_intern_static_string ("merge");
+        intern.minimum      = g_intern_static_string ("minimum");
         intern.name         = g_intern_static_string ("name");
+        intern.offset       = g_intern_static_string ("offset");
         intern.orientation  = g_intern_static_string ("orientation");
         intern.palettesize  = g_intern_static_string ("palettesize");
         intern.players      = g_intern_static_string ("players");
         intern.protection   = g_intern_static_string ("protection");
         intern.refresh      = g_intern_static_string ("refresh");
+        intern.region       = g_intern_static_string ("region");
+        intern.reverse      = g_intern_static_string ("reverse");
+        intern.rom          = g_intern_static_string ("rom");
         intern.romof        = g_intern_static_string ("romof");
+        intern.rotate       = g_intern_static_string ("rotate");
         intern.runnable     = g_intern_static_string ("runnable");
+        intern.sample       = g_intern_static_string ("sample");
         intern.sampleof     = g_intern_static_string ("sampleof");
         intern.savestate    = g_intern_static_string ("savestate");
         intern.screen       = g_intern_static_string ("screen");
+        intern.sensitivity  = g_intern_static_string ("sensitivity");
         intern.service      = g_intern_static_string ("service");
+        intern.sha1         = g_intern_static_string ("sha1");
+        intern.size         = g_intern_static_string ("size");
         intern.sound        = g_intern_static_string ("sound");
         intern.sourcefile   = g_intern_static_string ("sourcefile");
         intern.status       = g_intern_static_string ("status");
         intern.tilt         = g_intern_static_string ("tilt");
+        intern.type         = g_intern_static_string ("type");
         intern.width        = g_intern_static_string ("width");
         intern.year         = g_intern_static_string ("year");
 

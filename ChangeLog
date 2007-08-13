@@ -1,3 +1,8 @@
+2007-08-13  Matthew Barnes  <mbarnes@redhat.com>
+
+	* gva-db.c:
+	Parse the rest of the XML elements.
+
 2007-08-07  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:
