@@ -5,8 +5,8 @@ bin_PROGRAMS = gnome-video-arcade
 AM_CFLAGS = \
 	-Werror \
 	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
-	@GCONF_CFLAGS@ @GCONF_BRIDGE_CFLAGS@ \
-	@GLADE_CFLAGS@ @SQLITE_CFLAGS@
+	@GCONF_CFLAGS@ @GLADE_CFLAGS@ \
+	@SQLITE_CFLAGS@
 
 AM_CPPFLAGS = \
 	-DLOCALEDIR=\""$(datadir)/locale/"\" \
@@ -16,6 +16,8 @@ AM_LDFLAGS = \
 	-export-dynamic
 
 gnome_video_arcade_SOURCES = \
+	gconf-bridge.c			\
+	gconf-bridge.h			\
 	gva-cell-renderer-pixbuf.c	\
 	gva-cell-renderer-pixbuf.h	\
 	gva-column-manager.c		\
@@ -64,9 +66,8 @@ EXTRA_gnome_video_arcade_SOURCES = \
 
 gnome_video_arcade_LDADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
-	@GCONF_LIBS@ @GCONF_BRIDGE_LIBS@ \
-	@GLADE_LIBS@ @MAME_BACKEND@ \
-	@SQLITE_LIBS@
+	@GCONF_LIBS@ @GLADE_LIBS@ \
+	@MAME_BACKEND@ @SQLITE_LIBS@
 
 gnome_video_arcade_DEPENDENCIES = \
 	@MAME_BACKEND@

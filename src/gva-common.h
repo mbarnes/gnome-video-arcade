@@ -35,7 +35,7 @@
 
 #include <sqlite3.h>
 #include <gconf/gconf-client.h>
-#include <libgconf-bridge/gconf-bridge.h>
+#include "gconf-bridge.h"		/* Embedded in GVA */
 
 #define GVA_GCONF_PREFIX                "/apps/" PACKAGE
 #define GVA_GCONF_ALL_COLUMNS_KEY       GVA_GCONF_PREFIX "/all-columns"

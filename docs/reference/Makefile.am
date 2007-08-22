@@ -47,7 +47,7 @@ CFILE_GLOB=$(top_srcdir)/src/*.c
 
 # Header files to ignore when scanning.
 # e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h
-IGNORE_HFILES=gva-common.h
+IGNORE_HFILES=gconf-bridge.h gva-common.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
@@ -76,7 +76,6 @@ INCLUDES=							\
 	$(GLIB_CFLAGS)						\
 	$(GTK_CFLAGS)						\
 	$(GCONF_CFLAGS)						\
-	$(GCONF_BRIDGE_CFLAGS)					\
 	$(GLADE_CFLAGS)						\
 	$(SQLITE_CFLAGS)
 GTKDOC_LIBS=							\
@@ -103,7 +102,6 @@ GTKDOC_LIBS=							\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
 	$(GCONF_LIBS)						\
-	$(GCONF_BRIDGE_LIBS)					\
 	$(GLADE_LIBS)						\
 	$(SQLITE_LIBS)
 

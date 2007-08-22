@@ -4,7 +4,6 @@
 <glade-interface>
   <requires lib="gva"/>
   <widget class="GtkWindow" id="main-window">
-    <property name="visible">True</property>
     <property name="title" translatable="yes">GNOME Video Arcade</property>
     <property name="default_width">500</property>
     <property name="default_height">400</property>
@@ -586,21 +585,6 @@
               <placeholder/>
             </child>
             <child>
-              <widget class="GtkLabel" id="properties-header">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
-Manufacturer, Year</property>
-                <property name="use_markup">True</property>
-                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-              </widget>
-              <packing>
-                <property name="bottom_attach">2</property>
-              </packing>
-            </child>
-            <child>
               <widget class="GtkHBox" id="properties-hbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -655,6 +639,21 @@ Manufacturer, Year</property>
                 <property name="right_attach">2</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="properties-header">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
+Manufacturer, Year</property>
+                <property name="use_markup">True</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+              </widget>
+              <packing>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
           </widget>
@@ -896,20 +895,14 @@ Manufacturer, Year</property>
             <property name="column_spacing">12</property>
             <property name="row_spacing">6</property>
             <child>
-              <widget class="GtkComboBoxEntry" id="search-title-combo-box-entry">
+              <widget class="GtkImage" id="search-image">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <child internal-child="entry">
-                  <widget class="GtkEntry" id="search-title-combo-box-entry-entry">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                  </widget>
-                </child>
+                <property name="stock">gtk-find</property>
+                <property name="icon_size">6</property>
               </widget>
               <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
+                <property name="x_options"></property>
                 <property name="y_options"></property>
               </packing>
             </child>
@@ -929,14 +922,20 @@ Manufacturer, Year</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkImage" id="search-image">
+              <widget class="GtkComboBoxEntry" id="search-title-combo-box-entry">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="stock">gtk-find</property>
-                <property name="icon_size">6</property>
+                <child internal-child="entry">
+                  <widget class="GtkEntry" id="search-title-combo-box-entry-entry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                  </widget>
+                </child>
               </widget>
               <packing>
-                <property name="x_options"></property>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
                 <property name="y_options"></property>
               </packing>
             </child>

@@ -1,5 +1,32 @@
 2007-08-22  Matthew Barnes  <mbarnes@redhat.com>
 
+	* Embed gconf-bridge into GNOME Video Arcade rather than
+	  requiring it as an external dependency.  Some GNU/Linux
+	  distros (e.g. Fedora) do not provide libgconf-bridge.
+
+	* configure.ac:
+	Revert previous changes.
+
+	* data/gnome-video-arcade.glade:
+	Hide the main window until we've initialized it.
+
+	* data/gnome-video-arcade.schemas:
+	Fix some typos.
+
+	* docs/reference/Makefile.am:
+	Revert previous changes and ignore gconf-bridge.h.
+
+	* src/Makefile.am:
+	Revert previous changes and add gconf-bridge.[ch] to SOURCES.
+
+	* src/gconf-bridge.[ch]:
+	New source files ripped from libgconf-bridge.
+
+	* src/gva-main.c (gva_main_init):
+	Show the window after initialization is complete.
+
+2007-08-22  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac:
 	Check for libgconf-bridge.
 

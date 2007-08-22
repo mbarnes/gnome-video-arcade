@@ -88,7 +88,7 @@
       <applyto>/apps/gnome-video-arcade/selected-view</applyto>
       <key>/schemas/apps/gnome-video-arcade/selected-view</key>
       <owner>gnome-video-arcade</owner>
-      <type>integer</type>
+      <type>int</type>
       <default></default>
       <locale name="C">
         <short>Selected view</short>
@@ -128,7 +128,7 @@
       <applyto>/apps/gnome-video-arcade/window-height</applyto>
       <key>/schemas/apps/gnome-video-arcade/window-height</key>
       <owner>gnome-video-arcade</owner>
-      <type>integer</type>
+      <type>int</type>
       <default>400</default>
       <locale name="C">
         <short>Window height</short>
@@ -152,7 +152,7 @@
       <applyto>/apps/gnome-video-arcade/window-width</applyto>
       <key>/schemas/apps/gnome-video-arcade/window-width</key>
       <owner>gnome-video-arcade</owner>
-      <type>integer</type>
+      <type>int</type>
       <default>500</default>
       <locale name="C">
         <short>Window width</short>

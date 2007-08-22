@@ -108,22 +108,6 @@
 @game: 
 
 
-<!-- ##### FUNCTION gva_tree_view_get_last_selected_view ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION gva_tree_view_set_last_selected_view ##### -->
-<para>
-
-</para>
-
-@view: 
-
-
 <!-- ##### FUNCTION gva_tree_view_get_last_sort_column_id ##### -->
 <para>
 

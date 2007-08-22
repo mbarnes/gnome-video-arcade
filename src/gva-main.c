@@ -126,6 +126,8 @@ gva_main_init (void)
 
         gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
+
+	gtk_widget_show (GVA_WIDGET_MAIN_WINDOW);
 }
 
 /**

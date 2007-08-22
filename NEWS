@@ -1,3 +1,14 @@
+GNOME Video Arcade 0.4.3
+========================
+
+	Released August ?? 2007
+
+	What's New
+	----------
+	* Remember window size and maximize state.
+	* Put all available game information into the game database.
+	  Necessary for searching, but construction takes longer again.
+
 GNOME Video Arcade 0.4.2
 ========================
 
