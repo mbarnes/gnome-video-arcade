@@ -41,8 +41,6 @@ gint           gva_tree_view_get_selected_view       (void);
 void           gva_tree_view_set_selected_view       (gint view);
 const gchar *  gva_tree_view_get_last_selected_game  (void);
 void           gva_tree_view_set_last_selected_game  (const gchar *game);
-gint           gva_tree_view_get_last_selected_view  (void);
-void           gva_tree_view_set_last_selected_view  (gint view);
 void           gva_tree_view_get_last_sort_column_id (GvaGameStoreColumn *column_id,
                                                       GtkSortType *order);
 void           gva_tree_view_set_last_sort_column_id (GvaGameStoreColumn column_id,

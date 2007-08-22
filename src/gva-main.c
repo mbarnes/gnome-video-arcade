@@ -113,6 +113,10 @@ gva_main_init (void)
                 GVA_ACTION_START,
                 GVA_WIDGET_MAIN_START_GAME_BUTTON);
 
+        gconf_bridge_bind_window (
+                gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
+                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, FALSE);
+
         gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_START, FALSE);

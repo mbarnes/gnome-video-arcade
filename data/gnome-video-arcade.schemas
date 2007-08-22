@@ -88,7 +88,7 @@
       <applyto>/apps/gnome-video-arcade/selected-view</applyto>
       <key>/schemas/apps/gnome-video-arcade/selected-view</key>
       <owner>gnome-video-arcade</owner>
-      <type>string</type>
+      <type>integer</type>
       <default></default>
       <locale name="C">
         <short>Selected view</short>
@@ -121,6 +121,42 @@
       <locale name="C">
         <short>Program version</short>
         <long>The most recently run version of GNOME Video Arcade.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/window-height</applyto>
+      <key>/schemas/apps/gnome-video-arcade/window-height</key>
+      <owner>gnome-video-arcade</owner>
+      <type>integer</type>
+      <default>400</default>
+      <locale name="C">
+        <short>Window height</short>
+        <long>The height of the main window.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/window-maximized</applyto>
+      <key>/schemas/apps/gnome-video-arcade/window-maximized</key>
+      <owner>gnome-video-arcade</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Window maximized</short>
+        <long>True if the main window is maximized.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/window-width</applyto>
+      <key>/schemas/apps/gnome-video-arcade/window-width</key>
+      <owner>gnome-video-arcade</owner>
+      <type>integer</type>
+      <default>500</default>
+      <locale name="C">
+        <short>Window width</short>
+        <long>The width of the main window.</long>
       </locale>
     </schema>
 

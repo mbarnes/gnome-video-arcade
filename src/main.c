@@ -87,14 +87,11 @@ start (void)
         gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
 
         /* Force a tree view update. */
-        last_view = gva_tree_view_get_last_selected_view ();
-        if (last_view == gva_tree_view_get_selected_view ())
+        if (gva_tree_view_get_selected_view () == 0)
         {
                 gva_tree_view_update (&error);
                 gva_error_handle (&error);
         }
-        else
-                gva_tree_view_set_selected_view (last_view);
 }
 
 gint

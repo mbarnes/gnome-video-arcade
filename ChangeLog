@@ -1,6 +1,56 @@
+2007-08-22  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Check for libgconf-bridge.
+
+	* data/gnome-video-arcade.glade:
+	Prototype a search window; not yet working.
+
+	* data/gnome-video-arcade.schemas:
+	Add window-height, window-maximized, and window-width keys.
+
+	* src/Makefile.am:
+	* docs/reference/Makefile.am:
+	Add @GCONF_BRIDGE_CFLAGS@ and @GCONF_BRIDGE_LIBS@.
+
+	* src/main.c (start):
+	Simplify the "force a tree view update" logic.
+
+	* src/gva-common.h:
+	#include <libgconf-bridge/gconf-bridge.h>
+	Add GVA_GCONF_WINDOW_PREFIX.
+
+	* src/gva-main.c (gva_main):
+	Use GConfBridge to remember main window size.
+
+	* src/gva-preferences.c (gva_preferences_init):
+	Use GConfBridge to sync GConf keys with toggle actions.
+
+	* src/gva-preferences.c (gva_preferences_get_auto_save),
+	(gva_preferences_set_auto_save), (gva_preferences_get_full_screen),
+	(gva_preferences_set_full_screen):
+	Just get/set the toggle action's checked state.
+	Changes will get propagated to GConf automatically.
+
+	* src/gva-tree-view.c (gva_tree_view_init):
+	Use GConfBridge to sync GConf "selected-view" key with radio action.
+
+	* src/gva-tree-view.c (gva_tree_view_get_last_selected_view),
+	(gva_tree_view_set_last_selected_view):
+	Remove these functions; GConfBridge does the work for us.
+
+	* src/gva-ui.c (action_auto_save_cb), (action_full_screen_cb):
+	Remove these callbacks; nothing for them to do now.
+
+	* src/gva-ui.h:
+	Add GVA_ACTION_SEARCH and GVA_WIDGET_SEARCH_WINDOW.
+
+	* src/gva-ui.c (action_search_cb):
+	Show a prototype, non-working search window.
+
 2007-08-13  Matthew Barnes  <mbarnes@redhat.com>
 
-	* gva-db.c:
+	* src/gva-db.c:
 	Parse the rest of the XML elements.
 
 2007-08-07  Matthew Barnes  <mbarnes@redhat.com>

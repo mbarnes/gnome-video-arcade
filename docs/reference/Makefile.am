@@ -76,6 +76,7 @@ INCLUDES=							\
 	$(GLIB_CFLAGS)						\
 	$(GTK_CFLAGS)						\
 	$(GCONF_CFLAGS)						\
+	$(GCONF_BRIDGE_CFLAGS)					\
 	$(GLADE_CFLAGS)						\
 	$(SQLITE_CFLAGS)
 GTKDOC_LIBS=							\
@@ -102,6 +103,7 @@ GTKDOC_LIBS=							\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
 	$(GCONF_LIBS)						\
+	$(GCONF_BRIDGE_LIBS)					\
 	$(GLADE_LIBS)						\
 	$(SQLITE_LIBS)
 

@@ -35,6 +35,7 @@
 
 #include <sqlite3.h>
 #include <gconf/gconf-client.h>
+#include <libgconf-bridge/gconf-bridge.h>
 
 #define GVA_GCONF_PREFIX                "/apps/" PACKAGE
 #define GVA_GCONF_ALL_COLUMNS_KEY       GVA_GCONF_PREFIX "/all-columns"
@@ -46,6 +47,7 @@
 #define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"
 #define GVA_GCONF_SORT_COLUMN_KEY       GVA_GCONF_PREFIX "/sort-column"
 #define GVA_GCONF_VERSION_KEY           GVA_GCONF_PREFIX "/version"
+#define GVA_GCONF_WINDOW_PREFIX         GVA_GCONF_PREFIX "/window"
 
 G_BEGIN_DECLS
 

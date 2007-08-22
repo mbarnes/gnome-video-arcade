@@ -43,9 +43,9 @@ gva_preferences_init (void)
                 GVA_ACTION_AUTO_SAVE,
                 gva_mame_supports_auto_save ());
 
-        gtk_toggle_action_set_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_SAVE),
-                gva_preferences_get_auto_save ());
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_AUTO_SAVE_KEY,
+                G_OBJECT (GVA_ACTION_AUTO_SAVE), "active");
 
         /* Full Screen */
 
@@ -58,9 +58,9 @@ gva_preferences_init (void)
                 gva_mame_supports_full_screen () ||
                 gva_mame_supports_window ());
 
-        gtk_toggle_action_set_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN),
-                gva_preferences_get_full_screen ());
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_FULL_SCREEN_KEY,
+                G_OBJECT (GVA_ACTION_FULL_SCREEN), "active");
 }
 
 /**
@@ -74,17 +74,8 @@ gva_preferences_init (void)
 gboolean
 gva_preferences_get_auto_save (void)
 {
-        GConfClient *client;
-        gboolean auto_save;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        auto_save = gconf_client_get_bool (
-                client, GVA_GCONF_AUTO_SAVE_KEY, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-
-        return auto_save;
+        return gtk_toggle_action_get_active (
+                GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_SAVE));
 }
 
 /**
@@ -100,14 +91,8 @@ gva_preferences_get_auto_save (void)
 void
 gva_preferences_set_auto_save (gboolean auto_save)
 {
-        GConfClient *client;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        gconf_client_set_bool (
-                client, GVA_GCONF_AUTO_SAVE_KEY, auto_save, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        gtk_toggle_action_set_active (
+                GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_SAVE), auto_save);
 }
 
 /**
@@ -121,17 +106,8 @@ gva_preferences_set_auto_save (gboolean auto_save)
 gboolean
 gva_preferences_get_full_screen (void)
 {
-        GConfClient *client;
-        gboolean full_screen;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        full_screen = gconf_client_get_bool (
-                client, GVA_GCONF_FULL_SCREEN_KEY, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-
-        return full_screen;
+        return gtk_toggle_action_get_active (
+                GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN));
 }
 
 /**
@@ -147,14 +123,8 @@ gva_preferences_get_full_screen (void)
 void
 gva_preferences_set_full_screen (gboolean full_screen)
 {
-        GConfClient *client;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        gconf_client_set_bool (
-                client, GVA_GCONF_FULL_SCREEN_KEY, full_screen, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        gtk_toggle_action_set_active (
+                GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN), full_screen);
 }
 
 /**

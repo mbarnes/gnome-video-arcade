@@ -586,6 +586,21 @@
               <placeholder/>
             </child>
             <child>
+              <widget class="GtkLabel" id="properties-header">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
+Manufacturer, Year</property>
+                <property name="use_markup">True</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+              </widget>
+              <packing>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkHBox" id="properties-hbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -640,21 +655,6 @@
                 <property name="right_attach">2</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="properties-header">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
-Manufacturer, Year</property>
-                <property name="use_markup">True</property>
-                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-              </widget>
-              <packing>
-                <property name="bottom_attach">2</property>
               </packing>
             </child>
           </widget>
@@ -862,6 +862,207 @@ Manufacturer, Year</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="GtkWindow" id="search-window">
+    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+    <property name="title" translatable="yes">Search for Games</property>
+    <property name="resizable">False</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="transient_for">main-window</property>
+    <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
+    <child>
+      <widget class="GtkVBox" id="search-vbox">
+        <property name="visible">True</property>
+        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+        <property name="border_width">12</property>
+        <property name="spacing">12</property>
+        <child>
+          <widget class="GtkTable" id="search-table">
+            <property name="visible">True</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="n_rows">1</property>
+            <property name="n_columns">3</property>
+            <property name="column_spacing">12</property>
+            <property name="row_spacing">6</property>
+            <child>
+              <widget class="GtkComboBoxEntry" id="search-title-combo-box-entry">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <child internal-child="entry">
+                  <widget class="GtkEntry" id="search-title-combo-box-entry-entry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="right_attach">3</property>
+                <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="search-title-label">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">_Title contains:</property>
+                <property name="use_underline">True</property>
+                <property name="wrap_mode">PANGO_WRAP_WORD_CHAR</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="x_options"></property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkImage" id="search-image">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="stock">gtk-find</property>
+                <property name="icon_size">6</property>
+              </widget>
+              <packing>
+                <property name="x_options"></property>
+                <property name="y_options"></property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkExpander" id="search-expander">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="use_underline">True</property>
+            <property name="spacing">6</property>
+            <child>
+              <widget class="GtkAlignment" id="search-alignment">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="left_padding">12</property>
+                <child>
+                  <widget class="GtkVBox" id="search-option-vbox">
+                    <property name="visible">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <child>
+                      <widget class="GtkHBox" id="search-option-hbox">
+                        <property name="visible">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <widget class="GtkLabel" id="search-option-label">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">A_vailable options:</property>
+                            <property name="use_underline">True</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkComboBox" id="search-option-combo-box">
+                            <property name="visible">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                          </widget>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="search-option-add-button">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="label" translatable="yes">gtk-add</property>
+                            <property name="use_stock">True</property>
+                            <property name="response_id">0</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="pack_type">GTK_PACK_END</property>
+                      </packing>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="search-expander-label">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label" translatable="yes">Select more _options:</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">search-expander</property>
+              </widget>
+              <packing>
+                <property name="type">label_item</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkHButtonBox" id="search-button-box">
+            <property name="visible">True</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="spacing">12</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <widget class="GtkButton" id="search-close-button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label" translatable="yes">gtk-close</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">0</property>
+                <signal name="clicked" handler="gtk_widget_hide" object="search-window"/>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkButton" id="search-find-button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="label" translatable="yes">gtk-find</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">0</property>
+              </widget>
+              <packing>
+                <property name="position">1</property>
               </packing>
             </child>
           </widget>

@@ -154,6 +154,10 @@ gva_tree_view_init (void)
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
 
         gva_columns_load (view);
+
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
+                G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
 }
 
 /**
@@ -425,8 +429,6 @@ gva_tree_view_get_selected_view (void)
  *
  * Sets the game list view corresponding to index @view.  See
  * gva_tree_view_get_selected_view() for a list of valid indices.
- * The function also calls gva_tree_view_set_last_selected_view()
- * so that the selected view will be persistent across sessions.
  *
  * Setting the game list view triggers a tree view update.  See
  * gva_tree_view_update() for details.
@@ -436,8 +438,6 @@ gva_tree_view_set_selected_view (gint view)
 {
         gtk_radio_action_set_current_value (
                 GTK_RADIO_ACTION (GVA_ACTION_VIEW_AVAILABLE), view);
-
-        gva_tree_view_set_last_selected_view (view);
 }
 
 /**
@@ -494,54 +494,6 @@ gva_tree_view_set_last_selected_game (const gchar *game)
         client = gconf_client_get_default ();
         gconf_client_set_string (
                 client, GVA_GCONF_SELECTED_GAME_KEY, game, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-}
-
-/**
- * gva_tree_view_get_last_selected_view:
- *
- * Returns the index of the most recently selected game list view in
- * either the current or the previous session of GNOME Video Arcade.
- *
- * Returns: the index of the most recently selected view
- **/
-gint
-gva_tree_view_get_last_selected_view (void)
-{
-        GConfClient *client;
-        gint view;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        view = gconf_client_get_int (
-                client, GVA_GCONF_SELECTED_VIEW_KEY, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-
-        return view;
-}
-
-/**
- * gva_tree_view_set_last_selected_view:
- * @view: the index of a game list view
- *
- * Writes @view to GConf key
- * <filename>/apps/gnome-video-arcade/selected-view</filename>.
- *
- * This is used to remember which game list view was selected in the
- * previous session of GNOME Video Arcade so that the same view can be
- * selected again automatically at startup.
- **/
-void
-gva_tree_view_set_last_selected_view (gint view)
-{
-        GConfClient *client;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        gconf_client_set_int (
-                client, GVA_GCONF_SELECTED_VIEW_KEY, view, &error);
         gva_error_handle (&error);
         g_object_unref (client);
 }

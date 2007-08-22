@@ -110,14 +110,9 @@ action_about_cb (GtkAction *action)
  * This toggle action tracks the user's preference for whether to
  * restore the emulated machine's previous state when starting a game.
  **/
-static void
-action_auto_save_cb (GtkToggleAction *action)
-{
-        gboolean active;
 
-        active = gtk_toggle_action_get_active (action);
-        gva_preferences_set_auto_save (active);
-}
+/* No need for a callback function.  GConf Bridge keeps the GConf key
+ * synchronized with the toggle action's checked state. */
 
 /**
  * GVA_ACTION_CONTENTS:
@@ -138,14 +133,9 @@ action_contents_cb (GtkAction *action)
  * This toggle action tracks the user's preference for whether to
  * start games in full screen mode.
  **/
-static void
-action_full_screen_cb (GtkToggleAction *action)
-{
-        gboolean active;
 
-        active = gtk_toggle_action_get_active (action);
-        gva_preferences_set_full_screen (active);
-}
+/* No need for a callback function.  GConf Bridge keeps the GConf key
+ * synchronized with the toggle action's checked state. */
 
 /**
  * GVA_ACTION_INSERT_FAVORITE:
@@ -412,13 +402,14 @@ action_remove_favorite_cb (GtkAction *action)
 /**
  * GVA_ACTION_SEARCH:
  *
- * This action is not yet implemented.  In a future version of GNOME
- * Video Arcade it will display the advanced search interface.
+ * Activation of this action makes the "Search for Games" window visible.
+ *
+ * Main menu item: Edit -> Search...
  **/
 static void
 action_search_cb (GtkAction *action)
 {
-        /* TODO */
+        gtk_widget_show (GVA_WIDGET_SEARCH_WINDOW);
 }
 
 /**
@@ -494,9 +485,6 @@ action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
 
         gva_tree_view_update (&error);
         gva_error_handle (&error);
-
-        gva_tree_view_set_last_selected_view (
-                gva_tree_view_get_selected_view ());
 }
 
 static GtkActionEntry entries[] =
@@ -635,7 +623,7 @@ static GtkToggleActionEntry toggle_entries[] =
           N_("_Restore previous state when starting a game"),
           NULL,
           NULL,
-          G_CALLBACK (action_auto_save_cb),
+          NULL,     /* GConf Bridge monitors the state */
           FALSE },  /* GConf overrides this */
 
         { "full-screen",
@@ -643,7 +631,7 @@ static GtkToggleActionEntry toggle_entries[] =
           N_("Start games in _fullscreen mode"),
           NULL,
           NULL,
-          G_CALLBACK (action_full_screen_cb),
+          NULL,     /* GConf Bridge monitors the state */
           FALSE }   /* GConf overrides this */
 };
 
