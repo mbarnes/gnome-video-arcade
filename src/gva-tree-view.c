@@ -245,6 +245,7 @@ gva_tree_view_run_query (const gchar *expr,
         GString *string;
         GSList *list;
         const gchar **strv;
+        gboolean sensitive;
         gchar *columns;
         gint ii = 0;
 
@@ -278,7 +279,8 @@ gva_tree_view_run_query (const gchar *expr,
         gdk_window_set_cursor (window, cursor);
         gtk_widget_set_sensitive (GTK_WIDGET (view), FALSE);
         model = gva_game_store_new_from_query (string->str, error);
-        gtk_widget_set_sensitive (GTK_WIDGET (view), TRUE);
+        sensitive = (gtk_tree_model_iter_n_children (model, NULL) > 0);
+        gtk_widget_set_sensitive (GTK_WIDGET (view), sensitive);
         gdk_window_set_cursor (window, NULL);
 
         gdk_cursor_unref (cursor);

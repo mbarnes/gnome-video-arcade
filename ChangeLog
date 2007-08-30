@@ -1,5 +1,10 @@
 2007-08-30  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Leave the tree view insensitive if the query comes back empty.
+
+2007-08-30  Matthew Barnes  <mbarnes@redhat.com>
+
 	* intltool-extract.in:
 	* intltool-update.in:
 	Upgrade to intltool 0.36.
