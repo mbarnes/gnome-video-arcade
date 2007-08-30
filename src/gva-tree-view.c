@@ -154,10 +154,6 @@ gva_tree_view_init (void)
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
 
         gva_columns_load (view);
-
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
-                G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
 }
 
 /**

@@ -128,6 +128,11 @@ gva_main_init (void)
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
 
 	gtk_widget_show (GVA_WIDGET_MAIN_WINDOW);
+
+	/* Window must be realized before binding this property. */
+	gconf_bridge_bind_property (
+		gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
+		G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
 }
 
 /**

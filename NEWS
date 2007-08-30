@@ -8,6 +8,7 @@ GNOME Video Arcade 0.4.3
 	* Remember window size and maximize state.
 	* Put all available game information into the game database.
 	  Necessary for searching, but construction takes longer again.
+	* Early prototype Search window, not working yet at all.
 
 GNOME Video Arcade 0.4.2
 ========================

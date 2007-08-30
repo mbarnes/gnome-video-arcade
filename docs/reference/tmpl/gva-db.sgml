@@ -54,6 +54,33 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_db_transaction_begin ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_transaction_commit ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_db_transaction_rollback ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_db_prepare ##### -->
 <para>
 

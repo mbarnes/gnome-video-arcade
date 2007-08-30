@@ -43,3 +43,21 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_column_manager_get_managed_view ##### -->
+<para>
+
+</para>
+
+@manager: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_column_manager_set_managed_view ##### -->
+<para>
+
+</para>
+
+@manager: 
+@managed_view: 
+
+

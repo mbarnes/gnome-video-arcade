@@ -36,6 +36,8 @@ GvaColumnManagerPrivate
 <TITLE>GvaColumnManager</TITLE>
 GvaColumnManager
 gva_column_manager_new
+gva_column_manager_get_managed_view
+gva_column_manager_set_managed_view
 <SUBSECTION Standard>
 GVA_COLUMN_MANAGER
 GVA_IS_COLUMN_MANAGER
@@ -150,6 +152,7 @@ GVA_ACTION_PROPERTIES
 GVA_ACTION_QUIT
 GVA_ACTION_RECORD
 GVA_ACTION_REMOVE_FAVORITE
+GVA_ACTION_SEARCH
 GVA_ACTION_SHOW_PLAY_BACK
 GVA_ACTION_START
 GVA_ACTION_VIEW_AVAILABLE
@@ -184,6 +187,7 @@ GVA_WIDGET_PROPERTIES_FORWARD_BUTTON
 GVA_WIDGET_PROPERTIES_HEADER
 GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW
 GVA_WIDGET_PROPERTIES_WINDOW
+GVA_WIDGET_SEARCH_WINDOW
 </SECTION>
 
 <SECTION>
@@ -280,6 +284,7 @@ gva_find_data_file
 gva_get_last_version
 gva_get_monospace_font_name
 gva_get_time_elapsed
+gva_get_user_data_dir
 </SECTION>
 
 <SECTION>
@@ -288,6 +293,9 @@ gva_db_init
 gva_db_build
 gva_db_reset
 gva_db_execute
+gva_db_transaction_begin
+gva_db_transaction_commit
+gva_db_transaction_rollback
 gva_db_prepare
 gva_db_get_build
 gva_db_get_filename

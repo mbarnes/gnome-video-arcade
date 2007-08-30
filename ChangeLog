@@ -1,3 +1,21 @@
+2007-08-30  Matthew Barnes  <mbarnes@redhat.com>
+
+	* intltool-extract.in:
+	* intltool-update.in:
+	Upgrade to intltool 0.36.
+
+	* docs/reference/Makefile.am:
+	Add gconf-bridge.o to GTKDOC_LIBS.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add symbols from gnome-video-arcade-unused.txt.
+
+	* src/gva-main.c (gva_main_init):
+	Bind to "selected-view" GConf key after main window is realized.
+
+	* src/gva-tree-view.c (gva_tree_view_init):
+	Move "selected-view" GConf key binding to gva_main_init().
+
 2007-08-22  Matthew Barnes  <mbarnes@redhat.com>
 
 	* Embed gconf-bridge into GNOME Video Arcade rather than

@@ -79,6 +79,7 @@ INCLUDES=							\
 	$(GLADE_CFLAGS)						\
 	$(SQLITE_CFLAGS)
 GTKDOC_LIBS=							\
+	$(top_builddir)/src/gconf-bridge.o			\
 	$(top_builddir)/src/gva-cell-renderer-pixbuf.o		\
 	$(top_builddir)/src/gva-column-manager.o		\
 	$(top_builddir)/src/gva-columns.o			\
