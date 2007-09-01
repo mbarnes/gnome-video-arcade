@@ -1,3 +1,7 @@
+2007-09-01  Matthew Barnes  <mbarnes@redhat.com>
+
+	* Add some more developer documentation.
+
 2007-08-31  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/main.c (start):

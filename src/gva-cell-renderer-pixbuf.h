@@ -19,6 +19,10 @@
 /**
  * SECTION: gva-cell-renderer-pixbuf
  * @short_description: A clickable #GtkCellRendererPixbuf
+ *
+ * This is a clickable #GtkCellRendererPixbuf subclass.  It implements the
+ * @activate method to emit a #GtkCellRendererPixbuf::clicked signal when
+ * the cell is activated.
  **/
 
 #ifndef GVA_CELL_RENDERER_PIXBUF_H

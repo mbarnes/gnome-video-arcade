@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-error
  * @short_description: Error Management
+ *
+ * These functions and macros are for use with GLib's #GError API.
  **/
 
 #ifndef GVA_ERROR_H
@@ -49,13 +51,16 @@ G_BEGIN_DECLS
 
 /**
  * GvaError:
+ * @GVA_ERROR_CONFIG:
+ *      Configuration error.
+ * @GVA_ERROR_MAME:
+ *      Error from a MAME process.
+ * @GVA_ERROR_QUERY:
+ *      SQL query error.
+ * @GVA_ERROR_SYSTEM:
+ *      System-level error.
  *
  * Error codes for general operations in GNOME Video Arcade.
- * 
- * GVA_ERROR_CONFIG:    Configuration error.
- * GVA_ERROR_MAME:      Error from a MAME process.
- * GVA_ERROR_QUERY:     SQL query error.
- * GVA_ERROR_SYSTEM:    System-level error.
  **/  
 typedef enum
 {

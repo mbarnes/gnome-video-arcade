@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-favorites
  * @short_description: Favorite Games Management
+ *
+ * These functions manipulate the user's list of favorite games.
  **/
 
 #ifndef GVA_FAVORITES_H

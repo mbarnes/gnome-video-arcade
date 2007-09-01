@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-columns
  * @short_description: Column Creation and Persistence
+ *
+ * These functions manipulate the columns in the main tree view.
  **/
 
 #ifndef GVA_COLUMNS_H

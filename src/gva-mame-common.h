@@ -18,7 +18,9 @@
 
 /**
  * SECTION: gva-mame-common
- * @short_description: Definitions common to all MAME backends
+ * @short_description: Functions common to all MAME backends
+ *
+ * These functions are common to all supported MAME implementations.
  **/
 
 #ifndef GVA_MAME_COMMON_H

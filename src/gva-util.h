@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-util
  * @short_description: Miscellaneous Utilities
+ *
+ * These are miscellaneous utility functions that are used throughout the
+ * application.
  **/
 
 #ifndef GVA_UTIL_H

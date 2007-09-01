@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-preferences
  * @short_description: Preferences Window
+ *
+ * These functions manipulate the Preferences window.
  **/
 
 #ifndef GVA_PREFERENCES_H

@@ -55,6 +55,14 @@ cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
         cell_renderer_class = GTK_CELL_RENDERER_CLASS (class);
         cell_renderer_class->activate = cell_renderer_pixbuf_activate;
 
+        /**
+         * GvaCellRendererPixbuf::clicked:
+         * @renderer: the #GvaCellRendererPixbuf that received the signal
+         * @tree_path: the #GtkTreePath to the row containing the activated
+         * pixbuf
+         *
+         * The ::clicked signal is emitted when the cell is activated.
+         **/
         signals[CLICKED] = g_signal_new (
                 "clicked",
                 G_OBJECT_CLASS_TYPE (class),
@@ -102,6 +110,13 @@ gva_cell_renderer_pixbuf_get_type (void)
         return type;
 }
 
+/**
+ * gva_cell_renderer_pixbuf_new:
+ *
+ * Creates a new #GvaCellRendererPixbuf object.
+ *
+ * Returns: a new #GvaCellRendererPixbuf
+ **/
 GtkCellRenderer *
 gva_cell_renderer_pixbuf_new (void)
 {

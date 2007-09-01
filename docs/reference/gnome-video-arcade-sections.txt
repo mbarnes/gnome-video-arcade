@@ -32,7 +32,6 @@ gva_process_get_type
 
 <SECTION>
 <FILE>gva-column-manager</FILE>
-GvaColumnManagerPrivate
 <TITLE>GvaColumnManager</TITLE>
 GvaColumnManager
 gva_column_manager_new
@@ -47,6 +46,7 @@ GVA_IS_COLUMN_MANAGER_CLASS
 GVA_COLUMN_MANAGER_GET_CLASS
 GvaColumnManagerClass
 <SUBSECTION Private>
+GvaColumnManagerPrivate
 gva_column_manager_get_type
 </SECTION>
 

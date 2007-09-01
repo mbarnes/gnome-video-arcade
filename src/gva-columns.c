@@ -296,6 +296,15 @@ static gchar *default_column_order[] =
         "sampleset"
 };
 
+/**
+ * gva_columns_new_from_id:
+ * @column_id: the ID of the column to create
+ *
+ * Creates a new #GtkTreeViewColumn from the given @column_id, configured
+ * for use in the main tree view.
+ *
+ * Returns: a new #GtkTreeViewColumn
+ **/
 GtkTreeViewColumn *
 gva_columns_new_from_id (GvaGameStoreColumn column_id)
 {
@@ -314,6 +323,15 @@ gva_columns_new_from_id (GvaGameStoreColumn column_id)
         return column;
 }
 
+/**
+ * gva_columns_new_from_name:
+ * @column_name: the name of the column to create
+ *
+ * Creates a new #GtkTreeViewColumn from the given @column_name (as stored
+ * in GConf), configured for use in the main tree view.
+ *
+ * Returns: a new #GtkTreeViewColumn
+ **/
 GtkTreeViewColumn *
 gva_columns_new_from_name (const gchar *column_name)
 {
@@ -325,6 +343,16 @@ gva_columns_new_from_name (const gchar *column_name)
         return gva_columns_new_from_id (column_id);
 }
 
+/**
+ * gva_columns_lookup_id:
+ * @column_name: the name of the column to lookup
+ * @column_id: return location for the column ID
+ *
+ * Looks up the numeric column ID corresponding to @column_name, and write
+ * the result to @column_id if found.
+ *
+ * Returns: @TRUE if a column ID was found, @FALSE otherwise
+ **/
 gboolean
 gva_columns_lookup_id (const gchar *column_name,
                        GvaGameStoreColumn *column_id)
@@ -346,6 +374,14 @@ gva_columns_lookup_id (const gchar *column_name,
         return FALSE;
 }
 
+/**
+ * gva_columns_lookup_name:
+ * @column_id: the ID of the column to lookup
+ *
+ * Looks up the column name corresponding to @column_id.
+ *
+ * Returns: the column name, or @NULL if not found
+ **/
 const gchar *
 gva_columns_lookup_name (GvaGameStoreColumn column_id)
 {
@@ -372,6 +408,20 @@ columns_load_remove_name (GSList **p_list, const gchar *name)
         return TRUE;
 }
 
+/**
+ * gva_columns_load:
+ * @view: a #GtkTreeView
+ *
+ * Loads @view with columns in the order stored in the GConf key
+ * <filename>/apps/gnome-video-arcade/all-columns</filename>, but only
+ * makes visible those columns listed in
+ * <filename>/apps/gnome-video-arcade/columns</filename>.  Newly supported
+ * columns are appended to @view but remain invisible until explicitly
+ * selected in the Preferences window.
+ *
+ * Each column is loaded by reading the column name from GConf and passing
+ * it to gva_columns_new_from_name() to create the #GtkTreeViewColumn.
+ **/
 void
 gva_columns_load (GtkTreeView *view)
 {
@@ -479,6 +529,15 @@ gva_columns_load (GtkTreeView *view)
         gva_columns_save (view);
 }
 
+/**
+ * gva_columns_save:
+ * @view: a #GtkTreeView
+ *
+ * Writes the column order and visible columns of @view to the GConf
+ * keys <filename>/apps/gnome-video-arcade/all-columns</filename> and
+ * <filename>/apps/gnome-video-arcade/columns</filename> respectively,
+ * using gva_columns_get_names() to extract the column names.
+ **/
 void
 gva_columns_save (GtkTreeView *view)
 {
@@ -512,6 +571,19 @@ gva_columns_save (GtkTreeView *view)
         g_object_unref (client);
 }
 
+/**
+ * gva_columns_get_names:
+ * @view: a #GtkTreeView
+ * @visible_only: only extract visible columns
+ *
+ * Extracts a list of column names from @view, using gva_columns_lookup_name()
+ * to convert each numeric column ID to a name.  If @visible_only is %TRUE
+ * then only visible columns are included in the list.  The column name
+ * strings are owned by @view and should not be freed; only the list itself
+ * should be free using g_slist_free().
+ *
+ * Returns: a #GSList of column names
+ **/
 GSList *
 gva_columns_get_names (GtkTreeView *view,
                        gboolean visible_only)

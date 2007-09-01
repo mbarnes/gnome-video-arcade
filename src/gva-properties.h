@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-properties
  * @short_description: Properties Window
+ *
+ * These functions manipulate the Properties window.
  **/
 
 #ifndef GVA_PROPERTIES_H

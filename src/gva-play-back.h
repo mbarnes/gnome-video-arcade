@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-play-back
  * @short_description: Recorded Games Window
+ *
+ * These functions manipulate the Recorded Games window.
  **/
 
 #ifndef GVA_PLAY_BACK_H
