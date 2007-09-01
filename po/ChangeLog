@@ -1,3 +1,7 @@
+2007-09-01  Matthew Barnes  <mbarnes@redhat.com>
+
+	* POTFILES.in: Add src/gconf-bridge.c.
+
 2007-07-24  Matthew Barnes  <mbarnes@redhat.com>
 
 	* sv.po: Swedish translation update by Daniel Nylander.

@@ -1,5 +1,14 @@
 2007-09-01  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.4.3
+
+	* src/main.c:
+	* src/gva-common.h:
+	Add --version command-line option.
+	Prints the program version and exits.
+
+2007-09-01  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-tree-view.c (gva_tree_view_run_query):
 	Resize the columns after setting a new tree model.
 

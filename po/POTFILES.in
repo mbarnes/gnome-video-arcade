@@ -1,6 +1,7 @@
 # List of source files which contain translatable strings.
 
 data/gnome-video-arcade.glade
+src/gconf-bridge.c
 src/gva-column-manager.c
 src/gva-columns.c
 src/gva-history.c
