@@ -86,6 +86,10 @@ start (void)
         gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
 
+	gconf_bridge_bind_property (
+		gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
+		G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
+
         /* Force a tree view update. */
         if (gva_tree_view_get_selected_view () == 0)
         {
