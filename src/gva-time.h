@@ -19,19 +19,18 @@
 /**
  * SECTION: gva-time
  * @short_description: A #GBoxed type for time_t
+ *
+ * A portable #GType for <type>time_t</type>.
+ *
+ * IEEE 1003.1 does not specify the size of <type>time_t</type>, nor even
+ * whether it's an integer or floating-point type, so we have to represent
+ * the value as a subtype of #G_TYPE_BOXED.
  **/
 
 #ifndef GVA_TIME_H
 #define GVA_TIME_H
 
 #include "gva-common.h"
-
-/* Create a portable GType for time_t.
- *
- * IEEE 1003.1 does not specify the size of time_t, nor even whether it's
- * an integer or floating-point type.  So represent the value as a subtype
- * of G_TYPE_BOXED.
- */
 
 /**
  * GVA_TYPE_TIME:

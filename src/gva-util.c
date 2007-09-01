@@ -28,6 +28,7 @@
 
 /* Command Line Options */
 gboolean opt_build_database;
+gboolean opt_version;
 gboolean opt_which_emulator;
 
 static gboolean

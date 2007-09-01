@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-column-manager
  * @short_description: Manages the columns of a #GtkTreeView
+ *
+ * This widget provides a user interface for managing the order and visiblity
+ * of columns in a #GtkTreeView.
  **/
 
 #ifndef GVA_COLUMN_MANAGER_H

@@ -38,6 +38,10 @@ static GOptionEntry entries[] =
           G_OPTION_ARG_NONE, &opt_build_database,
           N_("Build the games database"), NULL },
 
+        { "version", 'v', 0,
+          G_OPTION_ARG_NONE, &opt_version,
+          N_("Show the application version"), NULL },
+
         { "which-emulator", 'w', 0,
           G_OPTION_ARG_NONE, &opt_which_emulator,
           N_("Show which emulator will be used"), NULL },
@@ -113,6 +117,12 @@ main (gint argc, gchar **argv)
                 &argc, &argv, NULL, entries, GETTEXT_PACKAGE, &error);
         if (error != NULL)
                 g_error ("%s", error->message);
+
+        if (opt_version)
+        {
+                g_print ("%s\n", PACKAGE_STRING);
+                exit (0);
+        }
 
         if (opt_which_emulator)
         {

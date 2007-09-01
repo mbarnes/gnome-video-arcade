@@ -19,6 +19,11 @@
 /**
  * SECTION: gva-main
  * @short_description: Main Window
+ *
+ * These functions manipulate the main window, excluding the tree view.
+ * The tree view functions are documented separately in the
+ * <link linkend="gnome-video-arcade-gva-tree-view">gva-tree-view</link>
+ * section.
  **/
 
 #ifndef GVA_MAIN_H

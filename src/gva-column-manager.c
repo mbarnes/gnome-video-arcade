@@ -646,6 +646,14 @@ gva_column_manager_get_type (void)
         return type;
 }
 
+/**
+ * gva_column_manager_new:
+ * @managed_view: a #GtkTreeView to manage
+ *
+ * Creates a new #GtkColumnManager.
+ *
+ * Returns: a new #GtkColumnManager
+ **/
 GtkWidget *
 gva_column_manager_new (GtkTreeView *managed_view)
 {
@@ -655,6 +663,14 @@ gva_column_manager_new (GtkTreeView *managed_view)
                 GVA_TYPE_COLUMN_MANAGER, "managed-view", managed_view, NULL);
 }
 
+/**
+ * gva_column_manager_get_managed_view:
+ * @manager: a #GvaColumnManager
+ *
+ * Returns the #GtkTreeView being managed.
+ *
+ * Returns: the #GtkTreeView being managed
+ **/
 GtkTreeView *
 gva_column_manager_get_managed_view (GvaColumnManager *manager)
 {
@@ -663,6 +679,14 @@ gva_column_manager_get_managed_view (GvaColumnManager *manager)
         return manager->priv->managed_view;
 }
 
+/**
+ * gva_column_manager_set_managed_view:
+ * @manager: a #GvaColumnManager
+ * @managed_view: a #GtkTreeView to manage
+ *
+ * Sets a new #GtkTreeView to manage.  The widget will be updated
+ * appropriately.
+ **/
 void
 gva_column_manager_set_managed_view (GvaColumnManager *manager,
                                      GtkTreeView *managed_view)

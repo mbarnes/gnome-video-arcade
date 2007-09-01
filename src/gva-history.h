@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-history
  * @short_description: Arcade History Management
+ *
+ * These functions manage the arcade history information shown in the
+ * Properties window.
  **/
 
 #ifndef GVA_HISTORY_H

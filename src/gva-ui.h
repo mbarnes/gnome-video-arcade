@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-ui
  * @short_description: User Interface Support
+ *
+ * These functions and macros provide easy access to global actions and
+ * widgets in the application.
  **/
 
 #ifndef GVA_UI_H

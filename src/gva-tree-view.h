@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-tree-view
  * @short_description: Main Tree View
+ *
+ * These functions manipulate the tree view widget in the main window.
  **/
 
 #ifndef GVA_TREE_VIEW_H

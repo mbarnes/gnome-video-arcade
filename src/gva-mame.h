@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-mame
  * @short_description: MAME Communication Backend
+ *
+ * These functions define the interface for MAME communication backends.
+ * GNOME Video Arcade currently supports backends for xmame and sdlmame.
  **/
 
 #ifndef GVA_MAME_H
