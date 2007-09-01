@@ -299,6 +299,7 @@ gva_tree_view_run_query (const gchar *expr,
                 G_CALLBACK (tree_view_sort_column_changed_cb), NULL);
 
         gtk_tree_view_set_model (view, model);
+        gtk_tree_view_columns_autosize (view);
         g_object_unref (model);
 
         return TRUE;
