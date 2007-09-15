@@ -26,6 +26,8 @@
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 
+#define MAX_PLAYER_ICONS 8
+
 typedef GtkTreeViewColumn * (*FactoryFunc) (GvaGameStoreColumn);
 
 static void
@@ -51,6 +53,24 @@ columns_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
                 gtk_action_activate (GVA_ACTION_REMOVE_FAVORITE);
         else
                 gtk_action_activate (GVA_ACTION_INSERT_FAVORITE);
+}
+
+static void
+columns_input_players_set_properties (GtkTreeViewColumn *column,
+                                      GtkCellRenderer *renderer,
+                                      GtkTreeModel *model,
+                                      GtkTreeIter *iter,
+                                      gpointer user_data)
+{
+        GvaGameStoreColumn column_id;
+        gint max_players;
+        gboolean visible;
+
+        column_id = gtk_tree_view_column_get_sort_column_id (column);
+        gtk_tree_model_get (model, iter, column_id, &max_players, -1);
+
+        visible = GPOINTER_TO_INT (user_data) < max_players;
+        g_object_set (renderer, "visible", visible, NULL);
 }
 
 static void
@@ -153,6 +173,40 @@ columns_factory_favorite (GvaGameStoreColumn column_id)
         g_signal_connect (
                 renderer, "clicked",
                 G_CALLBACK (columns_favorite_clicked_cb), column);
+
+        if (pixbuf != NULL)
+                g_object_unref (pixbuf);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
+columns_factory_input_players (GvaGameStoreColumn column_id)
+{
+        GtkTreeViewColumn *column;
+        GdkPixbuf *pixbuf;
+        gint ii;
+
+        pixbuf = columns_get_icon_name ("stock_person");
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("Players"));
+
+        for (ii = 0; ii < MAX_PLAYER_ICONS; ii++)
+        {
+                GtkCellRenderer *renderer;
+
+                renderer = gtk_cell_renderer_pixbuf_new ();
+                g_object_set (renderer, "pixbuf", pixbuf, NULL);
+                gtk_tree_view_column_pack_start (column, renderer, FALSE);
+
+                gtk_tree_view_column_set_cell_data_func (
+                        column, renderer, (GtkTreeCellDataFunc)
+                        columns_input_players_set_properties,
+                        GINT_TO_POINTER (ii), NULL);
+        }
 
         if (pixbuf != NULL)
                 g_object_unref (pixbuf);
@@ -270,7 +324,7 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "sound_channels",     NULL },
         { "input_service",      NULL },
         { "input_tilt",         NULL },
-        { "input_players",      NULL },
+        { "input_players",      columns_factory_input_players },
         { "input_buttons",      NULL },
         { "input_coins",        NULL },
         { "driver_status",      NULL },
@@ -292,6 +346,7 @@ static gchar *default_column_order[] =
         "description",
         "year",
         "manufacturer",
+        "input_players",
         "name",
         "sampleset"
 };
