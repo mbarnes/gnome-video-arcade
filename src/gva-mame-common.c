@@ -530,9 +530,9 @@ gva_mame_playback_game (const gchar *name,
                         g_string_append (arguments, "-window ");
         }
 
-        g_string_append_printf (arguments, "-playback %s", inpname);
+        g_string_append_printf (arguments, "%s -playback %s", name, inpname);
 
-        /* Execute the command "${mame} -playback ${inpname}". */
+        /* Execute the command "${mame} ${name} -playback ${inpname}". */
         process = gva_mame_process_spawn (
                 arguments->str, G_PRIORITY_LOW, error);
 
