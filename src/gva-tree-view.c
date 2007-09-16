@@ -26,6 +26,7 @@
 #include "gva-favorites.h"
 #include "gva-game-store.h"
 #include "gva-main.h"
+#include "gva-search.h"
 #include "gva-ui.h"
 
 #define SQL_SELECT_GAMES \
@@ -191,7 +192,8 @@ gboolean
 gva_tree_view_update (GError **error)
 {
         const gchar *name;
-        const gchar *expr;
+        gchar *expr;
+        gboolean success;
 
         switch (gva_tree_view_get_selected_view ())
         {
@@ -200,18 +202,35 @@ gva_tree_view_update (GError **error)
                         break;
 
                 case 1:  /* Favorite Games */
-                        expr = "isfavorite(name) == \"yes\"";
+                        expr = g_strdup ("isfavorite(name) == \"yes\"");
                         break;
 
                 case 2:  /* Search Results */
-                        expr = "name == NULL";
+                {
+                        gchar *text;
+
+                        text = gva_search_get_last_search ();
+                        if (text != NULL && *text != '\0')
+                                expr = g_strdup_printf (
+                                        "name LIKE '%%%s%%' OR "
+                                        "description LIKE '%%%s%%' OR "
+                                        "manufacturer LIKE '%%%s%%' OR "
+                                        "year LIKE '%%%s%%'",
+                                        text, text, text, text);
+                        else
+                                expr = g_strdup ("name == NULL");
+                        g_free (text);
                         break;
+                }
 
                 default:
                         g_assert_not_reached ();
         }
 
-        if (!gva_tree_view_run_query (expr, error))
+        success = gva_tree_view_run_query (expr, error);
+        g_free (expr);
+
+        if (!success)
                 return FALSE;
 
         name = gva_tree_view_get_last_selected_game ();
@@ -475,7 +494,7 @@ gva_tree_view_get_last_selected_game (void)
  * gva_tree_view_set_last_selected_game:
  * @game: the name of a game
  *
- * Writes %game to GConf key
+ * Writes @game to GConf key
  * <filename>/apps/gnome-video-arcade/selected-game</filename>.
  *
  * This is used to remember which game was selected in the previous

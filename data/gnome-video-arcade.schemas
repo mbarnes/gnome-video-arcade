@@ -73,6 +73,18 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/search</applyto>
+      <key>/schemas/apps/gnome-video-arcade/search</key>
+      <owner>gnome-video-arcade</owner>
+      <type>string</type>
+      <default></default>
+      <locale name="C">
+        <short>Search text</short>
+        <long>The most recent search.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/selected-game</applyto>
       <key>/schemas/apps/gnome-video-arcade/selected-game</key>
       <owner>gnome-video-arcade</owner>

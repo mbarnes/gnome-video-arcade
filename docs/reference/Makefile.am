@@ -95,6 +95,7 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/gva-preferences.o			\
 	$(top_builddir)/src/gva-process.o			\
 	$(top_builddir)/src/gva-properties.o			\
+	$(top_builddir)/src/gva-search.o			\
 	$(top_builddir)/src/gva-time.o				\
 	$(top_builddir)/src/gva-tree-view.o			\
 	$(top_builddir)/src/gva-ui.o				\

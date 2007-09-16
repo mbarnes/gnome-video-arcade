@@ -30,6 +30,7 @@
 #include "gva-play-back.h"
 #include "gva-preferences.h"
 #include "gva-properties.h"
+#include "gva-search.h"
 #include "gva-ui.h"
 
 static GOptionEntry entries[] =
@@ -90,9 +91,9 @@ start (void)
         gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
 
-	gconf_bridge_bind_property (
-		gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
-		G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
+                G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
 
         /* Force a tree view update. */
         if (gva_tree_view_get_selected_view () == 0)
@@ -139,6 +140,7 @@ main (gint argc, gchar **argv)
         gva_play_back_init ();
         gva_preferences_init ();
         gva_properties_init ();
+        gva_search_init ();
 
 #ifdef HISTORY_FILE
         gva_history_init (&error);

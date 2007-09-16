@@ -106,6 +106,14 @@ gva_mame_process_get_type
 </SECTION>
 
 <SECTION>
+<FILE>gva-search</FILE>
+gva_search_init
+gva_search_get_last_search
+gva_search_set_last_search
+gva_search_find_clicked_cb
+</SECTION>
+
+<SECTION>
 <FILE>gva-tree-view</FILE>
 gva_tree_view_init
 gva_tree_view_lookup
@@ -187,6 +195,8 @@ GVA_WIDGET_PROPERTIES_FORWARD_BUTTON
 GVA_WIDGET_PROPERTIES_HEADER
 GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW
 GVA_WIDGET_PROPERTIES_WINDOW
+GVA_WIDGET_SEARCH_ENTRY
+GVA_WIDGET_SEARCH_FIND_BUTTON
 GVA_WIDGET_SEARCH_WINDOW
 </SECTION>
 

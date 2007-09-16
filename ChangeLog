@@ -1,5 +1,37 @@
 2007-09-15  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.4.4
+
+	* data/gnome-video-arcade.glade:
+	Simplify the search window for basic searching.
+
+	* data/gnome-video-arcade.schemas:
+	Add search key.
+
+	* docs/reference/gnome-video-arcade-docs.sgml:
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add search documentation.
+
+	* src/Makefile.am:
+	Add gva-search.[ch].
+
+	* src/main.c (main):
+	Call gva_search_init().
+
+	* src/gva-common.h:
+	Add GVA_GCONF_SEARCH_KEY.
+
+	* src/gva-search.[ch]:
+	New source files implement the search window.
+
+	* src/gva-tree-view.c (gva_tree_view_update):
+	Build a query for the "Search Results" view.
+
+	* src/gva-ui.h:
+	Add GVA_WIDGET_SEARCH_ENTRY and GVA_WIDGET_SEARCH_FIND_BUTTON.
+
+2007-09-15  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-columns.c:
 	Add a "Players" column.
 

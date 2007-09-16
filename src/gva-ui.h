@@ -109,6 +109,10 @@
         (gva_ui_get_widget ("properties-window"))
 
 /* Search Window */
+#define GVA_WIDGET_SEARCH_ENTRY \
+        (gva_ui_get_widget ("search-entry"))
+#define GVA_WIDGET_SEARCH_FIND_BUTTON \
+        (gva_ui_get_widget ("search-find-button"))
 #define GVA_WIDGET_SEARCH_WINDOW \
         (gva_ui_get_widget ("search-window"))
 

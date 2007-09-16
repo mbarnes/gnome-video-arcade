@@ -35,7 +35,7 @@
 
 #include <sqlite3.h>
 #include <gconf/gconf-client.h>
-#include "gconf-bridge.h"		/* Embedded in GVA */
+#include "gconf-bridge.h"               /* Embedded in GVA */
 
 #define GVA_GCONF_PREFIX                "/apps/" PACKAGE
 #define GVA_GCONF_ALL_COLUMNS_KEY       GVA_GCONF_PREFIX "/all-columns"
@@ -43,6 +43,7 @@
 #define GVA_GCONF_COLUMNS_KEY           GVA_GCONF_PREFIX "/columns"
 #define GVA_GCONF_FAVORITES_KEY         GVA_GCONF_PREFIX "/favorites"
 #define GVA_GCONF_FULL_SCREEN_KEY       GVA_GCONF_PREFIX "/full-screen"
+#define GVA_GCONF_SEARCH_KEY            GVA_GCONF_PREFIX "/search"
 #define GVA_GCONF_SELECTED_GAME_KEY     GVA_GCONF_PREFIX "/selected-game"
 #define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"
 #define GVA_GCONF_SORT_COLUMN_KEY       GVA_GCONF_PREFIX "/sort-column"
