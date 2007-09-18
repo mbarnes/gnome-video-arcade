@@ -25,6 +25,8 @@
 #include "gva-favorites.h"
 #include "gva-time.h"
 
+#define DEFAULT_SORT_COLUMN     GVA_GAME_STORE_COLUMN_DESCRIPTION
+
 static gpointer parent_class = NULL;
 
 static GHashTable *
@@ -39,61 +41,73 @@ game_store_get_index (GvaGameStore *game_store)
 }
 
 static gint
-game_store_description_compare (GtkTreeModel *model,
-                                GtkTreeIter *iter_a,
-                                GtkTreeIter *iter_b)
+game_store_compare (GtkTreeModel *model,
+                    GtkTreeIter *iter_a,
+                    GtkTreeIter *iter_b,
+                    gpointer user_data)
 {
+        GType type;
         GValue value_a;
         GValue value_b;
-        const gchar *string_a;
-        const gchar *string_b;
-        gint result = 0;
+        gint column;
+        gint result;
 
         memset (&value_a, 0, sizeof (GValue));
         memset (&value_b, 0, sizeof (GValue));
 
-        gtk_tree_model_get_value (
-                model, iter_a, GVA_GAME_STORE_COLUMN_DESCRIPTION, &value_a);
-        gtk_tree_model_get_value (
-                model, iter_b, GVA_GAME_STORE_COLUMN_DESCRIPTION, &value_b);
+        column = GPOINTER_TO_INT (user_data);
+        type = gtk_tree_model_get_column_type (model, column);
+        gtk_tree_model_get_value (model, iter_a, column, &value_a);
+        gtk_tree_model_get_value (model, iter_b, column, &value_b);
 
-        string_a = g_value_get_string (&value_a);
-        string_b = g_value_get_string (&value_b);
-
-        if (string_a != NULL && string_b != NULL)
-                result = strcmp (string_a, string_b);
+        if (type == G_TYPE_BOOLEAN)
+        {
+                gboolean va, vb;
+                va = g_value_get_boolean (&value_a);
+                vb = g_value_get_boolean (&value_b);
+                result = (va < vb) ? -1 : (va == vb) ? 0 : 1;
+        }
+        else if (type == G_TYPE_INT)
+        {
+                gint va, vb;
+                va = g_value_get_int (&value_a);
+                vb = g_value_get_int (&value_b);
+                result = (va < vb) ? -1 : (va == vb) ? 0 : 1;
+        }
+        else if (type == G_TYPE_STRING)
+        {
+                const gchar *va, *vb;
+                va = g_value_get_string (&value_a);
+                vb = g_value_get_string (&value_b);
+                if (va == NULL) va = "";
+                if (vb == NULL) vb = "";
+                result = strcmp (va, vb);
+        }
+        else if (type == GVA_TYPE_TIME)
+        {
+                gdouble diff;
+                time_t *va, *vb;
+                va = (time_t *) g_value_get_boxed (&value_a);
+                vb = (time_t *) g_value_get_boxed (&value_b);
+                diff = difftime (*va, *vb);
+                result = (diff < 0.0) ? -1 : (diff == 0.0) ? 0 : 1;
+        }
+        else
+        {
+                g_assert_not_reached ();
+        }
 
         g_value_unset (&value_a);
         g_value_unset (&value_b);
 
-        return result;
-}
+        /* If the values are equal, compare the default sort column
+         * (being careful not to introduce infinite recursion!). */
 
-static gint
-game_store_time_compare (GtkTreeModel *model,
-                         GtkTreeIter *iter_a,
-                         GtkTreeIter *iter_b)
-{
-        GValue value_a;
-        GValue value_b;
-        gdouble diff;
+        if (result != 0 || column == DEFAULT_SORT_COLUMN)
+                return result;
 
-        memset (&value_a, 0, sizeof (GValue));
-        memset (&value_b, 0, sizeof (GValue));
-
-        gtk_tree_model_get_value (
-                model, iter_a, GVA_GAME_STORE_COLUMN_TIME, &value_a);
-        gtk_tree_model_get_value (
-                model, iter_b, GVA_GAME_STORE_COLUMN_TIME, &value_b);
-
-        diff = difftime (
-                *((time_t *) g_value_get_boxed (&value_a)),
-                *((time_t *) g_value_get_boxed (&value_b)));
-
-        g_value_unset (&value_a);
-        g_value_unset (&value_b);
-
-        return (diff == 0.0) ? 0 : (diff < 0.0) ? -1 : 1;
+        user_data = GINT_TO_POINTER (DEFAULT_SORT_COLUMN);
+        return game_store_compare (model, iter_a, iter_b, user_data);
 }
 
 static GObject *
@@ -103,39 +117,39 @@ game_store_constructor (GType type,
 {
         GType types[GVA_GAME_STORE_NUM_COLUMNS];
         GObject *object;
-        gint n = 0;
+        gint column = 0;
 
-        types[n++] = G_TYPE_STRING;     /* COLUMN_NAME */
-        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_SOURCEFILE */
-        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_RUNNABLE */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_CLONEOF */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_ROMOF */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_ROMSET */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_SAMPLEOF */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_SAMPLESET */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DESCRIPTION */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_YEAR */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_MANUFACTURER */
-        types[n++] = G_TYPE_INT;        /* COLUMN_SOUND_CHANNELS */
-        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_SERVICE */
-        types[n++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_TILT */
-        types[n++] = G_TYPE_INT;        /* COLUMN_INPUT_PLAYERS */
-        types[n++] = G_TYPE_INT;        /* COLUMN_INPUT_BUTTONS */
-        types[n++] = G_TYPE_INT;        /* COLUMN_INPUT_COINS */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_STATUS */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_EMULATION */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_COLOR */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SOUND */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_GRAPHIC */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_COCKTAIL */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_PROTECTION */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SAVESTATE */
-        types[n++] = G_TYPE_INT;        /* COLUMN_DRIVER_PALETTESIZE */
-        types[n++] = G_TYPE_STRING;     /* COLUMN_INPFILE */
-        types[n++] = GVA_TYPE_TIME;     /* COLUMN_TIME */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_NAME */
+        types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_SOURCEFILE */
+        types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_RUNNABLE */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_CLONEOF */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_ROMOF */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_ROMSET */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_SAMPLEOF */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_SAMPLESET */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DESCRIPTION */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_YEAR */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_MANUFACTURER */
+        types[column++] = G_TYPE_INT;        /* COLUMN_SOUND_CHANNELS */
+        types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_SERVICE */
+        types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_TILT */
+        types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_PLAYERS */
+        types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_BUTTONS */
+        types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_COINS */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_STATUS */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_EMULATION */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_COLOR */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SOUND */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_GRAPHIC */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_COCKTAIL */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_PROTECTION */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SAVESTATE */
+        types[column++] = G_TYPE_INT;        /* COLUMN_DRIVER_PALETTESIZE */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_INPFILE */
+        types[column++] = GVA_TYPE_TIME;     /* COLUMN_TIME */
 
-        g_assert (n == GVA_GAME_STORE_NUM_COLUMNS);
+        g_assert (column == GVA_GAME_STORE_NUM_COLUMNS);
 
         /* Chain up to parent's constructor() method. */
         object = G_OBJECT_CLASS (parent_class)->constructor (
@@ -145,12 +159,15 @@ game_store_constructor (GType type,
                 GTK_LIST_STORE (object), G_N_ELEMENTS (types), types);
 
         gtk_tree_sortable_set_default_sort_func (
-                GTK_TREE_SORTABLE (object), (GtkTreeIterCompareFunc)
-                game_store_description_compare, NULL, NULL);
+                GTK_TREE_SORTABLE (object),
+                (GtkTreeIterCompareFunc) game_store_compare,
+                GINT_TO_POINTER (DEFAULT_SORT_COLUMN), NULL);
 
-        gtk_tree_sortable_set_sort_func (
-                GTK_TREE_SORTABLE (object), GVA_GAME_STORE_COLUMN_TIME,
-                (GtkTreeIterCompareFunc) game_store_time_compare, NULL, NULL);
+        for (column = 0; column < GVA_GAME_STORE_NUM_COLUMNS; column++)
+                gtk_tree_sortable_set_sort_func (
+                        GTK_TREE_SORTABLE (object), column,
+                        (GtkTreeIterCompareFunc) game_store_compare,
+                        GINT_TO_POINTER (column), NULL);
 
         return object;
 }

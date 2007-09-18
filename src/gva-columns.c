@@ -283,6 +283,26 @@ columns_factory_sampleset (GvaGameStoreColumn column_id)
 }
 
 static GtkTreeViewColumn *
+columns_factory_sourcefile (GvaGameStoreColumn column_id)
+{
+        GtkCellRenderer *renderer;
+        GtkTreeViewColumn *column;
+
+        renderer = gtk_cell_renderer_text_new ();
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("Driver"));
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_add_attribute (
+                column, renderer, "text", column_id);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
 columns_factory_year (GvaGameStoreColumn column_id)
 {
         GtkCellRenderer *renderer;
@@ -311,7 +331,7 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
 {
         { "name",               columns_factory_name },
         { "favorite",           columns_factory_favorite },
-        { "sourcefile",         NULL },
+        { "sourcefile",         columns_factory_sourcefile },
         { "runnable",           NULL },
         { "cloneof",            NULL },
         { "romof",              NULL },
@@ -348,6 +368,7 @@ static gchar *default_column_order[] =
         "manufacturer",
         "input_players",
         "name",
+        "sourcefile",
         "sampleset"
 };
 

@@ -1,3 +1,18 @@
+2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-columns.c:
+	Add a "Driver" column.
+
+	* src/gva-game-store.c (game_store_compare):
+	General-purpose sort function for any column.
+	Falls back to default sort column if values are equal.
+
+	* src/gva-game-store.c (game_store_description_compare),
+	(game_store_time_compare): Removed.
+
+	* src/gva-game-store.c (game_store_constructor):
+	Register a sort function for all columns.
+
 2007-09-16  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-mame-common.c (gva_mame_playback_game):
