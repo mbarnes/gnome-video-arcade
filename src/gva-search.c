@@ -36,17 +36,6 @@ search_window_visible_notify_cb (GtkWindow *window,
         gtk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
 }
 
-static void
-search_entry_changed_cb (GtkEntry *entry,
-                         GtkWidget *widget)
-{
-        gchar *text;
-
-        text = g_strstrip (g_strdup (gtk_entry_get_text (entry)));
-        gtk_widget_set_sensitive (widget, strlen (text) > 0);
-        g_free (text);
-}
-
 /**
  * gva_search_init:
  *
@@ -63,11 +52,6 @@ gva_search_init (void)
                 GVA_WIDGET_SEARCH_WINDOW, "notify::visible",
                 G_CALLBACK (search_window_visible_notify_cb),
                 GVA_WIDGET_SEARCH_ENTRY);
-
-        g_signal_connect (
-                GVA_WIDGET_SEARCH_ENTRY, "changed",
-                G_CALLBACK (search_entry_changed_cb),
-                GVA_WIDGET_SEARCH_FIND_BUTTON);
 
         text = g_strstrip (gva_search_get_last_search ());
         gtk_entry_set_text (GTK_ENTRY (GVA_WIDGET_SEARCH_ENTRY), text);
@@ -137,7 +121,12 @@ void
 gva_search_find_clicked_cb (GtkEntry *entry,
                             GtkButton *button)
 {
-        gva_search_set_last_search (gtk_entry_get_text (entry));
+        gchar *text;
+
+        text = g_strdup (gtk_entry_get_text (entry));
+        gtk_entry_set_text (entry, g_strstrip (text));
+        gva_search_set_last_search (text);
+        g_free (text);
 
         /* Force a tree view update. */
         if (gva_tree_view_get_selected_view () != 2)

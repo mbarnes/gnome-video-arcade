@@ -432,6 +432,9 @@
                   </packing>
                 </child>
               </widget>
+              <packing>
+                <property name="tab_expand">False</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkLabel" id="preferences-general-tab">
@@ -441,6 +444,7 @@
               </widget>
               <packing>
                 <property name="type">tab</property>
+                <property name="tab_expand">False</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -506,6 +510,7 @@
               </widget>
               <packing>
                 <property name="position">1</property>
+                <property name="tab_expand">False</property>
               </packing>
             </child>
             <child>
@@ -517,6 +522,7 @@
               <packing>
                 <property name="type">tab</property>
                 <property name="position">1</property>
+                <property name="tab_expand">False</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -579,6 +585,21 @@
               <placeholder/>
             </child>
             <child>
+              <widget class="GtkLabel" id="properties-header">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
+Manufacturer, Year</property>
+                <property name="use_markup">True</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+              </widget>
+              <packing>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkHBox" id="properties-hbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -635,21 +656,6 @@
                 <property name="y_options"></property>
               </packing>
             </child>
-            <child>
-              <widget class="GtkLabel" id="properties-header">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
-Manufacturer, Year</property>
-                <property name="use_markup">True</property>
-                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-              </widget>
-              <packing>
-                <property name="bottom_attach">2</property>
-              </packing>
-            </child>
           </widget>
           <packing>
             <property name="expand">False</property>
@@ -690,6 +696,9 @@ Manufacturer, Year</property>
                       </widget>
                     </child>
                   </widget>
+                  <packing>
+                    <property name="tab_expand">False</property>
+                  </packing>
                 </child>
                 <child>
                   <placeholder/>
@@ -707,6 +716,9 @@ Manufacturer, Year</property>
                   </packing>
                 </child>
               </widget>
+              <packing>
+                <property name="tab_expand">False</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkLabel" id="properties-history-tab">
@@ -716,6 +728,7 @@ Manufacturer, Year</property>
               </widget>
               <packing>
                 <property name="type">tab</property>
+                <property name="tab_expand">False</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -734,6 +747,9 @@ Manufacturer, Year</property>
                     <property name="ypad">6</property>
                     <property name="stock">gtk-missing-image</property>
                   </widget>
+                  <packing>
+                    <property name="tab_expand">False</property>
+                  </packing>
                 </child>
                 <child>
                   <placeholder/>
@@ -753,6 +769,7 @@ Manufacturer, Year</property>
               </widget>
               <packing>
                 <property name="position">1</property>
+                <property name="tab_expand">False</property>
               </packing>
             </child>
             <child>
@@ -764,6 +781,7 @@ Manufacturer, Year</property>
               <packing>
                 <property name="type">tab</property>
                 <property name="position">1</property>
+                <property name="tab_expand">False</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -798,6 +816,7 @@ Manufacturer, Year</property>
               </widget>
               <packing>
                 <property name="position">2</property>
+                <property name="tab_expand">False</property>
               </packing>
             </child>
             <child>
@@ -809,6 +828,7 @@ Manufacturer, Year</property>
               <packing>
                 <property name="type">tab</property>
                 <property name="position">2</property>
+                <property name="tab_expand">False</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -898,7 +918,6 @@ Manufacturer, Year</property>
             <child>
               <widget class="GtkButton" id="search-find-button">
                 <property name="visible">True</property>
-                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>

@@ -1,5 +1,10 @@
 2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-search.c:
+	Allow an empty search entry to clear the Search Results view.
+
+2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+
 	* docs/reference:
 	Add docs for gva_columns_get_names_full().
 

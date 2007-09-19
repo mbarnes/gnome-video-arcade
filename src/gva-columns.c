@@ -165,6 +165,7 @@ columns_factory_description (GvaGameStoreColumn column_id)
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_spacing (column, 3);
         gtk_tree_view_column_set_title (column, _("Title"));
 
         renderer = gtk_cell_renderer_pixbuf_new ();
