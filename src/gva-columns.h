@@ -31,15 +31,16 @@
 
 G_BEGIN_DECLS
 
-GtkTreeViewColumn *  gva_columns_new_from_id   (GvaGameStoreColumn column_id);
-GtkTreeViewColumn *  gva_columns_new_from_name (const gchar *column_name);
-gboolean             gva_columns_lookup_id     (const gchar *column_name,
+GtkTreeViewColumn * gva_columns_new_from_id    (GvaGameStoreColumn column_id);
+GtkTreeViewColumn * gva_columns_new_from_name  (const gchar *column_name);
+gboolean            gva_columns_lookup_id      (const gchar *column_name,
                                                 GvaGameStoreColumn *column_id);
-const gchar *        gva_columns_lookup_name   (GvaGameStoreColumn column_id);
-void                 gva_columns_load          (GtkTreeView *view);
-void                 gva_columns_save          (GtkTreeView *view);
-GSList *             gva_columns_get_names     (GtkTreeView *view,
+const gchar *       gva_columns_lookup_name    (GvaGameStoreColumn column_id);
+void                gva_columns_load           (GtkTreeView *view);
+void                gva_columns_save           (GtkTreeView *view);
+GSList *            gva_columns_get_names      (GtkTreeView *view,
                                                 gboolean visible_only);
+GSList *            gva_columns_get_names_full (GtkTreeView *view);
 
 G_END_DECLS
 

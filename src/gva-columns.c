@@ -30,6 +30,37 @@
 
 typedef GtkTreeViewColumn * (*FactoryFunc) (GvaGameStoreColumn);
 
+static GdkPixbuf *
+columns_get_icon_name (const gchar *icon_name)
+{
+        GtkIconTheme *icon_theme;
+        GdkPixbuf *pixbuf;
+        GdkPixbuf *scaled;
+        gboolean valid;
+        gint size;
+        GError *error = NULL;
+
+        icon_theme = gtk_icon_theme_get_default ();
+        valid = gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &size, NULL);
+        g_assert (valid);
+
+        pixbuf = gtk_icon_theme_load_icon (
+                icon_theme, icon_name, size, 0, &error);
+
+        if (pixbuf == NULL)
+        {
+                gva_error_handle (&error);
+                return NULL;
+        }
+
+        scaled = gdk_pixbuf_scale_simple (
+                pixbuf, size, size, GDK_INTERP_BILINEAR);
+
+        g_object_unref (pixbuf);
+
+        return scaled;
+}
+
 static void
 columns_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
                              GtkTreePath *path,
@@ -53,6 +84,34 @@ columns_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
                 gtk_action_activate (GVA_ACTION_REMOVE_FAVORITE);
         else
                 gtk_action_activate (GVA_ACTION_INSERT_FAVORITE);
+}
+
+static void
+columns_description_set_properties (GtkTreeViewColumn *column,
+                                    GtkCellRenderer *renderer,
+                                    GtkTreeModel *model,
+                                    GtkTreeIter *iter)
+{
+        GvaGameStoreColumn column_id;
+        GdkPixbuf *pixbuf = NULL;
+        gchar *status;
+
+        column_id = GVA_GAME_STORE_COLUMN_DRIVER_STATUS;
+        gtk_tree_model_get (model, iter, column_id, &status, -1);
+
+        if (strcmp (status, "imperfect") == 0)
+                pixbuf = columns_get_icon_name ("dialog-warning");
+        else if (strcmp (status, "preliminary") == 0)
+                pixbuf = columns_get_icon_name ("dialog-error");
+
+        g_object_set (
+		renderer, "pixbuf", pixbuf,
+		"visible", (pixbuf != NULL), NULL);
+
+        if (pixbuf != NULL)
+                g_object_unref (pixbuf);
+
+        g_free (status);
 }
 
 static void
@@ -96,51 +155,27 @@ columns_sampleset_set_properties (GtkTreeViewColumn *column,
         g_free (sampleset);
 }
 
-static GdkPixbuf *
-columns_get_icon_name (const gchar *icon_name)
-{
-        GtkIconTheme *icon_theme;
-        GdkPixbuf *pixbuf;
-        GdkPixbuf *scaled;
-        gboolean valid;
-        gint size;
-        GError *error = NULL;
-
-        icon_theme = gtk_icon_theme_get_default ();
-        valid = gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &size, NULL);
-        g_assert (valid);
-
-        pixbuf = gtk_icon_theme_load_icon (
-                icon_theme, icon_name, size, 0, &error);
-
-        if (pixbuf == NULL)
-        {
-                gva_error_handle (&error);
-                return NULL;
-        }
-
-        scaled = gdk_pixbuf_scale_simple (
-                pixbuf, size, size, GDK_INTERP_BILINEAR);
-
-        g_object_unref (pixbuf);
-
-        return scaled;
-}
-
 static GtkTreeViewColumn *
 columns_factory_description (GvaGameStoreColumn column_id)
 {
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
-
-        renderer = gtk_cell_renderer_text_new ();
-        g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+        GtkCellRenderer *renderer;
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_title (column, _("Title"));
+
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        gtk_tree_view_column_pack_start (column, renderer, FALSE);
+
+        gtk_tree_view_column_set_cell_data_func (
+                column, renderer, (GtkTreeCellDataFunc)
+                columns_description_set_properties, NULL, NULL);
+
+        renderer = gtk_cell_renderer_text_new ();
+        g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
@@ -152,19 +187,18 @@ columns_factory_description (GvaGameStoreColumn column_id)
 static GtkTreeViewColumn *
 columns_factory_favorite (GvaGameStoreColumn column_id)
 {
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
         GdkPixbuf *pixbuf;
 
         pixbuf = columns_get_icon_name ("emblem-favorite");
-
-        renderer = gva_cell_renderer_pixbuf_new ();
-        g_object_set (renderer, "pixbuf", pixbuf, NULL);
-
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_title (column, _("Favorite"));
+
+        renderer = gva_cell_renderer_pixbuf_new ();
+        g_object_set (renderer, "pixbuf", pixbuf, NULL);
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
@@ -217,15 +251,15 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
 static GtkTreeViewColumn *
 columns_factory_manufacturer (GvaGameStoreColumn column_id)
 {
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
-
-        renderer = gtk_cell_renderer_text_new ();
+        GtkCellRenderer *renderer;
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_title (column, _("Manufacturer"));
+
+        renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
@@ -237,15 +271,15 @@ columns_factory_manufacturer (GvaGameStoreColumn column_id)
 static GtkTreeViewColumn *
 columns_factory_name (GvaGameStoreColumn column_id)
 {
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
-
-        renderer = gtk_cell_renderer_text_new ();
+        GtkCellRenderer *renderer;
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_title (column, _("ROM Name"));
+
+        renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
@@ -257,19 +291,19 @@ columns_factory_name (GvaGameStoreColumn column_id)
 static GtkTreeViewColumn *
 columns_factory_sampleset (GvaGameStoreColumn column_id)
 {
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
         GdkPixbuf *pixbuf;
 
         pixbuf = columns_get_icon_name ("emblem-sound");
-
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        g_object_set (renderer, "pixbuf", pixbuf, NULL);
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_title (column, _("Samples"));
+
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        g_object_set (renderer, "pixbuf", pixbuf, NULL);
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_set_cell_data_func (
@@ -285,15 +319,15 @@ columns_factory_sampleset (GvaGameStoreColumn column_id)
 static GtkTreeViewColumn *
 columns_factory_sourcefile (GvaGameStoreColumn column_id)
 {
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
-
-        renderer = gtk_cell_renderer_text_new ();
+        GtkCellRenderer *renderer;
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_title (column, _("Driver"));
+
+        renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
@@ -305,15 +339,15 @@ columns_factory_sourcefile (GvaGameStoreColumn column_id)
 static GtkTreeViewColumn *
 columns_factory_year (GvaGameStoreColumn column_id)
 {
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
-
-        renderer = gtk_cell_renderer_text_new ();
+        GtkCellRenderer *renderer;
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_title (column, _("Year"));
+
+        renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
@@ -656,7 +690,7 @@ gva_columns_save (GtkTreeView *view)
  * to convert each numeric column ID to a name.  If @visible_only is %TRUE
  * then only visible columns are included in the list.  The column name
  * strings are owned by @view and should not be freed; only the list itself
- * should be free using g_slist_free().
+ * should be freed using g_slist_free().
  *
  * Returns: a #GSList of column names
  **/
@@ -684,6 +718,49 @@ gva_columns_get_names (GtkTreeView *view,
                                 G_OBJECT (column), "name"));
 
                 list = g_list_delete_link (list, list);
+        }
+
+        return names;
+}
+
+/* Helper for gva_columns_get_names_full() */
+static void
+columns_add_dependency (GSList **p_list, const gchar *name)
+{
+        if (!g_slist_find_custom (*p_list, name, (GCompareFunc) strcmp))
+                *p_list = g_slist_prepend (*p_list, (gpointer) name);
+}
+
+/**
+ * gva_columns_get_names_full:
+ * @view: a #GtkTreeView
+ *
+ * Extracts a list of column names from @view, plus any additional column
+ * names from the game database necessary to render the tree view cells.
+ * The column name strings are owned by @view and should not be freed;
+ * only the list itself should be freed using g_slist_free().
+ *
+ * Returns: a #GSList of column names
+ **/
+GSList *
+gva_columns_get_names_full (GtkTreeView *view)
+{
+        GSList *names, *iter;
+
+        g_return_val_if_fail (GTK_IS_TREE_VIEW (view), NULL);
+
+        names = gva_columns_get_names (view, FALSE);
+
+        /* XXX All the dependency information lives here for now.
+         *     It might make more sense in the column_info table,
+         *     with some private API for lookups. */
+
+        for (iter = names; iter != NULL; iter = iter->next)
+        {
+                const gchar *column_name = iter->data;
+
+                if (strcmp (column_name, "description") == 0)
+                        columns_add_dependency (&names, "driver_status");
         }
 
         return names;

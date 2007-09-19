@@ -322,5 +322,6 @@ gva_columns_lookup_name
 gva_columns_load
 gva_columns_save
 gva_columns_get_names
+gva_columns_get_names_full
 </SECTION>
 

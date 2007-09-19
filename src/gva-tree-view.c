@@ -278,7 +278,7 @@ gva_tree_view_run_query (const gchar *expr,
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 
         /* Build a comma-separated list of column names. */
-        list = gva_columns_get_names (view, FALSE);
+        list = gva_columns_get_names_full (view);
         strv = g_new0 (const gchar *, g_slist_length (list) + 1);
         while (list != NULL)
         {

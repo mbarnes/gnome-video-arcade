@@ -1,5 +1,23 @@
 2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
 
+	* docs/reference:
+	Add docs for gva_columns_get_names_full().
+
+	* src/gva-columns.c:
+	Add an icon next to the game title indicating if emulation of the
+	game has known issues.  Use a warning symbol for minor issues and
+	an error symbol for major issues.
+
+	* src/gva-columns.c (gva_columns_get_names_full):
+	New function returns a list of tree view column names from the
+	given GtkTreeView, plus any additional column names from the game
+	database necessary to render the tree view cells.
+
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Call gva_columns_get_names_full().
+
+2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-tree-view.c (gva_tree_view_init):
 	Make searching work again; this broke at some point.
 
