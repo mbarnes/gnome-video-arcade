@@ -87,16 +87,16 @@ columns_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
 }
 
 static void
-columns_description_set_properties (GtkTreeViewColumn *column,
-                                    GtkCellRenderer *renderer,
-                                    GtkTreeModel *model,
-                                    GtkTreeIter *iter)
+columns_driver_status_set_properties (GtkTreeViewColumn *column,
+                                      GtkCellRenderer *renderer,
+                                      GtkTreeModel *model,
+                                      GtkTreeIter *iter)
 {
         GvaGameStoreColumn column_id;
         GdkPixbuf *pixbuf = NULL;
         gchar *status;
 
-        column_id = GVA_GAME_STORE_COLUMN_DRIVER_STATUS;
+        column_id = gtk_tree_view_column_get_sort_column_id (column);
         gtk_tree_model_get (model, iter, column_id, &status, -1);
 
         if (strcmp (status, "imperfect") == 0)
@@ -105,8 +105,8 @@ columns_description_set_properties (GtkTreeViewColumn *column,
                 pixbuf = columns_get_icon_name ("dialog-error");
 
         g_object_set (
-		renderer, "pixbuf", pixbuf,
-		"visible", (pixbuf != NULL), NULL);
+                renderer, "pixbuf", pixbuf,
+                "visible", (pixbuf != NULL), NULL);
 
         if (pixbuf != NULL)
                 g_object_unref (pixbuf);
@@ -168,19 +168,33 @@ columns_factory_description (GvaGameStoreColumn column_id)
         gtk_tree_view_column_set_spacing (column, 3);
         gtk_tree_view_column_set_title (column, _("Title"));
 
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        gtk_tree_view_column_pack_start (column, renderer, FALSE);
-
-        gtk_tree_view_column_set_cell_data_func (
-                column, renderer, (GtkTreeCellDataFunc)
-                columns_description_set_properties, NULL, NULL);
-
         renderer = gtk_cell_renderer_text_new ();
         g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
                 column, renderer, "text", column_id);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
+columns_factory_driver_status (GvaGameStoreColumn column_id)
+{
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("Status"));
+
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_set_cell_data_func (
+                column, renderer, (GtkTreeCellDataFunc)
+                columns_driver_status_set_properties, NULL, NULL);
 
         return column;
 }
@@ -193,6 +207,7 @@ columns_factory_favorite (GvaGameStoreColumn column_id)
         GdkPixbuf *pixbuf;
 
         pixbuf = columns_get_icon_name ("emblem-favorite");
+
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
@@ -382,7 +397,7 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "input_players",      columns_factory_input_players },
         { "input_buttons",      NULL },
         { "input_coins",        NULL },
-        { "driver_status",      NULL },
+        { "driver_status",      columns_factory_driver_status },
         { "driver_emulation",   NULL },
         { "driver_color",       NULL },
         { "driver_sound",       NULL },
@@ -401,6 +416,7 @@ static gchar *default_column_order[] =
         "description",
         "year",
         "manufacturer",
+        "driver_status",
         "input_players",
         "name",
         "sourcefile",
@@ -756,13 +772,14 @@ gva_columns_get_names_full (GtkTreeView *view)
          *     It might make more sense in the column_info table,
          *     with some private API for lookups. */
 
+        /* XXX Nothing to do yet.
         for (iter = names; iter != NULL; iter = iter->next)
         {
                 const gchar *column_name = iter->data;
 
                 if (strcmp (column_name, "description") == 0)
                         columns_add_dependency (&names, "driver_status");
-        }
+        }*/
 
         return names;
 }

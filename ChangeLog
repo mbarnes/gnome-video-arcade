@@ -1,5 +1,13 @@
 2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-columns.c:
+	Add a "Status" column showing a warning or error symbol as
+	described below.  Putting an icon next to the game title is
+	too distracting, but at least now there's infrastructure for
+	doing fancy things like that.
+
+2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-search.c:
 	Allow an empty search entry to clear the Search Results view.
 
