@@ -155,6 +155,12 @@ gva_tree_view_init (void)
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
 
         gva_columns_load (view);
+
+        gtk_tree_view_set_search_column (
+                view, GVA_GAME_STORE_COLUMN_DESCRIPTION);
+        gtk_tree_view_set_search_equal_func (
+                view, (GtkTreeViewSearchEqualFunc)
+                tree_view_search_equal, NULL, NULL);
 }
 
 /**
@@ -212,11 +218,12 @@ gva_tree_view_update (GError **error)
                         text = gva_search_get_last_search ();
                         if (text != NULL && *text != '\0')
                                 expr = g_strdup_printf (
-                                        "name LIKE '%%%s%%' OR "
+                                        "name LIKE '%s' OR "
+                                        "sourcefile LIKE '%s' OR "
                                         "description LIKE '%%%s%%' OR "
                                         "manufacturer LIKE '%%%s%%' OR "
-                                        "year LIKE '%%%s%%'",
-                                        text, text, text, text);
+                                        "year LIKE '%s'",
+                                        text, text, text, text, text);
                         else
                                 expr = g_strdup ("name == NULL");
                         g_free (text);

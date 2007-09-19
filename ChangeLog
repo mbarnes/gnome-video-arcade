@@ -1,5 +1,13 @@
 2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-tree-view.c (gva_tree_view_init):
+	Make searching work again; this broke at some point.
+
+	* src/gva-tree-view.c (gva_tree_view_update):
+	Tinker with the search query, add 'sourcefile' field.
+
+2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-columns.c:
 	Add a "Driver" column.
 
