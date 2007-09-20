@@ -328,6 +328,7 @@ mame_verify_read (GvaProcess *process,
                 status = "bad";
 
         data->callback (name, status, data->user_data);
+        gva_process_inc_progress (process);
 
 exit:
         g_free (line);

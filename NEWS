@@ -1,12 +1,15 @@
 GNOME Video Arcade 0.4.5
 ========================
 
-	Released September --, 2007
+        Released September 19, 2007
 
-	What's New
-	----------
-	* "Driver" column.
-	* More intelligent column sorting.
+        What's New
+        ----------
+        * "Driver" and "Status" columns.
+        * More intelligent column sorting.
+        * Playback now works for sdlmame.
+        * Database construction is faster once again and its progress is
+          more accurately reported in the user interface.
 
 GNOME Video Arcade 0.4.4
 ========================

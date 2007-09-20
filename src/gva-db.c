@@ -280,6 +280,7 @@ struct _ParserData
 {
         GMarkupParseContext *context;
         GvaProcess *process;
+
         sqlite3_stmt *insert_game_stmt;
         sqlite3_stmt *insert_biosset_stmt;
         sqlite3_stmt *insert_rom_stmt;
@@ -290,14 +291,8 @@ struct _ParserData
         sqlite3_stmt *insert_control_stmt;
         sqlite3_stmt *insert_dipvalue_stmt;
 
-        GHashTable *romsets;
-        GHashTable *samplesets;
-        GvaProcess *verify_roms;
-        GvaProcess *verify_samples;
-
         const gchar *element_stack[MAX_ELEMENT_DEPTH];
         guint element_stack_depth;
-        guint progress;
         gchar *dipswitch;
         gchar *game;
 };
@@ -880,6 +875,19 @@ db_parser_start_element (GMarkupParseContext *context,
                 interned_name[ii] = g_intern_string (attribute_name[ii]);
         attribute_name = interned_name;
 
+        /* XXX Copied from below... */
+
+        if (element_name == intern.game)
+                db_parser_start_element_game (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.mame)
+                db_parser_start_element_mame (
+                        data, attribute_name, attribute_value, error);
+
+        /* Skip unused elements to speed up parsing. */
+
+#if 0
         if (element_name == intern.biosset)
                 db_parser_start_element_biosset (
                         data, attribute_name, attribute_value, error);
@@ -935,6 +943,7 @@ db_parser_start_element (GMarkupParseContext *context,
         else if (element_name == intern.sound)
                 db_parser_start_element_sound (
                         data, attribute_name, attribute_value, error);
+#endif
 }
 
 static void
@@ -952,7 +961,7 @@ db_parser_end_element_game (ParserData *data,
         if (!db_parser_exec_stmt (data->insert_game_stmt, error))
                 return;
 
-        gva_process_set_progress (data->process, ++data->progress);
+        gva_process_inc_progress (data->process);
 
         g_free (data->game);
         data->game = NULL;
@@ -969,6 +978,14 @@ db_parser_end_element (GMarkupParseContext *context,
         g_assert (data->element_stack_depth > 0);
         element_name = data->element_stack[--data->element_stack_depth];
 
+        /* XXX Copied from below... */
+
+        if (element_name == intern.game)
+                db_parser_end_element_game (data, error);
+
+        /* Skip unused elements to speed up parsing. */
+
+#if 0
         if (element_name == intern.biosset)
                 db_parser_exec_stmt (data->insert_biosset_stmt, error);
 
@@ -998,6 +1015,7 @@ db_parser_end_element (GMarkupParseContext *context,
 
         else if (element_name == intern.sample)
                 db_parser_exec_stmt (data->insert_sample_stmt, error);
+#endif
 }
 
 static void
@@ -1024,65 +1042,6 @@ db_parser_text (GMarkupParseContext *context,
                 db_parser_bind_text (stmt, "@year", text);
 }
 
-static void
-db_verify_update_foreach (const gchar *status,
-                          GString *names,
-                          const gchar *column)
-{
-        gchar *sql;
-        GError *error = NULL;
-
-        sql = g_strdup_printf (
-                "UPDATE game SET %s=\"%s\" WHERE name IN (%s)",
-                column, status, names->str);
-        gva_db_execute (sql, &error);
-        gva_error_handle (&error);
-        g_free (sql);
-}
-
-static void
-db_verify_update_status (GvaProcess *process,
-                         GHashTable *hash_table,
-                         gchar *column)
-{
-        if (process == NULL)
-                return;
-
-        /* Wait for the process to exit. */
-        while (!gva_process_has_exited (process, NULL))
-                g_main_context_iteration (NULL, TRUE);
-
-        if (process->error != NULL)
-                return;
-
-        g_hash_table_foreach (
-                hash_table, (GHFunc) db_verify_update_foreach, column);
-}
-
-static void
-db_verify_insert_status (const gchar *name,
-                         const gchar *status,
-                         GHashTable *hash_table)
-{
-        GString *string;
-
-        string = g_hash_table_lookup (hash_table, status);
-        if (string != NULL)
-                g_string_append_printf (string, ", \"%s\"", name);
-        else
-        {
-                string = g_string_sized_new (1024);
-                g_string_printf (string, "\"%s\"", name);
-                g_hash_table_insert (hash_table, g_strdup (status), string);
-        }
-}
-
-static void
-db_verify_string_free (GString *string)
-{
-        g_string_free (string, TRUE);
-}
-
 static GMarkupParser parser =
 {
         db_parser_start_element,
@@ -1102,26 +1061,6 @@ db_parser_data_new (GvaProcess *process)
         data = g_slice_new0 (ParserData);
         data->context = g_markup_parse_context_new (&parser, 0, data, NULL);
         data->process = g_object_ref (process);
-
-        data->romsets = g_hash_table_new_full (
-                g_str_hash, g_str_equal,
-                (GDestroyNotify) g_free,
-                (GDestroyNotify) db_verify_string_free);
-
-        data->samplesets = g_hash_table_new_full (
-                g_str_hash, g_str_equal,
-                (GDestroyNotify) g_free,
-                (GDestroyNotify) db_verify_string_free);
-
-        data->verify_roms = gva_mame_verify_roms (
-                (GvaMameCallback) db_verify_insert_status,
-                data->romsets, &error);
-        gva_error_handle (&error);
-
-        data->verify_samples = gva_mame_verify_samples (
-                (GvaMameCallback) db_verify_insert_status,
-                data->samplesets, &error);
-        gva_error_handle (&error);
 
         if (!gva_db_prepare (SQL_INSERT_GAME, &data->insert_game_stmt, &error))
                 g_error ("%s", error->message);
@@ -1169,15 +1108,6 @@ db_parser_data_free (ParserData *data)
         sqlite3_finalize (data->insert_control_stmt);
         sqlite3_finalize (data->insert_dipvalue_stmt);
 
-        g_hash_table_destroy (data->romsets);
-        g_hash_table_destroy (data->samplesets);
-
-        if (data->verify_roms != NULL)
-                g_object_unref (data->verify_roms);
-
-        if (data->verify_samples != NULL)
-                g_object_unref (data->verify_samples);
-
         g_free (data->dipswitch);
         g_free (data->game);
 
@@ -1218,12 +1148,6 @@ db_parser_exit (GvaProcess *process,
                 g_markup_parse_context_end_parse (
                         data->context, &process->error);
 
-                db_verify_update_status (
-                        data->verify_roms, data->romsets, "romset");
-                db_verify_update_status (
-                        data->verify_samples, data->samplesets, "sampleset");
-                gva_db_execute (SQL_DELETE_NOT_FOUND, &process->error);
-
                 gva_db_transaction_commit (&error);
                 gva_error_handle (&error);
 
@@ -1240,6 +1164,79 @@ db_parser_exit (GvaProcess *process,
         }
 
         db_parser_data_free (data);
+}
+
+static void
+db_verify_read (const gchar *name,
+                const gchar *status,
+                GHashTable *hash_table)
+{
+        GString *string;
+
+        /* Build a quoted, comma-separated list of games. */
+        string = g_hash_table_lookup (hash_table, status);
+        if (string != NULL)
+                g_string_append_printf (string, ", \"%s\"", name);
+        else
+        {
+                string = g_string_sized_new (1024);
+                g_string_printf (string, "\"%s\"", name);
+                g_hash_table_insert (hash_table, g_strdup (status), string);
+        }
+}
+
+/* Helper for db_verify_exit() */
+static void
+db_verify_foreach (const gchar *status,
+                   GString *names,
+                   const gchar *column)
+{
+        gchar *sql;
+        GError *error = NULL;
+
+        sql = g_strdup_printf (
+                "UPDATE game SET %s=\"%s\" WHERE name IN (%s)",
+                column, status, names->str);
+        gva_db_execute (sql, &error);
+        gva_error_handle (&error);
+        g_free (sql);
+}
+
+static void
+db_verify_exit (GvaProcess *process,
+                gint status,
+                GHashTable *results)
+{
+        const gchar *column;
+        GError *error = NULL;
+
+        if (process->error != NULL)
+                return;
+
+        column = g_object_get_data (G_OBJECT (process), "column");
+        g_assert (column != NULL);
+
+        gva_db_transaction_begin (&error);
+        gva_error_handle (&error);
+
+        g_hash_table_foreach (
+                results, (GHFunc) db_verify_foreach, (gpointer) column);
+
+        /* This part only really applies to romsets, but I suppose there's
+         * no harm in executing it twice. */
+        gva_db_execute (SQL_DELETE_NOT_FOUND, &error);
+        gva_error_handle (&error);
+
+        gva_db_transaction_commit (&error);
+        gva_error_handle (&error);
+
+        g_hash_table_destroy (results);
+}
+
+static void
+db_verify_string_free (GString *string)
+{
+        g_string_free (string, TRUE);
 }
 
 static gboolean
@@ -1400,6 +1397,64 @@ gva_db_build (GError **error)
         g_signal_connect (
                 process, "exited",
                 G_CALLBACK (db_parser_exit), data);
+
+        return process;
+}
+
+GvaProcess *
+gva_db_verify_romsets (GError **error)
+{
+        GvaProcess *process;
+        GHashTable *results;
+
+        results = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) db_verify_string_free);
+
+        process = gva_mame_verify_roms (
+                (GvaMameCallback) db_verify_read, results, error);
+
+        if (process == NULL)
+        {
+                g_hash_table_destroy (results);
+                return NULL;
+        }
+
+        g_object_set_data (G_OBJECT (process), "column", "romset");
+
+        g_signal_connect (
+                process, "exited",
+                G_CALLBACK (db_verify_exit), results);
+
+        return process;
+}
+
+GvaProcess *
+gva_db_verify_samplesets (GError **error)
+{
+        GvaProcess *process;
+        GHashTable *results;
+
+        results = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) db_verify_string_free);
+
+        process = gva_mame_verify_samples (
+                (GvaMameCallback) db_verify_read, results, error);
+
+        if (process == NULL)
+        {
+                g_hash_table_destroy (results);
+                return NULL;
+        }
+
+        g_object_set_data (G_OBJECT (process), "column", "sampleset");
+
+        g_signal_connect (
+                process, "exited",
+                G_CALLBACK (db_verify_exit), results);
 
         return process;
 }

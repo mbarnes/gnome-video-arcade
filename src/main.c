@@ -53,7 +53,6 @@ static GOptionEntry entries[] =
 static void
 start (void)
 {
-        GvaProcess *process = NULL;
         gchar *mame_version;
         guint context_id;
         gint last_view;
@@ -71,19 +70,12 @@ start (void)
 
         if (gva_db_needs_rebuilt ())
         {
-                process = gva_main_build_database (&error);
+                gboolean success;
+
+                success = gva_main_build_database (&error);
                 gva_error_handle (&error);
-        }
 
-        if (process != NULL)
-        {
-                gboolean main_loop_quit;
-
-                while (!gva_process_has_exited (process, NULL))
-                        main_loop_quit = gtk_main_iteration ();
-                g_object_unref (process);
-
-                if (main_loop_quit)
+                if (!success)
                         return;
         }
 

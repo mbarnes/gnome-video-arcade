@@ -712,9 +712,18 @@ gva_process_stderr_read_lines (GvaProcess *process)
 guint
 gva_process_get_progress (GvaProcess *process)
 {
-        g_return_val_if_fail (GVA_IS_PROCESS (process), 0.0);
+        g_return_val_if_fail (GVA_IS_PROCESS (process), 0);
 
         return process->priv->progress;
+}
+
+void
+gva_process_inc_progress (GvaProcess *process)
+{
+        g_return_if_fail (GVA_IS_PROCESS (process));
+
+        process->priv->progress++;
+        g_object_notify (G_OBJECT (process), "progress");
 }
 
 void

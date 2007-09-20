@@ -1,5 +1,35 @@
 2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.4.5
+
+	* docs/reference:
+	Add docs for new functions.
+
+	* src/main.c (start):
+	Adapt to new gva_main_build_database() behavior.
+
+	* src/gva-db.c (gva_db_verify_romsets), (gva_db_verify_samplesets):
+	New functions separate the verification phase of the game database
+	construction from the XML parsing phase so they can be serialized.
+
+	* src/gva-db.c (db_parser_start_element), (gva_db_parser_end_element):
+	Skip over unused elements to speed up XML parsing.
+
+	* src/gva-db.c (db_parser_end_element_game):
+	Call gva_process_inc_progress() instead of gva_process_set_progress()
+	so that we don't have to maintain our own progress counter.
+
+	* src/gva-process.c (gva_process_inc_progress):
+	New function increments the progress property.
+
+	* src/gva-main (gva_main_build_database):
+	This is now a *synchronous* function that more accurately reports
+	database construction progress.  Construction is now broken into
+	two separate phases -- XML parsing and ROM verification -- and the
+	status and progress bars are updated accordingly for each phase.
+
+2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-columns.c:
 	Add a "Status" column showing a warning or error symbol as
 	described below.  Putting an icon next to the game title is

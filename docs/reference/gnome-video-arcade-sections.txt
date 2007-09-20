@@ -13,6 +13,7 @@ gva_process_stderr_read_line
 gva_process_stdout_read_lines
 gva_process_stderr_read_lines
 gva_process_get_progress
+gva_process_inc_progress
 gva_process_set_progress
 gva_process_has_exited
 gva_process_kill
@@ -301,6 +302,8 @@ gva_get_user_data_dir
 <FILE>gva-db</FILE>
 gva_db_init
 gva_db_build
+gva_db_verify_romsets
+gva_db_verify_samplesets
 gva_db_reset
 gva_db_execute
 gva_db_transaction_begin

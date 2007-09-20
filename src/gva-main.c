@@ -27,17 +27,6 @@
 static guint menu_tooltip_cid;
 
 static void
-main_build_database_exited_cb (GvaProcess *process,
-                               gint status,
-                               gpointer user_data)
-{
-        guint context_id = GPOINTER_TO_UINT (user_data);
-
-        gva_main_statusbar_pop (context_id);
-        gtk_widget_hide (GVA_WIDGET_MAIN_PROGRESS_BAR);
-}
-
-static void
 main_build_database_progress_cb (GvaProcess *process,
                                  GParamSpec *pspec,
                                  gpointer user_data)
@@ -134,42 +123,104 @@ gva_main_init (void)
  * gva_main_build_database:
  * @error: return location for a #GError, or %NULL
  *
- * Begins the lengthy process of constructing the games database.
+ * Executes the lengthy process of constructing the games database.
  * The function displays a progress bar in the main status bar that
- * tracks the database construction.  The function is asynchronous;
- * it returns immediately with a #GvaProcess that emits an "%exited"
- * signal when the process is complete.
+ * tracks the database construction.  The function is synchronous;
+ * it blocks until database construction is complete or aborted.
  *
- * Returns: a new #GvaProcess
+ * Returns: %TRUE if the database construction was successful,
+ *          %FALSE if construction failed or was aborted
  **/
-GvaProcess *
+gboolean
 gva_main_build_database (GError **error)
 {
+        GtkWidget *progress_bar;
+        GdkCursor *cursor;
+        GdkDisplay *display;
+        GdkWindow *window;
         GvaProcess *process;
+        GvaProcess *process2;
         guint context_id;
         guint total_supported;
+        gboolean main_loop_quit;
+        gboolean success = FALSE;
 
-        process = gva_db_build (error);
-        if (process == NULL)
-                return FALSE;
+        /* XXX Comment this code! */
 
+        progress_bar = GVA_WIDGET_MAIN_PROGRESS_BAR;
+
+        window = gtk_widget_get_parent_window (progress_bar);
+        display = gtk_widget_get_display (progress_bar);
+        cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
+        gdk_window_set_cursor (window, cursor);
+
+        gtk_widget_show (progress_bar);
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
         total_supported = gva_mame_get_total_supported (NULL);
 
-        gva_main_statusbar_push (context_id, _("Building game database..."));
-        gtk_widget_show (GVA_WIDGET_MAIN_PROGRESS_BAR);
+        process = gva_db_build (error);
+        if (process == NULL)
+                goto fail;
 
-        g_signal_connect (
-                process, "exited",
-                G_CALLBACK (main_build_database_exited_cb),
-                GUINT_TO_POINTER (context_id));
+        gva_main_statusbar_push (context_id, _("Building game database..."));
 
         g_signal_connect (
                 process, "notify::progress",
                 G_CALLBACK (main_build_database_progress_cb),
                 GUINT_TO_POINTER (total_supported));
 
-        return process;
+        while (!gva_process_has_exited (process, NULL))
+                main_loop_quit = gtk_main_iteration ();
+
+        if (main_loop_quit)
+                goto exit;
+
+        process = gva_db_verify_romsets (error);
+        if (process == NULL)
+                goto fail;
+
+        process2 = gva_db_verify_samplesets (error);
+        if (process2 == NULL)
+                goto fail;
+
+        gva_main_statusbar_pop (context_id);
+        gva_main_statusbar_push (context_id, _("Analyzing ROM files..."));
+        gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 0.0);
+
+        g_signal_connect (
+                process, "notify::progress",
+                G_CALLBACK (main_build_database_progress_cb),
+                GUINT_TO_POINTER (total_supported));
+
+        while (!gva_process_has_exited (process, NULL))
+                main_loop_quit = gtk_main_iteration ();
+
+        if (main_loop_quit)
+                goto exit;
+
+        while (!gva_process_has_exited (process2, NULL))
+                main_loop_quit = gtk_main_iteration ();
+
+        if (main_loop_quit)
+                goto exit;
+
+        success = TRUE;
+
+fail:
+        gva_main_statusbar_pop (context_id);
+        gtk_widget_hide (progress_bar);
+
+        gdk_window_set_cursor (window, NULL);
+        gdk_cursor_unref (cursor);
+
+exit:
+        if (process != NULL)
+                g_object_unref (process);
+
+        if (process2 != NULL)
+                g_object_unref (process2);
+
+        return success;
 }
 
 /**
