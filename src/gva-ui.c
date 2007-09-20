@@ -541,7 +541,7 @@ static GtkActionEntry entries[] =
         { "properties",
           GTK_STOCK_PROPERTIES,
           N_("_Properties"),
-          NULL,
+          "<Control>p",
           N_("Show information about the selected game"),
           G_CALLBACK (action_properties_cb) },
 
