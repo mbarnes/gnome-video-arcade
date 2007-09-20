@@ -885,6 +885,10 @@ db_parser_start_element (GMarkupParseContext *context,
                 db_parser_start_element_game (
                         data, attribute_name, attribute_value, error);
 
+        else if (element_name == intern.input)
+                db_parser_start_element_input (
+                        data, attribute_name, attribute_value, error);
+
         else if (element_name == intern.mame)
                 db_parser_start_element_mame (
                         data, attribute_name, attribute_value, error);

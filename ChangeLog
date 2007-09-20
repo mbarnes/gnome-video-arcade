@@ -1,9 +1,14 @@
-2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+2007-09-20  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-db.c (db_parser_start_element):
+	Parse <input> elements to make the Players column work again.
+
+2007-09-20  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-ui.c:
 	Make Ctrl-P an accelerator for Properties.
 
-2007-09-18  Matthew Barnes  <mbarnes@redhat.com>
+2007-09-20  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-db.c (db_parser_start_element):
 	Parse <driver> elements to make the Status column work again.
