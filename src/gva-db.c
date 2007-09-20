@@ -877,7 +877,11 @@ db_parser_start_element (GMarkupParseContext *context,
 
         /* XXX Copied from below... */
 
-        if (element_name == intern.game)
+        if (element_name == intern.driver)
+                db_parser_start_element_driver (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.game)
                 db_parser_start_element_game (
                         data, attribute_name, attribute_value, error);
 
