@@ -1,5 +1,12 @@
 2007-09-20  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.4.5.1
+
+	* src/gva-columns.c (columns_driver_status_set_properties):
+	Use "emblem-default" for working games (status == "good").
+
+2007-09-20  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-db.c (db_parser_start_element):
 	Parse <input> elements to make the Players column work again.
 
