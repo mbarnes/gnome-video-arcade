@@ -24,6 +24,7 @@
 #include <string.h>
 
 #include "gva-db.h"
+#include "gva-error.h"
 #include "gva-history.h"
 #include "gva-main.h"
 #include "gva-mame.h"
@@ -31,6 +32,7 @@
 #include "gva-preferences.h"
 #include "gva-properties.h"
 #include "gva-search.h"
+#include "gva-tree-view.h"
 #include "gva-ui.h"
 
 static GOptionEntry entries[] =
@@ -55,7 +57,6 @@ start (void)
 {
         gchar *mame_version;
         guint context_id;
-        gint last_view;
         GError *error = NULL;
 
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);

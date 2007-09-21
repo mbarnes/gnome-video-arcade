@@ -3,7 +3,7 @@
 bin_PROGRAMS = gnome-video-arcade
 
 AM_CFLAGS = \
-	-Werror \
+	-Wall \
 	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
 	@GCONF_CFLAGS@ @GLADE_CFLAGS@ \
 	@SQLITE_CFLAGS@

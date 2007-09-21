@@ -21,6 +21,8 @@
 #include <string.h>
 #include <time.h>
 
+#include "gva-columns.h"
+#include "gva-db.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-time.h"
@@ -313,7 +315,8 @@ gva_game_store_new_from_query (const gchar *sql,
                                 const gchar *text;
                                 gboolean v_boolean;
 
-                                text = sqlite3_column_text (stmt, ii);
+                                text = (const gchar *)
+                                        sqlite3_column_text (stmt, ii);
                                 v_boolean = (text != NULL) &&
                                         (strcmp (text, "yes") == 0);
                                 g_value_set_boolean (value, v_boolean);
@@ -329,7 +332,8 @@ gva_game_store_new_from_query (const gchar *sql,
                         {
                                 const gchar *v_string;
 
-                                v_string = sqlite3_column_text (stmt, ii);
+                                v_string = (const gchar *)
+                                        sqlite3_column_text (stmt, ii);
                                 if (v_string == NULL)
                                         v_string = "";
                                 g_value_set_string (value, v_string);
@@ -344,7 +348,7 @@ gva_game_store_new_from_query (const gchar *sql,
                                 column_ids[ii], value);
                 }
 
-                name = sqlite3_column_text (stmt, name_column);
+                name = (const gchar *) sqlite3_column_text (stmt, name_column);
 
                 value = &column_values[n_columns];
                 g_value_set_boolean (value, gva_favorites_contains (name));

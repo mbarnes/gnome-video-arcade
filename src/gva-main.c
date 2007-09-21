@@ -21,6 +21,7 @@
 #include <stdarg.h>
 
 #include "gva-db.h"
+#include "gva-mame.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 
@@ -139,10 +140,10 @@ gva_main_build_database (GError **error)
         GdkDisplay *display;
         GdkWindow *window;
         GvaProcess *process;
-        GvaProcess *process2;
+        GvaProcess *process2 = NULL;
         guint context_id;
         guint total_supported;
-        gboolean main_loop_quit;
+        gboolean main_loop_quit = FALSE;
         gboolean success = FALSE;
 
         /* XXX Comment this code! */

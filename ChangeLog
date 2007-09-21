@@ -1,3 +1,21 @@
+2007-09-21  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/Makefile.am:
+	Replace -Werror with -Wall (SF bug #1799564).
+
+	* src/main.c:
+	* src/gva-columns.c:
+	* src/gva-db.c:
+	* src/gva-game-store.c:
+	* src/gva-main.c:
+	* src/gva-mame-common.c:
+	* src/gva-properties.c:
+	* src/gva-tree-view.c:
+	* src/gva-ui.c:
+	* src/gva-util.c:
+	Fix a bunch of compiler warnings caught by -Wall.  Most of them
+	were just unused variables or missing #includes.
+
 2007-09-20  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.4.5.1

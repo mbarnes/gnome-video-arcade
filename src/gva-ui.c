@@ -662,7 +662,6 @@ static GtkRadioActionEntry view_radio_entries[] =
 static void
 ui_init (void)
 {
-        GtkWidget *widget;
         gchar *filename;
         GError *error = NULL;
 

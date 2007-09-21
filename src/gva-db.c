@@ -21,6 +21,7 @@
 #include <string.h>
 
 #include "gva-error.h"
+#include "gva-favorites.h"
 #include "gva-mame.h"
 #include "gva-util.h"
 
@@ -1063,7 +1064,6 @@ static ParserData *
 db_parser_data_new (GvaProcess *process)
 {
         ParserData *data;
-        gint errcode;
         GError *error = NULL;
 
         data = g_slice_new0 (ParserData);
@@ -1162,7 +1162,7 @@ db_parser_exit (GvaProcess *process,
                 gva_process_get_time_elapsed (process, &time_elapsed);
 
                 g_message (
-                        "Database built in %d.%d seconds.",
+                        "Database built in %ld.%ld seconds.",
                         time_elapsed.tv_sec, time_elapsed.tv_usec / 100000);
         }
         else
@@ -1310,7 +1310,6 @@ fail:
 GvaProcess *
 gva_db_build (GError **error)
 {
-        const gchar *filename;
         GvaProcess *process;
         ParserData *data;
 
@@ -1598,7 +1597,6 @@ gva_db_get_filename (void)
 gboolean
 gva_db_needs_rebuilt (void)
 {
-        GConfClient *client;
         gchar *db_build_id = NULL;
         gchar *mame_version = NULL;
         const gchar *reason;

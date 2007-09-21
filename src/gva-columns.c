@@ -780,14 +780,15 @@ gva_columns_get_names_full (GtkTreeView *view)
          *     It might make more sense in the column_info table,
          *     with some private API for lookups. */
 
-        /* XXX Nothing to do yet.
         for (iter = names; iter != NULL; iter = iter->next)
         {
+                /* XXX Nothing to do yet.
                 const gchar *column_name = iter->data;
 
                 if (strcmp (column_name, "description") == 0)
                         columns_add_dependency (&names, "driver_status");
-        }*/
+                */
+        }
 
         return names;
 }

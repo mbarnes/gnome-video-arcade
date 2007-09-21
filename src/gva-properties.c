@@ -18,6 +18,7 @@
 
 #include "gva-properties.h"
 
+#include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-history.h"
 #include "gva-tree-view.h"
@@ -156,7 +157,6 @@ gva_properties_init (void)
         GtkWidget *text_view;
         PangoFontDescription *desc;
         gchar *font_name;
-        GError *error = NULL;
 
         window = GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW);
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);

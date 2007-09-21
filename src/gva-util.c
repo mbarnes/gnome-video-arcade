@@ -177,7 +177,6 @@ gchar *
 gva_get_monospace_font_name (void)
 {
         GConfClient *client;
-        PangoFontDescription *desc;
         gchar *font_name;
         GError *error = NULL;
 

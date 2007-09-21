@@ -143,7 +143,6 @@ gva_tree_view_init (void)
 {
         GtkTreeView *view;
         GtkMenu *menu;
-        gchar *name;
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 

@@ -28,6 +28,7 @@
 
 #include "gva-error.h"
 #include "gva-mame-process.h"
+#include "gva-preferences.h"
 
 /*****************************************************************************
  * Private utilities for MAME backends
@@ -231,7 +232,6 @@ gva_mame_get_input_files (GError **error)
         while ((basename = g_dir_read_name (dir)) != NULL)
         {
                 gchar *filename;
-                gchar buffer[16];
                 GIOChannel *channel;
                 GError *local_error = NULL;
 
