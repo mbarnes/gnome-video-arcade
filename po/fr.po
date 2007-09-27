@@ -1,0 +1,387 @@
+# French translation for gnome-video-arcade.
+# Copyright (C) 2007 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-video-arcade package.
+# ElGeneralMidi <ElGeneralMidi@jabber.ubuntu-fr.org>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade\n"
+"Report-Msgid-Bugs-To: matthew@barnes.net\n"
+"POT-Creation-Date: 2007-07-24 12:20-0400\n"
+"PO-Revision-Date: 2007-07-24 11:10+0100\n"
+"Last-Translator: ElGeneralMidi <ElGeneralMidi@jabber.ubuntu-fr.org>\n"
+"Language-Team: French <ElGeneralMidi@jabber.ubuntu-fr.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/gnome-video-arcade.glade.h:1
+msgid "<b>Columns</b>"
+msgstr "<b>Colonnes</b>"
+
+#: ../data/gnome-video-arcade.glade.h:2
+msgid "<b>General</b>"
+msgstr "<b>Options</b>"
+
+#: ../data/gnome-video-arcade.glade.h:3
+msgid ""
+"<big><b>Game Description</b></big>\n"
+"Manufacturer, Year"
+msgstr ""
+"<big><b>Description Jeux</b></big>\n"
+"Fabricant, Année"
+
+#: ../data/gnome-video-arcade.glade.h:5
+msgid ""
+"<small><i>NOTE: Setting this will not take effect until the second time the "
+"game is started.  It does not apply to recording or playing back games.</i></"
+"small>"
+msgstr ""
+"<small><i>Note: Le réglages ne prendrons effet qu'aprés un "
+"redémarrage du jeu.  Cela ne s'applique pas à la sauvegarde n y à la reprise d un jeu.</i></small>"
+
+#: ../data/gnome-video-arcade.glade.h:6
+msgid "Choose the order of information to appear in the game list."
+msgstr "Choisisser l'ordre d'apparition des informations de la liste de jeux."
+
+#: ../data/gnome-video-arcade.glade.h:7
+msgid "Close this window"
+msgstr "Fermer cette fenêtre"
+
+#: ../data/gnome-video-arcade.glade.h:8
+msgid "Columns"
+msgstr "Colonnes"
+
+#: ../data/gnome-video-arcade.glade.h:9
+msgid "Delete the selected game recordings"
+msgstr "Supprimer la sauvegarde du jeu selectionné"
+
+#: ../data/gnome-video-arcade.glade.h:10
+msgid "GNOME Video Arcade"
+msgstr "GNOME Video Arcade"
+
+#: ../data/gnome-video-arcade.glade.h:11
+msgid "Gallery"
+msgstr "Gallerie"
+
+#: ../data/gnome-video-arcade.glade.h:12
+msgid "General"
+msgstr "Général"
+
+#: ../data/gnome-video-arcade.glade.h:13
+msgid "History"
+msgstr "Historique"
+
+#: ../data/gnome-video-arcade.glade.h:14 ../src/gva-ui.c:527
+msgid "Only show my favorite games"
+msgstr "Toujours montrer mes jeux favoris"
+
+#: ../data/gnome-video-arcade.glade.h:15
+msgid "Play _Back"
+msgstr "_Rejouer"
+
+#: ../data/gnome-video-arcade.glade.h:16 ../src/gva-ui.c:400
+msgid "Play back the selected game recording"
+msgstr "Rejouer la sauvegarde du jeu selectionné"
+
+#: ../data/gnome-video-arcade.glade.h:17
+msgid "Preferences"
+msgstr "Préférences"
+
+#: ../data/gnome-video-arcade.glade.h:18
+msgid "Properties"
+msgstr "Propriétés"
+
+#: ../data/gnome-video-arcade.glade.h:19
+msgid "Recorded Games"
+msgstr "Sauvegarder le jeu"
+
+#: ../data/gnome-video-arcade.glade.h:20 ../src/gva-ui.c:520
+msgid "Show all available games"
+msgstr "Montrer les jeux disponibles"
+
+#: ../data/gnome-video-arcade.glade.h:21 ../src/gva-ui.c:421
+msgid "Show information about the selected game"
+msgstr "Montrer toutes les informations à propos du jeu sélectionné"
+
+#: ../data/gnome-video-arcade.glade.h:22 ../src/gva-ui.c:534
+msgid "Show my search results"
+msgstr "Montrer le résultat de ma recherche"
+
+#: ../data/gnome-video-arcade.glade.h:23 ../src/gva-ui.c:393
+msgid "Show next game"
+msgstr "Montrer le jeu suivant"
+
+#: ../data/gnome-video-arcade.glade.h:24 ../src/gva-ui.c:414
+msgid "Show previous game"
+msgstr "Montrer le jeu précédent"
+
+#: ../data/gnome-video-arcade.glade.h:25 ../src/gva-ui.c:463
+msgid "Start the selected game"
+msgstr "Démarrer le jeu sélectionné"
+
+#: ../data/gnome-video-arcade.glade.h:26
+msgid "Technical"
+msgstr "Technique"
+
+#: ../data/gnome-video-arcade.glade.h:27
+msgid "_Start Game"
+msgstr "_Démarrer le jeu"
+
+#: ../data/gnome-video-arcade.glade.h:28
+msgid "gtk-close"
+msgstr "Quitter"
+
+#: ../src/gva-column-manager.c:584
+msgid "Move _Up"
+msgstr "Déplacer vers le _Haut"
+
+#: ../src/gva-column-manager.c:597
+msgid "Move _Down"
+msgstr "Déplacer vers le _Bas"
+
+#: ../src/gva-column-manager.c:610
+msgid "_Show"
+msgstr "_Montrer"
+
+#: ../src/gva-column-manager.c:619
+msgid "_Hide"
+msgstr "_Cacher"
+
+#: ../src/gva-columns.c:123 ../src/gva-play-back.c:252
+msgid "Title"
+msgstr "Titre"
+
+#: ../src/gva-columns.c:147
+msgid "Favorite"
+msgstr "Favoris"
+
+#: ../src/gva-columns.c:174
+msgid "Manufacturer"
+msgstr "Fabricant"
+
+#: ../src/gva-columns.c:194
+msgid "ROM Name"
+msgstr "Nom de la ROM"
+
+#: ../src/gva-columns.c:218
+msgid "Samples"
+msgstr "Samples"
+
+#: ../src/gva-columns.c:242
+msgid "Year"
+msgstr "Année"
+
+#: ../src/gva-history.c:44
+msgid "This program is not configured to show arcade history information."
+msgstr "Ce programme n'est pas configuré pour montrer l'historique des informations d'arcade"
+
+#: ../src/gva-main.c:144
+msgid "Building game database..."
+msgstr "Constuction de la base de données des jeux..."
+
+#: ../src/gva-mame-common.c:176
+#, c-format
+msgid "%s: No such configuration key"
+msgstr "%s: Aucune configuration de touche"
+
+#: ../src/gva-mame-process.c:94
+#, c-format
+msgid "Child process exited with status (%d)"
+msgstr "Le processus enfant a quitté avec le statut (%d)"
+
+#: ../src/gva-mame-sdlmame.c:60 ../src/gva-mame-xmame.c:56
+msgid "Could not determine emulator version"
+msgstr "Impossible de déterminer la version de l'émulateur"
+
+#: ../src/gva-play-back.c:59
+msgid "Delete selected game recordings?"
+msgstr "Supprimer la sauvegarde du jeu sélectionné ?"
+
+#: ../src/gva-play-back.c:63
+msgid ""
+"This operation will permanently erase the recorded games you have selected.  "
+"Are you sure you want to proceed?"
+msgstr ""
+"Cette opération effacera définitivement les sauvegardes de jeux que vous avez sélectionné.  "
+"Etes vous sûr de vouloir les supprimer ?"
+
+#: ../src/gva-play-back.c:67
+msgid "Do Not Delete"
+msgstr "Ne Pas Supprimer"
+
+#: ../src/gva-play-back.c:239
+msgid "Played On"
+msgstr "Jouer"
+
+#: ../src/gva-properties.c:49
+msgid "(Game Description Unknown)"
+msgstr "(Description Du Jeu Inconnu)"
+
+#: ../src/gva-properties.c:52
+msgid "(Manufacturer Unknown)"
+msgstr "(Fabricant Inconnu)"
+
+#: ../src/gva-properties.c:55
+msgid "(Year Unknown)"
+msgstr "(Année Inconnue)"
+
+#: ../src/gva-properties.c:95
+#, c-format
+msgid ""
+"Error while fetching history:\n"
+"%s"
+msgstr ""
+"Erreur en cherchant l'historique:\n"
+"%s"
+
+#: ../src/gva-properties.c:100
+msgid "History not available"
+msgstr "Historique non disponible"
+
+#: ../src/gva-ui.c:85
+msgid "M.A.M.E. Front-End"
+msgstr "M.A.M.E. Front-End."
+
+#: ../src/gva-ui.c:90
+msgid "translator-credits"
+msgstr "ElGeneralMidi <ElGeneralMidi@jabber.ubuntu-fr.org>"
+
+#: ../src/gva-ui.c:370
+msgid "_About"
+msgstr "_A propos"
+
+#: ../src/gva-ui.c:372
+msgid "Show information about the application"
+msgstr "Montrer les informations à propos de l'application"
+
+#: ../src/gva-ui.c:377
+msgid "_Contents"
+msgstr "_Sommaire"
+
+#: ../src/gva-ui.c:384
+msgid "Add to _Favorites"
+msgstr "Ajouter aux favoris"
+
+#: ../src/gva-ui.c:386
+msgid "Add the selected game to my list of favorites"
+msgstr "Ajouter le jeu sélectionné à ma liste de favoris"
+
+#: ../src/gva-ui.c:398 ../src/gva-ui.c:454
+msgid "Play _Back..."
+msgstr "Rejouer..."
+
+#: ../src/gva-ui.c:405
+msgid "_Preferences"
+msgstr "_Préférences"
+
+#: ../src/gva-ui.c:407
+msgid "Configure the application"
+msgstr "Configurer l'application"
+
+#: ../src/gva-ui.c:419
+msgid "_Properties"
+msgstr "_Propriétés"
+
+#: ../src/gva-ui.c:426
+msgid "_Quit"
+msgstr "_Quitter"
+
+#: ../src/gva-ui.c:428
+msgid "Quit the application"
+msgstr "Quitter l'application"
+
+#: ../src/gva-ui.c:433
+msgid "_Record"
+msgstr "_Sauvegarder"
+
+#: ../src/gva-ui.c:435
+msgid "Start the selected game and record keypresses to a file"
+msgstr "Démarrer le jeu sélectionné et sauvegarder les raccourcis clavier dans un fichier"
+
+#: ../src/gva-ui.c:440
+msgid "Remove from _Favorites"
+msgstr "Supprimer des _Favoris"
+
+#: ../src/gva-ui.c:442
+msgid "Remove the selected game from my list of favorites"
+msgstr "Supprimer le jeu selectionné de ma liste de favoris"
+
+#: ../src/gva-ui.c:447
+msgid "S_earch..."
+msgstr "R_echercher..."
+
+#: ../src/gva-ui.c:449
+msgid "Show a custom list of games"
+msgstr "Montrer la liste de jeux personnalisés"
+
+#: ../src/gva-ui.c:456
+msgid "Play back a previously recorded game"
+msgstr "Rejouer un jeu précédemment sauvegardé"
+
+#: ../src/gva-ui.c:461
+msgid "_Start"
+msgstr "_Démarrer"
+
+#: ../src/gva-ui.c:468
+msgid "_Edit"
+msgstr "_Editer"
+
+#: ../src/gva-ui.c:475
+msgid "_Game"
+msgstr "_Jeux"
+
+#: ../src/gva-ui.c:482
+msgid "_Help"
+msgstr "_Aide"
+
+#: ../src/gva-ui.c:489
+msgid "_View"
+msgstr "_Affichage"
+
+#: ../src/gva-ui.c:499
+msgid "_Restore previous state when starting a game"
+msgstr "_Restaurer l'état précédent au démarrage du jeu"
+
+#: ../src/gva-ui.c:507
+msgid "Start games in _fullscreen mode"
+msgstr "Démarrer le jeu en _plein écran"
+
+#: ../src/gva-ui.c:518
+msgid "_Available Games"
+msgstr "_Jeux Disponibles"
+
+#: ../src/gva-ui.c:525
+msgid "_Favorite Games"
+msgstr "_Jeux Favoris"
+
+#: ../src/gva-ui.c:532
+msgid "Search _Results"
+msgstr "_Résultats de la recherche"
+
+#: ../src/gva-ui.c:590
+msgid "Failed to initialize user interface"
+msgstr "Impossible d'initialisé l'interface utilisateur"
+
+#: ../src/main.c:43
+msgid "Build the games database"
+msgstr "Constuction de la base de données des jeux"
+
+#: ../src/main.c:47
+msgid "Show which emulator will be used"
+msgstr "Montrer quel émulateur sera utilisé"
+
+#~ msgid "(auto-save) GtkUIManager supplies the label"
+#~ msgstr "(auto-save) GtkUIManager supplies the label"
+
+#~ msgid "(full-screen) GtkUIManager supplies the label"
+#~ msgstr "(full-screen) GtkUIManager supplies the label"
+
+#~ msgid "Start playing the selected game"
+#~ msgstr "Démarrer le jeu selectionné"
+
+#~ msgid "Show properties about the selected game"
+#~ msgstr "Voir toutes les informations à propos du jeu sélectionné"
+
+#~ msgid "Could not find xmame executable"
+#~ msgstr "Impossible de trouver l'exécutable xmame"
