@@ -1,3 +1,8 @@
+2007-09-28  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Some minor UI tweaks.
+
 2007-09-21  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/Makefile.am:
