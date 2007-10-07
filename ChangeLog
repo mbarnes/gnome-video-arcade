@@ -1,3 +1,36 @@
+2007-10-07  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Add a new check button in the Preferences window for grouping
+	cloned games underneath the original game in the main window.
+	Doesn't do anything quite yet.
+
+	* data/gnome-video-arcade.schemas:
+	Add group-clones key.
+
+	* docs/reference:
+	Add docs for new symbols.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_GROUP_CLONES_KEY.
+
+	* src/gva-columns.c:
+	Add a "Clone Of" column.
+
+	* src/gva-preferences.c (gva_preferences_init):
+	Wire up the "group-clones" action, widget, and GConf key.
+
+	* src/gva-preferences.c (gva_preferences_get_group_clones),
+	(gva_preferences_set_group_clones):
+	New functions for getting and setting the "group-clones" user
+	preference.
+
+	* src/gva-ui.h:
+	Add GVA_ACTION_GROUP_CLONES and GVA_WIDGET_PREFERENCES_GROUP_CLONES.
+
+	* src/gva-ui.c:
+	Define a GtkToggleAction named "group-clones".
+
 2007-09-28  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:
