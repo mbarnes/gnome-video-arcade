@@ -34,7 +34,6 @@
 #define GVA_ACTION_AUTO_SAVE            (gva_ui_get_action ("auto-save"))
 #define GVA_ACTION_CONTENTS             (gva_ui_get_action ("contents"))
 #define GVA_ACTION_FULL_SCREEN          (gva_ui_get_action ("full-screen"))
-#define GVA_ACTION_GROUP_CLONES         (gva_ui_get_action ("group-clones"))
 #define GVA_ACTION_INSERT_FAVORITE      (gva_ui_get_action ("insert-favorite"))
 #define GVA_ACTION_NEXT_GAME            (gva_ui_get_action ("next-game"))
 #define GVA_ACTION_PLAY_BACK            (gva_ui_get_action ("play-back"))
@@ -92,8 +91,6 @@
         (gva_ui_get_widget ("preferences-close-button"))
 #define GVA_WIDGET_PREFERENCES_FULL_SCREEN \
         (gva_ui_get_widget ("preferences-full-screen"))
-#define GVA_WIDGET_PREFERENCES_GROUP_CLONES \
-        (gva_ui_get_widget ("preferences-group-clones"))
 #define GVA_WIDGET_PREFERENCES_WINDOW \
         (gva_ui_get_widget ("preferences-window"))
 

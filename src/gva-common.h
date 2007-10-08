@@ -43,7 +43,6 @@
 #define GVA_GCONF_COLUMNS_KEY           GVA_GCONF_PREFIX "/columns"
 #define GVA_GCONF_FAVORITES_KEY         GVA_GCONF_PREFIX "/favorites"
 #define GVA_GCONF_FULL_SCREEN_KEY       GVA_GCONF_PREFIX "/full-screen"
-#define GVA_GCONF_GROUP_CLONES_KEY      GVA_GCONF_PREFIX "/group-clones"
 #define GVA_GCONF_SEARCH_KEY            GVA_GCONF_PREFIX "/search"
 #define GVA_GCONF_SELECTED_GAME_KEY     GVA_GCONF_PREFIX "/selected-game"
 #define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"

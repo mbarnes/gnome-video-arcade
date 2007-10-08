@@ -138,16 +138,6 @@ action_contents_cb (GtkAction *action)
  * synchronized with the toggle action's checked state. */
 
 /**
- * GVA_ACTION_GROUP_CLONES:
- *
- * This toggle action tracks the user's preference for whether to
- * group cloned games underneath the original game in the main window.
- **/
-
-/* No need for a callback function.  GConf Bridge keeps the GConf key
- * synchronized with the toggle action's checked state. */
-
-/**
  * GVA_ACTION_INSERT_FAVORITE:
  *
  * Activation of this action adds the currently selected game to the
@@ -639,14 +629,6 @@ static GtkToggleActionEntry toggle_entries[] =
         { "full-screen",
           NULL,
           N_("Start games in _fullscreen mode"),
-          NULL,
-          NULL,
-          NULL,     /* GConf Bridge monitors the state */
-          FALSE },  /* GConf overrides this */
-
-        { "group-clones",
-          NULL,
-          N_("Group _cloned games underneath the original game"),
           NULL,
           NULL,
           NULL,     /* GConf Bridge monitors the state */

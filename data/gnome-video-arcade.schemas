@@ -73,20 +73,6 @@
     </schema>
 
     <schema>
-      <applyto>/apps/gnome-video-arcade/group-clones</applyto>
-      <key>/schemas/apps/gnome-video-arcade/group-clones</key>
-      <owner>gnome-video-arcade</owner>
-      <type>bool</type>
-      <default>false</default>
-      <locale name="C">
-        <short>Group cloned games underneath the original game</short>
-        <long>If true, group cloned games as children of the original
-        game in the main window.  If false, show both original and
-        cloned games as a flat list.</long>
-      </locale>
-    </schema>
-
-    <schema>
       <applyto>/apps/gnome-video-arcade/search</applyto>
       <key>/schemas/apps/gnome-video-arcade/search</key>
       <owner>gnome-video-arcade</owner>

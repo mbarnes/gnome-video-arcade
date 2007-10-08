@@ -1,3 +1,13 @@
+2007-10-08  Matthew Barnes  <mbarnes@redhat.com>
+
+	Revert the previous changes.  I ran into too many complications
+	trying to get cursor movement from the Properties window to work
+	right.  Maybe try again at some later date.
+
+	* docs/Makefile.am:
+	* docs/gnome-video-arcade.1:
+	Add a manual page.
+
 2007-10-07  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

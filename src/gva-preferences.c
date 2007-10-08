@@ -61,16 +61,6 @@ gva_preferences_init (void)
         gconf_bridge_bind_property (
                 gconf_bridge_get (), GVA_GCONF_FULL_SCREEN_KEY,
                 G_OBJECT (GVA_ACTION_FULL_SCREEN), "active");
-
-        /* Group Clones */
-
-        gtk_action_connect_proxy (
-                GVA_ACTION_GROUP_CLONES,
-                GVA_WIDGET_PREFERENCES_GROUP_CLONES);
-
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_GROUP_CLONES_KEY,
-                G_OBJECT (GVA_ACTION_GROUP_CLONES), "active");
 }
 
 /**
@@ -135,39 +125,6 @@ gva_preferences_set_full_screen (gboolean full_screen)
 {
         gtk_toggle_action_set_active (
                 GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN), full_screen);
-}
-
-
-/**
- * gva_preferences_get_group_clones:
- *
- * Returns the user's preferences for whether cloned games should be
- * displayed underneath the original game in the main window.
- *
- * Returns: %TRUE to group clones, %FALSE to display a flat list
- **/
-gboolean
-gva_preferences_get_group_clones (void)
-{
-        return gtk_toggle_action_get_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_GROUP_CLONES));
-}
-
-/**
- * gva_preferences_set_group_clones:
- * @group_clones: the user's preference
- *
- * Accepts the user's preference for whether cloned games should be
- * displayed underneath the original game in the main window.
- *
- * The preference is stored in GConf key
- * <filename>/apps/gnome-video-arcade/group-clones</filename>.
- **/
-void
-gva_preferences_set_group_clones (gboolean group_clones)
-{
-        gtk_toggle_action_set_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_GROUP_CLONES), group_clones);
 }
 
 /**

@@ -56,22 +56,6 @@
 @full_screen: 
 
 
-<!-- ##### FUNCTION gva_preferences_get_group_clones ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION gva_preferences_set_group_clones ##### -->
-<para>
-
-</para>
-
-@group_clones: 
-
-
 <!-- ##### FUNCTION gva_preferences_close_clicked_cb ##### -->
 <para>
 

@@ -164,26 +164,6 @@ columns_sampleset_set_properties (GtkTreeViewColumn *column,
 }
 
 static GtkTreeViewColumn *
-columns_factory_cloneof (GvaGameStoreColumn column_id)
-{
-        GtkTreeViewColumn *column;
-        GtkCellRenderer *renderer;
-
-        column = gtk_tree_view_column_new ();
-        gtk_tree_view_column_set_reorderable (column, TRUE);
-        gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Clone Of"));
-
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_tree_view_column_pack_start (column, renderer, TRUE);
-
-        gtk_tree_view_column_add_attribute (
-                column, renderer, "text", column_id);
-
-        return column;
-}
-
-static GtkTreeViewColumn *
 columns_factory_description (GvaGameStoreColumn column_id)
 {
         GtkTreeViewColumn *column;
@@ -411,7 +391,7 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "favorite",           columns_factory_favorite },
         { "sourcefile",         columns_factory_sourcefile },
         { "runnable",           NULL },
-        { "cloneof",            columns_factory_cloneof },
+        { "cloneof",            NULL },
         { "romof",              NULL },
         { "romset",             NULL },
         { "sampleof",           NULL },
@@ -447,7 +427,6 @@ static gchar *default_column_order[] =
         "driver_status",
         "input_players",
         "name",
-        "cloneof",
         "sourcefile",
         "sampleset"
 };
