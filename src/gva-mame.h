@@ -21,7 +21,9 @@
  * @short_description: MAME Communication Backend
  *
  * These functions define the interface for MAME communication backends.
- * GNOME Video Arcade currently supports backends for xmame and sdlmame.
+ * <emphasis>GNOME Video Arcade</emphasis> currently supports backends for
+ * <ulink url="http://x.mame.net/">xmame</ulink> and
+ * <ulink url="http://rbelmont.mameworld.info/?page_id=163">sdlmame</ulink>.
  **/
 
 #ifndef GVA_MAME_H
@@ -32,6 +34,15 @@
 
 G_BEGIN_DECLS
 
+/**
+ * GvaMameCallback:
+ * @name: a unique identifier, usually the game name
+ * @game_data: data for @name
+ * @user_data: user-provided data
+ *
+ * Specifies the type of function for passing results of an asynchronous
+ * operation to the user.
+ **/
 typedef void    (*GvaMameCallback)              (const gchar *name,
                                                  const gchar *game_data,
                                                  gpointer user_data);
@@ -62,12 +73,33 @@ void            gva_mame_delete_save_state      (const gchar *name);
 
 /* Test for supported options */
 
+/**
+ * gva_mame_supports_auto_save:
+ *
+ * Returns %TRUE if the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use
+ * supports an "autosave" option.
+ **/
 #define gva_mame_supports_auto_save() \
         (gva_mame_has_config_value ("autosave"))
 
+/**
+ * gva_mame_supports_full_screen:
+ *
+ * Returns %TRUE if the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use
+ * supports a "fullscreen" option.
+ **/
 #define gva_mame_supports_full_screen() \
         (gva_mame_has_config_value ("fullscreen"))
 
+/**
+ * gva_mame_supports_window:
+ *
+ * Returns %TRUE if the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use
+ * supports a "window" option.
+ **/
 #define gva_mame_supports_window() \
         (gva_mame_has_config_value ("window"))
 

@@ -246,7 +246,8 @@ gva_game_store_new (void)
  * @sql: an SQL query
  * @error: return locations for a #GError, or %NULL
  *
- * This may be the most powerful function in GNOME Video Arcade.
+ * This may be the most powerful function in
+ * <emphasis>GNOME Video Arcade</emphasis>.
  *
  * Creates a new #GvaGameStore by executing the given SQL query on the games
  * database and converting the results to tree model rows.  The resulting

@@ -468,8 +468,8 @@ gva_tree_view_set_selected_view (gint view)
  * gva_tree_view_get_last_selected_game:
  *
  * Returns the name of the most recently selected game in either the
- * current or the previous session of GNOME Video Arcade.  Note that
- * it is still possible for this function to return %NULL.
+ * current or the previous session of <emphasis>GNOME Video Arcade</emphasis>.
+ * Note that it is still possible for this function to return %NULL.
  *
  * Returns: the name of the most recently selected game
  **/
@@ -504,8 +504,8 @@ gva_tree_view_get_last_selected_game (void)
  * <filename>/apps/gnome-video-arcade/selected-game</filename>.
  *
  * This is used to remember which game was selected in the previous
- * session of GNOME Video Arcade so that the same game can be selected
- * again automatically at startup.
+ * session of <emphasis>GNOME Video Arcade</emphasis> so that the same
+ * game can be selected again automatically at startup.
  **/
 void
 gva_tree_view_set_last_selected_game (const gchar *game)
@@ -528,7 +528,8 @@ gva_tree_view_set_last_selected_game (const gchar *game)
  * @order: return location for the sort order
  *
  * Retrieves the most recently selected sort column ID and sort order in
- * either the current or the previous session of GNOME Video Arcade.
+ * either the current or the previous session of
+ * <emphasis>GNOME Video Arcade</emphasis>.
  **/
 void
 gva_tree_view_get_last_sort_column_id (GvaGameStoreColumn *column_id,
@@ -565,8 +566,8 @@ gva_tree_view_get_last_sort_column_id (GvaGameStoreColumn *column_id,
  * <filename>/apps/gnome-video-arcade/sort-column</filename>.
  *
  * This is used to remember which how the game list view was sorted in
- * the previous session of GNOME Video Arcade so that the same sorting
- * can be applied again automatically at startup.
+ * the previous session of <emphasis>GNOME Video Arcade</emphasis> so that
+ * the same sorting can be applied again automatically at startup.
  **/
 void
 gva_tree_view_set_last_sort_column_id (GvaGameStoreColumn column_id,

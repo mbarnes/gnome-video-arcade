@@ -31,17 +31,19 @@
 /**
  * GVA_ERROR:
  *
- * Error domain for general operations in GNOME Video Arcade.  Errors
- * in this domain will be from the #GvaError enumeration.  See #GError
- * for information on error domains.
+ * Error domain for general operations in
+ * <emphasis>GNOME Video Arcade</emphasis>.  Errors in this domain will be
+ * from the #GvaError enumeration.  See #GError for information on error
+ * domains.
  **/
 #define GVA_ERROR               gva_error_quark ()
 
 /**
  * GVA_SQLITE_ERROR:
  *
- * Error domain for SQLite operations in GNOME Video Arcade.  Errors
- * in this domain will be from SQLite's own
+ * Error domain for SQLite operations in
+ * <emphasis>GNOME Video Arcade</emphasis>.  Errors in this domain will be
+ * from SQLite's own
  * <ulink url="http://www.sqlite.org/capi3ref.html&num;SQLITE_ERROR">
  * result codes</ulink>.  See #GError for information on error domains.
  **/
@@ -60,7 +62,8 @@ G_BEGIN_DECLS
  * @GVA_ERROR_SYSTEM:
  *      System-level error.
  *
- * Error codes for general operations in GNOME Video Arcade.
+ * Error codes for general operations in
+ * <emphasis>GNOME Video Arcade</emphasis>.
  **/  
 typedef enum
 {

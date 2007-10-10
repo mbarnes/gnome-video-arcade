@@ -34,6 +34,16 @@
  * Private utilities for MAME backends
  *****************************************************************************/
 
+/**
+ * gva_mame_async_data_new:
+ * @callback: callback function
+ * @user_data: user data to pass to the callback function
+ *
+ * Creates a new #GvaMameAsyncData structure and populates it with @callback
+ * and @user_data.  Call gva_mame_async_data_free() to free it.
+ *
+ * Returns: a new #GvaMameAsyncData
+ **/
 GvaMameAsyncData *
 gva_mame_async_data_new (GvaMameCallback callback,
                          gpointer user_data)
@@ -47,12 +57,33 @@ gva_mame_async_data_new (GvaMameCallback callback,
         return data;
 }
 
+/**
+ * gva_mame_async_data_free:
+ * @data: a #GvaMameAsyncData
+ *
+ * Frees @data.
+ **/
 void
 gva_mame_async_data_free (GvaMameAsyncData *data)
 {
         g_slice_free (GvaMameAsyncData, data);
 }
 
+/**
+ * gva_mame_command:
+ * @arguments: command line arguments
+ * @stdout_lines: return location for stdout lines, or %NULL
+ * @stderr_lines: return location for stderr lines, or %NULL 
+ * @error: return locations for a #GError, or %NULL
+ *
+ * Spawns MAME with @arguments and blocks until the child process exits.
+ * The line-based output from the stdout and stderr pipes are written to
+ * @stdout_lines and @stderr_lines, respectively, as %NULL-terminated
+ * string arrays.  The function returns the exit status of the child
+ * process, or -1 if an error occurred while spawning the process.
+ *
+ * Returns: exit status of the child process or -1 if an error occurred
+ **/
 gint
 gva_mame_command (const gchar *arguments,
                   gchar ***stdout_lines,
@@ -106,6 +137,17 @@ fail:
  * Partial implementation of public MAME interface
  *****************************************************************************/
 
+/**
+ * gva_mame_get_config_value:
+ * @config_key: a configuration key
+ * @error: return location for a #GError, or %NULL
+ *
+ * Runs "MAME -showconfig" and extracts from the output the value of
+ * @config_key.  If an error occurs, or if @config_key is not found in
+ * MAME's configuration, the function returns %NULL and sets @error.
+ *
+ * Returns: the value of @config_key, or %NULL
+ **/
 gchar *
 gva_mame_get_config_value (const gchar *config_key,
                            GError **error)
@@ -180,6 +222,17 @@ exit:
         return config_value;
 }
 
+/**
+ * gva_mame_has_config_value:
+ * @config_key: a configuration key
+ *
+ * Returns %TRUE if the MAME configuration has a configuration value for
+ * @config_key.  The function does not report errors that occur in the
+ * course of spawning MAME, so false negatives are possible.
+ *
+ * Returns: %TRUE if a value for @config_key exists, %FALSE if no such
+ *          value exists or if an error occurred
+ **/
 gboolean
 gva_mame_has_config_value (const gchar *config_key)
 {
@@ -210,6 +263,16 @@ gva_mame_has_config_value (const gchar *config_key)
         return result;
 }
 
+/**
+ * gva_mame_get_input_files:
+ * @error: return location for a @GError, or %NULL
+ *
+ * Returns a #GHashTable of input files for playback.  The keys of the
+ * #GHashTable are absolute filenames and the values are the corresponding
+ * game name.  If an error occurs, it returns %NULL and sets @error.
+ *
+ * Returns: a #GHashTable of input files, or %NULL
+ **/
 GHashTable *
 gva_mame_get_input_files (GError **error)
 {
@@ -272,6 +335,22 @@ exit:
         return hash_table;
 }
 
+/**
+ * gva_mame_list_xml:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Spawns a "MAME -listxml" child process and returns a #GvaProcess so the
+ * output can be read asynchronously.  If an error occurs while spawning,
+ * it returns %NULL and sets @error.
+ *
+ * <note>
+ *   <para>
+ *     Beware, this command spews many megabytes of XML data!
+ *   </para>
+ * </note>
+ *
+ * Returns: a new #GvaProcess, or %NULL
+ **/
 GvaProcess *
 gva_mame_list_xml (GError **error)
 {
@@ -342,6 +421,19 @@ mame_verify_exit (GvaProcess *process,
         gva_mame_async_data_free (data);
 }
 
+/**
+ * gva_mame_verify_roms:
+ * @callback: callback function
+ * @user_data: user data to pass to the callback function
+ * @error: return location for a #GError, or %NULL
+ *
+ * Spawns a "MAME -verifyroms" child process and returns a #GvaProcess to
+ * track it.  As each ROM set is tested, the function asynchronously calls
+ * @callback(romset, status, @user_data).  If an error occurs while spawning,
+ * it returns %NULL and sets @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL
+ **/
 GvaProcess *
 gva_mame_verify_roms (GvaMameCallback callback,
                       gpointer user_data,
@@ -370,6 +462,19 @@ gva_mame_verify_roms (GvaMameCallback callback,
         return process;
 }
 
+/**
+ * gva_mame_verify_samples:
+ * @callback: callback function
+ * @user_data: user data to pass to the callback function
+ * @error: return location for a #GError, or %NULL
+ *
+ * Spawns a "MAME -verifysamples" child process and returns a #GvaProcess to
+ * track it.  As each sample set is tested, the function asynchronously calls
+ * @callback(sampleset, status, @user_data).  If an error occurs while
+ * spawning, it returns %NULL and sets @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL
+ **/
 GvaProcess *
 gva_mame_verify_samples (GvaMameCallback callback,
                          gpointer user_data,
@@ -397,6 +502,18 @@ gva_mame_verify_samples (GvaMameCallback callback,
 
         return process;
 }
+
+/**
+ * gva_mame_run_game:
+ * @name: the name of the game to run
+ * @error: return location for a #GError, or %NULL
+ *
+ * Spawns a "MAME @name" child process (with some additional user preferences)
+ * and returns a #GvaProcess to track it.  If an error occurs while spawning,
+ * it returns %NULL and sets @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL
+ **/
 GvaProcess *
 gva_mame_run_game (const gchar *name,
                    GError **error)
@@ -447,6 +564,18 @@ gva_mame_run_game (const gchar *name,
         return process;
 }
 
+/**
+ * gva_mame_record_game:
+ * @name: the name of the game to run
+ * @inpname: the name of a file to record keypresses to
+ * @error: return location for a #GError, or %NULL
+ *
+ * Spawns a "MAME -record @inpname @name" child process (with some additional
+ * user preferences) and returns a #GvaProcess to track it.  If an error
+ * occurs while spawning, it returns %NULL and sets @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL
+ **/
 GvaProcess *
 gva_mame_record_game (const gchar *name,
                       const gchar *inpname,
@@ -496,6 +625,18 @@ gva_mame_record_game (const gchar *name,
         return process;
 }
 
+/**
+ * gva_mame_playback_game:
+ * @name: the name of the game to play back
+ * @inpname: the name of a file containing keypresses for @name
+ * @error: return location for a #GError, or %NULL
+ *
+ * Spawns a "MAME -playback @inpname @name" child process (with some
+ * additional user preferences) and returns a #GvaProcess to track it.
+ * If an error occurs while spawning, it returns %NULL and sets @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL
+ **/
 GvaProcess *
 gva_mame_playback_game (const gchar *name,
                         const gchar *inpname,
@@ -550,6 +691,14 @@ gva_mame_playback_game (const gchar *name,
         return process;
 }
 
+/**
+ * gva_mame_get_save_state_file:
+ * @name: the name of a game
+ *
+ * Returns the name of the automatic save state file for @name.
+ *
+ * Returns: the name of the save state file
+ **/
 gchar *
 gva_mame_get_save_state_file (const gchar *name)
 {
@@ -589,6 +738,12 @@ exit:
         return filename;
 }
 
+/**
+ * gva_mame_delete_save_state:
+ * @name: the name of a game
+ *
+ * Deletes the automatic save state file for @name, if it exists.
+ **/
 void
 gva_mame_delete_save_state (const gchar *name)
 {
@@ -603,3 +758,29 @@ gva_mame_delete_save_state (const gchar *name)
 
         g_free (filename);
 }
+
+/*****************************************************************************
+ * Documentation for the rest of the public MAME interface
+ *****************************************************************************/
+
+/**
+ * gva_mame_get_version:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the version of the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use.  If an
+ * error occurs, it returns %NULL and sets @error.
+ *
+ * Returns: the MAME version, or %NULL
+ **/
+
+/**
+ * gva_mame_get_total_supported:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the number of games supported by the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use.  If an
+ * error occurs, it returns zero and sets @error.
+ *
+ * Returns: number of supported games, or zero
+ **/

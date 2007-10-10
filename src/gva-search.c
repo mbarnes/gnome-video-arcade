@@ -63,7 +63,7 @@ gva_search_init (void)
  * gva_search_get_last_search:
  *
  * Returns the criteria of the most recent search in either the current
- * or the previous session of GNOME Video Arcade.
+ * or the previous session of <emphasis>GNOME Video Arcade</emphasis>.
  *
  * Returns: the criteria of the most recent search
  **/
@@ -90,8 +90,8 @@ gva_search_get_last_search (void)
  * <filename>/apps/gnome-video-arcade/search</filename>.
  *
  * This is used to remember the search text from the previous session of
- * GNOME Video Arcade so that the same text can be preset in the Search
- * window at startup.
+ * <emphasis>GNOME Video Arcade</emphasis> so that the same text can be
+ * preset in the Search window at startup.
  **/
 void
 gva_search_set_last_search (const gchar *text)

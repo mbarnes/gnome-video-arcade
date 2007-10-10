@@ -130,10 +130,12 @@ gva_find_data_file (const gchar *basename)
 /**
  * gva_get_last_version:
  *
- * Returns the most recently run version of GNOME Video Arcade prior to
- * the current run.  This is used to detect GNOME Video Arcade upgrades.
+ * Returns the most recently run version of
+ * <emphasis>GNOME Video Arcade</emphasis> prior to the current run.  This
+ * is used to detect <emphasis>GNOME Video Arcade</emphasis> upgrades.
  *
- * Returns: the most recently run version of GNOME Video Arcade
+ * Returns: the most recently run version of
+ *          <emphasis>GNOME Video Arcade</emphasis>
  **/
 const gchar *
 gva_get_last_version (void)
