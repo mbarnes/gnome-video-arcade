@@ -1,5 +1,17 @@
 2007-10-10  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-error.h:
+	* src/gva-game-store.c:
+	* src/gva-mame-common.c:
+	* src/gva-mame-common.h:
+	* src/gva-mame.h:
+	* src/gva-search.c:
+	* src/gva-tree-view.c:
+	* src/gva-util.c:
+	Add more developer documentation (88% coverage).
+
+2007-10-10  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-game-store.c:
 	* src/gva-mame-process.c:
 	* src/gva-process.c:
