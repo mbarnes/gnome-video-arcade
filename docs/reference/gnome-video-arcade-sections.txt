@@ -1,6 +1,5 @@
 <SECTION>
 <FILE>gva-process</FILE>
-GvaProcessPrivate
 <TITLE>GvaProcess</TITLE>
 GvaProcess
 gva_process_new
@@ -28,6 +27,7 @@ GVA_IS_PROCESS_CLASS
 GVA_PROCESS_GET_CLASS
 GvaProcessClass
 <SUBSECTION Private>
+GvaProcessPrivate
 gva_process_get_type
 </SECTION>
 

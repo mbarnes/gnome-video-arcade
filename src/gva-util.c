@@ -214,6 +214,8 @@ gva_get_time_elapsed (GTimeVal *start_time,
  *
  * Returns the directory where user-specific application data is stored.
  * The function also creates the directory the first time it is called.
+ *
+ * Returns: user-specific application data directory
  **/
 const gchar *
 gva_get_user_data_dir (void)

@@ -228,12 +228,34 @@ gva_game_store_get_type (void)
         return type;
 }
 
+/**
+ * gva_game_store_new:
+ *
+ * Creates a new #GvaGameStore with pre-defined columns and settings.
+ *
+ * Returns: a new #GvaGameStore
+ **/
 GtkTreeModel *
 gva_game_store_new (void)
 {
         return g_object_new (GVA_TYPE_GAME_STORE, NULL);
 }
 
+/**
+ * gva_game_store_new_from_query:
+ * @sql: an SQL query
+ * @error: return locations for a #GError, or %NULL
+ *
+ * This may be the most powerful function in GNOME Video Arcade.
+ *
+ * Creates a new #GvaGameStore by executing the given SQL query on the games
+ * database and converting the results to tree model rows.  The resulting
+ * #GtkTreeModel can then be plugged into a #GtkTreeView.
+ *
+ * XXX Say more here.
+ *
+ * Returns: a new #GvaGameStore
+ **/
 GtkTreeModel *
 gva_game_store_new_from_query (const gchar *sql,
                                GError **error)
@@ -385,6 +407,12 @@ exit:
         return model;
 }
 
+/**
+ * gva_game_store_clear:
+ * @game_store: a #GvaGameStore
+ *
+ * Removes all rows from @game_store and clears the internal index.
+ **/
 void
 gva_game_store_clear (GvaGameStore *game_store)
 {
@@ -394,6 +422,16 @@ gva_game_store_clear (GvaGameStore *game_store)
         gtk_list_store_clear (GTK_LIST_STORE (game_store));
 }
 
+/**
+ * gva_game_store_index_insert:
+ * @game_store: a #GvaGameStore
+ * @key: an index key
+ * @iter: a #GtkTreeIter pointing to a row in @game_store
+ *
+ * Adds an entry to @game_store's internal index.  You will want to call
+ * this immediately after adding a new row to @game_store, such as with
+ * gtk_list_store_append().
+ **/
 void
 gva_game_store_index_insert (GvaGameStore *game_store,
                              const gchar *key,
@@ -416,6 +454,16 @@ gva_game_store_index_insert (GvaGameStore *game_store,
         gtk_tree_path_free (path);
 }
 
+/**
+ * gva_game_store_index_lookup:
+ * @game_store: a #GvaGameStore
+ * @key: an index key
+ *
+ * Looks up the row corresponding to @key in @game_store and returns a
+ * #GtkTreePath to it, or %NULL if the row was not found.
+ *
+ * Returns: a #GtkTreePath to the row corresponding to @key, or %NULL
+ **/
 GtkTreePath *
 gva_game_store_index_lookup (GvaGameStore *game_store,
                              const gchar *key)

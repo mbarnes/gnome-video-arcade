@@ -400,6 +400,11 @@ process_class_init (GvaProcessClass *class)
         class->stdout_read_line = process_stdout_read_line;
         class->stderr_read_line = process_stderr_read_line;
 
+        /**
+         * GvaProcess:pid:
+         *
+         * The ID of the child process.
+         **/
         g_object_class_install_property (
                 object_class,
                 PROP_PID,
@@ -411,6 +416,11 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_READWRITE |
                         G_PARAM_CONSTRUCT_ONLY));
 
+        /**
+         * GvaProcess:stdin:
+         *
+         * The file descriptor for the child process' stdin pipe.
+         **/
         g_object_class_install_property (
                 object_class,
                 PROP_STDIN,
@@ -422,6 +432,11 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_READWRITE |
                         G_PARAM_CONSTRUCT_ONLY));
 
+        /**
+         * GvaProcess:stdout:
+         *
+         * The file descriptor for the child process' stdout pipe.
+         **/
         g_object_class_install_property (
                 object_class,
                 PROP_STDOUT,
@@ -433,6 +448,11 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_READWRITE |
                         G_PARAM_CONSTRUCT_ONLY));
 
+        /**
+         * GvaProcess:stderr:
+         *
+         * The file descriptor for the child process' stderr pipe.
+         **/
         g_object_class_install_property (
                 object_class,
                 PROP_STDERR,
@@ -444,6 +464,11 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_READWRITE |
                         G_PARAM_CONSTRUCT_ONLY));
 
+        /**
+         * GvaProcess:priority:
+         *
+         * Priority of the event sources that watch for incoming data.
+         **/
         g_object_class_install_property (
                 object_class,
                 PROP_PRIORITY,
@@ -456,6 +481,12 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_READWRITE |
                         G_PARAM_CONSTRUCT_ONLY));
 
+        /**
+         * GvaProcess:progress:
+         *
+         * Progress value, the meaning of which is defined by the
+         * application.
+         **/
         g_object_class_install_property (
                 object_class,
                 PROP_PROGRESS,
@@ -466,6 +497,13 @@ process_class_init (GvaProcessClass *class)
                         0, G_MAXUINT, 0,
                         G_PARAM_READWRITE));
 
+        /**
+         * GvaProcess::stdout-ready:
+         * @process: the #GvaProcess that received the signal
+         *
+         * The ::stdout-ready signal is emitted when one or more lines
+         * from the child process' stdout pipe are available for reading.
+         **/
         signals[STDOUT_READY] = g_signal_new (
                 "stdout-ready",
                 G_TYPE_FROM_CLASS (class),
@@ -475,6 +513,13 @@ process_class_init (GvaProcessClass *class)
                 g_cclosure_marshal_VOID__VOID,
                 G_TYPE_NONE, 0);
 
+        /**
+         * GvaProcess::stderr-ready:
+         * @process: the #GvaProcess that received the signal
+         *
+         * The ::stderr-ready signal is emitted when one or more lines
+         * from the child process' stderr pipe are available for reading.
+         **/
         signals[STDERR_READY] = g_signal_new (
                 "stderr-ready",
                 G_TYPE_FROM_CLASS (class),
@@ -484,6 +529,13 @@ process_class_init (GvaProcessClass *class)
                 g_cclosure_marshal_VOID__VOID,
                 G_TYPE_NONE, 0);
 
+        /**
+         * GvaProcess::exited:
+         * @process: the #GvaProcess that received the signal
+         * @status: the exit status of the child process
+         *
+         * The ::exited signal is emitted when the child process exits.
+         **/
         signals[EXITED] = g_signal_new (
                 "exited",
                 G_TYPE_FROM_CLASS (class),
@@ -535,6 +587,20 @@ gva_process_get_type (void)
         return type;
 }
 
+/**
+ * gva_process_new:
+ * @pid: child process ID
+ * @priority: priority for the event sources
+ * @standard_input: file descriptor for the child's stdin
+ * @standard_output: file descriptor for the child's stdout
+ * @standard_error: file descriptor for the child's stderr
+ *
+ * Creates a new #GvaProcess from the given parameters.  A #GSource is
+ * created at the given @priority for each of the file descriptors.  The
+ * internal progress value is initialized to zero.
+ *
+ * Returns: a new #GvaProcess
+ **/
 GvaProcess *
 gva_process_new (GPid pid,
                  gint priority,
@@ -556,6 +622,19 @@ gva_process_new (GPid pid,
                 NULL);
 }
 
+/**
+ * gva_process_spawn:
+ * @command_line: a command line
+ * @priority: priority for the event sources
+ * @error: return location for a #GError, or %NULL
+ *
+ * Convenience function that passes @command_line to g_shell_parse_argv(),
+ * passes the resulting argument vector to gdk_spawn_on_screen_with_pipes(),
+ * and finally calls gva_process_new().  If an error occurs, it returns
+ * %NULL and sets @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL if an error occurred
+ **/
 GvaProcess *
 gva_process_spawn (const gchar *command_line,
                    gint priority,
@@ -589,6 +668,18 @@ gva_process_spawn (const gchar *command_line,
                 standard_output, standard_error);
 }
 
+/**
+ * gva_process_write_stdin:
+ * @process: a #GvaProcess
+ * @data: the data to write to the child process
+ * @length: length of the data, or -1 if the data is nul-terminated
+ * @error: return location for a #GError, or %NULL
+ *
+ * Writes @data to the stdin pipe of a child process represented by @process.
+ * If an error occurs, it returns %FALSE and sets @error.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
 gboolean
 gva_process_write_stdin (GvaProcess *process,
                          const gchar *data,
@@ -621,6 +712,15 @@ gva_process_write_stdin (GvaProcess *process,
         return (status == G_IO_STATUS_NORMAL);
 }
 
+/**
+ * gva_process_stdout_num_lines:
+ * @process: a #GvaProcess
+ *
+ * Returns the number of lines available for reading from the stdout pipe
+ * of the child process represented by @process.
+ *
+ * Returns: number of lines available for reading
+ **/
 guint
 gva_process_stdout_num_lines (GvaProcess *process)
 {
@@ -629,6 +729,15 @@ gva_process_stdout_num_lines (GvaProcess *process)
         return g_queue_get_length (process->priv->stdout_lines);
 }
 
+/**
+ * gva_process_stderr_num_lines:
+ * @process: a #GvaProcess
+ *
+ * Returns the number of lines available for reading from the stderr pipe
+ * of the child process represented by @process.
+ *
+ * Returns: number of lines available for reading
+ **/
 guint
 gva_process_stderr_num_lines (GvaProcess *process)
 {
@@ -637,6 +746,18 @@ gva_process_stderr_num_lines (GvaProcess *process)
         return g_queue_get_length (process->priv->stderr_lines);
 }
 
+/**
+ * gva_process_stdout_read_line:
+ * @process: a #GvaProcess
+ *
+ * Reads a line from the stdout pipe of the child process represented by
+ * @process.  This function does not block; it returns %NULL if no lines
+ * are available.  Use gva_process_stdout_num_lines() to peek at whether
+ * any lines are available.  The line should be freed with g_free() when
+ * no longer needed.
+ *
+ * Returns: a line from the child process' stdout, or %NULL
+ **/
 gchar *
 gva_process_stdout_read_line (GvaProcess *process)
 {
@@ -649,6 +770,18 @@ gva_process_stdout_read_line (GvaProcess *process)
         return class->stdout_read_line (process);
 }
 
+/**
+ * gva_process_stderr_read_line:
+ * @process: a #GvaProcess
+ *
+ * Reads a line from the stderr pipe of the child process represented by
+ * @process.  This function does not block; it returns %NULL if no lines
+ * are available.  Use gva_process_stderr_num_lines() to peek at whether
+ * any lines are available.  The line should be freed with g_free() when
+ * no longer needed.
+ *
+ * Returns: a line from the child process' stderr, or %NULL
+ **/
 gchar *
 gva_process_stderr_read_line (GvaProcess *process)
 {
@@ -661,6 +794,19 @@ gva_process_stderr_read_line (GvaProcess *process)
         return class->stderr_read_line (process);
 }
 
+/**
+ * gva_process_stdout_read_lines:
+ * @process: a #GvaProcess
+ *
+ * Returns a %NULL-terminated array of lines from the stdout pipe of the
+ * child process represented by @process.  This function does not block;
+ * it returns %NULL if no lines are available.  Use
+ * gva_process_stdout_num_lines() to peek at the number of lines available.
+ * The array should be freed with g_strfreev() when no longer needed.
+ *
+ * Returns: a %NULL-terminated array of lines from the child process'
+ *          stdout, or %NULL
+ **/
 gchar **
 gva_process_stdout_read_lines (GvaProcess *process)
 {
@@ -685,6 +831,19 @@ gva_process_stdout_read_lines (GvaProcess *process)
         return lines;
 }
 
+/**
+ * gva_process_stderr_read_lines:
+ * @process: a #GvaProcess
+ *
+ * Returns a %NULL-terminated array of lines from the stderr pipe of the
+ * child process represented by @process.  This function does not block;
+ * it returns %NULL if no lines are available.  Use
+ * gva_process_stderr_num_lines() to peek at the number of lines available.
+ * The array should be freed with g_strfreev() when no longer needed.
+ *
+ * Returns: a %NULL-terminated array of lines from the child process'
+ *          stderr, or %NULL
+ **/
 gchar **
 gva_process_stderr_read_lines (GvaProcess *process)
 {
@@ -709,6 +868,16 @@ gva_process_stderr_read_lines (GvaProcess *process)
         return lines;
 }
 
+/**
+ * gva_process_get_progress:
+ * @process: a #GvaProcess
+ *
+ * Returns the current progress value for @process.  It is up to the
+ * application to set this value using gva_process_set_progress() or
+ * gva_process_inc_progress().
+ *
+ * Returns: progress value
+ **/
 guint
 gva_process_get_progress (GvaProcess *process)
 {
@@ -717,6 +886,14 @@ gva_process_get_progress (GvaProcess *process)
         return process->priv->progress;
 }
 
+/**
+ * gva_process_inc_progress:
+ * @process: a #GvaProcess
+ *
+ * Increments the progress value for @process.  The progress value is
+ * just a counter; it is up to the application to establish an upper
+ * bound for the value.
+ **/
 void
 gva_process_inc_progress (GvaProcess *process)
 {
@@ -726,6 +903,15 @@ gva_process_inc_progress (GvaProcess *process)
         g_object_notify (G_OBJECT (process), "progress");
 }
 
+/**
+ * gva_process_set_progress:
+ * @process: a #GvaProcess
+ * @progress: progress value
+ *
+ * Sets the progress value for @process.  The progress value is just a
+ * counter; it is up to the application to establish an upper bound for
+ * the value.
+ **/
 void
 gva_process_set_progress (GvaProcess *process,
                           guint progress)
@@ -736,6 +922,18 @@ gva_process_set_progress (GvaProcess *process,
         g_object_notify (G_OBJECT (process), "progress");
 }
 
+/**
+ * gva_process_has_exited:
+ * @process: a #GvaProcess
+ * @status: return location for the exit status, or %NULL
+ *
+ * Returns %TRUE if the child process represented by @process has exited
+ * and writes the exit status to the location pointed to by @status, if
+ * @status is non-%NULL.  There may still be lines available for reading
+ * even after the child process has exited.
+ *
+ * Returns: %TRUE if the child process has exited, %FALSE otherwise
+ **/
 gboolean
 gva_process_has_exited (GvaProcess *process, gint *status)
 {
@@ -747,6 +945,13 @@ gva_process_has_exited (GvaProcess *process, gint *status)
         return process->priv->exited;
 }
 
+/**
+ * gva_process_kill:
+ * @process: a #GvaProcess
+ *
+ * Kills the child process represented by @process by sending it a
+ * "kill" signal.
+ **/
 void
 gva_process_kill (GvaProcess *process)
 {
@@ -765,12 +970,26 @@ gva_process_kill (GvaProcess *process)
                 g_warning ("%s", g_strerror (errno));
 }
 
+/**
+ * gva_process_kill_all:
+ *
+ * Kills all active child processes represented by #GvaProcess instances
+ * by sending them "kill" signals.
+ **/
 void
 gva_process_kill_all (void)
 {
         g_slist_foreach (active_list, (GFunc) gva_process_kill, NULL);
 }
 
+/**
+ * gva_process_get_time_elapsed:
+ * @process: a #GvaProcess
+ * @time_elapsed: location to put the time elapsed
+ *
+ * Writes the time elapsed since @process (the #GvaProcess instance, not
+ * necessarily the child process it represents) was created to @time_elapsed.
+ **/
 void
 gva_process_get_time_elapsed (GvaProcess *process, GTimeVal *time_elapsed)
 {

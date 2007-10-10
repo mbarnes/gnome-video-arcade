@@ -136,6 +136,19 @@ gva_mame_process_get_type (void)
         return type;
 }
 
+/**
+ * gva_mame_process_spawn:
+ * @arguments: command-line arguments
+ * @priority: priority for the event sources
+ * @error: return location for a #GError, or %NULL
+ *
+ * Spawns a child process running MAME with @arguments.  The resulting
+ * #GvaProcess instance will monitor the child process for error messages.
+ * If an error occurs while spawning, the function returns %NULL and sets
+ * @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL if an error occurred
+ **/
 GvaProcess *
 gva_mame_process_spawn (const gchar *arguments,
                         gint priority,
