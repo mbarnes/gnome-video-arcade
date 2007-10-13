@@ -54,6 +54,7 @@ G_BEGIN_DECLS
 
 /* Command Line Options */
 extern gboolean opt_build_database;
+extern gchar *opt_inspect;
 extern gboolean opt_version;
 extern gboolean opt_which_emulator;
 

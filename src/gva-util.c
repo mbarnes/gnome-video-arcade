@@ -28,6 +28,7 @@
 
 /* Command Line Options */
 gboolean opt_build_database;
+gchar *opt_inspect;
 gboolean opt_version;
 gboolean opt_which_emulator;
 

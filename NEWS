@@ -1,3 +1,19 @@
+GNOME Video Arcade 0.4.6
+========================
+
+        Released October ??, 2007
+
+        What's New
+        ----------
+        * Finished developer documentation (read it using DevHelp).
+        * Started on user documentation (read it using Yelp).
+        * New command line option --inspect=NAME prints the value of a
+          MAME configuration key (e.g. --inspect=rompath).
+
+        Translations
+        ------------
+        * ElGeneralMidi (fr)
+
 GNOME Video Arcade 0.4.5.1
 ==========================
 

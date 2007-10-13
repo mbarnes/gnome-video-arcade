@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="no"?>
+<omf>
+  <resource>
+    <subject category="GNOME|Applications|Games"/>
+    <type>manual</type>
+    <relation seriesid="041e66f6-3b06-5633-a09b-d6997515ce4000"/>
+    <rights type="GNU FDL" license.version="1.1" license="http://www.gnu.org/licenses/fdl.html" holder="Matthew Barnes"/>
+  </resource>
+</omf>

@@ -584,6 +584,15 @@ gva_columns_load (GtkTreeView *view)
         gva_error_handle (&error);
         g_object_unref (client);
 
+        if (visible_columns == NULL)
+        {
+                /* Fall back to the default columns. */
+                visible_columns = g_slist_append (
+                        visible_columns, g_strdup ("favorite"));
+                visible_columns = g_slist_append (
+                        visible_columns, g_strdup ("description"));
+        }
+
         new_columns = NULL;
         for (ii = 0; ii < G_N_ELEMENTS (default_column_order); ii++)
         {

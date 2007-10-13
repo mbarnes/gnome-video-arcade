@@ -7,6 +7,7 @@ m4_define([gva_version], 0.4.6)
 AC_INIT([GNOME Video Arcade], [gva_version],
         [mbarnes@redhat.com], gnome-video-arcade)
 
+AC_CONFIG_MACRO_DIR(m4)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_HEADER(config.h)
 
@@ -88,6 +89,7 @@ AM_GLIB_GNU_GETTEXT
 # Miscellaneous
 AM_GCONF_SOURCE_2
 GTK_DOC_CHECK(1.6)
+GNOME_DOC_INIT
 
 # Optional Features
 
@@ -112,6 +114,7 @@ AC_CONFIG_FILES([
         docs/Makefile
         docs/reference/Makefile
         docs/reference/version.xml
+        help/Makefile
         maint/Makefile
         po/Makefile.in
         src/Makefile

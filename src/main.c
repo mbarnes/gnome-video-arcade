@@ -41,6 +41,11 @@ static GOptionEntry entries[] =
           G_OPTION_ARG_NONE, &opt_build_database,
           N_("Build the games database"), NULL },
 
+        { "inspect", 'i', 0,
+          G_OPTION_ARG_STRING, &opt_inspect,
+          N_("Inspect an emulator setting"),
+          N_("NAME") },
+
         { "version", 'v', 0,
           G_OPTION_ARG_NONE, &opt_version,
           N_("Show the application version"), NULL },
@@ -111,6 +116,24 @@ main (gint argc, gchar **argv)
                 &argc, &argv, NULL, entries, GETTEXT_PACKAGE, &error);
         if (error != NULL)
                 g_error ("%s", error->message);
+
+        if (opt_inspect != NULL)
+        {
+                gchar *value;
+
+                value = gva_mame_get_config_value (opt_inspect, &error);
+                if (value != NULL)
+                {
+                        g_print ("%s\n", value);
+                        g_free (value);
+                }
+                else
+                {
+                        g_printerr ("%s\n", error->message);
+                        g_clear_error (&error);
+                }
+                exit (0);
+        }
 
         if (opt_version)
         {

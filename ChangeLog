@@ -1,3 +1,33 @@
+2007-10-13  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-db.c:
+	* docs/reference:
+	Add more developer documentation (94% coverage).
+
+	* configure.ac:
+	* Makefile.am:
+	* help/C/gnome-video-arcade.xml:
+	* help/C/legal.xml:
+	* help/gnome-video-arcade.omf.in:
+	Set up a gnome-doc-utils framework and begin writing user
+	documentation for Yelp.
+
+	* src/gva-columns (gva_columns_load):
+	Fall back to the default columns if the visible column list in
+	GConf is empty to ensure that *something* gets displayed at startup.
+
+	* src/main.c:
+	* src/gva-common.h:
+	* docs/gnome-video-arcade.1:
+	Add --inspect=NAME command-line option.
+	Prints the value of the given MAME configuration key and exits.
+
+	* src/gva-main.c (gva_main_init):
+	Desensitize GVA_ACTION_CONTENTS for now.  Making this work is going
+	to require linking against libgnome, which is unfortunate.  I plan to
+	make it optional by providing a --without-help configure option, which
+	would desensitize GVA_ACTION_CONTENTS as I'm doing now.
+
 2007-10-10  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-error.h:

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+  "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.5.4.1">
+  <!ENTITY manrevision "1.0">
+  <!ENTITY date "October 2007">
+  <!ENTITY app "GNOME Video Arcade">
+]>
+
+<article id="index" lang="en">
+
+  <articleinfo>
+
+    <title><application>&app;</application> Manual</title>
+
+    <abstract role="description">
+      <para>&app; is a front-end for the Multiple Arcade Machine Emulator
+      (MAME).</para>
+    </abstract>
+
+    <copyright>
+      <year>2007</year>
+      <holder>Matthew Barnes</holder>
+    </copyright>
+
+    &legal;
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Matthew</firstname>
+        <surname>Barnes</surname>
+        <email>mbarnes@redhat.com</email>
+      </author>
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>&app; Manual &manrevision;</revnumber>
+        <date>2007-10-10</date>
+      </revision>
+    </revhistory>
+
+    <releaseinfo>This manual describes version &appversion; of &app;</releaseinfo>
+
+  </articleinfo>
+
+  <section>
+    <title>Introduction</title>
+    <para>
+      The <application>&app;</application> application allows you to play
+      classic coin-operated arcade games on your GNOME desktop using the
+      Multiple Arcade Machine Emulator (MAME).
+    </para>
+    <para>
+      <application>&app;</application> provides the following features:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Play classic arcade games on your desktop.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Tag your favorite games to easily find them again later.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Read historical information and tips about your favorite games.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Game recording and play back.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Search.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Getting Started</title>
+    <section>
+      <title>Starting &app;</title>
+      <para>
+        You can start <application>&app;</application> in the following ways:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term><guimenu>Applications</guimenu> menu</term>
+          <listitem>
+            <para>
+              Choose
+              <menuchoice>
+                <guisubmenu>Games</guisubmenu>
+                <guimenuitem>Video Arcade</guimenuitem>
+              </menuchoice>.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Command line</term>
+          <listitem>
+            <para>
+              To start <application>&app;</application> from a command line,
+              type the following command, then press <keycap>Return</keycap>:
+            </para>
+            <para>
+              <command>gnome-video-arcade</command>
+            </para>
+            <tip>
+              <para>
+                To view other command line options that are available, type
+                <command>gnome-video-arcade --help</command>, then press
+                <keycap>Return</keycap>.
+              </para>
+            </tip>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+    <section>
+      <title>Getting Acquainted with &app;</title>
+      <para>
+        The first time you start <application>&app;</application>, it will
+        build a game database and determine which games are available.  This
+        process may take several minutes to complete, during which time the
+        following window is displayed:
+      </para>
+    </section>
+  </section>
+
+</article>

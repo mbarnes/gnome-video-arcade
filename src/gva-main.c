@@ -107,6 +107,8 @@ gva_main_init (void)
                 gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, FALSE);
 
+        gtk_action_set_sensitive (GVA_ACTION_CONTENTS, FALSE);
+
         gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_START, FALSE);
