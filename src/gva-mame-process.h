@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-mame-process
  * @short_description: An abstraction of a UNIX process running MAME
+ *
+ * A #GvaMameProcess is a type of #GvaProcess designed specifically for
+ * communicating with a child process running MAME.
  **/
 
 #ifndef GVA_MAME_PROCESS_H
@@ -51,6 +54,12 @@ G_BEGIN_DECLS
 typedef struct _GvaMameProcess GvaMameProcess;
 typedef struct _GvaMameProcessClass GvaMameProcessClass;
 
+/**
+ * GvaMameProcess:
+ *
+ * Contains only private data that should be read and manipulated using the
+ * functions below.
+ **/
 struct _GvaMameProcess
 {
         GvaProcess parent;

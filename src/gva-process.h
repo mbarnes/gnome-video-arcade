@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-process
  * @short_description: An abstraction of a UNIX process
+ *
+ * A #GvaProcess provides a convenient interface for communicating with a
+ * child process through pipes.
  **/
 
 #ifndef GVA_PROCESS_H
@@ -51,6 +54,12 @@ typedef struct _GvaProcess GvaProcess;
 typedef struct _GvaProcessClass GvaProcessClass;
 typedef struct _GvaProcessPrivate GvaProcessPrivate;
 
+/**
+ * GvaProcess:
+ *
+ * Contains only private data that should be read and manipulated using the
+ * functions below.
+ **/
 struct _GvaProcess
 {
         GObject parent;

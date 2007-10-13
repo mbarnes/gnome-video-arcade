@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-db
  * @short_description: Database Management
+ *
+ * These functions help manage the game database.
  **/
 
 #ifndef GVA_DB_H

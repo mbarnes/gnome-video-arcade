@@ -54,6 +54,12 @@ G_BEGIN_DECLS
 typedef struct _GvaCellRendererPixbuf GvaCellRendererPixbuf;
 typedef struct _GvaCellRendererPixbufClass GvaCellRendererPixbufClass;
 
+/**
+ * GvaCellRendererPixbuf:
+ *
+ * Contains only private data that should be read and manipulated using the
+ * functions below.
+ **/
 struct _GvaCellRendererPixbuf
 {
         GtkCellRendererPixbuf parent;

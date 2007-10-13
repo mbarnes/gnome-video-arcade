@@ -54,10 +54,17 @@ typedef struct _GvaColumnManager GvaColumnManager;
 typedef struct _GvaColumnManagerClass GvaColumnManagerClass;
 typedef struct _GvaColumnManagerPrivate GvaColumnManagerPrivate;
 
+/**
+ * GvaColumnManager:
+ *
+ * Contains only private data that should be read and manipulated using the
+ * functions below.
+ **/
 struct _GvaColumnManager
 {
         GtkHBox parent;
 
+        /*< protected >*/
         GtkWidget *vbox;
 
         GvaColumnManagerPrivate *priv;

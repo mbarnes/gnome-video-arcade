@@ -79,6 +79,8 @@ void            gva_mame_delete_save_state      (const gchar *name);
  * Returns %TRUE if the MAME executable that
  * <emphasis>GNOME Video Arcade</emphasis> is configured to use
  * supports an "autosave" option.
+ *
+ * Returns: %TRUE if MAME supports the "autosave" option
  **/
 #define gva_mame_supports_auto_save() \
         (gva_mame_has_config_value ("autosave"))
@@ -89,6 +91,8 @@ void            gva_mame_delete_save_state      (const gchar *name);
  * Returns %TRUE if the MAME executable that
  * <emphasis>GNOME Video Arcade</emphasis> is configured to use
  * supports a "fullscreen" option.
+ *
+ * Returns: %TRUE if MAME supports the "fullscreen" option
  **/
 #define gva_mame_supports_full_screen() \
         (gva_mame_has_config_value ("fullscreen"))
@@ -99,6 +103,8 @@ void            gva_mame_delete_save_state      (const gchar *name);
  * Returns %TRUE if the MAME executable that
  * <emphasis>GNOME Video Arcade</emphasis> is configured to use
  * supports a "window" option.
+ *
+ * Returns: %TRUE if MAME supports the "window" option
  **/
 #define gva_mame_supports_window() \
         (gva_mame_has_config_value ("window"))

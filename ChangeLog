@@ -1,5 +1,18 @@
 2007-10-13  Matthew Barnes  <mbarnes@redhat.com>
 
+	* AUTHORS: Add myself.
+
+	* src/gva-cell-renderer-pixbuf.h:
+	* src/gva-column-manager.h:
+	* src/gva-db.h:
+	* src/gva-game-store.h:
+	* src/gva-mame-process.h:
+	* src/gva-mame.h:
+	* src/gva-process.h:
+	Finish developer documentation (100% coverage).
+
+2007-10-13  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-db.c:
 	* docs/reference:
 	Add more developer documentation (94% coverage).

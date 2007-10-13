@@ -19,6 +19,9 @@
 /**
  * SECTION: gva-game-store
  * @short_description: A #GtkTreeModel that stores game information
+ *
+ * A #GvaGameStore stores information from the game database as a
+ * #GtkTreeModel.
  **/
 
 #ifndef GVA_GAME_STORE_H
@@ -85,6 +88,12 @@ enum _GvaGameStoreColumn
         GVA_GAME_STORE_NUM_COLUMNS
 };
 
+/**
+ * GvaGameStore:
+ *
+ * Contains only private data that should be read and manipulated using the
+ * functions below.
+ **/
 struct _GvaGameStore
 {
         GtkListStore parent;
