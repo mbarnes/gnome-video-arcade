@@ -207,11 +207,12 @@ gva_history_lookup (const gchar *game,
                         goto exit;
                 }
 
-                if (g_str_has_prefix (buffer->str, "$bio"))
-                        continue;
-
                 if (g_str_has_prefix (buffer->str, "$end"))
                         break;
+
+                /* Ignore anything else that starts with '$'. */
+                if (g_str_has_prefix (buffer->str, "$"))
+                        continue;
 
                 /* Be forgiving of the input.  If a conversion
                  * error occurs, skip the line and move on. */

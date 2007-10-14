@@ -1,5 +1,18 @@
 2007-10-13  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-history.c (gva_history_lookup):
+	Recent revisions of history.dat have added lines containing an
+	"Edit this entry at Arcade-History.com" HTML link between the $info
+	and $bio lines.  These new lines also start with '$', so modify the
+	parsing logic to ignore any lines starting with '$' that are not
+	$info or $end markers.  (Previously we were just checking for $bio
+	markers, so the raw HTML code got displayed in the UI.)
+
+	Perhaps in a future version we could actually display these links
+	as clickable widgets or text.
+
+2007-10-13  Matthew Barnes  <mbarnes@redhat.com>
+
 	* AUTHORS: Add myself.
 
 	* src/gva-cell-renderer-pixbuf.h:
