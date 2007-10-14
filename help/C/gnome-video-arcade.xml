@@ -126,13 +126,118 @@
       </variablelist>
     </section>
     <section>
-      <title>Getting Acquainted with &app;</title>
+      <title>When You Start &app;</title>
       <para>
         The first time you start <application>&app;</application>, it will
-        build a game database and determine which games are available.  This
-        process may take several minutes to complete, during which time the
-        following window is displayed:
+        build a database of game information and determine which games are
+        available.  This process may take several minutes to complete,
+        during which time the following window is displayed:
       </para>
+      <figure>
+        <title>&app; Building the Game Database</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gva_building_database.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              Shows <application>&app;</application> main window while the
+              database is being built.  Most of the elements are grayed out,
+              and a progress bar is shown at the bottom.
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <para>
+        The window will then change to look like this:
+      </para>
+      <figure>
+        <title>&app; Start Up Window</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gva_main_window.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              Shows <application>&app;</application> main window with a
+              sample list of games.  Contains menubar, game list, view
+              buttons, start game button, properties button and statusbar.
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <para>
+        You may see a different list of games, depending on which ROM images
+        are installed on your system.
+      </para>
+      <note>
+        <para>
+          Occasionally, the database may be rebuilt when you start
+          <application>&app;</application>.  Most of the time it will skip
+          this process and go straight to the window in Figure 2.
+        </para>
+      </note>
+      <para>
+        The <application>&app;</application> window contains the following
+        elements:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term>Menubar</term>
+          <listitem>
+            <para>
+              The menus on the menubar contain all of the commands you need to
+              use in <application>&app;</application>.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Game List</term>
+          <listitem>
+            <para>
+              The game list displays a list of games to choose from.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>View Buttons</term>
+          <listitem>
+            <para>
+              The view buttons control which games are displayed in the game
+              list.  You can choose between displaying all available games, a
+              list of your favorite games, or the results of your last search.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><guibutton>Start Game</guibutton> Button</term>
+          <listitem>
+            <para>
+              The <guibutton>Start Game</guibutton> button starts the
+              highlighted game in the game list.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><guibutton>Properties</guibutton> Button</term>
+          <listitem>
+            <para>
+              The <guibutton>Properties</guibutton> button displays additional
+              information about the highlighted game in the game list.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Statusbar</term>
+          <listitem>
+            <para>
+              The statusbar displays the MAME version used to play games and
+              contextual information about the menu items.  It also displays
+              a progress bar while building the game database.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
     </section>
   </section>
 

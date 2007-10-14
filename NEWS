@@ -5,10 +5,11 @@ GNOME Video Arcade 0.4.6
 
         What's New
         ----------
-        * Finished developer documentation (read it using DevHelp).
         * Started on user documentation (read it using Yelp).
+        * Finished developer documentation (read it using DevHelp).
         * New command line option --inspect=NAME prints the value of a
           MAME configuration key (e.g. --inspect=rompath).
+        * Filter out HTML links in recent revisions of history.dat.
 
         Translations
         ------------

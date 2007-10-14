@@ -1,3 +1,11 @@
+2007-10-14  Matthew Barnes  <mbarnes@redhat.com>
+
+	* help/C/figures/gva_building_database.png
+	* help/C/figures/gva_main_window.png
+	* help/C/gnome-video-arcade.xml
+	* help/Makefile.am:
+	Finish the "Getting Started" section of the user documentation.
+
 2007-10-13  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-history.c (gva_history_lookup):

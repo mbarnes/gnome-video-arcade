@@ -6,5 +6,9 @@ dist-hook: doc-dist-hook
 DOC_MODULE = gnome-video-arcade
 DOC_ENTITIES = legal.xml
 DOC_INCLUDES =
-DOC_FIGURES =
+
+DOC_FIGURES = \
+	figures/gva_building_database.png	\
+	figures/gva_main_window.png
+
 DOC_LINGUAS =
