@@ -1,3 +1,8 @@
+2007-10-15  Matthew Barnes  <mbarnes@redhat.com>
+
+	* help/C/gnome-video-arcade.xml:
+	Start on the "Usage" section of the user documentation.
+
 2007-10-14  Matthew Barnes  <mbarnes@redhat.com>
 
 	* help/C/figures/gva_building_database.png

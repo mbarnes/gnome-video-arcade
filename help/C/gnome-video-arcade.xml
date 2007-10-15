@@ -241,4 +241,119 @@
     </section>
   </section>
 
+  <section>
+    <title>Usage</title>
+    <section>
+      <title>To Start a Game</title>
+      <para>
+        Choose a game from the game list and click on it to highlight it.
+        Then click the <guibutton>Start Game</guibutton> button or choose
+        <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+              <keycap>S</keycap>
+            </keycombo>
+          </shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>Start</guimenuitem>
+        </menuchoice>.
+      </para>
+      <tip>
+        <para>
+          You can also start a game by double-clicking on it in the game list.
+        </para>
+      </tip>
+    </section>
+    <section>
+      <title>To View Properties of a Game</title>
+      <para>
+        Chose a game from the game list and click on it to highlight it.
+        Then click the <guibutton>Properties</guibutton> button or choose
+        <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+              <keycap>P</keycap>
+            </keycombo>
+          </shortcut>
+          <guimenu>View</guimenu>
+          <guimenuitem>Properties</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        The Properties dialog displays information about the highlighted
+        game, including some history about the game, tips and tricks to help
+        improve your scores, pictures of the arcade cabinet, screen shots of
+        the game in progress and some technical information about MAME's
+        emulation of the game.
+      </para>
+      <para>
+        To close the Properties dialog, click the
+        <guibutton>Close</guibutton> button.
+      </para>
+      <note>
+        <para>
+          Some of these features are not yet completed and will be available
+          in a future version of <application>&app;</application>.
+        </para>
+      </note>
+    </section>
+    <section>
+      <title>To Tag a Game as a Favorite</title>
+      <para>
+        To tag a game as a favorite, choose a game from the game list and
+        click on it to highlight it.  Then choose
+        <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+              <keycap>+</keycap>
+            </keycombo>
+          </shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>Add to Favorites</guimenuitem>
+        </menuchoice>.
+        The heart icon for the highlighted game will light up to indicate
+        that the game has been added to your list of favorites.
+      </para>
+      <para>
+        If you decide the game is no longer a favorite, click on the game
+        in the game list to highlight it.  Then choose
+        <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+              <keycap>-</keycap>
+            </keycombo>
+          </shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>Remove from Favorites</guimenuitem>
+        </menuchoice>.
+        The heart icon for the hightlighted game will turn gray to indicate
+        that the game has been removed from your list of favorites.
+      </para>
+      <tip>
+        You can also click directly on a heart icon in the game list to tag
+        the game as a favorite or not a favorite.
+      </tip>
+    </section>
+    <section>
+      <title>To Change Which Games Are Displayed</title>
+    </section>
+    <section>
+      <title>To Search for Games</title>
+    </section>
+    <section>
+      <title>To Record a Game</title>
+    </section>
+    <section>
+      <title>To Play Back a Recorded Game</title>
+    </section>
+  </section>
+
+  <section>
+    <title>Settings</title>
+  </section>
+
 </article>
