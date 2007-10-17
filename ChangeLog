@@ -1,3 +1,11 @@
+2007-10-16  Matthew Barnes  <mbarnes@redhat.com>
+
+	* help/C/figures/gva_recorded_games.png:
+	* help/C/figures/gva_search_window.png:
+	* help/C/gnome-video-arcade.xml:
+	* help/C/Makefile.am:
+	Finish the user documentation (first draft, anyway).
+
 2007-10-15  Matthew Barnes  <mbarnes@redhat.com>
 
 	* help/C/gnome-video-arcade.xml:

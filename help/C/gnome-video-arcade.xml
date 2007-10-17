@@ -268,7 +268,7 @@
     <section>
       <title>To View Properties of a Game</title>
       <para>
-        Chose a game from the game list and click on it to highlight it.
+        Choose a game from the game list and click on it to highlight it.
         Then click the <guibutton>Properties</guibutton> button or choose
         <menuchoice>
           <shortcut>
@@ -282,14 +282,14 @@
         </menuchoice>.
       </para>
       <para>
-        The Properties dialog displays information about the highlighted
-        game, including some history about the game, tips and tricks to help
-        improve your scores, pictures of the arcade cabinet, screen shots of
-        the game in progress and some technical information about MAME's
-        emulation of the game.
+        The <guilabel>Properties</guilabel> dialog displays information about
+        the highlighted game, including some history about the game, tips and
+        tricks to help improve your scores, pictures of the arcade cabinet,
+        screen shots of the game in progress and some technical information
+        about MAME's emulation of the game.
       </para>
       <para>
-        To close the Properties dialog, click the
+        To close the <guilabel>Properties</guilabel> dialog, click the
         <guibutton>Close</guibutton> button.
       </para>
       <note>
@@ -330,7 +330,7 @@
           <guimenu>Game</guimenu>
           <guimenuitem>Remove from Favorites</guimenuitem>
         </menuchoice>.
-        The heart icon for the hightlighted game will turn gray to indicate
+        The heart icon for the highlighted game will turn gray to indicate
         that the game has been removed from your list of favorites.
       </para>
       <tip>
@@ -340,20 +340,202 @@
     </section>
     <section>
       <title>To Change Which Games Are Displayed</title>
+      <para>
+        To show all available games in the game list, click the
+        <guibutton>Available Games</guibutton> view button or choose
+        <menuchoice>
+          <guimenu>View</guimenu>
+          <guimenuitem>Available Games</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        To show only your favorite games in the game list, click the
+        <guibutton>Favorite Games</guibutton> view button or choose
+        <menuchoice>
+          <guimenu>View</guimenu>
+          <guimenuitem>Favorite Games</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        To show the results of your last search in the game list, click
+        the <guibutton>Search Results</guibutton> view button or choose
+        <menuchoice>
+          <guimenu>View</guimenu>
+          <guimenuitem>Search Results</guimenuitem>
+        </menuchoice>.
+      </para>
     </section>
     <section>
       <title>To Search for Games</title>
+      <para>
+        Choose
+        <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+              <keycap>F</keycap>
+            </keycombo>
+          </shortcut>
+          <guimenu>Edit</guimenu>
+          <guimenuitem>Search...</guimenuitem>
+        </menuchoice>
+        to display the following dialog:
+      </para>
+      <figure>
+        <title>&app; Search Dialog</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gva_search_window.png" format="PNG"/>
+            </imageobject>
+					  <textobject>
+						  Shows <application>&app;</application> search dialog.  Contains
+						  text entry box, find button and close button.
+					  </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <para>
+        Type your search criteria in the entry box.  You can search by the
+        title of the game, the company that manufactured the game, the year
+        the game was released, or the name of the game's ROM set or MAME
+        driver.
+      </para>
+      <para>
+        Click the <guibutton>Find</guibutton> button to start your search.
+        The <guilabel>Search</guilabel> dialog will close and the results of
+        your search will be displayed in the game list.
+      </para>
+      <para>
+        Click the <guibutton>Close</guibutton> button to close the
+        <guilabel>Search</guilabel> dialog without searching.
+      </para>
     </section>
     <section>
       <title>To Record a Game</title>
+      <para>
+        Choose a game from the game list and click on it to highlight it.
+        Then choose
+        <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+              <keycap>R</keycap>
+            </keycombo>
+          </shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>Record</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        After you exit from MAME, your new recording will be highlighted in
+        the following window:
+      </para>
+      <figure>
+        <title>&app; Recorded Games Window</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gva_recorded_games.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              Shows <application>&app;</application> recorded games window.
+              Contains list of game recordings, play back button, delete
+              button and close button.
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <para>
+        Each recording shows the title of the game that was recorded, and
+        the date and time when recording began.
+      </para>
     </section>
     <section>
       <title>To Play Back a Recorded Game</title>
+      <para>
+        Choose
+        <menuchoice>
+          <guimenu>Game</guimenu>
+          <guimenuitem>Play Back...</guimenuitem>
+        </menuchoice>
+        to display the <guilabel>Recorded Games</guilabel> window.
+        Choose a game recording to play back and click on it to highlight it.
+        Then click the <guibutton>Play Back</guibutton> button.
+      </para>
     </section>
   </section>
 
   <section>
-    <title>Settings</title>
+    <title>Preferences</title>
+    <para>
+      To modify the preferences of <application>&app;</application>, choose
+      <menuchoice>
+        <guimenu>Edit</guimenu>
+        <guimenuitem>Preferences</guimenuitem>
+      </menuchoice>.
+    </para>
+    <para>
+      The <guilabel>Preferences</guilabel> dialog contains the following
+      sections:
+    </para>
+    <section>
+      <title>General</title>
+      <variablelist>
+        <varlistentry>
+          <term>
+            <guilabel>
+              Start games in fullscreen mode
+            </guilabel>
+          </term>
+          <listitem>
+            <para>
+              Select this option if you want to start games in fullscreen
+              mode.  Otherwise, games will be started in a window.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>
+            <guilabel>
+              Restore previous state when starting a game
+            </guilabel>
+          </term>
+          <listitem>
+            <para>
+              Select this option if you want to continue where you left off
+              when you last exited MAME.  If this option is not selected, the
+              emulator will boot the arcade machine each time you start a
+              game.
+            </para>
+            <note>
+              <para>
+                State restoration does not take effect until the second time
+                the game is started with the option enabled.  It does not
+                apply to recording or playing back games.
+              </para>
+            </note>
+            <note>
+              <para>
+                Not all games support this feature.
+              </para>
+            </note>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+    <section>
+      <title>Columns</title>
+      <para>
+        The <guilabel>Columns</guilabel> tab allows you to configure the
+        game list in the main window to show additional information about
+        the available games.  The column names are listed in the order that
+        they appear in the game list.  You can reorder columns and show
+        additional columns using the <guibutton>Move Up</guibutton>,
+        <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> and
+        <guibutton>Hide</guibutton> buttons to the right of the column list.
+      </para>
+    </section>
   </section>
 
 </article>
