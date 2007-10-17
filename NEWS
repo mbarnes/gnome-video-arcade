@@ -1,12 +1,13 @@
-GNOME Video Arcade 0.4.6
+GNOME Video Arcade 0.5.0
 ========================
 
-        Released October ??, 2007
+        Released October 17 2007
 
         What's New
         ----------
-        * Started on user documentation (read it using Yelp).
-        * Finished developer documentation (read it using DevHelp).
+        * Help -> Contents now works.
+        * Add a user manual (read it using Yelp).
+        * Finish developer documentation (read it using DevHelp).
         * New command line option --inspect=NAME prints the value of a
           MAME configuration key (e.g. --inspect=rompath).
         * Filter out HTML links in recent revisions of history.dat.

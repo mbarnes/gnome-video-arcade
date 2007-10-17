@@ -83,3 +83,6 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Define to 1 if you are linking against GNOME libraries */
+#undef WITH_GNOME

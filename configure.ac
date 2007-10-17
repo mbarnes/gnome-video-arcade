@@ -2,14 +2,14 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.4.6)
+m4_define([gva_version], 0.5.0)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
         [mbarnes@redhat.com], gnome-video-arcade)
 
 AC_CONFIG_MACRO_DIR(m4)
-AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_HEADER(config.h)
+AC_CONFIG_SRCDIR(src/main.c)
 
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
@@ -37,6 +37,23 @@ GLADE_MODULES="libglade-2.0 >= 2.6.0"
 PKG_CHECK_MODULES(GLADE, $GLADE_MODULES)
 AC_SUBST(GLADE_CFLAGS)
 AC_SUBST(GLADE_LIBS)
+
+# --with-gnome=[yes|no]
+AC_ARG_WITH([gnome],
+        [AC_HELP_STRING([--with-gnome],
+        [require GNOME libraries [default=yes]])],
+        with_gnome="$withval", with_gnome="yes")
+if test "$with_gnome" = "yes"; then
+GNOME_MODULES="libgnomeui-2.0 >= 2.14.0"
+PKG_CHECK_MODULES(GNOME, $GNOME_MODULES)
+AC_DEFINE_UNQUOTED(WITH_GNOME, 1,
+        [Define to 1 if you are linking against GNOME libraries])
+else
+GNOME_CFLAGS=
+GNOME_LIBS=
+fi
+AC_SUBST(GNOME_CFLAGS)
+AC_SUBST(GNOME_LIBS)
 
 SQLITE_MODULES="sqlite3 >= 3.0.0"
 PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
@@ -96,8 +113,8 @@ GNOME_DOC_INIT
 # --with-history-file=PATH
 AC_MSG_CHECKING([for arcade history file])
 AC_ARG_WITH([history-file],
-        AC_HELP_STRING([--with-history-file=PATH],
-        [path to arcade history file (usually named 'history.dat')]),
+        [AC_HELP_STRING([--with-history-file=PATH],
+        [path to arcade history file (usually named 'history.dat')])],
         with_history="$withval", with_history="no")
 if test "$with_history" = "yes"; then
         AC_MSG_ERROR([--with-history-file missing PATH argument])

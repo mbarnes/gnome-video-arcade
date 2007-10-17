@@ -1,3 +1,38 @@
+2007-10-17  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.5.0
+
+	* README:
+	Talk about new package requirements.
+	Reword some parts now that we have a user manual.
+
+	* configure.ac:
+	Add a --with-gnome option.
+
+	* Makefile.am:
+	Don't distribute the m4 directory.
+
+	* docs/reference/Makefile.am:
+	Add flags for linking to libgnomeui.
+
+	* help/C/gnome-video-arcade.xml:
+	Fix some validation errors.
+
+	* src/Makefile.am:
+	Add flags for linking to libgnomeui.
+
+	* src/main.c (main):
+	Call gnome_program_init() if we are linking to GNOME libraries,
+	otherwise call gtk_init_with_args().
+
+	* src/gva-main.c (gva_main_init):
+	Desensitize GVA_ACTION_CONTENTS if we are NOT linking to GNOME
+	libraries.
+
+	* src/gva-ui.c (action_contents_cb):
+	Call gnome_help_display() if we are linking to GNOME libraries,
+	otherwise do nothing (should be desensitized anyway).
+
 2007-10-16  Matthew Barnes  <mbarnes@redhat.com>
 
 	* help/C/figures/gva_recorded_games.png:

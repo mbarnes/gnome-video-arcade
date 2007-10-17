@@ -18,6 +18,10 @@
 
 #include "gva-ui.h"
 
+#ifdef WITH_GNOME
+#include <gnome.h>
+#endif
+
 #include <glade/glade.h>
 #include <glade/glade-build.h>
 
@@ -117,14 +121,35 @@ action_about_cb (GtkAction *action)
 /**
  * GVA_ACTION_CONTENTS:
  *
- * Activation of this action opens the user documentation for GNOME
- * Video Arcade.  (XXX Doesn't work yet; documentation is not written.)
+ * Activation of this action opens the user manual for GNOME Video Arcade.
  *
  * Main menu item: Help -> Contents
  **/
 static void
 action_contents_cb (GtkAction *action)
 {
+#ifdef WITH_GNOME
+        GtkWidget *dialog;
+        GError *error = NULL;
+
+        if (gnome_help_display ("gnome-video-arcade.xml", NULL, &error))
+                return;
+
+        dialog = gtk_message_dialog_new_with_markup (
+                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
+                GTK_DIALOG_DESTROY_WITH_PARENT,
+                GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+                "<big><b>%s</b></big>",
+                _(PACKAGE_NAME " could not display the help contents."));
+
+        gtk_message_dialog_format_secondary_text (
+                GTK_MESSAGE_DIALOG (dialog), "%s", error->message);
+
+        gtk_dialog_run (GTK_DIALOG (dialog));
+
+        gtk_widget_destroy (dialog);
+        g_error_free (error);
+#endif
 }
 
 /**

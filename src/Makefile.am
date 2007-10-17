@@ -6,11 +6,17 @@ AM_CFLAGS = \
 	-Wall \
 	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
 	@GCONF_CFLAGS@ @GLADE_CFLAGS@ \
-	@SQLITE_CFLAGS@
+	@GNOME_CFLAGS@ @SQLITE_CFLAGS@
 
+# The DATADIR, LIBDIR, PREFIX, and SYSCONFDIR definitions
+# are only needed for libgnome.  GLib handles it better.
 AM_CPPFLAGS = \
-	-DLOCALEDIR=\""$(datadir)/locale/"\" \
-	-DG_LOG_DOMAIN=\"Gva\"
+	-DG_LOG_DOMAIN=\"Gva\" \
+	-DDATADIR=\""$(datadir)"\" \
+	-DLIBDIR=\""$(libdir)"\" \
+	-DPREFIX=\""$(prefix)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)"\" \
+	-DLOCALEDIR=\""$(datadir)/locale/"\"
 
 AM_LDFLAGS = \
 	-export-dynamic
@@ -69,7 +75,8 @@ EXTRA_gnome_video_arcade_SOURCES = \
 gnome_video_arcade_LDADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
 	@GCONF_LIBS@ @GLADE_LIBS@ \
-	@MAME_BACKEND@ @SQLITE_LIBS@
+	@GNOME_LIBS@ @MAME_BACKEND@ \
+	@SQLITE_LIBS@
 
 gnome_video_arcade_DEPENDENCIES = \
 	@MAME_BACKEND@

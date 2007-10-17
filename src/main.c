@@ -23,6 +23,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef WITH_GNOME
+#include <gnome.h>
+#endif
+
 #include "gva-db.h"
 #include "gva-error.h"
 #include "gva-history.h"
@@ -104,18 +108,34 @@ start (void)
 gint
 main (gint argc, gchar **argv)
 {
+#ifdef WITH_GNOME
+        GnomeProgram *program;
+        GOptionContext *context;
+#endif
         GError *error = NULL;
+
+        g_thread_init (NULL);
 
         bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 
-        g_thread_init (NULL);
+#ifdef WITH_GNOME
+        context = g_option_context_new (NULL);
+        g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
+        g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
 
+        program = gnome_program_init (
+                PACKAGE, VERSION, LIBGNOMEUI_MODULE, argc, argv,
+                GNOME_PROGRAM_STANDARD_PROPERTIES,
+                GNOME_PARAM_GOPTION_CONTEXT, context,
+                GNOME_PARAM_NONE);
+#else
         gtk_init_with_args (
                 &argc, &argv, NULL, entries, GETTEXT_PACKAGE, &error);
         if (error != NULL)
                 g_error ("%s", error->message);
+#endif
 
         if (opt_inspect != NULL)
         {
@@ -166,6 +186,10 @@ main (gint argc, gchar **argv)
         gtk_init_add ((GtkFunction) start, NULL);
 
         gtk_main ();
+
+#ifdef WITH_GNOME
+        g_object_unref (program);
+#endif
 
         return EXIT_SUCCESS;
 }

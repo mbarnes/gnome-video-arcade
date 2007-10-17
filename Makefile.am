@@ -7,7 +7,6 @@ SUBDIRS += maint
 endif
 
 EXTRA_DIST = \
-	m4				\
 	config.rpath			\
 	gnome-doc-utils.make		\
 	intltool-extract.in		\

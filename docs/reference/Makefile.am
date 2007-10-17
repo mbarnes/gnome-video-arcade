@@ -77,6 +77,7 @@ INCLUDES=							\
 	$(GTK_CFLAGS)						\
 	$(GCONF_CFLAGS)						\
 	$(GLADE_CFLAGS)						\
+	$(GNOME_CFLAGS)						\
 	$(SQLITE_CFLAGS)
 GTKDOC_LIBS=							\
 	$(top_builddir)/src/gconf-bridge.o			\
@@ -105,6 +106,7 @@ GTKDOC_LIBS=							\
 	$(GTK_LIBS)						\
 	$(GCONF_LIBS)						\
 	$(GLADE_LIBS)						\
+	$(GNOME_LIBS)						\
 	$(SQLITE_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.

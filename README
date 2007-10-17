@@ -30,21 +30,37 @@ installed prior to compiling the source code:
    - Header files for GTK+ version 2.10 (or higher).
 
        The GTK+ header files should be available from your GNU/Linux
-       distribution as a "development" package. The exact package
-       name varies by distribution, but it should be something
-       similar to gtk2-devel or libgtk2.0-dev.
+       distribution as a "development" package.  The exact package name
+       varies by distribution, but it should be something similar to
+       gtk2-devel (Fedora) or libgtk2.0-dev (Debian/Ubuntu).
 
    - Header files for SQLite version 3.x.
 
-       This should also be available from your distribution as a
-       "development" package. The package is named sqlite-devel,
-       libsqlite3-dev or similar.
+       The SQLite header files should be available from your GNU/Linux
+       distribution as a "development" package.  The exact package name
+       varies by distribution, but it should be something similar to
+       sqlite-devel (Fedora) or libsqlite3-dev (Debian/Ubuntu).
+
+   - Header files for libgnomeui version 2.14 (or higher). (optional)
+
+       The libgnomeui header files should be available from your
+       GNU/Linux distribution as a "development" package.  The exact
+       package name varies by distribution, but it should be something
+       similar to libgnomeui-devel (Fedora) or libgnomeui-dev
+       (Debian/Ubuntu).
+
+       This library is only needed to make the Help->Contents menu item
+       work.  If you are already using a GNOME desktop, you should already
+       have this library installed.  But if you would rather not drag in
+       the entire GNOME development platform, you can configure GNOME
+       Video Arcade to not link against GNOME libraries.  See the
+       Installation section to find out how.
 
    - history.dat (optional)
 
        This file, available from http://www.arcade-history.com,
        contains historical information as well as tips and tricks
-       for many arcade games. GNOME Video Arcade can utilize this
+       for many arcade games.  GNOME Video Arcade can utilize this
        information in its Properties window.
 
 
@@ -53,15 +69,15 @@ Installation
 
 The INSTALL file has some generic but detailed installation
 instructions that are applicable to most Free Software packages,
-including GNOME Video Arcade. This section supplements the INSTALL
+including GNOME Video Arcade.  This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.4.5 and may change in forthcoming releases.
+version 0.5.0 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.4.5
+   $ cd /path/to/gnome-video-arcade-0.5.0
    $ ./configure
    $ make
    $ su -c "make install"
@@ -75,9 +91,9 @@ it where the MAME program is like this:
 
    $ MAME=/path/to/program/sdlmame ./configure
 
-Currently, the only configure option specific to GNOME Video Arcade
-is --with-history-file, for specifying the location of a history.dat
-file as mentioned above. Usage looks something like this:
+You can use the --with-history-file configure option to specify
+the location of a history.dat file as mentioned above.  Usage
+looks something like this:
 
    $ ./configure --with-history-file=/usr/share/xmame/history.dat
 
@@ -85,13 +101,19 @@ The --enable-gtk-doc configure option tells "make" to generate
 developer documentation while building GNOME Video Arcade.  Once
 installed, the documentation can be viewed through Devhelp.
 
+The --with-gnome and --without-gnome configure options tell "make"
+whether to link against high-level GNOME libraries like libgnomeui.
+
 
 Usage
 -----
 
-GNOME Video Arcade does not currently have a help document, however
-it is designed to be simple and easy to use. Please feel free to
-email me with any questions, bugs, or suggestions.
+GNOME Video Arcade comes with a user manual that describes basic usage
+of the application.  You can view it by choosing Help->Contents from
+the main menu in GNOME Video Arcade, or by starting Yelp and searching
+for "GNOME Video Arcade".
+
+Please feel free to email me with any questions, bugs, or suggestions.
 
 
                               - Matthew Barnes <mbarnes@redhat.com>

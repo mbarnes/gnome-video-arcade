@@ -30,7 +30,6 @@
       <author role="maintainer">
         <firstname>Matthew</firstname>
         <surname>Barnes</surname>
-        <email>mbarnes@redhat.com</email>
       </author>
     </authorgroup>
 
@@ -141,9 +140,11 @@
               <imagedata fileref="figures/gva_building_database.png" format="PNG"/>
             </imageobject>
             <textobject>
-              Shows <application>&app;</application> main window while the
-              database is being built.  Most of the elements are grayed out,
-              and a progress bar is shown at the bottom.
+              <para>
+                Shows &app; main window while the database is being built.
+                Most of the elements are grayed out, and a progress bar is
+                shown at the bottom.
+              </para>
             </textobject>
           </mediaobject>
         </screenshot>
@@ -159,9 +160,11 @@
               <imagedata fileref="figures/gva_main_window.png" format="PNG"/>
             </imageobject>
             <textobject>
-              Shows <application>&app;</application> main window with a
-              sample list of games.  Contains menubar, game list, view
-              buttons, start game button, properties button and statusbar.
+              <para>
+                Shows &app; main window with a sample list of games.
+                Contains menubar, game list, view buttons, start game button,
+                properties button and statusbar.
+              </para>
             </textobject>
           </mediaobject>
         </screenshot>
@@ -334,8 +337,10 @@
         that the game has been removed from your list of favorites.
       </para>
       <tip>
-        You can also click directly on a heart icon in the game list to tag
-        the game as a favorite or not a favorite.
+        <para>
+          You can also click directly on a heart icon in the game list to tag
+          the game as a favorite or not a favorite.
+        </para>
       </tip>
     </section>
     <section>
@@ -388,10 +393,12 @@
             <imageobject>
               <imagedata fileref="figures/gva_search_window.png" format="PNG"/>
             </imageobject>
-					  <textobject>
-						  Shows <application>&app;</application> search dialog.  Contains
-						  text entry box, find button and close button.
-					  </textobject>
+            <textobject>
+              <para>
+                Shows &app; search dialog.  Contains text entry box, find
+                button and close button.
+              </para>
+            </textobject>
           </mediaobject>
         </screenshot>
       </figure>
@@ -439,9 +446,10 @@
               <imagedata fileref="figures/gva_recorded_games.png" format="PNG"/>
             </imageobject>
             <textobject>
-              Shows <application>&app;</application> recorded games window.
-              Contains list of game recordings, play back button, delete
-              button and close button.
+              <para>
+                Shows &app; recorded games window.  Contains list of game
+                recordings, play back button, delete button and close button.
+              </para>
             </textobject>
           </mediaobject>
         </screenshot>
@@ -515,11 +523,11 @@
                 apply to recording or playing back games.
               </para>
             </note>
-            <note>
+            <warning>
               <para>
                 Not all games support this feature.
               </para>
-            </note>
+            </warning>
           </listitem>
         </varlistentry>
       </variablelist>

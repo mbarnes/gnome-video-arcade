@@ -107,7 +107,10 @@ gva_main_init (void)
                 gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, FALSE);
 
+#ifndef WITH_GNOME
+        /* Requires that we link against libgnome. */
         gtk_action_set_sensitive (GVA_ACTION_CONTENTS, FALSE);
+#endif
 
         gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
@@ -119,7 +122,7 @@ gva_main_init (void)
         gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
 
-	gtk_widget_show (GVA_WIDGET_MAIN_WINDOW);
+        gtk_widget_show (GVA_WIDGET_MAIN_WINDOW);
 }
 
 /**
