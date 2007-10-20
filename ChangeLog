@@ -1,3 +1,11 @@
+2007-10-20  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-columns.c (columns_favorite_clicked_cb):
+	Use gtk_tree_view_column_get_tree_view(), if available.
+
+	* src/gva-ui.c (action_about_cb):
+	Fix the program name when using GTK+ 2.12.
+
 2007-10-17  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.5.0
