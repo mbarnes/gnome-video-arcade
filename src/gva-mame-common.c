@@ -446,7 +446,7 @@ gva_mame_verify_roms (GvaMameCallback callback,
 
         /* Execute the command "${mame} -verifyroms". */
         process = gva_mame_process_spawn (
-                "-verifyroms", G_PRIORITY_LOW, error);
+                "-verifyroms", G_PRIORITY_DEFAULT_IDLE, error);
         if (process == NULL)
                 return NULL;
 
@@ -487,7 +487,7 @@ gva_mame_verify_samples (GvaMameCallback callback,
 
         /* Execute the command "${mame} -verifysamples". */
         process = gva_mame_process_spawn (
-                "-verifysamples", G_PRIORITY_LOW, error);
+                "-verifysamples", G_PRIORITY_DEFAULT_IDLE, error);
         if (process == NULL)
                 return NULL;
 

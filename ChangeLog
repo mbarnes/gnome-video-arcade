@@ -1,3 +1,30 @@
+2007-10-25  Matthew Barnes  <mbarnes@redhat.com>
+
+	NEWS: Update for 0.5.1
+
+	These changes fix a deadlock condition that occurred when running
+	--verifyroms on sdlmame versions 0.114 and earlier, which printed
+	progress messages on stderr.  The GvaProcess read logic would get
+	stuck reading these progress messages, causing the stdout pipe to
+	overflow.  The child process would then block in a write() call
+	to stdout, and we would be blocked in a read() call to stderr.
+
+	* src/gva-mame-common.c (gva_mame_verify_roms),
+	(gva_mame_verify_samples):
+	Bump the prioritiy to G_PRIORITY_DEFAULT_IDLE, since these
+	tasks no longer run in the background during XML parsing.
+
+	* src/gva-process.c (process_read_line):
+	New function reads a line from the GIOChannel and appends it to the
+	input queue.  Replaces process_data_ready().
+
+	* src/gva-process.c (process_stdout_ready):
+	Call process_read_line() for as long as the G_IO_IN condition is set.
+	The looping is a performance enhancement for XML parsing.
+
+	* src/gva-process.c (process_stderr_ready):
+	Call process_read_line() once if the G_IO_IN condition is set.
+
 2007-10-20  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-columns.c (columns_favorite_clicked_cb):
