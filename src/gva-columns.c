@@ -72,8 +72,11 @@ columns_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
         /* The row that was clicked is not yet selected.  We need to
          * select it first so that gva_tree_view_get_selected_game()
          * returns the correct name. */
+#if GTK_CHECK_VERSION (2, 12, 0)
+        widget = gtk_tree_view_column_get_tree_view (column);
+#else
         widget = column->tree_view;
-        /*widget = gtk_tree_view_column_get_tree_view (column);*/
+#endif
         gtk_tree_view_set_cursor (GTK_TREE_VIEW (widget), path, NULL, FALSE);
         gtk_widget_grab_focus (widget);
 

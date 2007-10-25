@@ -1,3 +1,13 @@
+GNOME Video Arcade 0.5.1
+========================
+
+        Released October 25 2007
+
+        What's New
+        ----------
+        * Fix a deadlock that occurred with sdlmame versions 0.114 and
+          earlier during the "Analyzing ROM files" phase.
+
 GNOME Video Arcade 0.5.0
 ========================
 

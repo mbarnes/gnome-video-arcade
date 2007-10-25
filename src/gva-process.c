@@ -152,35 +152,50 @@ process_exited (GPid pid,
         }
 }
 
+static void
+process_read_line (GvaProcess *process,
+                   GIOChannel *channel,
+                   GQueue *queue,
+                   guint signal_id)
+{
+        GIOStatus status;
+        gchar *line;
+        GError *error = NULL;
+
+        status = g_io_channel_read_line (channel, &line, NULL, NULL, &error);
+
+        if (status == G_IO_STATUS_NORMAL)
+        {
+                g_assert (line != NULL);
+                g_queue_push_tail (queue, line);
+                g_signal_emit (process, signal_id, 0);
+        }
+        else
+        {
+                g_assert (error != NULL);
+                process_propagate_error (process, error);
+        }
+}
+
 static gboolean
-process_data_ready (GvaProcess *process,
-                    GIOChannel *channel,
-                    GIOCondition condition,
-                    GQueue *queue,
-                    guint *source_id,
-                    guint signal_id)
+process_stdout_ready (GIOChannel *channel,
+                      GIOCondition condition,
+                      GvaProcess *process)
 {
         if (condition & G_IO_IN)
         {
+                /* For better performance, keep reading lines as long as
+                 * there's more data available.  This assumes the stderr
+                 * pipe is relatively quiet.  Otherwise the stderr pipe
+                 * could overflow and cause a deadlock between this and
+                 * the child process. */
+
                 do
                 {
-                        GIOStatus status;
-                        gchar *line;
-                        GError *error = NULL;
-
-                        status = g_io_channel_read_line (
-                                channel, &line, NULL, NULL, &error);
-                        if (status == G_IO_STATUS_NORMAL)
-                        {
-                                g_assert (line != NULL);
-                                g_queue_push_tail (queue, line);
-                                g_signal_emit (process, signal_id, 0);
-                        }
-                        else
-                        {
-                                g_assert (error != NULL);
-                                process_propagate_error (process, error);
-                        }
+                        process_read_line (
+                                process, channel,
+                                process->priv->stdout_lines,
+                                signals[STDOUT_READY]);
 
                         condition =
                                 g_io_channel_get_buffer_condition (channel);
@@ -190,29 +205,31 @@ process_data_ready (GvaProcess *process,
                 return TRUE;
         }
 
-        *source_id = 0;
+        process->priv->stdout_source_id = 0;
 
         return FALSE;
 }
 
 static gboolean
-process_stdout_ready (GIOChannel *source,
+process_stderr_ready (GIOChannel *channel,
                       GIOCondition condition,
                       GvaProcess *process)
 {
-        return process_data_ready (
-                process, source, condition, process->priv->stdout_lines,
-                &process->priv->stdout_source_id, signals[STDOUT_READY]);
-}
+        if (condition & G_IO_IN)
+        {
+                /* Do NOT loop here, as we do for stdout. */
 
-static gboolean
-process_stderr_ready (GIOChannel *source,
-                      GIOCondition condition,
-                      GvaProcess *process)
-{
-        return process_data_ready (
-                process, source, condition, process->priv->stderr_lines,
-                &process->priv->stderr_source_id, signals[STDERR_READY]);
+                process_read_line (
+                        process, channel,
+                        process->priv->stderr_lines,
+                        signals[STDERR_READY]);
+
+                return TRUE;
+        }
+
+        process->priv->stderr_source_id = 0;
+
+        return FALSE;
 }
 
 static GObject *
