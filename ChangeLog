@@ -1,5 +1,10 @@
 2007-10-27  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gconf-bridge.c:
+	Use dashes instead of underscores in GConf key names.
+
+2007-10-27  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac: Post-release version bump.
 
 2007-10-25  Matthew Barnes  <mbarnes@redhat.com>
