@@ -1,3 +1,34 @@
+2007-11-05  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/Makefile.am:
+	Add gva-audit.[ch].
+
+	* src/gva-audit.h:
+	* src/gva-audit.c:
+	New source files for auditing ROM and sample sets.
+
+	* src/gva-main.c (gva_main_build_database):
+	Call gva_audit_roms() and gva_audit_samples().
+
+	* src/gva-db.c (gva_db_verify_romsets), (gva_db_verify_samplesets),
+	(db_verify_read), (db_verify_foreach), (db_verify_exit),
+	(db_verify_string_free):
+	* src/gva-mame-common.c (mame_verify_read), (mame_verify_exit):
+	Move these functions to gva-audit.c.
+
+	* src/gva-game-store.h:
+	* src/gva-game-store.c:
+	Inherit from GtkTreeStore instead of GtkListStore.
+
+	* src/gva-play-back.c: Adapt.
+	* src/gva-ui.c: Adapt.
+
+	* data/gnome-video-arcade.glade:
+	Early prototype for an audit results dialog.
+
+	* docs/reference:
+	Update developer documentation.
+
 2007-10-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gconf-bridge.c:

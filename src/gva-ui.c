@@ -192,8 +192,8 @@ action_insert_favorite_cb (GtkAction *action)
         gtk_tree_path_free (path);
         g_assert (valid);
 
-        gtk_list_store_set (
-                GTK_LIST_STORE (model), &iter,
+        gtk_tree_store_set (
+                GTK_TREE_STORE (model), &iter,
                 GVA_GAME_STORE_COLUMN_FAVORITE, TRUE, -1);
 
         gva_favorites_insert (name);
@@ -418,8 +418,8 @@ action_remove_favorite_cb (GtkAction *action)
         gtk_tree_path_free (path);
         g_assert (valid);
 
-        gtk_list_store_set (
-                GTK_LIST_STORE (model), &iter,
+        gtk_tree_store_set (
+                GTK_TREE_STORE (model), &iter,
                 GVA_GAME_STORE_COLUMN_FAVORITE, FALSE, -1);
 
         gva_favorites_remove (name);

@@ -84,7 +84,7 @@ play_back_delete_inpfile (GtkTreeRowReference *reference)
 
         errno = 0;
         if (g_unlink (inpfile) == 0)
-                gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+                gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
         else
                 g_warning ("%s: %s", inpfile, g_strerror (errno));
 
@@ -161,10 +161,10 @@ play_back_add_input_file (const gchar *inpfile,
                 gva_tree_view_get_model (), &iter,
                 GVA_GAME_STORE_COLUMN_DESCRIPTION, &title, -1);
 
-        gtk_list_store_append (GTK_LIST_STORE (game_store), &iter);
+        gtk_tree_store_append (GTK_TREE_STORE (game_store), &iter, NULL);
 
-        gtk_list_store_set (
-                GTK_LIST_STORE (game_store), &iter,
+        gtk_tree_store_set (
+                GTK_TREE_STORE (game_store), &iter,
                 GVA_GAME_STORE_COLUMN_INPFILE, inpfile,
                 GVA_GAME_STORE_COLUMN_NAME, name,
                 GVA_GAME_STORE_COLUMN_DESCRIPTION, title,

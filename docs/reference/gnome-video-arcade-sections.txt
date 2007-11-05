@@ -1,4 +1,11 @@
 <SECTION>
+<FILE>gva-audit</FILE>
+<TITLE>GvaAudit</TITLE>
+gva_audit_roms
+gva_audit_samples
+</SECTION>
+
+<SECTION>
 <FILE>gva-process</FILE>
 <TITLE>GvaProcess</TITLE>
 GvaProcess
@@ -302,8 +309,6 @@ gva_get_user_data_dir
 <FILE>gva-db</FILE>
 gva_db_init
 gva_db_build
-gva_db_verify_romsets
-gva_db_verify_samplesets
 gva_db_reset
 gva_db_execute
 gva_db_transaction_begin

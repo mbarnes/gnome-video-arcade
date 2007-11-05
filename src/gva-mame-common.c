@@ -359,148 +359,40 @@ gva_mame_list_xml (GError **error)
                 "-listxml", G_PRIORITY_DEFAULT_IDLE, error);
 }
 
-static void
-mame_verify_read (GvaProcess *process,
-                  GvaMameAsyncData *data)
-{
-        gchar *line;
-        gchar *name;
-        gchar *status = NULL;
-        gchar *token;
-
-        /* Output for -verifyroms is as follows:
-         *
-         * romset puckman is good
-         * romset puckmana [puckman] is good
-         * romset puckmanf [puckman] is good
-         * ...
-         *
-         * - Ignore lines that do not start with "romset".
-         *
-         * - Status may be "good", "bad", or "best available".
-         *
-         * - Older MAMEs used "correct" and "incorrect" instead of
-         *   "good" and "bad".  Convert to the newer form if seen.
-         *
-         * - Similar output for -verifysamples.
-         */
-
-        line = g_strchomp (gva_process_stdout_read_line (process));
-
-        if ((token = strtok (line, " ")) == NULL)
-                goto exit;
-
-        if (strcmp (token, "romset") != 0 && strcmp (token, "sampleset") != 0)
-                goto exit;
-
-        name = strtok (NULL, " ");
-        while ((token = strtok (NULL, " ")) != NULL)
-                status = token;
-
-        if (name == NULL || status == NULL)
-                goto exit;
-
-        /* Normalize the status. */
-        if (strcmp (status, "correct") == 0)
-                status = "good";
-        else if (strcmp (status, "incorrect") == 0)
-                status = "bad";
-
-        data->callback (name, status, data->user_data);
-        gva_process_inc_progress (process);
-
-exit:
-        g_free (line);
-}
-
-static void
-mame_verify_exit (GvaProcess *process,
-                  gint status,
-                  GvaMameAsyncData *data)
-{
-        gva_mame_async_data_free (data);
-}
-
 /**
  * gva_mame_verify_roms:
- * @callback: callback function
- * @user_data: user data to pass to the callback function
  * @error: return location for a #GError, or %NULL
  *
- * Spawns a "MAME -verifyroms" child process and returns a #GvaProcess to
- * track it.  As each ROM set is tested, the function asynchronously calls
- * @callback(romset, status, @user_data).  If an error occurs while spawning,
+ * Spawns a "MAME -verifyroms" child process and returns a #GvaProcess so
+ * the output can be read asynchronously.  If an error occurs while spawning,
  * it returns %NULL and sets @error.
  *
  * Returns: a new #GvaProcess, or %NULL
  **/
 GvaProcess *
-gva_mame_verify_roms (GvaMameCallback callback,
-                      gpointer user_data,
-                      GError **error)
+gva_mame_verify_roms (GError **error)
 {
-        GvaProcess *process;
-        GvaMameAsyncData *data;
-
-        g_return_val_if_fail (callback != NULL, NULL);
-
         /* Execute the command "${mame} -verifyroms". */
-        process = gva_mame_process_spawn (
+        return gva_mame_process_spawn (
                 "-verifyroms", G_PRIORITY_DEFAULT_IDLE, error);
-        if (process == NULL)
-                return NULL;
-
-        data = gva_mame_async_data_new (callback, user_data);
-
-        g_signal_connect (
-                process, "stdout-ready",
-                G_CALLBACK (mame_verify_read), data);
-        g_signal_connect (
-                process, "exited",
-                G_CALLBACK (mame_verify_exit), data);
-
-        return process;
 }
 
 /**
  * gva_mame_verify_samples:
- * @callback: callback function
- * @user_data: user data to pass to the callback function
  * @error: return location for a #GError, or %NULL
  *
- * Spawns a "MAME -verifysamples" child process and returns a #GvaProcess to
- * track it.  As each sample set is tested, the function asynchronously calls
- * @callback(sampleset, status, @user_data).  If an error occurs while
- * spawning, it returns %NULL and sets @error.
+ * Spawns a "MAME -verifysamples" child process and returns a #GvaProcess so
+ * the output can be read asynchronously.  If an error occurs while spawning,
+ * it returns %NULL and sets @error.
  *
  * Returns: a new #GvaProcess, or %NULL
  **/
 GvaProcess *
-gva_mame_verify_samples (GvaMameCallback callback,
-                         gpointer user_data,
-                         GError **error)
+gva_mame_verify_samples (GError **error)
 {
-        GvaProcess *process;
-        GvaMameAsyncData *data;
-
-        g_return_val_if_fail (callback != NULL, NULL);
-
         /* Execute the command "${mame} -verifysamples". */
-        process = gva_mame_process_spawn (
+        return gva_mame_process_spawn (
                 "-verifysamples", G_PRIORITY_DEFAULT_IDLE, error);
-        if (process == NULL)
-                return NULL;
-
-        data = gva_mame_async_data_new (callback, user_data);
-
-        g_signal_connect (
-                process, "stdout-ready",
-                G_CALLBACK (mame_verify_read), data);
-        g_signal_connect (
-                process, "exited",
-                G_CALLBACK (mame_verify_exit), data);
-
-        return process;
 }
 
 /**
