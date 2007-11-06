@@ -17,6 +17,13 @@ GvaAudit
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### FUNCTION gva_audit_init ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### FUNCTION gva_audit_roms ##### -->
 <para>
 
@@ -33,5 +40,13 @@ GvaAudit
 
 @error: 
 @Returns: 
+
+
+<!-- ##### FUNCTION gva_audit_save_errors ##### -->
+<para>
+
+</para>
+
+@filename: 
 
 

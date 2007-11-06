@@ -1,5 +1,21 @@
 2007-11-05  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/gnome-video-arcade.glade:
+	* src/gva-audit.c:
+	* src/gva-audit.h:
+	Finish implementing the audit results dialog.
+
+	* src/main.c (main):
+	Call gva_audit_init().
+
+	* src/gva-ui.h:
+	* src/gva-ui.c:
+	Define WIDGET macros for audit window.
+	Add GVA_ACTION_SAVE_ERRORS, which displays a "Save As" dialog and
+	calls gva_audit_save_errors().
+
+2007-11-05  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/Makefile.am:
 	Add gva-audit.[ch].
 

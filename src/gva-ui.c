@@ -25,6 +25,7 @@
 #include <glade/glade.h>
 #include <glade/glade-build.h>
 
+#include "gva-audit.h"
 #include "gva-column-manager.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
@@ -429,6 +430,42 @@ action_remove_favorite_cb (GtkAction *action)
 }
 
 /**
+ * GVA_ACTION_SAVE_ERRORS:
+ *
+ * Activation of this action saves the errors from a ROM audit to a file.
+ **/
+static void
+action_save_errors_cb (GtkAction *action)
+{
+        GtkWidget *dialog;
+
+        dialog = gtk_file_chooser_dialog_new (
+                _("Save As"),
+                GTK_WINDOW (GVA_WIDGET_AUDIT_WINDOW),
+                GTK_FILE_CHOOSER_ACTION_SAVE,
+                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+                NULL);
+
+        gtk_file_chooser_set_current_name (
+                GTK_FILE_CHOOSER (dialog), "rom-errors.txt");
+        gtk_file_chooser_set_do_overwrite_confirmation (
+                GTK_FILE_CHOOSER (dialog), TRUE);
+
+        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+        {
+                gchar *filename;
+
+                filename = gtk_file_chooser_get_filename (
+                        GTK_FILE_CHOOSER (dialog));
+                gva_audit_save_errors (filename);
+                g_free (filename);
+        }
+
+        gtk_widget_destroy (dialog);
+}
+
+/**
  * GVA_ACTION_SEARCH:
  *
  * Activation of this action makes the "Search for Games" window visible.
@@ -594,6 +631,13 @@ static GtkActionEntry entries[] =
           "<Control>minus",
           N_("Remove the selected game from my list of favorites"),
           G_CALLBACK (action_remove_favorite_cb) },
+
+        { "save-errors",
+          GTK_STOCK_SAVE_AS,
+          N_("Save _As..."),
+          NULL,
+          N_("Save ROM errors to a file"),
+          G_CALLBACK (action_save_errors_cb) },
 
         { "search",
           GTK_STOCK_FIND,

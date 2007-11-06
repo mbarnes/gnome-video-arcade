@@ -20,15 +20,18 @@
 
 #include <string.h>
 
+#include "gva-columns.h"
 #include "gva-db.h"
 #include "gva-error.h"
+#include "gva-game-store.h"
 #include "gva-mame.h"
+#include "gva-ui.h"
 
 #define SQL_DELETE_NOT_FOUND \
         "DELETE FROM game WHERE romset == \"not found\";"
 
 #define SQL_SELECT_BAD_GAMES \
-        "SELECT game, description FROM game WHERE romset == 'bad'"
+        "SELECT name, description FROM game WHERE romset == 'bad'"
 
 typedef struct _GvaAuditData GvaAuditData;
 
@@ -98,20 +101,34 @@ audit_build_model (GvaAuditData *data,
 
         while (iter_valid)
         {
-                GtkTreePath *path;
                 GtkTreeIter child;
+                const gchar *line;
+                guint index;
                 gchar *name;
 
                 gtk_tree_model_get (model, &iter, 0, &name, -1);
-                path = gva_game_store_index_lookup (
-                        GVA_GAME_STORE (model), name);
-                g_assert (path != NULL);
-                g_free (name);
+                index = GPOINTER_TO_UINT (g_hash_table_lookup (
+                        data->output_index, name));
 
-                iter_valid = gtk_tree_model_get_iter (model, &iter, path);
+                line = g_ptr_array_index (data->output, --index);
+                while (g_str_has_prefix (line, name))
+                {
+                        gtk_tree_store_prepend (
+                                GTK_TREE_STORE (model), &child, &iter);
+                        gtk_tree_store_set (
+                                GTK_TREE_STORE (model), &child,
+                                GVA_GAME_STORE_COLUMN_DESCRIPTION, line, -1);
+                        line = g_ptr_array_index (data->output, --index);
+                }
+
+                g_free (name);
 
                 iter_valid = gtk_tree_model_iter_next (model, &iter);
         }
+
+        gtk_tree_sortable_set_sort_column_id (
+                GTK_TREE_SORTABLE (model),
+                GVA_GAME_STORE_COLUMN_DESCRIPTION, GTK_SORT_ASCENDING);
 
         return model;
 }
@@ -149,20 +166,20 @@ audit_read (GvaProcess *process,
         line = g_strchomp (gva_process_stdout_read_line (process));
 
         value = GUINT_TO_POINTER (data->output->len);
-        g_ptr_array_add (data->output, line);
+        g_ptr_array_add (data->output, g_strdup (line));
 
         if ((token = strtok (line, " ")) == NULL)
-                return;
+                goto exit;
 
         if (strcmp (token, data->column) != 0)
-                return;
+                goto exit;
 
         name = strtok (NULL, " ");
         while ((token = strtok (NULL, " ")) != NULL)
                 status = token;
 
         if (name == NULL || status == NULL)
-                return;
+                goto exit;
 
         /* Normalize the status. */
         if (strcmp (status, "correct") == 0)
@@ -187,6 +204,9 @@ audit_read (GvaProcess *process,
         }
 
         gva_process_inc_progress (process);
+
+exit:
+        g_free (line);
 }
 
 /* Helper for audit_exit() */
@@ -231,6 +251,48 @@ audit_exit (GvaProcess *process,
         gva_error_handle (&error);
 }
 
+static void
+audit_show_dialog (GvaProcess *process,
+                   gint status,
+                   GvaAuditData *data)
+{
+        GtkTreeView *view;
+        GtkTreeModel *model;
+        GError *error = NULL;
+
+        model = audit_build_model (data, &error);
+        gva_error_handle (&error);
+        if (model == NULL)
+                return;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
+        gtk_tree_view_set_model (view, model);
+
+        gtk_widget_show (GVA_WIDGET_AUDIT_WINDOW);
+}
+
+/**
+ * gva_audit_init:
+ *
+ * Initializes the ROM audit window.
+ *
+ * This function should be called once when the application starts.
+ **/
+void
+gva_audit_init (void)
+{
+        GtkTreeViewColumn *column;
+        GtkTreeView *view;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
+        column = gva_columns_new_from_id (GVA_GAME_STORE_COLUMN_DESCRIPTION);
+        gtk_tree_view_append_column (view, column);
+
+        gtk_action_connect_proxy (
+                GVA_ACTION_SAVE_ERRORS,
+                GVA_WIDGET_AUDIT_SAVE_BUTTON);
+}
+
 /**
  * gva_audit_roms:
  * @error: return location for a #GError, or %NULL
@@ -261,6 +323,10 @@ gva_audit_roms (GError **error)
         g_signal_connect (
                 process, "exited",
                 G_CALLBACK (audit_exit), data);
+
+        g_signal_connect (
+                process, "exited",
+                G_CALLBACK (audit_show_dialog), data);
 
         g_signal_connect_swapped (
                 process, "exited",
@@ -306,4 +372,64 @@ gva_audit_samples (GError **error)
                 G_CALLBACK (audit_data_free), data);
 
         return process;
+}
+
+/* Helper for audit_save_errors() */
+static gboolean
+audit_save_errors_foreach (GtkTreeModel *model,
+                           GtkTreePath *path,
+                           GtkTreeIter *iter,
+                           GString *contents)
+{
+        gchar *text;
+
+        gtk_tree_model_get (
+                model, iter, GVA_GAME_STORE_COLUMN_DESCRIPTION, &text, -1);
+        if (gtk_tree_path_get_depth (path) > 1)
+                g_string_append_len (contents, "  ", 2);
+        g_string_append_printf (contents, "%s\n", text);
+        g_free (text);
+
+        return FALSE;
+}
+
+/**
+ * gva_audit_save_errors:
+ * @filename: the filename to save errors to
+ *
+ * Saves the results of the most recent ROM file audit to @filename.
+ **/
+void
+gva_audit_save_errors (const gchar *filename)
+{
+        GtkTreeView *view;
+        GtkTreeModel *model;
+        GString *contents;
+        gchar *mame_version;
+        GError *error = NULL;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
+        model = gtk_tree_view_get_model (view);
+        g_return_if_fail (model != NULL);
+
+        contents = g_string_sized_new (4096);
+
+        mame_version = gva_mame_get_version (&error);
+        gva_error_handle (&error);
+
+        g_string_append_printf (
+                contents, "%s - ROM Audit Results\n", PACKAGE_STRING);
+        if (mame_version != NULL)
+                g_string_append_printf (contents, "Using %s\n", mame_version);
+        g_string_append_c (contents, '\n');
+
+        gtk_tree_model_foreach (
+                model, (GtkTreeModelForeachFunc)
+                audit_save_errors_foreach, contents);
+
+        g_file_set_contents (filename, contents->str, -1, &error);
+        gva_error_handle (&error);
+
+        g_free (mame_version);
+        g_string_free (contents, TRUE);
 }
