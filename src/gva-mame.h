@@ -54,12 +54,8 @@ gchar *         gva_mame_get_config_value       (const gchar *config_key,
 gboolean        gva_mame_has_config_value       (const gchar *config_key);
 GHashTable *    gva_mame_get_input_files        (GError **error);
 GvaProcess *    gva_mame_list_xml               (GError **error);
-GvaProcess *    gva_mame_verify_roms            (GvaMameCallback callback,
-                                                 gpointer user_data,
-                                                 GError **error);
-GvaProcess *    gva_mame_verify_samples         (GvaMameCallback callback,
-                                                 gpointer user_data,
-                                                 GError **error);
+GvaProcess *    gva_mame_verify_roms            (GError **error);
+GvaProcess *    gva_mame_verify_samples         (GError **error);
 GvaProcess *    gva_mame_run_game               (const gchar *name,
                                                  GError **error);
 GvaProcess *    gva_mame_record_game            (const gchar *name,

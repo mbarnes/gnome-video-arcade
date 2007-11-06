@@ -35,24 +35,6 @@
 @Returns: 
 
 
-<!-- ##### FUNCTION gva_db_verify_romsets ##### -->
-<para>
-
-</para>
-
-@error: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gva_db_verify_samplesets ##### -->
-<para>
-
-</para>
-
-@error: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gva_db_reset ##### -->
 <para>
 

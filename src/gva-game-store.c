@@ -157,8 +157,8 @@ game_store_constructor (GType type,
         object = G_OBJECT_CLASS (parent_class)->constructor (
                 type, n_construct_properties, construct_properties);
 
-        gtk_list_store_set_column_types (
-                GTK_LIST_STORE (object), G_N_ELEMENTS (types), types);
+        gtk_tree_store_set_column_types (
+                GTK_TREE_STORE (object), G_N_ELEMENTS (types), types);
 
         gtk_tree_sortable_set_default_sort_func (
                 GTK_TREE_SORTABLE (object),
@@ -222,7 +222,7 @@ gva_game_store_get_type (void)
                 };
 
                 type = g_type_register_static (
-                        GTK_TYPE_LIST_STORE, "GvaGameStore", &type_info, 0);
+                        GTK_TYPE_TREE_STORE, "GvaGameStore", &type_info, 0);
         }
 
         return type;
@@ -322,8 +322,8 @@ gva_game_store_new_from_query (const gchar *sql,
                 GtkTreeIter iter;
                 GValue *value;
 
-                /* Append a new row to the list store. */
-                gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+                /* Append a new row to the tree store. */
+                gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 
                 /* Populate the row with available values. */
                 for (ii = 0; ii < n_columns; ii++)
@@ -366,8 +366,8 @@ gva_game_store_new_from_query (const gchar *sql,
                                 g_assert_not_reached ();
                         }
 
-                        gtk_list_store_set_value (
-                                GTK_LIST_STORE (model), &iter,
+                        gtk_tree_store_set_value (
+                                GTK_TREE_STORE (model), &iter,
                                 column_ids[ii], value);
                 }
 
@@ -375,8 +375,8 @@ gva_game_store_new_from_query (const gchar *sql,
 
                 value = &column_values[n_columns];
                 g_value_set_boolean (value, gva_favorites_contains (name));
-                gtk_list_store_set_value (
-                        GTK_LIST_STORE (model), &iter,
+                gtk_tree_store_set_value (
+                        GTK_TREE_STORE (model), &iter,
                         GVA_GAME_STORE_COLUMN_FAVORITE, value);
 
                 /* Add an entry for this row to the index. */
@@ -420,7 +420,7 @@ gva_game_store_clear (GvaGameStore *game_store)
         g_return_if_fail (GVA_IS_GAME_STORE (game_store));
 
         g_hash_table_remove_all (game_store_get_index (game_store));
-        gtk_list_store_clear (GTK_LIST_STORE (game_store));
+        gtk_tree_store_clear (GTK_TREE_STORE (game_store));
 }
 
 /**
@@ -431,7 +431,7 @@ gva_game_store_clear (GvaGameStore *game_store)
  *
  * Adds an entry to @game_store's internal index.  You will want to call
  * this immediately after adding a new row to @game_store, such as with
- * gtk_list_store_append().
+ * gtk_tree_store_append().
  **/
 void
 gva_game_store_index_insert (GvaGameStore *game_store,

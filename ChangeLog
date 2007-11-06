@@ -1,3 +1,86 @@
+2007-11-06  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.5.2
+
+	Remember the previous filename used to save audit results, and
+	suggest that again next time.
+
+	* data/gnome-video-arcade.glade:
+	Increase the height of the audit results windows.
+
+	* data/gnome-video-arcade.schemas:
+	Add error-file key.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_ERROR_FILE_KEY.
+
+	* src/gva-audit.c (audit_run_save_dialog):
+	Move the save dialog logic here from action_save_errors_cb().
+	It was getting too complicated for an action handler.
+
+	* src/gva-audit.c (gva_audit_save_error):
+	Remove the filename argument; it's all self-contained now.
+
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Reset the tree view search column each time a new model is loaded.
+	Fixes a common crash when using the interactive search.
+
+	* src/gva-ui.c (action_save_errors_cb):
+	Move all the save dialog logic to audit_run_save_dialog().
+	Just call gva_audit_save_error() now.
+
+2007-11-05  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-audit.c:
+	* src/gva-audit.h:
+	Finish implementing the audit results dialog.
+
+	* src/main.c (main):
+	Call gva_audit_init().
+
+	* src/gva-ui.h:
+	* src/gva-ui.c:
+	Define WIDGET macros for audit window.
+	Add GVA_ACTION_SAVE_ERRORS, which displays a "Save As" dialog and
+	calls gva_audit_save_errors().
+
+2007-11-05  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/Makefile.am:
+	Add gva-audit.[ch].
+
+	* src/gva-audit.h:
+	* src/gva-audit.c:
+	New source files for auditing ROM and sample sets.
+
+	* src/gva-main.c (gva_main_build_database):
+	Call gva_audit_roms() and gva_audit_samples().
+
+	* src/gva-db.c (gva_db_verify_romsets), (gva_db_verify_samplesets),
+	(db_verify_read), (db_verify_foreach), (db_verify_exit),
+	(db_verify_string_free):
+	* src/gva-mame-common.c (mame_verify_read), (mame_verify_exit):
+	Move these functions to gva-audit.c.
+
+	* src/gva-game-store.h:
+	* src/gva-game-store.c:
+	Inherit from GtkTreeStore instead of GtkListStore.
+
+	* src/gva-play-back.c: Adapt.
+	* src/gva-ui.c: Adapt.
+
+	* data/gnome-video-arcade.glade:
+	Early prototype for an audit results dialog.
+
+	* docs/reference:
+	Update developer documentation.
+
+2007-10-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gconf-bridge.c:
+	Use dashes instead of underscores in GConf key names.
+
 2007-10-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.

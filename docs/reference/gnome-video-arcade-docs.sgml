@@ -20,6 +20,7 @@
 
   <chapter>
     <title>Infrastructure</title>
+    <xi:include href="xml/gva-audit.xml"/>
     <xi:include href="xml/gva-columns.xml"/>
     <xi:include href="xml/gva-db.xml"/>
     <xi:include href="xml/gva-error.xml"/>

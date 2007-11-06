@@ -25,6 +25,7 @@
 #include <glade/glade.h>
 #include <glade/glade-build.h>
 
+#include "gva-audit.h"
 #include "gva-column-manager.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
@@ -192,8 +193,8 @@ action_insert_favorite_cb (GtkAction *action)
         gtk_tree_path_free (path);
         g_assert (valid);
 
-        gtk_list_store_set (
-                GTK_LIST_STORE (model), &iter,
+        gtk_tree_store_set (
+                GTK_TREE_STORE (model), &iter,
                 GVA_GAME_STORE_COLUMN_FAVORITE, TRUE, -1);
 
         gva_favorites_insert (name);
@@ -418,14 +419,25 @@ action_remove_favorite_cb (GtkAction *action)
         gtk_tree_path_free (path);
         g_assert (valid);
 
-        gtk_list_store_set (
-                GTK_LIST_STORE (model), &iter,
+        gtk_tree_store_set (
+                GTK_TREE_STORE (model), &iter,
                 GVA_GAME_STORE_COLUMN_FAVORITE, FALSE, -1);
 
         gva_favorites_remove (name);
 
         gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, TRUE);
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
+}
+
+/**
+ * GVA_ACTION_SAVE_ERRORS:
+ *
+ * Activation of this action saves the errors from a ROM audit to a file.
+ **/
+static void
+action_save_errors_cb (GtkAction *action)
+{
+        gva_audit_save_errors ();
 }
 
 /**
@@ -594,6 +606,13 @@ static GtkActionEntry entries[] =
           "<Control>minus",
           N_("Remove the selected game from my list of favorites"),
           G_CALLBACK (action_remove_favorite_cb) },
+
+        { "save-errors",
+          GTK_STOCK_SAVE_AS,
+          N_("Save _As..."),
+          NULL,
+          N_("Save ROM errors to a file"),
+          G_CALLBACK (action_save_errors_cb) },
 
         { "search",
           GTK_STOCK_FIND,

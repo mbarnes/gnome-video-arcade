@@ -155,8 +155,6 @@ gva_tree_view_init (void)
 
         gva_columns_load (view);
 
-        gtk_tree_view_set_search_column (
-                view, GVA_GAME_STORE_COLUMN_DESCRIPTION);
         gtk_tree_view_set_search_equal_func (
                 view, (GtkTreeViewSearchEqualFunc)
                 tree_view_search_equal, NULL, NULL);
@@ -326,6 +324,12 @@ gva_tree_view_run_query (const gchar *expr,
         gtk_tree_view_set_model (view, model);
         gtk_tree_view_columns_autosize (view);
         g_object_unref (model);
+
+        /* Need to reset the search column after loading a new model,
+         * since GtkTreeView apparenly forgets.  This is not mentioned
+         * in the GTK+ documentation (GNOME bug #351910). */
+        gtk_tree_view_set_search_column (
+                view, GVA_GAME_STORE_COLUMN_DESCRIPTION);
 
         return TRUE;
 }

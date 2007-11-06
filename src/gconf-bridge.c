@@ -604,21 +604,21 @@ window_binding_perform_scheduled_sync (WindowBinding *binding)
                 state = gdk_window_get_state (GTK_WIDGET (binding->window)->window);
 
                 if (state & GDK_WINDOW_STATE_MAXIMIZED) {
-                        key = g_strconcat (binding->key_prefix, "_maximized", NULL);
+                        key = g_strconcat (binding->key_prefix, "-maximized", NULL);
                         gconf_client_set_bool (bridge->client, key, TRUE, NULL);
                         g_free (key);
                 } else {
                         gtk_window_get_size (binding->window, &width, &height);
 
-                        key = g_strconcat (binding->key_prefix, "_width", NULL);
+                        key = g_strconcat (binding->key_prefix, "-width", NULL);
                         gconf_client_set_int (bridge->client, key, width, NULL);
                         g_free (key);
 
-                        key = g_strconcat (binding->key_prefix, "_height", NULL);
+                        key = g_strconcat (binding->key_prefix, "-height", NULL);
                         gconf_client_set_int (bridge->client, key, height, NULL);
                         g_free (key);
 
-                        key = g_strconcat (binding->key_prefix, "_maximized", NULL);
+                        key = g_strconcat (binding->key_prefix, "-maximized", NULL);
                         gconf_client_set_bool (bridge->client, key, FALSE, NULL);
                         g_free (key);
                 }
@@ -630,11 +630,11 @@ window_binding_perform_scheduled_sync (WindowBinding *binding)
 
                 gtk_window_get_position (binding->window, &x, &y);
 
-                key = g_strconcat (binding->key_prefix, "_x", NULL);
+                key = g_strconcat (binding->key_prefix, "-x", NULL);
                 gconf_client_set_int (bridge->client, key, x, NULL);
                 g_free (key);
 
-                key = g_strconcat (binding->key_prefix, "_y", NULL);
+                key = g_strconcat (binding->key_prefix, "-y", NULL);
                 gconf_client_set_int (bridge->client, key, y, NULL);
                 g_free (key);
         }
@@ -752,15 +752,15 @@ gconf_bridge_bind_window (GConfBridge *bridge,
                 char *key;
                 GConfValue *width_val, *height_val, *maximized_val;
 
-                key = g_strconcat (key_prefix, "_width", NULL);
+                key = g_strconcat (key_prefix, "-width", NULL);
                 width_val = gconf_client_get (bridge->client, key, NULL);
                 g_free (key);
 
-                key = g_strconcat (key_prefix, "_height", NULL);
+                key = g_strconcat (key_prefix, "-height", NULL);
                 height_val = gconf_client_get (bridge->client, key, NULL);
                 g_free (key);
 
-                key = g_strconcat (key_prefix, "_maximized", NULL);
+                key = g_strconcat (key_prefix, "-maximized", NULL);
                 maximized_val = gconf_client_get (bridge->client, key, NULL);
                 g_free (key);
 
@@ -789,11 +789,11 @@ gconf_bridge_bind_window (GConfBridge *bridge,
                 char *key;
                 GConfValue *x_val, *y_val;
                 
-                key = g_strconcat (key_prefix, "_x", NULL);
+                key = g_strconcat (key_prefix, "-x", NULL);
                 x_val = gconf_client_get (bridge->client, key, NULL);
                 g_free (key);
 
-                key = g_strconcat (key_prefix, "_y", NULL);
+                key = g_strconcat (key_prefix, "-y", NULL);
                 y_val = gconf_client_get (bridge->client, key, NULL);
                 g_free (key);
 

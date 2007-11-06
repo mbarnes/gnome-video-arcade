@@ -87,8 +87,6 @@
 
 </para>
 
-@callback: 
-@user_data: 
 @error: 
 @Returns: 
 
@@ -98,8 +96,6 @@
 
 </para>
 
-@callback: 
-@user_data: 
 @error: 
 @Returns: 
 

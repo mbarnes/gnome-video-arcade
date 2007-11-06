@@ -20,6 +20,7 @@
 
 #include <stdarg.h>
 
+#include "gva-audit.h"
 #include "gva-db.h"
 #include "gva-mame.h"
 #include "gva-tree-view.h"
@@ -181,11 +182,11 @@ gva_main_build_database (GError **error)
         if (main_loop_quit)
                 goto exit;
 
-        process = gva_db_verify_romsets (error);
+        process = gva_audit_roms (error);
         if (process == NULL)
                 goto fail;
 
-        process2 = gva_db_verify_samplesets (error);
+        process2 = gva_audit_samples (error);
         if (process2 == NULL)
                 goto fail;
 

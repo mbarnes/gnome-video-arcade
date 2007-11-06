@@ -1,3 +1,13 @@
+GNOME Video Arcade 0.5.2
+========================
+
+        Released November 6 2007
+
+        What's New
+        ----------
+        * Alert the user if the ROM file analysis detects any errors.
+	* Fix a crash when using interactive search in the main window.
+
 GNOME Video Arcade 0.5.1
 ========================
 

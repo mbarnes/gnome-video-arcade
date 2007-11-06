@@ -24,6 +24,8 @@ AM_LDFLAGS = \
 gnome_video_arcade_SOURCES = \
 	gconf-bridge.c			\
 	gconf-bridge.h			\
+	gva-audit.c			\
+	gva-audit.h			\
 	gva-cell-renderer-pixbuf.c	\
 	gva-cell-renderer-pixbuf.h	\
 	gva-column-manager.c		\

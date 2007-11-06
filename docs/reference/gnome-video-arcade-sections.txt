@@ -1,4 +1,12 @@
 <SECTION>
+<FILE>gva-audit</FILE>
+gva_audit_init
+gva_audit_roms
+gva_audit_samples
+gva_audit_save_errors
+</SECTION>
+
+<SECTION>
 <FILE>gva-process</FILE>
 <TITLE>GvaProcess</TITLE>
 GvaProcess
@@ -161,6 +169,7 @@ GVA_ACTION_PROPERTIES
 GVA_ACTION_QUIT
 GVA_ACTION_RECORD
 GVA_ACTION_REMOVE_FAVORITE
+GVA_ACTION_SAVE_ERRORS
 GVA_ACTION_SEARCH
 GVA_ACTION_SHOW_PLAY_BACK
 GVA_ACTION_START
@@ -171,6 +180,9 @@ gva_ui_get_action
 gva_ui_get_widget
 gva_ui_get_managed_widget
 <SUBSECTION Private>
+GVA_WIDGET_AUDIT_SAVE_BUTTON
+GVA_WIDGET_AUDIT_TREE_VIEW
+GVA_WIDGET_AUDIT_WINDOW
 GVA_WIDGET_MAIN_PROGRESS_BAR
 GVA_WIDGET_MAIN_PROPERTIES_BUTTON
 GVA_WIDGET_MAIN_START_GAME_BUTTON
@@ -302,8 +314,6 @@ gva_get_user_data_dir
 <FILE>gva-db</FILE>
 gva_db_init
 gva_db_build
-gva_db_verify_romsets
-gva_db_verify_samplesets
 gva_db_reset
 gva_db_execute
 gva_db_transaction_begin

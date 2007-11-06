@@ -96,12 +96,12 @@ enum _GvaGameStoreColumn
  **/
 struct _GvaGameStore
 {
-        GtkListStore parent;
+        GtkTreeStore parent;
 };
 
 struct _GvaGameStoreClass
 {
-        GtkListStoreClass parent_class;
+        GtkTreeStoreClass parent_class;
 };
 
 GType           gva_game_store_get_type         (void);

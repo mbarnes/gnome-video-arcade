@@ -43,12 +43,21 @@
 #define GVA_ACTION_QUIT                 (gva_ui_get_action ("quit"))
 #define GVA_ACTION_RECORD               (gva_ui_get_action ("record"))
 #define GVA_ACTION_REMOVE_FAVORITE      (gva_ui_get_action ("remove-favorite"))
+#define GVA_ACTION_SAVE_ERRORS          (gva_ui_get_action ("save-errors"))
 #define GVA_ACTION_SEARCH               (gva_ui_get_action ("search"))
 #define GVA_ACTION_SHOW_PLAY_BACK       (gva_ui_get_action ("show-play-back"))
 #define GVA_ACTION_START                (gva_ui_get_action ("start"))
 #define GVA_ACTION_VIEW_AVAILABLE       (gva_ui_get_action ("view-available"))
 #define GVA_ACTION_VIEW_FAVORITES       (gva_ui_get_action ("view-favorites"))
 #define GVA_ACTION_VIEW_RESULTS         (gva_ui_get_action ("view-results"))
+
+/* Audit Window */
+#define GVA_WIDGET_AUDIT_SAVE_BUTTON \
+        (gva_ui_get_widget ("audit-save-button"))
+#define GVA_WIDGET_AUDIT_TREE_VIEW \
+        (gva_ui_get_widget ("audit-tree-view"))
+#define GVA_WIDGET_AUDIT_WINDOW \
+        (gva_ui_get_widget ("audit-window"))
 
 /* Main Window */
 #define GVA_WIDGET_MAIN_PROGRESS_BAR \
