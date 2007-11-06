@@ -251,6 +251,68 @@ audit_exit (GvaProcess *process,
         gva_error_handle (&error);
 }
 
+static gchar *
+audit_run_save_dialog (void)
+{
+        const gchar *key = GVA_GCONF_ERROR_FILE_KEY;
+        GtkFileChooser *file_chooser;
+        GtkWidget *dialog;
+        GConfClient *client;
+        gchar *filename;
+        gchar *folder;
+        gchar *name;
+        GError *error = NULL;
+
+        client = gconf_client_get_default ();
+
+        dialog = gtk_file_chooser_dialog_new (
+                _("Save As"),
+                GTK_WINDOW (GVA_WIDGET_AUDIT_WINDOW),
+                GTK_FILE_CHOOSER_ACTION_SAVE,
+                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+                NULL);
+
+        file_chooser = GTK_FILE_CHOOSER (dialog);
+
+        /* Suggest the previous filename, if available. */
+
+        filename = gconf_client_get_string (client, key, &error);
+        gva_error_handle (&error);
+
+        if (filename != NULL && *filename != '\0')
+        {
+                name = g_path_get_basename (filename);
+                folder = g_path_get_dirname (filename);
+        }
+        else
+        {
+                name = g_strdup ("rom-errors.txt");
+                folder = g_strdup (g_get_home_dir ());
+        }
+
+        gtk_file_chooser_set_current_folder (file_chooser, folder);
+        gtk_file_chooser_set_current_name (file_chooser, name);
+
+        g_free (name);
+        g_free (folder);
+        g_free (filename);
+
+        filename = NULL;
+
+        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+        {
+                filename = gtk_file_chooser_get_filename (file_chooser);
+                gconf_client_set_string (client, key, filename, &error);
+                gva_error_handle (&error);
+        }
+
+        gtk_widget_destroy (dialog);
+        g_object_unref (client);
+
+        return filename;
+}
+
 static void
 audit_show_dialog (GvaProcess *process,
                    gint status,
@@ -268,7 +330,8 @@ audit_show_dialog (GvaProcess *process,
         view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
         gtk_tree_view_set_model (view, model);
 
-        gtk_widget_show (GVA_WIDGET_AUDIT_WINDOW);
+        if (gtk_tree_model_iter_n_children (model, NULL) > 0)
+                gtk_widget_show (GVA_WIDGET_AUDIT_WINDOW);
 }
 
 /**
@@ -395,40 +458,47 @@ audit_save_errors_foreach (GtkTreeModel *model,
 
 /**
  * gva_audit_save_errors:
- * @filename: the filename to save errors to
  *
- * Saves the results of the most recent ROM file audit to @filename.
+ * Saves the results of the most recent ROM file audit to a file.
  **/
 void
-gva_audit_save_errors (const gchar *filename)
+gva_audit_save_errors (void)
 {
         GtkTreeView *view;
         GtkTreeModel *model;
         GString *contents;
         gchar *mame_version;
+        gchar *filename;
         GError *error = NULL;
 
         view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
         model = gtk_tree_view_get_model (view);
         g_return_if_fail (model != NULL);
 
-        contents = g_string_sized_new (4096);
-
         mame_version = gva_mame_get_version (&error);
         gva_error_handle (&error);
 
+        /* Build the contents of the file. */
+        contents = g_string_sized_new (4096);
         g_string_append_printf (
                 contents, "%s - ROM Audit Results\n", PACKAGE_STRING);
         if (mame_version != NULL)
                 g_string_append_printf (contents, "Using %s\n", mame_version);
+        else
+                g_string_append (contents, "Using unknown M.A.M.E. version\n");
         g_string_append_c (contents, '\n');
-
         gtk_tree_model_foreach (
                 model, (GtkTreeModelForeachFunc)
                 audit_save_errors_foreach, contents);
 
-        g_file_set_contents (filename, contents->str, -1, &error);
-        gva_error_handle (&error);
+        /* Prompt the user for a filename. */
+        filename = audit_run_save_dialog ();
+        if (filename != NULL)
+        {
+                g_file_set_contents (filename, contents->str, -1, &error);
+                gva_error_handle (&error);
+                g_free (filename);
+        }
 
         g_free (mame_version);
         g_string_free (contents, TRUE);

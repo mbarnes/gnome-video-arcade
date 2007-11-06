@@ -437,32 +437,7 @@ action_remove_favorite_cb (GtkAction *action)
 static void
 action_save_errors_cb (GtkAction *action)
 {
-        GtkWidget *dialog;
-
-        dialog = gtk_file_chooser_dialog_new (
-                _("Save As"),
-                GTK_WINDOW (GVA_WIDGET_AUDIT_WINDOW),
-                GTK_FILE_CHOOSER_ACTION_SAVE,
-                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
-                NULL);
-
-        gtk_file_chooser_set_current_name (
-                GTK_FILE_CHOOSER (dialog), "rom-errors.txt");
-        gtk_file_chooser_set_do_overwrite_confirmation (
-                GTK_FILE_CHOOSER (dialog), TRUE);
-
-        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-        {
-                gchar *filename;
-
-                filename = gtk_file_chooser_get_filename (
-                        GTK_FILE_CHOOSER (dialog));
-                gva_audit_save_errors (filename);
-                g_free (filename);
-        }
-
-        gtk_widget_destroy (dialog);
+        gva_audit_save_errors ();
 }
 
 /**

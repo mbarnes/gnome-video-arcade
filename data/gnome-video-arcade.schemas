@@ -73,6 +73,18 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/error-file</applyto>
+      <key>/schemas/apps/gnome-video-arcade/error-file</key>
+      <owner>gnome-video-arcade</owner>
+      <type>string</type>
+      <default></default>
+      <locale name="C">
+        <short>ROM error filename</short>
+        <long>Suggested filename for the ROM error "Save As" dialog.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/search</applyto>
       <key>/schemas/apps/gnome-video-arcade/search</key>
       <owner>gnome-video-arcade</owner>

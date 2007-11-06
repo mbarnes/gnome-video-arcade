@@ -35,7 +35,7 @@ G_BEGIN_DECLS
 void            gva_audit_init                  (void);
 GvaProcess *    gva_audit_roms                  (GError **error);
 GvaProcess *    gva_audit_samples               (GError **error);
-void            gva_audit_save_errors           (const gchar *filename);
+void            gva_audit_save_errors           (void);
 
 G_END_DECLS
 

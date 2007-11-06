@@ -1,3 +1,34 @@
+2007-11-06  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.5.2
+
+	Remember the previous filename used to save audit results, and
+	suggest that again next time.
+
+	* data/gnome-video-arcade.glade:
+	Increase the height of the audit results windows.
+
+	* data/gnome-video-arcade.schemas:
+	Add error-file key.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_ERROR_FILE_KEY.
+
+	* src/gva-audit.c (audit_run_save_dialog):
+	Move the save dialog logic here from action_save_errors_cb().
+	It was getting too complicated for an action handler.
+
+	* src/gva-audit.c (gva_audit_save_error):
+	Remove the filename argument; it's all self-contained now.
+
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Reset the tree view search column each time a new model is loaded.
+	Fixes a common crash when using the interactive search.
+
+	* src/gva-ui.c (action_save_errors_cb):
+	Move all the save dialog logic to audit_run_save_dialog().
+	Just call gva_audit_save_error() now.
+
 2007-11-05  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:
