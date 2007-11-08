@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "gva-common.h"
+#include "gva-history.h"
 
 #include "gva-error.h"
 

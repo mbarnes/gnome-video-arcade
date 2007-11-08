@@ -1,3 +1,9 @@
+2007-11-08  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-columns.c:
+	* src/gva-history.c:
+	Sparse warning cleanups.
+
 2007-11-06  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.

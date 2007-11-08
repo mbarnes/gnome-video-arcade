@@ -524,7 +524,7 @@ const gchar *
 gva_columns_lookup_name (GvaGameStoreColumn column_id)
 {
         if (CLAMP (column_id, 0, G_N_ELEMENTS (column_info)) != column_id)
-                return FALSE;
+                return NULL;
 
         return column_info[column_id].name;
 }
