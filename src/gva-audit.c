@@ -145,7 +145,7 @@ audit_read (GvaProcess *process,
         gpointer value;
 
         /* Output for -verifyroms is as follows:
-         * 
+         *
          * romset puckman is good
          * romset puckmana [puckman] is good
          * romset puckmanf [puckman] is good

@@ -79,7 +79,7 @@ GType           gva_column_manager_get_type     (void);
 GtkWidget *     gva_column_manager_new          (GtkTreeView *managed_view);
 GtkTreeView *   gva_column_manager_get_managed_view
                                                 (GvaColumnManager *manager);
-void            gva_column_manager_set_managed_view     
+void            gva_column_manager_set_managed_view
                                                 (GvaColumnManager *manager,
                                                  GtkTreeView *managed_view);
 

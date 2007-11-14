@@ -1565,7 +1565,7 @@ gva_db_get_filename (void)
 
 /**
  * gva_db_needs_rebuilt:
- * 
+ *
  * Runs a series of tests to determine whether the game database is
  * out-of-date and needs to be rebuilt.  Examples of conditions that
  * would cause a database rebuild are a new version of

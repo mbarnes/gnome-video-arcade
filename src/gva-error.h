@@ -64,7 +64,7 @@ G_BEGIN_DECLS
  *
  * Error codes for general operations in
  * <emphasis>GNOME Video Arcade</emphasis>.
- **/  
+ **/
 typedef enum
 {
         GVA_ERROR_CONFIG,

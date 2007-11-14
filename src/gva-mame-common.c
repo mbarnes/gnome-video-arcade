@@ -73,7 +73,7 @@ gva_mame_async_data_free (GvaMameAsyncData *data)
  * gva_mame_command:
  * @arguments: command line arguments
  * @stdout_lines: return location for stdout lines, or %NULL
- * @stderr_lines: return location for stderr lines, or %NULL 
+ * @stderr_lines: return location for stderr lines, or %NULL
  * @error: return locations for a #GError, or %NULL
  *
  * Spawns MAME with @arguments and blocks until the child process exits.

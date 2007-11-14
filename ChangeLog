@@ -1,3 +1,8 @@
+2007-11-14  Matthew Barnes  <mbarnes@redhat.com>
+
+	Remove trailing whitespace from source code via
+	$ find -name "*.[ch]" -exec sed -ie 's/[ ^t]*//' {} \;
+
 2007-11-08  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-columns.c:

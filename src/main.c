@@ -167,7 +167,7 @@ main (gint argc, gchar **argv)
                 g_print ("%s\n", MAME_PROGRAM);
                 exit (0);
         }
-        
+
         gtk_window_set_default_icon_name (PACKAGE);
 
         if (!gva_db_init (&error))
