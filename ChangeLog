@@ -1,3 +1,9 @@
+2007-11-17  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-column-manager.c (column_manager_init):
+	Use a GtkVButtonBox instead of a GtkVBox to hold the buttons.
+	Eliminates the need for a GtkAlignment.
+
 2007-11-14  Matthew Barnes  <mbarnes@redhat.com>
 
 	Remove trailing whitespace from source code via

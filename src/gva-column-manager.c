@@ -564,9 +564,11 @@ column_manager_init (GvaColumnManager *manager)
                 column, renderer, (GtkTreeCellDataFunc)
                 column_manager_render_title, NULL, NULL);
 
-        /* Initialize the vertical box. */
+        /* Initialize the vertical button box. */
 
-        vbox = gtk_vbox_new (FALSE, 6);
+        vbox = gtk_vbutton_box_new ();
+        gtk_box_set_spacing (GTK_BOX (vbox), 6);
+        gtk_button_box_set_layout (GTK_BUTTON_BOX (vbox), GTK_BUTTONBOX_START);
         manager->vbox = g_object_ref_sink (vbox);
 
         widget = gtk_button_new_with_mnemonic (_("Move _Up"));
@@ -612,10 +614,6 @@ column_manager_init (GvaColumnManager *manager)
         g_signal_connect_swapped (
                 priv->hide_button, "clicked",
                 G_CALLBACK (column_manager_hide_selected), manager);
-
-        /* Expand and fill to keep the buttons in place. */
-        widget = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
-        gtk_box_pack_end (GTK_BOX (vbox), widget, TRUE, TRUE, 0);
 }
 
 GType
