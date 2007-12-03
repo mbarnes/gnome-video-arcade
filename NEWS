@@ -1,7 +1,18 @@
+GNOME Video Arcade 0.5.3
+========================
+
+	Released December 3, 2007
+
+	What's New
+	----------
+	* Fix a configuration bug that prevented GNOME Video Arcade from
+	  building when the sdlmame or xmame binaries are installed under
+	  a different name (e.g. "mame").  See the README file for details.
+
 GNOME Video Arcade 0.5.2
 ========================
 
-        Released November 6 2007
+        Released November 6, 2007
 
         What's New
         ----------
@@ -11,7 +22,7 @@ GNOME Video Arcade 0.5.2
 GNOME Video Arcade 0.5.1
 ========================
 
-        Released October 25 2007
+        Released October 25, 2007
 
         What's New
         ----------
@@ -21,7 +32,7 @@ GNOME Video Arcade 0.5.1
 GNOME Video Arcade 0.5.0
 ========================
 
-        Released October 17 2007
+        Released October 17, 2007
 
         What's New
         ----------

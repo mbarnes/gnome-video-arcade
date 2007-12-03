@@ -1,5 +1,13 @@
 2007-12-03  Matthew Barnes  <mbarnes@redhat.com>
 
+	* configure.ac: Post-release version bump.
+
+2007-12-03  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.5.3
+
+2007-12-03  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac:
 	Rework how we find the MAME program.  The problem is some distros
 	install sdlmame or xmame as /usr/bin/mame, and our configure script
