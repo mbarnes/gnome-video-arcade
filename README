@@ -73,11 +73,11 @@ including GNOME Video Arcade.  This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.5.0 and may change in forthcoming releases.
+version 0.5.3 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.5.0
+   $ cd /path/to/gnome-video-arcade-0.5.3
    $ ./configure
    $ make
    $ su -c "make install"
@@ -85,11 +85,20 @@ The standard installation procedure looks like this:
 
    To start: Applications -> Games -> Video Arcade
 
-The MAME program name must begin with "sdlmame" or "xmame".  If
-the configure script cannot find the MAME program, you can tell
-it where the MAME program is like this:
+If the configure script cannot find the MAME program, you can
+specify the MAME program location by defining an SDLMAME or
+XMAME environment variable, like this:
 
-   $ MAME=/path/to/program/sdlmame ./configure
+   $ SDLMAME=/path/to/program/sdlmame ./configure
+
+   or
+
+   $ XMAME=/path/to/program/xmame ./configure
+
+The choice of environment variable determines which MAME driver
+is compiled, so use the SDLMAME environment variable if you have
+sdlmame installed, or the XMAME environment variable if you have
+xmame installed.
 
 You can use the --with-history-file configure option to specify
 the location of a history.dat file as mentioned above.  Usage

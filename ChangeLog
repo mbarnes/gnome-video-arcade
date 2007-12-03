@@ -1,3 +1,21 @@
+2007-12-03  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Rework how we find the MAME program.  The problem is some distros
+	install sdlmame or xmame as /usr/bin/mame, and our configure script
+	cannot handle that because:
+
+	  a) We place requirements on the name of the MAME binary.
+
+	  b) Defining "MAME=/usr/bin/mame" does not tell us which
+	     MAME backend to compile.
+
+	The solution is to specify program location using either an XMAME
+	or SDLMAME environment variable, instead of just MAME.  This tells
+	us both program location and which MAME backend to compile.
+
+	* README: Update the build instructions.
+
 2007-11-17  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-column-manager.c (column_manager_init):
