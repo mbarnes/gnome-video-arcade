@@ -1,5 +1,8 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Location of the category file */
+#undef CATEGORY_FILE
+
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 

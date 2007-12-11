@@ -31,8 +31,31 @@
 
 G_BEGIN_DECLS
 
+typedef enum _GvaDebugFlags GvaDebugFlags;
+
+/**
+ * GvaDebugFlags:
+ * @GVA_DEBUG_NONE:
+ *      Print no messages.
+ * @GVA_ERROR_MAME:
+ *      Print shell commands invoking MAME.
+ * @GVA_DEBUG_SQL:
+ *      Print SQL commands to the game database.
+ *
+ * These flags indicate which types of debugging messages will be triggered
+ * at runtime. Debugging messages can be triggered by setting the GVA_DEBUG
+ * environment variable to a colon-separated list of "mame" and "sql".
+ **/
+enum _GvaDebugFlags
+{
+        GVA_DEBUG_NONE  = 0,
+        GVA_DEBUG_MAME  = 1 << 0,
+        GVA_DEBUG_SQL   = 1 << 1
+};
+
 gchar *         gva_choose_inpname              (const gchar *game);
 gchar *         gva_find_data_file              (const gchar *basename);
+GvaDebugFlags   gva_get_debug_flags             (void);
 const gchar *   gva_get_last_version            (void);
 gchar *         gva_get_monospace_font_name     (void);
 void            gva_get_time_elapsed            (GTimeVal *start_time,

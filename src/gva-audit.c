@@ -27,9 +27,6 @@
 #include "gva-mame.h"
 #include "gva-ui.h"
 
-#define SQL_DELETE_NOT_FOUND \
-        "DELETE FROM game WHERE romset == \"not found\";"
-
 #define SQL_SELECT_BAD_GAMES \
         "SELECT name, description FROM game WHERE romset == 'bad'"
 
@@ -241,11 +238,6 @@ audit_exit (GvaProcess *process,
 
         g_hash_table_foreach (
                 data->status_index, (GHFunc) audit_exit_foreach, data);
-
-        /* This part only really applies to romsets, but I suppose there's
-         * no harm in executing it twice. */
-        gva_db_execute (SQL_DELETE_NOT_FOUND, &error);
-        gva_error_handle (&error);
 
         gva_db_transaction_commit (&error);
         gva_error_handle (&error);

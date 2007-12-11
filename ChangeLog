@@ -1,3 +1,66 @@
+2007-12-10  Matthew Barnes  <mbarnes@redhat.com>
+
+	* README:
+	Update the build instructions.
+
+	* configure.ac:
+	Add a --with-category-file option.
+
+	* data/gnome-video-arcade.desktop.in:
+	Change the category from ArcadeGame to Emulator.
+
+	* docs/reference:
+	Update developer documentation.
+
+	* src/Makefile.am:
+	Add gva-categories.[ch].
+
+	* src/gva-audit.c (audit_exit):
+	Don't delete unavailable games from the database.
+	Retaining that information might prove useful in the future.
+
+	* src/gva-categories.c:
+	* src/gva-categories.h:
+	New source files parse a catver.ini file.
+
+	* src/gva-columns.c:
+	Add a "Category" column (if CATEGORY_FILE is defined).
+
+	* src/gva-db.c (gva_db_init):
+	Print debug messages when the GVA_DEBUG_SQL flag is set.
+
+	* src/gva-db.c (db_create_tables):
+	Create a database view of available games, which also provides
+	virtual columns "category" and "favorite".  Use this view when
+	querying the database for game information.
+
+	* src/gva-db.c (db_function_getcategory):
+	Callback for database function getcategory().
+
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	Add GVA_GAME_STORE_COLUMN_CATEGORY.
+
+	* src/gva-history.c (gva_history_init):
+	Fix some mistakes in the documentation.
+
+	* src/gva-mame-process.c (gva_mame_process_spawn):
+	Print debug messages when the GVA_DEBUG_MAME flag is set.
+
+	* src/gva-properties.c:
+	Select database rows from the "available" view.
+
+	* src/gva-tree-view.c (gva_tree_view_update):
+	Simplify the "Favorite Games" search expression.
+	Add "category" to the "Search Results" search expression.
+
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Select database rows from the "available" view.
+	No need to special-case the "favorite" column anymore.
+
+	* src/gva-util.c (gva_get_debug_flags):
+	New function parses the GVA_DEBUG environment variable.
+
 2007-12-03  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.

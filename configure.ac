@@ -119,6 +119,21 @@ GNOME_DOC_INIT
 
 # Optional Features
 
+# --with-category-file=PATH
+AC_MSG_CHECKING([for category file])
+AC_ARG_WITH([category-file],
+        [AC_HELP_STRING([--with-category-file=PATH],
+        [path to category file (usually named 'catver.ini')])],
+        with_category="$withval", with_category="no")
+if test "$with_category" = "yes"; then
+        AC_MSG_ERROR([--with-category-file missing PATH argument])
+fi
+if test "$with_category" != "no"; then
+        AC_DEFINE_UNQUOTED(CATEGORY_FILE, "$with_category",
+                [Location of the category file])
+fi
+AC_MSG_RESULT($with_category)
+
 # --with-history-file=PATH
 AC_MSG_CHECKING([for arcade history file])
 AC_ARG_WITH([history-file],

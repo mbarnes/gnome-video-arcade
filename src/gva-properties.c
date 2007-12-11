@@ -26,7 +26,7 @@
 #include "gva-util.h"
 
 #define SQL_SELECT_NAME \
-        "SELECT * FROM game WHERE name = \"%s\""
+        "SELECT * FROM available WHERE name = \"%s\""
 
 static void
 properties_update_header (GtkTreeModel *model,

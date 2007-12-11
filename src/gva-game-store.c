@@ -122,6 +122,7 @@ game_store_constructor (GType type,
         gint column = 0;
 
         types[column++] = G_TYPE_STRING;     /* COLUMN_NAME */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_CATEGORY */
         types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
         types[column++] = G_TYPE_STRING;     /* COLUMN_SOURCEFILE */
         types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_RUNNABLE */

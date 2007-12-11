@@ -40,6 +40,13 @@ gva_process_get_type
 </SECTION>
 
 <SECTION>
+<FILE>gva-categories</FILE>
+gva_categories_init
+gva_categories_lookup
+gva_mame_version_lookup
+</SECTION>
+
+<SECTION>
 <FILE>gva-column-manager</FILE>
 <TITLE>GvaColumnManager</TITLE>
 GvaColumnManager
@@ -304,6 +311,8 @@ gva_properties_close_clicked_cb
 <FILE>gva-util</FILE>
 gva_choose_inpname
 gva_find_data_file
+gva_get_debug_flags
+GvaDebugFlags
 gva_get_last_version
 gva_get_monospace_font_name
 gva_get_time_elapsed

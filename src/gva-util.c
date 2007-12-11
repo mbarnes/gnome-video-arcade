@@ -129,6 +129,35 @@ gva_find_data_file (const gchar *basename)
 }
 
 /**
+ * gva_get_debug_flags:
+ *
+ * Returns a set of bit flags indicating what kinds of debugging messages
+ * are enabled through the GVA_DEBUG environment variable.
+ *
+ * Returns: bitwise combination of #GvaDebugFlags values
+ **/
+GvaDebugFlags
+gva_get_debug_flags (void)
+{
+        static guint flags = G_MAXUINT;
+
+        if (G_UNLIKELY (flags == G_MAXUINT))
+        {
+                static const GDebugKey debug_keys[] =
+                {
+                        { "mame",  GVA_DEBUG_MAME },
+                        { "sql",   GVA_DEBUG_SQL }
+                };
+
+                flags = g_parse_debug_string (
+                        g_getenv ("GVA_DEBUG"), debug_keys,
+                        G_N_ELEMENTS (debug_keys));
+        }
+
+        return (GvaDebugFlags) flags;
+}
+
+/**
  * gva_get_last_version:
  *
  * Returns the most recently run version of

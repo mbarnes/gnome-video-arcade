@@ -26,6 +26,8 @@ gnome_video_arcade_SOURCES = \
 	gconf-bridge.h			\
 	gva-audit.c			\
 	gva-audit.h			\
+	gva-categories.h		\
+	gva-categories.c		\
 	gva-cell-renderer-pixbuf.c	\
 	gva-cell-renderer-pixbuf.h	\
 	gva-column-manager.c		\

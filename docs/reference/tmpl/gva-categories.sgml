@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-
+gva-categories
 
 <!-- ##### SECTION Short_Description ##### -->
 
@@ -17,14 +17,7 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### FUNCTION gva_audit_init ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION gva_audit_roms ##### -->
+<!-- ##### FUNCTION gva_categories_init ##### -->
 <para>
 
 </para>
@@ -33,19 +26,23 @@
 @Returns: 
 
 
-<!-- ##### FUNCTION gva_audit_samples ##### -->
+<!-- ##### FUNCTION gva_categories_lookup ##### -->
 <para>
 
 </para>
 
+@game: 
 @error: 
 @Returns: 
 
 
-<!-- ##### FUNCTION gva_audit_save_errors ##### -->
+<!-- ##### FUNCTION gva_mame_version_lookup ##### -->
 <para>
 
 </para>
 
+@game: 
+@error: 
+@Returns: 
 
 

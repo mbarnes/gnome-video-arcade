@@ -20,6 +20,7 @@
 
 #include <string.h>
 
+#include "gva-categories.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-mame.h"
@@ -171,6 +172,12 @@
                 "default_ DEFAULT 'no' " \
                 "CHECK (default_ in ('yes', 'no')));"
 
+#define SQL_CREATE_VIEW_AVAILABLE \
+        "CREATE VIEW IF NOT EXISTS available AS " \
+                "SELECT *, getcategory(name) AS category, " \
+                "isfavorite(name) AS favorite FROM game " \
+                "WHERE (romset IN ('good', 'best available'))"
+
 #define SQL_INSERT_GAME \
         "INSERT INTO game VALUES (" \
                 "@name, " \
@@ -271,9 +278,6 @@
                 "@dipswitch, " \
                 "@name, " \
                 "@default_);"
-
-#define SQL_DELETE_NOT_FOUND \
-        "DELETE FROM game WHERE romset == \"not found\";"
 
 typedef struct _ParserData ParserData;
 
@@ -1186,7 +1190,35 @@ db_create_tables (GError **error)
                 && gva_db_execute (SQL_CREATE_TABLE_CHIP, error)
                 && gva_db_execute (SQL_CREATE_TABLE_DISPLAY, error)
                 && gva_db_execute (SQL_CREATE_TABLE_CONTROL, error)
-                && gva_db_execute (SQL_CREATE_TABLE_DIPVALUE, error);
+                && gva_db_execute (SQL_CREATE_TABLE_DIPVALUE, error)
+                && gva_db_execute (SQL_CREATE_VIEW_AVAILABLE, error);
+}
+
+static void
+db_function_getcategory (sqlite3_context *context,
+                         gint n_values,
+                         sqlite3_value **values)
+{
+#ifdef CATEGORY_FILE
+        const gchar *name;
+        gchar *category;
+        GError *error = NULL;
+
+        g_assert (n_values == 1);
+
+        name = (const gchar *) sqlite3_value_text (values[0]);
+        category = gva_categories_lookup (name, &error);
+	gva_error_handle (&error);
+
+        if (category != NULL)
+                sqlite3_result_text (context, category, -1, SQLITE_TRANSIENT);
+	else
+		sqlite3_result_null (context);
+
+	g_free (category);
+#else
+	sqlite3_result_null (context);
+#endif
 }
 
 static void
@@ -1203,6 +1235,12 @@ db_function_isfavorite (sqlite3_context *context,
                 sqlite3_result_text (context, "yes", -1, SQLITE_STATIC);
         else
                 sqlite3_result_text (context, "no", -1, SQLITE_STATIC);
+}
+
+static void
+db_trace_cb (gpointer unused, const gchar *message)
+{
+        g_debug ("%s", message);
 }
 
 /**
@@ -1229,9 +1267,18 @@ gva_db_init (GError **error)
         if (sqlite3_open (filename, &db) != SQLITE_OK)
                 goto fail;
 
+        if (gva_get_debug_flags () & GVA_DEBUG_SQL)
+                sqlite3_trace (db, db_trace_cb, NULL);
+
         errcode = sqlite3_create_function (
                 db, "isfavorite", 1, SQLITE_ANY, NULL,
                 db_function_isfavorite, NULL, NULL);
+        if (errcode != SQLITE_OK)
+                goto fail;
+
+        errcode = sqlite3_create_function (
+                db, "getcategory", 1, SQLITE_ANY, NULL,
+                db_function_getcategory, NULL, NULL);
         if (errcode != SQLITE_OK)
                 goto fail;
 

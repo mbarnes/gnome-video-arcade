@@ -30,7 +30,7 @@
 #include "gva-ui.h"
 
 #define SQL_SELECT_GAMES \
-        "SELECT %s FROM game WHERE (romset IN ('good', 'best available'))"
+        "SELECT %s FROM available"
 
 static gboolean
 tree_view_show_popup_menu (GdkEventButton *event)
@@ -205,7 +205,7 @@ gva_tree_view_update (GError **error)
                         break;
 
                 case 1:  /* Favorite Games */
-                        expr = g_strdup ("isfavorite(name) == \"yes\"");
+                        expr = g_strdup ("favorite == \"yes\"");
                         break;
 
                 case 2:  /* Search Results */
@@ -216,11 +216,12 @@ gva_tree_view_update (GError **error)
                         if (text != NULL && *text != '\0')
                                 expr = g_strdup_printf (
                                         "name LIKE '%s' OR "
+                                        "category LIKE '%%%s%%' OR "
                                         "sourcefile LIKE '%s' OR "
                                         "description LIKE '%%%s%%' OR "
                                         "manufacturer LIKE '%%%s%%' OR "
                                         "year LIKE '%s'",
-                                        text, text, text, text, text);
+                                        text, text, text, text, text, text);
                         else
                                 expr = g_strdup ("name == NULL");
                         g_free (text);
@@ -279,10 +280,7 @@ gva_tree_view_run_query (const gchar *expr,
         strv = g_new0 (const gchar *, g_slist_length (list) + 1);
         while (list != NULL)
         {
-                if (strcmp (list->data, "favorite") == 0)
-                        strv[ii++] = "isfavorite(name) AS favorite";
-                else
-                        strv[ii++] = list->data;
+                strv[ii++] = list->data;
                 list = g_slist_delete_link (list, list);
         }
         columns = g_strjoinv (", ", (gchar **) strv);
@@ -293,7 +291,7 @@ gva_tree_view_run_query (const gchar *expr,
         g_free (columns);
 
         if (expr != NULL)
-                g_string_append_printf (string, " AND (%s)", expr);
+                g_string_append_printf (string, " WHERE %s", expr);
 
         window = gtk_widget_get_parent_window (GTK_WIDGET (view));
         display = gtk_widget_get_display (GTK_WIDGET (view));

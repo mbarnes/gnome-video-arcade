@@ -1,13 +1,26 @@
+GNOME Video Arcade 0.5.4
+========================
+
+        Released December ??, 2007
+
+        What's New
+        ----------
+        * GNOME Video Arcade can now be configured to parse a catver.ini
+          file at startup. See the README file for details. This unlocks a
+          new "Category" column and the ability to search by category.
+        * Set the GVA_DEBUG environment variable to "mame" or "sql" to
+          trigger debugging messages during runtime.
+
 GNOME Video Arcade 0.5.3
 ========================
 
-	Released December 3, 2007
+        Released December 3, 2007
 
-	What's New
-	----------
-	* Fix a configuration bug that prevented GNOME Video Arcade from
-	  building when the sdlmame or xmame binaries are installed under
-	  a different name (e.g. "mame").  See the README file for details.
+        What's New
+        ----------
+        * Fix a configuration bug that prevented GNOME Video Arcade from
+          building when the sdlmame or xmame binaries are installed under
+          a different name (e.g. "mame"). See the README file for details.
 
 GNOME Video Arcade 0.5.2
 ========================
@@ -17,7 +30,7 @@ GNOME Video Arcade 0.5.2
         What's New
         ----------
         * Alert the user if the ROM file analysis detects any errors.
-	* Fix a crash when using interactive search in the main window.
+        * Fix a crash when using interactive search in the main window.
 
 GNOME Video Arcade 0.5.1
 ========================

@@ -22,6 +22,7 @@
 #include <wait.h>
 
 #include "gva-error.h"
+#include "gva-util.h"
 
 static gpointer parent_class = NULL;
 
@@ -158,6 +159,9 @@ gva_mame_process_spawn (const gchar *arguments,
         gchar *command_line;
 
         g_return_val_if_fail (arguments != NULL, FALSE);
+
+	if (gva_get_debug_flags () & GVA_DEBUG_MAME)
+		g_debug ("%s %s", MAME_PROGRAM, arguments);
 
         command_line = g_strdup_printf ("%s %s", MAME_PROGRAM, arguments);
         process = gva_process_spawn (command_line, priority, error);

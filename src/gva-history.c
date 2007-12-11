@@ -137,9 +137,9 @@ gva_history_init (GError **error)
  * @error: return location for a #GError, or %NULL
  *
  * Returns arcade history information for @game.  If an error occurs,
- * it returns %FALSE and sets @error.
+ * it returns %NULL and sets @error.
  *
- * Returns: %TRUE on success, %FALSE if an error occurred
+ * Returns: history for @game, or %NULL if an error occurred
  **/
 gchar *
 gva_history_lookup (const gchar *game,

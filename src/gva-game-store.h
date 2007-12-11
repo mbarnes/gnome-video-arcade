@@ -57,6 +57,7 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
 enum _GvaGameStoreColumn
 {
         GVA_GAME_STORE_COLUMN_NAME,               /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_CATEGORY,           /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_FAVORITE,           /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_SOURCEFILE,         /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_RUNNABLE,           /* G_TYPE_BOOLEAN */

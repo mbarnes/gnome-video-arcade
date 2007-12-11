@@ -6,5 +6,5 @@ Exec=gnome-video-arcade
 Icon=gnome-video-arcade
 Terminal=false
 Type=Application
-Categories=GNOME;GTK;Game;ArcadeGame;
+Categories=GNOME;GTK;Game;Emulator;
 StartupNotify=true

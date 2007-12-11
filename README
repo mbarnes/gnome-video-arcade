@@ -56,6 +56,12 @@ installed prior to compiling the source code:
        Video Arcade to not link against GNOME libraries.  See the
        Installation section to find out how.
 
+   - catver.ini (optional)
+
+       This file, available from http://www.progettoemma.net/?catlist,
+       contains category information for games supported by MAME.  GNOME
+       Video Arcade can utilize this information in the game list.
+
    - history.dat (optional)
 
        This file, available from http://www.arcade-history.com,
@@ -73,11 +79,11 @@ including GNOME Video Arcade.  This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.5.3 and may change in forthcoming releases.
+version 0.5.4 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.5.3
+   $ cd /path/to/gnome-video-arcade-0.5.4
    $ ./configure
    $ make
    $ su -c "make install"
@@ -100,11 +106,17 @@ is compiled, so use the SDLMAME environment variable if you have
 sdlmame installed, or the XMAME environment variable if you have
 xmame installed.
 
+You can use the --with-category-file configure option to specify
+the location of a catver.ini file as mentioned above.  Usage looks
+something like this:
+
+   $ ./configure --with-category-file=/path/to/catver.ini
+
 You can use the --with-history-file configure option to specify
 the location of a history.dat file as mentioned above.  Usage
 looks something like this:
 
-   $ ./configure --with-history-file=/usr/share/xmame/history.dat
+   $ ./configure --with-history-file=/path/to/history.dat
 
 The --enable-gtk-doc configure option tells "make" to generate
 developer documentation while building GNOME Video Arcade.  Once

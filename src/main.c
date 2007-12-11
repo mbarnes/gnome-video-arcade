@@ -28,6 +28,7 @@
 #endif
 
 #include "gva-audit.h"
+#include "gva-categories.h"
 #include "gva-db.h"
 #include "gva-error.h"
 #include "gva-history.h"
@@ -179,6 +180,11 @@ main (gint argc, gchar **argv)
         gva_preferences_init ();
         gva_properties_init ();
         gva_search_init ();
+
+#ifdef CATEGORY_FILE
+        gva_categories_init (&error);
+        gva_error_handle (&error);
+#endif
 
 #ifdef HISTORY_FILE
         gva_history_init (&error);
