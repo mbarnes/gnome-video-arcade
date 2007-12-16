@@ -1,3 +1,8 @@
+2007-12-16  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-util.c (gva_get_debug_flags):
+	Don't pass a NULL string to g_parse_debug_string().
+
 2007-12-10  Matthew Barnes  <mbarnes@redhat.com>
 
 	* README:
