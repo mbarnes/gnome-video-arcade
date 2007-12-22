@@ -1,3 +1,8 @@
+2007-12-22  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Add some helpful text to the search dialog.
+
 2007-12-16  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-util.c (gva_get_debug_flags):
