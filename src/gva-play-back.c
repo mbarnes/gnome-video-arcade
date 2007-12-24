@@ -278,7 +278,7 @@ gva_play_back_show (const gchar *inpname)
                 }
         }
 
-        gtk_widget_show (GVA_WIDGET_PLAY_BACK_WINDOW);
+        gtk_window_present (GTK_WINDOW (GVA_WIDGET_PLAY_BACK_WINDOW));
 }
 
 /**

@@ -10,6 +10,7 @@ GNOME Video Arcade 0.5.4
           new "Category" column and the ability to search by category.
         * Set the GVA_DEBUG environment variable to "mame" or "sql" to
           trigger debugging messages during runtime.
+	* Add some helpful text to the search dialog.
 
 GNOME Video Arcade 0.5.3
 ========================

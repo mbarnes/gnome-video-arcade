@@ -1,3 +1,12 @@
+2007-12-24  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-audit.c (audit_show_dialog):
+	* src/gva-main.c (gva_main_init):
+	* src/gva-play-back.c (gva_play_back_show):
+	* src/gva-ui.c (action_preferences_cb), (action_properties_cb),
+	(action_search_cb):
+	Use gtk_window_present() instead of gtk_widget_show().
+
 2007-12-22  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

@@ -298,7 +298,7 @@ action_play_back_cb (GtkAction *action)
 static void
 action_preferences_cb (GtkAction *action)
 {
-        gtk_widget_show (GVA_WIDGET_PREFERENCES_WINDOW);
+        gtk_window_present (GTK_WINDOW (GVA_WIDGET_PREFERENCES_WINDOW));
 }
 
 /**
@@ -345,7 +345,7 @@ action_previous_game_cb (GtkAction *action)
 static void
 action_properties_cb (GtkAction *action)
 {
-        gtk_widget_show (GVA_WIDGET_PROPERTIES_WINDOW);
+        gtk_window_present (GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW));
 }
 
 /**
@@ -450,7 +450,7 @@ action_save_errors_cb (GtkAction *action)
 static void
 action_search_cb (GtkAction *action)
 {
-        gtk_widget_show (GVA_WIDGET_SEARCH_WINDOW);
+        gtk_window_present (GTK_WINDOW (GVA_WIDGET_SEARCH_WINDOW));
 }
 
 /**

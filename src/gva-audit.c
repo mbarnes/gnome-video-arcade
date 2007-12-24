@@ -323,7 +323,7 @@ audit_show_dialog (GvaProcess *process,
         gtk_tree_view_set_model (view, model);
 
         if (gtk_tree_model_iter_n_children (model, NULL) > 0)
-                gtk_widget_show (GVA_WIDGET_AUDIT_WINDOW);
+                gtk_window_present (GTK_WINDOW (GVA_WIDGET_AUDIT_WINDOW));
 }
 
 /**
