@@ -1,5 +1,6 @@
 # List of source files which contain translatable strings.
 
+[encoding: UTF-8]
 data/gnome-video-arcade.glade
 src/gconf-bridge.c
 src/gva-audit.c
