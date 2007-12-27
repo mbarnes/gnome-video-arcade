@@ -1,3 +1,7 @@
+2007-12-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.5.4
+
 2007-12-24  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-audit.c (audit_show_dialog):
