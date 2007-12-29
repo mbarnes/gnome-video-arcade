@@ -1,5 +1,10 @@
 2007-12-28  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-mame-common.c (gva_mame_has_config_value):
+	Remove the assertion and make the logic more forgiving.
+
+2007-12-28  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac: Post-release version bump.
 
 2007-12-27  Matthew Barnes  <mbarnes@redhat.com>

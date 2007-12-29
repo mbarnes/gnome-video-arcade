@@ -241,17 +241,11 @@ gva_mame_has_config_value (const gchar *config_key)
         GError *error = NULL;
 
         config_value = gva_mame_get_config_value (config_key, &error);
+        result = (config_value != NULL && *config_value != '\0');
+        g_free (config_value);
 
-        if (config_value != NULL)
+        if (error != NULL)
         {
-                result = TRUE;
-                g_free (config_value);
-        }
-        else
-        {
-                result = FALSE;
-                g_assert (error != NULL);
-
                 /* Suppress warnings about unknown configuration
                  * keys, since that's what we're testing for. */
                 if (error->code == GVA_ERROR_MAME)
