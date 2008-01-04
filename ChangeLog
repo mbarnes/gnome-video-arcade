@@ -1,3 +1,7 @@
+2008-01-03  Matthew Barnes  <mbarnes@redhat.com>
+
+	* Update copyright notices on source files.
+
 2007-12-28  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-mame-common.c (gva_mame_has_config_value):
