@@ -1233,7 +1233,7 @@ error_handler (GConfClient *client,
                 gtk_widget_destroy (dlg);
 
                 shown_dialog = TRUE;
-	}
+        }
 }
 
 /**

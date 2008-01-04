@@ -1208,16 +1208,16 @@ db_function_getcategory (sqlite3_context *context,
 
         name = (const gchar *) sqlite3_value_text (values[0]);
         category = gva_categories_lookup (name, &error);
-	gva_error_handle (&error);
+        gva_error_handle (&error);
 
         if (category != NULL)
                 sqlite3_result_text (context, category, -1, SQLITE_TRANSIENT);
-	else
-		sqlite3_result_null (context);
+        else
+                sqlite3_result_null (context);
 
-	g_free (category);
+        g_free (category);
 #else
-	sqlite3_result_null (context);
+        sqlite3_result_null (context);
 #endif
 }
 

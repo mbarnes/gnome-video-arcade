@@ -149,7 +149,7 @@ gva_get_debug_flags (void)
                         { "sql",   GVA_DEBUG_SQL }
                 };
 
-		const gchar *env = g_getenv ("GVA_DEBUG");
+                const gchar *env = g_getenv ("GVA_DEBUG");
 
                 flags = g_parse_debug_string (
                         (env != NULL) ? env : "", debug_keys,

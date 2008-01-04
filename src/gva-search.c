@@ -55,7 +55,7 @@ gva_search_init (void)
 
         text = g_strstrip (gva_search_get_last_search ());
         gtk_entry_set_text (GTK_ENTRY (GVA_WIDGET_SEARCH_ENTRY), text);
-	g_object_notify (G_OBJECT (GVA_WIDGET_SEARCH_WINDOW), "visible");
+        g_object_notify (G_OBJECT (GVA_WIDGET_SEARCH_WINDOW), "visible");
         g_free (text);
 }
 
