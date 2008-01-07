@@ -43,6 +43,15 @@
 @Returns: 
 
 
+<!-- ##### ENUM GvaDebugFlags ##### -->
+<para>
+
+</para>
+
+@GVA_DEBUG_NONE: 
+@GVA_DEBUG_MAME: 
+@GVA_DEBUG_SQL: 
+
 <!-- ##### FUNCTION gva_get_last_version ##### -->
 <para>
 

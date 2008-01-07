@@ -66,7 +66,7 @@ static GOptionEntry entries[] =
 static void
 start (void)
 {
-        gchar *mame_version;
+        const gchar *mame_version;
         guint context_id;
         GError *error = NULL;
 
@@ -75,21 +75,37 @@ start (void)
         gva_error_handle (&error);
 
         if (mame_version != NULL)
-        {
                 gva_main_statusbar_push (context_id, "%s", mame_version);
-                g_free (mame_version);
-        }
 
         if (gva_db_needs_rebuilt ())
         {
-                gboolean success;
+                gboolean success = TRUE;
 
-                success = gva_main_build_database (&error);
+                gva_main_progress_bar_show ();
+                success &= gva_main_build_database (&error);
                 gva_error_handle (&error);
+                gva_main_progress_bar_set_fraction (0.0);
+                success &= gva_main_analyze_roms (&error);
+                gva_error_handle (&error);
+                gva_main_progress_bar_hide ();
 
                 if (!success)
                         return;
         }
+        else if (gva_quick_audit (&error) == GVA_AUDIT_RESULT_TOO_MANY)
+        {
+                gboolean success;
+
+                gva_main_progress_bar_show ();
+                success = gva_main_analyze_roms (&error);
+                gva_error_handle (&error);
+                gva_main_progress_bar_hide ();
+
+                if (!success)
+                        return;
+        }
+        else
+                gva_error_handle (&error);
 
         gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);

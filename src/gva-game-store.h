@@ -50,11 +50,10 @@
 
 G_BEGIN_DECLS
 
-typedef enum _GvaGameStoreColumn GvaGameStoreColumn;
 typedef struct _GvaGameStore GvaGameStore;
 typedef struct _GvaGameStoreClass GvaGameStoreClass;
 
-enum _GvaGameStoreColumn
+typedef enum
 {
         GVA_GAME_STORE_COLUMN_NAME,               /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_CATEGORY,           /* G_TYPE_STRING */
@@ -87,7 +86,7 @@ enum _GvaGameStoreColumn
         GVA_GAME_STORE_COLUMN_INPFILE,            /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_TIME,               /* GVA_TYPE_TIME */
         GVA_GAME_STORE_NUM_COLUMNS
-};
+} GvaGameStoreColumn;
 
 /**
  * GvaGameStore:

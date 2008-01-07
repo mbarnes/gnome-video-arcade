@@ -47,15 +47,25 @@ typedef void    (*GvaMameCallback)              (const gchar *name,
                                                  const gchar *game_data,
                                                  gpointer user_data);
 
-gchar *         gva_mame_get_version            (GError **error);
+const gchar *   gva_mame_get_path_sep           (void);
+const gchar *   gva_mame_get_version            (GError **error);
 guint           gva_mame_get_total_supported    (GError **error);
 gchar *         gva_mame_get_config_value       (const gchar *config_key,
                                                  GError **error);
 gboolean        gva_mame_has_config_value       (const gchar *config_key);
+gchar **        gva_mame_get_search_paths       (const gchar *config_key,
+                                                 GError **error);
 GHashTable *    gva_mame_get_input_files        (GError **error);
 GvaProcess *    gva_mame_list_xml               (GError **error);
-GvaProcess *    gva_mame_verify_roms            (GError **error);
-GvaProcess *    gva_mame_verify_samples         (GError **error);
+gchar *         gva_mame_verify_roms            (const gchar *name,
+                                                 GError **error);
+gchar *         gva_mame_verify_samples         (const gchar *name,
+                                                 GError **error);
+GvaProcess *    gva_mame_verify_all_roms        (GError **error);
+GvaProcess *    gva_mame_verify_all_samples     (GError **error);
+gboolean        gva_mame_verify_parse           (const gchar *line,
+                                                 gchar **out_name,
+                                                 gchar **out_status);
 GvaProcess *    gva_mame_run_game               (const gchar *name,
                                                  GError **error);
 GvaProcess *    gva_mame_record_game            (const gchar *name,

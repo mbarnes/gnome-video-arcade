@@ -1,3 +1,87 @@
+2008-01-06  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/main.c (start):
+	If we're not rebuilding the game database, check for changed ROM
+	or sample files and either do a quick or full audit, depending on
+	the extent of the changes.
+
+	* src/main.c (start):
+	* src/gva-audit.c (gva_audit_save_errors):
+	* src/gva-db.c (gva_db_needs_rebuilt):
+	gva_mame_get_version() now returns a const string.
+
+	* src/gva-audit.c (gva_quick_audit):
+	New function (and a bunch of supporting private functions and
+	refactoring work) detects new or changed ROM and sample files
+	and tries to quickly verify them and update the game database.
+	If the changes are too extensive for a quick update, it
+	recommends a full audit.
+
+	* src/gva-audit.c (gva_audit_roms):
+	Call gva_mame_verify_all_roms() (renamed function).
+
+	* src/gva-audit.c (gva_audit_samples):
+	Call gva_mame_verify_all_samples() (renamed function).
+
+	* src/gva-main.c (main_build_database_progress_cb):
+	Use gva_main_progress_bar_set_fraction().
+
+	* src/gva-main.c (gva_main_build_database):
+	Break this into smaller pieces.  Do not show the progress bar.
+	Do not change the mouse cursor.  Do not analyze ROMS.
+
+	* src/gva-main.c (gva_main_analyze_roms):
+	New function analyses ROM files, as gva_main_build_database()
+	used to do.
+
+	* src/gva-main.c (gva_main_progress_bar_show):
+	New function shows the progress bar in the main window and changes
+	the mouse cursor to busy, as gva_main_build_database() used to do.
+
+	* src/gva-main.c (gva_main_progress_bar_hide):
+	New function hides the progress bar in the main window and changes
+	the mouse cursor to normal, as gva_main_build_database() used to do.
+
+	* src/gva-main.c (gva_main_progress_bar_set_fraction):
+	New function updates the main window's progress bar using a cached
+	widget pointer for better performance.
+
+	* src/gva-mame-common.c (gva_mame_command):
+	Set process->error to NULL after propagating it.
+
+	* src/gva-mame-common.c (gva_mame_get_search_paths):
+	New function returns a configuration value as an ordered list
+	of search paths.  Useful for keys like "rompath" and "samplepath".
+
+	* src/gva-mame-common.c (gva_mame_verify_all_roms):
+	Renamed from gva_mame_verify_roms().
+
+	* src/gva-mame-common.c (gva_mame_verify_roms):
+	New function (sort of) verifies an individual ROM set.
+
+	* src/gva-mame-common.c (gva_mame_verify_all_samples):
+	Renamed from gva_mame_verify_samples().
+
+	* src/gva-mame-common.c (gva_mame_verify_samples):
+	New function (sort of) verifies an individual sample set.
+
+	* src/gva-mame-common.c (gva_mame_verify_parse):
+	New function attempts to extract a status from a line of output
+	from a "MAME -verifyroms" or "MAME -verifysamples" command.
+
+	* src/gva-mame-sdlmame.c (gva_mame_get_path_sep):
+	* src/gva-mame-xmame.c (gva_mame_get_path_sep):
+	New function returns the delimiter used in search paths.
+
+	* src/gva-mame-sdlmame.c (gva_mame_get_version),
+	(gva_mame_get_total_supported):
+	* src/gva-mame-xmame.c (gva_mame_get_version),
+	(gva_mame_get_total_supported):
+	If successful, cache the result for subsequent calls.
+
 2008-01-03  Matthew Barnes  <mbarnes@redhat.com>
 
 	* Update copyright notices on source files.

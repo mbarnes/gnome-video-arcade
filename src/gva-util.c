@@ -57,7 +57,7 @@ inpname_exists (const gchar *inppath, const gchar *inpname)
  * the first filename that does not already exist: "pacman.inp",
  * "pacman-1.inp", "pacman-2.inp", etc.
  *
- * Returns value: a newly-allocated input filename for @game
+ * Returns: a newly-allocated input filename for @game
  **/
 gchar *
 gva_choose_inpname (const gchar *game)

@@ -32,10 +32,19 @@
 
 G_BEGIN_DECLS
 
+typedef enum
+{
+        GVA_AUDIT_RESULT_SUCCESS,
+        GVA_AUDIT_RESULT_TOO_MANY,
+        GVA_AUDIT_RESULT_ERROR
+
+} GvaAuditResult;
+
 void            gva_audit_init                  (void);
 GvaProcess *    gva_audit_roms                  (GError **error);
 GvaProcess *    gva_audit_samples               (GError **error);
 void            gva_audit_save_errors           (void);
+GvaAuditResult  gva_quick_audit                 (GError **error);
 
 G_END_DECLS
 

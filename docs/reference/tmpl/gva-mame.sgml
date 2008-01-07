@@ -27,6 +27,14 @@
 @user_data: 
 
 
+<!-- ##### FUNCTION gva_mame_get_path_sep ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_mame_get_version ##### -->
 <para>
 
@@ -64,6 +72,16 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_mame_get_search_paths ##### -->
+<para>
+
+</para>
+
+@config_key: 
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_mame_get_input_files ##### -->
 <para>
 
@@ -87,6 +105,7 @@
 
 </para>
 
+@name: 
 @error: 
 @Returns: 
 
@@ -96,7 +115,37 @@
 
 </para>
 
+@name: 
 @error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_verify_all_roms ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_verify_all_samples ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_verify_parse ##### -->
+<para>
+
+</para>
+
+@line: 
+@out_name: 
+@out_status: 
 @Returns: 
 
 

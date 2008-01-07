@@ -1,3 +1,18 @@
+GNOME Video Arcade 0.5.5
+========================
+
+        Released January ??, 2008
+
+        What's New
+        ----------
+        * GNOME Video Arcade will now automatically detect new ROMs and
+          samples and will either quickly update the database or perform
+          a full analysis, depending on the extent of the changes.
+        * Do overwrite confirmation when saving audit results.
+        * Fix a couple regressions that have crept in recently:
+            - Show games having "best available" ROM sets.
+            - Show icons in the Samples column.
+
 GNOME Video Arcade 0.5.4
 ========================
 
@@ -10,7 +25,7 @@ GNOME Video Arcade 0.5.4
           new "Category" column and the ability to search by category.
         * Set the GVA_DEBUG environment variable to "mame" or "sql" to
           trigger debugging messages during runtime.
-	* Add some helpful text to the search dialog.
+        * Add some helpful text to the search dialog.
 
 GNOME Video Arcade 0.5.3
 ========================

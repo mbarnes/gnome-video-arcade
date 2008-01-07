@@ -110,6 +110,7 @@ gva_mame_command (const gchar *arguments,
         if (process->error != NULL)
         {
                 g_propagate_error (error, process->error);
+                process->error = NULL;
                 status = -1;
                 goto fail;
         }
@@ -258,6 +259,33 @@ gva_mame_has_config_value (const gchar *config_key)
 }
 
 /**
+ * gva_mame_get_search_paths:
+ * @config_key: a configuration key
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the value of @config_key as an ordered list of search paths.
+ * This is only appropriate for configuration keys containing a list of
+ * search paths, such as "rompath" or "samplepath".  If an error occurs,
+ * or if @config_key is not found in MAME's configuration, the function
+ * returns %NULL and sets @error.
+ *
+ * Returns: a newly-allocated %NULL-terminated array of paths, or %NULL.
+ *          Use g_strfreev() to free it.
+ **/
+gchar **
+gva_mame_get_search_paths (const gchar *config_key,
+                           GError **error)
+{
+        gchar *config_value;
+
+        config_value = gva_mame_get_config_value (config_key, error);
+        if (config_value == NULL)
+                return NULL;
+
+        return g_strsplit (config_value, gva_mame_get_path_sep (), -1);
+}
+
+/**
  * gva_mame_get_input_files:
  * @error: return location for a @GError, or %NULL
  *
@@ -355,6 +383,100 @@ gva_mame_list_xml (GError **error)
 
 /**
  * gva_mame_verify_roms:
+ * @name: the name of a ROM set
+ * @error: return location for a #GError, or %NULL
+ *
+ * Verifies the contents of the ROM set @name and returns the status, which
+ * may be "good", "bad", "best available", "not found", or "not supported".
+ * If an error occurs, it returns %NULL and sets @error.
+ *
+ * Returns: verification status, or %NULL
+ **/
+gchar *
+gva_mame_verify_roms (const gchar *name,
+                      GError **error)
+{
+        gchar *arguments;
+        gchar **stdout_lines;
+        gchar **stderr_lines;
+        gchar *status = NULL;
+        gint exit_status;
+        gint ii;
+
+        g_return_val_if_fail (name != NULL, NULL);
+
+        /* Execute the command "${mame} -verifyroms %{name}". */
+        arguments = g_strdup_printf ("-verifyroms %s", name);
+        exit_status = gva_mame_command (
+                arguments, &stdout_lines, &stderr_lines, error);
+        g_free (arguments);
+
+        if (exit_status < 0)
+                return NULL;
+
+        /* First try to extract a status from standard output. */
+        for (ii = 0; status == NULL && stdout_lines[ii] != NULL; ii++)
+                gva_mame_verify_parse (stdout_lines[ii], NULL, &status);
+
+        /* If that fails, try to extract a status from standard error. */
+        for (ii = 0; status == NULL && stderr_lines[ii] != NULL; ii++)
+                gva_mame_verify_parse (stderr_lines[ii], NULL, &status);
+
+        g_strfreev (stdout_lines);
+        g_strfreev (stderr_lines);
+
+        return status;
+}
+
+/**
+ * gva_mame_verify_samples:
+ * @name: the name of a sample set
+ * @error: return location for a #GError, or %NULL
+ *
+ * Verifies the contents of the sample set @name and returns the status,
+ * which may be "good", "bad", "best available", "not found", or "not
+ * supported".  If an error occurs, it returns %NULL and sets @error.
+ *
+ * Returns: verification status, or %NULL
+ **/
+gchar *
+gva_mame_verify_samples (const gchar *name,
+                         GError **error)
+{
+        gchar *arguments;
+        gchar **stdout_lines;
+        gchar **stderr_lines;
+        gchar *status = NULL;
+        gint exit_status;
+        gint ii;
+
+        g_return_val_if_fail (name != NULL, NULL);
+
+        /* Execute the command "${mame} -verifysamples %{name}". */
+        arguments = g_strdup_printf ("-verifysamples %s", name);
+        exit_status = gva_mame_command (
+                arguments, &stdout_lines, &stderr_lines, error);
+        g_free (arguments);
+
+        if (exit_status < 0)
+                return NULL;
+
+        /* First try to extract a status from standard output. */
+        for (ii = 0; status == NULL && stdout_lines[ii] != NULL; ii++)
+                gva_mame_verify_parse (stdout_lines[ii], NULL, &status);
+
+        /* If that fails, try to extract a status from standard error. */
+        for (ii = 0; status == NULL && stderr_lines[ii] != NULL; ii++)
+                gva_mame_verify_parse (stderr_lines[ii], NULL, &status);
+
+        g_strfreev (stdout_lines);
+        g_strfreev (stderr_lines);
+
+        return status;
+}
+
+/**
+ * gva_mame_verify_all_roms:
  * @error: return location for a #GError, or %NULL
  *
  * Spawns a "MAME -verifyroms" child process and returns a #GvaProcess so
@@ -364,7 +486,7 @@ gva_mame_list_xml (GError **error)
  * Returns: a new #GvaProcess, or %NULL
  **/
 GvaProcess *
-gva_mame_verify_roms (GError **error)
+gva_mame_verify_all_roms (GError **error)
 {
         /* Execute the command "${mame} -verifyroms". */
         return gva_mame_process_spawn (
@@ -372,7 +494,7 @@ gva_mame_verify_roms (GError **error)
 }
 
 /**
- * gva_mame_verify_samples:
+ * gva_mame_verify_all_samples:
  * @error: return location for a #GError, or %NULL
  *
  * Spawns a "MAME -verifysamples" child process and returns a #GvaProcess so
@@ -382,11 +504,107 @@ gva_mame_verify_roms (GError **error)
  * Returns: a new #GvaProcess, or %NULL
  **/
 GvaProcess *
-gva_mame_verify_samples (GError **error)
+gva_mame_verify_all_samples (GError **error)
 {
         /* Execute the command "${mame} -verifysamples". */
         return gva_mame_process_spawn (
                 "-verifysamples", G_PRIORITY_DEFAULT_IDLE, error);
+}
+
+/**
+ * gva_mame_verify_parse:
+ * @line: output line from a MAME process
+ * @out_name: return location for the game name, or %NULL
+ * @out_status: return location for the status, or %NULL
+ *
+ * Attempts to extract a status from a line of output generated by a
+ * "MAME -verifyroms" or "MAME -verifysamples" child process.  If successful,
+ * it sets @out_name to a newly-allocated string containing the game name and
+ * @out_status to a newly-allocated string containing the verification status
+ * and returns %TRUE.
+ *
+ * Known status values are "good", "bad", "best available", "not found" and
+ * "not supported".
+ *
+ * Returns: %TRUE if the parse was successful, %FALSE otherwise
+ **/
+gboolean
+gva_mame_verify_parse (const gchar *line,
+                       gchar **out_name,
+                       gchar **out_status)
+{
+        gchar *copy;
+        const gchar *name = NULL;
+        const gchar *sep = " \"[]:!";
+        const gchar *status = NULL;
+        const gchar *token;
+
+        g_return_val_if_fail (line != NULL, FALSE);
+
+        /* Output for -verifyroms is as follows:
+         *
+         * romset puckman is good
+         * romset puckmana [puckman] is good
+         * romset puckmanf [puckman] is good
+         * ...
+         * digdug  : 51xx.bin (1024 bytes) - NOT FOUND
+         * digdug  : 53xx.bin (1024 bytes) - NOT FOUND
+         * romset digdug is bad
+         * ...
+         *
+         * - Status may be "good", "bad", or "best available".
+         *
+         * - When checking individual sets, status may also be
+         *   "not found" or "not supported".
+         *
+         * - Older MAMEs used "correct" and "incorrect" instead of
+         *   "good" and "bad".  Convert to the newer form if seen.
+         *
+         * - Similar output for -verifysamples.
+         */
+
+        copy = g_strchomp (g_ascii_strdown (line, -1));
+
+        if ((token = strtok (copy, sep)) == NULL)
+                goto exit;
+
+        if (strcmp (token, "error") == 0)
+                if ((token = strtok (NULL, sep)) == NULL)
+                        goto exit;
+
+        if (strcmp (token, "romset") != 0)
+                if (strcmp (token, "sampleset") != 0)
+                        goto exit;
+
+        name = strtok (NULL, sep);
+        while ((token = strtok (NULL, sep)) != NULL)
+                status = token;
+
+        if (name == NULL || status == NULL)
+                goto exit;
+
+        /* Normalize the status. */
+        if (strcmp (status, "available") == 0)
+                status = "best available";
+        else if (strcmp (status, "found") == 0)
+                status = "not found";
+        else if (strcmp (status, "supported") == 0)
+                status = "not supported";
+        else if (strcmp (status, "correct") == 0)
+                status = "good";
+        else if (strcmp (status, "incorrect") == 0)
+                status = "bad";
+
+        if (out_name != NULL)
+                *out_name = g_strdup (name);
+
+        if (out_status != NULL)
+                *out_status = g_strdup (status);
+
+exit:
+        g_free (copy);
+
+        return (name != NULL && status != NULL);
 }
 
 /**
@@ -648,6 +866,15 @@ gva_mame_delete_save_state (const gchar *name)
 /*****************************************************************************
  * Documentation for the rest of the public MAME interface
  *****************************************************************************/
+
+/**
+ * gva_mame_get_path_sep:
+ *
+ * Returns the search path delimiter string.
+ * XMAME uses UNIX-style ':' whereas SDLMAME uses Window-style ';'.
+ *
+ * Returns: search path delimiter string
+ **/
 
 /**
  * gva_mame_get_version:

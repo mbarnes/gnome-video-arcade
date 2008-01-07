@@ -25,12 +25,21 @@
 #include "gva-error.h"
 #include "gva-mame-common.h"
 
-gchar *
+const gchar *
+gva_mame_get_path_sep (void)
+{
+        return ";";  /* SDLMAME uses Windows-style search paths */
+}
+
+const gchar *
 gva_mame_get_version (GError **error)
 {
-        gchar *version = NULL;
+        static gchar *version = NULL;
         gchar **lines;
         gchar *cp;
+
+        if (version != NULL)
+                return version;
 
         /* Execute the command "${mame} -help". */
         if (gva_mame_command ("-help", &lines, NULL, error) != 0)
@@ -67,8 +76,12 @@ exit:
 guint
 gva_mame_get_total_supported (GError **error)
 {
+        static guint total_supported = 0;
         gchar **lines;
         guint num_lines;
+
+        if (total_supported > 0)
+                return total_supported;
 
         /* Execute the command "${mame} -listfull". */
         if (gva_mame_command ("-listfull", &lines, NULL, error) != 0)
@@ -87,5 +100,7 @@ gva_mame_get_total_supported (GError **error)
         g_strfreev (lines);
 
         /* Count the lines, excluding the header. */
-        return (num_lines > 1) ? num_lines - 1 : 0;
+        total_supported = (num_lines > 1) ? num_lines - 1 : 0;
+
+        return total_supported;
 }

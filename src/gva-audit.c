@@ -18,19 +18,23 @@
 
 #include "gva-audit.h"
 
+#include <errno.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include "gva-columns.h"
 #include "gva-db.h"
 #include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-mame.h"
+#include "gva-tree-view.h"
 #include "gva-ui.h"
 
 #define SQL_SELECT_BAD_GAMES \
         "SELECT name, description FROM game WHERE romset == 'bad'"
 
 typedef struct _GvaAuditData GvaAuditData;
+typedef struct _GvaScanResults GvaScanResults;
 
 struct _GvaAuditData
 {
@@ -38,6 +42,12 @@ struct _GvaAuditData
         GHashTable *output_index;
         GHashTable *status_index;
         const gchar *column;
+};
+
+struct _GvaScanResults
+{
+        GSList *verify;
+        GSList *delete;
 };
 
 static void
@@ -63,7 +73,7 @@ audit_data_new (const gchar *column)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) audit_string_free);
 
-        data = g_slice_new (GvaAuditData);
+        data = g_slice_new0 (GvaAuditData);
         data->output = g_ptr_array_new ();
         data->output_index = output_index;
         data->status_index = status_index;
@@ -80,6 +90,102 @@ audit_data_free (GvaAuditData *data)
         g_hash_table_destroy (data->output_index);
         g_hash_table_destroy (data->status_index);
         g_slice_free (GvaAuditData, data);
+}
+
+static GvaScanResults *
+audit_scan_results_new (void)
+{
+        return g_slice_new0 (GvaScanResults);
+}
+
+static void
+audit_scan_results_free (GvaScanResults *results)
+{
+        g_slist_foreach (results->verify, (GFunc) g_free, NULL);
+        g_slist_foreach (results->delete, (GFunc) g_free, NULL);
+        g_slist_free (results->verify);
+        g_slist_free (results->delete);
+        g_slice_free (GvaScanResults, results);
+}
+
+static void
+audit_scan_results_add_to_verify_list (GvaScanResults *results,
+                                       const gchar *name)
+{
+        results->verify = g_slist_prepend (results->verify, g_strdup (name));
+}
+
+static void
+audit_scan_results_add_to_delete_list (GvaScanResults *results,
+                                       const gchar *name)
+{
+        results->delete = g_slist_prepend (results->delete, g_strdup (name));
+}
+
+static void
+audit_scan_results_reverse (GvaScanResults *results)
+{
+        results->verify = g_slist_reverse (results->verify);
+        results->delete = g_slist_reverse (results->delete);
+}
+
+/* A "status index" is a certain type of hash table used to update the
+ * "romset" and "sampleset" fields in the game database.  The hash key
+ * is a quoted status value (or a NULL literal), and the hash value is
+ * a GString containing a comma-separated list of quoted game names. */
+
+static void
+audit_status_index_commit_foreach (const gchar *status,
+                                   const GString *names,
+                                   const gchar *column)
+{
+        gchar *sql;
+        GError *error = NULL;
+
+        /* Both status and the name list values are already
+         * quoted, except when status is SQL literal NULL. */
+        sql = g_strdup_printf (
+                "UPDATE game SET %s=%s WHERE name IN (%s)",
+                column, status, names->str);
+        gva_db_execute (sql, &error);
+        gva_error_handle (&error);
+        g_free (sql);
+}
+
+static void
+audit_status_index_commit (GHashTable *index,
+                           const gchar *column)
+{
+        g_hash_table_foreach (
+                index, (GHFunc) audit_status_index_commit_foreach,
+                (gpointer) column);
+}
+
+static void
+audit_status_index_insert (GHashTable *index,
+                           const gchar *name,
+                           const gchar *status)
+{
+        GString *string;
+        gchar *key = "NULL";
+
+        /* Keys are quoted to allow for SQL literal NULL. */
+        if (status != NULL)
+        {
+                key = g_alloca (strlen (status) + 3);
+                g_sprintf (key, "\"%s\"", status);
+        }
+
+        /* Build a quoted, comma-separated list of games. */
+        string = g_hash_table_lookup (index, key);
+        if (string != NULL)
+                g_string_append_printf (string, ", \"%s\"", name);
+        else
+        {
+                string = g_string_sized_new (1024);
+                g_string_printf (string, "\"%s\"", name);
+                g_hash_table_insert (index, g_strdup (key), string);
+        }
 }
 
 static GtkTreeModel *
@@ -135,92 +241,28 @@ audit_read (GvaProcess *process,
             GvaAuditData *data)
 {
         gchar *line;
-        const gchar *name;
-        const gchar *status = NULL;
-        const gchar *token;
-        GString *string;
+        gchar *name;
+        gchar *status;
         gpointer value;
-
-        /* Output for -verifyroms is as follows:
-         *
-         * romset puckman is good
-         * romset puckmana [puckman] is good
-         * romset puckmanf [puckman] is good
-         * ...
-         * digdug  : 51xx.bin (1024 bytes) - NOT FOUND
-         * digdug  : 53xx.bin (1024 bytes) - NOT FOUND
-         * romset digdug is bad
-         * ...
-         *
-         * - Status may be "good", "bad", or "best available".
-         *
-         * - Older MAMEs used "correct" and "incorrect" instead of
-         *   "good" and "bad".  Convert to the newer form if seen.
-         *
-         * - Similar output for -verifysamples.
-         */
 
         line = g_strchomp (gva_process_stdout_read_line (process));
 
         value = GUINT_TO_POINTER (data->output->len);
         g_ptr_array_add (data->output, g_strdup (line));
 
-        if ((token = strtok (line, " ")) == NULL)
+        if (!gva_mame_verify_parse (line, &name, &status))
                 goto exit;
-
-        if (strcmp (token, data->column) != 0)
-                goto exit;
-
-        name = strtok (NULL, " ");
-        while ((token = strtok (NULL, " ")) != NULL)
-                status = token;
-
-        if (name == NULL || status == NULL)
-                goto exit;
-
-        /* Normalize the status. */
-        if (strcmp (status, "correct") == 0)
-                status = "good";
-        else if (strcmp (status, "incorrect") == 0)
-                status = "bad";
 
         g_hash_table_insert (data->output_index, g_strdup (name), value);
-
-        /* Build a quoted, comma-separated list of games. */
-        string = g_hash_table_lookup (data->status_index, status);
-        if (string != NULL)
-                g_string_append_printf (string, ", \"%s\"", name);
-        else
-        {
-                string = g_string_sized_new (1024);
-                g_string_printf (string, "\"%s\"", name);
-
-                g_hash_table_insert (
-                        data->status_index,
-                        g_strdup (status), string);
-        }
+        audit_status_index_insert (data->status_index, name, status);
 
         gva_process_inc_progress (process);
 
+        g_free (name);
+        g_free (status);
+
 exit:
         g_free (line);
-}
-
-/* Helper for audit_exit() */
-static void
-audit_exit_foreach (gchar *status,
-                    GString *names,
-                    GvaAuditData *data)
-{
-        gchar *sql;
-        GError *error = NULL;
-
-        sql = g_strdup_printf (
-                "UPDATE game SET %s=\"%s\" WHERE name IN (%s)",
-                data->column, status, names->str);
-        gva_db_execute (sql, &error);
-        gva_error_handle (&error);
-        g_free (sql);
 }
 
 static void
@@ -236,8 +278,7 @@ audit_exit (GvaProcess *process,
         gva_db_transaction_begin (&error);
         gva_error_handle (&error);
 
-        g_hash_table_foreach (
-                data->status_index, (GHFunc) audit_exit_foreach, data);
+        audit_status_index_commit (data->status_index, data->column);
 
         gva_db_transaction_commit (&error);
         gva_error_handle (&error);
@@ -285,6 +326,7 @@ audit_run_save_dialog (void)
 
         gtk_file_chooser_set_current_folder (file_chooser, folder);
         gtk_file_chooser_set_current_name (file_chooser, name);
+        gtk_file_chooser_set_do_overwrite_confirmation (file_chooser, TRUE);
 
         g_free (name);
         g_free (folder);
@@ -326,6 +368,230 @@ audit_show_dialog (GvaProcess *process,
                 gtk_window_present (GTK_WINDOW (GVA_WIDGET_AUDIT_WINDOW));
 }
 
+static GvaScanResults *
+audit_scan_files (const gchar *config_value,
+                  const gchar *column_name,
+                  GError **error)
+{
+        /* FIXME We're not taking clones into consideration.  If a game
+         *       is added, deleted or modified, we'll want to update the
+         *       status of all clones of that game.
+         *
+         *       Probably need to rethink the data structures we're using
+         *       to store scan results.  Instead of lists, maybe a single
+         *       hash table of names-to-filenames would work better.
+         *
+         *       Might also need to build a data structure to represent
+         *       parent/clone relationships.  Start with this:
+         *
+         *       SELECT cloneof, name FROM game WHERE cloneof != "";
+         */
+
+        GvaScanResults *results;
+        gboolean scan_needed = FALSE;
+        gchar **directories;
+        GHashTable *index;
+        sqlite3_stmt *stmt;
+        time_t db_mtime;
+        struct stat st;
+        gchar *sql;
+        gint errcode;
+        guint ii;
+
+        /* This does not get propagated. */
+        GError *recoverable_error = NULL;
+
+        /* Get the database modification time. */
+        if (stat (gva_db_get_filename (), &st) == 0)
+                db_mtime = st.st_mtime;
+        else
+        {
+                g_set_error (
+                        error, G_FILE_ERROR,
+                        g_file_error_from_errno (errno),
+                        "%s", g_strerror (errno));
+                return NULL;
+        }
+
+        /* Ask MAME for a list of directories. */
+        directories = gva_mame_get_search_paths (config_value, error);
+        if (directories == NULL)
+                return NULL;
+
+        /* Compare directory modification times against the database
+         * modification time.  If any of the directories were modified
+         * more recently than the database, assume a scan is needed. */
+        for (ii = 0; directories[ii] != NULL; ii++)
+                if (stat (directories[ii], &st) == 0)
+                {
+                        scan_needed |= (db_mtime < st.st_mtime);
+                        scan_needed |= (db_mtime < st.st_ctime);
+                }
+
+        results = audit_scan_results_new ();
+
+        /* If a scan is not needed we can exit early.  The scan results
+         * will indicate that nothing has changed. */
+        if (!scan_needed)
+                goto exit;
+
+        index = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) g_free);
+
+        /* Build an index of directory contents to simulate searching the
+         * directory list for a file.  Deal with collisions by iterating
+         * over the directories in reverse order. */
+        while (ii > 0)
+        {
+                const gchar *basename;
+                const gchar *dirname;
+                GDir *dir;
+
+                dirname = directories[--ii];
+
+                if (!g_file_test (dirname, G_FILE_TEST_IS_DIR))
+                        continue;
+
+                /* Failure to open a directory is recoverable,
+                 * but at least emit a warning about it. */
+                dir = g_dir_open (dirname, 0, &recoverable_error);
+                gva_error_handle (&recoverable_error);
+
+                if (dir == NULL)
+                        continue;
+
+                while ((basename = g_dir_read_name (dir)) != NULL)
+                {
+                        gchar *key, *value;
+
+                        /* Suppose basename is "pacman.zip", then
+                         * key = "pacman", value = "/path/to/pacman.zip" */
+                        key = g_strdelimit (g_strdup (basename), ".", '\0');
+                        value = g_build_filename (dirname, basename, NULL);
+                        g_hash_table_insert (index, key, value);
+                }
+
+                g_dir_close (dir);
+        }
+
+        g_strfreev (directories);
+
+        /* So far so good.  Now ask the game database for the last
+         * known status of each file so we can compare notes. */
+        sql = g_strdup_printf ("SELECT name, %s FROM game", column_name);
+        if (!gva_db_prepare (sql, &stmt, error))
+        {
+                audit_scan_results_free (results);
+                g_hash_table_destroy (index);
+                g_free (sql);
+                return NULL;
+        }
+        g_free (sql);
+
+#define MSG_FORMAT "%s '%s' was recently %s"
+
+        /* Compare notes.  If we discover a discrepency, emit a message
+         * stating so and add the file to the appropriate list in the scan
+         * results.  Note: The column name also serves as a description of
+         * the type of files we're scanning. */
+        while ((errcode = sqlite3_step (stmt)) == SQLITE_ROW)
+        {
+                const gchar *name;
+                const gchar *status;
+                const gchar *filename;
+
+                name = (const gchar *) sqlite3_column_text (stmt, 0);
+                status = (const gchar *) sqlite3_column_text (stmt, 1);
+                filename = g_hash_table_lookup (index, name);
+
+                /* Was the file recently added? */
+                if (status == NULL && filename != NULL)
+                {
+                        g_message (MSG_FORMAT, column_name, name, "added");
+                        audit_scan_results_add_to_verify_list (results, name);
+                }
+
+                /* Was the file recently deleted? */
+                else if (status != NULL && filename == NULL)
+                {
+                        g_message (MSG_FORMAT, column_name, name, "deleted");
+                        audit_scan_results_add_to_delete_list (results, name);
+                }
+
+                /* Was the file recently modified? */
+                else if (stat (filename, &st) == 0 && db_mtime < st.st_mtime)
+                {
+                        g_message (MSG_FORMAT, column_name, name, "modified");
+                        audit_scan_results_add_to_verify_list (results, name);
+                }
+        }
+
+#undef MSG_FORMAT
+
+        g_hash_table_destroy (index);
+        sqlite3_finalize (stmt);
+
+        if (errcode != SQLITE_DONE)
+        {
+                gva_db_set_error (error, 0, NULL);
+                audit_scan_results_free (results);
+                return NULL;
+        }
+
+        audit_scan_results_reverse (results);
+
+exit:
+        return results;
+}
+
+static gboolean
+audit_process_scan_results (GvaScanResults *results,
+                            const gchar *column_name,
+                            GError **error)
+{
+        GHashTable *index;
+        GSList *link;
+
+        index = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) audit_string_free);
+
+        for (link = results->delete; link != NULL; link = link->next)
+        {
+                const gchar *name = link->data;
+                audit_status_index_insert (index, name, NULL);
+        }
+
+        for (link = results->verify; link != NULL; link = link->next)
+        {
+                const gchar *name = link->data;
+                gchar *status;
+
+                status = gva_mame_verify_roms (name, error);
+                if (status == NULL)
+                {
+                        g_hash_table_destroy (index);
+                        return FALSE;
+                }
+                else if (strcmp (status, "not found") == 0)
+                        audit_status_index_insert (index, name, NULL);
+                else if (strcmp (status, "not supported") == 0)
+                        audit_status_index_insert (index, name, NULL);
+                else
+                        audit_status_index_insert (index, name, status);
+
+                g_free (status);
+        }
+
+        audit_status_index_commit (index, column_name);
+        g_hash_table_destroy (index);
+
+        return TRUE;
+}
+
 /**
  * gva_audit_init:
  *
@@ -365,7 +631,7 @@ gva_audit_roms (GError **error)
         GvaProcess *process;
         GvaAuditData *data;
 
-        process = gva_mame_verify_roms (error);
+        process = gva_mame_verify_all_roms (error);
         if (process == NULL)
                 return NULL;
 
@@ -408,7 +674,7 @@ gva_audit_samples (GError **error)
         GvaProcess *process;
         GvaAuditData *data;
 
-        process = gva_mame_verify_roms (error);
+        process = gva_mame_verify_all_samples (error);
         if (process == NULL)
                 return NULL;
 
@@ -459,7 +725,7 @@ gva_audit_save_errors (void)
         GtkTreeView *view;
         GtkTreeModel *model;
         GString *contents;
-        gchar *mame_version;
+        const gchar *mame_version;
         gchar *filename;
         GError *error = NULL;
 
@@ -492,6 +758,50 @@ gva_audit_save_errors (void)
                 g_free (filename);
         }
 
-        g_free (mame_version);
         g_string_free (contents, TRUE);
+}
+
+GvaAuditResult
+gva_quick_audit (GError **error)
+{
+        GvaAuditResult audit_result;
+        GvaScanResults *rom_results = NULL;
+        GvaScanResults *sample_results = NULL;
+        guint need_to_verify;
+
+        audit_result = GVA_AUDIT_RESULT_ERROR;
+
+        rom_results = audit_scan_files ("rompath", "romset", error);
+        if (rom_results == NULL)
+                goto exit;
+
+        sample_results = audit_scan_files ("samplepath", "sampleset", error);
+        if (sample_results == NULL)
+                goto exit;
+
+        need_to_verify =
+                g_slist_length (rom_results->verify) +
+                g_slist_length (sample_results->verify);
+
+        if (need_to_verify > 100)
+        {
+                audit_result = GVA_AUDIT_RESULT_TOO_MANY;
+                goto exit;
+        }
+
+        if (!audit_process_scan_results (rom_results, "romset", error))
+                goto exit;
+
+        if (!audit_process_scan_results (sample_results, "sampleset", error))
+                goto exit;
+
+        audit_result = GVA_AUDIT_RESULT_SUCCESS;
+
+exit:
+        if (rom_results != NULL)
+                audit_scan_results_free (rom_results);
+        if (sample_results != NULL)
+                audit_scan_results_free (sample_results);
+
+        return audit_result;
 }

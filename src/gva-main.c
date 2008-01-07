@@ -34,7 +34,6 @@ main_build_database_progress_cb (GvaProcess *process,
                                  gpointer user_data)
 {
         guint total_supported = GPOINTER_TO_UINT (user_data);
-        GtkProgressBar *progress_bar;
         gdouble fraction = 0.0;
 
         if (total_supported != 0)
@@ -46,8 +45,7 @@ main_build_database_progress_cb (GvaProcess *process,
                 fraction = CLAMP (fraction, 0.0, 1.0);
         }
 
-        progress_bar = GTK_PROGRESS_BAR (GVA_WIDGET_MAIN_PROGRESS_BAR);
-        gtk_progress_bar_set_fraction (progress_bar, fraction);
+        gva_main_progress_bar_set_fraction (fraction);
 }
 
 static void
@@ -131,9 +129,9 @@ gva_main_init (void)
  * @error: return location for a #GError, or %NULL
  *
  * Executes the lengthy process of constructing the games database.
- * The function displays a progress bar in the main status bar that
- * tracks the database construction.  The function is synchronous;
- * it blocks until database construction is complete or aborted.
+ * The function updates the main window's progress bar to help track
+ * the database construction.  The function is synchronous; it blocks
+ * until database construction is complete or aborted.
  *
  * Returns: %TRUE if the database construction was successful,
  *          %FALSE if construction failed or was aborted
@@ -141,12 +139,7 @@ gva_main_init (void)
 gboolean
 gva_main_build_database (GError **error)
 {
-        GtkWidget *progress_bar;
-        GdkCursor *cursor;
-        GdkDisplay *display;
-        GdkWindow *window;
         GvaProcess *process;
-        GvaProcess *process2 = NULL;
         guint context_id;
         guint total_supported;
         gboolean main_loop_quit = FALSE;
@@ -154,20 +147,12 @@ gva_main_build_database (GError **error)
 
         /* XXX Comment this code! */
 
-        progress_bar = GVA_WIDGET_MAIN_PROGRESS_BAR;
-
-        window = gtk_widget_get_parent_window (progress_bar);
-        display = gtk_widget_get_display (progress_bar);
-        cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-        gdk_window_set_cursor (window, cursor);
-
-        gtk_widget_show (progress_bar);
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
         total_supported = gva_mame_get_total_supported (NULL);
 
         process = gva_db_build (error);
         if (process == NULL)
-                goto fail;
+                goto exit;
 
         gva_main_statusbar_push (context_id, _("Building game database..."));
 
@@ -182,17 +167,52 @@ gva_main_build_database (GError **error)
         if (main_loop_quit)
                 goto exit;
 
+        success = TRUE;
+
+        gva_main_statusbar_pop (context_id);
+
+exit:
+        if (process != NULL)
+                g_object_unref (process);
+
+        return success;
+}
+
+/**
+ * gva_main_analyze_roms:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Executes the lengthy process of analyzing all available ROM and sample
+ * sets for correctness and then updating the games database with the new
+ * status information.  The function updates the main window's progress bar
+ * to help track the analysis.  The function is synchronous; it blocks until
+ * the analysis is complete or aborted.
+ *
+ * Returns: %TRUE if the analysis completed successfully,
+ *          %FALSE if the analysis failed or was aborted
+ **/
+gboolean
+gva_main_analyze_roms (GError **error)
+{
+        GvaProcess *process;
+        GvaProcess *process2 = NULL;
+        guint context_id;
+        guint total_supported;
+        gboolean main_loop_quit = FALSE;
+        gboolean success = FALSE;
+
+        context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
+        total_supported = gva_mame_get_total_supported (NULL);
+
         process = gva_audit_roms (error);
         if (process == NULL)
-                goto fail;
+                goto exit;
 
         process2 = gva_audit_samples (error);
         if (process2 == NULL)
-                goto fail;
+                goto exit;
 
-        gva_main_statusbar_pop (context_id);
         gva_main_statusbar_push (context_id, _("Analyzing ROM files..."));
-        gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 0.0);
 
         g_signal_connect (
                 process, "notify::progress",
@@ -213,12 +233,7 @@ gva_main_build_database (GError **error)
 
         success = TRUE;
 
-fail:
         gva_main_statusbar_pop (context_id);
-        gtk_widget_hide (progress_bar);
-
-        gdk_window_set_cursor (window, NULL);
-        gdk_cursor_unref (cursor);
 
 exit:
         if (process != NULL)
@@ -262,6 +277,75 @@ gva_main_connect_proxy_cb (GtkUIManager *manager,
                 menu_tooltip_cid =
                         gva_main_statusbar_get_context_id (G_STRFUNC);
         }
+}
+
+/**
+ * gva_main_progress_bar_show:
+ *
+ * Shows the progress bar in the main window's status bar and sets the
+ * mouse cursor to busy.  Generally useful before starting a long-running
+ * foreground task.
+ **/
+void
+gva_main_progress_bar_show (void)
+{
+        GdkCursor *cursor;
+        GdkDisplay *display;
+        GtkWidget *widget;
+        GdkWindow *window;
+
+        widget = GVA_WIDGET_MAIN_PROGRESS_BAR;
+        window = gtk_widget_get_parent_window (widget);
+        display = gtk_widget_get_display (widget);
+        cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
+        gva_main_progress_bar_set_fraction (0.0);
+        gdk_window_set_cursor (window, cursor);
+        gdk_cursor_unref (cursor);
+        gtk_widget_show (widget);
+}
+
+/**
+ * gva_main_progress_bar_hide:
+ *
+ * Hides the progress bar in the main window's status bar and sets the
+ * mouse cursor back to normal.  Generally useful after completing a
+ * long-running foreground task.
+ **/
+void
+gva_main_progress_bar_hide (void)
+{
+        GtkWidget *widget;
+        GdkWindow *window;
+
+        widget = GVA_WIDGET_MAIN_PROGRESS_BAR;
+        window = gtk_widget_get_parent_window (widget);
+        gdk_window_set_cursor (window, NULL);
+        gtk_widget_hide (widget);
+}
+
+/**
+ * gva_main_progress_bar_set_fraction:
+ * @fraction: fraction of the task that's been completed
+ *
+ * Thin wrapper for gtk_progress_bar_set_fraction() that uses the main
+ * window's progress bar.
+ *
+ * Causes the progress bar to "fill in" the given fraction of the bar.
+ * The fraction should be between 0.0 and 1.0, inclusive.
+ **/
+void
+gva_main_progress_bar_set_fraction (gdouble fraction)
+{
+        static GtkWidget *widget = NULL;
+
+        /* If this function gets called once, it will likely get
+         * called lots.  So cache a pointer to the widget so we
+         * don't have to look it up each time.
+         */
+        if (G_UNLIKELY (widget == NULL))
+                widget = GVA_WIDGET_MAIN_PROGRESS_BAR;
+
+        gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), fraction);
 }
 
 /**

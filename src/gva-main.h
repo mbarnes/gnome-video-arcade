@@ -34,22 +34,26 @@
 
 G_BEGIN_DECLS
 
-void          gva_main_init                     (void);
-gboolean      gva_main_build_database           (GError **error);
-void          gva_main_connect_proxy_cb         (GtkUIManager *manager,
-                                                 GtkAction *action,
-                                                 GtkWidget *proxy);
-guint         gva_main_statusbar_get_context_id (const gchar *context_description);
-guint         gva_main_statusbar_push           (guint context_id,
-                                                 const gchar *format,
-                                                 ...);
-void          gva_main_statusbar_pop            (guint context_id);
-void          gva_main_statusbar_remove         (guint context_id,
-                                                 guint message_id);
+void          gva_main_init                      (void);
+gboolean      gva_main_build_database            (GError **error);
+gboolean      gva_main_analyze_roms              (GError **error);
+void          gva_main_connect_proxy_cb          (GtkUIManager *manager,
+                                                  GtkAction *action,
+                                                  GtkWidget *proxy);
+void          gva_main_progress_bar_show         (void);
+void          gva_main_progress_bar_hide         (void);
+void          gva_main_progress_bar_set_fraction (gdouble fraction);
+guint         gva_main_statusbar_get_context_id  (const gchar *context_description);
+guint         gva_main_statusbar_push            (guint context_id,
+                                                  const gchar *format,
+                                                  ...);
+void          gva_main_statusbar_pop             (guint context_id);
+void          gva_main_statusbar_remove          (guint context_id,
+                                                  guint message_id);
 
 /* Signal Handlers */
 
-void          gva_main_window_destroy_cb        (GtkWindow *window);
+void          gva_main_window_destroy_cb         (GtkWindow *window);
 
 G_END_DECLS
 

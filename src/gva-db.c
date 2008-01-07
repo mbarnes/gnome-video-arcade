@@ -1626,7 +1626,7 @@ gboolean
 gva_db_needs_rebuilt (void)
 {
         gchar *db_build_id = NULL;
-        gchar *mame_version = NULL;
+        const gchar *mame_version; 
         const gchar *reason;
         gboolean rebuild;
         GError *error = NULL;
@@ -1668,7 +1668,6 @@ exit:
                 g_message ("Database seems up-to-date; no rebuild necessary.");
 
         g_free (db_build_id);
-        g_free (mame_version);
 
         return rebuild;
 }

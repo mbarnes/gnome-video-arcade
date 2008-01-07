@@ -33,6 +33,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_main_analyze_roms ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_main_connect_proxy_cb ##### -->
 <para>
 
@@ -41,6 +50,28 @@
 @manager: 
 @action: 
 @proxy: 
+
+
+<!-- ##### FUNCTION gva_main_progress_bar_show ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_main_progress_bar_hide ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_main_progress_bar_set_fraction ##### -->
+<para>
+
+</para>
+
+@fraction: 
 
 
 <!-- ##### FUNCTION gva_main_statusbar_get_context_id ##### -->
