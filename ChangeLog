@@ -1,5 +1,22 @@
 2008-01-06  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-error.h:
+	Add GVA_ERROR_LIMIT.
+
+	* src/gva-audit.c (gva_quick_audit):
+	Return a boolean instead of GvaAuditResult.  If too many files
+	have changed to proceed with the quick-audit, set the GError to
+	GVA_ERROR_LIMIT and return FALSE.  Eliminates the need for the
+	GvaAuditResult enumeration.
+
+	* src/gva-main (start):
+	Deal with gva_quick_audit()'s new semantics.
+
+	* src/gva-ui.c:
+	Add a tooltip for Help->Contents.
+
+2008-01-06  Matthew Barnes  <mbarnes@redhat.com>
+
 	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 

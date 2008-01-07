@@ -17,15 +17,6 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### ENUM GvaAuditResult ##### -->
-<para>
-
-</para>
-
-@GVA_AUDIT_RESULT_SUCCESS: 
-@GVA_AUDIT_RESULT_TOO_MANY: 
-@GVA_AUDIT_RESULT_ERROR: 
-
 <!-- ##### FUNCTION gva_audit_init ##### -->
 <para>
 

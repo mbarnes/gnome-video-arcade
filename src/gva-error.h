@@ -55,6 +55,8 @@ G_BEGIN_DECLS
  * GvaError:
  * @GVA_ERROR_CONFIG:
  *      Configuration error.
+ * @GVA_ERROR_LIMIT:
+ *      A limit has been exceeded.
  * @GVA_ERROR_MAME:
  *      Error from a MAME process.
  * @GVA_ERROR_QUERY:
@@ -68,6 +70,7 @@ G_BEGIN_DECLS
 typedef enum
 {
         GVA_ERROR_CONFIG,
+        GVA_ERROR_LIMIT,
         GVA_ERROR_MAME,
         GVA_ERROR_QUERY,
         GVA_ERROR_SYSTEM

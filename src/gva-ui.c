@@ -542,7 +542,7 @@ static GtkActionEntry entries[] =
           GTK_STOCK_HELP,
           N_("_Contents"),
           NULL,
-          NULL,
+          N_("Open the help documentation"),
           G_CALLBACK (action_contents_cb) },
 
         { "insert-favorite",

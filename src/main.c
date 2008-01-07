@@ -92,20 +92,25 @@ start (void)
                 if (!success)
                         return;
         }
-        else if (gva_quick_audit (&error) == GVA_AUDIT_RESULT_TOO_MANY)
+        else if (!gva_quick_audit (&error))
         {
-                gboolean success;
+                gboolean success = FALSE;
 
-                gva_main_progress_bar_show ();
-                success = gva_main_analyze_roms (&error);
+                /* Too many files have changed; perform a full audit. */
+                if (g_error_matches (error, GVA_ERROR, GVA_ERROR_LIMIT))
+                {
+                        g_clear_error (&error);
+
+                        gva_main_progress_bar_show ();
+                        success = gva_main_analyze_roms (&error);
+                        gva_main_progress_bar_hide ();
+                }
+
                 gva_error_handle (&error);
-                gva_main_progress_bar_hide ();
 
                 if (!success)
                         return;
         }
-        else
-                gva_error_handle (&error);
 
         gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);

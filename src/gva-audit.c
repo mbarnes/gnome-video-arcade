@@ -761,15 +761,13 @@ gva_audit_save_errors (void)
         g_string_free (contents, TRUE);
 }
 
-GvaAuditResult
+gboolean
 gva_quick_audit (GError **error)
 {
-        GvaAuditResult audit_result;
+        gboolean success = FALSE;
         GvaScanResults *rom_results = NULL;
         GvaScanResults *sample_results = NULL;
         guint need_to_verify;
-
-        audit_result = GVA_AUDIT_RESULT_ERROR;
 
         rom_results = audit_scan_files ("rompath", "romset", error);
         if (rom_results == NULL)
@@ -785,7 +783,9 @@ gva_quick_audit (GError **error)
 
         if (need_to_verify > 100)
         {
-                audit_result = GVA_AUDIT_RESULT_TOO_MANY;
+                g_set_error (
+                        error, GVA_ERROR, GVA_ERROR_LIMIT,
+                        _("Too many files have changed"));
                 goto exit;
         }
 
@@ -795,7 +795,7 @@ gva_quick_audit (GError **error)
         if (!audit_process_scan_results (sample_results, "sampleset", error))
                 goto exit;
 
-        audit_result = GVA_AUDIT_RESULT_SUCCESS;
+        success = TRUE;
 
 exit:
         if (rom_results != NULL)
@@ -803,5 +803,5 @@ exit:
         if (sample_results != NULL)
                 audit_scan_results_free (sample_results);
 
-        return audit_result;
+        return success;
 }
