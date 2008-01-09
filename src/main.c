@@ -82,31 +82,30 @@ start (void)
                 gboolean success = TRUE;
 
                 gva_main_progress_bar_show ();
+
                 success &= gva_main_build_database (&error);
                 gva_error_handle (&error);
+
                 gva_main_progress_bar_set_fraction (0.0);
+
                 success &= gva_main_analyze_roms (&error);
                 gva_error_handle (&error);
+
                 gva_main_progress_bar_hide ();
 
                 if (!success)
                         return;
         }
-        else if (!gva_quick_audit (&error))
+        else if (gva_audit_detect_changes ())
         {
-                gboolean success = FALSE;
+                gboolean success;
 
-                /* Too many files have changed; perform a full audit. */
-                if (g_error_matches (error, GVA_ERROR, GVA_ERROR_LIMIT))
-                {
-                        g_clear_error (&error);
+                gva_main_progress_bar_show ();
 
-                        gva_main_progress_bar_show ();
-                        success = gva_main_analyze_roms (&error);
-                        gva_main_progress_bar_hide ();
-                }
-
+                success = gva_main_analyze_roms (&error);
                 gva_error_handle (&error);
+
+                gva_main_progress_bar_hide ();
 
                 if (!success)
                         return;

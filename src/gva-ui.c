@@ -292,7 +292,7 @@ action_play_back_cb (GtkAction *action)
 /**
  * GVA_ACTION_PREFERENCES:
  *
- * Activation of this action makes the "Preferences" window visible.
+ * Activation of this action presents the "Preferences" window.
  *
  * Main menu item: Edit -> Preferences
  **/
@@ -339,7 +339,7 @@ action_previous_game_cb (GtkAction *action)
 /**
  * GVA_ACTION_PROPERTIES:
  *
- * Activation of this action makes the "Properties" window visible.
+ * Activation of this action presents the "Properties" window.
  *
  * Main menu item: View -> Properties
  **/
@@ -444,7 +444,7 @@ action_save_errors_cb (GtkAction *action)
 /**
  * GVA_ACTION_SEARCH:
  *
- * Activation of this action makes the "Search for Games" window visible.
+ * Activation of this action presents the "Search for Games" window.
  *
  * Main menu item: Edit -> Search...
  **/
@@ -457,7 +457,7 @@ action_search_cb (GtkAction *action)
 /**
  * GVA_ACTION_SHOW_PLAY_BACK:
  *
- * Activation of this action makes the "Recorded Games" window visible.
+ * Activation of this action presents the "Recorded Games" window.
  *
  * Main menu item: Game -> Play Back...
  **/

@@ -1,3 +1,29 @@
+2008-01-08  Matthew Barnes  <mbarnes@redhat.com>
+
+	Detecting fine-grained changes gets really hairy when dealing with
+	split or merged ROM sets so I'm backing away from my "Quick Audit"
+	idea and taking a simpler approach: if any of the directories in
+	"rompath" or "samplepath" have been modified (i.e. the timestamps
+	are more recent than the database timestamp), do a full audit.
+
+	* src/main.c (start):
+	Call gva_audit_detect_changes() instead of gva_quick_audit().
+	If it returns TRUE, run a full ROM file audit.
+
+	* src/gva-audit.c (gva_quick_audit):
+	Revert this function and all related support functions.
+
+	* src/gva-audit.c (gva_audit_detect_changes):
+	New function compare the timestamp of the games database against
+	the various ROM and sample directories.  Return TRUE if any of the
+	directories have been updated since the last database modification.
+
+	* src/gva-error.h:
+	Revert GVA_ERROR_LIMIT.
+
+	* src/gva-ui.c:
+	Reword documentation for actions that present a window.
+
 2008-01-06  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-error.h:

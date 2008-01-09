@@ -1,11 +1,10 @@
 <SECTION>
 <FILE>gva-audit</FILE>
-GvaAuditResult
 gva_audit_init
 gva_audit_roms
 gva_audit_samples
 gva_audit_save_errors
-gva_quick_audit
+gva_audit_detect_changes
 </SECTION>
 
 <SECTION>

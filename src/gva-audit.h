@@ -36,7 +36,7 @@ void            gva_audit_init                  (void);
 GvaProcess *    gva_audit_roms                  (GError **error);
 GvaProcess *    gva_audit_samples               (GError **error);
 void            gva_audit_save_errors           (void);
-gboolean        gva_quick_audit                 (GError **error);
+gboolean        gva_audit_detect_changes        (void);
 
 G_END_DECLS
 

@@ -49,12 +49,11 @@
 
 
 
-<!-- ##### FUNCTION gva_quick_audit ##### -->
+<!-- ##### FUNCTION gva_audit_detect_changes ##### -->
 <para>
 
 </para>
 
-@error: 
 @Returns: 
 
 
