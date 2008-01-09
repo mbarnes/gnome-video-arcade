@@ -48,7 +48,7 @@ typedef void    (*GvaMameCallback)              (const gchar *name,
                                                  gpointer user_data);
 
 const gchar *   gva_mame_get_path_sep           (void);
-const gchar *   gva_mame_get_version            (GError **error);
+gchar *         gva_mame_get_version            (GError **error);
 guint           gva_mame_get_total_supported    (GError **error);
 gchar *         gva_mame_get_config_value       (const gchar *config_key,
                                                  GError **error);

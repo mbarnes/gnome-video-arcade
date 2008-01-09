@@ -66,7 +66,7 @@ static GOptionEntry entries[] =
 static void
 start (void)
 {
-        const gchar *mame_version;
+        gchar *mame_version;
         guint context_id;
         GError *error = NULL;
 
@@ -75,7 +75,10 @@ start (void)
         gva_error_handle (&error);
 
         if (mame_version != NULL)
+        {
                 gva_main_statusbar_push (context_id, "%s", mame_version);
+                g_free (mame_version);
+        }
 
         if (gva_db_needs_rebuilt ())
         {

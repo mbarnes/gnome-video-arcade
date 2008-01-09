@@ -5,9 +5,9 @@ GNOME Video Arcade 0.5.5
 
         What's New
         ----------
-        * GNOME Video Arcade will now automatically detect new ROMs and
-          samples and will either quickly update the database or perform
-          a full analysis, depending on the extent of the changes.
+        * GNOME Video Arcade now detects new ROM files at startup and
+          will automatically run an analysis without having to rebuild
+          the game database.
         * Do overwrite confirmation when saving audit results.
         * Fix a couple regressions that have crept in recently:
             - Show games having "best available" ROM sets.

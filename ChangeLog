@@ -1,5 +1,19 @@
 2008-01-08  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-mame-sdlmame.c (gva_mame_get_version),
+	(gva_get_total_supported):
+	* src/gva-mame-xmame.c (gva_mame_get_version),
+	(gva_get_total_supported):
+	Changed my mind about the caching.  Might be better suited for a
+	MAME initialization function if I ever decide to add one.
+
+	* src/main.c (start):
+	* src/gva-audit.c (audit_data_new):
+	* src/gva-db.c (gva_db_needs_rebuilt):
+	Revert changes for gva_mame_get_version().
+
+2008-01-08  Matthew Barnes  <mbarnes@redhat.com>
+
 	Detecting fine-grained changes gets really hairy when dealing with
 	split or merged ROM sets so I'm backing away from my "Quick Audit"
 	idea and taking a simpler approach: if any of the directories in

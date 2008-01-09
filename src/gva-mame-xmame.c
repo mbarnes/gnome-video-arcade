@@ -31,14 +31,11 @@ gva_mame_get_path_sep (void)
         return ":";  /* XMAME uses UNIX-style search paths */
 }
 
-const gchar *
+gchar *
 gva_mame_get_version (GError **error)
 {
-        static gchar *version = NULL;
+        gchar *version = NULL;
         gchar **lines;
-
-        if (version != NULL)
-                return version;
 
         /* Execute the command "${mame} -version". */
         if (gva_mame_command ("-version", &lines, NULL, error) != 0)
@@ -72,12 +69,8 @@ exit:
 guint
 gva_mame_get_total_supported (GError **error)
 {
-        statuc guint total_supported = 0;
         gchar **lines;
         guint num_lines;
-
-        if (total_supported > 0)
-                return total_supported;
 
         /* Execute the command "${mame} -listfull". */
         if (gva_mame_command ("-listfull", &lines, NULL, error) != 0)
@@ -100,7 +93,5 @@ gva_mame_get_total_supported (GError **error)
         g_strfreev (lines);
 
         /* Count the lines, excluding the header and footer. */
-        total_supported = (num_lines > 4) ? num_lines - 4 : 0;
-
-        return total_supported;
+        return (num_lines > 4) ? num_lines - 4 : 0;
 }

@@ -18,7 +18,6 @@
 
 #include "gva-audit.h"
 
-#include <errno.h>
 #include <string.h>
 
 #include "gva-columns.h"
@@ -26,7 +25,6 @@
 #include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-mame.h"
-#include "gva-tree-view.h"
 #include "gva-ui.h"
 
 #define SQL_SELECT_BAD_GAMES \
@@ -65,7 +63,7 @@ audit_data_new (const gchar *column)
                 (GDestroyNotify) g_free,
                 (GDestroyNotify) audit_string_free);
 
-        data = g_slice_new0 (GvaAuditData);
+        data = g_slice_new (GvaAuditData);
         data->output = g_ptr_array_new ();
         data->output_index = output_index;
         data->status_index = status_index;
@@ -435,7 +433,7 @@ gva_audit_save_errors (void)
         GtkTreeView *view;
         GtkTreeModel *model;
         GString *contents;
-        const gchar *mame_version;
+        gchar *mame_version;
         gchar *filename;
         GError *error = NULL;
 
@@ -468,6 +466,7 @@ gva_audit_save_errors (void)
                 g_free (filename);
         }
 
+        g_free (mame_version);
         g_string_free (contents, TRUE);
 }
 
