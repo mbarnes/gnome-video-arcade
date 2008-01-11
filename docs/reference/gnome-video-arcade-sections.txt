@@ -234,6 +234,7 @@ gva_play_back_clicked_cb
 gva_play_back_close_clicked_cb
 gva_play_back_delete_clicked_cb
 gva_play_back_row_activated_cb
+gva_play_back_window_hide_cb
 </SECTION>
 
 <SECTION>
@@ -336,6 +337,7 @@ gva_db_init
 gva_db_build
 gva_db_reset
 gva_db_execute
+gva_db_get_table
 gva_db_transaction_begin
 gva_db_transaction_commit
 gva_db_transaction_rollback

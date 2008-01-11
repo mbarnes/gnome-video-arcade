@@ -114,6 +114,7 @@ start (void)
                         return;
         }
 
+        gtk_action_set_sensitive (GVA_ACTION_SEARCH, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);

@@ -24,12 +24,20 @@
 #include <time.h>
 #include <sys/stat.h>
 
+#include "gva-columns.h"
+#include "gva-db.h"
 #include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-mame.h"
 #include "gva-time.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
+
+#define SQL_DELETE_PLAY_BACK \
+        "DELETE FROM playback"
+
+#define SQL_INSERT_PLAY_BACK \
+        "INSERT INTO playback VALUES (@name, @inode, @comment)"
 
 static gint
 play_back_confirm_deletion (void)
@@ -105,69 +113,74 @@ play_back_selection_changed_cb (GtkTreeSelection *tree_selection)
 }
 
 static void
-play_back_render_time (GtkTreeViewColumn *column,
-                       GtkCellRenderer *renderer,
-                       GtkTreeModel *model,
-                       GtkTreeIter *iter)
-{
-        GValue value;
-        gchar text[256];
-
-        memset (&value, 0, sizeof (GValue));
-        gtk_tree_model_get_value (
-                model, iter, GVA_GAME_STORE_COLUMN_TIME, &value);
-        strftime (
-                text, sizeof (text), nl_langinfo (D_T_FMT),
-                localtime (g_value_get_boxed (&value)));
-        g_object_set (renderer, "text", text, NULL);
-        g_value_unset (&value);
-}
-
-static void
 play_back_add_input_file (const gchar *inpfile,
                           const gchar *name,
                           GvaGameStore *game_store)
 {
-        GtkTreePath *path;
         GtkTreeIter iter;
-        gboolean valid;
+        gchar *comment = NULL;
+        gchar **result = NULL;
         gchar *inpname;
-        gchar *title;
-        struct stat statbuf;
+        gchar *sql;
+        gint rows;
+        gint columns;
+        struct stat st;
         time_t *time;
+        GError *error = NULL;
 
-        if (g_stat (inpfile, &statbuf) != 0)
+        if (g_stat (inpfile, &st) != 0)
         {
                 g_warning ("%s: %s", inpfile, g_strerror (errno));
                 return;
         }
 
-        time = &statbuf.st_ctime;
+        time = &st.st_ctime;
 
-        path = gva_tree_view_lookup (name);
-        if (path == NULL)
+        /* Try to fetch the comment from the database. */
+        sql = g_strdup_printf (
+                "SELECT comment FROM playback WHERE "
+                "name == '%s' AND inode == %" G_GINT64_FORMAT,
+                name, (gint64) st.st_ino);
+        if (gva_db_get_table (sql, &result, &rows, &columns, &error))
+        {
+                if (rows > 0)
+                        comment = g_strdup (result[1]);
+                g_strfreev (result);
+        }
+        gva_error_handle (&error);
+        g_free (sql);
+
+        /* If that fails, use the game title. */
+        if (comment == NULL)
+        {
+                sql = g_strdup_printf (
+                        "SELECT description FROM available "
+                        "WHERE name == '%s'", name);
+                if (gva_db_get_table (sql, &result, &rows, &columns, &error))
+                {
+                        if (rows > 0)
+                                comment = g_strdup (result[1]);
+                        g_strfreev (result);
+                }
+                gva_error_handle (&error);
+                g_free (sql);
+        }
+
+        /* The game may not be available anymore. */
+        if (comment == NULL)
         {
                 g_warning ("%s: Game '%s' not found", inpfile, name);
                 return;
         }
 
-        valid = gtk_tree_model_get_iter (
-                gva_tree_view_get_model (), &iter, path);
-        g_assert (valid);
-
-        gtk_tree_path_free (path);
-
-        gtk_tree_model_get (
-                gva_tree_view_get_model (), &iter,
-                GVA_GAME_STORE_COLUMN_DESCRIPTION, &title, -1);
-
         gtk_tree_store_append (GTK_TREE_STORE (game_store), &iter, NULL);
 
         gtk_tree_store_set (
                 GTK_TREE_STORE (game_store), &iter,
-                GVA_GAME_STORE_COLUMN_INPFILE, inpfile,
                 GVA_GAME_STORE_COLUMN_NAME, name,
-                GVA_GAME_STORE_COLUMN_DESCRIPTION, title,
+                GVA_GAME_STORE_COLUMN_COMMENT, comment,
+                GVA_GAME_STORE_COLUMN_INODE, (gint64) st.st_ino,
+                GVA_GAME_STORE_COLUMN_INPFILE, inpfile,
                 GVA_GAME_STORE_COLUMN_TIME, time,
                 -1);
 
@@ -175,7 +188,7 @@ play_back_add_input_file (const gchar *inpfile,
         gva_game_store_index_insert (game_store, inpname, &iter);
         g_free (inpname);
 
-        g_free (title);
+        g_free (comment);
 }
 
 /**
@@ -190,7 +203,6 @@ gva_play_back_init (void)
 {
         GtkWindow *window;
         GtkTreeView *view;
-        GtkCellRenderer *renderer;
         GtkTreeViewColumn *column;
 
         window = GTK_WINDOW (GVA_WIDGET_PLAY_BACK_WINDOW);
@@ -202,26 +214,12 @@ gva_play_back_init (void)
                 gtk_tree_view_get_selection (view),
                 GTK_SELECTION_MULTIPLE);
 
-        /* Played On Column */
-        renderer = gtk_cell_renderer_text_new ();
-        column = gtk_tree_view_column_new ();
-        gtk_tree_view_column_set_title (column, _("Played On"));
-        gtk_tree_view_column_pack_start (column, renderer, TRUE);
-        gtk_tree_view_column_set_cell_data_func (
-                column, renderer, (GtkTreeCellDataFunc)
-                play_back_render_time, NULL, NULL);
-        gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_TIME);
+        /* Time Column */
+        column = gva_columns_new_from_id (GVA_GAME_STORE_COLUMN_TIME);
         gtk_tree_view_append_column (view, column);
 
-        /* Title Column */
-        renderer = gtk_cell_renderer_text_new ();
-        g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-        column = gtk_tree_view_column_new_with_attributes (
-                _("Title"), renderer, "text",
-                GVA_GAME_STORE_COLUMN_DESCRIPTION, NULL);
-        gtk_tree_view_column_set_sort_column_id (
-                column, GVA_GAME_STORE_COLUMN_DESCRIPTION);
+        /* Comment Column */
+        column = gva_columns_new_from_id (GVA_GAME_STORE_COLUMN_COMMENT);
         gtk_tree_view_append_column (view, column);
 
         g_signal_connect (
@@ -364,4 +362,138 @@ gva_play_back_row_activated_cb (GtkTreeView *view,
                                 GtkTreeViewColumn *column)
 {
         gtk_action_activate (GVA_ACTION_PLAY_BACK);
+}
+
+/**
+ * gva_play_back_window_hide_cb:
+ * @window: the "Recorded Games" window
+ *
+ * Handler for #GtkWidget::hide signals to the "Recorded Games" window.
+ *
+ * Saves the contents of the "Recorded Games" tree view to the game database.
+ **/
+void
+gva_play_back_window_hide_cb (GtkWindow *window)
+{
+        GtkTreeView *view;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        sqlite3_stmt *stmt;
+        gboolean valid;
+        GError *error = NULL;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_PLAY_BACK_TREE_VIEW);
+        model = gtk_tree_view_get_model (view);
+        valid = gtk_tree_model_get_iter_first (model, &iter);
+
+        if (!gva_db_transaction_begin (&error))
+                goto exit;
+
+        if (!gva_db_execute (SQL_DELETE_PLAY_BACK, &error))
+                goto rollback;
+
+        if (!gva_db_prepare (SQL_INSERT_PLAY_BACK, &stmt, &error))
+                goto rollback;
+
+        while (valid)
+        {
+                gchar *comment;
+                gchar *name;
+                gchar *utf8;
+                gint64 inode;
+                gint index;
+                gint errcode;
+
+                gtk_tree_model_get (
+                        model, &iter,
+                        GVA_GAME_STORE_COLUMN_NAME, &name,
+                        GVA_GAME_STORE_COLUMN_INODE, &inode,
+                        GVA_GAME_STORE_COLUMN_COMMENT, &comment,
+                        -1);
+
+                index = sqlite3_bind_parameter_index (stmt, "@name");
+                utf8 = g_locale_to_utf8 (name, -1, NULL, NULL, &error);
+                gva_error_handle (&error);
+
+                if (utf8 == NULL)
+                {
+                        g_free (name);
+                        g_free (comment);
+                        sqlite3_finalize (stmt);
+                        goto rollback;
+                }
+
+                errcode = sqlite3_bind_text (stmt, index, utf8, -1, g_free);
+
+                if (errcode != SQLITE_OK)
+                {
+                        g_free (name);
+                        g_free (comment);
+                        sqlite3_finalize (stmt);
+                        goto rollback;
+                }
+
+                index = sqlite3_bind_parameter_index (stmt, "@inode");
+                errcode = sqlite3_bind_int64 (stmt, index, inode);
+
+                if (errcode != SQLITE_OK)
+                {
+                        g_free (name);
+                        g_free (comment);
+                        sqlite3_finalize (stmt);
+                        goto rollback;
+                }
+
+                index = sqlite3_bind_parameter_index (stmt, "@comment");
+                utf8 = g_locale_to_utf8 (comment, -1, NULL, NULL, &error);
+                gva_error_handle (&error);
+
+                if (utf8 == NULL)
+                {
+                        g_free (name);
+                        g_free (comment);
+                        sqlite3_finalize (stmt);
+                        goto rollback;
+                }
+
+                errcode = sqlite3_bind_text (stmt, index, utf8, -1, g_free);
+
+                if (errcode != SQLITE_OK)
+                {
+                        g_free (name);
+                        g_free (comment);
+                        sqlite3_finalize (stmt);
+                        goto rollback;
+                }
+
+                g_free (name);
+                g_free (comment);
+
+                if (sqlite3_step (stmt) != SQLITE_DONE)
+                {
+                        gva_db_set_error (&error, 0, NULL);
+                        gva_error_handle (&error);
+                        sqlite3_finalize (stmt);
+                        goto rollback;
+                }
+
+                sqlite3_reset (stmt);
+                sqlite3_clear_bindings (stmt);
+
+                valid = gtk_tree_model_iter_next (model, &iter);
+        }
+
+        sqlite3_finalize (stmt);
+
+        if (!gva_db_transaction_commit (&error))
+                goto rollback;
+
+        goto exit;
+
+rollback:
+        gva_error_handle (&error);
+        gva_db_transaction_rollback (&error);
+
+exit:
+        gva_error_handle (&error);
 }

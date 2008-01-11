@@ -43,6 +43,7 @@ void            gva_play_back_delete_clicked_cb (GtkTreeView *view,
 void            gva_play_back_row_activated_cb  (GtkTreeView *view,
                                                  GtkTreePath *path,
                                                  GtkTreeViewColumn *column);
+void            gva_play_back_window_hide_cb    (GtkWindow *window);
 
 G_END_DECLS
 

@@ -54,6 +54,19 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_db_get_table ##### -->
+<para>
+
+</para>
+
+@sql: 
+@result: 
+@rows: 
+@columns: 
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_db_transaction_begin ##### -->
 <para>
 

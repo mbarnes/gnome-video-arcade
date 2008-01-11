@@ -172,11 +172,31 @@
                 "default_ DEFAULT 'no' " \
                 "CHECK (default_ in ('yes', 'no')));"
 
+/* The playback table survives database builds. */
+#define SQL_CREATE_TABLE_PLAYBACK \
+        "CREATE TABLE IF NOT EXISTS playback (" \
+                "name NOT NULL, " \
+                "inode NOT NULL, " \
+                "comment);"
+
 #define SQL_CREATE_VIEW_AVAILABLE \
         "CREATE VIEW IF NOT EXISTS available AS " \
                 "SELECT *, getcategory(name) AS category, " \
                 "isfavorite(name) AS favorite FROM game " \
                 "WHERE (romset IN ('good', 'best available'))"
+
+#define SQL_DROP_TABLES \
+        "DROP TABLE IF EXISTS mame; " \
+        "DROP TABLE IF EXISTS game; " \
+        "DROP TABLE IF EXISTS biosset; " \
+        "DROP TABLE IF EXISTS rom; " \
+        "DROP TABLE IF EXISTS disk; " \
+        "DROP TABLE IF EXISTS sample; " \
+        "DROP TABLE IF EXISTS chip; " \
+        "DROP TABLE IF EXISTS display; " \
+        "DROP TABLE IF EXISTS control; " \
+        "DROP TABLE IF EXISTS dipvalue; " \
+        "DROP VIEW IF EXISTS available"
 
 #define SQL_INSERT_GAME \
         "INSERT INTO game VALUES (" \
@@ -380,15 +400,17 @@ db_parser_bind_text (sqlite3_stmt *stmt,
                      const gchar *param,
                      const gchar *value)
 {
+        gint index;
         gint errcode;
+        gchar *utf8;
         GError *error = NULL;
 
-        errcode = sqlite3_bind_text (
-                stmt, sqlite3_bind_parameter_index (stmt, param),
-                g_locale_to_utf8 (value, -1, NULL, NULL, &error), -1, g_free);
-
-        /* Handle conversion errors. */
+        index = sqlite3_bind_parameter_index (stmt, param);
+        utf8 = g_locale_to_utf8 (value, -1, NULL, NULL, &error);
         gva_error_handle (&error);
+
+        g_return_if_fail (utf8 != NULL);
+        errcode = sqlite3_bind_text (stmt, index, utf8, -1, g_free);
 
         if (errcode != SQLITE_OK)
         {
@@ -1191,6 +1213,7 @@ db_create_tables (GError **error)
                 && gva_db_execute (SQL_CREATE_TABLE_DISPLAY, error)
                 && gva_db_execute (SQL_CREATE_TABLE_CONTROL, error)
                 && gva_db_execute (SQL_CREATE_TABLE_DIPVALUE, error)
+                && gva_db_execute (SQL_CREATE_TABLE_PLAYBACK, error)
                 && gva_db_execute (SQL_CREATE_VIEW_AVAILABLE, error);
 }
 
@@ -1417,19 +1440,12 @@ gva_db_build (GError **error)
 gboolean
 gva_db_reset (GError **error)
 {
-        const gchar *filename;
-
         g_return_val_if_fail (db != NULL, FALSE);
 
-        filename = gva_db_get_filename ();
+        if (!gva_db_execute (SQL_DROP_TABLES, error))
+                return FALSE;
 
-        sqlite3_close (db);
-        db = NULL;
-
-        if (g_file_test (filename, G_FILE_TEST_EXISTS))
-                g_remove (filename);
-
-        return gva_db_init (error);
+        return db_create_tables (error);
 }
 
 /**
@@ -1442,7 +1458,7 @@ gva_db_reset (GError **error)
  * "BEGIN TRANSACTION".  If an error occurs, it returns %FALSE and sets
  * @error.
  *
- * Returns: %TRUE on succes, %FALSE if an error occurred
+ * Returns: %TRUE on success, %FALSE if an error occurred
  **/
 gboolean
 gva_db_execute (const gchar *sql,
@@ -1457,6 +1473,62 @@ gva_db_execute (const gchar *sql,
         errcode = sqlite3_exec (db, sql, NULL, NULL, &errmsg);
 
         if (errcode != SQLITE_OK)
+        {
+                gva_db_set_error (error, errcode, errmsg);
+                sqlite3_free (errmsg);
+        }
+
+        return (errcode == SQLITE_OK);
+}
+
+/**
+ * gva_db_get_table:
+ * @sql: an SQL statement
+ * @result: return location for the result
+ * @rows: return location for the number of rows in the result
+ * @columns: return location for the number of columns in the result
+ * @error: return location for a #GError, or %NULL
+ *
+ * Executes the given SQL statement and returns the results as a string
+ * array (see sqlite3_get_table() for the array layout).  This function
+ * is appropriate for SELECT statements that return a small result set.
+ * If an error occurs, it returns %FALSE and sets @error.
+ *
+ * Use g_strfreev() to free @result.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
+gboolean
+gva_db_get_table (const gchar *sql,
+                  gchar ***result,
+                  gint *rows,
+                  gint *columns,
+                  GError **error)
+{
+        char **table;
+        char *errmsg;
+        gint errcode;
+
+        g_return_val_if_fail (db != NULL, FALSE);
+        g_return_val_if_fail (sql != NULL, FALSE);
+        g_return_val_if_fail (result != NULL, FALSE);
+        g_return_val_if_fail (rows != NULL, FALSE);
+        g_return_val_if_fail (columns != NULL, FALSE);
+
+        errcode = sqlite3_get_table (
+                db, sql, &table, rows, columns, &errmsg);
+
+        if (errcode == SQLITE_OK)
+        {
+                gint length, ii;
+
+                length = (*rows + 1) * (*columns);
+                *result = g_new0 (gchar *, length + 1);
+                for (ii = 0; ii < length; ii++)
+                        (*result)[ii] = g_strdup (table[ii]);
+                sqlite3_free_table (table);
+        }
+        else
         {
                 gva_db_set_error (error, errcode, errmsg);
                 sqlite3_free (errmsg);
@@ -1696,5 +1768,5 @@ gva_db_set_error (GError **error,
                 message = sqlite3_errmsg (db);
         }
 
-        g_set_error (error, GVA_SQLITE_ERROR, code, message);
+        g_set_error (error, GVA_SQLITE_ERROR, code, "(SQL) %s", message);
 }
