@@ -1,5 +1,9 @@
 2008-01-11  Matthew Barnes  <mbarnes@redhat.com>
 
+	* configure.ac: Post-release version bump.
+
+2008-01-11  Matthew Barnes  <mbarnes@redhat.com>
+
 	* NEWS: Update for 0.5.5
 
 	* data/gnome-video-arcade.glade:
