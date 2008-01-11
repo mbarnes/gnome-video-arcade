@@ -36,6 +36,11 @@ GvaProcess *    gva_db_build                    (GError **error);
 gboolean        gva_db_reset                    (GError **error);
 gboolean        gva_db_execute                  (const gchar *sql,
                                                  GError **error);
+gboolean        gva_db_get_table                (const gchar *sql,
+                                                 gchar ***result,
+                                                 gint *rows,
+                                                 gint *columns,
+                                                 GError **error);
 gboolean        gva_db_transaction_begin        (GError **error);
 gboolean        gva_db_transaction_commit       (GError **error);
 gboolean        gva_db_transaction_rollback     (GError **error);

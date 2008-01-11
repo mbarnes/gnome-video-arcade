@@ -470,6 +470,16 @@ gva_audit_save_errors (void)
         g_string_free (contents, TRUE);
 }
 
+/**
+ * gva_audit_detect_changes:
+ *
+ * Attempts to detect ROM and sample file changes since the last program
+ * execution by scanning the timestamps on the directories listed in the
+ * "rompath" and "samplepath" configuration values.  It returns %TRUE if
+ * any of those timestamps are more recent than the game database.
+ *
+ * Returns: %TRUE if changes were detected
+ **/
 gboolean
 gva_audit_detect_changes (void)
 {

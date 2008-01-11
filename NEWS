@@ -1,13 +1,16 @@
 GNOME Video Arcade 0.5.5
 ========================
 
-        Released January ??, 2008
+        Released January 11, 2008
 
         What's New
         ----------
         * GNOME Video Arcade now detects new ROM files at startup and
           will automatically run an analysis without having to rebuild
           the game database.
+        * Items in the "Recorded Games" window are now editable.  You
+          can click on the game title and change it to something more
+          informative like "Scored 1,000,000 on Donkey Kong!"
         * Do overwrite confirmation when saving audit results.
         * Fix a couple regressions that have crept in recently:
             - Show games having "best available" ROM sets.

@@ -149,6 +149,8 @@ game_store_constructor (GType type,
         types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_PROTECTION */
         types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SAVESTATE */
         types[column++] = G_TYPE_INT;        /* COLUMN_DRIVER_PALETTESIZE */
+        types[column++] = G_TYPE_STRING;     /* COLUMN_COMMENT */
+        types[column++] = G_TYPE_INT64;      /* COLUMN_INODE */
         types[column++] = G_TYPE_STRING;     /* COLUMN_INPFILE */
         types[column++] = GVA_TYPE_TIME;     /* COLUMN_TIME */
 

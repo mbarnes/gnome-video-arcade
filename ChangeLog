@@ -1,3 +1,73 @@
+2008-01-11  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.5.5
+
+	* data/gnome-video-arcade.glade:
+	Don't show expanders in the main and play back tree views.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/main.c (start):
+	Sensitize the "search" action after database construction.
+
+	* src/gva-audit.c (gva_audit_detect_changes):
+	Document this function.
+
+	* src/gva-columns.c (columns_comment_edited_cb):
+	New function gets called the user finishes editing a comment.
+	Writes the new comment back into the tree model.
+
+	* src/gva-columns.c (columns_time_set_properties):
+	New function, formerly known as play_back_render_time().
+
+	* src/gva-columns.c:
+	Add "comment" and "time" columns.
+
+	* src/gva-db.c:
+	Add a "playback" table to the game database that remembers user
+	comments for recorded games.  This table MUST survive a database
+	rebuild!
+
+	* src/gva-db.c (db_parser_bind_text):
+	Improve error handling.
+
+	* src/gva-db.c (gva_db_reset):
+	Do NOT destroy the game database file.  Instead, drop all the
+	tables that will be rebuilt (not including the "playback" table).
+
+	* src/gva-db.c (gva_db_get_table):
+	New function is a thin wrapper for sqlite3_get_table(), which
+	is a convenient way to execute short queries.
+
+	* src/gva-db.c (gva_db_set_error):
+	Prefix SQLite error messages with "(SQL)".
+
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	Add GVA_GAME_STORE_COLUMN_COMMENT.
+	Add GVA_GAME_STORE_COLUMN_INODE.
+
+	* src/gva-main.c:
+	Desensitize the "search" action on startup.
+
+	* src/gva-play-back.c (play_back_render_time):
+	Move this function over to gva-columns.c.
+
+	* src/gva-play-back.c (play_back_add_input_file):
+	Fetch the user comment for a recorded game from the game database,
+	and if that doesn't work just use the game title.  This is how new
+	game recordings get picked up.  Also, write inode values to the
+	tree model so we can retrieve them later.
+
+	* src/gva-play-back.c (gva_play_back_init):
+	Move the GtkTreeViewColumn configuration over to gva-columns.c, and
+	just ask for the tree view columns using gva_columns_new_from_id().
+
+	* src/gva-play-back.c (gva_play_back_window_hide_cb):
+	New function saves the recorded game entries to the game database
+	when the "Recorded Games" window is closed.
+
 2008-01-08  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-mame-sdlmame.c (gva_mame_get_version),

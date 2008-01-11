@@ -18,6 +18,7 @@
 
 #include "gva-columns.h"
 
+#include <langinfo.h>
 #include <string.h>
 
 #include "gva-cell-renderer-pixbuf.h"
@@ -93,6 +94,35 @@ columns_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
                 gtk_action_activate (GVA_ACTION_REMOVE_FAVORITE);
         else
                 gtk_action_activate (GVA_ACTION_INSERT_FAVORITE);
+}
+
+static void
+columns_comment_edited_cb (GtkCellRendererText *renderer,
+                           gchar *path_string,
+                           gchar *new_text,
+                           GtkTreeViewColumn *column)
+{
+        GtkWidget *widget;
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeIter iter;
+        gint column_id;
+        gboolean valid;
+
+#if GTK_CHECK_VERSION (2, 12, 0)
+        widget = gtk_tree_view_column_get_tree_view (column);
+#else
+        widget = column->tree_view;
+#endif
+        column_id = gtk_tree_view_column_get_sort_column_id (column);
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+        path = gtk_tree_path_new_from_string (path_string);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_path_free (path);
+        g_return_if_fail (valid);
+
+        gtk_tree_store_set (
+                GTK_TREE_STORE (model), &iter, column_id, new_text, -1);
 }
 
 static void
@@ -172,6 +202,29 @@ columns_sampleset_set_properties (GtkTreeViewColumn *column,
         g_free (sampleset);
 }
 
+static void
+columns_time_set_properties (GtkTreeViewColumn *column,
+                             GtkCellRenderer *renderer,
+                             GtkTreeModel *model,
+                             GtkTreeIter *iter)
+{
+        GvaGameStoreColumn column_id;
+        GValue value;
+        gchar text[256];
+
+        memset (&value, 0, sizeof (GValue));
+        column_id = gtk_tree_view_column_get_sort_column_id (column);
+        gtk_tree_model_get_value (model, iter, column_id, &value);
+
+        strftime (
+                text, sizeof (text), nl_langinfo (D_T_FMT),
+                localtime (g_value_get_boxed (&value)));
+
+        g_object_set (renderer, "text", text, NULL);
+
+        g_value_unset (&value);
+}
+
 static GtkTreeViewColumn *
 columns_factory_category (GvaGameStoreColumn column_id)
 {
@@ -185,6 +238,32 @@ columns_factory_category (GvaGameStoreColumn column_id)
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_add_attribute (
+                column, renderer, "text", column_id);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
+columns_factory_comment (GvaGameStoreColumn column_id)
+{
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_expand (column, TRUE);
+        gtk_tree_view_column_set_reorderable (column, FALSE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("Comment"));
+
+        renderer = gtk_cell_renderer_text_new ();
+        g_object_set (renderer, "editable", TRUE, NULL);
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        g_signal_connect (
+                renderer, "edited",
+                G_CALLBACK (columns_comment_edited_cb), column);
 
         gtk_tree_view_column_add_attribute (
                 column, renderer, "text", column_id);
@@ -390,6 +469,27 @@ columns_factory_sourcefile (GvaGameStoreColumn column_id)
 }
 
 static GtkTreeViewColumn *
+columns_factory_time (GvaGameStoreColumn column_id)
+{
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, FALSE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+        gtk_tree_view_column_set_title (column, _("Played On"));
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_set_cell_data_func (
+                column, renderer, (GtkTreeCellDataFunc)
+                columns_time_set_properties, NULL, NULL);
+
+        return column;
+}
+
+static GtkTreeViewColumn *
 columns_factory_year (GvaGameStoreColumn column_id)
 {
         GtkTreeViewColumn *column;
@@ -444,8 +544,10 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "driver_protection",  NULL },
         { "driver_savestate",   NULL },
         { "driver_palettesize", NULL },
+        { "comment",            columns_factory_comment },
+        { "inode",              NULL },
         { "inpfile",            NULL },
-        { "time",               NULL }
+        { "time",               columns_factory_time }
 };
 
 static gchar *default_column_order[] =
