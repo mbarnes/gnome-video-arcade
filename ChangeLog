@@ -1,3 +1,8 @@
+2008-01-12  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Center the "Recorded Games" window over the main window.
+
 2008-01-11  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.
