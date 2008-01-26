@@ -34,12 +34,23 @@ installed prior to compiling the source code:
        varies by distribution, but it should be something similar to
        gtk2-devel (Fedora) or libgtk2.0-dev (Debian/Ubuntu).
 
+   - Header files for GConf version 2.0 (or higher)
+
+       GNOME Video Arcade uses GConf to remember preferences, favorites
+       and other miscellaneous user data.  The GConf header files should
+       be available from your GNU/Linux distribution as a "development"
+       package.  The exact package name varies by distribution, but it
+       should be something similar to GConf2-devel (Fedora) or
+       libgconf2-dev (Debian/Ubuntu).
+
    - Header files for SQLite version 3.x.
 
-       The SQLite header files should be available from your GNU/Linux
-       distribution as a "development" package.  The exact package name
-       varies by distribution, but it should be something similar to
-       sqlite-devel (Fedora) or libsqlite3-dev (Debian/Ubuntu).
+       GNOME Video Arcade uses SQLite to store detailed information
+       about games supported by MAME.  The SQLite header files should
+       be available from your GNU/Linux distribution as a "development"
+       package.  The exact package name varies by distribution, but it
+       should be something similar to sqlite-devel (Fedora) or
+       libsqlite3-dev (Debian/Ubuntu).
 
    - Header files for libgnomeui version 2.14 (or higher). (optional)
 
