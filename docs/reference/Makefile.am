@@ -75,6 +75,7 @@ INCLUDES=							\
 	-I$(top_builddir)/src					\
 	$(GLIB_CFLAGS)						\
 	$(GTK_CFLAGS)						\
+	$(GIT_CFLAGS)						\
 	$(GCONF_CFLAGS)						\
 	$(GLADE_CFLAGS)						\
 	$(GNOME_CFLAGS)						\
@@ -106,6 +107,7 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/@MAME_BACKEND@			\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
+	$(GIT_LIBS)						\
 	$(GCONF_LIBS)						\
 	$(GLADE_LIBS)						\
 	$(GNOME_LIBS)						\

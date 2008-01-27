@@ -1,5 +1,15 @@
 2008-01-26  Matthew Barnes  <mbarnes@redhat.com>
 
+	* configure.ac:
+	Check for gnome-icon-theme >= 2.18.0.  The version corresponds to
+	the introduction of the 'emblem-default' icon.
+
+	* src/Makefile.am:
+	* docs/references/Makefile.am:
+	Add GIT_CFLAGS and GIT_LIBS even though they are empty at this time.
+
+2008-01-26  Matthew Barnes  <mbarnes@redhat.com>
+
 	* README: List GConf as a dependency.
 
 2008-01-12  Matthew Barnes  <mbarnes@redhat.com>

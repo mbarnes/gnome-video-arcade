@@ -5,8 +5,9 @@ bin_PROGRAMS = gnome-video-arcade
 AM_CFLAGS = \
 	-Wall \
 	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
-	@GCONF_CFLAGS@ @GLADE_CFLAGS@ \
-	@GNOME_CFLAGS@ @SQLITE_CFLAGS@
+	@GIT_CFLAGS@ @GCONF_CFLAGS@ \
+	@GLADE_CFLAGS@ @GNOME_CFLAGS@ \
+	@SQLITE_CFLAGS@
 
 # The DATADIR, LIBDIR, PREFIX, and SYSCONFDIR definitions
 # are only needed for libgnome.  GLib handles it better.
@@ -78,9 +79,9 @@ EXTRA_gnome_video_arcade_SOURCES = \
 
 gnome_video_arcade_LDADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
-	@GCONF_LIBS@ @GLADE_LIBS@ \
-	@GNOME_LIBS@ @MAME_BACKEND@ \
-	@SQLITE_LIBS@
+	@GIT_LIBS@ @GCONF_LIBS@ \
+	@GLADE_LIBS@ @GNOME_LIBS@ \
+	@MAME_BACKEND@ @SQLITE_LIBS@
 
 gnome_video_arcade_DEPENDENCIES = \
 	@MAME_BACKEND@
