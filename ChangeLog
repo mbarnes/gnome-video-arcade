@@ -1,3 +1,8 @@
+2008-01-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-categories.c (gva_categories_init):
+	Handle Window INI-style comments in the category file.
+
 2008-01-26  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:

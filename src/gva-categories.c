@@ -37,12 +37,31 @@ gboolean
 gva_categories_init (GError **error)
 {
         gboolean success = FALSE;
+        gchar *contents, *cp;
+        gsize length;
 
         keyfile = g_key_file_new ();
 
 #ifdef CATEGORY_FILE
-        success = g_key_file_load_from_file (
-                keyfile, CATEGORY_FILE, G_KEY_FILE_NONE, error);
+        if (!g_file_get_contents (CATEGORY_FILE, &contents, &length, error))
+                return FALSE;
+
+        /* Convert Windows INI-style comments (lines beginning with ';')
+         * to a form recognized by the GKeyFile parser. */
+        cp = contents;
+        while (cp != NULL && *cp != '\0') {
+                if (*cp == ';')
+                        *cp = '#';
+                /* Find the next line. */
+                cp = strchr (cp, '\n');
+                if (cp != NULL)
+                        cp++;
+        }
+
+        success = g_key_file_load_from_data (
+                keyfile, contents, length, G_KEY_FILE_NONE, error);
+
+        g_free (contents);
 #else
         g_set_error (
                 error, GVA_ERROR, GVA_ERROR_CONFIG,
