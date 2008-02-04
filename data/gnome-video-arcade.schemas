@@ -121,6 +121,19 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/show-clones</applyto>
+      <key>/schemas/apps/gnome-video-arcade/show-clones</key>
+      <owner>gnome-video-arcade</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Show cloned games</short>
+        <long>If true, show both original and cloned games in the
+        main window.  If false, show only original games.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/sort-column</applyto>
       <key>/schemas/apps/gnome-video-arcade/sort-column</key>
       <owner>gnome-video-arcade</owner>

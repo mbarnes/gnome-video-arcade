@@ -115,6 +115,7 @@ start (void)
         }
 
         gtk_action_set_sensitive (GVA_ACTION_SEARCH, TRUE);
+        gtk_action_set_sensitive (GVA_ACTION_SHOW_CLONES, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
@@ -205,15 +206,11 @@ main (gint argc, gchar **argv)
         gva_properties_init ();
         gva_search_init ();
 
-#ifdef CATEGORY_FILE
         gva_categories_init (&error);
         gva_error_handle (&error);
-#endif
 
-#ifdef HISTORY_FILE
         gva_history_init (&error);
         gva_error_handle (&error);
-#endif
 
         gtk_init_add ((GtkFunction) start, NULL);
 

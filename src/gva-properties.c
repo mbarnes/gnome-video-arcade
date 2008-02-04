@@ -28,6 +28,14 @@
 #define SQL_SELECT_NAME \
         "SELECT * FROM available WHERE name = \"%s\""
 
+/* Keep this in sync with the Glade file. */
+enum
+{
+        NOTEBOOK_PAGE_HISTORY,
+        NOTEBOOK_PAGE_GALLERY,
+        NOTEBOOK_PAGE_TECHNICAL
+};
+
 static void
 properties_update_header (GtkTreeModel *model,
                           GtkTreeIter *iter)
@@ -70,6 +78,7 @@ static void
 properties_update_history (GtkTreeModel *model,
                            GtkTreeIter *iter)
 {
+#ifdef HISTORY_FILE
         GtkTextView *view;
         GtkTextBuffer *buffer;
         gchar *history;
@@ -106,6 +115,7 @@ properties_update_history (GtkTreeModel *model,
         g_free (history);
         g_free (cloneof);
         g_free (name);
+#endif
 }
 
 static void
@@ -158,6 +168,11 @@ gva_properties_init (void)
         PangoFontDescription *desc;
         gchar *font_name;
 
+#ifndef HISTORY_FILE
+        GtkNotebook *notebook;
+        GtkWidget *page;
+#endif
+
         window = GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW);
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         text_view = GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW;
@@ -179,6 +194,13 @@ gva_properties_init (void)
         gtk_widget_modify_font (text_view, desc);
         pango_font_description_free (desc);
         g_free (font_name);
+
+#ifndef HISTORY_FILE
+        /* Hide the history page if we have no history file. */
+        notebook = GTK_NOTEBOOK (GVA_WIDGET_PROPERTIES_NOTEBOOK);
+        page = gtk_notebook_get_nth_page (notebook, NOTEBOOK_PAGE_HISTORY);
+        gtk_widget_hide (page);
+#endif
 }
 
 /**

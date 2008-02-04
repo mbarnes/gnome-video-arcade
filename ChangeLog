@@ -1,3 +1,65 @@
+2008-02-04  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Add a "show-clones" checkbox to the Preferences dialog.
+	Reorganize the container widgets in the Preferences dialog to
+	handle a second section ("Game List") in the General tab.
+
+	* data/gnome-video-arcade.schemas:
+	Add show-clones key.
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_SHOW_CLONES_KEY.
+
+	* src/main.c (start):
+	* src/gva-main.c (gva_main_init):
+	Desensitize the "show-clones" user preference until we've
+	loaded the initial view.
+
+	* src/gva-categories.c (gva_categories_init):
+	* src/gva-history.c (history_file_open):
+	If the program is not configured to show category information,
+	emit an informational message saying so rather than a warning.
+	We don't want to abort if we're running with fatal warnings.
+	Same goes for history information.
+
+	* src/gva-columns.c:
+	Alter how we handle the Category column when the program is
+	not configured to show category information.  Avoid causing
+	any warnings on the terminal.
+
+	* src/gva-preferences.c (gva_preferences_init):
+	Wire up the "show-clones" user preference.
+
+	* src/gva-preferences.c (gva_preferences_get_show_clones),
+	(gva_preferences_set_show_clones):
+	New functions get/set the "show-clones" user preference.
+
+	* src/gva-properties.c (properties_update_history):
+	Make this function a no-op if the program is not configured
+	to show history information.  Doing it this way avoids having
+	the compiler complain about the function being unused.
+
+	* src/gva-properties.c (gva_properties_init):
+	Hide the history page if the program is not configured to
+	show history information.
+
+	* src/gva-tree-view.c (gva_tree_view_update):
+	Exclude cloned games from the database query if the user prefers
+	not to see them ("show-clones" == FALSE).
+
+	* src/gva-ui.h:
+	Add GVA_WIDGET_PROPERTIES_NOTEBOOK.
+
+	* src/gva-ui.h:
+	* src/gva-ui.c:
+	Add GVA_ACTION_SHOW_CLONES.  If the action is sensitive (i.e.
+	we're not loading the initial value from GConf), force a tree
+	view update.  GConfBridge handles the rest.
+
 2008-01-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-categories.c (gva_categories_init):

@@ -29,12 +29,6 @@
 
 #define MAX_PLAYER_ICONS 8
 
-#ifdef CATEGORY_FILE
-#define CATEGORY_FACTORY_FUNC columns_factory_category
-#else
-#define CATEGORY_FACTORY_FUNC NULL
-#endif
-
 typedef GtkTreeViewColumn * (*FactoryFunc) (GvaGameStoreColumn);
 
 static GdkPixbuf *
@@ -228,6 +222,7 @@ columns_time_set_properties (GtkTreeViewColumn *column,
 static GtkTreeViewColumn *
 columns_factory_category (GvaGameStoreColumn column_id)
 {
+#ifdef CATEGORY_FILE
         GtkTreeViewColumn *column;
         GtkCellRenderer *renderer;
 
@@ -243,6 +238,9 @@ columns_factory_category (GvaGameStoreColumn column_id)
                 column, renderer, "text", column_id);
 
         return column;
+#else
+        return NULL;
+#endif
 }
 
 static GtkTreeViewColumn *
@@ -517,7 +515,7 @@ static struct
 column_info[GVA_GAME_STORE_NUM_COLUMNS] =
 {
         { "name",               columns_factory_name },
-        { "category",           CATEGORY_FACTORY_FUNC },
+        { "category",           columns_factory_category },
         { "favorite",           columns_factory_favorite },
         { "sourcefile",         columns_factory_sourcefile },
         { "runnable",           NULL },
@@ -586,9 +584,10 @@ gva_columns_new_from_id (GvaGameStoreColumn column_id)
 
         column = column_info[column_id].factory (column_id);
 
-        g_object_set_data (
-                G_OBJECT (column), "name",
-                (gpointer) column_info[column_id].name);
+        if (column != NULL)
+                g_object_set_data (
+                        G_OBJECT (column), "name",
+                        (gpointer) column_info[column_id].name);
 
         return column;
 }

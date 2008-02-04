@@ -45,6 +45,7 @@
 #define GVA_ACTION_REMOVE_FAVORITE      (gva_ui_get_action ("remove-favorite"))
 #define GVA_ACTION_SAVE_ERRORS          (gva_ui_get_action ("save-errors"))
 #define GVA_ACTION_SEARCH               (gva_ui_get_action ("search"))
+#define GVA_ACTION_SHOW_CLONES          (gva_ui_get_action ("show-clones"))
 #define GVA_ACTION_SHOW_PLAY_BACK       (gva_ui_get_action ("show-play-back"))
 #define GVA_ACTION_START                (gva_ui_get_action ("start"))
 #define GVA_ACTION_VIEW_AVAILABLE       (gva_ui_get_action ("view-available"))
@@ -100,6 +101,8 @@
         (gva_ui_get_widget ("preferences-close-button"))
 #define GVA_WIDGET_PREFERENCES_FULL_SCREEN \
         (gva_ui_get_widget ("preferences-full-screen"))
+#define GVA_WIDGET_PREFERENCES_SHOW_CLONES \
+        (gva_ui_get_widget ("preferences-show-clones"))
 #define GVA_WIDGET_PREFERENCES_WINDOW \
         (gva_ui_get_widget ("preferences-window"))
 
@@ -114,6 +117,8 @@
         (gva_ui_get_widget ("properties-header"))
 #define GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW \
         (gva_ui_get_widget ("properties-history-text-view"))
+#define GVA_WIDGET_PROPERTIES_NOTEBOOK \
+        (gva_ui_get_widget ("properties-notebook"))
 #define GVA_WIDGET_PROPERTIES_WINDOW \
         (gva_ui_get_widget ("properties-window"))
 

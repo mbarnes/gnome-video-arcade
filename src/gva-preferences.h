@@ -35,6 +35,8 @@ gboolean       gva_preferences_get_auto_save    (void);
 void           gva_preferences_set_auto_save    (gboolean auto_save);
 gboolean       gva_preferences_get_full_screen  (void);
 void           gva_preferences_set_full_screen  (gboolean full_screen);
+gboolean       gva_preferences_get_show_clones  (void);
+void           gva_preferences_set_show_clones  (gboolean show_clones);
 
 /* Signal Handlers */
 

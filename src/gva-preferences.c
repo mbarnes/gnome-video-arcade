@@ -61,6 +61,16 @@ gva_preferences_init (void)
         gconf_bridge_bind_property (
                 gconf_bridge_get (), GVA_GCONF_FULL_SCREEN_KEY,
                 G_OBJECT (GVA_ACTION_FULL_SCREEN), "active");
+
+        /* Show Clones */
+
+        gtk_action_connect_proxy (
+                GVA_ACTION_SHOW_CLONES,
+                GVA_WIDGET_PREFERENCES_SHOW_CLONES);
+
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_SHOW_CLONES_KEY,
+                G_OBJECT (GVA_ACTION_SHOW_CLONES), "active");
 }
 
 /**
@@ -125,6 +135,38 @@ gva_preferences_set_full_screen (gboolean full_screen)
 {
         gtk_toggle_action_set_active (
                 GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN), full_screen);
+}
+
+/**
+ * gva_preferences_get_show_clones:
+ *
+ * Returns the user's preference for whether to show cloned games in
+ * the main window.
+ *
+ * Returns: %TRUE to show cloned games, %FALSE to only show original games
+ **/
+gboolean
+gva_preferences_get_show_clones (void)
+{
+        return gtk_toggle_action_get_active (
+                GTK_TOGGLE_ACTION (GVA_ACTION_SHOW_CLONES));
+}
+
+/**
+ * gva_preferences_set_show_clones:
+ * @show_clones: the user's preference
+ *
+ * Accepts the user's preference for whether to show cloned games in
+ * the main window.
+ *
+ * The preference is stored in GConf key
+ * <filename>/apps/gnome-video-arcade/show-clones</filename>.
+ **/
+void
+gva_preferences_set_show_clones (gboolean show_clones)
+{
+        gtk_toggle_action_set_active (
+                GTK_TOGGLE_ACTION (GVA_ACTION_SHOW_CLONES), show_clones);
 }
 
 /**

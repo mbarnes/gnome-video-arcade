@@ -18,6 +18,7 @@
 
 #include "gva-categories.h"
 
+#include <string.h>
 #include "gva-error.h"
 
 static GKeyFile *keyfile = NULL;
@@ -63,10 +64,9 @@ gva_categories_init (GError **error)
 
         g_free (contents);
 #else
-        g_set_error (
-                error, GVA_ERROR, GVA_ERROR_CONFIG,
-                _("This program is not configured to show "
-                  "category or version information."));
+        g_message (
+                _("This program is not configured "
+                  "to show category information."));
 #endif
 
         return success;

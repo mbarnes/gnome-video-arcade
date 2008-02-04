@@ -455,6 +455,28 @@ action_search_cb (GtkAction *action)
 }
 
 /**
+ * GVA_ACTION_SHOW_CLONES:
+ *
+ * This toggle action tracks the user's preference for whether to
+ * show cloned games in the main window's game list.
+ **/
+static void
+action_show_clones_cb (GtkToggleAction *action)
+{
+        GError *error = NULL;
+
+        /* This is a bit of a hack.  We want to instantly apply the
+         * user preference, but not while loading the initial value
+         * from GConf.  So we desensitize the action until we're up
+         * and running, and use that to decide what to do here. */
+        if (gtk_action_is_sensitive (GTK_ACTION (action)))
+        {
+                gva_tree_view_update (&error);
+                gva_error_handle (&error);
+        }
+}
+
+/**
  * GVA_ACTION_SHOW_PLAY_BACK:
  *
  * Activation of this action presents the "Recorded Games" window.
@@ -681,6 +703,14 @@ static GtkToggleActionEntry toggle_entries[] =
           NULL,
           NULL,
           NULL,     /* GConf Bridge monitors the state */
+          FALSE },  /* GConf overrides this */
+
+        { "show-clones",
+          NULL,
+          N_("Show _variants of original games"),
+          NULL,
+          NULL,
+          G_CALLBACK (action_show_clones_cb),
           FALSE }   /* GConf overrides this */
 };
 

@@ -39,10 +39,9 @@ history_file_open (GError **error)
                 g_assert (status == G_IO_STATUS_NORMAL);
         }
 #else
-        g_set_error (
-                error, GVA_ERROR, GVA_ERROR_CONFIG,
-                _("This program is not configured to show "
-                  "arcade history information."));
+        g_message (
+                _("This program is not configured "
+                  "to show history information."));
 #endif
 
         return channel;

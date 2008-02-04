@@ -1,3 +1,14 @@
+GNOME Video Arcade 0.5.6
+========================
+
+        Released February ??, 2008
+
+        What's New
+        ----------
+        * User preference to hide cloned games.
+        * Handle the absence of category and history files more gracefully.
+        * Handle Windows INI-style comments in category files.
+
 GNOME Video Arcade 0.5.5
 ========================
 

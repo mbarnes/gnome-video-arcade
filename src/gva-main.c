@@ -114,6 +114,7 @@ gva_main_init (void)
         gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_SEARCH, FALSE);
+        gtk_action_set_sensitive (GVA_ACTION_SHOW_CLONES, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_START, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, FALSE);

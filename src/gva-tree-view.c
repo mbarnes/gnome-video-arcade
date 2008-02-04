@@ -26,6 +26,7 @@
 #include "gva-favorites.h"
 #include "gva-game-store.h"
 #include "gva-main.h"
+#include "gva-preferences.h"
 #include "gva-search.h"
 #include "gva-ui.h"
 
@@ -194,18 +195,19 @@ gva_tree_view_lookup (const gchar *game)
 gboolean
 gva_tree_view_update (GError **error)
 {
+        GString *expr;
         const gchar *name;
-        gchar *expr;
         gboolean success;
+
+        expr = g_string_sized_new (128);
 
         switch (gva_tree_view_get_selected_view ())
         {
                 case 0:  /* Available Games */
-                        expr = NULL;
                         break;
 
                 case 1:  /* Favorite Games */
-                        expr = g_strdup ("favorite == \"yes\"");
+                        g_string_append (expr, "favorite == \"yes\"");
                         break;
 
                 case 2:  /* Search Results */
@@ -214,16 +216,16 @@ gva_tree_view_update (GError **error)
 
                         text = gva_search_get_last_search ();
                         if (text != NULL && *text != '\0')
-                                expr = g_strdup_printf (
-                                        "name LIKE '%s' OR "
+                                g_string_append_printf (
+                                        expr, "(name LIKE '%s' OR "
                                         "category LIKE '%%%s%%' OR "
                                         "sourcefile LIKE '%s' OR "
                                         "description LIKE '%%%s%%' OR "
                                         "manufacturer LIKE '%%%s%%' OR "
-                                        "year LIKE '%s'",
+                                        "year LIKE '%s')",
                                         text, text, text, text, text, text);
                         else
-                                expr = g_strdup ("name == NULL");
+                                g_string_append (expr, "name ISNULL");
                         g_free (text);
                         break;
                 }
@@ -232,8 +234,15 @@ gva_tree_view_update (GError **error)
                         g_assert_not_reached ();
         }
 
-        success = gva_tree_view_run_query (expr, error);
-        g_free (expr);
+        if (!gva_preferences_get_show_clones ())
+        {
+                if (expr->len > 0)
+                        g_string_append (expr, " AND ");
+                g_string_append (expr, "cloneof ISNULL");
+        }
+
+        success = gva_tree_view_run_query (expr->str, error);
+        g_string_free (expr, TRUE);
 
         if (!success)
                 return FALSE;
@@ -290,7 +299,7 @@ gva_tree_view_run_query (const gchar *expr,
         g_string_printf (string, SQL_SELECT_GAMES, columns);
         g_free (columns);
 
-        if (expr != NULL)
+        if (expr != NULL && *expr != '\0')
                 g_string_append_printf (string, " WHERE %s", expr);
 
         window = gtk_widget_get_parent_window (GTK_WIDGET (view));
