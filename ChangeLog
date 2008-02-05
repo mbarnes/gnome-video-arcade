@@ -1,5 +1,13 @@
 2008-02-04  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/main.c (warn_if_no_roms), (start):
+	Detect the absence of ROMs at startup and display a helpful
+	dialog.  Still some things to do.  The Help button does not
+	work and the troubleshooting section of the user docs does
+	not exist.
+
+2008-02-04  Matthew Barnes  <mbarnes@redhat.com>
+
 	* docs/references/database-schema.xml:
 	* docs/references/gnome-video-arcade-docs.sgml:
 	Add an appendix to the developer documentation showing the

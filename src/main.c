@@ -18,6 +18,7 @@
 
 #include "gva-common.h"
 
+#include <errno.h>
 #include <libintl.h>
 #include <locale.h>
 #include <stdlib.h>
@@ -41,6 +42,10 @@
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 
+#define SQL_COUNT_ROMS \
+        "SELECT count(*) FROM game WHERE " \
+        "romset NOTNULL AND romset != 'not found'"
+
 static GOptionEntry entries[] =
 {
         { "build-database", 'b', 0,
@@ -62,6 +67,66 @@ static GOptionEntry entries[] =
 
         { NULL }
 };
+
+static void
+warn_if_no_roms (void)
+{
+        const gchar *sql = SQL_COUNT_ROMS;
+        GtkWidget *dialog;
+        gint rows, columns;
+        gchar **result;
+        glong n_roms;
+        GError *error = NULL;
+
+        if (!gva_db_get_table (sql, &result, &rows, &columns, &error))
+        {
+                gva_error_handle (&error);
+                return;
+        }
+
+        errno = 0;
+        g_return_if_fail (g_strv_length (result) > 1);
+        n_roms = strtol (result[1], NULL, 10);
+        g_strfreev (result);
+
+        if (errno != 0)
+        {
+                g_warning ("%s", g_strerror (errno));
+                return;
+        }
+
+        if (n_roms > 0)
+                return;
+
+        dialog = gtk_message_dialog_new_with_markup (
+                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
+                GTK_DIALOG_DESTROY_WITH_PARENT,
+                GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
+                "<big><b>%s</b></big>",
+                _("No ROM files found"));
+
+#ifdef WITH_GNOME
+        gtk_message_dialog_format_secondary_markup (
+                GTK_MESSAGE_DIALOG (dialog),
+                _("GNOME Video Arcade was unable to locate any ROM files. "
+                  "It could be that MAME is misconfigured or that no ROM "
+                  "files are installed. Click <b>Help</b> for more details "
+                  "and troubleshooting tips."));
+
+        gtk_dialog_add_button (
+                GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
+#else
+        gtk_message_dialog_format_secondary_markup (
+                GTK_MESSAGE_DIALOG (dialog),
+                _("GNOME Video Arcade was unable to locate any ROM files. "
+                  "It could be that MAME is misconfigured or no ROM files "
+                  "are installed. Consult the user documentation for more "
+                  "details and troubleshooting tips."));
+#endif
+
+        gtk_dialog_run (GTK_DIALOG (dialog));
+        gtk_widget_destroy (dialog);
+}
 
 static void
 start (void)
@@ -130,6 +195,9 @@ start (void)
                 gva_tree_view_update (&error);
                 gva_error_handle (&error);
         }
+
+        /* Present a helpful dialog if no ROMs were found. */
+        warn_if_no_roms ();
 }
 
 gint
