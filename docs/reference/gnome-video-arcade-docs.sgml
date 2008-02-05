@@ -42,6 +42,8 @@
     <xi:include href="xml/gva-process.xml"/>
   </chapter>
 
+  <xi:include href="database-schema.xml"/>
+
   <index>
     <title>Index</title>
   </index>

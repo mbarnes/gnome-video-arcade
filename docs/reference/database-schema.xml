@@ -1,0 +1,172 @@
+<?xml version='1.0'?>
+<appendix xml:id="database-schema">
+<title>Game Database Schema</title>
+
+<simplesect>
+<title>Table: mame</title>
+<programlisting>
+CREATE TABLE mame (
+        build,
+        debug DEFAULT 'no' CHECK (debug in ('yes', 'no')));
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: game</title>
+<programlisting>
+CREATE TABLE game (
+        name PRIMARY KEY,
+        sourcefile,
+        runnable DEFAULT 'yes' CHECK (runnable in ('yes', 'no')),
+        cloneof,
+        romof,
+        romset CHECK (romset in ('good', 'best available', 'bad')),
+        sampleof,
+        sampleset CHECK (sampleset in ('good', 'best available', 'bad')),
+        description NOT NULL,
+        year,
+        manufacturer NOT NULL,
+        sound_channels,
+        input_service DEFAULT 'no' CHECK (input_service in ('yes', 'no')),
+        input_tilt DEFAULT 'no' CHECK (input_tilt in ('yes', 'no')),
+        input_players,
+        input_buttons,
+        input_coins,
+        driver_status CHECK (driver_status in ('good', 'imperfect', 'preliminary')),
+        driver_emulation CHECK (driver_emulation in ('good', 'imperfect', 'preliminary')),
+        driver_color CHECK (driver_color in ('good', 'imperfect', 'preliminary')),
+        driver_sound CHECK (driver_sound in ('good', 'imperfect', 'preliminary')),
+        driver_graphic CHECK (driver_graphic in ('good', 'imperfect', 'preliminary')),
+        driver_cocktail CHECK (driver_cocktail in ('good', 'imperfect', 'preliminary')),
+        driver_protection CHECK (driver_protection in ('good', 'imperfect', 'preliminary')),
+        driver_savestate CHECK (driver_savestate in ('supported', 'unsupported')),
+        driver_palettesize);
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: biosset</title>
+<programlisting>
+CREATE TABLE biosset (
+        game NOT NULL,
+        name NOT NULL,
+        description NOT NULL,
+        default_ DEFAULT 'no' CHECK (default_ in ('yes', 'no')));
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: rom</title>
+<programlisting>
+CREATE TABLE rom (
+        game NOT NULL,
+        name NOT NULL,
+        bios,
+        size NOT NULL,
+        crc,
+        md5,
+        sha1,
+        merge,
+        region,
+        offset,
+        status DEFAULT 'good' CHECK (status in ('baddump', 'nodump', 'good')),
+        dispose DEFAULT 'no' CHECK (dispose in ('yes', 'no')));
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: disk</title>
+<programlisting>
+CREATE TABLE disk (
+        game NOT NULL,
+        name NOT NULL,
+        md5,
+        sha1,
+        merge,
+        region,
+        index_,
+        status DEFAULT 'good' CHECK (status in ('baddump', 'nodump', 'good')));
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: sample</title>
+<programlisting>
+CREATE TABLE sample (
+        game NOT NULL,
+        name NOT NULL);
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: chip</title>
+<programlisting>
+CREATE TABLE chip (
+        game NOT NULL,
+        name NOT NULL,
+        type NOT NULL CHECK (type in ('cpu', 'audio')),
+        clock);
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: display</title>
+<programlisting>
+CREATE TABLE display (
+        game NOT NULL,
+        type NOT NULL CHECK (type in ('raster', 'vector')),
+        rotate NOT NULL CHECK (rotate in ('0', '90', '180', '270')),
+        flipx DEFAULT 'no' CHECK (flipx in ('yes', 'no')),
+        width,
+        height,
+        refresh NOT NULL);
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: control</title>
+<programlisting>
+CREATE TABLE control (
+        game NOT NULL,
+        type NOT NULL,
+        minimum,
+        maximum,
+        sensitivity,
+        keydelta,
+        reverse DEFAULT 'no' CHECK (reverse in ('yes', 'no')));
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: dipvalue</title>
+<programlisting>
+CREATE TABLE dipvalue (
+        game NOT NULL,
+        dipswitch NOT NULL,
+        name NOT NULL,
+        default_ DEFAULT 'no' CHECK (default_ in ('yes', 'no')));
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>Table: playback</title>
+<programlisting>
+CREATE TABLE playback (
+        name NOT NULL,
+        inode NOT NULL,
+        comment);
+</programlisting>
+</simplesect>
+
+<simplesect>
+<title>View: available</title>
+<programlisting>
+CREATE VIEW available AS SELECT
+        *,
+        getcategory(name) AS category,
+        isfavorite(name) AS favorite FROM game
+        WHERE (romset IN ('good', 'best available'));
+</programlisting>
+</simplesect>
+
+</appendix>

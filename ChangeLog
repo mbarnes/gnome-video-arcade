@@ -1,5 +1,13 @@
 2008-02-04  Matthew Barnes  <mbarnes@redhat.com>
 
+	* docs/references/database-schema.xml:
+	* docs/references/gnome-video-arcade-docs.sgml:
+	Add an appendix to the developer documentation showing the
+	game database schema in SQL notation.  Needs to be fleshed
+	out more.
+
+2008-02-04  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.glade:
 	Add a "show-clones" checkbox to the Preferences dialog.
 	Reorganize the container widgets in the Preferences dialog to
