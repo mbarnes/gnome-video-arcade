@@ -123,6 +123,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_db_is_older_than ##### -->
+<para>
+
+</para>
+
+@filename: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_db_needs_rebuilt ##### -->
 <para>
 

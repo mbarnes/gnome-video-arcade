@@ -1225,12 +1225,19 @@ db_function_getcategory (sqlite3_context *context,
 #ifdef CATEGORY_FILE
         const gchar *name;
         gchar *category;
+        gint error_code;
         GError *error = NULL;
 
         g_assert (n_values == 1);
 
         name = (const gchar *) sqlite3_value_text (values[0]);
         category = gva_categories_lookup (name, &error);
+
+        /* Silence "key not found" errors. */
+        error_code = G_KEY_FILE_ERROR_KEY_NOT_FOUND;
+        if (g_error_matches (error, G_KEY_FILE_ERROR, error_code))
+                g_clear_error (&error);
+
         gva_error_handle (&error);
 
         if (category != NULL)
@@ -1681,6 +1688,39 @@ gva_db_get_filename (void)
 
         return filename;
 }
+
+/**
+ * gva_db_is_older_than:
+ * @filename: a file or directory name
+ *
+ * Returns %TRUE if @filename's creation or modification timestamp is
+ * more recent than the games database's modification timestamp.  The
+ * games database relies in part on external data files that might
+ * have been updated since the database was last rebuilt.  This
+ * function can detect that.
+ *
+ * If @filename does not exist or if the function has trouble comparing
+ * timestamps, it returns %FALSE as a safe fallback.
+ *
+ * Returns: %TRUE if @filename is newer than the games database
+ **/
+gboolean
+gva_db_is_older_than (const gchar *filename)
+{
+        time_t db_mtime;
+        struct stat st;
+
+        if (g_stat (gva_db_get_filename (), &st) < 0)
+                return FALSE;
+
+        db_mtime = st.st_mtime;
+
+        if (g_stat (filename, &st) < 0)
+                return FALSE;
+
+        return (db_mtime < st.st_mtime) || (db_mtime < st.st_ctime);
+}
+
 
 /**
  * gva_db_needs_rebuilt:

@@ -500,11 +500,7 @@ gva_audit_detect_changes (void)
         gva_error_handle (&error);
 
         for (ii = 0; ii < length; ii++)
-                if (g_stat (directories[ii], &st) == 0)
-                {
-                        changes |= (db_mtime < st.st_mtime);
-                        changes |= (db_mtime < st.st_ctime);
-                }
+                changes |= gva_db_is_older_than (directories[ii]);
 
         g_strfreev (directories);
 
@@ -513,11 +509,7 @@ gva_audit_detect_changes (void)
         gva_error_handle (&error);
 
         for (ii = 0; ii < length; ii++)
-                if (g_stat (directories[ii], &st) == 0)
-                {
-                        changes |= (db_mtime < st.st_mtime);
-                        changes |= (db_mtime < st.st_ctime);
-                }
+                changes |= gva_db_is_older_than (directories[ii]);
 
         g_strfreev (directories);
 
