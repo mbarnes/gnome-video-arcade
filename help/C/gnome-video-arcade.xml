@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
   "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "0.5.4.1">
-  <!ENTITY manrevision "1.0">
-  <!ENTITY date "October 2007">
+  <!ENTITY appversion "0.5.6">
+  <!ENTITY manrevision "1.1">
+  <!ENTITY date "February 2008">
   <!ENTITY app "GNOME Video Arcade">
 ]>
 
@@ -62,7 +62,7 @@
       </listitem>
       <listitem>
         <para>
-          Tag your favorite games to easily find them again later.
+          Tag favorite games to easily find them again later.
         </para>
       </listitem>
       <listitem>
@@ -127,10 +127,11 @@
     <section>
       <title>When You Start &app;</title>
       <para>
-        The first time you start <application>&app;</application>, it will
-        build a database of game information and determine which games are
-        available.  This process may take several minutes to complete,
-        during which time the following window is displayed:
+        The first time <application>&app;</application> starts, it will
+        build a database of game information and analyze available ROM
+        files to determine which games are playable.  This process may
+        take several minutes to complete, during which time the following
+        window is displayed:
       </para>
       <figure>
         <title>&app; Building the Game Database</title>
@@ -175,9 +176,9 @@
       </para>
       <note>
         <para>
-          Occasionally, the database may be rebuilt when you start
-          <application>&app;</application>.  Most of the time it will skip
-          this process and go straight to the window in Figure 2.
+          Occasionally, the database may be rebuilt when
+          <application>&app;</application> starts.  Most of the time it will
+          skip this process and go straight to the window in Figure 2.
         </para>
       </note>
       <para>
@@ -189,8 +190,8 @@
           <term>Menubar</term>
           <listitem>
             <para>
-              The menus on the menubar contain all of the commands you need to
-              use in <application>&app;</application>.
+              The menus on the menubar contain all the commands needed to
+              use <application>&app;</application>.
             </para>
           </listitem>
         </varlistentry>
@@ -207,8 +208,8 @@
           <listitem>
             <para>
               The view buttons control which games are displayed in the game
-              list.  You can choose between displaying all available games, a
-              list of your favorite games, or the results of your last search.
+              list.  Choose between displaying all available games, a list of
+              favorite games, or previous search results.
             </para>
           </listitem>
         </varlistentry>
@@ -321,8 +322,8 @@
         that the game has been added to your list of favorites.
       </para>
       <para>
-        If you decide the game is no longer a favorite, click on the game
-        in the game list to highlight it.  Then choose
+        If a game is no longer your favorite, click on its name in the game
+        list to highlight it.  Then choose
         <menuchoice>
           <shortcut>
             <keycombo>
@@ -362,8 +363,8 @@
         </menuchoice>.
       </para>
       <para>
-        To show the results of your last search in the game list, click
-        the <guibutton>Search Results</guibutton> view button or choose
+        To show your previous search results in the game list, click the
+        <guibutton>Search Results</guibutton> view button or choose
         <menuchoice>
           <guimenu>View</guimenu>
           <guimenuitem>Search Results</guimenuitem>
@@ -403,10 +404,9 @@
         </screenshot>
       </figure>
       <para>
-        Type your search criteria in the entry box.  You can search by the
-        title of the game, the company that manufactured the game, the year
-        the game was released, or the name of the game's ROM set or MAME
-        driver.
+        Type your search criteria in the entry box.  Search by the title of
+        the game, the company that manufactured the game, the year the game
+        was released, or the name of the game's ROM set or MAME driver.
       </para>
       <para>
         Click the <guibutton>Find</guibutton> button to start your search.
@@ -498,8 +498,8 @@
           </term>
           <listitem>
             <para>
-              Select this option if you want to start games in fullscreen
-              mode.  Otherwise, games will be started in a window.
+              Select this option to start games in fullscreen mode.
+              Otherwise, games will be started in a window.
             </para>
           </listitem>
         </varlistentry>
@@ -511,10 +511,9 @@
           </term>
           <listitem>
             <para>
-              Select this option if you want to continue where you left off
-              when you last exited MAME.  If this option is not selected, the
-              emulator will boot the arcade machine each time you start a
-              game.
+              Select this option to continue where you left off when you last
+              exited MAME.  If this option is not selected, the emulator will
+              boot the arcade machine each time a game is started.
             </para>
             <note>
               <para>
@@ -538,8 +537,8 @@
         The <guilabel>Columns</guilabel> tab allows you to configure the
         game list in the main window to show additional information about
         the available games.  The column names are listed in the order that
-        they appear in the game list.  You can reorder columns and show
-        additional columns using the <guibutton>Move Up</guibutton>,
+        they appear in the game list.  Reorder columns and show additional
+        columns using the <guibutton>Move Up</guibutton>,
         <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> and
         <guibutton>Hide</guibutton> buttons to the right of the column list.
       </para>

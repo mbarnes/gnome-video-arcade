@@ -53,6 +53,77 @@ G_BEGIN_DECLS
 typedef struct _GvaGameStore GvaGameStore;
 typedef struct _GvaGameStoreClass GvaGameStoreClass;
 
+/**
+ * GvaGameStoreColumn:
+ * @GVA_GAME_STORE_COLUMN_NAME:
+ *      Corresponds to the "available.name" database field.
+ * @GVA_GAME_STORE_COLUMN_CATEGORY:
+ *      Corresponds to the "available.category" database field.
+ * @GVA_GAME_STORE_COLUMN_FAVORITE:
+ *      Corresponds to the "available.favorite" database field.
+ * @GVA_GAME_STORE_COLUMN_SOURCEFILE:
+ *      Corresponds to the "available.sourcefile" database field.
+ * @GVA_GAME_STORE_COLUMN_RUNNABLE:
+ *      Corresponds to the "available.runnable" database field.
+ * @GVA_GAME_STORE_COLUMN_CLONEOF:
+ *      Corresponds to the "available.cloneof" database field.
+ * @GVA_GAME_STORE_COLUMN_ROMOF:
+ *      Corresponds to the "available.romof" database field.
+ * @GVA_GAME_STORE_COLUMN_ROMSET:
+ *      Corresponds to the "available.romset" database field.
+ * @GVA_GAME_STORE_COLUMN_SAMPLEOF:
+ *      Corresponds to the "available.sampleof" database field.
+ * @GVA_GAME_STORE_COLUMN_SAMPLESET:
+ *      Corresponds to the "available.sampleset" database field.
+ * @GVA_GAME_STORE_COLUMN_DESCRIPTION:
+ *      Corresponds to the "available.description" database field.
+ * @GVA_GAME_STORE_COLUMN_YEAR:
+ *      Corresponds to the "available.year" database field.
+ * @GVA_GAME_STORE_COLUMN_MANUFACTURER:
+ *      Corresponds to the "available.manufacturer" database field.
+ * @GVA_GAME_STORE_COLUMN_SOUND_CHANNELS:
+ *      Corresponds to the "available.sound_channels" database field.
+ * @GVA_GAME_STORE_COLUMN_INPUT_SERVICE:
+ *      Corresponds to the "available.input_service" database field.
+ * @GVA_GAME_STORE_COLUMN_INPUT_TILT:
+ *      Corresponds to the "available.input_tile" database field.
+ * @GVA_GAME_STORE_COLUMN_INPUT_PLAYERS:
+ *      Corresponds to the "available.input_players" database field.
+ * @GVA_GAME_STORE_COLUMN_INPUT_BUTTONS:
+ *      Corresponds to the "available.input_buttons" database field.
+ * @GVA_GAME_STORE_COLUMN_INPUT_COINS:
+ *      Corresponds to the "available.input_coins" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_STATUS:
+ *      Corresponds to the "available.driver_status" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_EMULATION:
+ *      Corresponds to the "available.driver_emulation" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_COLOR:
+ *      Corresponds to the "available.driver_color" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_SOUND:
+ *      Corresponds to the "available.driver_sound" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_GRAPHIC:
+ *      Corresponds to the "available.driver_graphic" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_COCKTAIL:
+ *      Corresponds to the "available.driver_cocktail" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_PROTECTION:
+ *      Corresponds to the "available.driver_protection" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_SAVESTATE:
+ *      Corresponds to the "available.driver_savestate" database field.
+ * @GVA_GAME_STORE_COLUMN_DRIVER_PALETTESIZE:
+ *      Corresponds to the "available.driver_palettesize" database field.
+ * @GVA_GAME_STORE_COLUMN_COMMENT:
+ *      Corresponds to the "playback.comment" database field.
+ * @GVA_GAME_STORE_COLUMN_INODE:
+ *      Corresponds to the "playback.inode" database field.
+ * @GVA_GAME_STORE_COLUMN_INPFILE:
+ *      Filename of a recorded game (not in the games database).
+ * @GVA_GAME_STORE_COLUMN_TIME:
+ *      Timestamp of a recorded game (not in the games database).
+ * @GVA_GAME_STORE_NUM_COLUMNS:
+ *      Total number of game store columns.
+ *
+ * Most of these values correspond to fields in the games database.
+ **/
 typedef enum
 {
         GVA_GAME_STORE_COLUMN_NAME,               /* G_TYPE_STRING */
