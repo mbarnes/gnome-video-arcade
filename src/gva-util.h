@@ -59,6 +59,8 @@ gchar *         gva_get_monospace_font_name     (void);
 void            gva_get_time_elapsed            (GTimeVal *start_time,
                                                  GTimeVal *time_elapsed);
 const gchar *   gva_get_user_data_dir           (void);
+void            gva_help_display                (GtkWindow *parent,
+                                                 const gchar *link_id);
 
 G_END_DECLS
 

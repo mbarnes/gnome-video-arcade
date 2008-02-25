@@ -124,7 +124,9 @@ warn_if_no_roms (void)
                   "details and troubleshooting tips."));
 #endif
 
-        gtk_dialog_run (GTK_DIALOG (dialog));
+        if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_HELP)
+                gva_help_display (GTK_WINDOW (dialog), "troubleshooting");
+
         gtk_widget_destroy (dialog);
 }
 

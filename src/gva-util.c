@@ -23,6 +23,10 @@
 #include "gva-error.h"
 #include "gva-mame.h"
 
+#ifdef WITH_GNOME
+#include <gnome.h>
+#endif
+
 #define GCONF_MONOSPACE_FONT_NAME_KEY \
         "/desktop/gnome/interface/monospace_font_name"
 
@@ -269,4 +273,31 @@ gva_get_user_data_dir (void)
         }
 
         return user_data_dir;
+}
+
+void
+gva_help_display (GtkWindow *parent,
+                  const gchar *link_id)
+{
+#ifdef WITH_GNOME
+        GtkWidget *dialog;
+        GError *error = NULL;
+
+        if (gnome_help_display ("gnome-video-arcade.xml", link_id, &error))
+                return;
+
+        dialog = gtk_message_dialog_new_with_markup (
+                parent, GTK_DIALOG_DESTROY_WITH_PARENT,
+                GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+                "<big><b>%s</b></big>",
+                _(PACKAGE_NAME " could not display the help contents."));
+
+        gtk_message_dialog_format_secondary_text (
+                GTK_MESSAGE_DIALOG (dialog), "%s", error->message);
+
+        gtk_dialog_run (GTK_DIALOG (dialog));
+
+        gtk_widget_destroy (dialog);
+        g_error_free (error);
+#endif
 }

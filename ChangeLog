@@ -1,3 +1,29 @@
+2008-02-25  Matthew Barnes  <mbarnes@redhat.com>
+
+	* help/C/gnome-video-arcade.xml:
+	Add a Troubleshooting section.
+
+	* help/C/figures/gva_building_database.png:
+	* help/C/figures/gva_column_preferences.png:
+	* help/C/figures/gva_general_preferences.png:
+	* help/C/figures/gva_main_window.png:
+	* help/C/figures/gva_recorded_games.png:
+	* help/C/figures/gva_search_window.png:
+	Update the screenshots and add a couple new ones.
+
+	* src/main.c (warn_if_no_roms):
+	Call gva_help_display() if the user requests help.
+
+	* src/gva-ui.c:
+	Reword the "show-clones" option.
+
+	* src/gva-ui.c (action_contents_cb):
+	Just call gva_help_display().
+
+	* src/gva-util.c (gva_help_display):
+	Display the help file for GNOME Video Arcade at the given location.
+	If help cannot be opened, displays an error dialog explaining why.
+
 2008-02-23  Matthew Barnes  <mbarnes@redhat.com>
 
 	* help/C/gnome-video-arcade.xml:

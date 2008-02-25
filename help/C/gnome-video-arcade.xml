@@ -15,12 +15,13 @@
     <title><application>&app;</application> Manual</title>
 
     <abstract role="description">
-      <para>&app; is a front-end for the Multiple Arcade Machine Emulator
-      (MAME).</para>
+      <para>&app; is a front-end for the <application>Multiple Arcade
+      Machine Emulator (MAME)</application>.</para>
     </abstract>
 
     <copyright>
       <year>2007</year>
+      <year>2008</year>
       <holder>Matthew Barnes</holder>
     </copyright>
 
@@ -36,7 +37,7 @@
     <revhistory>
       <revision>
         <revnumber>&app; Manual &manrevision;</revnumber>
-        <date>2007-10-10</date>
+        <date>2008-02-24</date>
       </revision>
     </revhistory>
 
@@ -49,7 +50,7 @@
     <para>
       The <application>&app;</application> application allows you to play
       classic coin-operated arcade games on your GNOME desktop using the
-      Multiple Arcade Machine Emulator (MAME).
+      <application>Multiple Arcade Machine Emulator (MAME)</application>.
     </para>
     <para>
       <application>&app;</application> provides the following features:
@@ -174,6 +175,15 @@
         You may see a different list of games, depending on which ROM images
         are installed on your system.
       </para>
+      <tip>
+        <para>
+          If you know that ROM images are installed on your system but
+          <application>&app;</application> does not list any games, it may be
+          that <application>MAME</application> is misconfigured or none of the
+          installed ROM images are playable.  See the Troubleshooting section
+          for more information.
+        </para>
+      </tip>
       <note>
         <para>
           Occasionally, the database may be rebuilt when
@@ -235,9 +245,10 @@
           <term>Statusbar</term>
           <listitem>
             <para>
-              The statusbar displays the MAME version used to play games and
-              contextual information about the menu items.  It also displays
-              a progress bar while building the game database.
+              The statusbar displays the <application>MAME</application>
+              version used to play games and contextual information about the
+              menu items.  It also displays a progress bar while building the
+              game database.
             </para>
           </listitem>
         </varlistentry>
@@ -290,7 +301,7 @@
         the highlighted game, including some history about the game, tips and
         tricks to help improve your scores, pictures of the arcade cabinet,
         screen shots of the game in progress and some technical information
-        about MAME's emulation of the game.
+        about <application>MAME</application>'s emulation of the game.
       </para>
       <para>
         To close the <guilabel>Properties</guilabel> dialog, click the
@@ -406,7 +417,8 @@
       <para>
         Type your search criteria in the entry box.  Search by the title of
         the game, the company that manufactured the game, the year the game
-        was released, or the name of the game's ROM set or MAME driver.
+        was released, or the name of the game's ROM set or
+        <application>MAME</application> driver.
       </para>
       <para>
         Click the <guibutton>Find</guibutton> button to start your search.
@@ -435,8 +447,8 @@
         </menuchoice>.
       </para>
       <para>
-        After you exit from MAME, your new recording will be highlighted in
-        the following window:
+        After you exit from <application>MAME</application>, your new
+        recording will be highlighted in the following window:
       </para>
       <figure>
         <title>&app; Recorded Games Window</title>
@@ -455,8 +467,10 @@
         </screenshot>
       </figure>
       <para>
-        Each recording shows the title of the game that was recorded, and
-        the date and time when recording began.
+        Each entry shows the title of the game that was recorded, and the
+        date and time when recording began.  Click on the game's title
+        to customize the comment.  You can add more information to the
+        comment such as the final score or level reached.
       </para>
     </section>
     <section>
@@ -489,6 +503,18 @@
     </para>
     <section>
       <title>General</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gva_general_preferences.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <para>
+              Shows the General tab of the Preferences window.
+            </para>
+          </textobject>
+        </mediaobject>
+      </screenshot>
       <variablelist>
         <varlistentry>
           <term>
@@ -512,8 +538,9 @@
           <listitem>
             <para>
               Select this option to continue where you left off when you last
-              exited MAME.  If this option is not selected, the emulator will
-              boot the arcade machine each time a game is started.
+              exited <application>MAME</application>.  If this option is not
+              selected, the emulator will boot the arcade machine each time a
+              game is started.
             </para>
             <note>
               <para>
@@ -529,10 +556,79 @@
             </warning>
           </listitem>
         </varlistentry>
+        <varlistentry>
+          <term>
+            <guilabel>
+              Show alternate versions of original games
+            </guilabel>
+          </term>
+          <listitem>
+            <para>
+              Select this option to show alternate versions of original games
+              in the game list in the main window.
+            </para>
+          </listitem>
+        </varlistentry>
       </variablelist>
+      <note>
+        <title>What are alternate versions?</title>
+          <para>
+            From the
+            <ulink url="http://mamedev.org/devwiki/index.php/FAQ:General_Games"><application>MAME</application> FAQ</ulink>:
+          </para>
+          <blockquote>
+            <para>
+              Games were often licensed to other companies for a variety of
+              reasons: the most common was that the makers wished to sell the
+              game in a country or region in which they had no distribution
+              of their own.  In the early 80s,
+              <orgname class="corporation">Namco</orgname> had no US
+              distribution network so their games were licensed to
+              <orgname class="corporation">Atari</orgname>,
+              <orgname class="corporation">Bally-Midway</orgname>,
+              and others.  Conversely,
+              <orgname class="corporation">Atari</orgname> licensed their
+              games to Japanese companies (usually
+              <orgname class="corporation">Namco</orgname>) for sale there.
+            </para>
+            <para>
+              Sometimes a set of ROMs with a different copyright date is
+              found, or a bootleg set, or another alternate version.  When
+              the <quote>parent</quote> game has already been emulated in
+              <application>MAME</application>, these alternates are usually
+              easy to add.  In some cases, alternate versions are slightly
+              different: Game levels are in a different order, the game is
+              harder or faster, etc.
+            </para>
+            <para>
+              In some cases, ROMs were hacked to run on hardware they were
+              not intended for.  For example, when
+              <productname>Pac-Man</productname> was <quote>hot,</quote>
+              some arcade operators found a way to dump
+              <productname>Pac-Man</productname> ROMs and hack them to work
+              on <productname>Scramble</productname> machines so they wouldn't
+              have to purchase extra <productname>Pac-Man</productname>
+              boards.  Since these hacked versions are masterpieces in their
+              own right, the <application>MAME</application> developers have
+              included them.
+            </para>
+          </blockquote>
+      </note>
     </section>
     <section>
       <title>Columns</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gva_column_preferences.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <para>
+              Shows the Columns tab of the Preferences window.
+            </para>
+          </textobject>
+        </mediaobject>
+      </screenshot>
       <para>
         The <guilabel>Columns</guilabel> tab allows you to configure the
         game list in the main window to show additional information about
@@ -542,6 +638,113 @@
         <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> and
         <guibutton>Hide</guibutton> buttons to the right of the column list.
       </para>
+    </section>
+  </section>
+
+  <section>
+    <title>Troubleshooting</title>
+    <anchor xml:id="troubleshooting"/>
+    <section>
+      <title>No games listed in the main window</title>
+        <section>
+          <title>
+            Are any ROM images installed?
+          </title>
+          <para>
+            For legal reasons, games are not bundled with
+            <application>&app;</application> or
+            <application>MAME</application>.  The
+            <ulink url="http://mamedev.org/devwiki/index.php/FAQ:Setting_Up"><application>MAME</application> FAQ</ulink>
+            has some suggestions for obtaining ROM images:
+          </para>
+          <blockquote>
+            <para>
+              There are several means of obtaining ROM images for use in
+              <application>MAME</application>:
+            </para>
+            <itemizedlist>
+              <listitem>
+                <para>
+                  A small number of ROM images are now available with the
+                  copyright holders' permission at the
+                  <ulink url="http://mamedev.org/roms/">mamedev.org ROMs page</ulink>.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  The
+                  <ulink url="http://www.hanaho.com/Products/HotRodJoystick.php"><productname>HotRod Joystick</productname> control panel</ulink>
+                  from
+                  <ulink url="http://www.hanaho.com/"><orgname class="corporation">Hanaho Games, Inc.</orgname></ulink>
+                  comes bundled with a CD that includes
+                  <application>MAME</application> and a selection of
+                  <orgname class="corporation">Capcom</orgname> ROMs.
+                  <orgname class="corporation">Hanaho</orgname> also sells
+                  the
+                  <ulink url="http://www.hanaho.com/Products/ArcadePC.php"><productname>ArcadePC</productname> cabinet</ulink>
+                  with a different selection of
+                  <orgname class="corporation">Capcom</orgname> ROMs.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  You can purchase your own arcade PCBs (on
+                  <ulink url="http://www.ebay.com/">eBay</ulink>, for
+                  example), buy a ROM reader, and use it to copy the ROM
+                  chips' contents into files for your personal use.
+                </para>
+              </listitem>
+            </itemizedlist>
+            <para>
+              Always check if the particular arcade games' copyright owner
+              is selling the ROMs legally (as with
+              <orgname class="corporation">Capcom</orgname>).  That way you
+              will support the companies that support emulation.
+            </para>
+          </blockquote>
+        </section>
+        <section>
+          <title>
+            Can <application>MAME</application> find the installed ROM images?
+          </title>
+          <para>
+            <application>&app;</application> relies on
+            <application>MAME</application> to find installed ROM images.
+            To test where <application>MAME</application> is configured to
+            look for ROM images, type the following command on a command
+            line, then press <keycap>Return</keycap>:
+          </para>
+          <para>
+            <command>gnome-video-arcade --inspect rompath</command>
+          </para>
+          <para>
+            The command should print a directory name such as
+            <computeroutput>/usr/share/mame/roms</computeroutput>.
+            Move ROM images to this directory and restart
+            <application>&app;</application>.
+          </para>
+          <para>
+            If the command does not print a directory name, it may mean
+            that <application>MAME</application> is not properly configured
+            on your system.  If you obtained <application>MAME</application>
+            from a <productname>GNU/Linux</productname> distribution, please
+            contact the maintainers of that distribution for further
+            instructions.
+          </para>
+        </section>
+        <section>
+          <title>
+            Is the Available Games view selected?
+          </title>
+          <para>
+            If no games have been tagged as favorites, the
+            <guilabel>Favorite Games</guilabel> view will be empty.
+            Similarly, if no searches have been run, the
+            <guilabel>Search Results</guilabel> view will be empty.
+            Switch to the <guilabel>Available Games</guilabel> view
+            to ensure all available games are listed.
+          </para>
+        </section>
     </section>
   </section>
 
