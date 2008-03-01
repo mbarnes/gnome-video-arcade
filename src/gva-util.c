@@ -43,6 +43,20 @@ inpname_exists (const gchar *inppath, const gchar *inpname)
         gchar *filename;
         gboolean exists;
 
+        /* Last version of xmame creates input files named "game.inp",
+         * but sdlmame names them "game".  Not sure when the extension
+         * was dropped (tested versions 0.120 - 0.123).  In any case,
+         * we need to check for both. */
+
+        inpfile = g_strdup_printf ("%s", inpname);
+        filename = g_build_filename (inppath, inpfile, NULL);
+        exists = g_file_test (filename, G_FILE_TEST_EXISTS);
+        g_free (filename);
+        g_free (inpfile);
+
+        if (exists)
+                return TRUE;
+
         inpfile = g_strdup_printf ("%s.inp", inpname);
         filename = g_build_filename (inppath, inpfile, NULL);
         exists = g_file_test (filename, G_FILE_TEST_EXISTS);
@@ -275,6 +289,16 @@ gva_get_user_data_dir (void)
         return user_data_dir;
 }
 
+/**
+ * gva_help_display:
+ * @parent: a parent #GtkWindow or %NULL
+ * @link_id: help section to present or %NULL
+ *
+ * Opens the user documentation to the section given by @link_id, or to the
+ * table of contents if @link_id is %NULL.  If the user documentation cannot
+ * be opened, it presents a dialog describing the error.  The dialog is set
+ * as transient to @parent if @parent is %NULL.
+ **/
 void
 gva_help_display (GtkWindow *parent,
                   const gchar *link_id)

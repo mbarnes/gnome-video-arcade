@@ -41,6 +41,7 @@
 #include "gva-search.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
+#include "gva-util.h"
 
 #define SQL_COUNT_ROMS \
         "SELECT count(*) FROM game WHERE " \
