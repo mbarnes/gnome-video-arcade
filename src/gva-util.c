@@ -289,6 +289,16 @@ gva_get_user_data_dir (void)
         return user_data_dir;
 }
 
+/**
+ * gva_help_display:
+ * @parent: a parent #GtkWindow or %NULL
+ * @link_id: help section to present or %NULL
+ *
+ * Opens the user documentation to the section given by @link_id, or to the
+ * table of contents if @link_id is %NULL.  If the user documentation cannot
+ * be opened, it presents a dialog describing the error.  The dialog is set
+ * as transient to @parent if @parent is %NULL.
+ **/
 void
 gva_help_display (GtkWindow *parent,
                   const gchar *link_id)

@@ -1,3 +1,19 @@
+2008-03-01  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.5.6
+
+	* help/C/gnome-video-arcade.xml:
+	Remove <orgname class="corporation"> tags to satisfy DocBook 4.5
+	validation (tried reverting to <corpname> but it didn't like that
+	either).  Fix some other cryptic validation errors.
+
+	* src/gva-columns.c (columns_driver_status_set_properties):
+	Decided I like the stock "Apply" icon better than "emblem-default"
+	for displaying "good" emulation status.
+
+	* src/gva-utils.c (gva_help_display):
+	Document this function.
+
 2008-02-29  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-util.c (inpname_exists):

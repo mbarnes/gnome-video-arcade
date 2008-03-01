@@ -581,15 +581,10 @@
               Games were often licensed to other companies for a variety of
               reasons: the most common was that the makers wished to sell the
               game in a country or region in which they had no distribution
-              of their own.  In the early 80s,
-              <orgname class="corporation">Namco</orgname> had no US
-              distribution network so their games were licensed to
-              <orgname class="corporation">Atari</orgname>,
-              <orgname class="corporation">Bally-Midway</orgname>,
-              and others.  Conversely,
-              <orgname class="corporation">Atari</orgname> licensed their
-              games to Japanese companies (usually
-              <orgname class="corporation">Namco</orgname>) for sale there.
+              of their own.  In the early 80s, Namco had no US distribution
+              network so their games were licensed to Atari, Bally-Midway,
+              and others.  Conversely, Atari licensed their games to Japanese
+              companies (usually Namco) for sale there.
             </para>
             <para>
               Sometimes a set of ROMs with a different copyright date is
@@ -643,7 +638,7 @@
 
   <section>
     <title>Troubleshooting</title>
-    <anchor xml:id="troubleshooting"/>
+    <anchor id="troubleshooting"/>
     <section>
       <title>No games listed in the main window</title>
         <section>
@@ -675,15 +670,12 @@
                   The
                   <ulink url="http://www.hanaho.com/Products/HotRodJoystick.php"><productname>HotRod Joystick</productname> control panel</ulink>
                   from
-                  <ulink url="http://www.hanaho.com/"><orgname class="corporation">Hanaho Games, Inc.</orgname></ulink>
+                  <ulink url="http://www.hanaho.com/">Hanaho Games, Inc.</ulink>
                   comes bundled with a CD that includes
-                  <application>MAME</application> and a selection of
-                  <orgname class="corporation">Capcom</orgname> ROMs.
-                  <orgname class="corporation">Hanaho</orgname> also sells
-                  the
+                  <application>MAME</application> and a selection of Capcom
+                  ROMs.  Hanaho also sells the
                   <ulink url="http://www.hanaho.com/Products/ArcadePC.php"><productname>ArcadePC</productname> cabinet</ulink>
-                  with a different selection of
-                  <orgname class="corporation">Capcom</orgname> ROMs.
+                  with a different selection of Capcom ROMs.
                 </para>
               </listitem>
               <listitem>
@@ -697,8 +689,7 @@
             </itemizedlist>
             <para>
               Always check if the particular arcade games' copyright owner
-              is selling the ROMs legally (as with
-              <orgname class="corporation">Capcom</orgname>).  That way you
+              is selling the ROMs legally (as with Capcom).  That way you
               will support the companies that support emulation.
             </para>
           </blockquote>
