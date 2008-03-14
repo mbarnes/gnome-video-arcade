@@ -1,5 +1,11 @@
 2008-03-13  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-util.c (gva_get_monospace_font_name):
+	Fallback to a default monospace font name if we can't get one
+	from GConf (currently using "Monospace 10").
+
+2008-03-13  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac: Post-release version bump.
 
 	* README: List gnome-doc-utils as a dependency.

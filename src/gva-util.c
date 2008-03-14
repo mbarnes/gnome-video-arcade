@@ -27,6 +27,8 @@
 #include <gnome.h>
 #endif
 
+#define DEFAULT_MONOSPACE_FONT_NAME	"Monospace 10"
+
 #define GCONF_MONOSPACE_FONT_NAME_KEY \
         "/desktop/gnome/interface/monospace_font_name"
 
@@ -237,6 +239,10 @@ gva_get_monospace_font_name (void)
                 client, GCONF_MONOSPACE_FONT_NAME_KEY, &error);
         gva_error_handle (&error);
         g_object_unref (client);
+
+	/* Fallback to a reasonable default. */
+	if (font_name == NULL)
+		font_name = g_strdup (DEFAULT_MONOSPACE_FONT_NAME);
 
         return font_name;
 }
