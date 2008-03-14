@@ -1,3 +1,23 @@
+2008-03-13  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac: Post-release version bump.
+
+	* README: List gnome-doc-utils as a dependency.
+
+	* src/gva-columns.c:
+	Add "isbios" column (not shown in game list).
+
+	* src/gva-columns.c (gva_columns_get_names_full):
+	Add column dependency: "name" pulls in "isbios"
+
+	* src/gva-db.c:
+	Add "isbios" field to the game database.
+	Filter BIOS ROM sets from the "available" view.
+
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	Add GVA_GAME_STORE_COLUMN_ISBIOS.
+
 2008-03-01  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.5.6

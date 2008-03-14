@@ -517,6 +517,7 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "category",           columns_factory_category },
         { "favorite",           columns_factory_favorite },
         { "sourcefile",         columns_factory_sourcefile },
+        { "isbios",             NULL },
         { "runnable",           NULL },
         { "cloneof",            NULL },
         { "romof",              NULL },
@@ -924,12 +925,10 @@ gva_columns_get_names_full (GtkTreeView *view)
 
         for (iter = names; iter != NULL; iter = iter->next)
         {
-                /* XXX Nothing to do yet.
                 const gchar *column_name = iter->data;
 
-                if (strcmp (column_name, "description") == 0)
-                        columns_add_dependency (&names, "driver_status");
-                */
+                if (strcmp (column_name, "name") == 0)
+                        columns_add_dependency (&names, "isbios");
         }
 
         return names;

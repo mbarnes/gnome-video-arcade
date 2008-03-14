@@ -17,6 +17,7 @@ CREATE TABLE mame (
 CREATE TABLE game (
         name PRIMARY KEY,
         sourcefile,
+        isbios DEFAULT 'no' CHECK (isbios in ('yes', 'no')),
         runnable DEFAULT 'yes' CHECK (runnable in ('yes', 'no')),
         cloneof,
         romof,
@@ -165,7 +166,8 @@ CREATE VIEW available AS SELECT
         *,
         getcategory(name) AS category,
         isfavorite(name) AS favorite FROM game
-        WHERE (romset IN ('good', 'best available'));
+        WHERE (romset IN ('good', 'best available')
+        AND isbios = 'no');
 </programlisting>
 </simplesect>
 

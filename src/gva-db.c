@@ -42,6 +42,8 @@
         "CREATE TABLE IF NOT EXISTS game (" \
                 "name PRIMARY KEY, " \
                 "sourcefile, " \
+                "isbios DEFAULT 'no' " \
+                "CHECK (isbios in ('yes', 'no')), " \
                 "runnable DEFAULT 'yes' " \
                 "CHECK (runnable in ('yes', 'no')), " \
                 "cloneof, " \
@@ -183,7 +185,8 @@
         "CREATE VIEW IF NOT EXISTS available AS " \
                 "SELECT *, getcategory(name) AS category, " \
                 "isfavorite(name) AS favorite FROM game " \
-                "WHERE (romset IN ('good', 'best available'))"
+                "WHERE (romset IN ('good', 'best available') " \
+                "AND isbios = 'no');"
 
 #define SQL_DROP_TABLES \
         "DROP TABLE IF EXISTS mame; " \
@@ -202,6 +205,7 @@
         "INSERT INTO game VALUES (" \
                 "@name, " \
                 "@sourcefile, " \
+                "@isbios, " \
                 "@runnable, " \
                 "@cloneof, " \
                 "@romof, " \
@@ -355,6 +359,7 @@ static struct
         const gchar *height;
         const gchar *index_;
         const gchar *input;
+        const gchar *isbios;
         const gchar *keydelta;
         const gchar *mame;
         const gchar *manufacturer;
@@ -698,6 +703,7 @@ db_parser_start_element_game (ParserData *data,
         gint ii;
 
         /* Bind default values. */
+        db_parser_bind_text (stmt, "@isbios", "no");
         db_parser_bind_text (stmt, "@runnable", "yes");
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
@@ -711,6 +717,8 @@ db_parser_start_element_game (ParserData *data,
                 }
                 else if (attribute_name[ii] == intern.sourcefile)
                         param = "@sourcefile";
+                else if (attribute_name[ii] == intern.isbios)
+                        param = "@isbios";
                 else if (attribute_name[ii] == intern.runnable)
                         param = "@runnable";
                 else if (attribute_name[ii] == intern.cloneof)
@@ -1372,6 +1380,7 @@ gva_db_build (GError **error)
         intern.height       = g_intern_static_string ("height");
         intern.index_       = g_intern_static_string ("index_");
         intern.input        = g_intern_static_string ("input");
+        intern.isbios       = g_intern_static_string ("isbios");
         intern.keydelta     = g_intern_static_string ("keydelta");
         intern.mame         = g_intern_static_string ("mame");
         intern.manufacturer = g_intern_static_string ("manufacturer");
