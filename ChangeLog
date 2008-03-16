@@ -1,3 +1,26 @@
+2008-03-15  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Bump GTK+ requirement to 2.12 and GVA version to 0.6.0.
+
+	* data/gnome-video-arcade.glade:
+	Set "has_tooltip" property on main tree view to TRUE, and
+	register a handler for the "query_tooltip" signal (see below).
+
+	* src/gva-columns.c (columns_favorite_clicked_cb),
+	(columns_comment_edited_cb):
+	Remove workarounds for GTK+ < 2.12.0.
+
+	* src/gva-columns.c (columns_tooltip_favorite):
+	New tooltip callback for the Favorite column.
+
+	* src/gva-columns.c (gva_columns_query_tooltip):
+	New function configures a GtkTooltip for a given
+	GtkTreeViewColumn and GtkTreePath.
+
+	* src/gva-tree-view.c (gva_tree_view_query_tooltip_cb):
+	New handler for "query-tooltip" signals on the main tree view.
+
 2008-03-13  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-util.c (gva_get_monospace_font_name):

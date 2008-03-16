@@ -29,7 +29,11 @@
 
 #define MAX_PLAYER_ICONS 8
 
-typedef GtkTreeViewColumn * (*FactoryFunc) (GvaGameStoreColumn);
+typedef GtkTreeViewColumn * (*FactoryFunc)      (GvaGameStoreColumn);
+typedef gboolean            (*TooltipFunc)      (GvaGameStoreColumn,
+                                                 GtkTreeModel *,
+                                                 GtkTreeIter *,
+                                                 GtkTooltip *);
 
 static GdkPixbuf *
 columns_get_icon_name (const gchar *icon_name)
@@ -73,11 +77,7 @@ columns_favorite_clicked_cb (GvaCellRendererPixbuf *renderer,
         /* The row that was clicked is not yet selected.  We need to
          * select it first so that gva_tree_view_get_selected_game()
          * returns the correct name. */
-#if GTK_CHECK_VERSION (2, 12, 0)
         widget = gtk_tree_view_column_get_tree_view (column);
-#else
-        widget = column->tree_view;
-#endif
         gtk_tree_view_set_cursor (GTK_TREE_VIEW (widget), path, NULL, FALSE);
         gtk_widget_grab_focus (widget);
 
@@ -103,11 +103,7 @@ columns_comment_edited_cb (GtkCellRendererText *renderer,
         gint column_id;
         gboolean valid;
 
-#if GTK_CHECK_VERSION (2, 12, 0)
         widget = gtk_tree_view_column_get_tree_view (column);
-#else
-        widget = column->tree_view;
-#endif
         column_id = gtk_tree_view_column_get_sort_column_id (column);
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
         path = gtk_tree_path_new_from_string (path_string);
@@ -217,6 +213,10 @@ columns_time_set_properties (GtkTreeViewColumn *column,
 
         g_value_unset (&value);
 }
+
+/*****************************************************************************
+ * Column Factory Callbacks
+ *****************************************************************************/
 
 static GtkTreeViewColumn *
 columns_factory_category (GvaGameStoreColumn column_id)
@@ -506,16 +506,43 @@ columns_factory_year (GvaGameStoreColumn column_id)
         return column;
 }
 
+/*****************************************************************************
+ * Column Tooltip Callbacks
+ *****************************************************************************/
+
+static gboolean
+columns_tooltip_favorite (GvaGameStoreColumn column_id,
+                          GtkTreeModel *model,
+                          GtkTreeIter *iter,
+                          GtkTooltip *tooltip)
+{
+        const gchar *text;
+        gboolean favorite;
+
+        gtk_tree_model_get (model, iter, column_id, &favorite, -1);
+
+        if (favorite)
+                text = _("Click here to remove from favorites");
+        else
+                text = _("Click here to add to favorites");
+
+        gtk_tooltip_set_text (tooltip, text);
+
+        return TRUE;
+}
+
 static struct
 {
         const gchar *name;
         FactoryFunc factory;
+        TooltipFunc tooltip;
 }
 column_info[GVA_GAME_STORE_NUM_COLUMNS] =
 {
         { "name",               columns_factory_name },
         { "category",           columns_factory_category },
-        { "favorite",           columns_factory_favorite },
+        { "favorite",           columns_factory_favorite,
+                                columns_tooltip_favorite },
         { "sourcefile",         columns_factory_sourcefile },
         { "isbios",             NULL },
         { "runnable",           NULL },
@@ -927,9 +954,48 @@ gva_columns_get_names_full (GtkTreeView *view)
         {
                 const gchar *column_name = iter->data;
 
+                /* Need to know if a ROM set is not a game but a BIOS,
+                 * so we can exclude it from the game list. */
                 if (strcmp (column_name, "name") == 0)
                         columns_add_dependency (&names, "isbios");
         }
 
         return names;
+}
+
+/**
+ * gva_columns_query_tooltip:
+ * @column: a #GtkTreeViewColumn
+ * @path: a #GtkTreePath
+ * @tooltip: a #GtkTooltip
+ *
+ * TODO
+ **/
+gboolean
+gva_columns_query_tooltip (GtkTreeViewColumn *column,
+                           GtkTreePath *path,
+                           GtkTooltip *tooltip)
+{
+        GvaGameStoreColumn column_id;
+        GtkTreeModel *model;
+        GtkWidget *widget;
+        GtkTreeIter iter;
+        TooltipFunc func;
+        gboolean valid;
+
+        g_return_val_if_fail (GTK_IS_TREE_VIEW_COLUMN (column), FALSE);
+        g_return_val_if_fail (path != NULL, FALSE);
+        g_return_val_if_fail (GTK_IS_TOOLTIP (tooltip), FALSE);
+
+        column_id = gtk_tree_view_column_get_sort_column_id (column);
+        g_return_val_if_fail (column_id >= 0, FALSE);
+        g_return_val_if_fail (column_id < G_N_ELEMENTS (column_info), FALSE);
+
+        func = column_info[column_id].tooltip;
+        widget = gtk_tree_view_column_get_tree_view (column);
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        g_return_val_if_fail (valid, FALSE);
+
+        return func ? func (column_id, model, &iter, tooltip) : FALSE;
 }

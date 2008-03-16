@@ -53,6 +53,11 @@ void           gva_tree_view_set_last_sort_column_id (GvaGameStoreColumn column_
 gboolean       gva_tree_view_button_press_event_cb   (GtkTreeView *view,
                                                       GdkEventButton *event);
 gboolean       gva_tree_view_popup_menu_cb           (GtkTreeView *view);
+gboolean       gva_tree_view_query_tooltip_cb        (GtkTreeView *view,
+                                                      gint x,
+                                                      gint y,
+                                                      gboolean keyboard_mode,
+                                                      GtkTooltip *tooltip);
 void           gva_tree_view_row_activated_cb        (GtkTreeView *view,
                                                       GtkTreePath *path,
                                                       GtkTreeViewColumn *column);

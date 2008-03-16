@@ -655,6 +655,49 @@ gva_tree_view_popup_menu_cb (GtkTreeView *view)
 }
 
 /**
+ * gva_tree_view_query_tooltip_cb:
+ * @view: the main tree view
+ * @x: the x coordinate of the cursor position where the request has
+ *     been emitted
+ * @y: the y coordinate of the cursor position where the request has
+ *     been emitted
+ * @keyboard_mode: %TRUE if the tooltip was triggered using the keyboard
+ * @tooltip: a #GtkTooltip
+ *
+ * Handles tooltips for the main tree view.
+ *
+ * Returns: %TRUE if @tooltip should be shown right now, %FALSE otherwise
+ **/
+gboolean
+gva_tree_view_query_tooltip_cb (GtkTreeView *view,
+                                gint x,
+                                gint y,
+                                gboolean keyboard_mode,
+                                GtkTooltip *tooltip)
+{
+        GtkTreeViewColumn *column;
+        GtkTreePath *path;
+        gboolean valid;
+        gint bx, by;
+
+        /* XXX Don't know how to handle keyboard tooltips yet. */
+        if (keyboard_mode)
+                return FALSE;
+
+        gtk_tree_view_convert_widget_to_bin_window_coords (
+                view, x, y, &bx, &by);
+        valid = gtk_tree_view_get_path_at_pos (
+                view, bx, by, &path, &column, NULL, NULL);
+        if (!valid)
+                return FALSE;
+
+        gtk_tree_view_set_tooltip_cell (view, tooltip, path, column, NULL);
+
+        return gva_columns_query_tooltip (column, path, tooltip);
+
+}
+
+/**
  * gva_tree_view_row_activated_cb:
  * @view: the main tree view
  * @path: the #GtkTreePath for the activated row

@@ -41,6 +41,9 @@ void                gva_columns_save           (GtkTreeView *view);
 GSList *            gva_columns_get_names      (GtkTreeView *view,
                                                 gboolean visible_only);
 GSList *            gva_columns_get_names_full (GtkTreeView *view);
+gboolean            gva_columns_query_tooltip  (GtkTreeViewColumn *column,
+                                                GtkTreePath *path,
+                                                GtkTooltip *tooltip);
 
 G_END_DECLS
 
