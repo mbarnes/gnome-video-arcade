@@ -1,3 +1,22 @@
+2008-03-16  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-columns.c:
+	Mess with the tooltip callback signature again.
+
+	* src/gva-columns.c (columns_tooltip_summary):
+	New tooltip callback for the Description, Manufacturer, and Year
+	columns.  Displays a summary similar to the Properties window.
+
+	* src/gva-columns.c (gva_columns_get_names_full):
+	Add dependency: any of the "description", "manufacturer", or
+	"year" columns pull in the other two.
+
+	* src/gva-properties.c (properties_update_header):
+	Check if strings are either NULL or empty.
+
 2008-03-15  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:

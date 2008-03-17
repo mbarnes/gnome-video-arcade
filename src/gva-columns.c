@@ -29,11 +29,8 @@
 
 #define MAX_PLAYER_ICONS 8
 
-typedef GtkTreeViewColumn * (*FactoryFunc)      (GvaGameStoreColumn);
-typedef gboolean            (*TooltipFunc)      (GvaGameStoreColumn,
-                                                 GtkTreeModel *,
-                                                 GtkTreeIter *,
-                                                 GtkTooltip *);
+typedef GtkTreeViewColumn * (*FactoryFunc) (GvaGameStoreColumn);
+typedef gboolean (*TooltipFunc) (GtkTreeModel *, GtkTreeIter *, GtkTooltip *);
 
 static GdkPixbuf *
 columns_get_icon_name (const gchar *icon_name)
@@ -511,15 +508,15 @@ columns_factory_year (GvaGameStoreColumn column_id)
  *****************************************************************************/
 
 static gboolean
-columns_tooltip_favorite (GvaGameStoreColumn column_id,
-                          GtkTreeModel *model,
+columns_tooltip_favorite (GtkTreeModel *model,
                           GtkTreeIter *iter,
                           GtkTooltip *tooltip)
 {
         const gchar *text;
         gboolean favorite;
 
-        gtk_tree_model_get (model, iter, column_id, &favorite, -1);
+        gtk_tree_model_get (
+                model, iter, GVA_GAME_STORE_COLUMN_FAVORITE, &favorite, -1);
 
         if (favorite)
                 text = _("Click here to remove from favorites");
@@ -527,6 +524,44 @@ columns_tooltip_favorite (GvaGameStoreColumn column_id,
                 text = _("Click here to add to favorites");
 
         gtk_tooltip_set_text (tooltip, text);
+
+        return TRUE;
+}
+
+static gboolean
+columns_tooltip_summary (GtkTreeModel *model,
+                         GtkTreeIter *iter,
+                         GtkTooltip *tooltip)
+{
+        gchar *description;
+        gchar *manufacturer;
+        gchar *year;
+        gchar *markup;
+
+        gtk_tree_model_get (
+                model, iter,
+                GVA_GAME_STORE_COLUMN_DESCRIPTION, &description,
+                GVA_GAME_STORE_COLUMN_MANUFACTURER, &manufacturer,
+                GVA_GAME_STORE_COLUMN_YEAR, &year, -1);
+
+        if (description == NULL || *description == '\0')
+                description = g_strdup (_("(Game Description Unknown)"));
+
+        if (manufacturer == NULL || *manufacturer == '\0')
+                manufacturer = g_strdup (_("(Manufacturer Unknown)"));
+
+        if (year == NULL || *year == '\0')
+                year = g_strdup (_("(Year Unknown)"));
+
+        markup = g_markup_printf_escaped (
+                "<b>%s</b>\n<small>%s %s</small>",
+                description, year, manufacturer);
+        gtk_tooltip_set_markup (tooltip, markup);
+        g_free (markup);
+
+        g_free (description);
+        g_free (manufacturer);
+        g_free (year);
 
         return TRUE;
 }
@@ -551,9 +586,12 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "romset",             NULL },
         { "sampleof",           NULL },
         { "sampleset",          columns_factory_sampleset },
-        { "description",        columns_factory_description },
-        { "year",               columns_factory_year },
-        { "manufacturer",       columns_factory_manufacturer },
+        { "description",        columns_factory_description,
+                                columns_tooltip_summary },
+        { "year",               columns_factory_year,
+                                columns_tooltip_summary },
+        { "manufacturer",       columns_factory_manufacturer,
+                                columns_tooltip_summary },
         { "sound_channels",     NULL },
         { "input_service",      NULL },
         { "input_tilt",         NULL },
@@ -958,6 +996,19 @@ gva_columns_get_names_full (GtkTreeView *view)
                  * so we can exclude it from the game list. */
                 if (strcmp (column_name, "name") == 0)
                         columns_add_dependency (&names, "isbios");
+
+                /* Any of the description, manufacturer, and year columns
+                 * require the other two for the summary tooltip. */
+                if (strcmp (column_name, "description") == 0) {
+                        columns_add_dependency (&names, "manufacturer");
+                        columns_add_dependency (&names, "year");
+                } else if (strcmp (column_name, "manufacturer") == 0) {
+                        columns_add_dependency (&names, "description");
+                        columns_add_dependency (&names, "year");
+                } else if (strcmp (column_name, "year") == 0) {
+                        columns_add_dependency (&names, "description");
+                        columns_add_dependency (&names, "manufacturer");
+                }
         }
 
         return names;
@@ -976,11 +1027,11 @@ gva_columns_query_tooltip (GtkTreeViewColumn *column,
                            GtkTreePath *path,
                            GtkTooltip *tooltip)
 {
+        TooltipFunc tooltip_func;
         GvaGameStoreColumn column_id;
         GtkTreeModel *model;
         GtkWidget *widget;
         GtkTreeIter iter;
-        TooltipFunc func;
         gboolean valid;
 
         g_return_val_if_fail (GTK_IS_TREE_VIEW_COLUMN (column), FALSE);
@@ -991,11 +1042,11 @@ gva_columns_query_tooltip (GtkTreeViewColumn *column,
         g_return_val_if_fail (column_id >= 0, FALSE);
         g_return_val_if_fail (column_id < G_N_ELEMENTS (column_info), FALSE);
 
-        func = column_info[column_id].tooltip;
+        tooltip_func = column_info[column_id].tooltip;
         widget = gtk_tree_view_column_get_tree_view (column);
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
         valid = gtk_tree_model_get_iter (model, &iter, path);
         g_return_val_if_fail (valid, FALSE);
 
-        return func ? func (column_id, model, &iter, tooltip) : FALSE;
+        return tooltip_func ? tooltip_func (model, &iter, tooltip) : FALSE;
 }

@@ -148,6 +148,7 @@ gva_tree_view_get_last_sort_column_id
 gva_tree_view_set_last_sort_column_id
 gva_tree_view_button_press_event_cb
 gva_tree_view_popup_menu_cb
+gva_tree_view_query_tooltip_cb
 gva_tree_view_row_activated_cb
 </SECTION>
 
@@ -365,5 +366,6 @@ gva_columns_load
 gva_columns_save
 gva_columns_get_names
 gva_columns_get_names_full
+gva_columns_query_tooltip
 </SECTION>
 

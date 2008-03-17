@@ -145,6 +145,19 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_tree_view_query_tooltip_cb ##### -->
+<para>
+
+</para>
+
+@view: 
+@x: 
+@y: 
+@keyboard_mode: 
+@tooltip: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_tree_view_row_activated_cb ##### -->
 <para>
 

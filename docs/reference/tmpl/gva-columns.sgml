@@ -89,3 +89,14 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_columns_query_tooltip ##### -->
+<para>
+
+</para>
+
+@column: 
+@path: 
+@tooltip: 
+@Returns: 
+
+

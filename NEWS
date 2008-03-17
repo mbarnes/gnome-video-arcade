@@ -5,6 +5,8 @@ GNOME Video Arcade 0.5.7
 
         What's New
         ----------
+        * GNOME Video Arcade now requires GTK+ 2.12 or higher.
+        * Add some fancy tooltips to some of the tree view columns.
         * Do not show BIOS ROM sets in the game list (requires MAME v0.118
           or later to work).
 

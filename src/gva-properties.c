@@ -54,13 +54,13 @@ properties_update_header (GtkTreeModel *model,
                 GVA_GAME_STORE_COLUMN_MANUFACTURER, &manufacturer,
                 GVA_GAME_STORE_COLUMN_YEAR, &year, -1);
 
-        if (description == NULL)
+        if (description == NULL || *description == '\0')
                 description = g_strdup (_("(Game Description Unknown)"));
 
-        if (manufacturer == NULL)
+        if (manufacturer == NULL || *manufacturer == '\0')
                 manufacturer = g_strdup (_("(Manufacturer Unknown)"));
 
-        if (year == NULL)
+        if (year == NULL || *year == '\0')
                 year = g_strdup (_("(Year Unknown)"));
 
         markup = g_markup_printf_escaped (
