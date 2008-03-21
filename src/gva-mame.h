@@ -76,6 +76,9 @@ GvaProcess *    gva_mame_playback_game          (const gchar *name,
                                                  GError **error);
 gchar *         gva_mame_get_save_state_file    (const gchar *name);
 void            gva_mame_delete_save_state      (const gchar *name);
+const gchar *   gva_mame_get_input_directory    (GError **error);
+const gchar *   gva_mame_get_snapshot_directory (GError **error);
+const gchar *   gva_mame_get_state_directory    (GError **error);
 
 /* Test for supported options */
 

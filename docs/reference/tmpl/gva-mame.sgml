@@ -198,6 +198,33 @@
 @name: 
 
 
+<!-- ##### FUNCTION gva_mame_get_input_directory ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_get_snapshot_directory ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_mame_get_state_directory ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
 <!-- ##### MACRO gva_mame_supports_auto_save ##### -->
 <para>
 

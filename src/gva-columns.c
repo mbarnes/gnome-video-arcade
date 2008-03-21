@@ -35,12 +35,23 @@ typedef gboolean (*TooltipFunc) (GtkTreeModel *, GtkTreeIter *, GtkTooltip *);
 static GdkPixbuf *
 columns_get_icon_name (const gchar *icon_name)
 {
+        static GHashTable *cache = NULL;
         GtkIconTheme *icon_theme;
         GdkPixbuf *pixbuf;
         GdkPixbuf *scaled;
         gboolean valid;
         gint size;
         GError *error = NULL;
+
+        if (G_UNLIKELY (cache == NULL))
+                cache = g_hash_table_new_full (
+                        g_str_hash, g_str_equal,
+                        (GDestroyNotify) g_free,
+                        (GDestroyNotify) g_object_unref);
+
+        scaled = g_hash_table_lookup (cache, icon_name);
+        if (scaled != NULL)
+                return scaled;
 
         icon_theme = gtk_icon_theme_get_default ();
         valid = gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &size, NULL);
@@ -57,6 +68,8 @@ columns_get_icon_name (const gchar *icon_name)
 
         scaled = gdk_pixbuf_scale_simple (
                 pixbuf, size, size, GDK_INTERP_BILINEAR);
+
+        g_hash_table_insert (cache, g_strdup (icon_name), scaled);
 
         g_object_unref (pixbuf);
 
@@ -130,6 +143,7 @@ columns_driver_status_set_properties (GtkTreeViewColumn *column,
          *     image seems to be the closest match at this time (a green
          *     checkmark), but may not be suitable for all icon themes. */
 
+        /* Remember, we don't own the pixbuf reference. */
         if (strcmp (status, "good") == 0)
                 pixbuf = columns_get_icon_name (GTK_STOCK_APPLY);
         else if (strcmp (status, "imperfect") == 0)
@@ -140,9 +154,6 @@ columns_driver_status_set_properties (GtkTreeViewColumn *column,
         g_object_set (
                 renderer, "pixbuf", pixbuf,
                 "visible", (pixbuf != NULL), NULL);
-
-        if (pixbuf != NULL)
-                g_object_unref (pixbuf);
 
         g_free (status);
 }
@@ -316,6 +327,7 @@ columns_factory_favorite (GvaGameStoreColumn column_id)
         GtkCellRenderer *renderer;
         GdkPixbuf *pixbuf;
 
+        /* Remember, we don't own the pixbuf reference. */
         pixbuf = columns_get_icon_name ("emblem-favorite");
 
         column = gtk_tree_view_column_new ();
@@ -334,9 +346,6 @@ columns_factory_favorite (GvaGameStoreColumn column_id)
                 renderer, "clicked",
                 G_CALLBACK (columns_favorite_clicked_cb), column);
 
-        if (pixbuf != NULL)
-                g_object_unref (pixbuf);
-
         return column;
 }
 
@@ -347,6 +356,7 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
         GdkPixbuf *pixbuf;
         gint ii;
 
+        /* Remember, we don't own the pixbuf reference. */
         pixbuf = columns_get_icon_name ("stock_person");
 
         column = gtk_tree_view_column_new ();
@@ -367,9 +377,6 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
                         columns_input_players_set_properties,
                         GINT_TO_POINTER (ii), NULL);
         }
-
-        if (pixbuf != NULL)
-                g_object_unref (pixbuf);
 
         return column;
 }
@@ -421,6 +428,7 @@ columns_factory_sampleset (GvaGameStoreColumn column_id)
         GtkCellRenderer *renderer;
         GdkPixbuf *pixbuf;
 
+        /* Remember, we don't own the pixbuf reference. */
         pixbuf = columns_get_icon_name ("emblem-sound");
 
         column = gtk_tree_view_column_new ();
@@ -435,9 +443,6 @@ columns_factory_sampleset (GvaGameStoreColumn column_id)
         gtk_tree_view_column_set_cell_data_func (
                 column, renderer, (GtkTreeCellDataFunc)
                 columns_sampleset_set_properties, NULL, NULL);
-
-        if (pixbuf != NULL)
-                g_object_unref (pixbuf);
 
         return column;
 }

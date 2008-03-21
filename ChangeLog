@@ -1,3 +1,28 @@
+2008-03-20  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-columns.c (columns_get_icon_name):
+	Cache the scaled icon in a static hash table.
+	This should make switching between views faster.
+
+	* src/gva-mame-common.c (gva_mame_get_input_directory):
+	* src/gva-util.c (gva_choose_inpname):
+	New function caches the "input_directory" config value.
+
+	* src/gva-mame-common.c (gva_mame_get_snapshot_directory):
+	New function caches the "snapshot_directory" config value.
+
+	* src/gva-mame-common.c (gva_mame_get_state_directory):
+	New function caches the "state_directory" config value.
+
+	* src/gva-mame-common.c (gva_mame_get_input_files):
+	Use gva_mame_get_input_directory().
+
+	* src/gva-mame-common.c (gva_mame_get_save_state_file):
+	Use gva_mame_get_state_directory().
+
 2008-03-16  Matthew Barnes  <mbarnes@redhat.com>
 
 	* docs/references/gnome-video-arcade-sections.txt:

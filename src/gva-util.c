@@ -27,7 +27,7 @@
 #include <gnome.h>
 #endif
 
-#define DEFAULT_MONOSPACE_FONT_NAME	"Monospace 10"
+#define DEFAULT_MONOSPACE_FONT_NAME     "Monospace 10"
 
 #define GCONF_MONOSPACE_FONT_NAME_KEY \
         "/desktop/gnome/interface/monospace_font_name"
@@ -82,14 +82,14 @@ inpname_exists (const gchar *inppath, const gchar *inpname)
 gchar *
 gva_choose_inpname (const gchar *game)
 {
+        const gchar *inppath;
         gchar *inpname;
-        gchar *inppath;
         gint nn = 1;
         GError *error = NULL;
 
         g_return_val_if_fail (game != NULL, NULL);
 
-        inppath = gva_mame_get_config_value ("input_directory", &error);
+        inppath = gva_mame_get_input_directory (&error);
 
         if (inppath == NULL || !inpname_exists (inppath, game))
         {
@@ -103,8 +103,6 @@ gva_choose_inpname (const gchar *game)
                         break;
                 g_free (inpname);
         }
-
-        g_free (inppath);
 
         return inpname;
 }
@@ -240,9 +238,9 @@ gva_get_monospace_font_name (void)
         gva_error_handle (&error);
         g_object_unref (client);
 
-	/* Fallback to a reasonable default. */
-	if (font_name == NULL)
-		font_name = g_strdup (DEFAULT_MONOSPACE_FONT_NAME);
+        /* Fallback to a reasonable default. */
+        if (font_name == NULL)
+                font_name = g_strdup (DEFAULT_MONOSPACE_FONT_NAME);
 
         return font_name;
 }

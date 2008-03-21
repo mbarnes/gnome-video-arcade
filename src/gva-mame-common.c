@@ -298,16 +298,16 @@ gva_mame_get_search_paths (const gchar *config_key,
 GHashTable *
 gva_mame_get_input_files (GError **error)
 {
-        GHashTable *hash_table = NULL;
+        GHashTable *hash_table;
         const gchar *basename;
-        gchar *inppath;
+        const gchar *directory;
         GDir *dir;
 
-        inppath = gva_mame_get_config_value ("input_directory", error);
-        dir = (inppath != NULL) ? g_dir_open (inppath, 0, error) : NULL;
+        directory = gva_mame_get_input_directory (error);
 
+        dir = g_dir_open (directory, 0, error);
         if (dir == NULL)
-                goto exit;
+                return NULL;
 
         hash_table = g_hash_table_new_full (
                 g_str_hash, g_str_equal,
@@ -320,7 +320,7 @@ gva_mame_get_input_files (GError **error)
                 GIOChannel *channel;
                 GError *local_error = NULL;
 
-                filename = g_build_filename (inppath, basename, NULL);
+                filename = g_build_filename (directory, basename, NULL);
 
                 channel = g_io_channel_new_file (filename, "r", &local_error);
 
@@ -350,9 +350,6 @@ gva_mame_get_input_files (GError **error)
         }
 
         g_dir_close (dir);
-
-exit:
-        g_free (inppath);
 
         return hash_table;
 }
@@ -806,21 +803,21 @@ gva_mame_playback_game (const gchar *name,
 gchar *
 gva_mame_get_save_state_file (const gchar *name)
 {
-        gchar *directory;
+        const gchar *directory;
         gchar *basename;
         gchar *filename = NULL;
         GError *error = NULL;
 
-        directory = gva_mame_get_config_value ("state_directory", &error);
+        directory = gva_mame_get_state_directory (&error);
         gva_error_handle (&error);
         if (directory == NULL)
-                goto exit;
+                return NULL;
 
         /* As of 0.115, MAME stores save state files as "name/auto.sta". */
         filename = g_build_filename (directory, name, "auto.sta", NULL);
 
         if (g_file_test (filename, G_FILE_TEST_IS_REGULAR))
-                goto exit;
+                return filename;
         else
                 g_free (filename);
 
@@ -830,16 +827,11 @@ gva_mame_get_save_state_file (const gchar *name)
         g_free (basename);
 
         if (g_file_test (filename, G_FILE_TEST_IS_REGULAR))
-                goto exit;
+                return filename;
         else
                 g_free (filename);
 
-        filename = NULL;  /* file not found */
-
-exit:
-        g_free (directory);
-
-        return filename;
+        return NULL;  /* file not found */
 }
 
 /**
@@ -861,6 +853,45 @@ gva_mame_delete_save_state (const gchar *name)
                         filename, g_strerror (errno));
 
         g_free (filename);
+}
+
+const gchar *
+gva_mame_get_input_directory (GError **error)
+{
+        static gchar *directory = NULL;
+
+        if (G_UNLIKELY (directory == NULL)) {
+                const gchar *config_key = "input_directory";
+                directory = gva_mame_get_config_value (config_key, error);
+        }
+
+        return directory;
+}
+
+const gchar *
+gva_mame_get_snapshot_directory (GError **error)
+{
+        static gchar *directory = NULL;
+
+        if (G_UNLIKELY (directory == NULL)) {
+                const gchar *config_key = "snapshot_directory";
+                directory = gva_mame_get_config_value (config_key, error);
+        }
+
+        return directory;
+}
+
+const gchar *
+gva_mame_get_state_directory (GError **error)
+{
+        static gchar *directory = NULL;
+
+        if (G_UNLIKELY (directory == NULL)) {
+                const gchar *config_key = "state_directory";
+                directory = gva_mame_get_config_value (config_key, error);
+        }
+
+        return directory;
 }
 
 /*****************************************************************************
