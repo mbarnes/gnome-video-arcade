@@ -38,8 +38,10 @@ gboolean
 gva_categories_init (GError **error)
 {
         gboolean success = FALSE;
+#ifdef CATEGORY_FILE
         gchar *contents, *cp;
         gsize length;
+#endif
 
         keyfile = g_key_file_new ();
 

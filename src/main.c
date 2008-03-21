@@ -38,7 +38,6 @@
 #include "gva-play-back.h"
 #include "gva-preferences.h"
 #include "gva-properties.h"
-#include "gva-search.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 #include "gva-util.h"
@@ -275,7 +274,6 @@ main (gint argc, gchar **argv)
         gva_play_back_init ();
         gva_preferences_init ();
         gva_properties_init ();
-        gva_search_init ();
 
         gva_categories_init (&error);
         gva_error_handle (&error);

@@ -13,7 +13,6 @@
     <xi:include href="xml/gva-play-back.xml"/>
     <xi:include href="xml/gva-preferences.xml"/>
     <xi:include href="xml/gva-properties.xml"/>
-    <xi:include href="xml/gva-search.xml"/>
     <xi:include href="xml/gva-tree-view.xml"/>
     <xi:include href="xml/gva-ui.xml"/>
   </chapter>

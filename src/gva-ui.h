@@ -65,6 +65,10 @@
         (gva_ui_get_widget ("main-progress-bar"))
 #define GVA_WIDGET_MAIN_PROPERTIES_BUTTON \
         (gva_ui_get_widget ("main-properties-button"))
+#define GVA_WIDGET_MAIN_SEARCH_ENTRY \
+        (gva_ui_get_widget ("main-search-entry"))
+#define GVA_WIDGET_MAIN_SEARCH_HBOX \
+        (gva_ui_get_widget ("main-search-hbox"))
 #define GVA_WIDGET_MAIN_START_GAME_BUTTON \
         (gva_ui_get_widget ("main-start-game-button"))
 #define GVA_WIDGET_MAIN_STATUSBAR \
@@ -121,14 +125,6 @@
         (gva_ui_get_widget ("properties-notebook"))
 #define GVA_WIDGET_PROPERTIES_WINDOW \
         (gva_ui_get_widget ("properties-window"))
-
-/* Search Window */
-#define GVA_WIDGET_SEARCH_ENTRY \
-        (gva_ui_get_widget ("search-entry"))
-#define GVA_WIDGET_SEARCH_FIND_BUTTON \
-        (gva_ui_get_widget ("search-find-button"))
-#define GVA_WIDGET_SEARCH_WINDOW \
-        (gva_ui_get_widget ("search-window"))
 
 G_BEGIN_DECLS
 

@@ -50,9 +50,19 @@ guint         gva_main_statusbar_push            (guint context_id,
 void          gva_main_statusbar_pop             (guint context_id);
 void          gva_main_statusbar_remove          (guint context_id,
                                                   guint message_id);
+gchar *       gva_main_get_last_search           (void);
+void          gva_main_set_last_search           (const gchar *text);
 
 /* Signal Handlers */
 
+void          gva_main_search_entry_activate_cb  (GtkEntry *entry);
+void          gva_main_search_entry_notify_cb    (GtkEntry *entry,
+                                                  GParamSpec *pspec);
+gboolean      gva_main_search_query_tooltip_cb   (GtkWidget *widget,
+                                                  gint x,
+                                                  gint y,
+                                                  gboolean keyboard_mode,
+                                                  GtkTooltip *tooltip);
 void          gva_main_window_destroy_cb         (GtkWindow *window);
 
 G_END_DECLS

@@ -1025,7 +1025,9 @@ gva_columns_get_names_full (GtkTreeView *view)
  * @path: a #GtkTreePath
  * @tooltip: a #GtkTooltip
  *
- * TODO
+ * Configures @tooltip for the given @column and @path.
+ *
+ * Returns: %TRUE if the tooltip should be shown
  **/
 gboolean
 gva_columns_query_tooltip (GtkTreeViewColumn *column,

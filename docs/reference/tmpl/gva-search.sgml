@@ -17,35 +17,3 @@ gva-search
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### FUNCTION gva_search_init ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### FUNCTION gva_search_get_last_search ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION gva_search_set_last_search ##### -->
-<para>
-
-</para>
-
-@text: 
-
-
-<!-- ##### FUNCTION gva_search_find_clicked_cb ##### -->
-<para>
-
-</para>
-
-@entry: 
-@button: 
-
-

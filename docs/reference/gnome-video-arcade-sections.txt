@@ -124,14 +124,6 @@ gva_mame_process_get_type
 </SECTION>
 
 <SECTION>
-<FILE>gva-search</FILE>
-gva_search_init
-gva_search_get_last_search
-gva_search_set_last_search
-gva_search_find_clicked_cb
-</SECTION>
-
-<SECTION>
 <FILE>gva-tree-view</FILE>
 gva_tree_view_init
 gva_tree_view_lookup
@@ -165,6 +157,11 @@ gva_main_statusbar_get_context_id
 gva_main_statusbar_push
 gva_main_statusbar_pop
 gva_main_statusbar_remove
+gva_main_get_last_search
+gva_main_set_last_search
+gva_main_search_entry_activate_cb
+gva_main_search_entry_notify_cb
+gva_main_search_query_tooltip_cb
 gva_main_window_destroy_cb
 </SECTION>
 
@@ -200,6 +197,8 @@ GVA_WIDGET_AUDIT_TREE_VIEW
 GVA_WIDGET_AUDIT_WINDOW
 GVA_WIDGET_MAIN_PROGRESS_BAR
 GVA_WIDGET_MAIN_PROPERTIES_BUTTON
+GVA_WIDGET_MAIN_SEARCH_ENTRY
+GVA_WIDGET_MAIN_SEARCH_HBOX
 GVA_WIDGET_MAIN_START_GAME_BUTTON
 GVA_WIDGET_MAIN_STATUSBAR
 GVA_WIDGET_MAIN_TREE_VIEW
@@ -225,9 +224,6 @@ GVA_WIDGET_PROPERTIES_HEADER
 GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW
 GVA_WIDGET_PROPERTIES_NOTEBOOK
 GVA_WIDGET_PROPERTIES_WINDOW
-GVA_WIDGET_SEARCH_ENTRY
-GVA_WIDGET_SEARCH_FIND_BUTTON
-GVA_WIDGET_SEARCH_WINDOW
 </SECTION>
 
 <SECTION>

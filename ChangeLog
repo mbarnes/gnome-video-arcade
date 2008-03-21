@@ -1,6 +1,44 @@
+2008-03-21  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Add an inline search interface to the main window.
+	Remove the search dialog.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/Makefile.am:
+	Remove gva-search.[ch]
+
+	* src/main.c (main):
+	Remove call to gva_search_init().
+
+	* src/gva-columns.c (gva_columns_query_tooltip):
+	* src/gva-mame-common.c (gva_mame_get_input_directory),
+	(gva_mame_get_snapshot_directory), (gva_mame_get_state_directory):
+	Document these functions.
+
+	* src/gva-main.c:
+	Move the logic from gva-search.c to here to support the new
+	inline search interface.  Add appropriate signal handlers.
+
+	* src/gva-search.c:
+	* src/gva-search.h:
+	Remove these files.
+
+	* src/gva-ui.c (action_search_cb):
+	Show and give focus to the inline search entry.
+
+	* src/gva-ui.h:
+	Add GVA_WIDGET_MAIN_SEARCH_ENTRY, GVA_WIDGET_MAIN_SEARCH_HBOX.
+	Remove the old search dialog widgets.
+
+	* src/gva-ui.c (view_radio_entries):
+	Add accelerators to the view actions.
+
 2008-03-20  Matthew Barnes  <mbarnes@redhat.com>
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 
 	* src/gva-columns.c (columns_get_icon_name):
@@ -25,7 +63,7 @@
 
 2008-03-16  Matthew Barnes  <mbarnes@redhat.com>
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 
 	* src/gva-columns.c:
@@ -169,8 +207,8 @@
 
 2008-02-04  Matthew Barnes  <mbarnes@redhat.com>
 
-	* docs/references/database-schema.xml:
-	* docs/references/gnome-video-arcade-docs.sgml:
+	* docs/reference/database-schema.xml:
+	* docs/reference/gnome-video-arcade-docs.sgml:
 	Add an appendix to the developer documentation showing the
 	game database schema in SQL notation.  Needs to be fleshed
 	out more.
@@ -185,7 +223,7 @@
 	* data/gnome-video-arcade.schemas:
 	Add show-clones key.
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 
 	* src/gva-common.h:
@@ -249,7 +287,7 @@
 	the introduction of the 'emblem-default' icon.
 
 	* src/Makefile.am:
-	* docs/references/Makefile.am:
+	* docs/reference/Makefile.am:
 	Add GIT_CFLAGS and GIT_LIBS even though they are empty at this time.
 
 2008-01-26  Matthew Barnes  <mbarnes@redhat.com>
@@ -1252,7 +1290,7 @@
 	* data/gnome-video-arcade.glade:
 	Connect to some of the tree view signals.
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	* src/gva-tree-view.h:
 	Add tree view signal handlers to Gtk-Doc output.
 
@@ -1299,7 +1337,7 @@
 
 2007-07-31  Matthew Barnes  <mbarnes@redhat.com>
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	Don't list GVA_WIDGET_* symbols in the Reference Manual.
 
 	* src/gva-ui.c:

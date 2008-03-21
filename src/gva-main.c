@@ -22,6 +22,7 @@
 
 #include "gva-audit.h"
 #include "gva-db.h"
+#include "gva-error.h"
 #include "gva-mame.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
@@ -75,6 +76,8 @@ main_menu_item_deselect_cb (GtkItem *item)
 void
 gva_main_init (void)
 {
+        gchar *text;
+
         gva_tree_view_init ();
 
         gtk_box_pack_start (
@@ -105,6 +108,11 @@ gva_main_init (void)
         gconf_bridge_bind_window (
                 gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, FALSE);
+
+        /* Initialize the search entry. */
+        text = gva_main_get_last_search ();
+        gtk_entry_set_text (GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY), text);
+        g_free (text);
 
 #ifndef WITH_GNOME
         /* Requires that we link against libgnome. */
@@ -458,6 +466,186 @@ gva_main_statusbar_remove (guint context_id,
         statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
 
         gtk_statusbar_remove (statusbar, context_id, message_id);
+}
+
+/**
+ * gva_main_get_last_search:
+ *
+ * Returns the criteria of the most recent search in either the current
+ * or previous session of <emphasis>GNOME Video Arcade</emphasis>.
+ *
+ * Returns: the criteria of the most recent search
+ **/
+gchar *
+gva_main_get_last_search (void)
+{
+        GConfClient *client;
+        gchar *text;
+        GError *error = NULL;
+
+        client = gconf_client_get_default ();
+        text = gconf_client_get_string (client, GVA_GCONF_SEARCH_KEY, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+
+        return (text != NULL) ? g_strstrip (text) : g_strdup ("");
+}
+
+/**
+ * gva_main_set_last_search:
+ * @text: the search text
+ *
+ * Writes @text to GConf key
+ * <filename>/apps/gnome-video-arcade/search</filename>.
+ *
+ * This is used to remember the search text from the previous session of
+ * <emphasis>GNOME Video Arcade</emphasis> so that the same text can be
+ * preset in the search entry at startup.
+ **/
+void
+gva_main_set_last_search (const gchar *text)
+{
+        GConfClient *client;
+        GError *error = NULL;
+
+        g_return_if_fail (text != NULL);
+
+        client = gconf_client_get_default ();
+        gconf_client_set_string (client, GVA_GCONF_SEARCH_KEY, text, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+}
+
+/**
+ * gva_main_search_entry_activate_cb:
+ * @entry: the search entry
+ *
+ * Handler for #GtkEntry::activate signals to the search entry.
+ *
+ * Saves the contents of the search entry and switches the main window to
+ * the "Search Results" view.
+ **/
+void
+gva_main_search_entry_activate_cb (GtkEntry *entry)
+{
+        gchar *text;
+
+        text = g_strdup (gtk_entry_get_text (entry));
+        gtk_entry_set_text (entry, g_strstrip (text));
+        gva_main_set_last_search (text);
+        g_free (text);
+
+        /* Force a tree view update. */
+        if (gva_tree_view_get_selected_view () != 2)
+                gva_tree_view_set_selected_view (2);
+        else
+        {
+                GError *error = NULL;
+
+                gva_tree_view_update (&error);
+                gva_error_handle (&error);
+        }
+}
+
+/**
+ * gva_main_search_entry_notify_cb:
+ * @entry: the search entry
+ * @pspec: a #GParamSpec
+ *
+ * Handler for #GObject::notify signals to the search entry.
+ *
+ * Hides the search interface when the search entry loses input focus.
+ **/
+void
+gva_main_search_entry_notify_cb (GtkEntry *entry,
+                                 GParamSpec *pspec)
+{
+        if (g_str_equal (pspec->name, "has-focus"))
+                if (!GTK_WIDGET_HAS_FOCUS (GTK_ENTRY (entry)))
+                        gtk_widget_hide (GVA_WIDGET_MAIN_SEARCH_HBOX);
+}
+
+/**
+ * gva_main_search_query_tooltip_cb:
+ * @widget: the object which received the signal
+ * @x: the x coordinate of the cursor position where the request has been
+ *     emitted, relative to @widget->window
+ * @y: the y coordinate of the cursor position where the request has been
+ *     emitted, relative to @widget->window
+ * @keyboard_mode: @TRUE if the tooltip was triggerd using the keyboard
+ * @tooltip: a #GtkTooltip
+ *
+ * Handler for #GtkWidget::query-tooltip signals to the search interface.
+ *
+ * Displays some tips for searching.
+ *
+ * Returns: always %TRUE (show the tooltip)
+ **/
+gboolean
+gva_main_search_query_tooltip_cb (GtkWidget *widget,
+                                  gint x,
+                                  gint y,
+                                  gboolean keyboard_mode,
+                                  GtkTooltip *tooltip)
+{
+        GtkWidget *custom;
+        gchar *text;
+
+        custom = gtk_table_new (4, 2, FALSE);
+        gtk_table_set_col_spacings (GTK_TABLE (custom), 12);
+        gtk_table_set_row_spacing (GTK_TABLE (custom), 0, 6);
+        gtk_tooltip_set_custom (tooltip, custom);
+
+        widget = gtk_label_new (_("Search for any of the following:"));
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 0, 2, 0, 1);
+        gtk_widget_show (widget);
+
+        /* The labels begin with a UTF-8 encoded bullet character. */
+
+        text = g_strdup_printf ("• %s", _("Game Title"));
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 0, 1, 1, 2);
+        gtk_widget_show (widget);
+        g_free (text);
+
+        text = g_strdup_printf ("• %s", _("Manufacturer"));
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 0, 1, 2, 3);
+        gtk_widget_show (widget);
+        g_free (text);
+
+        text = g_strdup_printf ("• %s", _("Copyright Year"));
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 0, 1, 3, 4);
+        gtk_widget_show (widget);
+        g_free (text);
+
+        text = g_strdup_printf ("• %s", _("Category"));
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 1, 2, 1, 2);
+        gtk_widget_show (widget);
+        g_free (text);
+
+        text = g_strdup_printf ("• %s", _("ROM Name"));
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 1, 2, 2, 3);
+        gtk_widget_show (widget);
+        g_free (text);
+
+        text = g_strdup_printf ("• %s", _("Driver Name"));
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 1, 2, 3, 4);
+        gtk_widget_show (widget);
+        g_free (text);
+
+        return TRUE;
 }
 
 /**

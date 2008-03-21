@@ -855,6 +855,16 @@ gva_mame_delete_save_state (const gchar *name)
         g_free (filename);
 }
 
+/**
+ * gva_mame_get_input_directory:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the value of the "input_directory" configuration key.  The
+ * function caches the result to avoid excessive MAME invocations.  If
+ * an error occurs, the function returns %NULL and sets @error.
+ *
+ * Returns: the directory containing MAME input files, or %NULL
+ **/
 const gchar *
 gva_mame_get_input_directory (GError **error)
 {
@@ -868,6 +878,16 @@ gva_mame_get_input_directory (GError **error)
         return directory;
 }
 
+/**
+ * gva_mame_get_snapshot_directory:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the value of the "snapshot_directory" configuration key.  The
+ * function caches the result to avoid excessive MAME invocations.  If an
+ * error occurs, the function returns %NULL and sets @error.
+ *
+ * Returns: the directory containing MAME snapshot files, or %NULL
+ **/
 const gchar *
 gva_mame_get_snapshot_directory (GError **error)
 {
@@ -881,6 +901,16 @@ gva_mame_get_snapshot_directory (GError **error)
         return directory;
 }
 
+/**
+ * gva_mame_get_state_directory:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the value of the "state_directory" configuration key.  The
+ * function caches the result to avoid excessive MAME invocations.  If
+ * an error occurs, the function returns %NULL and sets @error.
+ *
+ * Returns: the directory containing MAME save state files, or %NULL
+ **/
 const gchar *
 gva_mame_get_state_directory (GError **error)
 {

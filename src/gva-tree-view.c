@@ -27,7 +27,6 @@
 #include "gva-game-store.h"
 #include "gva-main.h"
 #include "gva-preferences.h"
-#include "gva-search.h"
 #include "gva-ui.h"
 
 #define SQL_SELECT_GAMES \
@@ -214,7 +213,7 @@ gva_tree_view_update (GError **error)
                 {
                         gchar *text;
 
-                        text = gva_search_get_last_search ();
+                        text = gva_main_get_last_search ();
                         if (text != NULL && *text != '\0')
                                 g_string_append_printf (
                                         expr, "(name LIKE '%s' OR "

@@ -426,7 +426,13 @@ action_save_errors_cb (GtkAction *action)
 static void
 action_search_cb (GtkAction *action)
 {
-        gtk_window_present (GTK_WINDOW (GVA_WIDGET_SEARCH_WINDOW));
+        GtkWidget *widget;
+
+        gtk_widget_show (GVA_WIDGET_MAIN_SEARCH_HBOX);
+
+        widget = GVA_WIDGET_MAIN_SEARCH_ENTRY;
+        gtk_widget_grab_focus (widget);
+        gtk_cell_editable_start_editing (GTK_CELL_EDITABLE (widget), NULL);
 }
 
 /**
@@ -694,21 +700,21 @@ static GtkRadioActionEntry view_radio_entries[] =
         { "view-available",
           NULL,
           N_("_Available Games"),
-          NULL,
+          "<Control>1",
           N_("Show all available games"),
           0 },
 
         { "view-favorites",
           NULL,
           N_("_Favorite Games"),
-          NULL,
+          "<Control>2",
           N_("Only show my favorite games"),
           1 },
 
         { "view-results",
           NULL,
           N_("Search _Results"),
-          NULL,
+          "<Control>3",
           N_("Show my search results"),
           2 }
 };
