@@ -37,6 +37,7 @@ G_BEGIN_DECLS
 void          gva_main_init                      (void);
 gboolean      gva_main_build_database            (GError **error);
 gboolean      gva_main_analyze_roms              (GError **error);
+gboolean      gva_main_init_search_completion    (GError **error);
 void          gva_main_connect_proxy_cb          (GtkUIManager *manager,
                                                   GtkAction *action,
                                                   GtkWidget *proxy);

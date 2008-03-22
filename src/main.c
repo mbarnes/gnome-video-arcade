@@ -181,6 +181,13 @@ start (void)
                         return;
         }
 
+        /* Do this after ROMs are analyzed. */
+        if (!gva_main_init_search_completion (&error))
+        {
+                gva_error_handle (&error);
+                return;
+        }        
+
         gtk_action_set_sensitive (GVA_ACTION_SEARCH, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_SHOW_CLONES, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);

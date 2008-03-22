@@ -21,11 +21,22 @@
 #include <stdarg.h>
 
 #include "gva-audit.h"
+#include "gva-columns.h"
 #include "gva-db.h"
 #include "gva-error.h"
 #include "gva-mame.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
+#include "gva-util.h"
+
+/* The string literals are column names defined in gva-columns.c. */
+#define SQL_COMPLETION_LIST \
+        "SELECT DISTINCT name, 'name' FROM available UNION " \
+        "SELECT DISTINCT category, 'category' FROM available UNION " \
+        "SELECT DISTINCT sourcefile, 'sourcefile' FROM available UNION " \
+        "SELECT DISTINCT description, 'description' FROM available UNION " \
+        "SELECT DISTINCT manufacturer, 'manufacturer' FROM available UNION " \
+        "SELECT DISTINCT year, 'year' FROM available;"
 
 static guint menu_tooltip_cid;
 
@@ -47,6 +58,49 @@ main_build_database_progress_cb (GvaProcess *process,
         }
 
         gva_main_progress_bar_set_fraction (fraction);
+}
+
+static gboolean
+main_entry_completion_match (GtkEntryCompletion *completion,
+                             const gchar *key,
+                             GtkTreeIter *iter)
+{
+        GtkTreeModel *model;
+        gchar *text;
+        gchar *s1, *s2;
+        gboolean match;
+
+        model = gtk_entry_completion_get_model (completion);
+        gtk_tree_model_get (model, iter, 0, &text, -1);
+        g_return_val_if_fail (text != NULL, FALSE);
+
+        s1 = gva_normalize_for_search (key);
+        s2 = gva_normalize_for_search (text);
+
+        match = (strstr (s2, s1) != NULL);
+
+        g_free (text);
+        g_free (s1);
+        g_free (s2);
+
+        return match;
+}
+
+static gboolean
+main_entry_completion_match_selected_cb (GtkEntryCompletion *completion,
+                                         GtkTreeModel *model,
+                                         GtkTreeIter *iter)
+{
+        GtkWidget *widget;
+        gchar *text;
+
+        widget = gtk_entry_completion_get_entry (completion);
+        gtk_tree_model_get (model, iter, 0, &text, -1);
+        gtk_entry_set_text (GTK_ENTRY (widget), text);
+        gtk_widget_activate (widget);
+        g_free (text);
+
+        return TRUE;
 }
 
 static void
@@ -253,6 +307,112 @@ exit:
                 g_object_unref (process2);
 
         return success;
+}
+
+/**
+ * gva_main_init_search_completion:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Initializes autocompletion in the search entry.  This must be done after
+ * the game database is built and ROMs are analyzed.  If an error occurs,
+ * the function returns %FALSE and sets @error.
+ *
+ * Returns: %TRUE if autocompletion was initialized successfully,
+ *          %FALSE if an error occurred
+ **/
+gboolean
+gva_main_init_search_completion (GError **error)
+{
+        GtkEntryCompletion *completion;
+        GtkCellRenderer *renderer;
+        GtkListStore *store;
+        GtkTreeView *view;
+        GtkTreeIter iter;
+        GtkEntry *entry;
+        GList *list;
+        sqlite3_stmt *stmt;
+        gint errcode;
+
+        GList *columns;
+        GSList *names;
+        GHashTable *hash_table;
+
+        if (!gva_db_prepare (SQL_COMPLETION_LIST, &stmt, error))
+                return FALSE;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        columns = gtk_tree_view_get_columns (view);
+        names = gva_columns_get_names (view, FALSE);
+        hash_table = g_hash_table_new (g_str_hash, g_str_equal);
+        g_assert (g_list_length (columns) == g_slist_length (names));
+
+        while (columns != NULL)
+        {
+                g_hash_table_insert (
+                        hash_table, names->data,
+                        gtk_tree_view_column_get_title (columns->data));
+
+                columns = g_list_delete_link (columns, columns);
+                names = g_slist_delete_link (names, names);
+        }
+
+        store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+
+        while ((errcode = sqlite3_step (stmt)) == SQLITE_ROW)
+        {
+                const gchar *name;
+                const gchar *text;
+                const gchar *type;
+
+                gtk_list_store_append (store, &iter);
+                text = (const gchar *) sqlite3_column_text (stmt, 0);
+                name = (const gchar *) sqlite3_column_text (stmt, 1);
+                type = g_hash_table_lookup (hash_table, name);
+                gtk_list_store_set (store, &iter, 0, text, 1, type, -1);
+        }
+
+        g_hash_table_destroy (hash_table);
+        sqlite3_finalize (stmt);
+
+        if (errcode != SQLITE_DONE)
+        {
+                gva_db_set_error (error, 0, NULL);
+                g_object_unref (store);
+                return FALSE;
+        }
+
+        completion = gtk_entry_completion_new ();
+        gtk_entry_completion_set_match_func (
+                completion, (GtkEntryCompletionMatchFunc)
+                main_entry_completion_match, NULL, NULL);
+        gtk_entry_completion_set_minimum_key_length (completion, 3);
+        gtk_entry_completion_set_model (completion, GTK_TREE_MODEL (store));
+        gtk_entry_completion_set_text_column (completion, 0);
+
+        g_signal_connect (
+                completion, "match-selected",
+                G_CALLBACK (main_entry_completion_match_selected_cb), NULL);
+
+        /* XXX GtkEntryCompletion does not implement get_cells().
+         *     http://bugzilla.gnome.org/show_bug.cgi?id=523787
+         *     Fixed in GTK+ 2.13.1. */
+#if GTK_CHECK_VERSION(2,13,1)
+        list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (completion));
+        g_object_set (list->data, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+        g_list_free (list);
+#endif
+
+        renderer = gtk_cell_renderer_text_new ();
+        g_object_set (renderer, "sensitive", FALSE, "xalign", 1.0, NULL);
+        gtk_cell_layout_pack_start (
+                GTK_CELL_LAYOUT (completion), renderer, FALSE);
+        gtk_cell_layout_add_attribute (
+                GTK_CELL_LAYOUT (completion), renderer, "text", 1);
+
+        entry = GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY);
+        gtk_entry_set_completion (entry, completion);
+
+        return TRUE;
 }
 
 /**

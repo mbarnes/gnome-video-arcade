@@ -28,6 +28,7 @@
 #include "gva-main.h"
 #include "gva-preferences.h"
 #include "gva-ui.h"
+#include "gva-util.h"
 
 #define SQL_SELECT_GAMES \
         "SELECT %s FROM available"
@@ -101,32 +102,23 @@ tree_view_search_equal (GtkTreeModel *model,
                         const gchar *key,
                         GtkTreeIter *iter)
 {
-        const gchar *valid_chars;
-        gchar **str_array;
         gchar *title;
+        gchar *s1, *s2;
         gboolean retval;
-
-        /* Filter out spaces and punctuation so that, e.g. typing
-         * "mspacman" will match "Ms. Pac-Man". */
-
-        valid_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                      "abcdefghijklmnopqrstuvwxyz"
-                      "0123456789";
 
         g_assert (column == GVA_GAME_STORE_COLUMN_DESCRIPTION);
         gtk_tree_model_get (model, iter, column, &title, -1);
         g_assert (title != NULL);
 
-        g_strcanon (title, valid_chars, '?');
-        str_array = g_strsplit_set (title, "?", -1);
-        g_free (title);
-        title = g_strjoinv (NULL, str_array);
-        g_strfreev (str_array);
+        s1 = gva_normalize_for_search (key);
+        s2 = gva_normalize_for_search (title);
 
         /* Return FALSE if the row matches. */
-        retval = (g_ascii_strncasecmp (key, title, strlen (key)) != 0);
+        retval = (g_ascii_strncasecmp (s1, s2, strlen (s1)) != 0);
 
         g_free (title);
+        g_free (s1);
+        g_free (s2);
 
         return retval;
 }

@@ -149,6 +149,7 @@ gva_tree_view_row_activated_cb
 gva_main_init
 gva_main_build_database
 gva_main_analyze_roms
+gva_main_init_search_completion
 gva_main_connect_proxy_cb
 gva_main_progress_bar_show
 gva_main_progress_bar_hide
@@ -335,6 +336,7 @@ gva_get_monospace_font_name
 gva_get_time_elapsed
 gva_get_user_data_dir
 gva_help_display
+gva_normalize_for_search
 </SECTION>
 
 <SECTION>

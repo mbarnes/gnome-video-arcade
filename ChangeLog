@@ -1,3 +1,19 @@
+2008-03-22  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/main.c (start):
+	Call gva_main_init_search_completion() after ROMs are analyzed.
+
+	* src/gva-main.c (gva_main_init_search_completion):
+	New function adds autocompletion to the inline search entry.
+
+	* src/gva-tree-view.c (tree_view_search_equal):
+	Move normalizing logic to gva_normalize_for_search(), and
+	normalize both the game title /and/ user input.
+
+	* src/gva-util.c (gva_normalize_for_search):
+	Normalizes a string for easier comparison with what a human is
+	likely to type in an interactive search.
+
 2008-03-21  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

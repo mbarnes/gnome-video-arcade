@@ -42,6 +42,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_main_init_search_completion ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_main_connect_proxy_cb ##### -->
 <para>
 

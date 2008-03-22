@@ -329,3 +329,37 @@ gva_help_display (GtkWindow *parent,
         g_error_free (error);
 #endif
 }
+
+/**
+ * gva_normalize_for_search:
+ * @string: a string to normalize
+ *
+ * Filters out spaces and punctuation from @string for easier comparison
+ * with what a human is likely to type in an interactive search.  e.g.
+ * Typing "mspacman" will match "Ms. Pac-Man".
+ *
+ * Returns: a newly-allocated normalized string
+ **/
+gchar *
+gva_normalize_for_search (const gchar *string)
+{
+        const gchar *valid_chars;
+        gchar **str_array;
+        gchar *temp;
+
+        /* FIXME This doesn't take UTF-8 into account. */
+
+        g_return_val_if_fail (string != NULL, NULL);
+
+        valid_chars = "abcdefghijklmnopqrstuvwxyz"
+                      "0123456789";
+
+        temp = g_ascii_strdown (string, -1);
+        g_strcanon (temp, valid_chars, '?');
+        str_array = g_strsplit_set (temp, "?", -1);
+        g_free (temp);
+        temp = g_strjoinv (NULL, str_array);
+        g_strfreev (str_array);
+
+        return temp;
+}
