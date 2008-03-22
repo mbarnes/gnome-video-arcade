@@ -115,12 +115,19 @@ CREATE TABLE chip (
 <programlisting>
 CREATE TABLE display (
         game NOT NULL,
-        type NOT NULL CHECK (type in ('raster', 'vector')),
+        type NOT NULL CHECK (type in ('raster', 'vector', 'lcd', 'unknown')),
         rotate NOT NULL CHECK (rotate in ('0', '90', '180', '270')),
         flipx DEFAULT 'no' CHECK (flipx in ('yes', 'no')),
         width,
         height,
-        refresh NOT NULL);
+        refresh NOT NULL,
+        pixclock,
+        htotal,
+        hbend,
+        hbstart,
+        vtotal,
+        vbend
+        vbstart);
 </programlisting>
 </simplesect>
 

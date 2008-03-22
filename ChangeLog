@@ -1,5 +1,13 @@
 2008-03-22  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-db.c:
+	* docs/reference/database-schema.xml:
+	Support new display attributes in MAME 0.124: 'pixclock',
+	'htotal', 'hbend', 'hbstart', 'vtotal', 'vbend' and 'vbstart'
+	Also new display types: 'lcd' and 'unknown'
+
+2008-03-22  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/main.c (start):
 	Call gva_main_init_search_completion() after ROMs are analyzed.
 

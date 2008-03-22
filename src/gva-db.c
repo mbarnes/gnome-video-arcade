@@ -146,14 +146,21 @@
         "CREATE TABLE IF NOT EXISTS display (" \
                 "game NOT NULL, " \
                 "type NOT NULL " \
-                "CHECK (type in ('raster', 'vector')), " \
+                "CHECK (type in ('raster', 'vector', 'lcd', 'unknown')), " \
                 "rotate NOT NULL " \
                 "CHECK (rotate in ('0', '90', '180', '270')), " \
                 "flipx DEFAULT 'no' " \
                 "CHECK (flipx in ('yes', 'no')), " \
                 "width, " \
                 "height, " \
-                "refresh NOT NULL);"
+                "refresh NOT NULL, " \
+                "pixclock, " \
+                "htotal, " \
+                "hbend, " \
+                "hbstart, " \
+                "vtotal, " \
+                "vbend, " \
+                "vbstart);"
 
 #define SQL_CREATE_TABLE_CONTROL \
         "CREATE TABLE IF NOT EXISTS control (" \
@@ -356,7 +363,10 @@ static struct
         const gchar *flipx;
         const gchar *game;
         const gchar *graphic;
+        const gchar *hbend;
+        const gchar *hbstart;
         const gchar *height;
+        const gchar *htotal;
         const gchar *index_;
         const gchar *input;
         const gchar *isbios;
@@ -371,6 +381,7 @@ static struct
         const gchar *offset;
         const gchar *orientation;
         const gchar *palettesize;
+        const gchar *pixclock;
         const gchar *players;
         const gchar *protection;
         const gchar *refresh;
@@ -393,6 +404,9 @@ static struct
         const gchar *status;
         const gchar *tilt;
         const gchar *type;
+        const gchar *vbend;
+        const gchar *vbstart;
+        const gchar *vtotal;
         const gchar *width;
         const gchar *year;
 
@@ -648,6 +662,20 @@ db_parser_start_element_display (ParserData *data,
                         param = "@height";
                 else if (attribute_name[ii] == intern.refresh)
                         param = "@refresh";
+                else if (attribute_name[ii] == intern.pixclock)
+                        param = "@pixclock";
+                else if (attribute_name[ii] == intern.htotal)
+                        param = "@htotal";
+                else if (attribute_name[ii] == intern.hbend)
+                        param = "@hbend";
+                else if (attribute_name[ii] == intern.hbstart)
+                        param = "@hbstart";
+                else if (attribute_name[ii] == intern.vtotal)
+                        param = "@vtotal";
+                else if (attribute_name[ii] == intern.vbend)
+                        param = "@vbend";
+                else if (attribute_name[ii] == intern.vbstart)
+                        param = "@vbstart";
                 else
                         continue;
 
@@ -1377,7 +1405,10 @@ gva_db_build (GError **error)
         intern.flipx        = g_intern_static_string ("flipx");
         intern.game         = g_intern_static_string ("game");
         intern.graphic      = g_intern_static_string ("graphic");
+        intern.hbend        = g_intern_static_string ("hbend");
+        intern.hbstart      = g_intern_static_string ("hbstart");
         intern.height       = g_intern_static_string ("height");
+        intern.htotal       = g_intern_static_string ("htotal");
         intern.index_       = g_intern_static_string ("index_");
         intern.input        = g_intern_static_string ("input");
         intern.isbios       = g_intern_static_string ("isbios");
@@ -1392,6 +1423,7 @@ gva_db_build (GError **error)
         intern.offset       = g_intern_static_string ("offset");
         intern.orientation  = g_intern_static_string ("orientation");
         intern.palettesize  = g_intern_static_string ("palettesize");
+        intern.pixclock     = g_intern_static_string ("pixclock");
         intern.players      = g_intern_static_string ("players");
         intern.protection   = g_intern_static_string ("protection");
         intern.refresh      = g_intern_static_string ("refresh");
@@ -1414,6 +1446,9 @@ gva_db_build (GError **error)
         intern.status       = g_intern_static_string ("status");
         intern.tilt         = g_intern_static_string ("tilt");
         intern.type         = g_intern_static_string ("type");
+        intern.vbend        = g_intern_static_string ("vbend");
+        intern.vbstart      = g_intern_static_string ("vbstart");
+        intern.vtotal       = g_intern_static_string ("vtotal");
         intern.width        = g_intern_static_string ("width");
         intern.year         = g_intern_static_string ("year");
 
