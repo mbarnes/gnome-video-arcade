@@ -336,7 +336,7 @@ gva_get_monospace_font_name
 gva_get_time_elapsed
 gva_get_user_data_dir
 gva_help_display
-gva_normalize_for_search
+gva_search_collate_key
 </SECTION>
 
 <SECTION>
@@ -363,6 +363,7 @@ gva_columns_new_from_id
 gva_columns_new_from_name
 gva_columns_lookup_id
 gva_columns_lookup_name
+gva_columns_lookup_title
 gva_columns_load
 gva_columns_save
 gva_columns_get_names

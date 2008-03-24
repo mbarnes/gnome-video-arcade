@@ -1304,6 +1304,39 @@ db_function_isfavorite (sqlite3_context *context,
 }
 
 static void
+db_function_match (sqlite3_context *context,
+                   gint n_values,
+                   sqlite3_value **values)
+{
+        const gchar *text1;
+        const gchar *text2;
+        gboolean match = FALSE;
+
+        g_assert (n_values == 2);
+
+        /* XXX Note the operands are not in the order one might think.
+         *     Still trying to find some documentation to confirm this. */
+
+        text1 = (const gchar *) sqlite3_value_text (values[1]);
+        text2 = (const gchar *) sqlite3_value_text (values[0]);
+
+        if (text1 != NULL && text2 != NULL)
+        {
+                gchar *s1, *s2;
+
+                s1 = gva_search_collate_key (text1);
+                s2 = gva_search_collate_key (text2);
+
+                match = (strstr (s1, s2) != NULL);
+
+                g_free (s1);
+                g_free (s2);
+        }
+
+        sqlite3_result_int (context, match);
+}
+
+static void
 db_trace_cb (gpointer unused, const gchar *message)
 {
         g_debug ("%s", message);
@@ -1345,6 +1378,12 @@ gva_db_init (GError **error)
         errcode = sqlite3_create_function (
                 db, "getcategory", 1, SQLITE_ANY, NULL,
                 db_function_getcategory, NULL, NULL);
+        if (errcode != SQLITE_OK)
+                goto fail;
+
+        errcode = sqlite3_create_function (
+                db, "match", 2, SQLITE_ANY, NULL,
+                db_function_match, NULL, NULL);
         if (errcode != SQLITE_OK)
                 goto fail;
 

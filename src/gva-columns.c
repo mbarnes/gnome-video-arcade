@@ -236,7 +236,6 @@ columns_factory_category (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Category"));
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
@@ -260,7 +259,6 @@ columns_factory_comment (GvaGameStoreColumn column_id)
         gtk_tree_view_column_set_expand (column, TRUE);
         gtk_tree_view_column_set_reorderable (column, FALSE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Comment"));
 
         renderer = gtk_cell_renderer_text_new ();
         g_object_set (renderer, "editable", TRUE, NULL);
@@ -287,7 +285,6 @@ columns_factory_description (GvaGameStoreColumn column_id)
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
         gtk_tree_view_column_set_spacing (column, 3);
-        gtk_tree_view_column_set_title (column, _("Title"));
 
         renderer = gtk_cell_renderer_text_new ();
         g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
@@ -308,7 +305,6 @@ columns_factory_driver_status (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Status"));
 
         renderer = gtk_cell_renderer_pixbuf_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
@@ -333,7 +329,6 @@ columns_factory_favorite (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Favorite"));
 
         renderer = gva_cell_renderer_pixbuf_new ();
         g_object_set (renderer, "pixbuf", pixbuf, NULL);
@@ -362,7 +357,6 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Players"));
 
         for (ii = 0; ii < MAX_PLAYER_ICONS; ii++)
         {
@@ -390,7 +384,6 @@ columns_factory_manufacturer (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Manufacturer"));
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
@@ -410,7 +403,6 @@ columns_factory_name (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("ROM Name"));
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
@@ -434,7 +426,6 @@ columns_factory_sampleset (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Samples"));
 
         renderer = gtk_cell_renderer_pixbuf_new ();
         g_object_set (renderer, "pixbuf", pixbuf, NULL);
@@ -456,7 +447,6 @@ columns_factory_sourcefile (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Driver"));
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
@@ -476,7 +466,6 @@ columns_factory_time (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, FALSE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Played On"));
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
@@ -497,7 +486,6 @@ columns_factory_year (GvaGameStoreColumn column_id)
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
         gtk_tree_view_column_set_sort_column_id (column, column_id);
-        gtk_tree_view_column_set_title (column, _("Year"));
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
@@ -574,36 +562,47 @@ columns_tooltip_summary (GtkTreeModel *model,
 static struct
 {
         const gchar *name;
+        const gchar *title;
         FactoryFunc factory;
         TooltipFunc tooltip;
 }
 column_info[GVA_GAME_STORE_NUM_COLUMNS] =
 {
-        { "name",               columns_factory_name },
-        { "category",           columns_factory_category },
-        { "favorite",           columns_factory_favorite,
+        { "name",               N_("ROM Name"),
+                                columns_factory_name },
+        { "category",           N_("Category"),
+                                columns_factory_category },
+        { "favorite",           N_("Favorite"),
+                                columns_factory_favorite,
                                 columns_tooltip_favorite },
-        { "sourcefile",         columns_factory_sourcefile },
+        { "sourcefile",         N_("Driver"),
+                                columns_factory_sourcefile },
         { "isbios",             NULL },
         { "runnable",           NULL },
         { "cloneof",            NULL },
         { "romof",              NULL },
         { "romset",             NULL },
         { "sampleof",           NULL },
-        { "sampleset",          columns_factory_sampleset },
-        { "description",        columns_factory_description,
+        { "sampleset",          N_("Samples"),
+                                columns_factory_sampleset },
+        { "description",        N_("Title"),
+                                columns_factory_description,
                                 columns_tooltip_summary },
-        { "year",               columns_factory_year,
+        { "year",               N_("Year"),
+                                columns_factory_year,
                                 columns_tooltip_summary },
-        { "manufacturer",       columns_factory_manufacturer,
+        { "manufacturer",       N_("Manufacturer"),
+                                columns_factory_manufacturer,
                                 columns_tooltip_summary },
         { "sound_channels",     NULL },
         { "input_service",      NULL },
         { "input_tilt",         NULL },
-        { "input_players",      columns_factory_input_players },
+        { "input_players",      N_("Players"),
+                                columns_factory_input_players },
         { "input_buttons",      NULL },
         { "input_coins",        NULL },
-        { "driver_status",      columns_factory_driver_status },
+        { "driver_status",      N_("Status"),
+                                columns_factory_driver_status },
         { "driver_emulation",   NULL },
         { "driver_color",       NULL },
         { "driver_sound",       NULL },
@@ -612,10 +611,12 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "driver_protection",  NULL },
         { "driver_savestate",   NULL },
         { "driver_palettesize", NULL },
-        { "comment",            columns_factory_comment },
+        { "comment",            N_("Comment"),
+                                columns_factory_comment },
         { "inode",              NULL },
         { "inpfile",            NULL },
-        { "time",               columns_factory_time }
+        { "time",               N_("Played On"),
+                                columns_factory_time }
 };
 
 static gchar *default_column_order[] =
@@ -647,12 +648,16 @@ GtkTreeViewColumn *
 gva_columns_new_from_id (GvaGameStoreColumn column_id)
 {
         GtkTreeViewColumn *column;
+        const gchar *title;
 
         g_return_val_if_fail (column_id >= 0, NULL);
         g_return_val_if_fail (column_id < G_N_ELEMENTS (column_info), NULL);
         g_return_val_if_fail (column_info[column_id].factory != NULL, NULL);
 
         column = column_info[column_id].factory (column_id);
+
+        title = gettext (column_info[column_id].title);
+        gtk_tree_view_column_set_title (column, title);
 
         if (column != NULL)
                 g_object_set_data (
@@ -728,6 +733,23 @@ gva_columns_lookup_name (GvaGameStoreColumn column_id)
                 return NULL;
 
         return column_info[column_id].name;
+}
+
+/**
+ * gva_columns_lookup_title:
+ * @column_id: the ID of the column to lookup
+ *
+ * Looks up the column title corresponding to @column_id.
+ *
+ * Returns: the column title, or @NULL if not found
+ **/
+const gchar *
+gva_columns_lookup_title (GvaGameStoreColumn column_id)
+{
+        if (CLAMP (column_id, 0, G_N_ELEMENTS (column_info)) != column_id)
+                return NULL;
+
+        return column_info[column_id].title;
 }
 
 /* Helper for gva_columns_load() */

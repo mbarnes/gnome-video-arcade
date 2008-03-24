@@ -61,7 +61,7 @@ void            gva_get_time_elapsed            (GTimeVal *start_time,
 const gchar *   gva_get_user_data_dir           (void);
 void            gva_help_display                (GtkWindow *parent,
                                                  const gchar *link_id);
-gchar *         gva_normalize_for_search        (const gchar *string);
+gchar *         gva_search_collate_key          (const gchar *string);
 
 G_END_DECLS
 

@@ -19,6 +19,7 @@
 #include "gva-main.h"
 
 #include <stdarg.h>
+#include <string.h>
 
 #include "gva-audit.h"
 #include "gva-columns.h"
@@ -37,6 +38,13 @@
         "SELECT DISTINCT description, 'description' FROM available UNION " \
         "SELECT DISTINCT manufacturer, 'manufacturer' FROM available UNION " \
         "SELECT DISTINCT year, 'year' FROM available;"
+
+/* Entry completion columns */
+enum {
+        COLUMN_TEXT,
+        COLUMN_TYPE,
+        COLUMN_CKEY
+};
 
 static guint menu_tooltip_cid;
 
@@ -66,20 +74,16 @@ main_entry_completion_match (GtkEntryCompletion *completion,
                              GtkTreeIter *iter)
 {
         GtkTreeModel *model;
-        gchar *text;
         gchar *s1, *s2;
         gboolean match;
 
         model = gtk_entry_completion_get_model (completion);
-        gtk_tree_model_get (model, iter, 0, &text, -1);
-        g_return_val_if_fail (text != NULL, FALSE);
+        gtk_tree_model_get (model, iter, COLUMN_CKEY, &s1, -1);
+        g_return_val_if_fail (s1 != NULL, FALSE);
 
-        s1 = gva_normalize_for_search (key);
-        s2 = gva_normalize_for_search (text);
+        s2 = gva_search_collate_key (key);
+        match = (strstr (s1, s2) != NULL);
 
-        match = (strstr (s2, s1) != NULL);
-
-        g_free (text);
         g_free (s1);
         g_free (s2);
 
@@ -313,9 +317,10 @@ exit:
  * gva_main_init_search_completion:
  * @error: return location for a #GError, or %NULL
  *
- * Initializes autocompletion in the search entry.  This must be done after
- * the game database is built and ROMs are analyzed.  If an error occurs,
- * the function returns %FALSE and sets @error.
+ * Initializes autocompletion in the search entry.  This must be done
+ * <emphasis>after</emphasis> the game database is built and ROMs are
+ * analyzed.  If an error occurs, the function returns %FALSE and sets
+ * @error.
  *
  * Returns: %TRUE if autocompletion was initialized successfully,
  *          %FALSE if an error occurred
@@ -326,52 +331,43 @@ gva_main_init_search_completion (GError **error)
         GtkEntryCompletion *completion;
         GtkCellRenderer *renderer;
         GtkListStore *store;
-        GtkTreeView *view;
         GtkTreeIter iter;
         GtkEntry *entry;
-        GList *list;
         sqlite3_stmt *stmt;
         gint errcode;
-
-        GList *columns;
-        GSList *names;
-        GHashTable *hash_table;
 
         if (!gva_db_prepare (SQL_COMPLETION_LIST, &stmt, error))
                 return FALSE;
 
-        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
-        columns = gtk_tree_view_get_columns (view);
-        names = gva_columns_get_names (view, FALSE);
-        hash_table = g_hash_table_new (g_str_hash, g_str_equal);
-        g_assert (g_list_length (columns) == g_slist_length (names));
-
-        while (columns != NULL)
-        {
-                g_hash_table_insert (
-                        hash_table, names->data,
-                        gtk_tree_view_column_get_title (columns->data));
-
-                columns = g_list_delete_link (columns, columns);
-                names = g_slist_delete_link (names, names);
-        }
-
-        store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+        store = gtk_list_store_new (
+                3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
         while ((errcode = sqlite3_step (stmt)) == SQLITE_ROW)
         {
-                const gchar *name;
-                const gchar *text;
-                const gchar *type;
+                GvaGameStoreColumn column_id;
+                const gchar *column_name;
+                const gchar *column_title;
+                const gchar *matched_text;
+                gchar *collation_key;
+
+                matched_text = (const gchar *) sqlite3_column_text (stmt, 0);
+                column_name = (const gchar *) sqlite3_column_text (stmt, 1);
+                gva_columns_lookup_id (column_name, &column_id);
+                column_title = gva_columns_lookup_title (column_id);
+
+                if (matched_text == NULL || *matched_text == '\0')
+                        continue;
 
                 gtk_list_store_append (store, &iter);
-                text = (const gchar *) sqlite3_column_text (stmt, 0);
-                name = (const gchar *) sqlite3_column_text (stmt, 1);
-                type = g_hash_table_lookup (hash_table, name);
-                gtk_list_store_set (store, &iter, 0, text, 1, type, -1);
+                collation_key = gva_search_collate_key (matched_text);
+                gtk_list_store_set (
+                        store, &iter,
+                        COLUMN_TEXT, matched_text,
+                        COLUMN_TYPE, column_title,
+                        COLUMN_CKEY, collation_key, -1);
+                g_free (collation_key);
         }
 
-        g_hash_table_destroy (hash_table);
         sqlite3_finalize (stmt);
 
         if (errcode != SQLITE_DONE)

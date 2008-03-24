@@ -1,3 +1,40 @@
+2008-03-23  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-db.c (db_function_match):
+	New function implements the SQLite MATCH operator.
+	Calls gva_search_collate_key() on the operands and does a
+	substring comparison.
+
+	* src/gva-columns.c:
+	Add a 'title' field to the column_info table so translated
+	column titles can be looked up easily.
+
+	* src/gva-columns.c (gva_columns_new_from_id):
+	Assign column titles here instead of in the factory functions.
+
+	* src/gva-columns.c (gva_columns_lookup_title):
+	New function... self-explanatory.
+
+	* src/gva-main.c (gva_main_init_search_completion):
+	Add a collation key field to the completion model for better
+	performance.  Use gva_columns_lookup_title() and get rid of
+	the silly column title hash table.
+
+	* src/gva-tree-view.c (tree_view_update):
+	Use MATCH instead of LIKE for fuzzy comparisons.
+
+	* src/gva-ui.c (action_search_cb):
+	Emit a "changed" signal on the search entry to start the
+	completion timeout.  The purpose is to show completions
+	automatically when we show the search entry with preset
+	text.
+
+	* src/gva-util.c (gva_normalize_for_search):
+	Rename the function to 'gva_search_collate_key'.
+
 2008-03-22  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-db.c:

@@ -110,11 +110,11 @@ tree_view_search_equal (GtkTreeModel *model,
         gtk_tree_model_get (model, iter, column, &title, -1);
         g_assert (title != NULL);
 
-        s1 = gva_normalize_for_search (key);
-        s2 = gva_normalize_for_search (title);
+        s1 = gva_search_collate_key (key);
+        s2 = gva_search_collate_key (title);
 
         /* Return FALSE if the row matches. */
-        retval = (g_ascii_strncasecmp (s1, s2, strlen (s1)) != 0);
+        retval = (strncmp (s1, s2, strlen (s1)) != 0);
 
         g_free (title);
         g_free (s1);
@@ -209,10 +209,10 @@ gva_tree_view_update (GError **error)
                         if (text != NULL && *text != '\0')
                                 g_string_append_printf (
                                         expr, "(name LIKE '%s' OR "
-                                        "category LIKE '%%%s%%' OR "
+                                        "category MATCH '%s' OR "
                                         "sourcefile LIKE '%s' OR "
-                                        "description LIKE '%%%s%%' OR "
-                                        "manufacturer LIKE '%%%s%%' OR "
+                                        "description MATCH '%s' OR "
+                                        "manufacturer MATCH '%s' OR "
                                         "year LIKE '%s')",
                                         text, text, text, text, text, text);
                         else

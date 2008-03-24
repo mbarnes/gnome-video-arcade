@@ -54,6 +54,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_columns_lookup_title ##### -->
+<para>
+
+</para>
+
+@column_id: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_columns_load ##### -->
 <para>
 

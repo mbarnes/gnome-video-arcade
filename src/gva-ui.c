@@ -432,6 +432,7 @@ action_search_cb (GtkAction *action)
 
         widget = GVA_WIDGET_MAIN_SEARCH_ENTRY;
         gtk_widget_grab_focus (widget);
+        g_signal_emit_by_name (widget, "changed");
         gtk_cell_editable_start_editing (GTK_CELL_EDITABLE (widget), NULL);
 }
 

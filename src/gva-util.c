@@ -331,17 +331,20 @@ gva_help_display (GtkWindow *parent,
 }
 
 /**
- * gva_normalize_for_search:
- * @string: a string to normalize
+ * gva_search_collate_key:
+ * @string: a string
  *
- * Filters out spaces and punctuation from @string for easier comparison
- * with what a human is likely to type in an interactive search.  e.g.
- * Typing "mspacman" will match "Ms. Pac-Man".
+ * Converts a string into a collation key that can be compared with other
+ * collation keys produced by the same function using strcmp().
  *
- * Returns: a newly-allocated normalized string
+ * Specifically, the function filters out spaces and punctuation from @string
+ * for easier comparison with what a human is likely to type in an interactive
+ * search.  e.g. Typing "mspacman" will match "Ms. Pac-Man".
+ *
+ * Returns: a newly-allocated collation key
  **/
 gchar *
-gva_normalize_for_search (const gchar *string)
+gva_search_collate_key (const gchar *string)
 {
         const gchar *valid_chars;
         gchar **str_array;
