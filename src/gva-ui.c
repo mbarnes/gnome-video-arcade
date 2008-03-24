@@ -525,7 +525,8 @@ action_start_cb (GtkAction *action)
  * Main menu item: View -> Search Results
  **/
 static void
-action_view_changed_cb (GtkRadioAction *action, GtkRadioAction *current)
+action_view_changed_cb (GtkRadioAction *action,
+                        GtkRadioAction *current)
 {
         GError *error = NULL;
 
