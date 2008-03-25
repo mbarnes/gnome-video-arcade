@@ -1,5 +1,11 @@
 2008-03-25  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-tree-view.c (gva_tree_view_query_tooltip_cb):
+	Handle keyboard tooltips.  And just for my own reference,
+	keyboard tooltips are activiated/deactivated with Ctrl+F1.
+
+2008-03-25  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-db.c:
 	Store category information directly in the database instead of
 	dynamically looking it up in a GKeyFile each time it's needed.

@@ -668,20 +668,21 @@ gva_tree_view_query_tooltip_cb (GtkTreeView *view,
 {
         GtkTreeViewColumn *column;
         GtkTreePath *path;
-        gboolean valid;
+        GtkTreeIter iter;
         gint bx, by;
 
-        /* XXX Don't know how to handle keyboard tooltips yet. */
+        if (!gtk_tree_view_get_tooltip_context (
+                view, &x, &y, keyboard_mode, NULL, &path, &iter))
+                return FALSE;
+
+        /* Figure out which column we're pointing at. */
         if (keyboard_mode)
-                return FALSE;
+                gtk_tree_view_get_cursor (view, NULL, &column);
+        else
+                gtk_tree_view_get_path_at_pos (
+                        view, x, y, NULL, &column, NULL, NULL);
 
-        gtk_tree_view_convert_widget_to_bin_window_coords (
-                view, x, y, &bx, &by);
-        valid = gtk_tree_view_get_path_at_pos (
-                view, bx, by, &path, &column, NULL, NULL);
-        if (!valid)
-                return FALSE;
-
+        /* Restrict the tip area to a single cell. */
         gtk_tree_view_set_tooltip_cell (view, tooltip, path, column, NULL);
 
         return gva_columns_query_tooltip (column, path, tooltip);
