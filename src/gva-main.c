@@ -684,7 +684,14 @@ gva_main_set_last_search (const gchar *text)
 void
 gva_main_search_entry_activate_cb (GtkEntry *entry)
 {
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreeView *view;
+        GtkTreeIter iter;
         gchar *text;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        selection = gtk_tree_view_get_selection (view);
 
         text = g_strdup (gtk_entry_get_text (entry));
         gtk_entry_set_text (entry, g_strstrip (text));
@@ -701,6 +708,24 @@ gva_main_search_entry_activate_cb (GtkEntry *entry)
                 gva_tree_view_update (&error);
                 gva_error_handle (&error);
         }
+
+        /* Select something in the tree view.  Parts of this are
+         * copied from gva_tree_view_set_selected_game(). */
+        if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+        {
+                if (gtk_tree_model_get_iter_first (model, &iter))
+                {
+                        GtkTreePath *path;
+
+                        path = gtk_tree_model_get_path (model, &iter);
+                        gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+                        gtk_tree_view_scroll_to_cell (
+                                view, path, NULL, TRUE, 0.5, 0.0);
+                        gtk_tree_path_free (path);
+                }
+        }
+
+        gtk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 /**

@@ -1,3 +1,8 @@
+2008-03-24  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-main.c (gva_main_search_entry_activate_cb):
+	After searching, focus the tree view and select a row.
+
 2008-03-23  Matthew Barnes  <mbarnes@redhat.com>
 
 	* docs/reference/gnome-video-arcade-sections.txt:
