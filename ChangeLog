@@ -1,3 +1,13 @@
+2008-03-25  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-db.c:
+	Store category information directly in the database instead of
+	dynamically looking it up in a GKeyFile each time it's needed.
+	Profiling suggests user-defined database functions are expensive,
+	and may be contributing to the performance issue when switching
+	to a view with a large number of games.  Category information
+	will be refreshed when the database is rebuilt.
+
 2008-03-24  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-main.c (gva_main_search_entry_activate_cb):

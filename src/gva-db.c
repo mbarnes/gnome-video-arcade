@@ -41,6 +41,7 @@
 #define SQL_CREATE_TABLE_GAME \
         "CREATE TABLE IF NOT EXISTS game (" \
                 "name PRIMARY KEY, " \
+                "category, " \
                 "sourcefile, " \
                 "isbios DEFAULT 'no' " \
                 "CHECK (isbios in ('yes', 'no')), " \
@@ -190,8 +191,7 @@
 
 #define SQL_CREATE_VIEW_AVAILABLE \
         "CREATE VIEW IF NOT EXISTS available AS " \
-                "SELECT *, getcategory(name) AS category, " \
-                "isfavorite(name) AS favorite FROM game " \
+                "SELECT *, isfavorite(name) AS favorite FROM game " \
                 "WHERE (romset IN ('good', 'best available') " \
                 "AND isbios = 'no');"
 
@@ -211,6 +211,7 @@
 #define SQL_INSERT_GAME \
         "INSERT INTO game VALUES (" \
                 "@name, " \
+                "@category, " \
                 "@sourcefile, " \
                 "@isbios, " \
                 "@runnable, " \
@@ -291,7 +292,14 @@
                 "@flipx, " \
                 "@width, " \
                 "@height, " \
-                "@refresh);"
+                "@refresh, " \
+                "@pixclock, " \
+                "@htotal, " \
+                "@hbend, " \
+                "@hbstart, " \
+                "@vtotal, " \
+                "@vbend, " \
+                "@vbstart);"
 
 #define SQL_INSERT_CONTROL \
         "INSERT INTO control VALUES (" \
@@ -728,7 +736,10 @@ db_parser_start_element_game (ParserData *data,
                               GError **error)
 {
         sqlite3_stmt *stmt = data->insert_game_stmt;
+        gchar *category;
+        gint error_code;
         gint ii;
+        GError *local_error = NULL;
 
         /* Bind default values. */
         db_parser_bind_text (stmt, "@isbios", "no");
@@ -760,6 +771,22 @@ db_parser_start_element_game (ParserData *data,
 
                 db_parser_bind_text (stmt, param, attribute_value[ii]);
         }
+
+#ifdef CATEGORY_FILE
+        /* Lookup category from the catver.ini file. */
+        g_return_if_fail (data->game != NULL);
+        category = gva_categories_lookup (data->game, &local_error);
+
+        /* Slience "key not found" errors. */
+        error_code = G_KEY_FILE_ERROR_KEY_NOT_FOUND;
+        if (g_error_matches (local_error, G_KEY_FILE_ERROR, error_code))
+                g_clear_error (&local_error);
+
+        if (category != NULL)
+                db_parser_bind_text (stmt, "@category", category);
+        else if (local_error != NULL)
+                g_propagate_error (error, local_error);
+#endif
 }
 
 static void
@@ -1254,40 +1281,6 @@ db_create_tables (GError **error)
 }
 
 static void
-db_function_getcategory (sqlite3_context *context,
-                         gint n_values,
-                         sqlite3_value **values)
-{
-#ifdef CATEGORY_FILE
-        const gchar *name;
-        gchar *category;
-        gint error_code;
-        GError *error = NULL;
-
-        g_assert (n_values == 1);
-
-        name = (const gchar *) sqlite3_value_text (values[0]);
-        category = gva_categories_lookup (name, &error);
-
-        /* Silence "key not found" errors. */
-        error_code = G_KEY_FILE_ERROR_KEY_NOT_FOUND;
-        if (g_error_matches (error, G_KEY_FILE_ERROR, error_code))
-                g_clear_error (&error);
-
-        gva_error_handle (&error);
-
-        if (category != NULL)
-                sqlite3_result_text (context, category, -1, SQLITE_TRANSIENT);
-        else
-                sqlite3_result_null (context);
-
-        g_free (category);
-#else
-        sqlite3_result_null (context);
-#endif
-}
-
-static void
 db_function_isfavorite (sqlite3_context *context,
                         gint n_values,
                         sqlite3_value **values)
@@ -1372,12 +1365,6 @@ gva_db_init (GError **error)
         errcode = sqlite3_create_function (
                 db, "isfavorite", 1, SQLITE_ANY, NULL,
                 db_function_isfavorite, NULL, NULL);
-        if (errcode != SQLITE_OK)
-                goto fail;
-
-        errcode = sqlite3_create_function (
-                db, "getcategory", 1, SQLITE_ANY, NULL,
-                db_function_getcategory, NULL, NULL);
         if (errcode != SQLITE_OK)
                 goto fail;
 
