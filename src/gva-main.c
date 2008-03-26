@@ -33,6 +33,7 @@
 /* The string literals are column names defined in gva-columns.c. */
 #define SQL_COMPLETION_LIST \
         "SELECT DISTINCT name, 'name' FROM available UNION " \
+	"SELECT DISTINCT bios, 'bios' FROM available UNION " \
         "SELECT DISTINCT category, 'category' FROM available UNION " \
         "SELECT DISTINCT sourcefile, 'sourcefile' FROM available UNION " \
         "SELECT DISTINCT description, 'description' FROM available UNION " \
@@ -772,7 +773,7 @@ gva_main_search_query_tooltip_cb (GtkWidget *widget,
         GtkWidget *custom;
         gchar *text;
 
-        custom = gtk_table_new (4, 2, FALSE);
+        custom = gtk_table_new (5, 2, FALSE);
         gtk_table_set_col_spacings (GTK_TABLE (custom), 12);
         gtk_table_set_row_spacing (GTK_TABLE (custom), 0, 6);
         gtk_tooltip_set_custom (tooltip, custom);
@@ -808,11 +809,18 @@ gva_main_search_query_tooltip_cb (GtkWidget *widget,
         text = g_strdup_printf ("• %s", _("Category"));
         widget = gtk_label_new (text);
         gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 1, 2, 1, 2);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 0, 1, 4, 5);
         gtk_widget_show (widget);
         g_free (text);
 
         text = g_strdup_printf ("• %s", _("ROM Name"));
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach_defaults (GTK_TABLE (custom), widget, 1, 2, 1, 2);
+        gtk_widget_show (widget);
+        g_free (text);
+
+        text = g_strdup_printf ("• %s", _("BIOS Name"));
         widget = gtk_label_new (text);
         gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
         gtk_table_attach_defaults (GTK_TABLE (custom), widget, 1, 2, 2, 3);

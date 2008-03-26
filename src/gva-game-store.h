@@ -57,6 +57,8 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
  * GvaGameStoreColumn:
  * @GVA_GAME_STORE_COLUMN_NAME:
  *      Corresponds to the "available.name" database field.
+ * @GVA_GAME_STORE_COLUMN_BIOS:
+ *      Corresponds to the "available.bios" database field.
  * @GVA_GAME_STORE_COLUMN_CATEGORY:
  *      Corresponds to the "available.category" database field.
  * @GVA_GAME_STORE_COLUMN_FAVORITE:
@@ -129,6 +131,7 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
 typedef enum
 {
         GVA_GAME_STORE_COLUMN_NAME,               /* G_TYPE_STRING */
+        GVA_GAME_STORE_COLUMN_BIOS,               /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_CATEGORY,           /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_FAVORITE,           /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_SOURCEFILE,         /* G_TYPE_STRING */

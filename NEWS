@@ -8,8 +8,11 @@ GNOME Video Arcade 0.6.0
         * GNOME Video Arcade now requires GTK+ 2.12 or higher.
         * Inline search interface with autocompletion.
         * Fancy tooltips for some of the tree view columns.
-        * Do not show BIOS ROM sets in the game list (requires MAME v0.118
-          or later to work).
+	* Better support for BIOS ROM sets:
+		* Do not list BIOS ROM sets as games.
+		* Show BIOS names in a new BIOS column.
+		* Support searching for BIOS names.
+		* Requires MAME v0.118 or later to work.
 
 GNOME Video Arcade 0.5.6
 ========================

@@ -209,12 +209,14 @@ gva_tree_view_update (GError **error)
                         if (text != NULL && *text != '\0')
                                 g_string_append_printf (
                                         expr, "(name LIKE '%s' OR "
+					"bios MATCH '%s' OR "
                                         "category MATCH '%s' OR "
                                         "sourcefile LIKE '%s' OR "
                                         "description MATCH '%s' OR "
                                         "manufacturer MATCH '%s' OR "
                                         "year LIKE '%s')",
-                                        text, text, text, text, text, text);
+                                        text, text, text, text,
+                                        text, text, text);
                         else
                                 g_string_append (expr, "name ISNULL");
                         g_free (text);
@@ -669,7 +671,6 @@ gva_tree_view_query_tooltip_cb (GtkTreeView *view,
         GtkTreeViewColumn *column;
         GtkTreePath *path;
         GtkTreeIter iter;
-        gint bx, by;
 
         if (!gtk_tree_view_get_tooltip_context (
                 view, &x, &y, keyboard_mode, NULL, &path, &iter))

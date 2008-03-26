@@ -126,6 +126,31 @@ columns_comment_edited_cb (GtkCellRendererText *renderer,
 }
 
 static void
+columns_bios_set_properties (GtkTreeViewColumn *column,
+                             GtkCellRenderer *renderer,
+                             GtkTreeModel *model,
+                             GtkTreeIter *iter)
+{
+        GvaGameStoreColumn column_id;
+        gchar *bios, *cp;
+        gsize length;
+
+        column_id = gtk_tree_view_column_get_sort_column_id (column);
+        gtk_tree_model_get (model, iter, column_id, &bios, -1);
+
+        /* A lot of BIOS descriptions end with the word "BIOS".
+         * Strip it off, since the column is already titled "BIOS". */
+        length = strlen (bios);
+        cp = bios + length - 5;
+        if (g_ascii_strcasecmp (cp, " BIOS") == 0)
+                *cp = '\0';
+
+        g_object_set (renderer, "text", bios, NULL);
+
+        g_free (bios);
+}
+
+static void
 columns_driver_status_set_properties (GtkTreeViewColumn *column,
                                       GtkCellRenderer *renderer,
                                       GtkTreeModel *model,
@@ -225,6 +250,26 @@ columns_time_set_properties (GtkTreeViewColumn *column,
 /*****************************************************************************
  * Column Factory Callbacks
  *****************************************************************************/
+
+static GtkTreeViewColumn *
+columns_factory_bios (GvaGameStoreColumn column_id)
+{
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_set_cell_data_func (
+                column, renderer, (GtkTreeCellDataFunc)
+                columns_bios_set_properties, NULL, NULL);
+
+        return column;
+}
 
 static GtkTreeViewColumn *
 columns_factory_category (GvaGameStoreColumn column_id)
@@ -570,6 +615,8 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
 {
         { "name",               N_("ROM Name"),
                                 columns_factory_name },
+        { "bios",               N_("BIOS"),
+                                columns_factory_bios },
         { "category",           N_("Category"),
                                 columns_factory_category },
         { "favorite",           N_("Favorite"),
@@ -628,6 +675,7 @@ static gchar *default_column_order[] =
 #ifdef CATEGORY_FILE
         "category",
 #endif
+        "bios",
         "driver_status",
         "input_players",
         "name",

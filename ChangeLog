@@ -1,3 +1,26 @@
+2008-03-26  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add GVA_GAME_STORE_COLUMN_BIOS to the developer documentation.
+
+	* src/gva-columns.c:
+	Add "BIOS" column that shows the name of the BIOS ROM set required
+	for a game, if any.  (e.g. "Neo-Geo")
+
+	* src/gva-db.c (SQL_CREATE_VIEW_AVAILABLE):
+	Form a "bios" column in the available view by doing a left join
+	on BIOS ROM sets (where isbios='yes').  This is getting to be a
+	pretty complex SELECT statement.
+
+	* src/gva-main.c (gva_main_search_query_tooltip_cb):
+	* src/gva-tree-view (gva_tree_view_update):
+	Add the "bios" column to the search criteria.
+	Add "BIOS Name" to the search entry tooltip.
+
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	Add GVA_GAME_STORE_COLUMN_BIOS.
+
 2008-03-25  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-tree-view.c (gva_tree_view_query_tooltip_cb):

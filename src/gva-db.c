@@ -191,7 +191,10 @@
 
 #define SQL_CREATE_VIEW_AVAILABLE \
         "CREATE VIEW IF NOT EXISTS available AS " \
-                "SELECT *, isfavorite(name) AS favorite FROM game " \
+                "SELECT game.*, bios.description AS bios, " \
+                "isfavorite(game.name) AS favorite FROM game " \
+                "LEFT JOIN (SELECT name, description FROM game WHERE " \
+                "isbios = 'yes') AS bios ON game.romof = bios.name " \
                 "WHERE (romset IN ('good', 'best available') " \
                 "AND isbios = 'no');"
 
