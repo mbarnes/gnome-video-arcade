@@ -2,7 +2,7 @@
 
 SUBDIRS = data po src docs help
 
-if MAINTAINER_MODE
+if GLADE_CATALOG
 SUBDIRS += maint
 endif
 

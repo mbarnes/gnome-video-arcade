@@ -65,10 +65,17 @@ PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
 AC_SUBST(SQLITE_CFLAGS)
 AC_SUBST(SQLITE_LIBS)
 
-if test "$USE_MAINTAINER_MODE" = "yes"; then
-GLADEUI_MODULES="gladeui-1.0 >= 3.0.0"
-PKG_CHECK_MODULES(GLADEUI, $GLADEUI_MODULES)
+# --with-glade-catalog=[yes|no]
+AC_ARG_WITH([glade-catalog],
+        [AC_HELP_STRING([--with-glade-catalog],
+                [install the catalog files for Glade 3 ]
+                [(for maintainers only) [default=no]])],
+        with_catalog="$withval", with_catalog="no")
+if test "$with_catalog" = "yes"; then
+        GLADEUI_MODULES="gladeui-1.0 >= 3.0.0"
+        PKG_CHECK_MODULES(GLADEUI, $GLADEUI_MODULES)
 fi
+AM_CONDITIONAL(GLADE_CATALOG, test $with_catalog = yes)
 
 # Header Checks
 AC_HEADER_STDC

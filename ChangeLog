@@ -1,3 +1,12 @@
+2008-04-12  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	* Makefile.am:
+	Add a --with-glade-catalog configure option that determines whether
+	the Glade 3 catalog files get built and installed.  It used to be
+	based on whether maintainer mode was enabled, but that proved too
+	problematic.
+
 2008-03-26  Matthew Barnes  <mbarnes@redhat.com>
 
 	* docs/reference/gnome-video-arcade-sections.txt:
