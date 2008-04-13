@@ -970,7 +970,15 @@ db_parser_start_element (GMarkupParseContext *context,
 
         /* XXX Copied from below... */
 
-        if (element_name == intern.driver)
+        if (element_name == intern.chip)
+                db_parser_start_element_chip (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.display)
+                db_parser_start_element_display (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.driver)
                 db_parser_start_element_driver (
                         data, attribute_name, attribute_value, error);
 
@@ -1081,7 +1089,13 @@ db_parser_end_element (GMarkupParseContext *context,
 
         /* XXX Copied from below... */
 
-        if (element_name == intern.game)
+        if (element_name == intern.chip)
+                db_parser_exec_stmt (data->insert_chip_stmt, error);
+
+        else if (element_name == intern.display)
+                db_parser_exec_stmt (data->insert_display_stmt, error);
+
+        else if (element_name == intern.game)
                 db_parser_end_element_game (data, error);
 
         /* Skip unused elements to speed up parsing. */

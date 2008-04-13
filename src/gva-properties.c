@@ -18,6 +18,9 @@
 
 #include "gva-properties.h"
 
+#include <stdlib.h>
+
+#include "gva-db.h"
 #include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-history.h"
@@ -28,6 +31,20 @@
 #define SQL_SELECT_NAME \
         "SELECT * FROM available WHERE name = \"%s\""
 
+#define SQL_SELECT_CPU \
+        "SELECT COUNT(*), name, clock FROM chip " \
+        "WHERE game = \"%s\" AND type = \"cpu\" " \
+        "GROUP BY name, clock ORDER BY CAST (clock AS INT) DESC LIMIT %d"
+
+#define SQL_SELECT_SOUND \
+        "SELECT COUNT(*), name, clock FROM chip " \
+        "WHERE game = \"%s\" AND type = \"audio\" " \
+        "GROUP BY name, clock ORDER BY CAST (clock AS INT) DESC LIMIT %d"
+
+#define SQL_SELECT_VIDEO \
+        "SELECT type, rotate, width, height, refresh " \
+        "FROM display WHERE game = \"%s\" LIMIT %d"
+
 /* Keep this in sync with the Glade file. */
 enum
 {
@@ -35,6 +52,114 @@ enum
         NOTEBOOK_PAGE_GALLERY,
         NOTEBOOK_PAGE_TECHNICAL
 };
+
+static const gchar *cpu_labels[] =
+{
+        "properties-cpu0-label",
+        "properties-cpu1-label",
+        "properties-cpu2-label",
+        "properties-cpu3-label"
+};
+
+static const gchar *sound_labels[] =
+{
+        "properties-sound0-label",
+        "properties-sound1-label",
+        "properties-sound2-label",
+        "properties-sound3-label"
+};
+
+static const gchar *video_labels[] =
+{
+        "properties-video0-label",
+        "properties-video1-label",
+        "properties-video2-label",
+        "properties-video3-label"
+};
+
+static gchar *
+properties_cpu_description (const gchar *name,
+                            const gchar *clock,
+                            gint count)
+{
+        GString *string;
+
+        string = g_string_sized_new (128);
+
+        if (count > 1)
+                g_string_append_printf (string, "%d × ", count);
+        g_string_append (string, name);
+
+        if (clock != NULL)
+        {
+                gdouble hertz;
+
+                hertz = g_ascii_strtod (clock, NULL);
+                if (hertz >= 1000000.)
+                        g_string_append_printf (
+                                string, "  %.6f MHz", hertz / 1000000.);
+                else if (hertz >= 1000.)
+                        g_string_append_printf (
+                                string, "  %.3f KHz", hertz / 1000.);
+                else
+                        g_string_append_printf (
+                                string, "  %.6f Hz", hertz);
+        }
+
+        return g_string_free (string, FALSE);
+}
+
+static void
+properties_update_cpu (const gchar *name)
+{
+        GtkWidget *label;
+        gchar *sql;
+        gchar **result = NULL;
+        gint rows, columns, ii;
+        GError *error = NULL;
+
+        enum { CPU_COUNT, CPU_NAME, CPU_CLOCK };
+
+        sql = g_strdup_printf (
+                SQL_SELECT_CPU, name, G_N_ELEMENTS (cpu_labels));
+
+        if (!gva_db_get_table (sql, &result, &rows, &columns, &error)) {
+                gva_error_handle (&error);
+                rows = columns = 0;
+        }
+
+        g_assert (rows <= G_N_ELEMENTS (cpu_labels));
+
+        for (ii = 0; ii < rows; ii++)
+        {
+                const gchar *name;
+                const gchar *clock;
+                gchar **values;
+                gchar *text;
+                gint count;
+
+                values = result + ((ii + 1) * columns);
+
+                name = values[CPU_NAME];
+                clock = values[CPU_CLOCK];
+                count = (gint) strtol (values[CPU_COUNT], NULL, 10);
+
+                label = gva_ui_get_widget (cpu_labels[ii]);
+                text = properties_cpu_description (name, clock, count);
+                gtk_label_set_text (GTK_LABEL (label), text);
+                gtk_widget_show (label);
+                g_free (text);
+        }
+
+        while (ii < G_N_ELEMENTS (cpu_labels))
+        {
+                label = gva_ui_get_widget (cpu_labels[ii++]);
+                gtk_widget_hide (label);
+        }
+
+        g_strfreev (result);
+        g_free (sql);
+}
 
 static void
 properties_update_header (GtkTreeModel *model,
@@ -119,6 +244,142 @@ properties_update_history (GtkTreeModel *model,
 }
 
 static void
+properties_update_sound (const gchar *name)
+{
+        GtkWidget *label;
+        gchar *sql;
+        gchar **result = NULL;
+        gint rows, columns, ii;
+        GError *error = NULL;
+
+        enum { SOUND_COUNT, SOUND_NAME, SOUND_CLOCK };
+
+        sql = g_strdup_printf (
+                SQL_SELECT_SOUND, name, G_N_ELEMENTS (sound_labels));
+
+        if (!gva_db_get_table (sql, &result, &rows, &columns, &error)) {
+                gva_error_handle (&error);
+                rows = columns = 0;
+        }
+
+        g_assert (rows <= G_N_ELEMENTS (sound_labels));
+
+        for (ii = 0; ii < rows; ii++)
+        {
+                const gchar *name;
+                const gchar *clock;
+                gchar **values;
+                gchar *text;
+                gint count;
+
+                values = result + ((ii + 1) * columns);
+
+                name = values[SOUND_NAME];
+                clock = values[SOUND_CLOCK];
+                count = (gint) strtol (values[SOUND_COUNT], NULL, 10);
+
+                label = gva_ui_get_widget (sound_labels[ii]);
+                text = properties_cpu_description (name, clock, count);
+                gtk_label_set_text (GTK_LABEL (label), text);
+                gtk_widget_show (label);
+                g_free (text);
+        }
+
+        while (ii < G_N_ELEMENTS (sound_labels))
+        {
+                label = gva_ui_get_widget (sound_labels[ii++]);
+                gtk_widget_hide (label);
+        }
+
+        g_strfreev (result);
+        g_free (sql);
+}
+
+static void
+properties_update_video (const gchar *name)
+{
+        GtkWidget *label;
+        gchar *sql;
+        gchar **result = NULL;
+        gint rows, columns, ii;
+        GError *error = NULL;
+
+        enum
+        {
+                VIDEO_TYPE, VIDEO_ROTATE, VIDEO_WIDTH,
+                VIDEO_HEIGHT, VIDEO_REFRESH
+        };
+
+        sql = g_strdup_printf (
+                SQL_SELECT_VIDEO, name, G_N_ELEMENTS (video_labels));
+
+        if (!gva_db_get_table (sql, &result, &rows, &columns, &error)) {
+                gva_error_handle (&error);
+                rows = columns = 0;
+        }
+
+        g_assert (rows <= G_N_ELEMENTS (video_labels));
+
+        for (ii = 0; ii < rows; ii++)
+        {
+                GString *string;
+                const gchar *type;
+                const gchar *refresh;
+                const gchar *width;
+                const gchar *height;
+                gchar **values;
+                gdouble hertz;
+                gint rotate;
+
+                values = result + ((ii + 1) * columns);
+
+                type = values[VIDEO_TYPE];
+                refresh = values[VIDEO_REFRESH];
+                width = values[VIDEO_WIDTH];
+                height = values[VIDEO_HEIGHT];
+                rotate = (gint) strtol (values[VIDEO_ROTATE], NULL, 10);
+
+                string = g_string_sized_new (128);
+
+                if (g_str_equal (type, "vector"))
+                        g_string_assign (string, "Vector");
+                else
+                {
+                        g_string_append_printf (
+                                string, "%s × %s  ", width, height);
+                        g_string_append (
+                                string, (rotate % 180 == 0) ? "(H)" : "(V)");
+
+                        hertz = g_ascii_strtod (refresh, NULL);
+                        if (hertz >= 1000000.)
+                                g_string_append_printf (
+                                        string, "  %.6f MHz", hertz / 1000000.);
+                        else if (hertz >= 1000.)
+                                g_string_append_printf (
+                                        string, "  %.3f KHz", hertz / 1000.);
+                        else
+                                g_string_append_printf (
+                                        string, "  %.6f Hz", hertz);
+                }
+
+                label = gva_ui_get_widget (video_labels[ii]);
+                gtk_label_set_text (GTK_LABEL (label), string->str);
+                gtk_widget_show (label);
+
+                g_string_free (string, TRUE);
+        }
+
+        while (ii < G_N_ELEMENTS (video_labels))
+        {
+                label = gva_ui_get_widget (video_labels[ii++]);
+                gtk_widget_hide (label);
+        }
+
+        g_strfreev (result);
+        g_free (sql);
+}
+
+static void
 properties_selection_changed_cb (GtkTreeSelection *selection)
 {
         GtkTreeModel *model;
@@ -145,8 +406,11 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
                 valid = gtk_tree_model_get_iter_first (model, &iter);
                 g_assert (valid);
 
+                properties_update_cpu (name);
                 properties_update_header (model, &iter);
                 properties_update_history (model, &iter);
+                properties_update_sound (name);
+                properties_update_video (name);
 
                 g_object_unref (model);
         }

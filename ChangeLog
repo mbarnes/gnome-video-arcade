@@ -1,3 +1,20 @@
+2008-04-13  Matthew Barnes  <mbarnes@redhat.com>
+
+	** Add some basic information to the Technical Properties tab.
+
+	* data/gnome-video-arcade.glade:
+	Create an initial design for the Technical Properties tab.
+
+	* src/gva-db.c (db_parser_start_element), (db_parser_end_element):
+	Enable the 'chip' and 'display' table parsing routines.
+
+	* src/gva-properties.c (properties_update_cpu),
+	(properties_update_sound), (properties_update_video):
+	New functions populate labels in the 'CPU', 'Sound', and 'Video'
+	sections of the 'Technical' tab with hardware specifications for
+	the selected game.  The data attempts to match what MAME shows
+	on the initial screen when starting a game.
+
 2008-04-12  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:
