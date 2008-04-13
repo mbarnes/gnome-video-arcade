@@ -1,5 +1,11 @@
 2008-04-13  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-properties.c (properties_cpu_description),
+	(properties_update_video):
+	Some minor simplifications having read the MAME source code.
+
+2008-04-13  Matthew Barnes  <mbarnes@redhat.com>
+
 	** Add some basic information to the Technical Properties tab.
 
 	* data/gnome-video-arcade.glade:

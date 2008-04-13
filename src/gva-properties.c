@@ -98,12 +98,9 @@ properties_cpu_description (const gchar *name,
                 if (hertz >= 1000000.)
                         g_string_append_printf (
                                 string, "  %.6f MHz", hertz / 1000000.);
-                else if (hertz >= 1000.)
-                        g_string_append_printf (
-                                string, "  %.3f KHz", hertz / 1000.);
                 else
                         g_string_append_printf (
-                                string, "  %.6f Hz", hertz);
+                                string, "  %.3f KHz", hertz / 1000.);
         }
 
         return g_string_free (string, FALSE);
@@ -328,7 +325,6 @@ properties_update_video (const gchar *name)
                 const gchar *width;
                 const gchar *height;
                 gchar **values;
-                gdouble hertz;
                 gint rotate;
 
                 values = result + ((ii + 1) * columns);
@@ -348,18 +344,11 @@ properties_update_video (const gchar *name)
                         g_string_append_printf (
                                 string, "%s × %s  ", width, height);
                         g_string_append (
-                                string, (rotate % 180 == 0) ? "(H)" : "(V)");
-
-                        hertz = g_ascii_strtod (refresh, NULL);
-                        if (hertz >= 1000000.)
-                                g_string_append_printf (
-                                        string, "  %.6f MHz", hertz / 1000000.);
-                        else if (hertz >= 1000.)
-                                g_string_append_printf (
-                                        string, "  %.3f KHz", hertz / 1000.);
-                        else
-                                g_string_append_printf (
-                                        string, "  %.6f Hz", hertz);
+                                string, (rotate % 180 == 0)
+                                ? "(Horizontal)" : "(Vertical)");
+                        g_string_append_printf (
+                                string, "  %.6f Hz",
+                                g_ascii_strtod (refresh, NULL));
                 }
 
                 label = gva_ui_get_widget (video_labels[ii]);
