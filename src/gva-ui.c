@@ -91,11 +91,7 @@ action_about_cb (GtkAction *action)
 
         gtk_show_about_dialog (
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
-#if GTK_CHECK_VERSION (2, 12, 0)
                 "program-name", PACKAGE_NAME,
-#else
-                "name", PACKAGE_NAME,
-#endif
                 "version", PACKAGE_VERSION,
                 "comments", _("M.A.M.E. Front-End"),
                 "copyright", copyright,

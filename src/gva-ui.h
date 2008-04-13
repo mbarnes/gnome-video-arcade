@@ -113,8 +113,14 @@
 /* Properties Window */
 #define GVA_WIDGET_PROPERTIES_BACK_BUTTON \
         (gva_ui_get_widget ("properties-back-button"))
+#define GVA_WIDGET_PROPERTIES_BIOS_LABEL \
+        (gva_ui_get_widget ("properties-bios-label"))
+#define GVA_WIDGET_PROPERTIES_BIOS_VBOX \
+        (gva_ui_get_widget ("properties-bios-vbox"))
 #define GVA_WIDGET_PROPERTIES_CLOSE_BUTTON \
         (gva_ui_get_widget ("properties-close-button"))
+#define GVA_WIDGET_PROPERTIES_CPU_VBOX \
+        (gva_ui_get_widget ("properties-cpu-vbox"))
 #define GVA_WIDGET_PROPERTIES_FORWARD_BUTTON \
         (gva_ui_get_widget ("properties-forward-button"))
 #define GVA_WIDGET_PROPERTIES_HEADER \
@@ -123,6 +129,10 @@
         (gva_ui_get_widget ("properties-history-text-view"))
 #define GVA_WIDGET_PROPERTIES_NOTEBOOK \
         (gva_ui_get_widget ("properties-notebook"))
+#define GVA_WIDGET_PROPERTIES_SOUND_VBOX \
+        (gva_ui_get_widget ("properties-sound-vbox"))
+#define GVA_WIDGET_PROPERTIES_VIDEO_VBOX \
+        (gva_ui_get_widget ("properties-video-vbox"))
 #define GVA_WIDGET_PROPERTIES_WINDOW \
         (gva_ui_get_widget ("properties-window"))
 

@@ -19,6 +19,7 @@
 #include "gva-properties.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "gva-db.h"
 #include "gva-error.h"
@@ -107,6 +108,38 @@ properties_cpu_description (const gchar *name,
 }
 
 static void
+properties_update_bios (GtkTreeModel *model,
+                        GtkTreeIter *iter)
+{
+        gchar *bios;
+
+        gtk_tree_model_get (
+                model, iter, GVA_GAME_STORE_COLUMN_BIOS, &bios, -1);
+
+        if (bios != NULL && *bios != '\0')
+        {
+                GtkLabel *label;
+                gchar *cp;
+                gsize length;
+
+                /* A lot of BIOS descriptions end with the word "BIOS".
+                 * Strip it off, since the section is already titled "BIOS". */
+                length = strlen (bios);
+                cp = bios + length - 5;
+                if (g_ascii_strcasecmp (cp, " BIOS") == 0)
+                        *cp = '\0';
+
+                label = GTK_LABEL (GVA_WIDGET_PROPERTIES_BIOS_LABEL);
+                gtk_widget_show (GVA_WIDGET_PROPERTIES_BIOS_VBOX);
+                gtk_label_set_text (label, bios);
+        }
+        else
+                gtk_widget_hide (GVA_WIDGET_PROPERTIES_BIOS_VBOX);
+
+        g_free (bios);
+}
+
+static void
 properties_update_cpu (const gchar *name)
 {
         GtkWidget *label;
@@ -126,6 +159,11 @@ properties_update_cpu (const gchar *name)
         }
 
         g_assert (rows <= G_N_ELEMENTS (cpu_labels));
+
+        if (rows > 0)
+                gtk_widget_show (GVA_WIDGET_PROPERTIES_CPU_VBOX);
+        else
+                gtk_widget_hide (GVA_WIDGET_PROPERTIES_CPU_VBOX);
 
         for (ii = 0; ii < rows; ii++)
         {
@@ -261,6 +299,11 @@ properties_update_sound (const gchar *name)
 
         g_assert (rows <= G_N_ELEMENTS (sound_labels));
 
+        if (rows > 0)
+                gtk_widget_show (GVA_WIDGET_PROPERTIES_SOUND_VBOX);
+        else
+                gtk_widget_hide (GVA_WIDGET_PROPERTIES_SOUND_VBOX);
+
         for (ii = 0; ii < rows; ii++)
         {
                 const gchar *name;
@@ -316,6 +359,11 @@ properties_update_video (const gchar *name)
         }
 
         g_assert (rows <= G_N_ELEMENTS (video_labels));
+
+        if (rows > 0)
+                gtk_widget_show (GVA_WIDGET_PROPERTIES_VIDEO_VBOX);
+        else
+                gtk_widget_hide (GVA_WIDGET_PROPERTIES_VIDEO_VBOX);
 
         for (ii = 0; ii < rows; ii++)
         {
@@ -395,6 +443,7 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
                 valid = gtk_tree_model_get_iter_first (model, &iter);
                 g_assert (valid);
 
+                properties_update_bios (model, &iter);
                 properties_update_cpu (name);
                 properties_update_header (model, &iter);
                 properties_update_history (model, &iter);

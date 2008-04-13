@@ -1,5 +1,27 @@
 2008-04-13  Matthew Barnes  <mbarnes@redhat.com>
 
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-properties.c (properties_update_bios):
+	Add a BIOS section to the Technical Properties tab.
+
+	* src/gva-properties.c (properties_update_cpu),
+	(properties_update_sound), (properties_update_video):
+	Hide the entire section when there are no rows to display.
+	I've only actually seen this for sound, but might as well do it
+	for all sections.
+
+	* src/gva-ui.c:
+	Remove the GTK_CHECK_VERSION(2,12,0) since we require it now.
+
+	* src/gva-ui.h:
+	Add a bunch of GVA_WIDGET_PROPERITES_xxx_VBOX widgets.
+	Also add GVA_WIDGET_PROPERTIES_BIOS_LABEL.
+
+2008-04-13  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-properties.c (properties_cpu_description),
 	(properties_update_video):
 	Some minor simplifications having read the MAME source code.
