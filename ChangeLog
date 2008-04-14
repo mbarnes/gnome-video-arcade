@@ -1,5 +1,16 @@
 2008-04-14  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/gnome-video-arcade.schemas:
+	Add properties-page key.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_PROPERTIES_PAGE_KEY.
+
+	* src/gva-properties.c (gva_properties_init):
+	Bind the "properties-page" GConf key to the Properties notebook.
+
+2008-04-14  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/main.c (start):
 	* src/gva-audit.c (audit_show_dialog):
 	* src/gva-game-store.c (gva_game_store_new_from_query):

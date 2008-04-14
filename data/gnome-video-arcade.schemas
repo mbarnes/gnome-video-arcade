@@ -85,6 +85,18 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/properties-page</applyto>
+      <key>/schemas/apps/gnome-video-arcade/properties-page</key>
+      <owner>gnome-video-arcade</owner>
+      <type>int</type>
+      <default>0</default>
+      <locale name="C">
+        <short>Properties page</short>
+        <long>The most recently selected page in the Properties window.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/search</applyto>
       <key>/schemas/apps/gnome-video-arcade/search</key>
       <owner>gnome-video-arcade</owner>

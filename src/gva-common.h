@@ -44,6 +44,7 @@
 #define GVA_GCONF_FAVORITES_KEY         GVA_GCONF_PREFIX "/favorites"
 #define GVA_GCONF_FULL_SCREEN_KEY       GVA_GCONF_PREFIX "/full-screen"
 #define GVA_GCONF_ERROR_FILE_KEY        GVA_GCONF_PREFIX "/error-file"
+#define GVA_GCONF_PROPERTIES_PAGE_KEY   GVA_GCONF_PREFIX "/properties-page"
 #define GVA_GCONF_SEARCH_KEY            GVA_GCONF_PREFIX "/search"
 #define GVA_GCONF_SELECTED_GAME_KEY     GVA_GCONF_PREFIX "/selected-game"
 #define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"

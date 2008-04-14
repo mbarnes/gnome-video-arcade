@@ -487,6 +487,10 @@ gva_properties_init (void)
                 GVA_ACTION_NEXT_GAME,
                 GVA_WIDGET_PROPERTIES_FORWARD_BUTTON);
 
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_PROPERTIES_PAGE_KEY,
+                G_OBJECT (GVA_WIDGET_PROPERTIES_NOTEBOOK), "page");
+
         g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (properties_selection_changed_cb), NULL);
