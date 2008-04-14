@@ -149,36 +149,35 @@ start (void)
 
         if (gva_db_needs_rebuilt ())
         {
-                gboolean success = TRUE;
-
                 gva_main_progress_bar_show ();
 
-                success &= gva_main_build_database (&error);
-                gva_error_handle (&error);
+                if (!gva_main_build_database (&error))
+                {
+                        gva_error_handle (&error);
+                        return;
+                }
 
                 gva_main_progress_bar_set_fraction (0.0);
 
-                success &= gva_main_analyze_roms (&error);
-                gva_error_handle (&error);
+                if (!gva_main_analyze_roms (&error))
+                {
+                        gva_error_handle (&error);
+                        return;
+                }
 
                 gva_main_progress_bar_hide ();
-
-                if (!success)
-                        return;
         }
         else if (gva_audit_detect_changes ())
         {
-                gboolean success;
-
                 gva_main_progress_bar_show ();
 
-                success = gva_main_analyze_roms (&error);
-                gva_error_handle (&error);
+                if (!gva_main_analyze_roms (&error))
+                {
+                        gva_error_handle (&error);
+                        return;
+                }
 
                 gva_main_progress_bar_hide ();
-
-                if (!success)
-                        return;
         }
 
         /* Do this after ROMs are analyzed. */

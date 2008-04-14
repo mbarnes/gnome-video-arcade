@@ -288,6 +288,9 @@ audit_show_dialog (GvaProcess *process,
         GtkTreeModel *model;
         GError *error = NULL;
 
+        if (process->error != NULL)
+                return;
+
         model = audit_build_model (data, &error);
         gva_error_handle (&error);
         if (model == NULL)

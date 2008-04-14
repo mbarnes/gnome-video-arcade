@@ -389,7 +389,8 @@ gva_game_store_new_from_query (const gchar *sql,
                         GVA_GAME_STORE (model), g_strdup (name), &iter);
 
                 /* Keep the UI responsive. */
-                g_main_context_iteration (NULL, FALSE);
+                if (gtk_main_iteration_do (FALSE))
+                        goto fail;
         }
 
         /* Query complete. */

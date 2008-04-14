@@ -48,7 +48,7 @@ mame_process_check_for_error (GvaProcess *process, const gchar *line)
                 *error_message = g_ascii_toupper (*error_message);
 
                 g_set_error (
-                        &process->error, GVA_ERROR, GVA_ERROR_SYSTEM,
+                        &process->error, GVA_ERROR, GVA_ERROR_MAME,
                         "%s", error_message);
         }
 }

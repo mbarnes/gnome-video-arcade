@@ -1,3 +1,22 @@
+2008-04-14  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/main.c (start):
+	* src/gva-audit.c (audit_show_dialog):
+	* src/gva-game-store.c (gva_game_store_new_from_query):
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Avoid crashing when the application is closed while it's busy doing
+	something.  This usually happens in places where we manually iterate
+	GTK's main loop.  The user closes the main window, destroying it and
+	taking most of the Glade-loaded widgets with it.  Then we return
+	from some function and attempt to fetch a destroyed widget, which
+	causes gva_ui_get_widget() to trip its non-NULL assertion.
+	Fortunately we can avoid this scenario by checking the return value
+	of gtk_main_iteration() or gtk_main_iteration_do(), which indicates
+	whether the application is shutting down.
+
+	* src/gva-mame-process.c (mame_process_check_for_error):
+	Use GVA_ERROR_MAME instead of GVA_ERROR_SYSTEM.
+
 2008-04-13  Matthew Barnes  <mbarnes@redhat.com>
 
 	* docs/reference/gnome-video-arcade-sections.txt:

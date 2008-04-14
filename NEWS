@@ -14,6 +14,8 @@ GNOME Video Arcade 0.6.0
             - Show BIOS names in a new BIOS column.
             - Support searching for BIOS names.
             - Requires MAME v0.118 or later to work.
+        * Avoid crashing if the application is closed while it's busy
+          doing something (especially during database construction).
 
 GNOME Video Arcade 0.5.6
 ========================

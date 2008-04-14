@@ -301,10 +301,16 @@ gva_tree_view_run_query (const gchar *expr,
 
         gdk_window_set_cursor (window, cursor);
         gtk_widget_set_sensitive (GTK_WIDGET (view), FALSE);
+
         model = gva_game_store_new_from_query (string->str, error);
-        sensitive = (gtk_tree_model_iter_n_children (model, NULL) > 0);
-        gtk_widget_set_sensitive (GTK_WIDGET (view), sensitive);
-        gdk_window_set_cursor (window, NULL);
+
+        /* Don't touch widgets if gtk_main_quit() has been called. */
+        if (!gtk_main_iteration_do (FALSE))
+        {
+                sensitive = (gtk_tree_model_iter_n_children (model, NULL) > 0);
+                gtk_widget_set_sensitive (GTK_WIDGET (view), sensitive);
+                gdk_window_set_cursor (window, NULL);
+        }
 
         gdk_cursor_unref (cursor);
         g_string_free (string, TRUE);
