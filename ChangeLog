@@ -1,3 +1,9 @@
+2008-04-15  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-columns.c (columns_tooltip_driver_status):
+	Start adding a fancy tooltip to the 'Status' column.
+	Not done with it yet, just committing progress so far.
+
 2008-04-14  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.schemas:

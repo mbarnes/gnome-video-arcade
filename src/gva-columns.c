@@ -546,6 +546,118 @@ columns_factory_year (GvaGameStoreColumn column_id)
  *****************************************************************************/
 
 static gboolean
+columns_tooltip_driver_status (GtkTreeModel *model,
+                               GtkTreeIter *iter,
+                               GtkTooltip *tooltip)
+{
+        gboolean show_tooltip = FALSE;
+        gchar *cocktail;
+        gchar *color;
+        gchar *graphic;
+        gchar *sound;
+        gchar *status;
+
+        gtk_tree_model_get (
+                model, iter,
+                GVA_GAME_STORE_COLUMN_DRIVER_COCKTAIL, &cocktail,
+                GVA_GAME_STORE_COLUMN_DRIVER_COLOR, &color,
+                GVA_GAME_STORE_COLUMN_DRIVER_GRAPHIC, &graphic,
+                GVA_GAME_STORE_COLUMN_DRIVER_SOUND, &sound,
+                GVA_GAME_STORE_COLUMN_DRIVER_STATUS, &status,
+                -1);
+
+        if (status != NULL && strcmp (status, "imperfect") == 0)
+        {
+                GtkWidget *table;
+                GtkWidget *widget;
+                const gchar *text;
+                gchar *markup;
+
+                table = gtk_table_new (7, 2, FALSE);
+                gtk_table_set_col_spacings (GTK_TABLE (table), 12);
+                gtk_table_set_row_spacings (GTK_TABLE (table), 3);
+                gtk_table_set_row_spacing (GTK_TABLE (table), 0, 6);
+                gtk_widget_show (table);
+
+                widget = gtk_image_new_from_stock (
+                        GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.5, 0.0);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 0, 1, 0, 7, 0, 0, 0, 0);
+                gtk_widget_show (widget);
+
+                text = _("There are known problems with this game.");
+                markup = g_strdup_printf ("<b>%s</b>", text);
+                widget = gtk_label_new (markup);
+                gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 1, 2, 0, 1, 0, 0, 0, 0);
+                gtk_widget_show (widget);
+                g_free (markup);
+
+                text = _("The colors aren't 100% accurate.");
+                widget = gtk_label_new (text);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 1, 2, 1, 2, 0, 0, 0, 0);
+                if (color != NULL && strcmp (color, "imperfect") == 0)
+                        gtk_widget_show (widget);
+
+                text = _("The colors are completely wrong.");
+                widget = gtk_label_new (text);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 1, 2, 2, 3, 0, 0, 0, 0);
+                if (color != NULL && strcmp (color, "preliminary") == 0)
+                        gtk_widget_show (widget);
+
+                text = _("The video emulation isn't 100% accurate.");
+                widget = gtk_label_new (text);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 1, 2, 3, 4, 0, 0, 0, 0);
+                if (graphic != NULL && strcmp (graphic, "imperfect") == 0)
+                        gtk_widget_show (widget);
+
+                text = _("The sound emulation isn't 100% accurate.");
+                widget = gtk_label_new (text);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 1, 2, 4, 5, 0, 0, 0, 0);
+                if (sound != NULL && strcmp (sound, "imperfect") == 0)
+                        gtk_widget_show (widget);
+
+                text = _("The game lacks sound.");
+                widget = gtk_label_new (text);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 1, 2, 5, 6, 0, 0, 0, 0);
+                if (sound != NULL && strcmp (sound, "preliminary") == 0)
+                        gtk_widget_show (widget);
+
+                text = _("Screen flipping in cocktail mode is not supported.");
+                widget = gtk_label_new (text);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+                gtk_table_attach (
+                        GTK_TABLE (table), widget, 1, 2, 6, 7, 0, 0, 0, 0);
+                if (cocktail != NULL && strcmp (cocktail, "preliminary") == 0)
+                        gtk_widget_show (widget);
+
+                gtk_tooltip_set_custom (tooltip, table);
+                show_tooltip = TRUE;
+        }
+
+        g_free (cocktail);
+        g_free (color);
+        g_free (graphic);
+        g_free (sound);
+        g_free (status);
+
+        return show_tooltip;
+}
+
+static gboolean
 columns_tooltip_favorite (GtkTreeModel *model,
                           GtkTreeIter *iter,
                           GtkTooltip *tooltip)
@@ -649,7 +761,8 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "input_buttons",      NULL },
         { "input_coins",        NULL },
         { "driver_status",      N_("Status"),
-                                columns_factory_driver_status },
+                                columns_factory_driver_status,
+                                columns_tooltip_driver_status },
         { "driver_emulation",   NULL },
         { "driver_color",       NULL },
         { "driver_sound",       NULL },
@@ -1074,15 +1187,31 @@ gva_columns_get_names_full (GtkTreeView *view)
 
                 /* Any of the description, manufacturer, and year columns
                  * require the other two for the summary tooltip. */
-                if (strcmp (column_name, "description") == 0) {
+                if (strcmp (column_name, "description") == 0)
+                {
                         columns_add_dependency (&names, "manufacturer");
                         columns_add_dependency (&names, "year");
-                } else if (strcmp (column_name, "manufacturer") == 0) {
+                }
+                else if (strcmp (column_name, "manufacturer") == 0)
+                {
                         columns_add_dependency (&names, "description");
                         columns_add_dependency (&names, "year");
-                } else if (strcmp (column_name, "year") == 0) {
+                }
+                else if (strcmp (column_name, "year") == 0)
+                {
                         columns_add_dependency (&names, "description");
                         columns_add_dependency (&names, "manufacturer");
+                }
+
+                /* We give detailed information in the status tooltip. */
+                if (strcmp (column_name, "driver_status") == 0)
+                {
+                        columns_add_dependency (&names, "driver_emulation");
+                        columns_add_dependency (&names, "driver_color");
+                        columns_add_dependency (&names, "driver_sound");
+                        columns_add_dependency (&names, "driver_graphic");
+                        columns_add_dependency (&names, "driver_cocktail");
+                        columns_add_dependency (&names, "driver_protection");
                 }
         }
 
