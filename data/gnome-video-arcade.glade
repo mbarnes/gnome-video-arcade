@@ -693,6 +693,21 @@
               <placeholder/>
             </child>
             <child>
+              <widget class="GtkLabel" id="properties-header">
+                <property name="visible">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
+Manufacturer, Year</property>
+                <property name="use_markup">True</property>
+                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+              </widget>
+              <packing>
+                <property name="bottom_attach">2</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkHBox" id="properties-hbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -747,21 +762,6 @@
                 <property name="right_attach">2</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="properties-header">
-                <property name="visible">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label">&lt;big&gt;&lt;b&gt;Game Description&lt;/b&gt;&lt;/big&gt;
-Manufacturer, Year</property>
-                <property name="use_markup">True</property>
-                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-              </widget>
-              <packing>
-                <property name="bottom_attach">2</property>
               </packing>
             </child>
           </widget>
@@ -887,7 +887,7 @@ Manufacturer, Year</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="border_width">6</property>
-                <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
                 <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                 <child>
                   <widget class="GtkViewport" id="properties-technical-viewport">
@@ -899,6 +899,119 @@ Manufacturer, Year</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="border_width">12</property>
                         <property name="spacing">12</property>
+                        <child>
+                          <widget class="GtkHBox" id="properties-imperfect-hbox">
+                            <property name="visible">True</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <widget class="GtkImage" id="properties-imperfect-image">
+                                <property name="visible">True</property>
+                                <property name="yalign">0</property>
+                                <property name="stock">gtk-dialog-warning</property>
+                                <property name="icon_size">5</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkVBox" id="properties-imperfect-vbox">
+                                <property name="visible">True</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <widget class="GtkLabel" id="properties-imperfect-header">
+                                    <property name="visible">True</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">&lt;b&gt;There are known problems with this game.&lt;/b&gt;</property>
+                                    <property name="use_markup">True</property>
+                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkVBox" id="properties-imperfect-inner-vbox">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <widget class="GtkLabel" id="properties-imperfect-color-label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">The colors aren't 100% accurate.</property>
+                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                      </widget>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkLabel" id="properties-preliminary-color-label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">The colors are completely wrong.</property>
+                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkLabel" id="properties-imperfect-graphic-label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">The video emulation isn't 100% accurate.</property>
+                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkLabel" id="properties-imperfect-sound-label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">The sound emulation isn't 100% accurate.</property>
+                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="position">3</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkLabel" id="properties-preliminary-sound-label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">The game lacks sound.</property>
+                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="position">4</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkLabel" id="properties-preliminary-cocktail-label">
+                                        <property name="visible">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">Screen flipping in cocktail mode is not supported.</property>
+                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="position">5</property>
+                                      </packing>
+                                    </child>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
                         <child>
                           <widget class="GtkVBox" id="properties-bios-vbox">
                             <property name="visible">True</property>
@@ -935,6 +1048,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -1021,7 +1135,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -1104,7 +1218,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">2</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
@@ -1191,7 +1305,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">3</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </widget>
@@ -1276,6 +1390,79 @@ Manufacturer, Year</property>
         <property name="column_spacing">12</property>
         <property name="row_spacing">12</property>
         <child>
+          <widget class="GtkLabel" id="audit-verbage">
+            <property name="visible">True</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">An audit of the available games has detected errors in some of the ROM files. The following games will not be available in GNOME Video Arcade.
+
+&lt;small&gt;&lt;i&gt;&lt;b&gt;Tip:&lt;/b&gt; If these games worked with previous versions of MAME, it is likely their ROM requirements have changed. If so, you will need to acquire more recent ROM files.&lt;/i&gt;&lt;/small&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">2</property>
+            <property name="top_attach">1</property>
+            <property name="bottom_attach">2</property>
+            <property name="y_options"></property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="audit-title">
+            <property name="visible">True</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Errors detected in ROM files&lt;/b&gt;&lt;/big&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">2</property>
+            <property name="y_options"></property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkImage" id="audit-image">
+            <property name="visible">True</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="yalign">0</property>
+            <property name="stock">gtk-dialog-warning</property>
+            <property name="icon_size">6</property>
+          </widget>
+          <packing>
+            <property name="bottom_attach">3</property>
+            <property name="x_options"></property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkScrolledWindow" id="audit-scrolled-window">
+            <property name="height_request">200</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+            <property name="shadow_type">GTK_SHADOW_IN</property>
+            <child>
+              <widget class="GtkTreeView" id="audit-tree-view">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="headers_visible">False</property>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="right_attach">2</property>
+            <property name="top_attach">2</property>
+            <property name="bottom_attach">3</property>
+          </packing>
+        </child>
+        <child>
           <widget class="GtkHButtonBox" id="audit-button-box">
             <property name="visible">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -1318,79 +1505,6 @@ Manufacturer, Year</property>
             <property name="right_attach">2</property>
             <property name="top_attach">3</property>
             <property name="bottom_attach">4</property>
-            <property name="y_options"></property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkScrolledWindow" id="audit-scrolled-window">
-            <property name="height_request">200</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <property name="shadow_type">GTK_SHADOW_IN</property>
-            <child>
-              <widget class="GtkTreeView" id="audit-tree-view">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="headers_visible">False</property>
-              </widget>
-            </child>
-          </widget>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="top_attach">2</property>
-            <property name="bottom_attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkImage" id="audit-image">
-            <property name="visible">True</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="yalign">0</property>
-            <property name="stock">gtk-dialog-warning</property>
-            <property name="icon_size">6</property>
-          </widget>
-          <packing>
-            <property name="bottom_attach">3</property>
-            <property name="x_options"></property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkLabel" id="audit-title">
-            <property name="visible">True</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="xalign">0</property>
-            <property name="yalign">0</property>
-            <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Errors detected in ROM files&lt;/b&gt;&lt;/big&gt;</property>
-            <property name="use_markup">True</property>
-            <property name="wrap">True</property>
-          </widget>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="y_options"></property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkLabel" id="audit-verbage">
-            <property name="visible">True</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">An audit of the available games has detected errors in some of the ROM files. The following games will not be available in GNOME Video Arcade.
-
-&lt;small&gt;&lt;i&gt;&lt;b&gt;Tip:&lt;/b&gt; If these games worked with previous versions of MAME, it is likely their ROM requirements have changed. If so, you will need to acquire more recent ROM files.&lt;/i&gt;&lt;/small&gt;</property>
-            <property name="use_markup">True</property>
-            <property name="wrap">True</property>
-          </widget>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="top_attach">1</property>
-            <property name="bottom_attach">2</property>
             <property name="y_options"></property>
           </packing>
         </child>

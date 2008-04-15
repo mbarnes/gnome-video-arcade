@@ -127,8 +127,22 @@
         (gva_ui_get_widget ("properties-header"))
 #define GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW \
         (gva_ui_get_widget ("properties-history-text-view"))
+#define GVA_WIDGET_PROPERTIES_IMPERFECT_COLOR_LABEL \
+        (gva_ui_get_widget ("properties-imperfect-color-label"))
+#define GVA_WIDGET_PROPERTIES_IMPERFECT_GRAPHIC_LABEL \
+        (gva_ui_get_widget ("properties-imperfect-graphic-label"))
+#define GVA_WIDGET_PROPERTIES_IMPERFECT_HBOX \
+        (gva_ui_get_widget ("properties-imperfect-hbox"))
+#define GVA_WIDGET_PROPERTIES_IMPERFECT_SOUND_LABEL \
+        (gva_ui_get_widget ("properties-imperfect-sound-label"))
 #define GVA_WIDGET_PROPERTIES_NOTEBOOK \
         (gva_ui_get_widget ("properties-notebook"))
+#define GVA_WIDGET_PROPERTIES_PRELIMINARY_COCKTAIL_LABEL \
+        (gva_ui_get_widget ("properties-preliminary-cocktail-label"))
+#define GVA_WIDGET_PROPERTIES_PRELIMINARY_COLOR_LABEL \
+        (gva_ui_get_widget ("properties-preliminary-color-label"))
+#define GVA_WIDGET_PROPERTIES_PRELIMINARY_SOUND_LABEL \
+        (gva_ui_get_widget ("properties-preliminary-sound-label"))
 #define GVA_WIDGET_PROPERTIES_SOUND_VBOX \
         (gva_ui_get_widget ("properties-sound-vbox"))
 #define GVA_WIDGET_PROPERTIES_VIDEO_VBOX \

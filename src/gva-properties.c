@@ -29,6 +29,9 @@
 #include "gva-ui.h"
 #include "gva-util.h"
 
+/* Update Delay (0.05 sec) */
+#define UPDATE_TIMEOUT_MS 50
+
 #define SQL_SELECT_NAME \
         "SELECT * FROM available WHERE name = \"%s\""
 
@@ -77,6 +80,8 @@ static const gchar *video_labels[] =
         "properties-video2-label",
         "properties-video3-label"
 };
+
+static guint update_timeout_source_id;
 
 static gchar *
 properties_cpu_description (const gchar *name,
@@ -336,6 +341,62 @@ properties_update_sound (const gchar *name)
 }
 
 static void
+properties_update_status (GtkTreeModel *model,
+                          GtkTreeIter *iter)
+{
+        GtkWidget *widget;
+        gchar *driver_status;
+        gchar *driver_color;
+        gchar *driver_sound;
+        gchar *driver_graphic;
+        gchar *driver_cocktail;
+        gboolean visible;
+
+        gtk_tree_model_get (
+                model, iter,
+                GVA_GAME_STORE_COLUMN_DRIVER_STATUS, &driver_status,
+                GVA_GAME_STORE_COLUMN_DRIVER_COLOR, &driver_color,
+                GVA_GAME_STORE_COLUMN_DRIVER_SOUND, &driver_sound,
+                GVA_GAME_STORE_COLUMN_DRIVER_GRAPHIC, &driver_graphic,
+                GVA_GAME_STORE_COLUMN_DRIVER_COCKTAIL, &driver_cocktail,
+                -1);
+
+        widget = GVA_WIDGET_PROPERTIES_IMPERFECT_HBOX;
+        visible = (strcmp (driver_status, "imperfect") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        widget = GVA_WIDGET_PROPERTIES_IMPERFECT_COLOR_LABEL;
+        visible = (strcmp (driver_color, "imperfect") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        widget = GVA_WIDGET_PROPERTIES_IMPERFECT_GRAPHIC_LABEL;
+        visible = (strcmp (driver_graphic, "imperfect") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        widget = GVA_WIDGET_PROPERTIES_IMPERFECT_SOUND_LABEL;
+        visible = (strcmp (driver_sound, "imperfect") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_COCKTAIL_LABEL;
+        visible = (strcmp (driver_cocktail, "preliminary") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_COLOR_LABEL;
+        visible = (strcmp (driver_color, "preliminary") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_SOUND_LABEL;
+        visible = (strcmp (driver_sound, "preliminary") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        g_free (driver_status);
+        g_free (driver_color);
+        g_free (driver_sound);
+        g_free (driver_graphic);
+        g_free (driver_cocktail);
+}
+
+static void
 properties_update_video (const gchar *name)
 {
         GtkWidget *label;
@@ -416,8 +477,8 @@ properties_update_video (const gchar *name)
         g_free (sql);
 }
 
-static void
-properties_selection_changed_cb (GtkTreeSelection *selection)
+static gboolean
+properties_update_timeout_cb (void)
 {
         GtkTreeModel *model;
         const gchar *name;
@@ -428,7 +489,7 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
 
         /* Leave the window alone if a game is not selected. */
         if (name == NULL)
-                return;
+                return FALSE;
 
         sql = g_strdup_printf (SQL_SELECT_NAME, name);
         model = gva_game_store_new_from_query (sql, &error);
@@ -448,10 +509,28 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
                 properties_update_header (model, &iter);
                 properties_update_history (model, &iter);
                 properties_update_sound (name);
+                properties_update_status (model, &iter);
                 properties_update_video (name);
 
                 g_object_unref (model);
         }
+
+        update_timeout_source_id = 0;
+
+        return FALSE;
+}
+
+static void
+properties_selection_changed_cb (GtkTreeSelection *selection)
+{
+        /* Add a short delay to the properties window update to avoid
+         * tying up the CPU while the user is rapidly scrolling through
+         * the tree view. */
+        if (update_timeout_source_id != 0)
+                g_source_remove (update_timeout_source_id);
+        update_timeout_source_id = g_timeout_add (
+                UPDATE_TIMEOUT_MS, (GSourceFunc)
+                properties_update_timeout_cb, NULL);
 }
 
 /**

@@ -1,5 +1,25 @@
 2008-04-15  Matthew Barnes  <mbarnes@redhat.com>
 
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-columns.c (columns_tooltip_driver_status):
+	Finish the tooltip; make the icon smaller.
+
+	* data/gnome-video-arcade.glade:
+	* src/gva-properties.c (properties_update_status):
+	Add a warning to the Technical tab if emulation is imperfect.
+	It's meant to look the same as the 'Status' column tooltip.
+
+	* src/gva-properties.c (properties_update_timeout_cb):
+	We're piling a lot of work on the Properties window.  Add a short
+	delay to the update to keep the tree view scrolling smoothly.
+
+	* src/gva-ui.h:
+	Add a bunch of GVA_WIDGET_PROPERITES_xxx_LABEL widgets.
+
+2008-04-15  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-columns.c (columns_tooltip_driver_status):
 	Start adding a fancy tooltip to the 'Status' column.
 	Not done with it yet, just committing progress so far.

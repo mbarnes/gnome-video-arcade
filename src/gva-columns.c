@@ -571,36 +571,37 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                 GtkWidget *table;
                 GtkWidget *widget;
                 const gchar *text;
-                gchar *markup;
 
                 table = gtk_table_new (7, 2, FALSE);
                 gtk_table_set_col_spacings (GTK_TABLE (table), 12);
-                gtk_table_set_row_spacings (GTK_TABLE (table), 3);
                 gtk_table_set_row_spacing (GTK_TABLE (table), 0, 6);
                 gtk_widget_show (table);
 
                 widget = gtk_image_new_from_stock (
-                        GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
+                        GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DND);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.5, 0.0);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 0, 1, 0, 7, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 0, 1, 0, 7,
+                        0, GTK_EXPAND | GTK_FILL, 0, 0);
                 gtk_widget_show (widget);
 
-                text = _("There are known problems with this game.");
-                markup = g_strdup_printf ("<b>%s</b>", text);
-                widget = gtk_label_new (markup);
+                /* The same text is in gnome-video-arcade.glade,
+                 * so it has to be translated with markup anyway. */
+                text = _("<b>There are known problems with this game.</b>");
+                widget = gtk_label_new (text);
                 gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 0, 1, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 1, 2, 0, 1,
+                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
                 gtk_widget_show (widget);
-                g_free (markup);
 
                 text = _("The colors aren't 100% accurate.");
                 widget = gtk_label_new (text);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 1, 2, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 1, 2, 1, 2,
+                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
                 if (color != NULL && strcmp (color, "imperfect") == 0)
                         gtk_widget_show (widget);
 
@@ -608,7 +609,8 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                 widget = gtk_label_new (text);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 2, 3, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 1, 2, 2, 3,
+                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
                 if (color != NULL && strcmp (color, "preliminary") == 0)
                         gtk_widget_show (widget);
 
@@ -616,7 +618,8 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                 widget = gtk_label_new (text);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 3, 4, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 1, 2, 3, 4,
+                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
                 if (graphic != NULL && strcmp (graphic, "imperfect") == 0)
                         gtk_widget_show (widget);
 
@@ -624,7 +627,8 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                 widget = gtk_label_new (text);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 4, 5, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 1, 2, 4, 5,
+                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
                 if (sound != NULL && strcmp (sound, "imperfect") == 0)
                         gtk_widget_show (widget);
 
@@ -632,7 +636,8 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                 widget = gtk_label_new (text);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 5, 6, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 1, 2, 5, 6,
+                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
                 if (sound != NULL && strcmp (sound, "preliminary") == 0)
                         gtk_widget_show (widget);
 
@@ -640,7 +645,8 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                 widget = gtk_label_new (text);
                 gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
                 gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 6, 7, 0, 0, 0, 0);
+                        GTK_TABLE (table), widget, 1, 2, 6, 7,
+                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
                 if (cocktail != NULL && strcmp (cocktail, "preliminary") == 0)
                         gtk_widget_show (widget);
 
