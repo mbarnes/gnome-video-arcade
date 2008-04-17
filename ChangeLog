@@ -1,3 +1,23 @@
+2008-04-16  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.glade:
+	Add a couple more warning labels to the Technical tab.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-columns.c (columns_driver_status_set_properties):
+	Be more conservative about showing the error icon.  Only show it
+	if the game doesn't work or if the protection is not emulated.
+
+	* src/gva-columns.c (columns_tooltip_driver_status):
+	* src/gva-properties.c (properties_update_status):
+	Same as above.  Also, add stronger warnings for when we /do/ show
+	the error icon.
+
+	* src/gva-ui.h:
+	Add more GVA_WIDGET_PROPERTIES_xxx widgets.
+
 2008-04-15  Matthew Barnes  <mbarnes@redhat.com>
 
 	* docs/reference/gnome-video-arcade-sections.txt:

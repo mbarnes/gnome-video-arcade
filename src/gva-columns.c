@@ -156,12 +156,17 @@ columns_driver_status_set_properties (GtkTreeViewColumn *column,
                                       GtkTreeModel *model,
                                       GtkTreeIter *iter)
 {
-        GvaGameStoreColumn column_id;
         GdkPixbuf *pixbuf = NULL;
-        gchar *status;
+        gchar *driver_status;
+        gchar *driver_emulation;
+        gchar *driver_protection;
 
-        column_id = gtk_tree_view_column_get_sort_column_id (column);
-        gtk_tree_model_get (model, iter, column_id, &status, -1);
+        gtk_tree_model_get (
+                model, iter,
+                GVA_GAME_STORE_COLUMN_DRIVER_STATUS, &driver_status,
+                GVA_GAME_STORE_COLUMN_DRIVER_EMULATION, &driver_emulation,
+                GVA_GAME_STORE_COLUMN_DRIVER_PROTECTION, &driver_protection,
+                -1);
 
         /* XXX For the "good" icon I want some kind of positive symbol; a
          *     checkmark or thumbs up or something.  The GTK_STOCK_APPLY 
@@ -169,18 +174,24 @@ columns_driver_status_set_properties (GtkTreeViewColumn *column,
          *     checkmark), but may not be suitable for all icon themes. */
 
         /* Remember, we don't own the pixbuf reference. */
-        if (strcmp (status, "good") == 0)
+        if (strcmp (driver_status, "good") == 0)
                 pixbuf = columns_get_icon_name (GTK_STOCK_APPLY);
-        else if (strcmp (status, "imperfect") == 0)
-                pixbuf = columns_get_icon_name ("dialog-warning");
-        else if (strcmp (status, "preliminary") == 0)
-                pixbuf = columns_get_icon_name ("dialog-error");
+        else if (strcmp (driver_emulation, "preliminary") == 0)
+                pixbuf = columns_get_icon_name (GTK_STOCK_DIALOG_ERROR);
+        else if (strcmp (driver_protection, "preliminary") == 0)
+                pixbuf = columns_get_icon_name (GTK_STOCK_DIALOG_ERROR);
+        else if (strcmp (driver_status, "imperfect") == 0)
+                pixbuf = columns_get_icon_name (GTK_STOCK_DIALOG_WARNING);
+        else if (strcmp (driver_status, "preliminary") == 0)
+                pixbuf = columns_get_icon_name (GTK_STOCK_DIALOG_WARNING);
 
         g_object_set (
                 renderer, "pixbuf", pixbuf,
                 "visible", (pixbuf != NULL), NULL);
 
-        g_free (status);
+        g_free (driver_status);
+        g_free (driver_emulation);
+        g_free (driver_protection);
 }
 
 static void
@@ -550,115 +561,151 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                                GtkTreeIter *iter,
                                GtkTooltip *tooltip)
 {
-        gboolean show_tooltip = FALSE;
-        gchar *cocktail;
-        gchar *color;
-        gchar *graphic;
-        gchar *sound;
-        gchar *status;
+        GtkWidget *table;
+        GtkWidget *widget;
+        const gchar *text;
+        const gchar *stock_id;
+        gchar *driver_status;
+        gchar *driver_emulation;
+        gchar *driver_color;
+        gchar *driver_sound;
+        gchar *driver_graphic;
+        gchar *driver_cocktail;
+        gchar *driver_protection;
+        gboolean show_tooltip;
 
         gtk_tree_model_get (
                 model, iter,
-                GVA_GAME_STORE_COLUMN_DRIVER_COCKTAIL, &cocktail,
-                GVA_GAME_STORE_COLUMN_DRIVER_COLOR, &color,
-                GVA_GAME_STORE_COLUMN_DRIVER_GRAPHIC, &graphic,
-                GVA_GAME_STORE_COLUMN_DRIVER_SOUND, &sound,
-                GVA_GAME_STORE_COLUMN_DRIVER_STATUS, &status,
+                GVA_GAME_STORE_COLUMN_DRIVER_STATUS, &driver_status,
+                GVA_GAME_STORE_COLUMN_DRIVER_EMULATION, &driver_emulation,
+                GVA_GAME_STORE_COLUMN_DRIVER_COLOR, &driver_color,
+                GVA_GAME_STORE_COLUMN_DRIVER_SOUND, &driver_sound,
+                GVA_GAME_STORE_COLUMN_DRIVER_GRAPHIC, &driver_graphic,
+                GVA_GAME_STORE_COLUMN_DRIVER_COCKTAIL, &driver_cocktail,
+                GVA_GAME_STORE_COLUMN_DRIVER_PROTECTION, &driver_protection,
                 -1);
 
-        if (status != NULL && strcmp (status, "imperfect") == 0)
-        {
-                GtkWidget *table;
-                GtkWidget *widget;
-                const gchar *text;
+        show_tooltip =
+                strcmp (driver_status, "imperfect") == 0 ||
+                strcmp (driver_status, "preliminary") == 0;
+        if (!show_tooltip)
+                goto exit;
 
-                table = gtk_table_new (7, 2, FALSE);
-                gtk_table_set_col_spacings (GTK_TABLE (table), 12);
-                gtk_table_set_row_spacing (GTK_TABLE (table), 0, 6);
-                gtk_widget_show (table);
+        if (strcmp (driver_emulation, "preliminary") == 0)
+                stock_id = GTK_STOCK_DIALOG_ERROR;
+        else if (strcmp (driver_protection, "preliminary") == 0)
+                stock_id = GTK_STOCK_DIALOG_ERROR;
+        else
+                stock_id = GTK_STOCK_DIALOG_WARNING;
 
-                widget = gtk_image_new_from_stock (
-                        GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DND);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.5, 0.0);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 0, 1, 0, 7,
-                        0, GTK_EXPAND | GTK_FILL, 0, 0);
+        table = gtk_table_new (9, 2, FALSE);
+        gtk_table_set_col_spacings (GTK_TABLE (table), 6);
+        gtk_table_set_row_spacing (GTK_TABLE (table), 0, 6);
+        gtk_widget_show (table);
+
+        widget = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_DND);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.5, 0.0);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 0, 1, 0, 9,
+                0, GTK_EXPAND | GTK_FILL, 0, 0);
+        gtk_widget_show (widget);
+
+        /* The same text is in gnome-video-arcade.glade,
+         * so it has to be translated with markup anyway. */
+        text = _("<b>There are known problems with this game:</b>");
+        widget = gtk_label_new (text);
+        gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 0, 1,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        gtk_widget_show (widget);
+
+        /* The labels begin with a UTF-8 encoded bullet character. */
+
+        text = _("• The colors aren't 100% accurate.");
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 1, 2,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_color, "imperfect") == 0)
                 gtk_widget_show (widget);
 
-                /* The same text is in gnome-video-arcade.glade,
-                 * so it has to be translated with markup anyway. */
-                text = _("<b>There are known problems with this game.</b>");
-                widget = gtk_label_new (text);
-                gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 0, 1,
-                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        text = _("• The colors are completely wrong.");
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 2, 3,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_color, "preliminary") == 0)
                 gtk_widget_show (widget);
 
-                text = _("The colors aren't 100% accurate.");
-                widget = gtk_label_new (text);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 1, 2,
-                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
-                if (color != NULL && strcmp (color, "imperfect") == 0)
-                        gtk_widget_show (widget);
+        text = _("• The video emulation isn't 100% accurate.");
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 3, 4,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_graphic, "imperfect") == 0)
+                gtk_widget_show (widget);
 
-                text = _("The colors are completely wrong.");
-                widget = gtk_label_new (text);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 2, 3,
-                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
-                if (color != NULL && strcmp (color, "preliminary") == 0)
-                        gtk_widget_show (widget);
+        text = _("• The sound emulation isn't 100% accurate.");
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 4, 5,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_sound, "imperfect") == 0)
+                gtk_widget_show (widget);
 
-                text = _("The video emulation isn't 100% accurate.");
-                widget = gtk_label_new (text);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 3, 4,
-                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
-                if (graphic != NULL && strcmp (graphic, "imperfect") == 0)
-                        gtk_widget_show (widget);
+        text = _("• The game lacks sound.");
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 5, 6,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_sound, "preliminary") == 0)
+                gtk_widget_show (widget);
 
-                text = _("The sound emulation isn't 100% accurate.");
-                widget = gtk_label_new (text);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 4, 5,
-                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
-                if (sound != NULL && strcmp (sound, "imperfect") == 0)
-                        gtk_widget_show (widget);
+        text = _("• Screen flipping in cocktail mode is not supported.");
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 6, 7,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_cocktail, "preliminary") == 0)
+                gtk_widget_show (widget);
 
-                text = _("The game lacks sound.");
-                widget = gtk_label_new (text);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 5, 6,
-                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
-                if (sound != NULL && strcmp (sound, "preliminary") == 0)
-                        gtk_widget_show (widget);
+        text = _("• <b>THIS GAME DOESN'T WORK.</b>");
+        widget = gtk_label_new (text);
+        gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 7, 8,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_emulation, "preliminary") == 0)
+                gtk_widget_show (widget);
 
-                text = _("Screen flipping in cocktail mode is not supported.");
-                widget = gtk_label_new (text);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-                gtk_table_attach (
-                        GTK_TABLE (table), widget, 1, 2, 6, 7,
-                        GTK_EXPAND | GTK_FILL, 0, 0, 0);
-                if (cocktail != NULL && strcmp (cocktail, "preliminary") == 0)
-                        gtk_widget_show (widget);
+        text = _("• The game has protection which isn't fully emulated.");
+        widget = gtk_label_new (text);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        gtk_table_attach (
+                GTK_TABLE (table), widget, 1, 2, 8, 9,
+                GTK_EXPAND | GTK_FILL, 0, 0, 0);
+        if (strcmp (driver_protection, "preliminary") == 0)
+                gtk_widget_show (widget);
 
-                gtk_tooltip_set_custom (tooltip, table);
-                show_tooltip = TRUE;
-        }
+        gtk_tooltip_set_custom (tooltip, table);
 
-        g_free (cocktail);
-        g_free (color);
-        g_free (graphic);
-        g_free (sound);
-        g_free (status);
+exit:
+        g_free (driver_status);
+        g_free (driver_emulation);
+        g_free (driver_color);
+        g_free (driver_sound);
+        g_free (driver_graphic);
+        g_free (driver_cocktail);
+        g_free (driver_protection);
 
         return show_tooltip;
 }

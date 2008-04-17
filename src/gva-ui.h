@@ -131,8 +131,6 @@
         (gva_ui_get_widget ("properties-imperfect-color-label"))
 #define GVA_WIDGET_PROPERTIES_IMPERFECT_GRAPHIC_LABEL \
         (gva_ui_get_widget ("properties-imperfect-graphic-label"))
-#define GVA_WIDGET_PROPERTIES_IMPERFECT_HBOX \
-        (gva_ui_get_widget ("properties-imperfect-hbox"))
 #define GVA_WIDGET_PROPERTIES_IMPERFECT_SOUND_LABEL \
         (gva_ui_get_widget ("properties-imperfect-sound-label"))
 #define GVA_WIDGET_PROPERTIES_NOTEBOOK \
@@ -141,10 +139,18 @@
         (gva_ui_get_widget ("properties-preliminary-cocktail-label"))
 #define GVA_WIDGET_PROPERTIES_PRELIMINARY_COLOR_LABEL \
         (gva_ui_get_widget ("properties-preliminary-color-label"))
+#define GVA_WIDGET_PROPERTIES_PRELIMINARY_EMULATION_LABEL \
+        (gva_ui_get_widget ("properties-preliminary-emulation-label"))
+#define GVA_WIDGET_PROPERTIES_PRELIMINARY_PROTECTION_LABEL \
+        (gva_ui_get_widget ("properties-preliminary-protection-label"))
 #define GVA_WIDGET_PROPERTIES_PRELIMINARY_SOUND_LABEL \
         (gva_ui_get_widget ("properties-preliminary-sound-label"))
 #define GVA_WIDGET_PROPERTIES_SOUND_VBOX \
         (gva_ui_get_widget ("properties-sound-vbox"))
+#define GVA_WIDGET_PROPERTIES_STATUS_HBOX \
+        (gva_ui_get_widget ("properties-status-hbox"))
+#define GVA_WIDGET_PROPERTIES_STATUS_IMAGE \
+        (gva_ui_get_widget ("properties-status-image"))
 #define GVA_WIDGET_PROPERTIES_VIDEO_VBOX \
         (gva_ui_get_widget ("properties-video-vbox"))
 #define GVA_WIDGET_PROPERTIES_WINDOW \

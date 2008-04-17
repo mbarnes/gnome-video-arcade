@@ -345,24 +345,42 @@ properties_update_status (GtkTreeModel *model,
                           GtkTreeIter *iter)
 {
         GtkWidget *widget;
+        const gchar *stock_id;
         gchar *driver_status;
+        gchar *driver_emulation;
         gchar *driver_color;
         gchar *driver_sound;
         gchar *driver_graphic;
         gchar *driver_cocktail;
+        gchar *driver_protection;
         gboolean visible;
 
         gtk_tree_model_get (
                 model, iter,
                 GVA_GAME_STORE_COLUMN_DRIVER_STATUS, &driver_status,
+                GVA_GAME_STORE_COLUMN_DRIVER_EMULATION, &driver_emulation,
                 GVA_GAME_STORE_COLUMN_DRIVER_COLOR, &driver_color,
                 GVA_GAME_STORE_COLUMN_DRIVER_SOUND, &driver_sound,
                 GVA_GAME_STORE_COLUMN_DRIVER_GRAPHIC, &driver_graphic,
                 GVA_GAME_STORE_COLUMN_DRIVER_COCKTAIL, &driver_cocktail,
+                GVA_GAME_STORE_COLUMN_DRIVER_PROTECTION, &driver_protection,
                 -1);
 
-        widget = GVA_WIDGET_PROPERTIES_IMPERFECT_HBOX;
-        visible = (strcmp (driver_status, "imperfect") == 0);
+        if (strcmp (driver_emulation, "preliminary") == 0)
+                stock_id = GTK_STOCK_DIALOG_ERROR;
+        else if (strcmp (driver_protection, "preliminary") == 0)
+                stock_id = GTK_STOCK_DIALOG_ERROR;
+        else
+                stock_id = GTK_STOCK_DIALOG_WARNING;
+
+        widget = GVA_WIDGET_PROPERTIES_STATUS_HBOX;
+        visible = (strcmp (driver_status, "imperfect") == 0) ||
+                (strcmp (driver_status, "preliminary") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        gtk_image_set_from_stock (
+                GTK_IMAGE (GVA_WIDGET_PROPERTIES_STATUS_IMAGE),
+                stock_id, GTK_ICON_SIZE_DIALOG);
         g_object_set (widget, "visible", visible, NULL);
 
         widget = GVA_WIDGET_PROPERTIES_IMPERFECT_COLOR_LABEL;
@@ -385,15 +403,25 @@ properties_update_status (GtkTreeModel *model,
         visible = (strcmp (driver_color, "preliminary") == 0);
         g_object_set (widget, "visible", visible, NULL);
 
+        widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_EMULATION_LABEL;
+        visible = (strcmp (driver_emulation, "preliminary") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
+        widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_PROTECTION_LABEL;
+        visible = (strcmp (driver_protection, "preliminary") == 0);
+        g_object_set (widget, "visible", visible, NULL);
+
         widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_SOUND_LABEL;
         visible = (strcmp (driver_sound, "preliminary") == 0);
         g_object_set (widget, "visible", visible, NULL);
 
         g_free (driver_status);
+        g_free (driver_emulation);
         g_free (driver_color);
         g_free (driver_sound);
         g_free (driver_graphic);
         g_free (driver_cocktail);
+        g_free (driver_protection);
 }
 
 static void
