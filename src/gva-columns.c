@@ -732,6 +732,62 @@ columns_tooltip_favorite (GtkTreeModel *model,
 }
 
 static gboolean
+columns_tooltip_input_players (GtkTreeModel *model,
+                               GtkTreeIter *iter,
+                               GtkTooltip *tooltip)
+{
+        const gchar *text;
+        gint max_players;
+
+        gtk_tree_model_get (
+                model, iter,
+                GVA_GAME_STORE_COLUMN_INPUT_PLAYERS, &max_players, -1);
+
+        /* Keep this in sync with MAX_PLAYER_ICONS. */
+        switch (max_players)
+        {
+                case 1:
+                        text = _("One player only");
+                        break;
+
+                case 2:
+                        text = _("One or two players");
+                        break;
+
+                case 3:
+                        text = _("Up to three players");
+                        break;
+
+                case 4:
+                        text = _("Up to four players");
+                        break;
+
+                case 5:
+                        text = _("Up to five players");
+                        break;
+
+                case 6:
+                        text = _("Up to six players");
+                        break;
+
+                case 7:
+                        text = _("Up to seven players");
+                        break;
+
+                case 8:
+                        text = _("Up to eight players");
+                        break;
+
+                default:
+                        return FALSE;
+        }
+
+        gtk_tooltip_set_text (tooltip, text);
+
+        return TRUE;
+}
+
+static gboolean
 columns_tooltip_summary (GtkTreeModel *model,
                          GtkTreeIter *iter,
                          GtkTooltip *tooltip)
@@ -810,7 +866,8 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "input_service",      NULL },
         { "input_tilt",         NULL },
         { "input_players",      N_("Players"),
-                                columns_factory_input_players },
+                                columns_factory_input_players,
+                                columns_tooltip_input_players },
         { "input_buttons",      NULL },
         { "input_coins",        NULL },
         { "driver_status",      N_("Status"),
