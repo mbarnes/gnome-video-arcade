@@ -1,3 +1,10 @@
+2008-04-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.6.0
+
+	* src/gva-columns.c (columns_tooltip_input_players):
+	New tooltip callback for the Players column.
+
 2008-04-16  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:
