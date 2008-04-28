@@ -47,6 +47,7 @@
 #define GVA_GCONF_PROPERTIES_PAGE_KEY   GVA_GCONF_PREFIX "/properties-page"
 #define GVA_GCONF_SEARCH_KEY            GVA_GCONF_PREFIX "/search"
 #define GVA_GCONF_SELECTED_GAME_KEY     GVA_GCONF_PREFIX "/selected-game"
+#define GVA_GCONF_SELECTED_MATCH_KEY    GVA_GCONF_PREFIX "/selected-match"
 #define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"
 #define GVA_GCONF_SHOW_CLONES_KEY       GVA_GCONF_PREFIX "/show-clones"
 #define GVA_GCONF_SORT_COLUMN_KEY       GVA_GCONF_PREFIX "/sort-column"

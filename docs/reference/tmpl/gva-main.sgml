@@ -120,7 +120,14 @@
 @message_id: 
 
 
-<!-- ##### FUNCTION gva_main_get_last_search ##### -->
+<!-- ##### FUNCTION gva_main_execute_search ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_main_get_last_search_text ##### -->
 <para>
 
 </para>
@@ -128,12 +135,31 @@
 @Returns: 
 
 
-<!-- ##### FUNCTION gva_main_set_last_search ##### -->
+<!-- ##### FUNCTION gva_main_set_last_search_text ##### -->
 <para>
 
 </para>
 
 @text: 
+
+
+<!-- ##### FUNCTION gva_main_get_last_selected_match ##### -->
+<para>
+
+</para>
+
+@column_name: 
+@search_text: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_main_set_last_selected_match ##### -->
+<para>
+
+</para>
+
+@column_name: 
+@search_text: 
 
 
 <!-- ##### FUNCTION gva_main_search_entry_activate_cb ##### -->

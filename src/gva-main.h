@@ -51,8 +51,13 @@ guint         gva_main_statusbar_push            (guint context_id,
 void          gva_main_statusbar_pop             (guint context_id);
 void          gva_main_statusbar_remove          (guint context_id,
                                                   guint message_id);
-gchar *       gva_main_get_last_search           (void);
-void          gva_main_set_last_search           (const gchar *text);
+void          gva_main_execute_search            (void);
+gchar *       gva_main_get_last_search_text      (void);
+void          gva_main_set_last_search_text      (const gchar *text);
+gboolean      gva_main_get_last_selected_match   (gchar **column_name,
+                                                  gchar **search_text);
+void          gva_main_set_last_selected_match   (const gchar *column_name,
+                                                  const gchar *search_text);
 
 /* Signal Handlers */
 

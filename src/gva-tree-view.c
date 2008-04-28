@@ -33,6 +33,39 @@
 #define SQL_SELECT_GAMES \
         "SELECT %s FROM available"
 
+void
+tree_view_add_search_expression (GString *expression)
+{
+        gchar *column_name = NULL;
+        gchar *search_text = NULL;
+
+        if (gva_main_get_last_selected_match (&column_name, &search_text))
+                g_string_append_printf (
+                        expression, "%s == '%s'", column_name, search_text);
+        else
+        {
+                search_text = gva_main_get_last_search_text ();
+                if (search_text != NULL && *search_text != '\0')
+                        g_string_append_printf (
+                                expression,
+                                "(name LIKE '%s' OR "
+                                "bios MATCH '%s' OR "
+                                "category MATCH '%s' OR "
+                                "sourcefile LIKE '%s' OR "
+                                "description MATCH '%s' OR "
+                                "manufacturer MATCH '%s' OR "
+                                "year LIKE '%s')",
+                                search_text, search_text,
+                                search_text, search_text,
+                                search_text, search_text,
+                                search_text);
+                else
+                        g_string_append (expression, "name ISNULL");
+        }
+
+        g_free (column_name);
+        g_free (search_text);
+}
 static gboolean
 tree_view_show_popup_menu (GdkEventButton *event)
 {
@@ -186,11 +219,11 @@ gva_tree_view_lookup (const gchar *game)
 gboolean
 gva_tree_view_update (GError **error)
 {
-        GString *expr;
+        GString *expression;
         const gchar *name;
         gboolean success;
 
-        expr = g_string_sized_new (128);
+        expression = g_string_sized_new (128);
 
         switch (gva_tree_view_get_selected_view ())
         {
@@ -198,30 +231,12 @@ gva_tree_view_update (GError **error)
                         break;
 
                 case 1:  /* Favorite Games */
-                        g_string_append (expr, "favorite == \"yes\"");
+                        g_string_append (expression, "favorite == \"yes\"");
                         break;
 
                 case 2:  /* Search Results */
-                {
-                        gchar *text;
-
-                        text = gva_main_get_last_search ();
-                        if (text != NULL && *text != '\0')
-                                g_string_append_printf (
-                                        expr, "(name LIKE '%s' OR "
-					"bios MATCH '%s' OR "
-                                        "category MATCH '%s' OR "
-                                        "sourcefile LIKE '%s' OR "
-                                        "description MATCH '%s' OR "
-                                        "manufacturer MATCH '%s' OR "
-                                        "year LIKE '%s')",
-                                        text, text, text, text,
-                                        text, text, text);
-                        else
-                                g_string_append (expr, "name ISNULL");
-                        g_free (text);
+                        tree_view_add_search_expression (expression);
                         break;
-                }
 
                 default:
                         g_assert_not_reached ();
@@ -229,13 +244,13 @@ gva_tree_view_update (GError **error)
 
         if (!gva_preferences_get_show_clones ())
         {
-                if (expr->len > 0)
-                        g_string_append (expr, " AND ");
-                g_string_append (expr, "cloneof ISNULL");
+                if (expression->len > 0)
+                        g_string_append (expression, " AND ");
+                g_string_append (expression, "cloneof ISNULL");
         }
 
-        success = gva_tree_view_run_query (expr->str, error);
-        g_string_free (expr, TRUE);
+        success = gva_tree_view_run_query (expression->str, error);
+        g_string_free (expression, TRUE);
 
         if (!success)
                 return FALSE;
@@ -249,7 +264,7 @@ gva_tree_view_update (GError **error)
 
 /**
  * gva_tree_view_run_query:
- * @expr: an SQL "where" expression
+ * @expression: an SQL "where" expression
  * @error: return location for a #GError, or %NULL
  *
  * Similar to gva_tree_view_update() but applies custom criteria to the game
@@ -258,7 +273,7 @@ gva_tree_view_update (GError **error)
  * Returns: %TRUE on success, %FALSE if an error occurred
  **/
 gboolean
-gva_tree_view_run_query (const gchar *expr,
+gva_tree_view_run_query (const gchar *expression,
                          GError **error)
 {
         GvaGameStoreColumn column_id;
@@ -292,8 +307,8 @@ gva_tree_view_run_query (const gchar *expr,
         g_string_printf (string, SQL_SELECT_GAMES, columns);
         g_free (columns);
 
-        if (expr != NULL && *expr != '\0')
-                g_string_append_printf (string, " WHERE %s", expr);
+        if (expression != NULL && *expression != '\0')
+                g_string_append_printf (string, " WHERE %s", expression);
 
         window = gtk_widget_get_parent_window (GTK_WIDGET (view));
         display = gtk_widget_get_display (GTK_WIDGET (view));

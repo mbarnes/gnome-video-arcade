@@ -42,6 +42,7 @@
 
 /* Entry completion columns */
 enum {
+        COLUMN_NAME,
         COLUMN_TEXT,
         COLUMN_TYPE,
         COLUMN_CKEY
@@ -96,14 +97,19 @@ main_entry_completion_match_selected_cb (GtkEntryCompletion *completion,
                                          GtkTreeModel *model,
                                          GtkTreeIter *iter)
 {
-        GtkWidget *widget;
-        gchar *text;
+        gchar *column_name;
+        gchar *search_text;
 
-        widget = gtk_entry_completion_get_entry (completion);
-        gtk_tree_model_get (model, iter, 0, &text, -1);
-        gtk_entry_set_text (GTK_ENTRY (widget), text);
-        gtk_widget_activate (widget);
-        g_free (text);
+        gtk_tree_model_get (
+                model, iter,
+                COLUMN_NAME, &column_name,
+                COLUMN_TEXT, &search_text, -1);
+
+        gva_main_set_last_selected_match (column_name, search_text);
+        gva_main_execute_search ();
+
+        g_free (column_name);
+        g_free (search_text);
 
         return TRUE;
 }
@@ -169,7 +175,7 @@ gva_main_init (void)
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, FALSE);
 
         /* Initialize the search entry. */
-        text = gva_main_get_last_search ();
+        text = gva_main_get_last_search_text ();
         gtk_entry_set_text (GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY), text);
         g_free (text);
 
@@ -341,29 +347,30 @@ gva_main_init_search_completion (GError **error)
                 return FALSE;
 
         store = gtk_list_store_new (
-                3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+                4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
         while ((errcode = sqlite3_step (stmt)) == SQLITE_ROW)
         {
                 GvaGameStoreColumn column_id;
                 const gchar *column_name;
                 const gchar *column_title;
-                const gchar *matched_text;
+                const gchar *search_text;
                 gchar *collation_key;
 
-                matched_text = (const gchar *) sqlite3_column_text (stmt, 0);
+                search_text = (const gchar *) sqlite3_column_text (stmt, 0);
                 column_name = (const gchar *) sqlite3_column_text (stmt, 1);
                 gva_columns_lookup_id (column_name, &column_id);
                 column_title = gva_columns_lookup_title (column_id);
 
-                if (matched_text == NULL || *matched_text == '\0')
+                if (search_text == NULL || *search_text == '\0')
                         continue;
 
                 gtk_list_store_append (store, &iter);
-                collation_key = gva_search_collate_key (matched_text);
+                collation_key = gva_search_collate_key (search_text);
                 gtk_list_store_set (
                         store, &iter,
-                        COLUMN_TEXT, matched_text,
+                        COLUMN_NAME, column_name,
+                        COLUMN_TEXT, search_text,
                         COLUMN_TYPE, column_title,
                         COLUMN_CKEY, collation_key, -1);
                 g_free (collation_key);
@@ -384,7 +391,7 @@ gva_main_init_search_completion (GError **error)
                 main_entry_completion_match, NULL, NULL);
         gtk_entry_completion_set_minimum_key_length (completion, 3);
         gtk_entry_completion_set_model (completion, GTK_TREE_MODEL (store));
-        gtk_entry_completion_set_text_column (completion, 0);
+        gtk_entry_completion_set_text_column (completion, COLUMN_TEXT);
 
         g_signal_connect (
                 completion, "match-selected",
@@ -404,7 +411,7 @@ gva_main_init_search_completion (GError **error)
         gtk_cell_layout_pack_start (
                 GTK_CELL_LAYOUT (completion), renderer, FALSE);
         gtk_cell_layout_add_attribute (
-                GTK_CELL_LAYOUT (completion), renderer, "text", 1);
+                GTK_CELL_LAYOUT (completion), renderer, "text", COLUMN_TYPE);
 
         entry = GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY);
         gtk_entry_set_completion (entry, completion);
@@ -626,77 +633,36 @@ gva_main_statusbar_remove (guint context_id,
 }
 
 /**
- * gva_main_get_last_search:
+ * gva_main_execute_search:
  *
- * Returns the criteria of the most recent search in either the current
- * or previous session of <emphasis>GNOME Video Arcade</emphasis>.
+ * Executes a game database search and configures the main window to
+ * display the results.  More precisely, the function saves the search
+ * entry contents to GConf, switches to the Search Results view, forces
+ * an update, ensures a row in the resulting game list is selected, and
+ * gives focus to the main tree view.
  *
- * Returns: the criteria of the most recent search
- **/
-gchar *
-gva_main_get_last_search (void)
-{
-        GConfClient *client;
-        gchar *text;
-        GError *error = NULL;
-
-        client = gconf_client_get_default ();
-        text = gconf_client_get_string (client, GVA_GCONF_SEARCH_KEY, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-
-        return (text != NULL) ? g_strstrip (text) : g_strdup ("");
-}
-
-/**
- * gva_main_set_last_search:
- * @text: the search text
- *
- * Writes @text to GConf key
- * <filename>/apps/gnome-video-arcade/search</filename>.
- *
- * This is used to remember the search text from the previous session of
- * <emphasis>GNOME Video Arcade</emphasis> so that the same text can be
- * preset in the search entry at startup.
+ * The SQL expression used in the database search is retrieved from
+ * gva_main_get_search_expression().  It is applied while updating the
+ * Search Results view.
  **/
 void
-gva_main_set_last_search (const gchar *text)
-{
-        GConfClient *client;
-        GError *error = NULL;
-
-        g_return_if_fail (text != NULL);
-
-        client = gconf_client_get_default ();
-        gconf_client_set_string (client, GVA_GCONF_SEARCH_KEY, text, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-}
-
-/**
- * gva_main_search_entry_activate_cb:
- * @entry: the search entry
- *
- * Handler for #GtkEntry::activate signals to the search entry.
- *
- * Saves the contents of the search entry and switches the main window to
- * the "Search Results" view.
- **/
-void
-gva_main_search_entry_activate_cb (GtkEntry *entry)
+gva_main_execute_search (void)
 {
         GtkTreeSelection *selection;
         GtkTreeModel *model;
         GtkTreeView *view;
         GtkTreeIter iter;
+        GtkEntry *entry;
         gchar *text;
 
+        entry = GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY);
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         selection = gtk_tree_view_get_selection (view);
 
+        /* Save the search entry text. */
         text = g_strdup (gtk_entry_get_text (entry));
         gtk_entry_set_text (entry, g_strstrip (text));
-        gva_main_set_last_search (text);
+        gva_main_set_last_search_text (text);
         g_free (text);
 
         /* Force a tree view update. */
@@ -727,6 +693,160 @@ gva_main_search_entry_activate_cb (GtkEntry *entry)
         }
 
         gtk_widget_grab_focus (GTK_WIDGET (view));
+}
+
+/**
+ * gva_main_get_last_search_text:
+ *
+ * Returns the most recent search entry text from either the current or
+ * previous session of <emphasis>GNOME Video Arcade</emphasis>.
+ *
+ * Returns: the most recent search text
+ **/
+gchar *
+gva_main_get_last_search_text (void)
+{
+        GConfClient *client;
+        gchar *text;
+        GError *error = NULL;
+
+        client = gconf_client_get_default ();
+        text = gconf_client_get_string (client, GVA_GCONF_SEARCH_KEY, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+
+        return (text != NULL) ? g_strstrip (text) : g_strdup ("");
+}
+
+/**
+ * gva_main_set_last_search_text:
+ * @text: the search entry text
+ *
+ * Writes @text to GConf key
+ * <filename>/apps/gnome-video-arcade/search</filename>.
+ *
+ * This is used to remember the search entry text from the previous session
+ * of <emphasis>GNOME Video Arcade</emphasis> so that the same text can be
+ * preset in the search entry at startup.
+ **/
+void
+gva_main_set_last_search_text (const gchar *text)
+{
+        GConfClient *client;
+        GError *error = NULL;
+
+        g_return_if_fail (text != NULL);
+
+        client = gconf_client_get_default ();
+        gconf_client_set_string (client, GVA_GCONF_SEARCH_KEY, text, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+}
+
+/**
+ * gva_main_get_last_selected_match:
+ * @column_name: return location for the column name
+ * @search_text: return location for the search text
+ *
+ * Returns the most recently selected match in a search completion list
+ * from either the current or previous session of <emphasis>GNOME Video
+ * Arcade</emphasis>.  If the completion feature was not used in the
+ * most recent search, @column_name and @search_text are set to %NULL
+ * and the function returns %FALSE.
+ *
+ * Returns: %TRUE if match values wer successfully retrieved from GConf,
+ *          %FALSE otherwise
+ **/
+gboolean
+gva_main_get_last_selected_match (gchar **column_name,
+                                  gchar **search_text)
+{
+        GConfClient *client;
+        gboolean success;
+        GError *error = NULL;
+
+        g_return_val_if_fail (column_name != NULL, FALSE);
+        g_return_val_if_fail (search_text != NULL, FALSE);
+
+        *column_name = *search_text = NULL;
+
+        client = gconf_client_get_default ();
+        success = gconf_client_get_pair (
+                client, GVA_GCONF_SELECTED_MATCH_KEY,
+                GCONF_VALUE_STRING, GCONF_VALUE_STRING,
+                column_name, search_text, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+
+        if (success)
+        {
+                g_strstrip (*column_name);
+                g_strstrip (*search_text);
+
+                /* Both strings must be non-empty. */
+                if (**column_name == '\0' || **search_text == '\0')
+                {
+                        g_free (*column_name);
+                        g_free (*search_text);
+                        *column_name = NULL;
+                        *search_text = NULL;
+                        success = FALSE;
+                }
+        }
+
+        return success;
+}
+
+/**
+ * gva_main_set_last_selected_match:
+ * @column_name: the column name of the completion match
+ * @search_text: the search text of the completion match
+ *
+ * Writes @column_name and @search_text to GConf key
+ * <filename>/apps/gnome-video-arcade/sql-expression</filename> as a
+ * string pair.
+ *
+ * This is used to remember whether the search results from the previous
+ * session of <emphasis>GNOME Video Arcade</emphasis> were the result of
+ * selecting a match from the search completion list.  If so, the values
+ * are also used to restore the contents of the Search Results view.
+ **/
+void
+gva_main_set_last_selected_match (const gchar *column_name,
+                                  const gchar *search_text)
+{
+        GConfClient *client;
+        GError *error = NULL;
+
+        if (column_name == NULL)
+                column_name = "";
+
+        if (search_text == NULL)
+                search_text = "";
+
+        client = gconf_client_get_default ();
+        gconf_client_set_pair (
+                client, GVA_GCONF_SELECTED_MATCH_KEY,
+                GCONF_VALUE_STRING, GCONF_VALUE_STRING,
+                &column_name, &search_text, &error);
+        gva_error_handle (&error);
+        g_object_unref (client);
+}
+
+/**
+ * gva_main_search_entry_activate_cb:
+ * @entry: the search entry
+ *
+ * Handler for #GtkEntry::activate signals to the search entry.
+ *
+ * Saves the contents of the search entry and switches the main window to
+ * the "Search Results" view.
+ **/
+void
+gva_main_search_entry_activate_cb (GtkEntry *entry)
+{
+        gva_main_set_last_selected_match (NULL, NULL);
+        gva_main_execute_search ();
 }
 
 /**

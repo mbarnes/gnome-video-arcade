@@ -1,3 +1,52 @@
+2008-04-28  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac: Post-release version bump.
+
+	* data/gnome-video-arcade.schemas:
+	Add selected-match key.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation and alphabetize
+	the sections.  Yes, I'm that anal.
+
+	* src/gva-common.h:
+	Add GVA_GCONF_SELECTED_MATCH_KEY.
+
+	* src/gva-main.c (gva_main_init_search_completion):
+	Add a "column name" column to the completion model.
+	Always use enum values when referring to columns.
+
+	* src/gva-main.c (gva_main_execute_search):
+	New function handles all the high-level details of executing a
+	search in the main window.  Note this function does not interact
+	directly with the games database.  The actual database search is
+	triggered by simply switching to or forcing a refresh on the
+	Search Results view.
+
+	* src/gva-main.c (gva_main_get_last_selected_match),
+	(gva_main_set_last_selected_match):
+	New functions get/set the new "selected-match" GConf key.
+	The get function also validates the strings (somewhat) before
+	returning them.
+
+	* src/gva-main.c (gva_main_search_entry_activate_cb):
+	Most of the logic here has been outsourced.  The function now
+	just calls gva_main_set_last_selected_match(NULL, NULL) and
+	gva_main_execute_search().
+
+	* src/gva-main.c (main_entry_completion_match_selected_cb):
+	Instead of copying the completion match to the search entry and
+	activating it, save the matched text and associated column name
+	to the new "selected-match" GConf key and execute a search.
+
+	* src/gva-main.c (gva_main_get_last_search):
+	Rename the function to gva_main_get_last_search_text().
+
+	* src/gva-tree-view.c (tree_view_add_search_expression):
+	New function adds an SQL "where" expression to a GString.  This
+	used to reside inside gva_tree_view_update() but the logic is a
+	bit more complicated now so it deserves its own function.
+
 2008-04-19  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.6.0

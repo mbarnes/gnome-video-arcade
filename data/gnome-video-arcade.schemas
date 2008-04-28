@@ -104,7 +104,7 @@
       <default></default>
       <locale name="C">
         <short>Search text</short>
-        <long>The most recent search.</long>
+        <long>The most recent text in the search entry.</long>
       </locale>
     </schema>
 
@@ -117,6 +117,23 @@
       <locale name="C">
         <short>Selected game</short>
         <long>The most recently selected game.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/selected-match</applyto>
+      <key>/schemas/apps/gnome-video-arcade/selected-match</key>
+      <owner>gnome-video-arcade</owner>
+      <type>pair</type>
+      <car_type>string</car_type>
+      <cdr_type>string</cdr_type>
+      <locale name="C">
+        <short>Selected completion match</short>
+        <long>The most recently selected match from a search completion list.
+        The first value is the column name of the match, and the second value
+        is the text of the match.  Example: (manufacturer, Williams).  Empty
+        values indicate the completion feature was not used in the most
+        recent search.
       </locale>
     </schema>
 
