@@ -133,7 +133,7 @@
         The first value is the column name of the match, and the second value
         is the text of the match.  Example: (manufacturer, Williams).  Empty
         values indicate the completion feature was not used in the most
-        recent search.
+        recent search.</long>
       </locale>
     </schema>
 
