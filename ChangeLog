@@ -1,3 +1,10 @@
+2008-05-11  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-game-store.c (gva_game_store_new_from_query):
+	Use gtk_tree_store_set_valuesv() to cut model construction time
+	almost in half.  On my machine, construction of the Available
+	Games model (6255 rows) dropped from ~5 seconds to ~2.75 seconds.
+
 2008-04-28  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.
