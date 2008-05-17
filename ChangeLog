@@ -1,5 +1,11 @@
 2008-05-17  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-tree-view.c (tree_view_show_popup_menu):
+	* src/gva-ui.c (gva_ui_add_column_actions):
+	The add/remove column menu items look better without quotes.
+
+2008-05-17  Matthew Barnes  <mbarnes@redhat.com>
+
 	* data/gnome-video-arcade.ui:
 	Add an "add-column" placeholder and a "remove-column" menu item to
 	the popup menu.

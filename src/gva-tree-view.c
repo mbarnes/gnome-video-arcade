@@ -86,7 +86,7 @@ tree_view_show_popup_menu (GdkEventButton *event,
 
         /* Update the "Remove Column" item in the popup menu. */
         label = g_strdup_printf (
-                _("Remove \"%s\" Column"), column_title);
+                _("Remove %s Column"), column_title);
         tooltip = g_strdup_printf (
                 _("Remove the \"%s\" column from the game list"),
                 column_title);

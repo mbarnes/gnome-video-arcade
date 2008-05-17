@@ -971,7 +971,7 @@ gva_ui_add_column_actions (GtkTreeView *view)
 
                 action_name = g_strconcat ("add-column-", column_name, NULL);
                 action_label = g_strdup_printf (
-                        _("Add \"%s\" Column"), column_title);
+                        _("Add %s Column"), column_title);
                 action_tooltip = g_strdup_printf (
                         _("Add a \"%s\" column to the game list"),
                         column_title);
