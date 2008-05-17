@@ -1,3 +1,58 @@
+2008-05-17  Matthew Barnes  <mbarnes@redhat.com>
+
+	* data/gnome-video-arcade.ui:
+	Add an "add-column" placeholder and a "remove-column" menu item to
+	the popup menu.
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-column-manager.c (column_manager_hide_selected),
+	(column_manager_show_selected):
+	Just set the column visbility.  Signal callbacks will take care of
+	updating the show/hide buttons and the toggle cell renderer.
+
+	* src/gva-column-manager.c (column_manager_row_changed_cb):
+	New "row-changed" signal handler updates the show/hide button
+	sensitivity when the selected tree model row changes.
+
+	* src/gva-column-manager.c (column_manager_notify_visible_cb):
+	New "notify::visible" signal handler emits a "row-changed" signal
+	when a game list column's visibility changes.
+
+	* src/gva-column-manager.c (column_manager_update_view):
+	Connect the new signal handlers mentioned above.
+
+	* src/gva-tree-view.c (tree_view_show_popup_menu):
+	Embed the selected game list column in the main tree view widget
+	under the "popup-menu-column" key.
+	Update the "remove-column" action's label and tooltip to reflect
+	the selected game list column.
+
+	* src/gva-tree-view.c (gva_tree_view_init):
+	Call gva_ui_add_column_actions() after loading the columns.
+
+	* src/gva-tree-view.c (gva_tree_view_button_press_event_cb),
+	(gva_tree_view_popup_menu_cb):
+	Pass the selected game list column to tree_view_show_popup_menu().
+
+	* src/gva-ui.c (action_add_column_cb):
+	Callback for any of the "add-column-xxx" actions.  Extracts the
+	selected game list column via the "popup-menu-column" key in the
+	tree view, moves the desired column after the selected column,
+	and makes the desired column visible.
+
+	* src/gva-ui.c (action_remove_column_cb):
+	Callback for the "remove-column" action.  Extracts the selected
+	game list column via the "popup-menu-column" key in the tree view,
+	and makes the selected column invisible.
+
+	* src/gva-ui.c (gva_ui_add_column_actions):
+	Adds an "add-column-xxx" action for each of the columns in the
+	given tree view, whether visible or invisible (where "xxx" is the
+	column's name).  This is called during initialization of the main
+	tree view, after the columns are loaded.
+
 2008-05-11  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-game-store.c (gva_game_store_new_from_query):

@@ -32,7 +32,6 @@ struct _GvaColumnManagerPrivate
 {
         GtkTreeView *managed_view;
 
-        GtkListStore *list_store;
         GtkTreeRowReference *move_reference;
 
         GtkTreeView *tree_view;
@@ -119,7 +118,6 @@ column_manager_hide_selected (GvaColumnManager *manager)
         GtkTreeSelection *selection;
         GtkTreeViewColumn *column;
         GtkTreeModel *model;
-        GtkTreePath *path;
         GtkTreeIter iter;
 
         selection = gtk_tree_view_get_selection (priv->tree_view);
@@ -130,15 +128,6 @@ column_manager_hide_selected (GvaColumnManager *manager)
         gtk_tree_model_get (model, &iter, 0, &column, -1);
         gtk_tree_view_column_set_visible (column, FALSE);
         g_object_unref (column);
-
-        /* Update show/hide button sensitivity. */
-        gtk_widget_set_sensitive (priv->show_button, TRUE);
-        gtk_widget_set_sensitive (priv->hide_button, FALSE);
-
-        /* Notify the cell renderer. */
-        path = gtk_tree_model_get_path (model, &iter);
-        gtk_tree_model_row_changed (model, path, &iter);
-        gtk_tree_path_free (path);
 }
 
 static void
@@ -148,7 +137,6 @@ column_manager_show_selected (GvaColumnManager *manager)
         GtkTreeSelection *selection;
         GtkTreeViewColumn *column;
         GtkTreeModel *model;
-        GtkTreePath *path;
         GtkTreeIter iter;
 
         selection = gtk_tree_view_get_selection (priv->tree_view);
@@ -159,15 +147,6 @@ column_manager_show_selected (GvaColumnManager *manager)
         gtk_tree_model_get (model, &iter, 0, &column, -1);
         gtk_tree_view_column_set_visible (column, TRUE);
         g_object_unref (column);
-
-        /* Update show/hide button sensitivity. */
-        gtk_widget_set_sensitive (priv->show_button, FALSE);
-        gtk_widget_set_sensitive (priv->hide_button, TRUE);
-
-        /* Notify the cell renderer. */
-        path = gtk_tree_model_get_path (model, &iter);
-        gtk_tree_model_row_changed (model, path, &iter);
-        gtk_tree_path_free (path);
 }
 
 static void
@@ -198,6 +177,32 @@ column_manager_render_visible (GtkTreeViewColumn *column,
         visible = gtk_tree_view_column_get_visible (managed_column);
         g_object_set (renderer, "active", visible, NULL);
         g_object_unref (managed_column);
+}
+
+static void
+column_manager_row_changed_cb (GtkTreeModel *model,
+                               GtkTreePath *path,
+                               GtkTreeIter *iter,
+                               GvaColumnManager *manager)
+{
+        GvaColumnManagerPrivate *priv = manager->priv;
+        GtkTreeSelection *selection;
+        GtkTreeViewColumn *column;
+        gboolean visible;
+
+        /* If the changed row is not selected, nothing to do. */
+        selection = gtk_tree_view_get_selection (priv->tree_view);
+        if (!gtk_tree_selection_iter_is_selected (selection, iter))
+                return;
+
+        /* Get the visible state of the selected row. */
+        gtk_tree_model_get (model, iter, 0, &column, -1);
+        visible = gtk_tree_view_column_get_visible (column);
+        g_object_unref (column);
+
+        /* Update show/hide button sensitivity. */
+        gtk_widget_set_sensitive (priv->show_button, !visible);
+        gtk_widget_set_sensitive (priv->hide_button, visible);
 }
 
 static void
@@ -317,6 +322,36 @@ column_manager_toggled_cb (GtkCellRendererToggle *renderer,
 }
 
 static void
+column_manager_notify_visible_cb (GtkTreeViewColumn *column,
+                                  GParamSpec *pspec,
+                                  GvaColumnManager *manager)
+{
+        GvaColumnManagerPrivate *priv = manager->priv;
+        GtkTreeModel *model;
+        GtkTreePath *path;
+        GtkTreeIter iter;
+        GList *list;
+        gboolean valid;
+        gint index;
+
+        /* Find the index for this column. */
+        list = gtk_tree_view_get_columns (priv->managed_view);
+        index = g_list_index (list, column);
+        g_list_free (list);
+
+        /* Convert the index to an iterator. */
+        model = gtk_tree_view_get_model (priv->tree_view);
+        path = gtk_tree_path_new_from_indices (index, -1);
+        valid = gtk_tree_model_get_iter (model, &iter, path);
+        g_return_if_fail (valid);
+
+        /* Notify the toggle cell renderer and buttons. */
+        gtk_tree_model_row_changed (model, path, &iter);
+
+        gtk_tree_path_free (path);
+}
+
+static void
 column_manager_update_view (GvaColumnManager *manager)
 {
         GvaColumnManagerPrivate *priv = manager->priv;
@@ -331,6 +366,11 @@ column_manager_update_view (GvaColumnManager *manager)
                 GtkTreeViewColumn *column = list->data;
                 GtkTreeIter iter;
 
+                g_signal_connect (
+                        column, "notify::visible",
+                        G_CALLBACK (column_manager_notify_visible_cb),
+                        manager);
+
                 gtk_list_store_append (list_store, &iter);
                 gtk_list_store_set (list_store, &iter, 0, column, -1);
                 list = g_list_delete_link (list, list);
@@ -339,6 +379,9 @@ column_manager_update_view (GvaColumnManager *manager)
         gtk_tree_view_set_model (
                 priv->tree_view, GTK_TREE_MODEL (list_store));
 
+        g_signal_connect (
+                list_store, "row-changed",
+                G_CALLBACK (column_manager_row_changed_cb), manager);
         g_signal_connect (
                 list_store, "row-inserted",
                 G_CALLBACK (column_manager_row_inserted_cb), manager);
@@ -439,12 +482,6 @@ column_manager_dispose (GObject *object)
 
                 g_object_unref (priv->managed_view);
                 manager->priv->managed_view = NULL;
-        }
-
-        if (priv->list_store != NULL)
-        {
-                g_object_unref (priv->list_store);
-                priv->list_store = NULL;
         }
 
         if (priv->tree_view != NULL)

@@ -42,6 +42,7 @@
 #define GVA_ACTION_PROPERTIES           (gva_ui_get_action ("properties"))
 #define GVA_ACTION_QUIT                 (gva_ui_get_action ("quit"))
 #define GVA_ACTION_RECORD               (gva_ui_get_action ("record"))
+#define GVA_ACTION_REMOVE_COLUMN        (gva_ui_get_action ("remove-column"))
 #define GVA_ACTION_REMOVE_FAVORITE      (gva_ui_get_action ("remove-favorite"))
 #define GVA_ACTION_SAVE_ERRORS          (gva_ui_get_action ("save-errors"))
 #define GVA_ACTION_SEARCH               (gva_ui_get_action ("search"))
@@ -161,6 +162,7 @@ G_BEGIN_DECLS
 GtkAction *     gva_ui_get_action               (const gchar *action_name);
 GtkWidget *     gva_ui_get_widget               (const gchar *widget_name);
 GtkWidget *     gva_ui_get_managed_widget       (const gchar *widget_path);
+void            gva_ui_add_column_actions       (GtkTreeView *view);
 
 G_END_DECLS
 

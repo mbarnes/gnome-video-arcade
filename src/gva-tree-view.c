@@ -66,10 +66,35 @@ tree_view_add_search_expression (GString *expression)
         g_free (column_name);
         g_free (search_text);
 }
+
 static gboolean
-tree_view_show_popup_menu (GdkEventButton *event)
+tree_view_show_popup_menu (GdkEventButton *event,
+                           GtkTreeViewColumn *column)
 {
         GtkMenu *menu;
+        GtkWidget *view;
+        const gchar *column_name;
+        const gchar *column_title;
+        GvaGameStoreColumn column_id;
+        gchar *label, *tooltip;
+
+        view = gtk_tree_view_column_get_tree_view (column);
+        g_object_set_data (G_OBJECT (view), "popup-menu-column", column);
+        column_name = g_object_get_data (G_OBJECT (column), "name");
+        gva_columns_lookup_id (column_name, &column_id);
+        column_title = gva_columns_lookup_title (column_id);
+
+        /* Update the "Remove Column" item in the popup menu. */
+        label = g_strdup_printf (
+                _("Remove \"%s\" Column"), column_title);
+        tooltip = g_strdup_printf (
+                _("Remove the \"%s\" column from the game list"),
+                column_title);
+        g_object_set (
+                GVA_ACTION_REMOVE_COLUMN, "label",
+                label, "tooltip", tooltip, NULL);
+        g_free (tooltip);
+        g_free (label);
 
         menu = GTK_MENU (gva_ui_get_managed_widget ("/game-popup"));
 
@@ -179,6 +204,7 @@ gva_tree_view_init (void)
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
 
         gva_columns_load (view);
+        gva_ui_add_column_actions (view);
 
         gtk_tree_view_set_search_equal_func (
                 view, (GtkTreeViewSearchEqualFunc)
@@ -633,19 +659,21 @@ gva_tree_view_button_press_event_cb (GtkTreeView *view,
 {
         if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
         {
+                GtkTreeViewColumn *column;
                 GtkTreePath *path;
                 gboolean valid;
 
                 /* Select the row that was clicked. */
                 valid = gtk_tree_view_get_path_at_pos (
-                        view, event->x, event->y, &path, NULL, NULL, NULL);
+                        view, event->x, event->y, &path,
+                        &column, NULL, NULL);
                 if (valid)
                 {
                         gtk_tree_view_set_cursor (view, path, NULL, FALSE);
                         gtk_widget_grab_focus (GTK_WIDGET (view));
                         gtk_tree_path_free (path);
 
-                        return tree_view_show_popup_menu (event);
+                        return tree_view_show_popup_menu (event, column);
                 }
         }
 
@@ -665,7 +693,11 @@ gva_tree_view_button_press_event_cb (GtkTreeView *view,
 gboolean
 gva_tree_view_popup_menu_cb (GtkTreeView *view)
 {
-        return tree_view_show_popup_menu (NULL);
+        GtkTreeViewColumn *column;
+
+        gtk_tree_view_get_cursor (view, NULL, &column);
+
+        return tree_view_show_popup_menu (NULL, column);
 }
 
 /**

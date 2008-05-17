@@ -5,6 +5,7 @@ GNOME Video Arcade 0.6.1
 
         What's New
         ----------
+        * Quickly add or remove columns by right-clicking on the game list.
         * More intuitive search behavior.  Picking an item from the search
           completion list now does an exact match on that item.
 
