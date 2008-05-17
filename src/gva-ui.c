@@ -106,6 +106,21 @@ action_about_cb (GtkAction *action)
                 g_object_unref (logo);
 }
 
+static void
+action_add_column_cb (GtkAction *action,
+                      GtkTreeViewColumn *column)
+{
+        GtkTreeViewColumn *base_column;
+        GtkTreeView *view;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        base_column = g_object_get_data (G_OBJECT (view), "popup-menu-column");
+        g_return_if_fail (column != base_column);
+
+        gtk_tree_view_move_column_after (view, column, base_column);
+        gtk_tree_view_column_set_visible (column, TRUE);
+}
+
 /**
  * GVA_ACTION_AUTO_SAVE:
  *
@@ -113,7 +128,7 @@ action_about_cb (GtkAction *action)
  * restore the emulated machine's previous state when starting a game.
  **/
 
-/* No need for a callback function.  GConf Bridge keeps the GConf key
+/* No need for a callback function.  GConfBridge keeps the GConf key
  * synchronized with the toggle action's checked state. */
 
 /**
@@ -136,7 +151,7 @@ action_contents_cb (GtkAction *action)
  * start games in full screen mode.
  **/
 
-/* No need for a callback function.  GConf Bridge keeps the GConf key
+/* No need for a callback function.  GConfBridge keeps the GConf key
  * synchronized with the toggle action's checked state. */
 
 /**
@@ -363,6 +378,26 @@ action_record_cb (GtkAction *action)
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (record_game_exited), inpname);
+}
+
+/**
+ * GVA_ACTION_REMOVE_COLUMN:
+ *
+ * Activation of this action removes the currently selected column from
+ * the game list.
+ **/
+static void
+action_remove_column_cb (GtkAction *action)
+{
+        GtkTreeViewColumn *column;
+        GtkTreeView *view;
+
+        /* The popup menu callback embeds the column for us. */
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        column = g_object_get_data (G_OBJECT (view), "popup-menu-column");
+        g_return_if_fail (column != NULL);
+
+        gtk_tree_view_column_set_visible (column, FALSE);
 }
 
 /**
@@ -602,6 +637,13 @@ static GtkActionEntry entries[] =
           N_("Start the selected game and record keypresses to a file"),
           G_CALLBACK (action_record_cb) },
 
+        { "remove-column",
+          NULL,
+          "Fake Label",  /* label is set dynamically */
+          NULL,
+          NULL,          /* tooltip is set dynamically */
+          G_CALLBACK (action_remove_column_cb) },
+
         { "remove-favorite",
           GTK_STOCK_REMOVE,
           N_("Remove from _Favorites"),
@@ -636,6 +678,13 @@ static GtkActionEntry entries[] =
           "<Control>s",
           N_("Start the selected game"),
           G_CALLBACK (action_start_cb) },
+
+        { "add-column-menu",
+          NULL,
+          N_("_Add Column"),
+          NULL,
+          NULL,
+          NULL },
 
         { "edit-menu",
           NULL,
@@ -673,7 +722,7 @@ static GtkToggleActionEntry toggle_entries[] =
           N_("_Restore previous state when starting a game"),
           NULL,
           NULL,
-          NULL,     /* GConf Bridge monitors the state */
+          NULL,     /* GConfBridge monitors the state */
           FALSE },  /* GConf overrides this */
 
         { "full-screen",
@@ -681,7 +730,7 @@ static GtkToggleActionEntry toggle_entries[] =
           N_("Start games in _fullscreen mode"),
           NULL,
           NULL,
-          NULL,     /* GConf Bridge monitors the state */
+          NULL,     /* GConfBridge monitors the state */
           FALSE },  /* GConf overrides this */
 
         { "show-clones",
@@ -716,6 +765,30 @@ static GtkRadioActionEntry view_radio_entries[] =
           N_("Show my search results"),
           2 }
 };
+
+static void
+ui_column_notify_visible_cb (GtkTreeViewColumn *column,
+                             GParamSpec *pspec,
+                             GtkAction *action)
+{
+        gboolean visible;
+
+        visible = gtk_tree_view_column_get_visible (column);
+        gtk_action_set_visible (action, !visible);
+}
+
+static gint
+ui_sort_columns (GtkTreeViewColumn *column1,
+                 GtkTreeViewColumn *column2)
+{
+        const gchar *title1;
+        const gchar *title2;
+
+        title1 = gtk_tree_view_column_get_title (column1);
+        title2 = gtk_tree_view_column_get_title (column2);
+
+        return g_utf8_collate (title1, title2);
+}
 
 static void
 ui_init (void)
@@ -859,4 +932,74 @@ gva_ui_get_managed_widget (const gchar *widget_path)
         widget = gtk_ui_manager_get_widget (manager, widget_path);
         g_assert (widget != NULL);
         return widget;
+}
+
+/**
+ * gva_ui_add_column_actions:
+ * @view: a #GtkTreeView
+ *
+ * Creates "add-column" actions for each of the columns in @view.  These
+ * appear as menu items in the tree view's context menu.  The columns'
+ * visibility controls the menu items' visibility in that only invisible
+ * columns are listed in the context menu.
+ **/
+void
+gva_ui_add_column_actions (GtkTreeView *view)
+{
+        GList *list;
+        guint merge_id;
+
+        g_return_if_fail (GTK_IS_TREE_VIEW (view));
+
+        list = gtk_tree_view_get_columns (view);
+        list = g_list_sort (list, (GCompareFunc) ui_sort_columns);
+        merge_id = gtk_ui_manager_new_merge_id (manager);
+
+        while (list != NULL)
+        {
+                GtkTreeViewColumn *column = list->data;
+                GtkAction *action;
+                const gchar *column_name;
+                const gchar *column_title;
+                gchar *action_name;
+                gchar *action_label;
+                gchar *action_tooltip;
+                gboolean visible;
+
+                column_name = g_object_get_data (G_OBJECT (column), "name");
+                column_title = gtk_tree_view_column_get_title (column);
+
+                action_name = g_strconcat ("add-column-", column_name, NULL);
+                action_label = g_strdup_printf (
+                        _("Add %s Column"), column_title);
+                action_tooltip = g_strdup_printf (
+                        _("Add a \"%s\" column to the game list"),
+                        column_title);
+
+                action = gtk_action_new (
+                        action_name, action_label, action_tooltip, NULL);
+                gtk_action_group_add_action (action_group, action);
+
+                visible = gtk_tree_view_column_get_visible (column);
+                gtk_action_set_visible (action, !visible);
+
+                g_signal_connect (
+                        action, "activate",
+                        G_CALLBACK (action_add_column_cb), column);
+                g_signal_connect (
+                        column, "notify::visible",
+                        G_CALLBACK (ui_column_notify_visible_cb), action);
+
+                gtk_ui_manager_add_ui (
+                        manager, merge_id,
+                        "/game-popup/add-column",
+                        action_name, action_name,
+                        GTK_UI_MANAGER_AUTO, FALSE);
+
+                g_free (action_name);
+                g_free (action_label);
+                g_free (action_tooltip);
+
+                list = g_list_delete_link (list, list);
+        }
 }

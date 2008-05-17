@@ -26,6 +26,7 @@
 #include "gva-favorites.h"
 #include "gva-game-store.h"
 #include "gva-main.h"
+#include "gva-mame.h"
 #include "gva-preferences.h"
 #include "gva-ui.h"
 #include "gva-util.h"
@@ -66,10 +67,35 @@ tree_view_add_search_expression (GString *expression)
         g_free (column_name);
         g_free (search_text);
 }
+
 static gboolean
-tree_view_show_popup_menu (GdkEventButton *event)
+tree_view_show_popup_menu (GdkEventButton *event,
+                           GtkTreeViewColumn *column)
 {
         GtkMenu *menu;
+        GtkWidget *view;
+        const gchar *column_name;
+        const gchar *column_title;
+        GvaGameStoreColumn column_id;
+        gchar *label, *tooltip;
+
+        view = gtk_tree_view_column_get_tree_view (column);
+        g_object_set_data (G_OBJECT (view), "popup-menu-column", column);
+        column_name = g_object_get_data (G_OBJECT (column), "name");
+        gva_columns_lookup_id (column_name, &column_id);
+        column_title = gva_columns_lookup_title (column_id);
+
+        /* Update the "Remove Column" item in the popup menu. */
+        label = g_strdup_printf (
+                _("Remove %s Column"), column_title);
+        tooltip = g_strdup_printf (
+                _("Remove the \"%s\" column from the game list"),
+                column_title);
+        g_object_set (
+                GVA_ACTION_REMOVE_COLUMN, "label",
+                label, "tooltip", tooltip, NULL);
+        g_free (tooltip);
+        g_free (label);
 
         menu = GTK_MENU (gva_ui_get_managed_widget ("/game-popup"));
 
@@ -179,6 +205,8 @@ gva_tree_view_init (void)
                 G_CALLBACK (tree_view_selection_changed_cb), NULL);
 
         gva_columns_load (view);
+        gva_ui_add_column_actions (view);
+        gva_tree_view_update_status_bar ();
 
         gtk_tree_view_set_search_equal_func (
                 view, (GtkTreeViewSearchEqualFunc)
@@ -344,6 +372,7 @@ gva_tree_view_run_query (const gchar *expression,
 
         gtk_tree_view_set_model (view, model);
         gtk_tree_view_columns_autosize (view);
+        gva_tree_view_update_status_bar ();
         g_object_unref (model);
 
         /* Need to reset the search column after loading a new model,
@@ -373,6 +402,83 @@ gva_tree_view_get_model (void)
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 
         return gtk_tree_view_get_model (view);
+}
+
+/**
+ * gva_tree_view_update_status_bar:
+ *
+ * Puts a message in the main status bar containing the MAME version and the
+ * number of games displayed in the current view.  This message gets shown
+ * when the status bar has nothing more important to show.
+ **/
+void
+gva_tree_view_update_status_bar (void)
+{
+        GtkTreeView *view;
+        GtkTreeModel *model;
+        GString *message;
+        const gchar *units;
+        gchar *mame_version;
+        guint context_id;
+        gint count = 0;
+        GError *error = NULL;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        model = gtk_tree_view_get_model (view);
+        message = g_string_sized_new (128);
+
+        mame_version = gva_mame_get_version (&error);
+        gva_error_handle (&error);
+
+        if (model != NULL)
+                count = gtk_tree_model_iter_n_children (model, NULL);
+
+        switch (gva_tree_view_get_selected_view ())
+        {
+                case 0:
+                        units = ngettext (
+                                "Available Game",
+                                "Available Games",
+                                count);
+                        break;
+
+                case 1:
+                        units = ngettext (
+                                "Favorite Game",
+                                "Favorite Games",
+                                count);
+                        break;
+
+                case 2:
+                        units = ngettext (
+                                "Search Result",
+                                "Search Results",
+                                count);
+                        break;
+
+                default:
+                        g_return_if_reached ();
+        }
+
+        if (mame_version != NULL)
+        {
+                g_string_append (message, mame_version);
+                g_free (mame_version);
+
+                if (count > 0)
+                {
+                        /* Append a UTF-8 encoded bullet. */
+                        g_string_append (message, "  •  ");
+                }
+        }
+
+        if (count > 0)
+                g_string_append_printf (message, "%d %s", count, units);
+
+        context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
+        gva_main_statusbar_pop (context_id);
+        gva_main_statusbar_push (context_id, message->str);
+        g_string_free (message, TRUE);
 }
 
 /**
@@ -633,19 +739,21 @@ gva_tree_view_button_press_event_cb (GtkTreeView *view,
 {
         if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
         {
+                GtkTreeViewColumn *column;
                 GtkTreePath *path;
                 gboolean valid;
 
                 /* Select the row that was clicked. */
                 valid = gtk_tree_view_get_path_at_pos (
-                        view, event->x, event->y, &path, NULL, NULL, NULL);
+                        view, event->x, event->y, &path,
+                        &column, NULL, NULL);
                 if (valid)
                 {
                         gtk_tree_view_set_cursor (view, path, NULL, FALSE);
                         gtk_widget_grab_focus (GTK_WIDGET (view));
                         gtk_tree_path_free (path);
 
-                        return tree_view_show_popup_menu (event);
+                        return tree_view_show_popup_menu (event, column);
                 }
         }
 
@@ -665,7 +773,11 @@ gva_tree_view_button_press_event_cb (GtkTreeView *view,
 gboolean
 gva_tree_view_popup_menu_cb (GtkTreeView *view)
 {
-        return tree_view_show_popup_menu (NULL);
+        GtkTreeViewColumn *column;
+
+        gtk_tree_view_get_cursor (view, NULL, &column);
+
+        return tree_view_show_popup_menu (NULL, column);
 }
 
 /**

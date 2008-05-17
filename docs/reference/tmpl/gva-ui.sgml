@@ -101,6 +101,13 @@
 
 
 
+<!-- ##### MACRO GVA_ACTION_REMOVE_COLUMN ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO GVA_ACTION_REMOVE_FAVORITE ##### -->
 <para>
 
@@ -189,5 +196,13 @@
 
 @widget_path: 
 @Returns: 
+
+
+<!-- ##### FUNCTION gva_ui_add_column_actions ##### -->
+<para>
+
+</para>
+
+@view: 
 
 

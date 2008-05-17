@@ -282,9 +282,10 @@ gva_game_store_new_from_query (const gchar *sql,
         if (!gva_db_prepare (sql, &stmt, error))
                 return NULL;
 
+        /* Allocate an extra column for favorites. */
         model = gva_game_store_new ();
         n_columns = sqlite3_column_count (stmt);
-        column_ids = g_newa (GvaGameStoreColumn, n_columns);
+        column_ids = g_newa (GvaGameStoreColumn, n_columns + 1);
         column_values = g_new0 (GValue, n_columns + 1);
 
         for (ii = 0; ii < n_columns; ii++)
@@ -310,6 +311,7 @@ gva_game_store_new_from_query (const gchar *sql,
 
         /* Tack on an extra value for favorites.  This information is not
          * stored in the database so we want to supply it for every query. */
+        column_ids[n_columns] = GVA_GAME_STORE_COLUMN_FAVORITE;
         g_value_init (&column_values[n_columns], G_TYPE_BOOLEAN);
 
         if (name_column < 0)
@@ -370,19 +372,17 @@ gva_game_store_new_from_query (const gchar *sql,
                         {
                                 g_assert_not_reached ();
                         }
-
-                        gtk_tree_store_set_value (
-                                GTK_TREE_STORE (model), &iter,
-                                column_ids[ii], value);
                 }
 
                 name = (const gchar *) sqlite3_column_text (stmt, name_column);
 
                 value = &column_values[n_columns];
                 g_value_set_boolean (value, gva_favorites_contains (name));
-                gtk_tree_store_set_value (
+
+                /* Store the row in the tree model. */
+                gtk_tree_store_set_valuesv (
                         GTK_TREE_STORE (model), &iter,
-                        GVA_GAME_STORE_COLUMN_FAVORITE, value);
+                        (gint *) column_ids, column_values, n_columns + 1);
 
                 /* Add an entry for this row to the index. */
                 gva_game_store_index_insert (

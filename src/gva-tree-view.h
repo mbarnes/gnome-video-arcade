@@ -37,6 +37,7 @@ gboolean       gva_tree_view_update                  (GError **error);
 gboolean       gva_tree_view_run_query               (const gchar *expression,
                                                       GError **error);
 GtkTreeModel * gva_tree_view_get_model               (void);
+void           gva_tree_view_update_status_bar       (void);
 const gchar *  gva_tree_view_get_selected_game       (void);
 void           gva_tree_view_set_selected_game       (const gchar *game);
 gint           gva_tree_view_get_selected_view       (void);
