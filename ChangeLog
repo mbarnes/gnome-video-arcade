@@ -1,5 +1,23 @@
 2008-05-17  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.6.1
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/main.c (start):
+	Remove the status bar logic.
+
+	* src/gva-tree-view.c (gva_tree_view_update_status_bar):
+	New function shows the MAME version and game count in the status
+	bar of the main window.
+
+	* src/gva-tree-view.c (gva_tree_view_init),
+	(gva_tree_view_run_query):
+	Call gva_tree_view_update_status_bar().
+
+2008-05-17  Matthew Barnes  <mbarnes@redhat.com>
+
 	* src/gva-tree-view.c (tree_view_show_popup_menu):
 	* src/gva-ui.c (gva_ui_add_column_actions):
 	The add/remove column menu items look better without quotes.

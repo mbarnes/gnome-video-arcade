@@ -26,6 +26,7 @@
 #include "gva-favorites.h"
 #include "gva-game-store.h"
 #include "gva-main.h"
+#include "gva-mame.h"
 #include "gva-preferences.h"
 #include "gva-ui.h"
 #include "gva-util.h"
@@ -205,6 +206,7 @@ gva_tree_view_init (void)
 
         gva_columns_load (view);
         gva_ui_add_column_actions (view);
+        gva_tree_view_update_status_bar ();
 
         gtk_tree_view_set_search_equal_func (
                 view, (GtkTreeViewSearchEqualFunc)
@@ -370,6 +372,7 @@ gva_tree_view_run_query (const gchar *expression,
 
         gtk_tree_view_set_model (view, model);
         gtk_tree_view_columns_autosize (view);
+        gva_tree_view_update_status_bar ();
         g_object_unref (model);
 
         /* Need to reset the search column after loading a new model,
@@ -399,6 +402,83 @@ gva_tree_view_get_model (void)
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
 
         return gtk_tree_view_get_model (view);
+}
+
+/**
+ * gva_tree_view_update_status_bar:
+ *
+ * Puts a message in the main status bar containing the MAME version and the
+ * number of games displayed in the current view.  This message gets shown
+ * when the status bar has nothing more important to show.
+ **/
+void
+gva_tree_view_update_status_bar (void)
+{
+        GtkTreeView *view;
+        GtkTreeModel *model;
+        GString *message;
+        const gchar *units;
+        gchar *mame_version;
+        guint context_id;
+        gint count = 0;
+        GError *error = NULL;
+
+        view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+        model = gtk_tree_view_get_model (view);
+        message = g_string_sized_new (128);
+
+        mame_version = gva_mame_get_version (&error);
+        gva_error_handle (&error);
+
+        if (model != NULL)
+                count = gtk_tree_model_iter_n_children (model, NULL);
+
+        switch (gva_tree_view_get_selected_view ())
+        {
+                case 0:
+                        units = ngettext (
+                                "Available Game",
+                                "Available Games",
+                                count);
+                        break;
+
+                case 1:
+                        units = ngettext (
+                                "Favorite Game",
+                                "Favorite Games",
+                                count);
+                        break;
+
+                case 2:
+                        units = ngettext (
+                                "Search Result",
+                                "Search Results",
+                                count);
+                        break;
+
+                default:
+                        g_return_if_reached ();
+        }
+
+        if (mame_version != NULL)
+        {
+                g_string_append (message, mame_version);
+                g_free (mame_version);
+
+                if (count > 0)
+                {
+                        /* Append a UTF-8 encoded bullet. */
+                        g_string_append (message, "  •  ");
+                }
+        }
+
+        if (count > 0)
+                g_string_append_printf (message, "%d %s", count, units);
+
+        context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
+        gva_main_statusbar_pop (context_id);
+        gva_main_statusbar_push (context_id, message->str);
+        g_string_free (message, TRUE);
 }
 
 /**

@@ -278,6 +278,7 @@ gva_tree_view_lookup
 gva_tree_view_update
 gva_tree_view_run_query
 gva_tree_view_get_model
+gva_tree_view_update_status_bar
 gva_tree_view_get_selected_game
 gva_tree_view_set_selected_game
 gva_tree_view_get_selected_view

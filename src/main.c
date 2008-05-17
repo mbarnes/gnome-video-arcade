@@ -133,19 +133,7 @@ warn_if_no_roms (void)
 static void
 start (void)
 {
-        gchar *mame_version;
-        guint context_id;
         GError *error = NULL;
-
-        context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
-        mame_version = gva_mame_get_version (&error);
-        gva_error_handle (&error);
-
-        if (mame_version != NULL)
-        {
-                gva_main_statusbar_push (context_id, "%s", mame_version);
-                g_free (mame_version);
-        }
 
         if (gva_db_needs_rebuilt ())
         {

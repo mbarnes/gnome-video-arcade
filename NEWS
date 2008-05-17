@@ -1,10 +1,11 @@
 GNOME Video Arcade 0.6.1
 ========================
 
-        Released May ?? 2008
+        Released May 17 2008
 
         What's New
         ----------
+        * Status bar shows the number of games in the current view.
         * Quickly add or remove columns by right-clicking on the game list.
         * More intuitive search behavior.  Picking an item from the search
           completion list now does an exact match on that item.
