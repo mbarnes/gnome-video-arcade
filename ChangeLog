@@ -1,3 +1,11 @@
+2008-05-21  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac: Post-release version bump.
+
+	* src/gva-db.c (db_parser_start_element_game):
+	* src/gva-process.c (gva_process_spawn):
+	Fix a couple memory leaks.
+
 2008-05-17  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.6.1

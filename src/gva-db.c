@@ -789,6 +789,8 @@ db_parser_start_element_game (ParserData *data,
                 db_parser_bind_text (stmt, "@category", category);
         else if (local_error != NULL)
                 g_propagate_error (error, local_error);
+
+        g_free (category);
 #endif
 }
 

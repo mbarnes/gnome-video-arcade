@@ -677,6 +677,8 @@ gva_process_spawn (const gchar *command_line,
                 &standard_input, &standard_output, &standard_error,
                 error);
 
+        g_strfreev (argv);
+
         if (!success)
                 return NULL;
 
