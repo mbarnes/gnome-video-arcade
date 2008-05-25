@@ -33,7 +33,7 @@
 /* The string literals are column names defined in gva-columns.c. */
 #define SQL_COMPLETION_LIST \
         "SELECT DISTINCT name, 'name' FROM available UNION " \
-	"SELECT DISTINCT bios, 'bios' FROM available UNION " \
+        "SELECT DISTINCT bios, 'bios' FROM available UNION " \
         "SELECT DISTINCT category, 'category' FROM available UNION " \
         "SELECT DISTINCT sourcefile, 'sourcefile' FROM available UNION " \
         "SELECT DISTINCT description, 'description' FROM available UNION " \
@@ -754,7 +754,7 @@ gva_main_set_last_search_text (const gchar *text)
  * most recent search, @column_name and @search_text are set to %NULL
  * and the function returns %FALSE.
  *
- * Returns: %TRUE if match values wer successfully retrieved from GConf,
+ * Returns: %TRUE if match values were successfully retrieved from GConf,
  *          %FALSE otherwise
  **/
 gboolean
@@ -778,23 +778,29 @@ gva_main_get_last_selected_match (gchar **column_name,
         gva_error_handle (&error);
         g_object_unref (client);
 
-        if (success)
-        {
-                g_strstrip (*column_name);
-                g_strstrip (*search_text);
+        if (!success)
+                return FALSE;
 
-                /* Both strings must be non-empty. */
-                if (**column_name == '\0' || **search_text == '\0')
-                {
-                        g_free (*column_name);
-                        g_free (*search_text);
-                        *column_name = NULL;
-                        *search_text = NULL;
-                        success = FALSE;
-                }
-        }
+        /* The value may be unset.  Treat it as a failure. */
+        if (*column_name == NULL || *search_text == NULL)
+                goto fail;
 
-        return success;
+        g_strstrip (*column_name);
+        g_strstrip (*search_text);
+
+        /* Both strings must be non-empty. */
+        if (**column_name == '\0' || **search_text == '\0')
+                goto fail;
+
+        return TRUE;
+
+fail:
+        g_free (*column_name);
+        g_free (*search_text);
+
+        *column_name = *search_text = NULL;
+
+        return FALSE;
 }
 
 /**

@@ -1,3 +1,13 @@
+GNOME Video Arcade 0.6.1.1
+==========================
+
+        Released May 25 2008
+
+        What's New
+        ----------
+        * Fix a crash that occurs when starting in or switching to the
+          Search Results view.  Reported by Damion Manuel and Taylor Easum.
+
 GNOME Video Arcade 0.6.1
 ========================
 

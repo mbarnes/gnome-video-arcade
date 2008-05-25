@@ -1,3 +1,15 @@
+2008-05-25  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.6.1.1
+
+	* src/gva-main.c (gva_main_get_last_selected_match):
+	Fix a crash reported by Damion Manuel and Taylor Easum in the SF.net
+	Help forum.  I didn't take into account the fact that the GConf key
+	may not be set, in which case the string values will remain NULL.
+	Rewrote the logic to handle that case.
+
+	Unfortunately the bug is pretty severe and requires a new release.
+
 2008-05-21  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.
