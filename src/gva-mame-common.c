@@ -276,41 +276,13 @@ gchar **
 gva_mame_get_search_paths (const gchar *config_key,
                            GError **error)
 {
-        const gchar *delimiter;
-        gchar **search_paths;
         gchar *config_value;
-        gchar *dirname;
-        gint ii;
 
         config_value = gva_mame_get_config_value (config_key, error);
         if (config_value == NULL)
                 return NULL;
 
-        delimiter = gva_mame_get_path_sep ();
-        search_paths = g_strsplit (config_value, delimiter, -1);
-
-        /* The default SDLMAME configuration sets various search paths
-         * relative to the location of the executable (e.g. rompath=roms).
-         * Convert these to absolute paths so they get handled correctly
-         * (e.g. rompath=/path/to/mame/roms). */
-
-        dirname = g_path_get_dirname (MAME_PROGRAM);
-
-        for (ii = 0; search_paths[ii] != NULL; ii++)
-        {
-                gchar *path;
-
-                if (g_path_is_absolute (search_paths[ii]))
-                        continue;
-
-                path = g_build_filename (dirname, search_paths[ii], NULL);
-                g_free (search_paths[ii]);
-                search_paths[ii] = path;
-        }
-
-        g_free (dirname);
-
-        return search_paths;
+        return g_strsplit (config_value, gva_mame_get_path_sep (), -1);
 }
 
 /**

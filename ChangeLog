@@ -1,5 +1,15 @@
 2008-05-27  Matthew Barnes  <mbarnes@redhat.com>
 
+	* src/gva-mame-common.c (gva_mame_get_search_paths):
+	Revert the previous commit.  It didn't work right.
+
+	* src/main.c (main):
+	The correct solution is to change our working directory to that
+	which contains the MAME executable.  Documented the rationale in
+	the code, since otherwise it seems like an odd thing to do.
+
+2008-05-27  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac: Post-release version bump.
 
 	* src/gva-mame-common.c (gva_mame_get_search_paths):

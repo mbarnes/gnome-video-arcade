@@ -203,6 +203,7 @@ main (gint argc, gchar **argv)
         GnomeProgram *program;
         GOptionContext *context;
 #endif
+        gchar *path;
         GError *error = NULL;
 
         g_thread_init (NULL);
@@ -227,6 +228,16 @@ main (gint argc, gchar **argv)
         if (error != NULL)
                 g_error ("%s", error->message);
 #endif
+
+        /* Change the working directory to that of the MAME executable.
+         * Why?  Because SDLMAME's default configuration uses relative
+         * search paths such as "rompath = roms".  The paths are relative
+         * to the directory containing the MAME executable, so we must run
+         * from that directory in order for SDLMAME's default configuration
+         * to work.  Annoying, but a common problem for users. */
+        path = g_path_get_dirname (MAME_PROGRAM);
+        g_chdir (path);
+        g_free (path);
 
         if (opt_inspect != NULL)
         {
