@@ -1,3 +1,12 @@
+2008-05-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac: Post-release version bump.
+
+	* src/gva-mame-common.c (gva_mame_get_search_paths):
+	Convert relative paths to absolute paths, using the location of
+	the MAME executable as the base directory.  Should allow GNOME
+	Video Arcade to work with the default SDLMAME configuration.
+
 2008-05-25  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.6.1.1
