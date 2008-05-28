@@ -46,7 +46,7 @@ gva_mame_get_version (GError **error)
          * xmame (backend) version 0.xxx (Mmm dd yyyy)
          */
 
-        if (lines[0] == NULL)
+        if (lines == NULL || lines[0] == NULL)
                 goto exit;
         if (strstr (lines[0], "xmame") == NULL)
                 goto exit;
@@ -89,7 +89,7 @@ gva_mame_get_total_supported (GError **error)
          * Total Supported: xxxx
          */
 
-        num_lines = g_strv_length (lines);
+        num_lines = (lines != NULL) ? g_strv_length (lines) : 0;
         g_strfreev (lines);
 
         /* Count the lines, excluding the header and footer. */

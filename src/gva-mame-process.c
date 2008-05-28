@@ -82,18 +82,11 @@ mame_process_stderr_read_line (GvaProcess *process)
 static void
 mame_process_exited (GvaProcess *process, gint status)
 {
-        /* Check for errors on unread lines. */
-        g_strfreev (gva_process_stdout_read_lines (process));
-        g_strfreev (gva_process_stderr_read_lines (process));
-
-        if (process->error != NULL)
-                return;
-
-        if (WIFEXITED (status) && WEXITSTATUS (status) != 0)
-                g_set_error (
-                        &process->error, GVA_ERROR, GVA_ERROR_MAME,
-                        _("Child process exited with status (%d)"),
-                        WEXITSTATUS (status));
+        if (WIFEXITED (status) && (gva_get_debug_flags () & GVA_DEBUG_MAME))
+        {
+                status = WEXITSTATUS (status);
+                g_debug ("Process exited with status %d", status);
+        }
 }
 
 static void
@@ -138,6 +131,41 @@ gva_mame_process_get_type (void)
 }
 
 /**
+ * gva_mame_process_new:
+ * @pid: child process ID
+ * @priority: priority for the event sources
+ * @standard_input: file descriptor for the child's stdin
+ * @standard_output: file descriptor for the child's stdout
+ * @standard_error: file descriptor for the child's stderr
+ *
+ * Creates a new #GvaMameProcess from the given parameters.  A #GSource is
+ * created at the given @priority for each of the file descriptors.  The
+ * internal process value is initialized to zero.
+ *
+ * Returns: a new #GvaMameProcess
+ **/
+GvaProcess *
+gva_mame_process_new (GPid pid,
+                      gint priority,
+                      gint standard_input,
+                      gint standard_output,
+                      gint standard_error)
+{
+        g_return_val_if_fail (standard_input >= 0, NULL);
+        g_return_val_if_fail (standard_output >= 0, NULL);
+        g_return_val_if_fail (standard_error >= 0, NULL);
+
+        return g_object_new (
+                GVA_TYPE_MAME_PROCESS,
+                "pid", pid,
+                "priority", priority,
+                "stdin", standard_input,
+                "stdout", standard_output,
+                "stderr", standard_error,
+                NULL);
+}
+
+/**
  * gva_mame_process_spawn:
  * @arguments: command-line arguments
  * @priority: priority for the event sources
@@ -155,17 +183,30 @@ gva_mame_process_spawn (const gchar *arguments,
                         gint priority,
                         GError **error)
 {
-        GvaProcess *process;
+        gint standard_input;
+        gint standard_output;
+        gint standard_error;
         gchar *command_line;
+        GPid child_pid;
+        gboolean success;
 
         g_return_val_if_fail (arguments != NULL, FALSE);
 
-        if (gva_get_debug_flags () & GVA_DEBUG_MAME)
-                g_debug ("%s %s", MAME_PROGRAM, arguments);
-
         command_line = g_strdup_printf ("%s %s", MAME_PROGRAM, arguments);
-        process = gva_process_spawn (command_line, priority, error);
+
+        if (gva_get_debug_flags () & GVA_DEBUG_MAME)
+                g_debug ("Spawned %s", command_line);
+
+        success = gva_spawn_with_pipes (
+                command_line, &child_pid, &standard_input,
+                &standard_output, &standard_error, error);
+
         g_free (command_line);
 
-        return process;
+        if (!success)
+                return NULL;
+
+        return gva_mame_process_new (
+                child_pid, priority, standard_input,
+                standard_output, standard_error);
 }

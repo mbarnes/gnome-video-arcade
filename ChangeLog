@@ -1,3 +1,30 @@
+2008-05-28  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/references/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-mame-common.c (gva_mame_get_config_value):
+	* src/gva-mame-sdlmame.c (gva_mame_get_version),
+	(gva_mame_get_total_supported):
+	* src/gva-mame-xmame.c (gva_mame_get_version),
+	(gva_mame_get_total_supported):
+	Prevent passing a NULL string array to g_strv_length().
+
+	* src/gva-util.c (gva_spawn_with_pipes):
+	New convenience function spawns a process from a command line
+	string and opens stdin/stdout/stderr pipes.
+
+	* src/gva-process.c (gva_process_spawn):
+	* src/gva-mame-process.c (gva_mame_process_spawn):
+	Call gva_spawn_with_pipes() to actually spawn the process.
+
+	* src/gva-mame-process.c (mame_process_exited):
+	The old logic was never used, and was broken anyway.  Rewrite the
+	method to simply emit a debugging message showing the exit status.
+
+	* src/gva-mame-process.c (gva_mame_process_new):
+	New function creates a new GvaMameProcess instance.
+
 2008-05-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-mame-common.c (gva_mame_get_search_paths):

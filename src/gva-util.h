@@ -62,6 +62,12 @@ const gchar *   gva_get_user_data_dir           (void);
 void            gva_help_display                (GtkWindow *parent,
                                                  const gchar *link_id);
 gchar *         gva_search_collate_key          (const gchar *string);
+gboolean        gva_spawn_with_pipes            (const gchar *command_line,
+                                                 GPid *child_pid,
+                                                 gint *standard_input,
+                                                 gint *standard_output,
+                                                 gint *standard_error,
+                                                 GError **error);
 
 G_END_DECLS
 

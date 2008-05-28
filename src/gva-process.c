@@ -645,9 +645,8 @@ gva_process_new (GPid pid,
  * @priority: priority for the event sources
  * @error: return location for a #GError, or %NULL
  *
- * Convenience function that passes @command_line to g_shell_parse_argv(),
- * passes the resulting argument vector to gdk_spawn_on_screen_with_pipes(),
- * and finally calls gva_process_new().  If an error occurs, it returns
+ * Spawns a child process with @command_line and returns the resulting
+ * #GvaProcess.  If an error occurs while spawning, the function returns
  * %NULL and sets @error.
  *
  * Returns: a new #GvaProcess, or %NULL if an error occurred
@@ -657,7 +656,6 @@ gva_process_spawn (const gchar *command_line,
                    gint priority,
                    GError **error)
 {
-        gchar **argv;
         gint standard_input;
         gint standard_output;
         gint standard_error;
@@ -666,18 +664,9 @@ gva_process_spawn (const gchar *command_line,
 
         g_return_val_if_fail (command_line != NULL, NULL);
 
-        success = g_shell_parse_argv (command_line, NULL, &argv, error);
-
-        if (!success)
-                return NULL;
-
-        success = gdk_spawn_on_screen_with_pipes (
-                gdk_screen_get_default (), NULL, argv, NULL,
-                G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &child_pid,
-                &standard_input, &standard_output, &standard_error,
-                error);
-
-        g_strfreev (argv);
+        success = gva_spawn_with_pipes (
+                command_line, &child_pid, &standard_input,
+                &standard_output, &standard_error, error);
 
         if (!success)
                 return NULL;

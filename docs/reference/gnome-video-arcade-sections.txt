@@ -196,6 +196,7 @@ gva_mame_command
 <FILE>gva-mame-process</FILE>
 <TITLE>GvaMameProcess</TITLE>
 GvaMameProcess
+gva_mame_process_new
 gva_mame_process_spawn
 <SUBSECTION Standard>
 GVA_MAME_PROCESS
@@ -390,5 +391,6 @@ gva_get_time_elapsed
 gva_get_user_data_dir
 gva_help_display
 gva_search_collate_key
+gva_spawn_with_pipes
 </SECTION>
 

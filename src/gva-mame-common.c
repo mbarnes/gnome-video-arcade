@@ -174,7 +174,7 @@ gva_mame_get_config_value (const gchar *config_key,
          * ...
          */
 
-        num_lines = g_strv_length (lines);
+        num_lines = (lines != NULL) ? g_strv_length (lines) : 0;
 
         for (ii = 0; ii < num_lines; ii++)
         {

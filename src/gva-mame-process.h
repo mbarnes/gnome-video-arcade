@@ -71,6 +71,11 @@ struct _GvaMameProcessClass
 };
 
 GType           gva_mame_process_get_type       (void);
+GvaProcess *    gva_mame_process_new            (GPid pid,
+                                                 gint priority,
+                                                 gint standard_input,
+                                                 gint standard_output,
+                                                 gint standard_error);
 GvaProcess *    gva_mame_process_spawn          (const gchar *arguments,
                                                  gint priority,
                                                  GError **error);

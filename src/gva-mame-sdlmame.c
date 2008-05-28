@@ -49,7 +49,7 @@ gva_mame_get_version (GError **error)
          * ...
          */
 
-        if (lines[0] == NULL)
+        if (lines == NULL || lines[0] == NULL)
                 goto exit;
 
         cp = strstr (lines[0], " - Multiple Arcade Machine Emulator");
@@ -89,7 +89,7 @@ gva_mame_get_total_supported (GError **error)
          * ...
          */
 
-        num_lines = g_strv_length (lines);
+        num_lines = (lines != NULL) ? g_strv_length (lines) : 0;
         g_strfreev (lines);
 
         /* Count the lines, excluding the header. */

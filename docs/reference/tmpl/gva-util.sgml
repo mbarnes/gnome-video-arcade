@@ -103,3 +103,17 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_spawn_with_pipes ##### -->
+<para>
+
+</para>
+
+@command_line: 
+@child_pid: 
+@standard_input: 
+@standard_output: 
+@standard_error: 
+@error: 
+@Returns: 
+
+

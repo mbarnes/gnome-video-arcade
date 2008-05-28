@@ -23,6 +23,19 @@
 </para>
 
 
+<!-- ##### FUNCTION gva_mame_process_new ##### -->
+<para>
+
+</para>
+
+@pid: 
+@priority: 
+@standard_input: 
+@standard_output: 
+@standard_error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_mame_process_spawn ##### -->
 <para>
 
