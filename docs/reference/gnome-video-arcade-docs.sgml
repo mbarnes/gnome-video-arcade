@@ -30,6 +30,7 @@
     <xi:include href="xml/gva-mame.xml"/>
     <xi:include href="xml/gva-time.xml"/>
     <xi:include href="xml/gva-util.xml"/>
+    <xi:include href="xml/gva-wnck.xml"/>
   </chapter>
 
   <chapter>

@@ -73,6 +73,19 @@ installed prior to compiling the source code:
        Video Arcade to not link against GNOME libraries.  See the
        Installation section to find out how.
 
+   - Header files for libwnck version 2.16 (or higher). (optional)
+
+       The libwnck header files should be available from your GNU/Linux
+       distribution as a "development" package.  The exact package name
+       varies by distribution, but it should be something similar to
+       libwnck-devel (Fedora) or libwnck-dev (Debian/Ubuntu).
+
+       GNOME Video Arcade uses libwnck to implement "spatial" MAME
+       windows, whereby the size and position of each game window is
+       remembered across sessions.  If you prefer not to use libwnck,
+       you can configure GNOME Video Arcade to not link against it.
+       See the Installation section to find out how.
+
    - catver.ini (optional)
 
        This file, available from http://www.progettoemma.net/?catlist,
@@ -141,6 +154,9 @@ installed, the documentation can be viewed through Devhelp.
 
 The --with-gnome and --without-gnome configure options tell "make"
 whether to link against high-level GNOME libraries like libgnomeui.
+Similarly, the --with-wnck and --without-wnck configure options
+tell "make" whether to link against libwnck.  See the previous
+section for details on what these libraries are used for.
 
 
 Usage

@@ -1,7 +1,19 @@
+GNOME Video Arcade 0.6.2
+========================
+
+        Released June ??, 2008
+
+        What's New
+        ----------
+        * Introduce an optional dependency on libwnck, which is used to
+          implement "spatial" MAME windows (size and position, per game,
+          are remembered across sessions).
+        * Better support for SDLMAME's default configuration.
+
 GNOME Video Arcade 0.6.1.1
 ==========================
 
-        Released May 25 2008
+        Released May 25, 2008
 
         What's New
         ----------
@@ -11,7 +23,7 @@ GNOME Video Arcade 0.6.1.1
 GNOME Video Arcade 0.6.1
 ========================
 
-        Released May 17 2008
+        Released May 17, 2008
 
         What's New
         ----------
@@ -23,7 +35,7 @@ GNOME Video Arcade 0.6.1
 GNOME Video Arcade 0.6.0
 ========================
 
-        Released April 19 2008
+        Released April 19, 2008
 
         What's New
         ----------

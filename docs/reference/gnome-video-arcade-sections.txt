@@ -239,6 +239,7 @@ gva_preferences_close_clicked_cb
 GvaProcess
 gva_process_new
 gva_process_spawn
+gva_process_get_pid
 gva_process_write_stdin
 gva_process_stdout_num_lines
 gva_process_stderr_num_lines
@@ -394,3 +395,7 @@ gva_search_collate_key
 gva_spawn_with_pipes
 </SECTION>
 
+<SECTION>
+<FILE>gva-wnck</FILE>
+gva_wnck_listen_for_new_window
+</SECTION>

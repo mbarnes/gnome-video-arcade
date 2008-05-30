@@ -1,6 +1,49 @@
+2008-05-30  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Require libwnck-1.0 >= 2.16.0.
+	TODO: Make this optional before releasing.
+
+	* README:
+	Mention libwnck as an optional dependency.
+
+	* data/gnome-video-arcade.glade:
+	Don't set a title in the audit results window.
+
+	* docs/reference/Makefile.am:
+	Add WNCK_CFLAGS to INCLUDES.
+	Add WNCK_LIBS to GTKDOC_LIBS.
+	Add gva-wnck.o to GTKDOC_LIBS.
+
+	* docs/reference/gnome-video-arcade-docs.sgml:
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/Makefile.am:
+	Add gva-wnck.[ch].
+	Add WNCK_CFLAGS to AM_CFLAGS.
+	Add WNCK_LIBS to gnome_video_arcade_LDADD.
+
+	* src/gva-db.c (gva_db_create_tables):
+	Add a "window" table to hold game window geometry.
+
+	* src/gva-db.c (gva_db_needs_rebuilt):
+	Rebuild the database if the categories file changed.
+
+	* src/gva-process.c (gva_process_get_pid):
+	New function returns the process ID of a GvaProcess.
+
+	* src/gva-wnck.c (gva_wnck_listen_for_new_window):
+	New function implements "spatial" MAME windows using libwnck.
+
+	* src/gva-ui.c (action_play_back_cb), (action_record_cb),
+	(action_start_cb):
+	Call gva_wnck_listen_for_new_window() immediately after
+	successfully spawning a MAME process.
+
 2008-05-28  Matthew Barnes  <mbarnes@redhat.com>
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 
 	* src/gva-mame-common.c (gva_mame_get_config_value):
@@ -68,7 +111,7 @@
 
 	* NEWS: Update for 0.6.1
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 
 	* src/main.c (start):
@@ -94,7 +137,7 @@
 	Add an "add-column" placeholder and a "remove-column" menu item to
 	the popup menu.
 
-	* docs/references/gnome-video-arcade-sections.txt:
+	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 
 	* src/gva-column-manager.c (column_manager_hide_selected),

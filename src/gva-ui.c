@@ -33,6 +33,7 @@
 #include "gva-process.h"
 #include "gva-tree-view.h"
 #include "gva-util.h"
+#include "gva-wnck.h"
 
 static GladeXML *xml = NULL;
 static GtkUIManager *manager = NULL;
@@ -264,9 +265,12 @@ action_play_back_cb (GtkAction *action)
         gva_error_handle (&error);
 
         if (process != NULL)
+        {
+                gva_wnck_listen_for_new_window (process, name);
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (g_object_unref), NULL);
+        }
 
         g_free (inpname);
         g_free (name);
@@ -375,9 +379,12 @@ action_record_cb (GtkAction *action)
         gva_error_handle (&error);
 
         if (process != NULL)
+        {
+                gva_wnck_listen_for_new_window (process, name);
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (record_game_exited), inpname);
+        }
 }
 
 /**
@@ -526,9 +533,12 @@ action_start_cb (GtkAction *action)
         gva_error_handle (&error);
 
         if (process != NULL)
+        {
+                gva_wnck_listen_for_new_window (process, name);
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (g_object_unref), NULL);
+        }
 }
 
 /**

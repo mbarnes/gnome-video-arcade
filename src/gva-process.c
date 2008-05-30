@@ -677,6 +677,22 @@ gva_process_spawn (const gchar *command_line,
 }
 
 /**
+ * gva_process_get_pid:
+ * @process: a #GvaProcess
+ *
+ * Returns the process ID for @process.
+ *
+ * Returns: process ID for @process
+ **/
+GPid
+gva_process_get_pid (GvaProcess *process)
+{
+        g_return_val_if_fail (GVA_IS_PROCESS (process), (GPid) 0);
+
+        return process->priv->pid;
+}
+
+/**
  * gva_process_write_stdin:
  * @process: a #GvaProcess
  * @data: the data to write to the child process

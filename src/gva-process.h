@@ -92,6 +92,7 @@ GvaProcess *    gva_process_new                 (GPid pid,
 GvaProcess *    gva_process_spawn               (const gchar *command_line,
                                                  gint priority,
                                                  GError **error);
+GPid            gva_process_get_pid             (GvaProcess *process);
 gboolean        gva_process_write_stdin         (GvaProcess *process,
                                                  const gchar *data,
                                                  gssize length,

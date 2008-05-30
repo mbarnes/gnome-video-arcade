@@ -99,6 +99,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_process_get_pid ##### -->
+<para>
+
+</para>
+
+@process: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_process_write_stdin ##### -->
 <para>
 

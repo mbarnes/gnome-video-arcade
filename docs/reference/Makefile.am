@@ -80,7 +80,8 @@ INCLUDES=							\
 	$(GCONF_CFLAGS)						\
 	$(GLADE_CFLAGS)						\
 	$(GNOME_CFLAGS)						\
-	$(SQLITE_CFLAGS)
+	$(SQLITE_CFLAGS)					\
+	$(WNCK_CFLAGS)
 GTKDOC_LIBS=							\
 	$(top_builddir)/src/gconf-bridge.o			\
 	$(top_builddir)/src/gva-audit.o				\
@@ -104,6 +105,7 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/gva-tree-view.o			\
 	$(top_builddir)/src/gva-ui.o				\
 	$(top_builddir)/src/gva-util.o				\
+	$(top_builddir)/src/gva-wnck.o				\
 	$(top_builddir)/src/@MAME_BACKEND@			\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
@@ -111,7 +113,8 @@ GTKDOC_LIBS=							\
 	$(GCONF_LIBS)						\
 	$(GLADE_LIBS)						\
 	$(GNOME_LIBS)						\
-	$(SQLITE_LIBS)
+	$(SQLITE_LIBS)						\
+	$(WNCK_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
 include $(top_srcdir)/gtk-doc.make

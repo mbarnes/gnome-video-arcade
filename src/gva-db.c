@@ -189,6 +189,16 @@
                 "inode NOT NULL, " \
                 "comment);"
 
+/* The window table survives database builds. */
+#define SQL_CREATE_TABLE_WINDOW \
+        "CREATE TABLE IF NOT EXISTS window (" \
+                "name PRIMARY KEY, " \
+                "x, " \
+                "y, " \
+                "width, " \
+                "height, " \
+                "maximized);"
+
 #define SQL_CREATE_VIEW_AVAILABLE \
         "CREATE VIEW IF NOT EXISTS available AS " \
                 "SELECT game.*, bios.description AS bios, " \
@@ -1296,6 +1306,7 @@ db_create_tables (GError **error)
                 && gva_db_execute (SQL_CREATE_TABLE_CONTROL, error)
                 && gva_db_execute (SQL_CREATE_TABLE_DIPVALUE, error)
                 && gva_db_execute (SQL_CREATE_TABLE_PLAYBACK, error)
+                && gva_db_execute (SQL_CREATE_TABLE_WINDOW, error)
                 && gva_db_execute (SQL_CREATE_VIEW_AVAILABLE, error);
 }
 
@@ -1799,6 +1810,8 @@ gva_db_is_older_than (const gchar *filename)
         time_t db_mtime;
         struct stat st;
 
+        g_return_val_if_fail (filename != NULL, FALSE);
+
         if (g_stat (gva_db_get_filename (), &st) < 0)
                 return FALSE;
 
@@ -1857,6 +1870,11 @@ gva_db_needs_rebuilt (void)
 
         reason = "the database build ID does not match the MAME version";
         TEST_CASE (strstr (mame_version, db_build_id) == NULL);
+
+#ifdef CATEGORY_FILE
+        reason = "the category file changed";
+        TEST_CASE (gva_db_is_older_than (CATEGORY_FILE));
+#endif
 
         /* ... add more tests here ... */
 
