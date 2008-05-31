@@ -308,9 +308,6 @@ gva_tree_view_run_query (const gchar *expression,
         GtkSortType order;
         GtkTreeView *view;
         GtkTreeModel *model;
-        GdkCursor *cursor;
-        GdkDisplay *display;
-        GdkWindow *window;
         GString *string;
         GSList *list;
         const gchar **strv;
@@ -338,12 +335,8 @@ gva_tree_view_run_query (const gchar *expression,
         if (expression != NULL && *expression != '\0')
                 g_string_append_printf (string, " WHERE %s", expression);
 
-        window = gtk_widget_get_parent_window (GTK_WIDGET (view));
-        display = gtk_widget_get_display (GTK_WIDGET (view));
-        cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-
-        gdk_window_set_cursor (window, cursor);
         gtk_widget_set_sensitive (GTK_WIDGET (view), FALSE);
+        gva_main_cursor_busy ();
 
         model = gva_game_store_new_from_query (string->str, error);
 
@@ -352,10 +345,9 @@ gva_tree_view_run_query (const gchar *expression,
         {
                 sensitive = (gtk_tree_model_iter_n_children (model, NULL) > 0);
                 gtk_widget_set_sensitive (GTK_WIDGET (view), sensitive);
-                gdk_window_set_cursor (window, NULL);
+                gva_main_cursor_normal ();
         }
 
-        gdk_cursor_unref (cursor);
         g_string_free (string, TRUE);
 
         if (model == NULL)

@@ -41,6 +41,8 @@ gboolean      gva_main_init_search_completion    (GError **error);
 void          gva_main_connect_proxy_cb          (GtkUIManager *manager,
                                                   GtkAction *action,
                                                   GtkWidget *proxy);
+void          gva_main_cursor_busy               (void);
+void          gva_main_cursor_normal             (void);
 void          gva_main_progress_bar_show         (void);
 void          gva_main_progress_bar_hide         (void);
 void          gva_main_progress_bar_set_fraction (gdouble fraction);

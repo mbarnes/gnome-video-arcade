@@ -65,8 +65,20 @@ PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
 AC_SUBST(SQLITE_CFLAGS)
 AC_SUBST(SQLITE_LIBS)
 
+# --with-wnck=[yes|no]
+AC_ARG_WITH([wnck],
+        [AC_HELP_STRING([--with-wnck],
+        [manage game windows with libwnck [default=yes]])],
+        with_wnck="$withval", with_wnck="yes")
+if test "$with_wnck" = "yes"; then
 WNCK_MODULES="libwnck-1.0 >= 2.16.0"
 PKG_CHECK_MODULES(WNCK, $WNCK_MODULES)
+AC_DEFINE_UNQUOTED(WITH_WNCK, 1,
+        [Define to 1 if you are linking against libwnck])
+else
+WNCK_CFLAGS=
+WNCK_LIBS=
+fi
 AC_SUBST(WNCK_CFLAGS)
 AC_SUBST(WNCK_LIBS)
 

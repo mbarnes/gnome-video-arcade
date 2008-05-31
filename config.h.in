@@ -89,3 +89,6 @@
 
 /* Define to 1 if you are linking against GNOME libraries */
 #undef WITH_GNOME
+
+/* Define to 1 if you are linking against libwnck */
+#undef WITH_WNCK

@@ -654,6 +654,11 @@ gva_mame_run_game (const gchar *name,
                         g_string_append (arguments, "-window ");
         }
 
+#ifdef WITH_WNCK
+        if (gva_mame_supports_maximize ())
+                g_string_append (arguments, "-nomaximize ");
+#endif
+
         g_string_append_printf (arguments, "%s", name);
 
         /* Execute the command "${mame} ${name}". */
@@ -715,6 +720,11 @@ gva_mame_record_game (const gchar *name,
                         g_string_append (arguments, "-window ");
         }
 
+#ifdef WITH_WNCK
+        if (gva_mame_supports_maximize ())
+                g_string_append (arguments, "-nomaximize ");
+#endif
+
         g_string_append_printf (arguments, "-record %s %s", inpname, name);
 
         /* Execute the command "${mame} -record ${inpname} ${name}". */
@@ -772,6 +782,11 @@ gva_mame_playback_game (const gchar *name,
                 else
                         g_string_append (arguments, "-window ");
         }
+
+#ifdef WITH_WNCK
+        if (gva_mame_supports_maximize ())
+                g_string_append (arguments, "-nomaximize ");
+#endif
 
         g_string_append_printf (arguments, "%s -playback %s", name, inpname);
 

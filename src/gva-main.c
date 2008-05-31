@@ -454,6 +454,41 @@ gva_main_connect_proxy_cb (GtkUIManager *manager,
 }
 
 /**
+ * gva_main_cursor_busy:
+ *
+ * Sets the mouse cursor to busy.  Generally useful before starting a
+ * long-running foreground task.
+ **/
+void
+gva_main_cursor_busy (void)
+{
+        GdkCursor *cursor;
+        GdkDisplay *display;
+        GtkWidget *widget;
+
+        widget = GVA_WIDGET_MAIN_WINDOW;
+        display = gtk_widget_get_display (widget);
+        cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
+        gdk_window_set_cursor (widget->window, cursor);
+        gdk_cursor_unref (cursor);
+}
+
+/**
+ * gva_main_cursor_normal:
+ *
+ * Sets the mouse cursor back to normal.  Generally useful after completing
+ * a long-running foreground task.
+ **/
+void
+gva_main_cursor_normal (void)
+{
+        GtkWidget *widget;
+
+        widget = GVA_WIDGET_MAIN_WINDOW;
+        gdk_window_set_cursor (widget->window, NULL);
+}
+
+/**
  * gva_main_progress_bar_show:
  *
  * Shows the progress bar in the main window's status bar and sets the
@@ -463,19 +498,9 @@ gva_main_connect_proxy_cb (GtkUIManager *manager,
 void
 gva_main_progress_bar_show (void)
 {
-        GdkCursor *cursor;
-        GdkDisplay *display;
-        GtkWidget *widget;
-        GdkWindow *window;
-
-        widget = GVA_WIDGET_MAIN_PROGRESS_BAR;
-        window = gtk_widget_get_parent_window (widget);
-        display = gtk_widget_get_display (widget);
-        cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
         gva_main_progress_bar_set_fraction (0.0);
-        gdk_window_set_cursor (window, cursor);
-        gdk_cursor_unref (cursor);
-        gtk_widget_show (widget);
+        gtk_widget_show (GVA_WIDGET_MAIN_PROGRESS_BAR);
+        gva_main_cursor_busy ();
 }
 
 /**
@@ -488,13 +513,8 @@ gva_main_progress_bar_show (void)
 void
 gva_main_progress_bar_hide (void)
 {
-        GtkWidget *widget;
-        GdkWindow *window;
-
-        widget = GVA_WIDGET_MAIN_PROGRESS_BAR;
-        window = gtk_widget_get_parent_window (widget);
-        gdk_window_set_cursor (window, NULL);
-        gtk_widget_hide (widget);
+        gtk_widget_hide (GVA_WIDGET_MAIN_PROGRESS_BAR);
+        gva_main_cursor_normal ();
 }
 
 /**

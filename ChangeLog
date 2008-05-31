@@ -1,3 +1,33 @@
+2008-05-31  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Make libwnck optional.  Use --without-wnck to disable it.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-main.c (gva_main_cursor_busy), (gva_main_cursor_normal):
+	New functions set the mouse cursor to busy or normal, respectively.
+
+	* src/gva-main.c (gva_main_progress_bar_show),
+	(gva_main_progress_bar_hide):
+	* src/gva-tree-view.c (gva_tree_view_run_query):
+	Let gva_main_cursor_busy() and gva_main_cursor_normal() manage the
+	mouse cursor.  Simplifies the logic.
+
+	* src/gva-mame.h (gva_mame_supports_maximize):
+	New macro returns TRUE if MAME supports the -maximize option.
+
+	* src/gva-mame-common.c (gva_mame_run_game), (gva_mame_record_game),
+	(gva_mame_playback_game):
+	Add a -nomaximize argument if supported and we're linking against
+	libwnck.  Allowing MAME to maximize the window seems to confuse the
+	window management logic and/or libwnck for some reason.
+
+	* src/gva-wnck.c (wnck_weak_notify_cb), (wnck_window_opened_cb),
+	(gva_wnck_listen_for_new_window):
+	Set the mouse cursor to busy until the game window appears.
+
 2008-05-30  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:

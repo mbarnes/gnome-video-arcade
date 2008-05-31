@@ -61,6 +61,20 @@
 @proxy: 
 
 
+<!-- ##### FUNCTION gva_main_cursor_busy ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gva_main_cursor_normal ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### FUNCTION gva_main_progress_bar_show ##### -->
 <para>
 

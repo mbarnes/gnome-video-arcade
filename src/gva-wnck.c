@@ -18,11 +18,14 @@
 
 #include "gva-wnck.h"
 
+#ifdef WITH_WNCK
+
 #define WNCK_I_KNOW_THIS_IS_UNSTABLE
 #include <libwnck/libwnck.h>
 
 #include "gva-db.h"
 #include "gva-error.h"
+#include "gva-main.h"
 
 #define SQL_SELECT_GAME_WINDOW \
         "SELECT * FROM window WHERE name == '%s'"
@@ -216,6 +219,7 @@ wnck_weak_notify_cb (WnckScreen *screen,
                 NULL, NULL, where_the_process_was);
 
         window_opened_handler_id = 0;
+        gva_main_cursor_normal ();
 }
 
 static void
@@ -263,7 +267,11 @@ wnck_window_opened_cb (WnckScreen *screen,
         g_signal_connect (
                 screen, "window-closed",
                 G_CALLBACK (wnck_window_closed_cb), NULL);
+
+        gva_main_cursor_normal ();
 }
+
+#endif /* WITH_WNCK */
 
 /**
  * gva_wnck_listen_for_new_window:
@@ -283,6 +291,7 @@ void
 gva_wnck_listen_for_new_window (GvaProcess *process,
                                 const gchar *game)
 {
+#ifdef WITH_WNCK
         g_return_if_fail (GVA_IS_PROCESS (process));
         g_return_if_fail (game != NULL);
 
@@ -308,4 +317,7 @@ gva_wnck_listen_for_new_window (GvaProcess *process,
         window_opened_handler_id = g_signal_connect (
                 wnck_screen_get_default (), "window-opened",
                 G_CALLBACK (wnck_window_opened_cb), process);
+
+        gva_main_cursor_busy ();
+#endif /* WITH_WNCK */
 }
