@@ -128,7 +128,7 @@ gva_find_data_file (const gchar *basename)
         g_return_val_if_fail (basename != NULL, NULL);
 
         /* Support running directly from the source tree. */
-        filename = g_build_filename ("..", "data", basename, NULL);
+        filename = g_build_filename (TOPSRCDIR, "data", basename, NULL);
         if (g_file_test (filename, G_FILE_TEST_EXISTS))
                 return filename;
         g_free (filename);

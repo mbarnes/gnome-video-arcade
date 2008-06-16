@@ -343,6 +343,10 @@ gva_main_init_search_completion (GError **error)
         sqlite3_stmt *stmt;
         gint errcode;
 
+#if GTK_CHECK_VERSION(2,13,1)
+	GList *list;
+#endif
+
         if (!gva_db_prepare (SQL_COMPLETION_LIST, &stmt, error))
                 return FALSE;
 

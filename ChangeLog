@@ -1,5 +1,22 @@
 2008-06-16  Matthew Barnes  <mbarnes@redhat.com>
 
+	* configure.ac: Post-release version bump.
+
+	* docs/reference/database-schema.xml:
+	Add documentation for the 'window' table.
+
+	* src/Makefile.am:
+	Add TOPSRCDIR definition to AM_CPPFLAGS.
+
+	* src/gva-main.c (gva_main_init_search_completion):
+	Fix a compilation error when building against GTK+ >= 2.13.1.
+
+	* src/gva-util.c (gva_file_data_file):
+	When running directly from the source tree, use TOPSRCDIR
+	rather than '..' when constructing the file path.
+
+2008-06-16  Matthew Barnes  <mbarnes@redhat.com>
+
 	* NEWS: Update for 0.6.2
 
 2008-05-31  Matthew Barnes  <mbarnes@redhat.com>

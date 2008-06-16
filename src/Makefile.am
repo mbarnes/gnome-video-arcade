@@ -17,6 +17,7 @@ AM_CPPFLAGS = \
 	-DLIBDIR=\""$(libdir)"\" \
 	-DPREFIX=\""$(prefix)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)"\" \
+	-DTOPSRCDIR=\""$(abs_top_builddir)"\" \
 	-DLOCALEDIR=\""$(datadir)/locale/"\"
 
 AM_LDFLAGS = \

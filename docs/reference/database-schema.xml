@@ -166,6 +166,19 @@ CREATE TABLE playback (
 </programlisting>
 </simplesect>
 
+<simpleset>
+<title>Table: window</title>
+<programlisting>
+CREATE TABLE window (
+	name PRIMARY KEY,
+	x,
+	y,
+	width,
+	height,
+	maximized);
+</programlisting>
+</simpleset>
+
 <simplesect>
 <title>View: available</title>
 <programlisting>
