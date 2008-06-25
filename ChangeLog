@@ -1,3 +1,27 @@
+2008-06-25  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	AC_SUBST(abs_top_builddir)
+
+	* data/gnome-video-arcade.glade:
+	Add a frame and event box around the status area in the Technical
+	Properties tab.  The event box allows us to color the background
+	to make it stand out more.  Also add some placeholder widgets for
+	displaying parent/clone relationships in the Technical Properties.
+	Not even remotely complete yet.
+
+	* src/gva-properties.c (properties_update_status):
+	Set visibility of the new GtkFrame in the status area.
+	Make the status icon smaller.  It now matches the tooltip.
+
+	* src/gva-properties.c (gva_properties_init):
+	Dig up the tooltip background color from GtkSettings and set
+	the status area background color to match.  Looks better.
+
+	* src/gva-ui.h:
+	Add macros to fetch the status GtkEventBox and GtkFrame in the
+	Technical Properties tab.
+
 2008-06-16  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.

@@ -900,135 +900,201 @@ Manufacturer, Year</property>
                         <property name="border_width">12</property>
                         <property name="spacing">12</property>
                         <child>
-                          <widget class="GtkHBox" id="properties-status-hbox">
+                          <widget class="GtkFrame" id="properties-status-frame">
                             <property name="visible">True</property>
-                            <property name="spacing">12</property>
+                            <property name="label_xalign">0</property>
+                            <property name="label_yalign">0</property>
+                            <property name="shadow_type">GTK_SHADOW_IN</property>
                             <child>
-                              <widget class="GtkImage" id="properties-status-image">
+                              <widget class="GtkAlignment" id="properties-status-frame-alignment">
                                 <property name="visible">True</property>
-                                <property name="yalign">0</property>
-                                <property name="stock">gtk-dialog-warning</property>
-                                <property name="icon_size">5</property>
+                                <child>
+                                  <widget class="GtkEventBox" id="properties-status-event-box">
+                                    <property name="visible">True</property>
+                                    <child>
+                                      <widget class="GtkHBox" id="properties-status-hbox">
+                                        <property name="visible">True</property>
+                                        <property name="border_width">6</property>
+                                        <property name="spacing">12</property>
+                                        <child>
+                                          <widget class="GtkImage" id="properties-status-image">
+                                            <property name="visible">True</property>
+                                            <property name="yalign">0</property>
+                                            <property name="stock">gtk-dialog-warning</property>
+                                            <property name="icon_size">5</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkVBox" id="properties-status-vbox">
+                                            <property name="visible">True</property>
+                                            <property name="spacing">6</property>
+                                            <child>
+                                              <widget class="GtkLabel" id="properties-status-header">
+                                                <property name="visible">True</property>
+                                                <property name="xalign">0</property>
+                                                <property name="label" translatable="yes">&lt;b&gt;There are known problems with this game:&lt;/b&gt;</property>
+                                                <property name="use_markup">True</property>
+                                                <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="GtkVBox" id="properties-status-detail-vbox">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-imperfect-color-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• The colors aren't 100% accurate.</property>
+                                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                  </widget>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-preliminary-color-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• The colors are completely wrong.</property>
+                                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-imperfect-graphic-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• The video emulation isn't 100% accurate.</property>
+                                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="position">2</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-imperfect-sound-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• The sound emulation isn't 100% accurate.</property>
+                                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="position">3</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-preliminary-sound-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• The game lacks sound.</property>
+                                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="position">4</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-preliminary-cocktail-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• Screen flipping in cocktail mode is not supported.</property>
+                                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="position">5</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-preliminary-emulation-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
+                                                    <property name="use_markup">True</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">6</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <widget class="GtkLabel" id="properties-preliminary-protection-label">
+                                                    <property name="visible">True</property>
+                                                    <property name="xalign">0</property>
+                                                    <property name="label" translatable="yes">• The game has protection which isn't fully emulated.</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="expand">False</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">7</property>
+                                                  </packing>
+                                                </child>
+                                              </widget>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">1</property>
+                                              </packing>
+                                            </child>
+                                          </widget>
+                                          <packing>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </widget>
+                                    </child>
+                                  </widget>
+                                </child>
                               </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                              </packing>
                             </child>
                             <child>
-                              <widget class="GtkVBox" id="properties-status-vbox">
+                              <widget class="GtkLabel" id="properties-status-frame-label">
+                              </widget>
+                              <packing>
+                                <property name="type">label_item</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkVBox" id="properties-original-vbox">
+                            <property name="visible">True</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <widget class="GtkLabel" id="properties-original-header">
                                 <property name="visible">True</property>
-                                <property name="spacing">6</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Original Version&lt;/b&gt;</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="GtkAlignment" id="properties-original-alignment">
+                                <property name="visible">True</property>
+                                <property name="left_padding">12</property>
                                 <child>
-                                  <widget class="GtkLabel" id="properties-status-header">
+                                  <widget class="GtkLinkButton" id="linkbutton1">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="label" translatable="yes">Pac-Man (Midway)</property>
+                                    <property name="relief">GTK_RELIEF_NONE</property>
+                                    <property name="focus_on_click">False</property>
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">&lt;b&gt;There are known problems with this game:&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
+                                    <property name="response_id">0</property>
+                                    <property name="uri"></property>
                                   </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkVBox" id="properties-status-detail-vbox">
-                                    <property name="visible">True</property>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-imperfect-color-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• The colors aren't 100% accurate.</property>
-                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-                                      </widget>
-                                    </child>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-preliminary-color-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• The colors are completely wrong.</property>
-                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-                                      </widget>
-                                      <packing>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-imperfect-graphic-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• The video emulation isn't 100% accurate.</property>
-                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-                                      </widget>
-                                      <packing>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-imperfect-sound-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• The sound emulation isn't 100% accurate.</property>
-                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-                                      </widget>
-                                      <packing>
-                                        <property name="position">3</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-preliminary-sound-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• The game lacks sound.</property>
-                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-                                      </widget>
-                                      <packing>
-                                        <property name="position">4</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-preliminary-cocktail-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• Screen flipping in cocktail mode is not supported.</property>
-                                        <property name="ellipsize">PANGO_ELLIPSIZE_END</property>
-                                      </widget>
-                                      <packing>
-                                        <property name="position">5</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-preliminary-emulation-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
-                                        <property name="use_markup">True</property>
-                                      </widget>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">6</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <widget class="GtkLabel" id="properties-preliminary-protection-label">
-                                        <property name="visible">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">• The game has protection which isn't fully emulated.</property>
-                                      </widget>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">7</property>
-                                      </packing>
-                                    </child>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
                                 </child>
                               </widget>
                               <packing>
@@ -1039,6 +1105,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -1077,7 +1144,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -1164,7 +1231,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">2</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
@@ -1247,7 +1314,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">3</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                         <child>
@@ -1334,7 +1401,7 @@ Manufacturer, Year</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">4</property>
+                            <property name="position">5</property>
                           </packing>
                         </child>
                       </widget>

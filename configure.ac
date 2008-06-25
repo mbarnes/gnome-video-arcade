@@ -17,6 +17,8 @@ AM_MAINTAINER_MODE
 GVA_VERSION=gva_version
 AC_SUBST(GVA_VERSION)
 
+AC_SUBST(abs_top_builddir)
+
 # Dependencies
 GLIB_MODULES="glib-2.0 >= 2.12"
 PKG_CHECK_MODULES(GLIB, $GLIB_MODULES)

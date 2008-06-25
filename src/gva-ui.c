@@ -831,6 +831,7 @@ ui_init (void)
         filename = gva_find_data_file (PACKAGE ".glade");
         if (filename != NULL)
         {
+                REGISTER_WIDGET (GTK_TYPE_LINK_BUTTON);
                 REGISTER_WIDGET (GVA_TYPE_COLUMN_MANAGER);
 
                 glade_provide ("gva");

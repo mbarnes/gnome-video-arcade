@@ -373,14 +373,14 @@ properties_update_status (GtkTreeModel *model,
         else
                 stock_id = GTK_STOCK_DIALOG_WARNING;
 
-        widget = GVA_WIDGET_PROPERTIES_STATUS_HBOX;
+        widget = GVA_WIDGET_PROPERTIES_STATUS_FRAME;
         visible = (strcmp (driver_status, "imperfect") == 0) ||
                 (strcmp (driver_status, "preliminary") == 0);
         g_object_set (widget, "visible", visible, NULL);
 
         gtk_image_set_from_stock (
                 GTK_IMAGE (GVA_WIDGET_PROPERTIES_STATUS_IMAGE),
-                stock_id, GTK_ICON_SIZE_DIALOG);
+                stock_id, GTK_ICON_SIZE_DND);
         g_object_set (widget, "visible", visible, NULL);
 
         widget = GVA_WIDGET_PROPERTIES_IMPERFECT_COLOR_LABEL;
@@ -573,13 +573,16 @@ gva_properties_init (void)
 {
         GtkWindow *window;
         GtkTreeView *view;
+        GtkSettings *settings;
         GtkWidget *text_view;
+        GHashTable *color_hash;
         PangoFontDescription *desc;
+        const GdkColor *color;
+        GtkWidget *widget;
         gchar *font_name;
 
 #ifndef HISTORY_FILE
         GtkNotebook *notebook;
-        GtkWidget *page;
 #endif
 
         window = GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW);
@@ -608,11 +611,17 @@ gva_properties_init (void)
         pango_font_description_free (desc);
         g_free (font_name);
 
+        settings = gtk_settings_get_default ();
+        widget = GVA_WIDGET_PROPERTIES_STATUS_EVENT_BOX;
+        g_object_get (settings, "color-hash", &color_hash, NULL);
+        color = g_hash_table_lookup (color_hash, "tooltip_bg_color");
+        gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, color);
+
 #ifndef HISTORY_FILE
         /* Hide the history page if we have no history file. */
         notebook = GTK_NOTEBOOK (GVA_WIDGET_PROPERTIES_NOTEBOOK);
-        page = gtk_notebook_get_nth_page (notebook, NOTEBOOK_PAGE_HISTORY);
-        gtk_widget_hide (page);
+        widget = gtk_notebook_get_nth_page (notebook, NOTEBOOK_PAGE_HISTORY);
+        gtk_widget_hide (widget);
 #endif
 }
 
