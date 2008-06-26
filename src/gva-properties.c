@@ -25,6 +25,7 @@
 #include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-history.h"
+#include "gva-link-button.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 #include "gva-util.h"
@@ -32,8 +33,19 @@
 /* Update Delay (0.05 sec) */
 #define UPDATE_TIMEOUT_MS 50
 
+#define SQL_GAME_IS_AVAILABLE \
+        "SELECT COUNT(*) FROM available WHERE name = \"%s\""
+
 #define SQL_SELECT_NAME \
         "SELECT * FROM available WHERE name = \"%s\""
+
+#define SQL_SELECT_PARENT \
+        "SELECT name, description FROM game " \
+        "WHERE name = \"%s\" ORDER BY description"
+
+#define SQL_SELECT_CLONES \
+        "SELECT name, description FROM game " \
+        "WHERE cloneof = \"%s\" ORDER BY description"
 
 #define SQL_SELECT_CPU \
         "SELECT COUNT(*), name, clock FROM chip " \
@@ -82,6 +94,54 @@ static const gchar *video_labels[] =
 };
 
 static guint update_timeout_source_id;
+
+static void
+properties_label_clicked_cb (GvaLinkButton *button,
+                             const gchar *game)
+{
+        GdkEvent *event;
+	GtkWidget *widget;
+
+        /* Force the cursor back to normal before the button is destroyed.
+         * XXX We're passing the wrong type of event here, but it should be
+         *     okay for this particular case. */
+        event = gtk_get_current_event ();
+        g_signal_emit_by_name (button, "leave-notify-event", event);
+        gdk_event_free (event);
+
+	widget = GVA_WIDGET_PROPERTIES_TECHNICAL_SCROLLED_WINDOW;
+	gtk_widget_grab_focus (widget);
+
+        gva_tree_view_set_selected_game (game);
+}
+
+static void
+properties_add_game_label (GtkBox *box,
+                           const gchar *game,
+                           const gchar *description)
+{
+        GtkWidget *widget;
+
+        if (gva_tree_view_lookup (game) != NULL)
+        {
+                widget = gva_link_button_new (description);
+                gtk_button_set_alignment (GTK_BUTTON (widget), 0.0, 0.5);
+                gtk_widget_set_tooltip_text (widget, _("Show this game"));
+
+                g_signal_connect (
+                        widget, "clicked",
+                        G_CALLBACK (properties_label_clicked_cb),
+                        (gpointer) g_intern_string (game));
+        }
+        else
+        {
+                widget = gtk_label_new (description);
+                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+        }
+
+        gtk_box_pack_start (box, widget, FALSE, FALSE, 0);
+        gtk_widget_show (widget);
+}
 
 static gchar *
 properties_cpu_description (const gchar *name,
@@ -145,6 +205,109 @@ properties_update_bios (GtkTreeModel *model,
 }
 
 static void
+properties_update_clones (GtkTreeModel *model,
+                          GtkTreeIter *iter)
+{
+        GtkBox *box;
+        GList *children;
+        gchar **result = NULL;
+        gchar *game;
+        gint rows, columns, ii;
+        GError *error = NULL;
+
+        box = GTK_BOX (GVA_WIDGET_PROPERTIES_ORIGINAL_LINKS);
+        children = gtk_container_get_children (GTK_CONTAINER (box));
+        g_list_foreach (children, (GFunc) gtk_widget_destroy, NULL);
+        g_list_free (children);
+
+        gtk_tree_model_get (
+                model, iter, GVA_GAME_STORE_COLUMN_CLONEOF, &game, -1);
+
+        if (game != NULL)
+        {
+                gchar *sql;
+
+                sql = g_strdup_printf (SQL_SELECT_PARENT, game);
+                if (!gva_db_get_table (sql, &result, &rows, &columns, &error))
+                {
+                        gva_error_handle (&error);
+                        rows = columns = 0;
+                }
+                g_free (sql);
+                g_free (game);
+        }
+        else
+                rows = columns = 0;
+
+        if (rows > 0)
+                gtk_widget_show (GVA_WIDGET_PROPERTIES_ORIGINAL_VBOX);
+        else
+                gtk_widget_hide (GVA_WIDGET_PROPERTIES_ORIGINAL_VBOX);
+
+        for (ii = 0; ii < rows; ii++)
+        {
+                const gchar *parent_name;
+                const gchar *description;
+                gchar **values;
+
+                values = result + ((ii + 1) * columns);
+
+                parent_name = values[0];
+                description = values[1];
+
+                properties_add_game_label (box, parent_name, description);
+        }
+
+        g_strfreev (result);
+        result = NULL;
+
+        box = GTK_BOX (GVA_WIDGET_PROPERTIES_ALTERNATE_LINKS);
+        children = gtk_container_get_children (GTK_CONTAINER (box));
+        g_list_foreach (children, (GFunc) gtk_widget_destroy, NULL);
+        g_list_free (children);
+
+        gtk_tree_model_get (
+                model, iter, GVA_GAME_STORE_COLUMN_NAME, &game, -1);
+
+        if (game != NULL)
+        {
+                gchar *sql;
+
+                sql = g_strdup_printf (SQL_SELECT_CLONES, game);
+                if (!gva_db_get_table (sql, &result, &rows, &columns, &error))
+                {
+                        gva_error_handle (&error);
+                        rows = columns = 0;
+                }
+                g_free (sql);
+                g_free (game);
+        }
+        else
+                rows = columns = 0;
+
+        if (rows > 0)
+                gtk_widget_show (GVA_WIDGET_PROPERTIES_ALTERNATE_VBOX);
+        else
+                gtk_widget_hide (GVA_WIDGET_PROPERTIES_ALTERNATE_VBOX);
+
+        for (ii = 0; ii < rows; ii++)
+        {
+                const gchar *clone_name;
+                const gchar *description;
+                gchar **values;
+
+                values = result + ((ii + 1) * columns);
+
+                clone_name = values[0];
+                description = values[1];
+
+                properties_add_game_label (box, clone_name, description);
+        }
+
+        g_strfreev (result);
+}
+
+static void
 properties_update_cpu (const gchar *name)
 {
         GtkWidget *label;
@@ -158,7 +321,8 @@ properties_update_cpu (const gchar *name)
         sql = g_strdup_printf (
                 SQL_SELECT_CPU, name, G_N_ELEMENTS (cpu_labels));
 
-        if (!gva_db_get_table (sql, &result, &rows, &columns, &error)) {
+        if (!gva_db_get_table (sql, &result, &rows, &columns, &error))
+        {
                 gva_error_handle (&error);
                 rows = columns = 0;
         }
@@ -533,6 +697,7 @@ properties_update_timeout_cb (void)
                 g_assert (valid);
 
                 properties_update_bios (model, &iter);
+                properties_update_clones (model, &iter);
                 properties_update_cpu (name);
                 properties_update_header (model, &iter);
                 properties_update_history (model, &iter);
@@ -612,9 +777,11 @@ gva_properties_init (void)
         g_free (font_name);
 
         settings = gtk_settings_get_default ();
-        widget = GVA_WIDGET_PROPERTIES_STATUS_EVENT_BOX;
         g_object_get (settings, "color-hash", &color_hash, NULL);
         color = g_hash_table_lookup (color_hash, "tooltip_bg_color");
+        widget = GVA_WIDGET_PROPERTIES_STATUS_EVENT_BOX;
+        gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, color);
+        widget = GVA_WIDGET_PROPERTIES_STATUS_FRAME;
         gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, color);
 
 #ifndef HISTORY_FILE

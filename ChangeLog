@@ -1,5 +1,35 @@
 2008-06-25  Matthew Barnes  <mbarnes@redhat.com>
 
+	* data/gnome-video-arcade.glade:
+	Move clones to the bottom of the Technical Properties tab.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* maint/Makefile.am:
+	* maint/gva.xml:
+	Create a Glade catalog for GvaLinkButton.
+
+	* src/Makefile.am:
+	Add gva-link-button.[ch].
+
+	* src/gva-link-button.c:
+	* src/gva-link-button.h:
+	New subclass of GtkLinkButton.  Works the same but eliminates the
+	shadow and extra padding around the button label.
+
+	* src/gva-properties.c (properties_label_clicked_cb),
+	(properties_add_game_label), (properties_update_clones):
+	Add parent/clone information to the Technical Properties tab.
+	Games that are present in the current main window view look like
+	hypertext links.  Clicking one will jump to that game in the main
+	window and consequently update the Properties dialog.
+
+	* gva-ui.h:
+	More widget macros.
+
+2008-06-25  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac:
 	AC_SUBST(abs_top_builddir)
 

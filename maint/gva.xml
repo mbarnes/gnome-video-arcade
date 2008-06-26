@@ -8,10 +8,13 @@
       </properties>
     </glade-widget-class>
 
+    <glade-widget-class name="GvaLinkButton" generic-name="link-button" title="Link Button"/>
+
   </glade-widget-classes>
 
   <glade-widget-group name="gva-widgets" title="GNOME Video Arcade">
     <glade-widget-class-ref name="GvaColumnManager"/>
+    <glade-widget-class-ref name="GvaLinkButton"/>
   </glade-widget-group>
 
 </glade-catalog>

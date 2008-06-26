@@ -25,7 +25,6 @@
             <child>
               <widget class="GtkProgressBar" id="main-progress-bar">
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="text" translatable="yes"></property>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -114,7 +113,6 @@
                         <property name="can_focus">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="has_tooltip">True</property>
-                        <property name="headers_clickable">True</property>
                         <property name="rules_hint">True</property>
                         <property name="show_expanders">False</property>
                         <signal name="popup_menu" handler="gva_tree_view_popup_menu_cb"/>
@@ -904,7 +902,7 @@ Manufacturer, Year</property>
                             <property name="visible">True</property>
                             <property name="label_xalign">0</property>
                             <property name="label_yalign">0</property>
-                            <property name="shadow_type">GTK_SHADOW_IN</property>
+                            <property name="shadow_type">GTK_SHADOW_OUT</property>
                             <child>
                               <widget class="GtkAlignment" id="properties-status-frame-alignment">
                                 <property name="visible">True</property>
@@ -1084,16 +1082,12 @@ Manufacturer, Year</property>
                                 <property name="visible">True</property>
                                 <property name="left_padding">12</property>
                                 <child>
-                                  <widget class="GtkLinkButton" id="linkbutton1">
+                                  <widget class="GtkVBox" id="properties-original-links">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="label" translatable="yes">Pac-Man (Midway)</property>
-                                    <property name="relief">GTK_RELIEF_NONE</property>
-                                    <property name="focus_on_click">False</property>
-                                    <property name="xalign">0</property>
-                                    <property name="response_id">0</property>
-                                    <property name="uri"></property>
+                                    <property name="spacing">6</property>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
                                   </widget>
                                 </child>
                               </widget>
@@ -1402,6 +1396,43 @@ Manufacturer, Year</property>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="position">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkVBox" id="properties-alternate-vbox">
+                            <property name="visible">True</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <widget class="GtkLabel" id="properties-alternate-header">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Alternate Versions&lt;/b&gt;</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="GtkAlignment" id="properties-alternate-alignment">
+                                <property name="visible">True</property>
+                                <property name="left_padding">12</property>
+                                <child>
+                                  <widget class="GtkVBox" id="properties-alternate-links">
+                                    <property name="visible">True</property>
+                                    <property name="spacing">6</property>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">6</property>
                           </packing>
                         </child>
                       </widget>
