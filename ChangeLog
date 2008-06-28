@@ -1,3 +1,15 @@
+2008-06-28  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-properties.c (properties_scroll_to_top):
+	Rename function from properties_technical_scroll_to_top().
+	Scroll both the Technical and History tabs to the top.
+
+	* src/gva-ui.h:
+	Add GVA_WIDGET_PROPERTIES_HISTORY_SCROLLED_WINDOW.
+
 2008-06-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* README: List intltool as a dependency.

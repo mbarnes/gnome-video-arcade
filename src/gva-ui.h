@@ -130,6 +130,8 @@
         (gva_ui_get_widget ("properties-forward-button"))
 #define GVA_WIDGET_PROPERTIES_HEADER \
         (gva_ui_get_widget ("properties-header"))
+#define GVA_WIDGET_PROPERTIES_HISTORY_SCROLLED_WINDOW \
+        (gva_ui_get_widget ("properties-history-scrolled-window"))
 #define GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW \
         (gva_ui_get_widget ("properties-history-text-view"))
 #define GVA_WIDGET_PROPERTIES_IMPERFECT_COLOR_LABEL \

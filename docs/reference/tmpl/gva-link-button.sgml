@@ -22,14 +22,13 @@ GvaLinkButton
 
 </para>
 
-@parent: 
 
 <!-- ##### FUNCTION gva_link_button_new ##### -->
 <para>
 
 </para>
 
-@text: 
+@label: 
 @Returns: 
 
 

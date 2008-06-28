@@ -69,7 +69,7 @@ struct _GvaLinkButtonClass
 };
 
 GType           gva_link_button_get_type        (void);
-GtkWidget *     gva_link_button_new             (const gchar *text);
+GtkWidget *     gva_link_button_new             (const gchar *label);
 
 G_END_DECLS
 
