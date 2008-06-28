@@ -96,6 +96,18 @@ static const gchar *video_labels[] =
 static guint update_timeout_source_id;
 
 static void
+properties_technical_scroll_to_top (void)
+{
+        GtkScrolledWindow *scrolled_window;
+        GtkAdjustment *adjustment;
+
+        scrolled_window = GTK_SCROLLED_WINDOW (
+                GVA_WIDGET_PROPERTIES_TECHNICAL_SCROLLED_WINDOW);
+        adjustment = gtk_scrolled_window_get_vadjustment (scrolled_window);
+        gtk_adjustment_set_value (adjustment, 0.0);
+}
+
+static void
 properties_label_clicked_cb (GvaLinkButton *button,
                              const gchar *game)
 {
@@ -696,6 +708,8 @@ properties_update_timeout_cb (void)
                 valid = gtk_tree_model_get_iter_first (model, &iter);
                 g_assert (valid);
 
+                properties_technical_scroll_to_top ();
+
                 properties_update_bios (model, &iter);
                 properties_update_clones (model, &iter);
                 properties_update_cpu (name);
@@ -806,4 +820,18 @@ gva_properties_close_clicked_cb (GtkWindow *window,
                                  GtkButton *button)
 {
         gtk_widget_hide (GTK_WIDGET (window));
+}
+
+/**
+ * gva_properties_show_cb:
+ * @window: the "Properties" window
+ *
+ * Handler for #GtkWidget::show signals to the "Properties" window.
+ *
+ * Scrolls the viewport in the Technical tab to the top.
+ **/
+void
+gva_properties_show_cb (GtkWindow *window)
+{
+        properties_technical_scroll_to_top ();
 }

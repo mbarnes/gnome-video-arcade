@@ -36,6 +36,7 @@ void            gva_properties_init             (void);
 
 void            gva_properties_close_clicked_cb (GtkWindow *window,
                                                  GtkButton *button);
+void            gva_properties_show_cb          (GtkWindow *window);
 
 G_END_DECLS
 

@@ -1,3 +1,17 @@
+2008-06-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* README: List intltool as a dependency.
+
+	* data/gnome-video-arcade.glade:
+	Add an information icon to the Audit dialog.
+	Move parents to the bottom of the Technical Properties tab.
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
+	* src/gva-properties.c (properties_technical_scroll_to_top):
+	New function scrolls the Technical Properties viewport to the top.
+
 2008-06-25  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.glade:

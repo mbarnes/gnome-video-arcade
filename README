@@ -27,6 +27,12 @@ installed prior to compiling the source code:
           sdlmame:  http://rbelmont.mameworld.info/?page_id=163
           xmame:    http://x.mame.net/
 
+   - intltool
+
+       GNOME Video Arcade uses intltool to help internationalize the
+       user interface.  This should be available from your GNU/Linux
+       distribution as a pre-compiled package.
+
    - gnome-doc-utils
 
        GNOME Video Arcade uses gnome-doc-utils to build the user
