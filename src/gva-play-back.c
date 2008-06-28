@@ -123,7 +123,6 @@ play_back_add_input_file (const gchar *inpfile,
         gchar *inpname;
         gchar *sql;
         gint rows;
-        gint columns;
         struct stat st;
         time_t *time;
         GError *error = NULL;
@@ -141,7 +140,7 @@ play_back_add_input_file (const gchar *inpfile,
                 "SELECT comment FROM playback WHERE "
                 "name == '%s' AND inode == %" G_GINT64_FORMAT,
                 name, (gint64) st.st_ino);
-        if (gva_db_get_table (sql, &result, &rows, &columns, &error))
+        if (gva_db_get_table (sql, &result, &rows, NULL, &error))
         {
                 if (rows > 0)
                         comment = g_strdup (result[1]);
@@ -156,7 +155,7 @@ play_back_add_input_file (const gchar *inpfile,
                 sql = g_strdup_printf (
                         "SELECT description FROM available "
                         "WHERE name == '%s'", name);
-                if (gva_db_get_table (sql, &result, &rows, &columns, &error))
+                if (gva_db_get_table (sql, &result, &rows, NULL, &error))
                 {
                         if (rows > 0)
                                 comment = g_strdup (result[1]);

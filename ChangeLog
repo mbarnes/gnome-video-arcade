@@ -3,6 +3,33 @@
 	* docs/reference/gnome-video-arcade-sections.txt:
 	Add new symbols to the developer documentation.
 
+	* src/gva-db.c (gva_db_get_table):
+	Allow the output arguments to be NULL.  This is more convenient
+	for callers if they don't need all the output values.
+
+	* src/main.c (warn_if_no_roms):
+	* src/gva-play-back.c (play_back_add_input_file):
+	Take advantage of this in calls to gva_db_get_table().
+
+	* src/gva-properties.c:
+	Modify the SELECT_PARENT/CLONES queries to also return whether the
+	game is available.  properties_add_game_label() will use this to
+	decide what kind of widget to create -- a label or a link label.
+
+	* src/gva-properties.c (gva_properties_show_game):
+	Move the update logic from properties_update_timeout_cb() to this
+	new function.  This allows us to bypass the "tree view selection
+	changed" delay when the user clicks on a link label.
+
+	* src/gva-tree-view.c (gva_tree_view_set_selected_game):
+	If the requested game is not visible in the current view, unselect
+	all rows rather than arbitrarily selecting the first row.
+
+2008-06-28  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add new symbols to the developer documentation.
+
 	* src/gva-properties.c (properties_scroll_to_top):
 	Rename function from properties_technical_scroll_to_top().
 	Scroll both the Technical and History tabs to the top.

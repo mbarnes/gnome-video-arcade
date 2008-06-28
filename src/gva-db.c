@@ -1591,9 +1591,9 @@ gva_db_execute (const gchar *sql,
 /**
  * gva_db_get_table:
  * @sql: an SQL statement
- * @result: return location for the result
- * @rows: return location for the number of rows in the result
- * @columns: return location for the number of columns in the result
+ * @result: return location for the result, or %NULL
+ * @rows: return location for the number of rows in the result, or %NULL
+ * @columns: return location for the number of columns in the result, or %NULL
  * @error: return location for a #GError, or %NULL
  *
  * Executes the given SQL statement and returns the results as a string
@@ -1614,25 +1614,28 @@ gva_db_get_table (const gchar *sql,
 {
         char **table;
         char *errmsg;
+        int local_rows = 0;
+        int local_columns = 0;
         gint errcode;
 
         g_return_val_if_fail (db != NULL, FALSE);
         g_return_val_if_fail (sql != NULL, FALSE);
-        g_return_val_if_fail (result != NULL, FALSE);
-        g_return_val_if_fail (rows != NULL, FALSE);
-        g_return_val_if_fail (columns != NULL, FALSE);
 
         errcode = sqlite3_get_table (
-                db, sql, &table, rows, columns, &errmsg);
+                db, sql, &table, &local_rows, &local_columns, &errmsg);
 
         if (errcode == SQLITE_OK)
         {
-                gint length, ii;
+                if (result != NULL)
+                {
+                        gint length, ii;
 
-                length = (*rows + 1) * (*columns);
-                *result = g_new0 (gchar *, length + 1);
-                for (ii = 0; ii < length; ii++)
-                        (*result)[ii] = g_strdup (table[ii]);
+                        length = (local_rows + 1) * (local_columns);
+                        *result = g_new0 (gchar *, length + 1);
+                        for (ii = 0; ii < length; ii++)
+                                (*result)[ii] = g_strdup (table[ii]);
+                }
+
                 sqlite3_free_table (table);
         }
         else
@@ -1640,6 +1643,11 @@ gva_db_get_table (const gchar *sql,
                 gva_db_set_error (error, errcode, errmsg);
                 sqlite3_free (errmsg);
         }
+
+        if (rows != NULL)
+                *rows = local_rows;
+        if (columns != NULL)
+                *columns = local_columns;
 
         return (errcode == SQLITE_OK);
 }

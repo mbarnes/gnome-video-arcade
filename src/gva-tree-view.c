@@ -509,8 +509,8 @@ gva_tree_view_get_selected_game (void)
  * gva_tree_view_set_selected_game:
  * @game: the name of a game
  *
- * Selects the row corresponding to @game.  If the row is invisible in the
- * current view, select the first row instead.  The function also calls
+ * Selects the row corresponding to @game.  If the row is invisible in
+ * the current view, unselect all tree view rows.  The function also calls
  * gva_tree_view_set_last_selected_game() so that the selected game will be
  * persistent across sessions.
  **/
@@ -520,32 +520,28 @@ gva_tree_view_set_selected_game (const gchar *game)
         GtkTreeModel *model;
         GtkTreeView *view;
         GtkTreePath *path;
-        GtkTreeIter iter;
 
         g_return_if_fail (game != NULL);
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         path = gva_tree_view_lookup (game);
 
-        /* If the game is visible in the current view, put the cursor on it.
-         * Otherwise just select the root path. */
+        /* If the game is visible in the current view, put the cursor
+         * on it and scroll to it.  Otherwise unselect everything. */
         if (path != NULL)
         {
-                gtk_tree_view_set_cursor (view, path, NULL, FALSE);
                 gtk_widget_grab_focus (GTK_WIDGET (view));
+                gtk_tree_view_set_cursor (view, path, NULL, FALSE);
+                gtk_tree_view_scroll_to_cell (view, path, NULL, TRUE, .5, .0);
+                gtk_tree_path_free (path);
         }
         else
-                path = gtk_tree_path_new_first ();
+        {
+                GtkTreeSelection *selection;
 
-        /* If we have a path to a visible game, scroll to it.  Note that
-         * we don't really need the GtkTreeIter here; we're just testing
-         * whether the path is valid. */
-        model = gtk_tree_view_get_model (view);
-        if (gtk_tree_model_get_iter (model, &iter, path))
-                gtk_tree_view_scroll_to_cell (
-                        view, path, NULL, TRUE, 0.5, 0.0);
-
-        gtk_tree_path_free (path);
+                selection = gtk_tree_view_get_selection (view);
+                gtk_tree_selection_unselect_all (selection);
+        }
 
         gva_tree_view_set_last_selected_game (game);
 }

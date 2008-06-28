@@ -31,6 +31,7 @@
 G_BEGIN_DECLS
 
 void            gva_properties_init             (void);
+void            gva_properties_select_game      (const gchar *name);
 
 /* Signal Handlers */
 

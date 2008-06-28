@@ -73,12 +73,11 @@ warn_if_no_roms (void)
 {
         const gchar *sql = SQL_COUNT_ROMS;
         GtkWidget *dialog;
-        gint rows, columns;
         gchar **result;
         glong n_roms;
         GError *error = NULL;
 
-        if (!gva_db_get_table (sql, &result, &rows, &columns, &error))
+        if (!gva_db_get_table (sql, &result, NULL, NULL, &error))
         {
                 gva_error_handle (&error);
                 return;

@@ -33,19 +33,18 @@
 /* Update Delay (0.05 sec) */
 #define UPDATE_TIMEOUT_MS 50
 
-#define SQL_GAME_IS_AVAILABLE \
-        "SELECT COUNT(*) FROM available WHERE name = \"%s\""
-
 #define SQL_SELECT_NAME \
         "SELECT * FROM available WHERE name = \"%s\""
 
 #define SQL_SELECT_PARENT \
-        "SELECT name, description FROM game " \
-        "WHERE name = \"%s\" ORDER BY description"
+        "SELECT game.name, game.description, available.name NOTNULL " \
+        "FROM game LEFT JOIN available ON game.name = available.name " \
+        "WHERE game.name = \"%s\" ORDER BY game.description"
 
 #define SQL_SELECT_CLONES \
-        "SELECT name, description FROM game " \
-        "WHERE cloneof = \"%s\" ORDER BY description"
+        "SELECT game.name, game.description, available.name NOTNULL " \
+        "FROM game LEFT JOIN available ON game.name = available.name " \
+        "WHERE game.cloneof = \"%s\" ORDER BY game.description"
 
 #define SQL_SELECT_CPU \
         "SELECT COUNT(*), name, clock FROM chip " \
@@ -93,6 +92,7 @@ static const gchar *video_labels[] =
         "properties-video3-label"
 };
 
+static const gchar *current_game;
 static guint update_timeout_source_id;
 
 static void
@@ -129,17 +129,19 @@ properties_label_clicked_cb (GvaLinkButton *button,
 	widget = GVA_WIDGET_PROPERTIES_TECHNICAL_SCROLLED_WINDOW;
 	gtk_widget_grab_focus (widget);
 
+        gva_properties_show_game (game);
         gva_tree_view_set_selected_game (game);
 }
 
 static void
 properties_add_game_label (GtkBox *box,
                            const gchar *game,
-                           const gchar *description)
+                           const gchar *description,
+                           gboolean available)
 {
         GtkWidget *widget;
 
-        if (gva_tree_view_lookup (game) != NULL)
+        if (available)
         {
                 widget = gva_link_button_new (description);
                 gtk_button_set_alignment (GTK_BUTTON (widget), 0.0, 0.5);
@@ -265,14 +267,17 @@ properties_update_clones (GtkTreeModel *model,
         {
                 const gchar *parent_name;
                 const gchar *description;
+                gboolean available;
                 gchar **values;
 
                 values = result + ((ii + 1) * columns);
 
                 parent_name = values[0];
                 description = values[1];
+                available = (*values[2] == '1');
 
-                properties_add_game_label (box, parent_name, description);
+                properties_add_game_label (
+                        box, parent_name, description, available);
         }
 
         g_strfreev (result);
@@ -311,14 +316,17 @@ properties_update_clones (GtkTreeModel *model,
         {
                 const gchar *clone_name;
                 const gchar *description;
+                gboolean available;
                 gchar **values;
 
                 values = result + ((ii + 1) * columns);
 
                 clone_name = values[0];
                 description = values[1];
+                available = (*values[2] == '1');
 
-                properties_add_game_label (box, clone_name, description);
+                properties_add_game_label (
+                        box, clone_name, description, available);
         }
 
         g_strfreev (result);
@@ -689,43 +697,12 @@ properties_update_video (const gchar *name)
 static gboolean
 properties_update_timeout_cb (void)
 {
-        GtkTreeModel *model;
         const gchar *name;
-        gchar *sql;
-        GError *error = NULL;
 
         name = gva_tree_view_get_selected_game ();
 
-        /* Leave the window alone if a game is not selected. */
-        if (name == NULL)
-                return FALSE;
-
-        sql = g_strdup_printf (SQL_SELECT_NAME, name);
-        model = gva_game_store_new_from_query (sql, &error);
-        gva_error_handle (&error);
-        g_free (sql);
-
-        if (model != NULL)
-        {
-                GtkTreeIter iter;
-                gboolean valid;
-
-                valid = gtk_tree_model_get_iter_first (model, &iter);
-                g_assert (valid);
-
-                properties_scroll_to_top ();
-
-                properties_update_bios (model, &iter);
-                properties_update_clones (model, &iter);
-                properties_update_cpu (name);
-                properties_update_header (model, &iter);
-                properties_update_history (model, &iter);
-                properties_update_sound (name);
-                properties_update_status (model, &iter);
-                properties_update_video (name);
-
-                g_object_unref (model);
-        }
+        if (name != NULL)
+                gva_properties_show_game (name);
 
         update_timeout_source_id = 0;
 
@@ -809,6 +786,57 @@ gva_properties_init (void)
         widget = gtk_notebook_get_nth_page (notebook, NOTEBOOK_PAGE_HISTORY);
         gtk_widget_hide (widget);
 #endif
+}
+
+/**
+ * gva_properties_show_game:
+ * @game: the name of a game
+ *
+ * Shows information about @game in the Properties window.
+ **/
+void
+gva_properties_show_game (const gchar *game)
+{
+        GtkTreeModel *model;
+        gchar *sql;
+        GError *error = NULL;
+
+        g_return_if_fail (game != NULL);
+
+        game = g_intern_string (game);
+
+        /* Refreshing the Properties window is expensive.  If the
+         * requested game is already being shown, do nothing. */
+        if (game == current_game)
+                return;
+
+        sql = g_strdup_printf (SQL_SELECT_NAME, game);
+        model = gva_game_store_new_from_query (sql, &error);
+        gva_error_handle (&error);
+        g_free (sql);
+
+        if (model != NULL)
+        {
+                GtkTreeIter iter;
+                gboolean valid;
+
+                valid = gtk_tree_model_get_iter_first (model, &iter);
+                g_assert (valid);
+
+                current_game = game;
+                properties_scroll_to_top ();
+
+                properties_update_bios (model, &iter);
+                properties_update_clones (model, &iter);
+                properties_update_cpu (game);
+                properties_update_header (model, &iter);
+                properties_update_history (model, &iter);
+                properties_update_sound (game);
+                properties_update_status (model, &iter);
+                properties_update_video (game);
+
+                g_object_unref (model);
+        }
 }
 
 /**

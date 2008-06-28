@@ -290,6 +290,7 @@ gva_process_get_type
 <SECTION>
 <FILE>gva-properties</FILE>
 gva_properties_init
+gva_properties_select_game
 gva_properties_close_clicked_cb
 gva_properties_show_cb
 </SECTION>
