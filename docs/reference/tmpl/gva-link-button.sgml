@@ -9,12 +9,10 @@ GvaLinkButton
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -24,6 +22,7 @@ GvaLinkButton
 
 </para>
 
+@parent: 
 
 <!-- ##### FUNCTION gva_link_button_new ##### -->
 <para>
