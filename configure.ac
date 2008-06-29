@@ -192,3 +192,14 @@ AC_CONFIG_FILES([
         src/Makefile
 ])
 AC_OUTPUT
+
+echo
+echo "    Configuration Summary"
+echo "    ---------------------"
+echo
+echo "    MAME Program    : $MAME"
+echo "    Category File   : $with_category"
+echo "    History File    : $with_history"
+echo "    Use libgnomeui  : $with_gnome"
+echo "    Use libwnck     : $with_wnck"
+echo
