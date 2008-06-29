@@ -517,7 +517,6 @@ gva_tree_view_get_selected_game (void)
 void
 gva_tree_view_set_selected_game (const gchar *game)
 {
-        GtkTreeModel *model;
         GtkTreeView *view;
         GtkTreePath *path;
 
