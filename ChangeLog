@@ -1,5 +1,9 @@
 2008-06-29  Matthew Barnes  <mbarnes@redhat.com>
 
+	* NEWS: Update for 0.6.3	
+
+2008-06-29  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac:
 	Add a summary message to the end of configuration output.
 	Note, not showing Glade Catalog because that's for me only.

@@ -24,12 +24,12 @@
 
 
 
-<!-- ##### FUNCTION gva_properties_select_game ##### -->
+<!-- ##### FUNCTION gva_properties_show_game ##### -->
 <para>
 
 </para>
 
-@name: 
+@game: 
 
 
 <!-- ##### FUNCTION gva_properties_close_clicked_cb ##### -->

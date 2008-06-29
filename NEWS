@@ -1,11 +1,13 @@
 GNOME Video Arcade 0.6.3
 ========================
 
-	Released July ??, 2008
+	Released June 29, 2008
 
 	What's New
 	----------
 	* Show parent/clone information in the Technical Properties tab.
+        * Fix a compilation error when building against GTK+ >= 2.13.1.
+        * Other miscellaneous UI tweaks.
 
 GNOME Video Arcade 0.6.2
 ========================
