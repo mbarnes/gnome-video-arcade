@@ -1003,7 +1003,7 @@ gva_ui_add_column_actions (GtkTreeView *view)
 
                 gtk_ui_manager_add_ui (
                         manager, merge_id,
-                        "/game-popup/add-column",
+                        "/column-popup/add-column",
                         action_name, action_name,
                         GTK_UI_MANAGER_AUTO, FALSE);
 

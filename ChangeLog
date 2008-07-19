@@ -1,3 +1,19 @@
+2008-07-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac: Post-release version bump.
+
+	* data/gnome-video-arcade.ui:
+	* src/gva-columns.c (columns_show_popup_menu),
+	(columns_button_press_event_cb), (columns_popup_menu_cb),
+	(columns_setup_popup_menu), (gva_columns_load):
+	* src/gva-tree-view.c (tree_view_show_popup_menu):
+	Move the add/remove column popup menu items to a new popup menu
+	that's triggered by right-clicking on the column headers in the
+	game list.  Thanks to Jonathan Blandford for showing me how.
+
+	* src/gva-ui.c (gva_ui_add_column_actions):
+	Add "add-column" actions to "column-popup" menu.
+
 2008-06-29  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.6.3	

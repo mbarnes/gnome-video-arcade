@@ -31,7 +31,8 @@
     <menuitem action="record"/>
     <separator/>
     <menuitem action="properties"/>
-    <separator/>
+  </popup>
+  <popup name="column-popup">
     <placeholder name="add-column"/>
     <separator/>
     <menuitem action="remove-column"/>

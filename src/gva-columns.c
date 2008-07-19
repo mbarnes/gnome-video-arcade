@@ -258,6 +258,78 @@ columns_time_set_properties (GtkTreeViewColumn *column,
         g_value_unset (&value);
 }
 
+static gboolean
+columns_show_popup_menu (GdkEventButton *event,
+                         GtkTreeViewColumn *column)
+{
+        GtkMenu *menu;
+        GtkWidget *view;
+        const gchar *column_title;
+        gchar *label, *tooltip;
+
+        column_title = gtk_tree_view_column_get_title (column);
+        view = gtk_tree_view_column_get_tree_view (column);
+
+        /* Let the "Add Column" action know where to insert the column. */
+        g_object_set_data (G_OBJECT (view), "popup-menu-column", column);
+
+        /* Update the "Remove Column" item in the popup menu. */
+        label = g_strdup_printf (
+                _("Remove %s Column"), column_title);
+        tooltip = g_strdup_printf (
+                _("Remove the \"%s\" column from the game list"),
+                column_title);
+        g_object_set (
+                GVA_ACTION_REMOVE_COLUMN, "label",
+                label, "tooltip", tooltip, NULL);
+        g_free (tooltip);
+        g_free (label);
+
+        menu = GTK_MENU (gva_ui_get_managed_widget ("/column-popup"));
+
+        if (event != NULL)
+                gtk_menu_popup (
+                        menu, NULL, NULL, NULL, NULL,
+                        event->button, event->time);
+        else
+                gtk_menu_popup (
+                        menu, NULL, NULL, NULL, NULL,
+                        0, gtk_get_current_event_time ());
+
+        return TRUE;
+}
+
+static gboolean
+columns_button_press_event_cb (GtkTreeViewColumn *column,
+                               GdkEventButton *event)
+{
+        if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
+                return columns_show_popup_menu (event, column);
+
+        return FALSE;
+}
+
+static gboolean
+columns_popup_menu_cb (GtkTreeViewColumn *column)
+{
+        return columns_show_popup_menu (NULL, column);
+}
+
+static void
+columns_setup_popup_menu (GtkTreeViewColumn *column)
+{
+        g_return_if_fail (column->button != NULL);
+
+        g_signal_connect_swapped (
+                column->button, "button-press-event",
+                G_CALLBACK (columns_button_press_event_cb), column);
+
+        g_signal_connect_swapped (
+                column->button, "popup-menu",
+                G_CALLBACK (columns_popup_menu_cb), column);
+
+}
+
 /*****************************************************************************
  * Column Factory Callbacks
  *****************************************************************************/
@@ -930,10 +1002,9 @@ gva_columns_new_from_id (GvaGameStoreColumn column_id)
         title = gettext (column_info[column_id].title);
         gtk_tree_view_column_set_title (column, title);
 
-        if (column != NULL)
-                g_object_set_data (
-                        G_OBJECT (column), "name",
-                        (gpointer) column_info[column_id].name);
+        g_object_set_data (
+                G_OBJECT (column), "name",
+                (gpointer) column_info[column_id].name);
 
         return column;
 }
@@ -1114,6 +1185,7 @@ gva_columns_load (GtkTreeView *view)
                 {
                         gtk_tree_view_column_set_visible (column, visible);
                         gtk_tree_view_append_column (view, column);
+                        columns_setup_popup_menu (column);
 
                         g_signal_connect_swapped (
                                 column, "notify::visible",
@@ -1137,6 +1209,7 @@ gva_columns_load (GtkTreeView *view)
                 {
                         gtk_tree_view_column_set_visible (column, TRUE);
                         gtk_tree_view_append_column (view, column);
+                        columns_setup_popup_menu (column);
 
                         g_signal_connect_swapped (
                                 column, "notify::visible",
@@ -1158,6 +1231,7 @@ gva_columns_load (GtkTreeView *view)
                 {
                         gtk_tree_view_column_set_visible (column, FALSE);
                         gtk_tree_view_append_column (view, column);
+                        columns_setup_popup_menu (column);
 
                         g_signal_connect_swapped (
                                 column, "notify::visible",
