@@ -201,6 +201,7 @@ gva_mame_get_state_directory
 gva_mame_supports_auto_save
 gva_mame_supports_full_screen
 gva_mame_supports_maximize
+gva_mame_supports_sound
 gva_mame_supports_window
 </SECTION>
 
@@ -228,6 +229,26 @@ GVA_MAME_PROCESS_GET_CLASS
 GvaMameProcessClass
 <SUBSECTION Private>
 gva_mame_process_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gva-mute-button</FILE>
+<TITLE>GvaMuteButton</TITLE>
+GvaMuteButton
+gva_mute_button_new
+gva_mute_button_get_muted
+gva_mute_button_set_muted
+<SUBSECTION Standard>
+GVA_MUTE_BUTTON
+GVA_IS_MUTE_BUTTON
+GVA_TYPE_MUTE_BUTTON
+GVA_MUTE_BUTTON_CLASS
+GVA_IS_MUTE_BUTTON_CLASS
+GVA_MUTE_BUTTON_GET_CLASS
+GvaMuteButtonClass
+<SUBSECTION Private>
+GvaMuteButtonPrivate
+gva_mute_button_get_type
 </SECTION>
 
 <SECTION>
@@ -356,6 +377,7 @@ gva_ui_add_column_actions
 GVA_WIDGET_AUDIT_SAVE_BUTTON
 GVA_WIDGET_AUDIT_TREE_VIEW
 GVA_WIDGET_AUDIT_WINDOW
+GVA_WIDGET_MAIN_MUTE_BUTTON
 GVA_WIDGET_MAIN_PROGRESS_BAR
 GVA_WIDGET_MAIN_PROPERTIES_BUTTON
 GVA_WIDGET_MAIN_SEARCH_ENTRY

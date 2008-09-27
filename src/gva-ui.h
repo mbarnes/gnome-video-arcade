@@ -62,6 +62,8 @@
         (gva_ui_get_widget ("audit-window"))
 
 /* Main Window */
+#define GVA_WIDGET_MAIN_MUTE_BUTTON \
+        (gva_ui_get_widget ("main-mute-button"))
 #define GVA_WIDGET_MAIN_PROGRESS_BAR \
         (gva_ui_get_widget ("main-progress-bar"))
 #define GVA_WIDGET_MAIN_PROPERTIES_BUTTON \
@@ -113,9 +115,9 @@
 
 /* Properties Window */
 #define GVA_WIDGET_PROPERTIES_ALTERNATE_LINKS \
-	(gva_ui_get_widget ("properties-alternate-links"))
+        (gva_ui_get_widget ("properties-alternate-links"))
 #define GVA_WIDGET_PROPERTIES_ALTERNATE_VBOX \
-	(gva_ui_get_widget ("properties-alternate-vbox"))
+        (gva_ui_get_widget ("properties-alternate-vbox"))
 #define GVA_WIDGET_PROPERTIES_BACK_BUTTON \
         (gva_ui_get_widget ("properties-back-button"))
 #define GVA_WIDGET_PROPERTIES_BIOS_LABEL \
@@ -143,9 +145,9 @@
 #define GVA_WIDGET_PROPERTIES_NOTEBOOK \
         (gva_ui_get_widget ("properties-notebook"))
 #define GVA_WIDGET_PROPERTIES_ORIGINAL_LINKS \
-	(gva_ui_get_widget ("properties-original-links"))
+        (gva_ui_get_widget ("properties-original-links"))
 #define GVA_WIDGET_PROPERTIES_ORIGINAL_VBOX \
-	(gva_ui_get_widget ("properties-original-vbox"))
+        (gva_ui_get_widget ("properties-original-vbox"))
 #define GVA_WIDGET_PROPERTIES_PRELIMINARY_COCKTAIL_LABEL \
         (gva_ui_get_widget ("properties-preliminary-cocktail-label"))
 #define GVA_WIDGET_PROPERTIES_PRELIMINARY_COLOR_LABEL \
@@ -165,7 +167,7 @@
 #define GVA_WIDGET_PROPERTIES_STATUS_IMAGE \
         (gva_ui_get_widget ("properties-status-image"))
 #define GVA_WIDGET_PROPERTIES_TECHNICAL_SCROLLED_WINDOW \
-	(gva_ui_get_widget ("properties-technical-scrolled-window"))
+        (gva_ui_get_widget ("properties-technical-scrolled-window"))
 #define GVA_WIDGET_PROPERTIES_VIDEO_VBOX \
         (gva_ui_get_widget ("properties-video-vbox"))
 #define GVA_WIDGET_PROPERTIES_WINDOW \

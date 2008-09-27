@@ -180,6 +180,18 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/sound-muted</applyto>
+      <key>/apps/gnome-video-arcade/sound-muted</key>
+      <owner>gnome-video-arcade</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Sound muted</short>
+        <long>If true, games are started without sound.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/version</applyto>
       <key>/schemas/apps/gnome-video-arcade/version</key>
       <owner>gnome-video-arcade</owner>

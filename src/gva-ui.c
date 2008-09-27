@@ -28,6 +28,7 @@
 #include "gva-game-store.h"
 #include "gva-main.h"
 #include "gva-mame.h"
+#include "gva-mute-button.h"
 #include "gva-play-back.h"
 #include "gva-preferences.h"
 #include "gva-process.h"
@@ -833,6 +834,7 @@ ui_init (void)
         {
                 REGISTER_WIDGET (GTK_TYPE_LINK_BUTTON);
                 REGISTER_WIDGET (GVA_TYPE_COLUMN_MANAGER);
+                REGISTER_WIDGET (GVA_TYPE_MUTE_BUTTON);
 
                 glade_provide ("gva");
                 xml = glade_xml_new (filename, NULL, NULL);

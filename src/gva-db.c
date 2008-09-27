@@ -749,10 +749,13 @@ db_parser_start_element_game (ParserData *data,
                               GError **error)
 {
         sqlite3_stmt *stmt = data->insert_game_stmt;
+        gint ii;
+
+#ifdef CATEGORY_FILE
         gchar *category;
         gint error_code;
-        gint ii;
         GError *local_error = NULL;
+#endif
 
         /* Bind default values. */
         db_parser_bind_text (stmt, "@isbios", "no");

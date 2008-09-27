@@ -1,10 +1,11 @@
-GNOME Video Arcade 0.7.0
+GNOME Video Arcade 0.6.4
 ========================
 
-        Released August ??, 2008
+        Released September 27, 2008
 
         What's New
         ----------
+	* Mute button on the main window mutes in-game sound.
         * Right-click on column headers (instead of the game list) to
           quickly add or remove a column.
 

@@ -10,11 +10,18 @@
 
     <glade-widget-class name="GvaLinkButton" generic-name="link-button" title="Link Button"/>
 
+    <glade-widget-class name="GvaMuteButton" generic-name="mute-button" title="Mute Button">
+      <properties>
+        <property id="muted"/>
+      </properties>
+    </glade-widget-class>
+
   </glade-widget-classes>
 
   <glade-widget-group name="gva-widgets" title="GNOME Video Arcade">
     <glade-widget-class-ref name="GvaColumnManager"/>
     <glade-widget-class-ref name="GvaLinkButton"/>
+    <glade-widget-class-ref name="GvaMuteButton"/>
   </glade-widget-group>
 
 </glade-catalog>

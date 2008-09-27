@@ -170,6 +170,14 @@ gva_main_init (void)
                 GVA_ACTION_START,
                 GVA_WIDGET_MAIN_START_GAME_BUTTON);
 
+        gtk_widget_set_sensitive (
+                GVA_WIDGET_MAIN_MUTE_BUTTON,
+                gva_mame_supports_sound ());
+
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_SOUND_MUTED,
+                G_OBJECT (GVA_WIDGET_MAIN_MUTE_BUTTON), "muted");
+
         gconf_bridge_bind_window (
                 gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, FALSE);
@@ -344,7 +352,7 @@ gva_main_init_search_completion (GError **error)
         gint errcode;
 
 #if GTK_CHECK_VERSION(2,13,1)
-	GList *list;
+        GList *list;
 #endif
 
         if (!gva_db_prepare (SQL_COMPLETION_LIST, &stmt, error))

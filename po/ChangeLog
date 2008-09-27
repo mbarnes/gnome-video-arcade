@@ -1,3 +1,7 @@
+2008-09-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* POTFILES.in: Add src/gva-mute-button.c.
+
 2007-12-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* POTFILES.in: Specify the encoding as UTF-8.

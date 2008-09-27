@@ -1,3 +1,43 @@
+2008-09-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.6.4
+
+	* data/gnome-video-arcade.glade:
+	Add a mute button to the top-right corner of the main window.
+
+	* data/gnome-video-arcade.schemas:
+	Add sound-muted key.
+
+	* docs/reference/gnome-video-arcade.types:
+	* docs/reference/gnome-video-arcade-docs.sgml:
+	* docs/reference/gnome-video-arcade-sections.txt:
+	Add developer documentation for GvaMuteButton.
+
+	* src/Makefile.am:
+	Add gva-mute-button.[ch].
+
+	* src/gva-common.h:
+	Add GVA_GCONF_SOUND_MUTED_KEY.
+
+	* src/gva-db.c (db_parser_start_element_game):
+	Fix a compiler error when CATEGORY_FILE is not defined.
+
+	* src/gva-main.c (gva_main_init):
+	Bind the mute button to the "sound-muted" GConf key.
+
+	* src/gva-mame.h (gva_mame_supports_sound):
+	New macro returns TRUE if MAME supports the -sound option.
+
+	* src/gva-mame-common.c (gva_mame_run_game), (gva_mame_record_game),
+	(gva_mame_playback_game):
+	Append a "-sound" or "-nosound" command-line argument depending on
+	the state of the mute button.
+
+	* src/gva-mute-button.c:
+	* src/gva-mute-button.h:
+	New source files implement a button that can toggle between an
+	"audio-volume-muted" and "audio-volume-high" icon.
+
 2008-07-19  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.

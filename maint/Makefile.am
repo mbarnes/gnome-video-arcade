@@ -5,7 +5,8 @@ gladecatalogdir = `$(PKG_CONFIG) --variable=catalogdir gladeui-1.0`
 
 gladepixmap_DATA = \
 	widget-gva-column-manager.png \
-	widget-gva-link-button.png
+	widget-gva-link-button.png \
+	widget-gva-mute-button.png
 gladepixmapdir = `$(PKG_CONFIG) --variable=pixmapdir gladeui-1.0`/hicolor/22x22/actions
 
 gladegva_LTLIBRARIES = libgladegva.la
@@ -17,7 +18,8 @@ libgladegva_la_CFLAGS = \
 
 libgladegva_la_SOURCES = \
 	$(top_srcdir)/src/gva-column-manager.c \
-	$(top_srcdir)/src/gva-link-button.c
+	$(top_srcdir)/src/gva-link-button.c \
+	$(top_srcdir)/src/gva-mute-button.c
 
 libgladegva_la_LDFLAGS = \
 	-module -avoid-version

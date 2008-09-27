@@ -28,7 +28,9 @@
 
 #include "gva-error.h"
 #include "gva-mame-process.h"
+#include "gva-mute-button.h"
 #include "gva-preferences.h"
+#include "gva-ui.h"
 
 /*****************************************************************************
  * Private utilities for MAME backends
@@ -659,6 +661,17 @@ gva_mame_run_game (const gchar *name,
                 g_string_append (arguments, "-nomaximize ");
 #endif
 
+        if (gva_mame_supports_sound ())
+        {
+                GvaMuteButton *mute_button;
+
+                mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
+                if (gva_mute_button_get_muted (mute_button))
+                        g_string_append (arguments, "-nosound ");
+                else
+                        g_string_append (arguments, "-sound ");
+        }
+
         g_string_append_printf (arguments, "%s", name);
 
         /* Execute the command "${mame} ${name}". */
@@ -725,6 +738,17 @@ gva_mame_record_game (const gchar *name,
                 g_string_append (arguments, "-nomaximize ");
 #endif
 
+        if (gva_mame_supports_sound ())
+        {
+                GvaMuteButton *mute_button;
+
+                mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
+                if (gva_mute_button_get_muted (mute_button))
+                        g_string_append (arguments, "-nosound ");
+                else
+                        g_string_append (arguments, "-sound ");
+        }
+
         g_string_append_printf (arguments, "-record %s %s", inpname, name);
 
         /* Execute the command "${mame} -record ${inpname} ${name}". */
@@ -787,6 +811,17 @@ gva_mame_playback_game (const gchar *name,
         if (gva_mame_supports_maximize ())
                 g_string_append (arguments, "-nomaximize ");
 #endif
+
+        if (gva_mame_supports_sound ())
+        {
+                GvaMuteButton *mute_button;
+
+                mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
+                if (gva_mute_button_get_muted (mute_button))
+                        g_string_append (arguments, "-nosound ");
+                else
+                        g_string_append (arguments, "-sound ");
+        }
 
         g_string_append_printf (arguments, "%s -playback %s", name, inpname);
 

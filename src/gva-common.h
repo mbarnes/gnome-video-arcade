@@ -51,6 +51,7 @@
 #define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"
 #define GVA_GCONF_SHOW_CLONES_KEY       GVA_GCONF_PREFIX "/show-clones"
 #define GVA_GCONF_SORT_COLUMN_KEY       GVA_GCONF_PREFIX "/sort-column"
+#define GVA_GCONF_SOUND_MUTED           GVA_GCONF_PREFIX "/sound-muted"
 #define GVA_GCONF_VERSION_KEY           GVA_GCONF_PREFIX "/version"
 #define GVA_GCONF_WINDOW_PREFIX         GVA_GCONF_PREFIX "/window"
 

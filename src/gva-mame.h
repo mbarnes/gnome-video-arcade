@@ -113,10 +113,22 @@ const gchar *   gva_mame_get_state_directory    (GError **error);
  * <emphasis>GNOME Video Arcade</emphasis> is configured to use
  * supports a "maximize" option.
  *
- * Returns: %TRUE is MAME supports the "maximize" option
+ * Returns: %TRUE if MAME supports the "maximize" option
  **/
 #define gva_mame_supports_maximize() \
         (gva_mame_has_config_value ("maximize"))
+
+/**
+ * gva_mame_supports_sound:
+ *
+ * Returns %TRUE if the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use
+ * supports a "sound" option.
+ *
+ * Returns: %TRUE if MAME supports the "sound" option
+ **/
+#define gva_mame_supports_sound() \
+        (gva_mame_has_config_value ("sound"))
 
 /**
  * gva_mame_supports_window:

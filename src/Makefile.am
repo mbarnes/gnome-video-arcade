@@ -56,6 +56,8 @@ gnome_video_arcade_SOURCES = \
 	gva-mame-process.c		\
 	gva-mame-process.h		\
 	gva-mame.h			\
+	gva-mute-button.c		\
+	gva-mute-button.h		\
 	gva-play-back.c			\
 	gva-play-back.h			\
 	gva-preferences.c		\
