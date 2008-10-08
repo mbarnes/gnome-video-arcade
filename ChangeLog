@@ -1,3 +1,11 @@
+2008-10-07  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac: Post-release version bump.
+
+	* src/gva-tree-view.c (gva_tree_view_update):
+	When switching to the Search Results view with no results,
+	automatically show the search entry.
+
 2008-09-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.6.4

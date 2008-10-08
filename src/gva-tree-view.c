@@ -260,6 +260,18 @@ gva_tree_view_update (GError **error)
         if (!success)
                 return FALSE;
 
+        if (gva_tree_view_get_selected_view () == 2)
+        {
+                GtkTreeView *view;
+                GtkTreeModel *model;
+
+                view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
+                model = gtk_tree_view_get_model (view);
+
+                if (gtk_tree_model_iter_n_children (model, NULL) == 0)
+                        gtk_action_activate (GVA_ACTION_SEARCH);
+        }
+
         name = gva_tree_view_get_last_selected_game ();
         if (name != NULL)
                 gva_tree_view_set_selected_game (name);
