@@ -164,7 +164,8 @@ gva_get_debug_flags (void)
                 static const GDebugKey debug_keys[] =
                 {
                         { "mame",  GVA_DEBUG_MAME },
-                        { "sql",   GVA_DEBUG_SQL }
+                        { "sql",   GVA_DEBUG_SQL },
+                        { "io",    GVA_DEBUG_IO }
                 };
 
                 const gchar *env = g_getenv ("GVA_DEBUG");

@@ -51,6 +51,7 @@
 @GVA_DEBUG_NONE: 
 @GVA_DEBUG_MAME: 
 @GVA_DEBUG_SQL: 
+@GVA_DEBUG_IO: 
 
 <!-- ##### FUNCTION gva_get_last_version ##### -->
 <para>

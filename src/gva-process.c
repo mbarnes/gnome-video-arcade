@@ -232,6 +232,23 @@ process_stderr_ready (GIOChannel *channel,
         return FALSE;
 }
 
+static void
+process_debug_message (GvaProcess *process,
+                       const gchar *line,
+                       const gchar *sep)
+{
+        GPid pid;
+        gchar *copy;
+
+        /* Copy the string just to remove the newline. */
+        pid = gva_process_get_pid (process);
+        copy = g_strchomp (g_strdup (line));
+
+        g_debug ("Process %d %s %s", (gint) pid, sep, copy);
+
+        g_free (copy);
+}
+
 static GObject *
 process_constructor (GType type,
                      guint n_construct_properties,
@@ -716,6 +733,9 @@ gva_process_write_stdin (GvaProcess *process,
         g_return_val_if_fail (GVA_IS_PROCESS (process), FALSE);
         g_return_val_if_fail (data != NULL, FALSE);
 
+        if (gva_get_debug_flags () & GVA_DEBUG_IO)
+                process_debug_message (process, data, "<<<");
+
         while (status == G_IO_STATUS_AGAIN)
                 status = g_io_channel_write_chars (
                         process->priv->stdin_channel, data,
@@ -786,12 +806,18 @@ gchar *
 gva_process_stdout_read_line (GvaProcess *process)
 {
         GvaProcessClass *class;
+        gchar *line;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
         class = GVA_PROCESS_GET_CLASS (process);
         g_return_val_if_fail (class->stdout_read_line != NULL, NULL);
-        return class->stdout_read_line (process);
+        line = class->stdout_read_line (process);
+
+        if (gva_get_debug_flags () & GVA_DEBUG_IO)
+                process_debug_message (process, line, ">>>");
+
+        return line;
 }
 
 /**
@@ -810,12 +836,18 @@ gchar *
 gva_process_stderr_read_line (GvaProcess *process)
 {
         GvaProcessClass *class;
+        gchar *line;
 
         g_return_val_if_fail (GVA_IS_PROCESS (process), NULL);
 
         class = GVA_PROCESS_GET_CLASS (process);
         g_return_val_if_fail (class->stderr_read_line != NULL, NULL);
-        return class->stderr_read_line (process);
+        line = class->stderr_read_line (process);
+
+        if (gva_get_debug_flags () & GVA_DEBUG_IO)
+                process_debug_message (process, line, "!!!");
+
+        return line;
 }
 
 /**

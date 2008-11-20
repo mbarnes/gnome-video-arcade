@@ -1,3 +1,21 @@
+2008-11-19  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-process.c (process_debug_message):
+	New function prints communication between GVA and MAME as a
+	debug message.
+
+	* src/gva-process.c (gva_process_write_stdin),
+	(gva_process_write_stdout), (gva_process_write_stderr):
+	Call process_debug_message() if the GVA_DEBUG_IO flag is set.
+
+	* src/gva-mame-process.c (mame_process_exited),
+	(gva_mame_process_spawn):
+	Include the process ID in the debug message.
+
+	* src/gva-util.c (gva_get_debug_flags):
+	* src/gva-util.h (GvaDebugFlags):
+	Add GVA_DEBUG_IO flag, which generates verbose debug output.
+
 2008-10-07  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac: Post-release version bump.

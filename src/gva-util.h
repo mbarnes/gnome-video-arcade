@@ -39,16 +39,19 @@ G_BEGIN_DECLS
  *      Print shell commands invoking MAME.
  * @GVA_DEBUG_SQL:
  *      Print SQL commands to the game database.
+ * @GVA_DEBUG_IO:
+ *      Print all communication between GVA and MAME.
  *
  * These flags indicate which types of debugging messages will be triggered
  * at runtime. Debugging messages can be triggered by setting the GVA_DEBUG
- * environment variable to a colon-separated list of "mame" and "sql".
+ * environment variable to a colon-separated list of "mame", "sql" and "io".
  **/
 typedef enum
 {
-        GVA_DEBUG_NONE  = 0,
-        GVA_DEBUG_MAME  = 1 << 0,
-        GVA_DEBUG_SQL   = 1 << 1
+        GVA_DEBUG_NONE = 0,
+        GVA_DEBUG_MAME = 1 << 0,
+        GVA_DEBUG_SQL  = 1 << 1,
+        GVA_DEBUG_IO   = 1 << 2
 } GvaDebugFlags;
 
 gchar *         gva_choose_inpname              (const gchar *game);

@@ -84,8 +84,11 @@ mame_process_exited (GvaProcess *process, gint status)
 {
         if (WIFEXITED (status) && (gva_get_debug_flags () & GVA_DEBUG_MAME))
         {
+                GPid pid;
+
                 status = WEXITSTATUS (status);
-                g_debug ("Process exited with status %d", status);
+                pid = gva_process_get_pid (process);
+                g_debug ("Process %d exited with status %d", pid, status);
         }
 }
 
@@ -194,12 +197,14 @@ gva_mame_process_spawn (const gchar *arguments,
 
         command_line = g_strdup_printf ("%s %s", MAME_PROGRAM, arguments);
 
-        if (gva_get_debug_flags () & GVA_DEBUG_MAME)
-                g_debug ("Spawned %s", command_line);
-
         success = gva_spawn_with_pipes (
                 command_line, &child_pid, &standard_input,
                 &standard_output, &standard_error, error);
+
+        if (gva_get_debug_flags () & GVA_DEBUG_MAME)
+                g_debug (
+                        "Spawned \"%s\" as process %d",
+                        command_line, (gint) child_pid);
 
         g_free (command_line);
 
