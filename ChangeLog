@@ -1,3 +1,14 @@
+2008-11-21  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.6.5
+
+2008-11-20  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-audit.c (audit_build_model):
+	Fix a crash that occurs when the first audited romset is bad,
+	which causes an unsigned integer to rollover.  (SF #2314490,
+	Daniel Rammelt)
+
 2008-11-19  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-process.c (process_debug_message):
