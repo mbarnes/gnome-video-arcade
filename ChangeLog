@@ -1,3 +1,7 @@
+2008-11-21  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.6.5
+
 2008-11-20  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-audit.c (audit_build_model):

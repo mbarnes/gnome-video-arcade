@@ -1,3 +1,15 @@
+GNOME Video Arcade 0.6.5
+========================
+
+        Released November 21, 2008
+
+        What's New
+        ----------
+        * SF Bug #2314490: Segfault while scanning roms.
+          Reported and tested by Daniel Rammelt.
+        * Set the GVA_DEBUG environment variable to "io" for more
+          detailed debugging messages during runtime.
+
 GNOME Video Arcade 0.6.4
 ========================
 
