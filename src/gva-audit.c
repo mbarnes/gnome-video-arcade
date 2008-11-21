@@ -99,7 +99,6 @@ audit_build_model (GvaAuditData *data,
         while (iter_valid)
         {
                 GtkTreeIter child;
-                const gchar *line;
                 guint index;
                 gchar *name;
 
@@ -107,15 +106,20 @@ audit_build_model (GvaAuditData *data,
                 index = GPOINTER_TO_UINT (g_hash_table_lookup (
                         data->output_index, name));
 
-                line = g_ptr_array_index (data->output, --index);
-                while (g_str_has_prefix (line, name))
+                while (index > 0)
                 {
+                        const gchar *line;
+
+                        line = g_ptr_array_index (data->output, --index);
+
+                        if (!g_str_has_prefix (line, name))
+                                break;
+
                         gtk_tree_store_prepend (
                                 GTK_TREE_STORE (model), &child, &iter);
                         gtk_tree_store_set (
                                 GTK_TREE_STORE (model), &child,
                                 GVA_GAME_STORE_COLUMN_DESCRIPTION, line, -1);
-                        line = g_ptr_array_index (data->output, --index);
                 }
 
                 g_free (name);
