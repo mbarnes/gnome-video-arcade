@@ -1,0 +1,93 @@
+body
+{
+  margin: 2%;
+}
+
+h3
+{
+  font-size: 120%;
+  padding-top: 12px;
+  border-bottom: thin solid;
+}
+
+ul
+{
+  padding-left: 24px;
+}
+
+li
+{
+  margin-bottom: 6px;
+}
+
+p.date
+{
+  font-weight: bold;
+}
+
+p.news
+{
+}
+
+.screenshot
+{
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+#header
+{
+}
+
+#header img
+{
+  float: left;
+  margin-right: 1%;
+}
+
+#header h1
+{
+  font-size: 220%;
+  margin-bottom: 0px;
+}
+
+#header h2
+{
+  font-size: 100%;
+}
+
+#bottom
+{
+  clear: both;
+}
+
+#bottomLeft
+{
+  width: 60%;
+  float: left;
+  margin-right: 4%;
+}
+
+#bottomRight
+{
+  width: 32%;
+  float: left;
+}
+
+/* Download */
+
+div.download
+{
+  width: 250px;
+  border: thin solid;
+  padding-left: 12px;
+  padding-right: 12px;
+  background-color: WhiteSmoke;
+}
+
+img.download
+{
+  float: right;
+  position: relative;
+  top: -24px;
+}
