@@ -32,8 +32,23 @@ p.news
 
 .screenshot
 {
-  margin-top: 12px;
-  margin-bottom: 12px;
+  background-color: #f9f9f9;
+  border: thin solid #cccccc;
+  padding: 3px;
+  font: 11px/1.4em Arial, sans-serif;
+  float: left;
+}
+
+div.screenshot
+{
+  margin-right: 12px;
+}
+
+img.screenshot
+{
+  border: thin solid #cccccc;
+  vertical-align: middle;
+  margin-bottom: 3px;
 }
 
 #header
