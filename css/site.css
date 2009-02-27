@@ -30,23 +30,19 @@ p.news
 {
 }
 
-.screenshot
+div.screenshot
 {
   background-color: #f9f9f9;
   border: thin solid #cccccc;
+  margin-right: 12px;
   padding: 3px;
   font: 11px/1.4em Arial, sans-serif;
   float: left;
 }
 
-div.screenshot
-{
-  margin-right: 12px;
-}
-
 img.screenshot
 {
-  border: thin solid #cccccc;
+  border: none;
   vertical-align: middle;
   margin-bottom: 3px;
 }
