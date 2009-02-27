@@ -549,7 +549,7 @@ columns_factory_sampleset (GvaGameStoreColumn column_id)
         GdkPixbuf *pixbuf;
 
         /* Remember, we don't own the pixbuf reference. */
-        pixbuf = columns_get_icon_name ("emblem-sound");
+        pixbuf = columns_get_icon_name ("audio-x-generic");
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);

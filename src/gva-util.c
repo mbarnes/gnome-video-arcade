@@ -308,7 +308,43 @@ void
 gva_help_display (GtkWindow *parent,
                   const gchar *link_id)
 {
-#ifdef WITH_GNOME
+#if GTK_CHECK_VERSION(2,14,0)
+	GString *uri;
+	GtkWidget *dialog;
+	GdkScreen *screen = NULL;
+	GError *error = NULL;
+	guint32 timestamp;
+
+	uri = g_string_new ("ghelp:" PACKAGE);
+	timestamp = gtk_get_current_event_time ();
+
+	if (parent != NULL)
+		screen = gtk_widget_get_screen (GTK_WIDGET (parent));
+
+	if (link_id != NULL)
+		g_string_append_printf (uri, "?%s", link_id);
+
+	if (gtk_show_uri (screen, uri->str, timestamp, &error))
+		goto exit;
+
+	dialog = gtk_message_dialog_new_with_markup (
+		parent, GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+		"<big><b>%s</b></big>",
+		_(PACKAGE_NAME " could not display the help contents."));
+
+	gtk_message_dialog_format_secondary_text (
+		GTK_MESSAGE_DIALOG (dialog), "%s", error->message);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
+	g_error_free (error);
+
+exit:
+	g_string_free (uri, TRUE);
+
+#elif defined WITH_GNOME
         GtkWidget *dialog;
         GError *error = NULL;
 

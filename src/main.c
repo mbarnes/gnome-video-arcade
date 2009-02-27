@@ -104,7 +104,7 @@ warn_if_no_roms (void)
                 "<big><b>%s</b></big>",
                 _("No ROM files found"));
 
-#ifdef WITH_GNOME
+#if GTK_CHECK_VERSION(2,14,0) || defined WITH_GNOME
         gtk_message_dialog_format_secondary_markup (
                 GTK_MESSAGE_DIALOG (dialog),
                 _("GNOME Video Arcade was unable to locate any ROM files. "

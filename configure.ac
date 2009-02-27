@@ -2,7 +2,7 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.6.5)
+m4_define([gva_version], 0.6.6)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
         [mbarnes@redhat.com], gnome-video-arcade)
@@ -46,6 +46,11 @@ AC_SUBST(GIT_CFLAGS)
 AC_SUBST(GIT_LIBS)
 
 # --with-gnome=[yes|no]
+GNOME_CFLAGS=
+GNOME_LIBS=
+if pkg-config --atleast-version=2.14 gtk+-2.0; then
+with_gnome="n/a"
+else
 AC_ARG_WITH([gnome],
         [AC_HELP_STRING([--with-gnome],
         [require GNOME libraries [default=yes]])],
@@ -55,9 +60,7 @@ GNOME_MODULES="libgnomeui-2.0 >= 2.14.0"
 PKG_CHECK_MODULES(GNOME, $GNOME_MODULES)
 AC_DEFINE_UNQUOTED(WITH_GNOME, 1,
         [Define to 1 if you are linking against GNOME libraries])
-else
-GNOME_CFLAGS=
-GNOME_LIBS=
+fi
 fi
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)

@@ -1,3 +1,21 @@
+2009-02-27  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Post-release version bump.
+	If GTK+ >= 2.14 is installed, ignore --with-gnome.
+
+	* src/gva-columns.c (columns_factory_sampleset):
+	Use 'audio-x-generic' instead of deprecated 'emblem-sound'
+	for the icon in the samples column.
+
+	* src/main.c (warn_if_no_roms):
+	* src/gva-main.c (gva_main_init):
+	Test for both GTK_CHECK_VERSION(2,14,0) and WITH_GNOME.
+
+	* src/gva-util.c (gva_help_display):
+	Use gtk_show_uri() if we have GTK+ >= 2.14, else fall back to
+	gnome_help_display().
+
 2009-01-01  Matthew Barnes  <mbarnes@redhat.com>
 
 	* Update copyright notices on source files.
