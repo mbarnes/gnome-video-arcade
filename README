@@ -79,6 +79,10 @@ installed prior to compiling the source code:
        Video Arcade to not link against GNOME libraries.  See the
        Installation section to find out how.
 
+       UPDATE: As of version 2.14, GTK+ can now open help on its own.  So
+               you no longer need libgnomeui if you're on a sufficiently
+               up-to-date system.
+
    - Header files for libwnck version 2.16 (or higher). (optional)
 
        The libwnck header files should be available from your GNU/Linux
@@ -164,6 +168,7 @@ Similarly, the --with-wnck and --without-wnck configure options
 tell "make" whether to link against libwnck.  See the previous
 section for details on what these libraries are used for.
 
+UPDATE: --with-gnome is now ignored if GTK+ >= 2.14 is detected.
 
 Usage
 -----

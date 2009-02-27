@@ -1,5 +1,9 @@
 2009-02-27  Matthew Barnes  <mbarnes@redhat.com>
 
+	* README: Add a note about GTK+ and --with-gnome.
+
+2009-02-27  Matthew Barnes  <mbarnes@redhat.com>
+
 	* configure.ac:
 	Post-release version bump.
 	If GTK+ >= 2.14 is installed, ignore --with-gnome.
