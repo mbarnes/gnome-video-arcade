@@ -35,6 +35,7 @@
 #include "gva-history.h"
 #include "gva-main.h"
 #include "gva-mame.h"
+#include "gva-nplayers.h"
 #include "gva-play-back.h"
 #include "gva-preferences.h"
 #include "gva-properties.h"
@@ -283,6 +284,9 @@ main (gint argc, gchar **argv)
         gva_error_handle (&error);
 
         gva_history_init (&error);
+        gva_error_handle (&error);
+
+        gva_nplayers_init (&error);
         gva_error_handle (&error);
 
         gtk_init_add ((GtkFunction) start, NULL);

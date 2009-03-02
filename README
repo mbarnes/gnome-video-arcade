@@ -109,6 +109,14 @@ installed prior to compiling the source code:
        for many arcade games.  GNOME Video Arcade can utilize this
        information in its Properties window.
 
+   - nplayers.ini (optional)
+
+       This file, available from http://nplayers.arcadebelgium.be,
+       contains more detailed information about the maximum number of
+       players a game supports, including whether players alternate
+       or play simultaneously.  GNOME Video Arcade can utilize this
+       information in the Players column of the game list.
+
 
 Installation
 ------------
@@ -157,6 +165,12 @@ the location of a history.dat file as mentioned above.  Usage
 looks something like this:
 
    $ ./configure --with-history-file=/path/to/history.dat
+
+You can use the --with-nplayers-file configure option to specify
+the location of a nplayers.ini file as mentioned above.  Usage
+looks something like this:
+
+   $ ./configure --with-nplayers-file=/path/to/nplayers.ini
 
 The --enable-gtk-doc configure option tells "make" to generate
 developer documentation while building GNOME Video Arcade.  Once

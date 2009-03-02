@@ -1,3 +1,21 @@
+2009-03-02  Matthew Barnes  <mbarnes@redhat.com>
+
+	* README:
+	Update the build instructions.
+
+	* configure.ac:
+	Add a --with-nplayers-file option.
+
+	* src/Makefile.am:
+	Add gva-nplayers.[ch].
+
+	* src/main.c (main):
+	Call gva_nplayers_init().
+
+	* src/gva-nplayers.c:
+	* src/gva-nplayers.h:
+	New source files parse an nplayers.ini file.
+
 2009-02-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* README: Add a note about GTK+ and --with-gnome.

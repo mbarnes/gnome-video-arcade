@@ -183,6 +183,18 @@ if test "$with_history" != "no"; then
 fi
 AC_MSG_RESULT($with_history)
 
+# --with-nplayers-file=PATH
+AC_MSG_CHECKING([for number of players file])
+AC_ARG_WITH([nplayers-file],
+        [AC_HELP_STRING([--with-nplayers-file=PATH],
+        [path to number of players file (usually named 'nplayers.ini')])],
+        with_nplayers="$withval", with_nplayers="no")
+if test "$with_nplayers" != "no"; then
+        AC_DEFINE_UNQUOTED(NPLAYERS_FILE, "$with_nplayers",
+                [Location of the number of players file])
+fi
+AC_MSG_RESULT($with_nplayers)
+
 AC_CONFIG_FILES([
         Makefile
         data/Makefile
@@ -203,6 +215,7 @@ echo
 echo "    MAME Program    : $MAME"
 echo "    Category File   : $with_category"
 echo "    History File    : $with_history"
+echo "    NPlayers File   : $with_nplayers"
 echo "    Use libgnomeui  : $with_gnome"
 echo "    Use libwnck     : $with_wnck"
 echo

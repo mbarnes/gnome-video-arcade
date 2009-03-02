@@ -52,7 +52,8 @@ gva_categories_init (GError **error)
         /* Convert Windows INI-style comments (lines beginning with ';')
          * to a form recognized by the GKeyFile parser. */
         cp = contents;
-        while (cp != NULL && *cp != '\0') {
+        while (cp != NULL && *cp != '\0')
+        {
                 if (*cp == ';')
                         *cp = '#';
                 /* Find the next line. */
