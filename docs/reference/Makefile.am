@@ -99,6 +99,7 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/gva-mame-common.o			\
 	$(top_builddir)/src/gva-mame-process.o			\
 	$(top_builddir)/src/gva-mute-button.o			\
+	$(top_builddir)/src/gva-nplayers.o			\
 	$(top_builddir)/src/gva-play-back.o			\
 	$(top_builddir)/src/gva-preferences.o			\
 	$(top_builddir)/src/gva-process.o			\

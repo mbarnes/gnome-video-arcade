@@ -33,6 +33,12 @@
 G_BEGIN_DECLS
 
 gboolean        gva_nplayers_init               (GError **error);
+gboolean        gva_nplayers_lookup             (const gchar *game,
+                                                 gint *max_alternating,
+                                                 gint *max_simultaneous,
+                                                 GError **error);
+const gchar *   gva_nplayers_describe           (gint max_alternating,
+                                                 gint max_simultaneous);
 
 G_END_DECLS
 

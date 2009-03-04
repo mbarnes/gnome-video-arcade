@@ -1,3 +1,34 @@
+2009-03-03  Matthew Barnes  <mbarnes@redhat.com>
+
+	* docs/reference:
+	Update developer documentation.
+
+	* src/gva-columns.c:
+	Add "Player (Alt.)" and "Player (Sim.)" columns (if NPLAYERS_FILE
+	is defined), which shows only the number of alternating players or
+	simultaneous players a game supports (respectively).
+
+	* src/gva-db.c:
+	Add "input_players_alt" and "input_players_sim" columns (if
+	NPLAYERS_FILE is defined).
+
+	* src/gva-db.c (db_parser_start_element_input):
+	If NPLAYERS_FILE is defined, fetch player information from the
+	NPLAYERS_FILE for the "input_players_alt" and "input_players_sim"
+	columns.  Also override "input_players" with the maximum of the
+	"alt" and "sim" columns.  Surprisingly, the file seems to be more
+	accurate than MAME's own XML data.
+
+	* src/gva-game-store.c:
+	* src/gva-game-store.h:
+	Add GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_ALT.
+	Add GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_SIM.
+
+	* src/gva-nplayers.c (gva_nplayers_describe):
+	New function returns a human-readable description of the number of
+	players a game supports.  Description is used as the tooltip in all
+	"Players" columns, whether NPLAYERS_FILE is defined or not.
+
 2009-03-02  Matthew Barnes  <mbarnes@redhat.com>
 
 	* README:

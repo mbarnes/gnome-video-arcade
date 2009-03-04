@@ -93,6 +93,10 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
  *      Corresponds to the "available.input_tile" database field.
  * @GVA_GAME_STORE_COLUMN_INPUT_PLAYERS:
  *      Corresponds to the "available.input_players" database field.
+ * @GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_ALT:
+ *      Corresponds to the "available.input_players_alt" database field.
+ * @GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_SIM:
+ *      Corresponds to the "available.input_players_sim" database field.
  * @GVA_GAME_STORE_COLUMN_INPUT_BUTTONS:
  *      Corresponds to the "available.input_buttons" database field.
  * @GVA_GAME_STORE_COLUMN_INPUT_COINS:
@@ -149,6 +153,8 @@ typedef enum
         GVA_GAME_STORE_COLUMN_INPUT_SERVICE,      /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_INPUT_TILT,         /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_INPUT_PLAYERS,      /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_ALT,  /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_SIM,  /* G_TYPE_INT */
         GVA_GAME_STORE_COLUMN_INPUT_BUTTONS,      /* G_TYPE_INT */
         GVA_GAME_STORE_COLUMN_INPUT_COINS,        /* G_TYPE_INT */
         GVA_GAME_STORE_COLUMN_DRIVER_STATUS,      /* G_TYPE_STRING */

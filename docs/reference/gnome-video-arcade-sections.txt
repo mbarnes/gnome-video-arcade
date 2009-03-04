@@ -252,6 +252,13 @@ gva_mute_button_get_type
 </SECTION>
 
 <SECTION>
+<FILE>gva-nplayers</FILE>
+gva_nplayers_init
+gva_nplayers_lookup
+gva_nplayers_describe
+</SECTION>
+
+<SECTION>
 <FILE>gva-play-back</FILE>
 gva_play_back_init
 gva_play_back_show

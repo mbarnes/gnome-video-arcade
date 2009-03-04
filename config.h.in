@@ -63,6 +63,9 @@
 /* Location of the MAME program */
 #undef MAME_PROGRAM
 
+/* Location of the number of players file */
+#undef NPLAYERS_FILE
+
 /* Name of package */
 #undef PACKAGE
 

@@ -24,6 +24,7 @@
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-mame.h"
+#include "gva-nplayers.h"
 #include "gva-util.h"
 
 #define ASSERT_OK(code) \
@@ -65,6 +66,8 @@
                 "input_tilt DEFAULT 'no' " \
                 "CHECK (input_tilt in ('yes', 'no')), " \
                 "input_players, " \
+                "input_players_alt, " \
+                "input_players_sim, " \
                 "input_buttons, " \
                 "input_coins, " \
                 "driver_status " \
@@ -240,6 +243,8 @@
                 "@input_service, " \
                 "@input_tilt, " \
                 "@input_players, " \
+                "@input_players_alt, " \
+                "@input_players_sim, " \
                 "@input_buttons, " \
                 "@input_coins, " \
                 "@driver_status, " \
@@ -434,6 +439,25 @@ static struct
 } intern;
 
 static sqlite3 *db = NULL;
+
+static void
+db_parser_bind_int (sqlite3_stmt *stmt,
+                    const gchar *param,
+                    gint value)
+{
+        gint index;
+        gint errcode;
+        GError *error = NULL;
+
+        index = sqlite3_bind_parameter_index (stmt, param);
+        errcode = sqlite3_bind_int (stmt, index, value);
+
+        if (errcode != SQLITE_OK)
+        {
+                gva_db_set_error (&error, 0, NULL);
+                gva_error_handle (&error);
+        }
+}
 
 static void
 db_parser_bind_text (sqlite3_stmt *stmt,
@@ -816,6 +840,13 @@ db_parser_start_element_input (ParserData *data,
         sqlite3_stmt *stmt = data->insert_game_stmt;
         gint ii;
 
+#ifdef NPLAYERS_FILE
+        gint error_code;
+        gint max_alternating = 0;
+        gint max_simultaneous = 0;
+        GError *local_error = NULL;
+#endif
+
         /* Bind default values. */
         db_parser_bind_text (stmt, "@input_service", "no");
         db_parser_bind_text (stmt, "@input_tilt", "no");
@@ -839,6 +870,31 @@ db_parser_start_element_input (ParserData *data,
 
                 db_parser_bind_text (stmt, param, attribute_value[ii]);
         }
+
+#ifdef NPLAYERS_FILE
+        /* Lookup players info from the nplayers.ini file. */
+        g_return_if_fail (data->game != NULL);
+        gva_nplayers_lookup (
+                data->game, &max_alternating,
+                &max_simultaneous, &local_error);
+
+        /* Silence "key not found" errors. */
+        error_code = G_KEY_FILE_ERROR_KEY_NOT_FOUND;
+        if (g_error_matches (local_error, G_KEY_FILE_ERROR, error_code))
+                g_clear_error (&local_error);
+ 
+        db_parser_bind_int (stmt, "@input_players_alt", max_alternating);
+        db_parser_bind_int (stmt, "@input_players_sim", max_simultaneous);
+
+        /* Override "input_players" if we can, because nplayers.ini
+         * seems to be more accurate than MAME's own XML data. */
+        if (max_alternating > 0 || max_simultaneous > 0)
+                db_parser_bind_int (
+                        stmt, "@input_players",
+                        MAX (max_alternating, max_simultaneous));
+        else if (local_error != NULL)
+                g_propagate_error (error, local_error);
+#endif
 }
 
 static void

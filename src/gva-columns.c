@@ -24,6 +24,7 @@
 #include "gva-cell-renderer-pixbuf.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
+#include "gva-nplayers.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 
@@ -504,6 +505,26 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
 }
 
 static GtkTreeViewColumn *
+columns_factory_input_players_alt (GvaGameStoreColumn column_id)
+{
+#ifdef NPLAYERS_FILE
+        return columns_factory_input_players (column_id);
+#else
+        return NULL;
+#endif
+}
+
+static GtkTreeViewColumn *
+columns_factory_input_players_sim (GvaGameStoreColumn column_id)
+{
+#ifdef NPLAYERS_FILE
+        return columns_factory_input_players (column_id);
+#else
+        return NULL;
+#endif
+}
+
+static GtkTreeViewColumn *
 columns_factory_manufacturer (GvaGameStoreColumn column_id)
 {
         GtkTreeViewColumn *column;
@@ -787,11 +808,12 @@ columns_tooltip_favorite (GtkTreeModel *model,
                           GtkTreeIter *iter,
                           GtkTooltip *tooltip)
 {
+        GvaGameStoreColumn column_id;
         const gchar *text;
         gboolean favorite;
 
-        gtk_tree_model_get (
-                model, iter, GVA_GAME_STORE_COLUMN_FAVORITE, &favorite, -1);
+        column_id = GVA_GAME_STORE_COLUMN_FAVORITE;
+        gtk_tree_model_get (model, iter, column_id, &favorite, -1);
 
         if (favorite)
                 text = _("Click here to remove from favorites");
@@ -809,54 +831,66 @@ columns_tooltip_input_players (GtkTreeModel *model,
                                GtkTooltip *tooltip)
 {
         const gchar *text;
+        gint max_alternating;
+        gint max_simultaneous;
         gint max_players;
 
         gtk_tree_model_get (
                 model, iter,
+                GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_ALT, &max_alternating,
+                GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_SIM, &max_simultaneous,
                 GVA_GAME_STORE_COLUMN_INPUT_PLAYERS, &max_players, -1);
 
-        /* Keep this in sync with MAX_PLAYER_ICONS. */
-        switch (max_players)
-        {
-                case 1:
-                        text = _("One player only");
-                        break;
+        /* Fall back to "input_players" if we have to. */
+        if (max_alternating == 0 && max_simultaneous == 0)
+                max_alternating = max_simultaneous = max_players;
 
-                case 2:
-                        text = _("One or two players");
-                        break;
+        text = gva_nplayers_describe (max_alternating, max_simultaneous);
 
-                case 3:
-                        text = _("Up to three players");
-                        break;
-
-                case 4:
-                        text = _("Up to four players");
-                        break;
-
-                case 5:
-                        text = _("Up to five players");
-                        break;
-
-                case 6:
-                        text = _("Up to six players");
-                        break;
-
-                case 7:
-                        text = _("Up to seven players");
-                        break;
-
-                case 8:
-                        text = _("Up to eight players");
-                        break;
-
-                default:
-                        return FALSE;
-        }
-
+        /* This handles NULL for text. */
         gtk_tooltip_set_text (tooltip, text);
 
-        return TRUE;
+        return (text != NULL);
+}
+
+static gboolean
+columns_tooltip_input_players_alt (GtkTreeModel *model,
+                                   GtkTreeIter *iter,
+                                   GtkTooltip *tooltip)
+{
+        GvaGameStoreColumn column_id;
+        const gchar *text;
+        gint max_alternating;
+
+        column_id = GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_ALT;
+        gtk_tree_model_get (model, iter, column_id, &max_alternating, -1);
+
+        text = gva_nplayers_describe (max_alternating, 0);
+
+        /* This handles NULL for text. */
+        gtk_tooltip_set_text (tooltip, text);
+
+        return (text != NULL);
+}
+
+static gboolean
+columns_tooltip_input_players_sim (GtkTreeModel *model,
+                                   GtkTreeIter *iter,
+                                   GtkTooltip *tooltip)
+{
+        GvaGameStoreColumn column_id;
+        const gchar *text;
+        gint max_simultaneous;
+
+        column_id = GVA_GAME_STORE_COLUMN_INPUT_PLAYERS_SIM;
+        gtk_tree_model_get (model, iter, column_id, &max_simultaneous, -1);
+
+        text = gva_nplayers_describe (0, max_simultaneous);
+
+        /* This handles NULL for text. */
+        gtk_tooltip_set_text (tooltip, text);
+
+        return (text != NULL);
 }
 
 static gboolean
@@ -940,6 +974,12 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "input_players",      N_("Players"),
                                 columns_factory_input_players,
                                 columns_tooltip_input_players },
+        { "input_players_alt",  N_("Players (Alt.)"),
+                                columns_factory_input_players_alt,
+                                columns_tooltip_input_players_alt },
+        { "input_players_sim",  N_("Players (Sim.)"),
+                                columns_factory_input_players_sim,
+                                columns_tooltip_input_players_sim },
         { "input_buttons",      NULL },
         { "input_coins",        NULL },
         { "driver_status",      N_("Status"),
@@ -973,6 +1013,10 @@ static gchar *default_column_order[] =
         "bios",
         "driver_status",
         "input_players",
+#ifdef NPLAYERS_FILE
+        "input_players_alt",
+        "input_players_sim",
+#endif
         "name",
         "sourcefile",
         "sampleset"

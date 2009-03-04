@@ -140,6 +140,8 @@ game_store_constructor (GType type,
         types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_SERVICE */
         types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_INPUT_TILT */
         types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_PLAYERS */
+        types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_PLAYERS_ALT */
+        types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_PLAYERS_SIM */
         types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_BUTTONS */
         types[column++] = G_TYPE_INT;        /* COLUMN_INPUT_COINS */
         types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_STATUS */
