@@ -1,3 +1,21 @@
+GNOME Video Arcade 0.6.6
+========================
+
+        Released March 15, 2009
+
+        What's New
+        ----------
+        * Project moved to http://mbarnes.github.com/gnome-video-arcade/.
+        * GNOME Video Arcade can now be configured to parse a nplayers.ini
+          file at startup. See the README files for details. This unlocks a
+          more descriptive tooltip for the Players column, as well as new
+          Players (Alt.) and Players (Sim.) columns, which show the maximum
+          number of alternating and simultaneous players (respectively) a
+          game supports.
+        * If GNOME Video Arcade is built against GTK+ 2.14 or later it will
+          no longer link to libgnome, which is a deprecated GNOME platform
+          library.  Note the mimimum required GTK+ version is still 2.12.
+
 GNOME Video Arcade 0.6.5
 ========================
 
@@ -17,18 +35,18 @@ GNOME Video Arcade 0.6.4
 
         What's New
         ----------
-	* Mute button on the main window mutes in-game sound.
+        * Mute button on the main window mutes in-game sound.
         * Right-click on column headers (instead of the game list) to
           quickly add or remove a column.
 
 GNOME Video Arcade 0.6.3
 ========================
 
-	Released June 29, 2008
+        Released June 29, 2008
 
-	What's New
-	----------
-	* Show parent/clone information in the Technical Properties tab.
+        What's New
+        ----------
+        * Show parent/clone information in the Technical Properties tab.
         * Fix a compilation error when building against GTK+ >= 2.13.1.
         * Other miscellaneous UI tweaks.
 
