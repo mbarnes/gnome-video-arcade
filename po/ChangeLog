@@ -1,3 +1,7 @@
+2009-03-16  Matthew Barnes  <mbarnes@redhat.com>
+
+	* POTFILES.in: Add src/gva-nplayers.c.
+
 2008-09-27  Matthew Barnes  <mbarnes@redhat.com>
 
 	* POTFILES.in: Add src/gva-mute-button.c.

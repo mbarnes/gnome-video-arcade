@@ -14,6 +14,7 @@ src/gva-mame-process.c
 src/gva-mame-sdlmame.c
 src/gva-mame-xmame.c
 src/gva-mute-button.c
+src/gva-nplayers.c
 src/gva-play-back.c
 src/gva-properties.c
 src/gva-tree-view.c
