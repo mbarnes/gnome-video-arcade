@@ -1,3 +1,8 @@
+2009-03-17  Matthew Barnes  <mbarnes@redhat.com>
+
+	* MAINTAINERS:
+	New file to satisfy gnome.org requirements.
+
 2009-03-15  Matthew Barnes  <mbarnes@redhat.com>
 
 	* NEWS: Update for 0.6.6
