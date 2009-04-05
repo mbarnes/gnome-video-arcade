@@ -1,3 +1,7 @@
+2009-04-05  Matthew Barnes  <mbarnes@redhat.com>
+
+	* Actually release 0.6.6.
+
 2009-04-05  Pierre Riteau  <pierre.riteau@gmail.com>
 
 	* src/gva-mame-common.c:
