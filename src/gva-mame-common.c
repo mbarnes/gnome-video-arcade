@@ -20,7 +20,7 @@
 
 #include <errno.h>
 #include <string.h>
-#include <wait.h>
+#include <sys/wait.h>
 
 #ifdef HAVE_WORDEXP_H
 #include <wordexp.h>

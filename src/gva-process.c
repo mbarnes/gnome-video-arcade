@@ -21,7 +21,7 @@
 #include <errno.h>
 #include <signal.h>
 #include <string.h>
-#include <wait.h>
+#include <sys/wait.h>
 
 #include "gva-error.h"
 #include "gva-util.h"
