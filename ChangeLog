@@ -1,3 +1,10 @@
+2009-04-05  Pierre Riteau  <pierre.riteau@gmail.com>
+
+	* src/gva-mame-common.c:
+	* src/gva-mame-process.c:
+	* src/gva-process.c:
+	Include sys/wait.h instead of wait.h which is specific to glibc.
+
 2009-03-17  Matthew Barnes  <mbarnes@redhat.com>
 
 	* MAINTAINERS:
