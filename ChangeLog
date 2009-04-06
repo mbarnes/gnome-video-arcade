@@ -1,3 +1,11 @@
+2009-04-06  Matthew Barnes  <mbarnes@redhat.com>
+
+	* gva-process.c (process_read_line):
+	Remove the assertion before process_propagate_error(), since the
+	function can handle NULL GErrors.  Hopefully this fixes a crash on
+	OpenBSD, but I'd still like to know why g_io_channel_read_line()
+	returns G_IO_STATUS_ERROR without setting the GError.
+
 2009-04-05  Matthew Barnes  <mbarnes@redhat.com>
 
 	* Actually release 0.6.6.

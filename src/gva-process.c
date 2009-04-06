@@ -171,10 +171,7 @@ process_read_line (GvaProcess *process,
                 g_signal_emit (process, signal_id, 0);
         }
         else
-        {
-                g_assert (error != NULL);
                 process_propagate_error (process, error);
-        }
 }
 
 static gboolean
