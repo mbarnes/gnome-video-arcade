@@ -1,5 +1,10 @@
 2009-04-06  Matthew Barnes  <mbarnes@redhat.com>
 
+	* gva-process.c (process_stdout_ready):
+	Correctly handle the (G_IO_IN | G_IO_HUP) case.
+
+2009-04-06  Matthew Barnes  <mbarnes@redhat.com>
+
 	* gva-process.c (process_read_line):
 	Remove the assertion before process_propagate_error(), since the
 	function can handle NULL GErrors.  Hopefully this fixes a crash on

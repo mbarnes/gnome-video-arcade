@@ -194,10 +194,11 @@ process_stdout_ready (GIOChannel *channel,
                                 process->priv->stdout_lines,
                                 signals[STDOUT_READY]);
 
-                        condition =
+                        /* Break immediately if we have a G_IO_HUP. */
+                        condition = (condition & G_IO_HUP) |
                                 g_io_channel_get_buffer_condition (channel);
                 }
-                while (condition & G_IO_IN);
+                while (condition == G_IO_IN);
 
                 return TRUE;
         }
