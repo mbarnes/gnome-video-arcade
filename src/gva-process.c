@@ -152,7 +152,7 @@ process_exited (GPid pid,
         }
 }
 
-static void
+static GIOStatus
 process_read_line (GvaProcess *process,
                    GIOChannel *channel,
                    GQueue *queue,
@@ -172,6 +172,8 @@ process_read_line (GvaProcess *process,
         }
         else
                 process_propagate_error (process, error);
+
+        return status;
 }
 
 static gboolean
@@ -179,6 +181,8 @@ process_stdout_ready (GIOChannel *channel,
                       GIOCondition condition,
                       GvaProcess *process)
 {
+        GIOStatus status;
+
         if (condition & G_IO_IN)
         {
                 /* For better performance, keep reading lines as long as
@@ -189,18 +193,20 @@ process_stdout_ready (GIOChannel *channel,
 
                 do
                 {
-                        process_read_line (
+                        status = process_read_line (
                                 process, channel,
                                 process->priv->stdout_lines,
                                 signals[STDOUT_READY]);
 
-                        /* Break immediately if we have a G_IO_HUP. */
-                        condition = (condition & G_IO_HUP) |
+                        /* Continue reading as long as data is available
+                         * in the internal buffer. */
+                        condition =
                                 g_io_channel_get_buffer_condition (channel);
                 }
                 while (condition == G_IO_IN);
 
-                return TRUE;
+                if (status == G_IO_STATUS_NORMAL)
+                        return TRUE;
         }
 
         process->priv->stdout_source_id = 0;
@@ -213,16 +219,19 @@ process_stderr_ready (GIOChannel *channel,
                       GIOCondition condition,
                       GvaProcess *process)
 {
+        GIOStatus status;
+
         if (condition & G_IO_IN)
         {
                 /* Do NOT loop here, as we do for stdout. */
 
-                process_read_line (
+                status = process_read_line (
                         process, channel,
                         process->priv->stderr_lines,
                         signals[STDERR_READY]);
 
-                return TRUE;
+                if (status == G_IO_STATUS_NORMAL)
+                        return TRUE;
         }
 
         process->priv->stderr_source_id = 0;
