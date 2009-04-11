@@ -1,3 +1,10 @@
+2009-04-11  Matthew Barnes  <mbarnes@redhat.com>
+
+	* src/gva-process.c (process_stdout_ready):
+	Break out of the loop immediately if the status is not
+	G_IO_STATUS_NORMAL.  Avoids potentially getting stuck in
+	the loop.
+
 2009-04-11  Pierre Riteau  <pierre.riteau@gmail.com>
 
 	The code reading the output of the SDLMAME child process was

@@ -181,6 +181,10 @@ process_stdout_ready (GIOChannel *channel,
                       GIOCondition condition,
                       GvaProcess *process)
 {
+        /* The logic here is tricky to get right across all operating
+         * systems due to the various ways poll() can report end-of-file.
+         * See http://www.greenend.org.uk/rjk/2001/06/poll.html. */
+
         GIOStatus status;
 
         if (condition & G_IO_IN)
@@ -197,6 +201,9 @@ process_stdout_ready (GIOChannel *channel,
                                 process, channel,
                                 process->priv->stdout_lines,
                                 signals[STDOUT_READY]);
+
+                        if (status != G_IO_STATUS_NORMAL)
+                                break;
 
                         /* Continue reading as long as data is available
                          * in the internal buffer. */
