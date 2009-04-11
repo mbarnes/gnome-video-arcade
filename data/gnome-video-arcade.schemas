@@ -77,7 +77,6 @@
       <key>/schemas/apps/gnome-video-arcade/error-file</key>
       <owner>gnome-video-arcade</owner>
       <type>string</type>
-      <default></default>
       <locale name="C">
         <short>ROM error filename</short>
         <long>Suggested filename for the ROM error "Save As" dialog.</long>
@@ -101,7 +100,6 @@
       <key>/schemas/apps/gnome-video-arcade/search</key>
       <owner>gnome-video-arcade</owner>
       <type>string</type>
-      <default></default>
       <locale name="C">
         <short>Search text</short>
         <long>The most recent text in the search entry.</long>
@@ -113,7 +111,6 @@
       <key>/schemas/apps/gnome-video-arcade/selected-game</key>
       <owner>gnome-video-arcade</owner>
       <type>string</type>
-      <default></default>
       <locale name="C">
         <short>Selected game</short>
         <long>The most recently selected game.</long>
@@ -142,7 +139,6 @@
       <key>/schemas/apps/gnome-video-arcade/selected-view</key>
       <owner>gnome-video-arcade</owner>
       <type>int</type>
-      <default></default>
       <locale name="C">
         <short>Selected view</short>
         <long>The most recently selected view.</long>
