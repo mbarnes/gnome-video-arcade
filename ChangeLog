@@ -1,3 +1,26 @@
+2009-04-11  Pierre Riteau  <pierre.riteau@gmail.com>
+
+	The code reading the output of the SDLMAME child process was
+	non-functional on OpenBSD because of differences of behavior
+	for poll(2).  When poll(2) monitors output from a pipe which
+	reaches EOF, the revents flags returned by poll(2) differ
+	between implementations.  Linux only sets the POLLHUP flag,
+	while OpenBSD sets both the POLLIN and the POLLHUP flags.
+
+	Since the condition variable given as argument to
+	process_stdout_ready() is partially derived from the revents
+	flags, process_stdout_ready() on OpenBSD is called with
+	G_IO_IN|G_IO_HUP when we hit EOF.  With these flags, the event
+	source is not removed, and process_stdout_ready() is called
+	again and again.
+
+	* src/gva-process.c (process_read_line), (process_stdout_ready),
+	(process_stderr_ready):
+	Modify the process_read_line() function to return the status
+	reported by g_io_channel_read_line().  This makes is possible
+	for process_stdout_ready() and process_stderr_ready() to remove
+	the event source when the status is not G_IO_STATUS_NORMAL.
+
 2009-04-10  Matthew Barnes  <mbarnes@redhat.com>
 
 	* data/gnome-video-arcade.schemas:
