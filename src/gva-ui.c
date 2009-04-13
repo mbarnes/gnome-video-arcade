@@ -64,7 +64,9 @@ static const gchar *license =
 "along with this program.  If not, see <http://www.gnu.org/licenses/>.";
 
 static void
-record_game_exited (GvaProcess *process, gint status, gchar *inpname)
+record_game_exited (GvaProcess *process,
+                    gint status,
+                    gchar *inpname)
 {
         if (process->error == NULL)
                 gva_play_back_show (inpname);

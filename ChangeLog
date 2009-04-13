@@ -1,3 +1,33 @@
+2009-04-13  Matthew Barnes  <mbarnes@redhat.com>
+
+	* configure.ac:
+	Post-release version bump.
+
+	* src/Makefile.am:
+	Add gva-input-file.[ch].
+
+	* src/gva-error.h:
+	Add GVA_ERROR_FORMAT for file format errors.
+
+	* src/gva-input-file.c:
+	* src/gva-input-file.h:
+	New GvaInputFile class for parsing input file headers.
+	Knows about all header formats dating back to MAME 0.112.
+
+	* src/gva-mame-common.c (gva_mame_get_input_files):
+	Return a list of GvaInputFiles instead of a hash table of
+	filenames and ROM names.
+
+	* src/gva-play-back.c (play_back_add_input_file):
+	Take a GvaInputFile instead of a filename and ROM name.
+
+	* src/gva-play-back.c (gva_play_back_show):
+	Adapt to new gva_mame_get_input_files() signature.
+
+	* src/gva-util.c (gva_get_debug_flags):
+	* src/gva-util.h (GvaDebugFlags):
+	Add GVA_DEBUG_INP flag, which prints input file details.
+
 2009-04-11  Matthew Barnes  <mbarnes@redhat.com>
 
 	* src/gva-process.c (process_stdout_ready):

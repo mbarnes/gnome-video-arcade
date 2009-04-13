@@ -165,7 +165,8 @@ gva_get_debug_flags (void)
                 {
                         { "mame",  GVA_DEBUG_MAME },
                         { "sql",   GVA_DEBUG_SQL },
-                        { "io",    GVA_DEBUG_IO }
+                        { "io",    GVA_DEBUG_IO },
+                        { "inp",   GVA_DEBUG_INP }
                 };
 
                 const gchar *env = g_getenv ("GVA_DEBUG");

@@ -18,6 +18,7 @@ depcomp
 gnome-doc-utils.make
 gtk-doc.make
 install-sh
+intltool-*.in
 libtool
 ltmain.sh
 missing

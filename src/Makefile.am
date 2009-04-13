@@ -47,6 +47,8 @@ gnome_video_arcade_SOURCES = \
 	gva-game-store.h		\
 	gva-history.c			\
 	gva-history.h			\
+	gva-input-file.c		\
+	gva-input-file.h		\
 	gva-link-button.c		\
 	gva-link-button.h		\
 	gva-main.c			\

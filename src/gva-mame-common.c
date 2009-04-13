@@ -27,6 +27,7 @@
 #endif
 
 #include "gva-error.h"
+#include "gva-input-file.h"
 #include "gva-mame-process.h"
 #include "gva-mute-button.h"
 #include "gva-preferences.h"
@@ -291,18 +292,18 @@ gva_mame_get_search_paths (const gchar *config_key,
  * gva_mame_get_input_files:
  * @error: return location for a @GError, or %NULL
  *
- * Returns a #GHashTable of input files for playback.  The keys of the
- * #GHashTable are absolute filenames and the values are the corresponding
- * game name.  If an error occurs, it returns %NULL and sets @error.
+ * Returns a list of #GvaInputFile instances corresponding to files in the
+ * input directory.  If an error occurs, it returns %NULL and sets @error.
  *
- * Returns: a #GHashTable of input files, or %NULL
+ * Returns: a list of #GvaInputFile instances, or %NULL
  **/
-GHashTable *
+GList *
 gva_mame_get_input_files (GError **error)
 {
         GHashTable *hash_table;
         const gchar *basename;
         const gchar *directory;
+        GList *list = NULL;
         GDir *dir;
 
         directory = gva_mame_get_input_directory (error);
@@ -319,41 +320,17 @@ gva_mame_get_input_files (GError **error)
         while ((basename = g_dir_read_name (dir)) != NULL)
         {
                 gchar *filename;
-                GIOChannel *channel;
-                GError *local_error = NULL;
+                GvaInputFile *input_file;
 
                 filename = g_build_filename (directory, basename, NULL);
-
-                channel = g_io_channel_new_file (filename, "r", &local_error);
-
-                if (channel != NULL)
-                {
-                        gchar name[16];
-                        GIOStatus status;
-
-                        status = g_io_channel_read_chars (
-                                channel, name, sizeof (name),
-                                NULL, &local_error);
-                        if (status == G_IO_STATUS_NORMAL)
-                                g_hash_table_insert (
-                                        hash_table, filename,
-                                        g_strdup (name));
-                        g_io_channel_unref (channel);
-                }
-
-                if (local_error != NULL)
-                {
-                        g_free (filename);
-                        g_hash_table_destroy (hash_table);
-                        g_propagate_error (error, local_error);
-                        hash_table = NULL;
-                        break;
-                }
+                input_file = gva_input_file_new (filename);
+                list = g_list_prepend (list, input_file);
+                g_free (filename);
         }
 
         g_dir_close (dir);
 
-        return hash_table;
+        return g_list_reverse (list);
 }
 
 /**

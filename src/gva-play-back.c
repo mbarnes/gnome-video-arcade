@@ -28,6 +28,7 @@
 #include "gva-db.h"
 #include "gva-error.h"
 #include "gva-game-store.h"
+#include "gva-input-file.h"
 #include "gva-mame.h"
 #include "gva-time.h"
 #include "gva-tree-view.h"
@@ -113,33 +114,42 @@ play_back_selection_changed_cb (GtkTreeSelection *tree_selection)
 }
 
 static void
-play_back_add_input_file (const gchar *inpfile,
-                          const gchar *name,
+play_back_add_input_file (GvaInputFile *input_file,
                           GvaGameStore *game_store)
 {
         GtkTreeIter iter;
+        const gchar *filename;
+        const gchar *game;
         gchar *comment = NULL;
         gchar **result = NULL;
         gchar *inpname;
         gchar *sql;
         gint rows;
         struct stat st;
-        time_t *time;
+        time_t timestamp;
         GError *error = NULL;
 
-        if (g_stat (inpfile, &st) != 0)
+        if (!gva_input_file_read (input_file, &error))
         {
-                g_warning ("%s: %s", inpfile, g_strerror (errno));
+                gva_error_handle (&error);
                 return;
         }
 
-        time = &st.st_ctime;
+        game = gva_input_file_get_game (input_file);
+        filename = gva_input_file_get_filename (input_file);
+        timestamp = gva_input_file_get_timestamp (input_file);
+
+        if (g_stat (filename, &st) != 0)
+        {
+                g_warning ("%s: %s", filename, g_strerror (errno));
+                return;
+        }
 
         /* Try to fetch the comment from the database. */
         sql = g_strdup_printf (
                 "SELECT comment FROM playback WHERE "
                 "name == '%s' AND inode == %" G_GINT64_FORMAT,
-                name, (gint64) st.st_ino);
+                game, (gint64) st.st_ino);
         if (gva_db_get_table (sql, &result, &rows, NULL, &error))
         {
                 if (rows > 0)
@@ -154,7 +164,7 @@ play_back_add_input_file (const gchar *inpfile,
         {
                 sql = g_strdup_printf (
                         "SELECT description FROM available "
-                        "WHERE name == '%s'", name);
+                        "WHERE name == '%s'", game);
                 if (gva_db_get_table (sql, &result, &rows, NULL, &error))
                 {
                         if (rows > 0)
@@ -168,7 +178,7 @@ play_back_add_input_file (const gchar *inpfile,
         /* The game may not be available anymore. */
         if (comment == NULL)
         {
-                g_warning ("%s: Game '%s' not found", inpfile, name);
+                g_warning ("%s: Game '%s' not found", filename, game);
                 return;
         }
 
@@ -176,14 +186,14 @@ play_back_add_input_file (const gchar *inpfile,
 
         gtk_tree_store_set (
                 GTK_TREE_STORE (game_store), &iter,
-                GVA_GAME_STORE_COLUMN_NAME, name,
+                GVA_GAME_STORE_COLUMN_NAME, game,
                 GVA_GAME_STORE_COLUMN_COMMENT, comment,
                 GVA_GAME_STORE_COLUMN_INODE, (gint64) st.st_ino,
-                GVA_GAME_STORE_COLUMN_INPFILE, inpfile,
-                GVA_GAME_STORE_COLUMN_TIME, time,
+                GVA_GAME_STORE_COLUMN_INPFILE, filename,
+                GVA_GAME_STORE_COLUMN_TIME, &timestamp,
                 -1);
 
-        inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
+        inpname = g_strdelimit (g_path_get_basename (filename), ".", '\0');
         gva_game_store_index_insert (game_store, inpname, &iter);
         g_free (inpname);
 
@@ -239,7 +249,7 @@ gva_play_back_init (void)
 void
 gva_play_back_show (const gchar *inpname)
 {
-        GHashTable *hash_table;
+        GList *list;
         GvaGameStore *game_store;
         GtkTreeView *view;
         GError *error = NULL;
@@ -247,17 +257,14 @@ gva_play_back_show (const gchar *inpname)
         view = GTK_TREE_VIEW (GVA_WIDGET_PLAY_BACK_TREE_VIEW);
         game_store = GVA_GAME_STORE (gtk_tree_view_get_model (view));
 
-        hash_table = gva_mame_get_input_files (&error);
+        gva_game_store_clear (game_store);
+
+        list = gva_mame_get_input_files (&error);
         gva_error_handle (&error);
 
-        if (hash_table != NULL)
-        {
-                gva_game_store_clear (game_store);
-                g_hash_table_foreach (
-                        hash_table, (GHFunc) play_back_add_input_file,
-                        game_store);
-                g_hash_table_destroy (hash_table);
-        }
+        g_list_foreach (list, (GFunc) play_back_add_input_file, game_store);
+        g_list_foreach (list, (GFunc) g_object_unref, NULL);
+        g_list_free (list);
 
         if (inpname != NULL)
         {

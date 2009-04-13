@@ -1,3 +1,16 @@
+GNOME Video Arcade 0.6.7
+========================
+
+        Released April ??, 2009
+
+        What's New
+        ----------
+        * Make game play back work again with recent MAME releases.
+        * GNOME Video Arcade now works on OpenBSD.  Huge thanks to
+          Pierre Riteau and Antoine Jacoutot for their assistance.
+        * Set the GVA_DEBUG environment variable to "inp" to show
+          input file header information.
+
 GNOME Video Arcade 0.6.6
 ========================
 
