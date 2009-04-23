@@ -10,6 +10,10 @@
 
 	* sv.po: Updated Swedish translation.
 
+2009-04-23  Matthew Barnes  <mbarnes@redhat.com>
+
+	* POTFILES.in: Add src/gva-input-file.c.
+
 2009-03-16  Matthew Barnes  <mbarnes@redhat.com>
 
 	* POTFILES.in: Add src/gva-nplayers.c.
