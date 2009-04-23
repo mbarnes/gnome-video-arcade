@@ -1,235 +1,554 @@
 # Swedish translation for gnome-video-arcade.
-# Copyright (C) 2007 Free Software Foundation, Inc.
+# Copyright (C) 2007, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-video-arcade package.
-# Daniel Nylander <po@danielnylander.se>, 2007.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "Report-Msgid-Bugs-To: matthew@barnes.net\n"
-"POT-Creation-Date: 2007-07-24 12:20-0400\n"
-"PO-Revision-Date: 2007-07-24 11:10+0100\n"
+"POT-Creation-Date: 2009-04-23 17:37+0200\n"
+"PO-Revision-Date: 2009-04-23 17:49+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../data/gnome-video-arcade.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../data/gnome-video-arcade.glade.h:2
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>Alternativa versioner</b>"
+
+#: ../data/gnome-video-arcade.glade.h:3
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/gnome-video-arcade.glade.h:4
+msgid "<b>CPU</b>"
+msgstr "<b>Processor</b>"
+
+#: ../data/gnome-video-arcade.glade.h:5
 msgid "<b>Columns</b>"
 msgstr "<b>Kolumner</b>"
 
-#: ../data/gnome-video-arcade.glade.h:2
+#: ../data/gnome-video-arcade.glade.h:6
+msgid "<b>Game List</b>"
+msgstr "<b>Spellista</b>"
+
+#: ../data/gnome-video-arcade.glade.h:7
 msgid "<b>General</b>"
 msgstr "<b>Allmänt</b>"
 
-#: ../data/gnome-video-arcade.glade.h:3
-msgid ""
-"<big><b>Game Description</b></big>\n"
-"Manufacturer, Year"
-msgstr ""
-"<big><b>Spelbeskrivning</b></big>\n"
-"Tillverkare, År"
+#: ../data/gnome-video-arcade.glade.h:8
+msgid "<b>Original Version</b>"
+msgstr "<b>Ursprunglig version</b>"
 
-#: ../data/gnome-video-arcade.glade.h:5
-msgid ""
-"<small><i>NOTE: Setting this will not take effect until the second time the "
-"game is started.  It does not apply to recording or playing back games.</i></"
-"small>"
-msgstr ""
-"<small><i>OBSERVERA: Denna inställning kommer inte att bli aktiverad förrän "
-"nästa gång som spelet startas.  Den gäller inte för inspelning eller "
-"uppspelning av spel.</i></small>"
+#: ../data/gnome-video-arcade.glade.h:9
+msgid "<b>Sound</b>"
+msgstr "<b>Ljud</b>"
 
-#: ../data/gnome-video-arcade.glade.h:6
+#. The same text is in gnome-video-arcade.glade,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.glade.h:10
+#: ../src/gva-columns.c:708
+msgid "<b>There are known problems with this game:</b>"
+msgstr "<b>Det finns kända problem med detta spel:</b>"
+
+#: ../data/gnome-video-arcade.glade.h:11
+msgid "<b>Video</b>"
+msgstr "<b>Video</b>"
+
+#: ../data/gnome-video-arcade.glade.h:12
+msgid "<big><b>Errors detected in ROM files</b></big>"
+msgstr "<big><b>Fel upptäcktes i ROM-filer</b></big>"
+
+#: ../data/gnome-video-arcade.glade.h:13
+msgid "<small><i><b>Note:</b> Setting this will not take effect until the second time the game is started. It does not apply to recording or playing back games.</i></small>"
+msgstr "<small><i><b>OBSERVERA:</b> Denna inställning kommer inte att bli aktiverad förrän nästa gång som spelet startas.  Den gäller inte för inspelning eller uppspelning av spel.</i></small>"
+
+#: ../data/gnome-video-arcade.glade.h:14
+msgid "<small><i>If these games worked with previous versions of MAME, it is likely their ROM requirements have changed.  If so, you will need to acquire more recent ROM files.</i></small>"
+msgstr "<small><i>Om dessa spel fungerade med tidigare versioner av MAME så är det möjligt att deras ROM-krav har ändrats.  Om så är fallet så behöver du få tag på senare versioner av ROM-filerna.</i></small>"
+
+#: ../data/gnome-video-arcade.glade.h:15
+msgid "An audit of the available games has detected errors in some of the ROM files. The following games will not be available in GNOME Video Arcade."
+msgstr "En granskning av de tillgängliga spelet har upptäckt fel i några av ROM-filerna. Följande spel kommer inte att vara tillgängliga i GNOME Video Arcade."
+
+#: ../data/gnome-video-arcade.glade.h:16
 msgid "Choose the order of information to appear in the game list."
 msgstr "Välj ordningen som informationen ska visas i spellistan."
 
-#: ../data/gnome-video-arcade.glade.h:7
+#: ../data/gnome-video-arcade.glade.h:17
 msgid "Close this window"
 msgstr "Stäng det här fönstret"
 
-#: ../data/gnome-video-arcade.glade.h:8
+#: ../data/gnome-video-arcade.glade.h:18
 msgid "Columns"
 msgstr "Kolumner"
 
-#: ../data/gnome-video-arcade.glade.h:9
+#: ../data/gnome-video-arcade.glade.h:19
 msgid "Delete the selected game recordings"
 msgstr "Ta bort inspelningar för det markerade spelet"
 
-#: ../data/gnome-video-arcade.glade.h:10
+#: ../data/gnome-video-arcade.glade.h:20
 msgid "GNOME Video Arcade"
 msgstr "GNOME Video Arcade"
 
-#: ../data/gnome-video-arcade.glade.h:11
+#: ../data/gnome-video-arcade.glade.h:21
 msgid "Gallery"
 msgstr "Galleri"
 
-#: ../data/gnome-video-arcade.glade.h:12
+#: ../data/gnome-video-arcade.glade.h:22
 msgid "General"
 msgstr "Allmänt"
 
-#: ../data/gnome-video-arcade.glade.h:13
+#: ../data/gnome-video-arcade.glade.h:23
 msgid "History"
 msgstr "Historik"
 
-#: ../data/gnome-video-arcade.glade.h:14 ../src/gva-ui.c:527
+#: ../data/gnome-video-arcade.glade.h:24
+#: ../src/gva-ui.c:771
 msgid "Only show my favorite games"
 msgstr "Visa endast mina favoritspel"
 
-#: ../data/gnome-video-arcade.glade.h:15
+#: ../data/gnome-video-arcade.glade.h:25
 msgid "Play _Back"
 msgstr "Spela _upp"
 
-#: ../data/gnome-video-arcade.glade.h:16 ../src/gva-ui.c:400
+#: ../data/gnome-video-arcade.glade.h:26
+#: ../src/gva-ui.c:615
 msgid "Play back the selected game recording"
 msgstr "Spela upp inspelning för det markerade spelet"
 
-#: ../data/gnome-video-arcade.glade.h:17
+#: ../data/gnome-video-arcade.glade.h:27
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ../data/gnome-video-arcade.glade.h:18
+#: ../data/gnome-video-arcade.glade.h:28
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: ../data/gnome-video-arcade.glade.h:19
+#: ../data/gnome-video-arcade.glade.h:29
 msgid "Recorded Games"
 msgstr "Inspelade spel"
 
-#: ../data/gnome-video-arcade.glade.h:20 ../src/gva-ui.c:520
+#: ../data/gnome-video-arcade.glade.h:30
+#: ../src/gva-ui.c:671
+msgid "Save ROM errors to a file"
+msgstr "Spara ROM-fel till en fil"
+
+#. This label precedes the search entry.&#10;e.g. Search for: Pac-Man
+#: ../data/gnome-video-arcade.glade.h:32
+msgid "Search for:"
+msgstr "Sök efter:"
+
+#: ../data/gnome-video-arcade.glade.h:33
+#: ../src/gva-ui.c:764
 msgid "Show all available games"
 msgstr "Visa alla tillgängliga spel"
 
-#: ../data/gnome-video-arcade.glade.h:21 ../src/gva-ui.c:421
+#: ../data/gnome-video-arcade.glade.h:34
+#: ../src/gva-ui.c:636
 msgid "Show information about the selected game"
 msgstr "Visa information om det markerade spelet"
 
-#: ../data/gnome-video-arcade.glade.h:22 ../src/gva-ui.c:534
+#: ../data/gnome-video-arcade.glade.h:35
+#: ../src/gva-ui.c:778
 msgid "Show my search results"
 msgstr "Visa mina sökresultat"
 
-#: ../data/gnome-video-arcade.glade.h:23 ../src/gva-ui.c:393
+#: ../data/gnome-video-arcade.glade.h:36
+#: ../src/gva-ui.c:608
 msgid "Show next game"
 msgstr "Visa nästa spel"
 
-#: ../data/gnome-video-arcade.glade.h:24 ../src/gva-ui.c:414
+#: ../data/gnome-video-arcade.glade.h:37
+#: ../src/gva-ui.c:629
 msgid "Show previous game"
 msgstr "Visa föregående spel"
 
-#: ../data/gnome-video-arcade.glade.h:25 ../src/gva-ui.c:463
+#: ../data/gnome-video-arcade.glade.h:38
+#: ../src/gva-ui.c:692
 msgid "Start the selected game"
 msgstr "Starta markerat spel"
 
-#: ../data/gnome-video-arcade.glade.h:26
+#: ../data/gnome-video-arcade.glade.h:39
 msgid "Technical"
 msgstr "Techniskt"
 
-#: ../data/gnome-video-arcade.glade.h:27
+#: ../data/gnome-video-arcade.glade.h:40
 msgid "_Start Game"
 msgstr "_Starta spel"
 
-#: ../data/gnome-video-arcade.glade.h:28
+#: ../data/gnome-video-arcade.glade.h:41
 msgid "gtk-close"
 msgstr "Stäng"
 
-#: ../src/gva-column-manager.c:584
+#: ../data/gnome-video-arcade.glade.h:42
+#: ../src/gva-columns.c:773
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>DETTA SPEL FUNGERAR INTE.</b>"
+
+#: ../data/gnome-video-arcade.glade.h:43
+#: ../src/gva-columns.c:764
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr "• Skärmvändning i cocktail-läge stöds inte."
+
+#: ../data/gnome-video-arcade.glade.h:44
+#: ../src/gva-columns.c:728
+msgid "• The colors are completely wrong."
+msgstr "• Färgerna är helt fel."
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.glade.h:46
+#: ../src/gva-columns.c:719
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• Färgerna är inte 100% korrekta."
+
+#: ../data/gnome-video-arcade.glade.h:47
+#: ../src/gva-columns.c:783
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• Spelet har ett skydd som inte är fullt emulerat."
+
+#: ../data/gnome-video-arcade.glade.h:48
+#: ../src/gva-columns.c:755
+msgid "• The game lacks sound."
+msgstr "• Spelet saknar ljud."
+
+#: ../data/gnome-video-arcade.glade.h:50
+#: ../src/gva-columns.c:746
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• Ljudemuleringen är inte 100% korrekt."
+
+#: ../data/gnome-video-arcade.glade.h:52
+#: ../src/gva-columns.c:737
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• Videoemuleringen är inte 100% korrekt."
+
+#: ../src/gconf-bridge.c:1218
+#, c-format
+msgid "GConf error: %s"
+msgstr "GConf-fel: %s"
+
+#: ../src/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "Alla ytterligare fel visas endast på terminalen."
+
+#: ../src/gva-audit.c:238
+msgid "Save As"
+msgstr "Spara som"
+
+#: ../src/gva-categories.c:71
+msgid "This program is not configured to show category information."
+msgstr "Det här programmet är inte konfigurerat att visa kategoriinformation."
+
+#: ../src/gva-column-manager.c:554
+msgid "Managed View"
+msgstr "Hanterad vy"
+
+#: ../src/gva-column-manager.c:555
+msgid "The GtkTreeView being managed"
+msgstr "GtkTreeView som hanteras"
+
+#: ../src/gva-column-manager.c:611
 msgid "Move _Up"
 msgstr "Flytta _uppåt"
 
-#: ../src/gva-column-manager.c:597
+#: ../src/gva-column-manager.c:624
 msgid "Move _Down"
 msgstr "Flytta _nedåt"
 
-#: ../src/gva-column-manager.c:610
+#: ../src/gva-column-manager.c:637
 msgid "_Show"
 msgstr "_Visa"
 
-#: ../src/gva-column-manager.c:619
+#: ../src/gva-column-manager.c:646
 msgid "_Hide"
 msgstr "_Dölj"
 
-#: ../src/gva-columns.c:123 ../src/gva-play-back.c:252
-msgid "Title"
-msgstr "Titel"
+#: ../src/gva-columns.c:279
+#, c-format
+msgid "Remove %s Column"
+msgstr "Ta bort %s-kolumn"
 
-#: ../src/gva-columns.c:147
-msgid "Favorite"
-msgstr "Favorit"
+#: ../src/gva-columns.c:281
+#, c-format
+msgid "Remove the \"%s\" column from the game list"
+msgstr "Ta bort kolumnen \"%s\" från spellistan"
 
-#: ../src/gva-columns.c:174
-msgid "Manufacturer"
-msgstr "Tillverkare"
+#: ../src/gva-columns.c:819
+msgid "Click here to remove from favorites"
+msgstr "Klicka här för att ta bort från favoriter"
 
-#: ../src/gva-columns.c:194
+#: ../src/gva-columns.c:821
+msgid "Click here to add to favorites"
+msgstr "Klicka här för att lägga till favoriter"
+
+#: ../src/gva-columns.c:913
+#: ../src/gva-properties.c:412
+msgid "(Game Description Unknown)"
+msgstr "(Spelbeskrivningen är okänd)"
+
+#: ../src/gva-columns.c:916
+#: ../src/gva-properties.c:415
+msgid "(Manufacturer Unknown)"
+msgstr "(Tillverkaren är okänd)"
+
+#: ../src/gva-columns.c:919
+#: ../src/gva-properties.c:418
+msgid "(Year Unknown)"
+msgstr "(Året är okänt)"
+
+#: ../src/gva-columns.c:943
+#: ../src/gva-main.c:974
 msgid "ROM Name"
 msgstr "ROM-namn"
 
-#: ../src/gva-columns.c:218
+#: ../src/gva-columns.c:945
+msgid "BIOS"
+msgstr "BIOS"
+
+#: ../src/gva-columns.c:947
+#: ../src/gva-main.c:967
+msgid "Category"
+msgstr "Kategori"
+
+#: ../src/gva-columns.c:949
+msgid "Favorite"
+msgstr "Favorit"
+
+#: ../src/gva-columns.c:952
+msgid "Driver"
+msgstr "Drivrutin"
+
+#: ../src/gva-columns.c:960
 msgid "Samples"
 msgstr "Samplingar"
 
-#: ../src/gva-columns.c:242
+#: ../src/gva-columns.c:962
+msgid "Title"
+msgstr "Titel"
+
+#: ../src/gva-columns.c:965
 msgid "Year"
 msgstr "År"
 
-#: ../src/gva-history.c:44
-msgid "This program is not configured to show arcade history information."
-msgstr ""
-"Det här programmet är inte konfigurerat att visa information om "
-"arkadhistorik."
+#: ../src/gva-columns.c:968
+#: ../src/gva-main.c:953
+msgid "Manufacturer"
+msgstr "Tillverkare"
 
-#: ../src/gva-main.c:144
+#: ../src/gva-columns.c:974
+msgid "Players"
+msgstr "Spelare"
+
+#: ../src/gva-columns.c:977
+msgid "Players (Alt.)"
+msgstr "Spelare (Alt.)"
+
+#: ../src/gva-columns.c:980
+msgid "Players (Sim.)"
+msgstr "Spelare (Sim.)"
+
+#: ../src/gva-columns.c:985
+msgid "Status"
+msgstr "Status"
+
+#: ../src/gva-columns.c:996
+msgid "Comment"
+msgstr "Kommentar"
+
+#: ../src/gva-columns.c:1000
+msgid "Played On"
+msgstr "Spelades den"
+
+#: ../src/gva-history.c:43
+msgid "This program is not configured to show history information."
+msgstr "Det här programmet är inte konfigurerat att visa historikinformation."
+
+#: ../src/gva-main.c:240
 msgid "Building game database..."
 msgstr "Bygger speldatabasen..."
 
-#: ../src/gva-mame-common.c:176
+#: ../src/gva-main.c:298
+msgid "Analyzing ROM files..."
+msgstr "Analyserar ROM-filer..."
+
+#: ../src/gva-main.c:939
+msgid "Search for any of the following:"
+msgstr "Sök efter något av följande:"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../src/gva-main.c:946
+msgid "Game Title"
+msgstr "Speltitel"
+
+#: ../src/gva-main.c:960
+msgid "Copyright Year"
+msgstr "Copyright (år)"
+
+#: ../src/gva-main.c:981
+msgid "BIOS Name"
+msgstr "BIOS-namn"
+
+#: ../src/gva-main.c:988
+msgid "Driver Name"
+msgstr "Drivrutinens namn"
+
+#: ../src/gva-mame-common.c:224
 #, c-format
 msgid "%s: No such configuration key"
 msgstr "%s: Ingen sådan konfigurationsnyckel"
 
-#: ../src/gva-mame-process.c:94
+#: ../src/gva-mame-sdlmame.c:66
+#: ../src/gva-mame-xmame.c:62
 #, c-format
-msgid "Child process exited with status (%d)"
-msgstr "Barnprocessen avslutades med status (%d)"
-
-#: ../src/gva-mame-sdlmame.c:60 ../src/gva-mame-xmame.c:56
 msgid "Could not determine emulator version"
 msgstr "Kunde inte fastställa emulatorns version"
 
-#: ../src/gva-play-back.c:59
+#: ../src/gva-mute-button.c:126
+msgid "Muted"
+msgstr "Tyst"
+
+#: ../src/gva-mute-button.c:127
+msgid "Whether the button state is muted"
+msgstr "Huruvida knapptillståndet är tystat"
+
+#: ../src/gva-mute-button.c:229
+msgid "In-game sound is muted"
+msgstr "Ljud i spelet är inaktiverat"
+
+#: ../src/gva-mute-button.c:234
+msgid "In-game sound is enabled"
+msgstr "Ljud i spelet är aktiverat"
+
+#: ../src/gva-nplayers.c:99
+msgid "This program is not configured to show detailed number of players information."
+msgstr "Det här programmet är inte konfigurerat att visa detaljerad information om antal spelare."
+
+#: ../src/gva-nplayers.c:179
+msgid "Up to four players alternating or two players simultaneously"
+msgstr "Upp till fyra spelare i turordning eller två spelare samtidigt"
+
+#: ../src/gva-nplayers.c:183
+msgid "Up to eight players alternating or two players simultaneously"
+msgstr "Upp till åtta spelare i turordning eller två spelare samtidigt"
+
+#: ../src/gva-nplayers.c:198
+#: ../src/gva-nplayers.c:241
+#: ../src/gva-nplayers.c:277
+msgid "One player only"
+msgstr "Endast en spelare"
+
+#: ../src/gva-nplayers.c:201
+msgid "One or two players"
+msgstr "En eller två spelare"
+
+#: ../src/gva-nplayers.c:204
+msgid "Up to three players"
+msgstr "Upp till tre spelare"
+
+#: ../src/gva-nplayers.c:207
+msgid "Up to four players"
+msgstr "Upp till fyra spelare"
+
+#: ../src/gva-nplayers.c:210
+msgid "Up to five players"
+msgstr "Upp till fem spelare"
+
+#: ../src/gva-nplayers.c:213
+msgid "Up to six players"
+msgstr "Upp till sex spelare"
+
+#: ../src/gva-nplayers.c:216
+msgid "Up to seven players"
+msgstr "Upp till sju spelare"
+
+#: ../src/gva-nplayers.c:219
+msgid "Up to eight players"
+msgstr "Upp till åtta spelare"
+
+#: ../src/gva-nplayers.c:244
+msgid "One or two players alternating"
+msgstr "En eller två spelare i turordning"
+
+#: ../src/gva-nplayers.c:247
+msgid "Up to three players alternating"
+msgstr "Upp till tre spelare i turordning"
+
+#: ../src/gva-nplayers.c:250
+msgid "Up to four players alternating"
+msgstr "Upp till fyra spelare i turordning"
+
+#: ../src/gva-nplayers.c:253
+msgid "Up to five players alternating"
+msgstr "Upp till fem spelare i turordning"
+
+#: ../src/gva-nplayers.c:256
+msgid "Up to six players alternating"
+msgstr "Upp till sex spelare i turordning"
+
+#: ../src/gva-nplayers.c:259
+msgid "Up to seven players alternating"
+msgstr "Upp till sju spelare i turordning"
+
+#: ../src/gva-nplayers.c:262
+msgid "Up to eight players alternating"
+msgstr "Upp till åtta spelare i turordning"
+
+#: ../src/gva-nplayers.c:280
+msgid "One or two players simultaneously"
+msgstr "En eller två spelare samtidigt"
+
+#: ../src/gva-nplayers.c:283
+msgid "Up to three players simultaneously"
+msgstr "Upp till tre spelare samtidigt"
+
+#: ../src/gva-nplayers.c:286
+msgid "Up to four players simultaneously"
+msgstr "Upp till fyra spelare samtidigt"
+
+#: ../src/gva-nplayers.c:289
+msgid "Up to five players simultaneously"
+msgstr "Upp till fem spelare samtidigt"
+
+#: ../src/gva-nplayers.c:292
+msgid "Up to six players simultaneously"
+msgstr "Upp till sex spelare samtidigt"
+
+#: ../src/gva-nplayers.c:295
+msgid "Up to seven players simultaneously"
+msgstr "Upp till sju spelare samtidigt"
+
+#: ../src/gva-nplayers.c:298
+msgid "Up to eight players simultaneously"
+msgstr "Upp till åtta spelare samtidigt"
+
+#: ../src/gva-play-back.c:54
 msgid "Delete selected game recordings?"
 msgstr "Ta bort inspelningar för markerat spel?"
 
-#: ../src/gva-play-back.c:63
-msgid ""
-"This operation will permanently erase the recorded games you have selected.  "
-"Are you sure you want to proceed?"
-msgstr ""
-"Den här åtgärden kommer permanent att ta bort de inspelade spelet som du "
-"markerat.  Är du säker på att du vill fortsätta?"
+#: ../src/gva-play-back.c:58
+msgid "This operation will permanently erase the recorded games you have selected.  Are you sure you want to proceed?"
+msgstr "Den här åtgärden kommer permanent att ta bort de inspelade spelet som du markerat.  Är du säker på att du vill fortsätta?"
 
-#: ../src/gva-play-back.c:67
+#: ../src/gva-play-back.c:62
 msgid "Do Not Delete"
 msgstr "Ta inte bort"
 
-#: ../src/gva-play-back.c:239
-msgid "Played On"
-msgstr "Spelades den"
+#: ../src/gva-properties.c:148
+msgid "Show this game"
+msgstr "Visa detta spel"
 
-#: ../src/gva-properties.c:49
-msgid "(Game Description Unknown)"
-msgstr "(Spelbeskrivningen är okänd)"
-
-#: ../src/gva-properties.c:52
-msgid "(Manufacturer Unknown)"
-msgstr "(Tillverkaren är okänd)"
-
-#: ../src/gva-properties.c:55
-msgid "(Year Unknown)"
-msgstr "(Året är okänt)"
-
-#: ../src/gva-properties.c:95
+#: ../src/gva-properties.c:459
 #, c-format
 msgid ""
 "Error while fetching history:\n"
@@ -238,154 +557,227 @@ msgstr ""
 "Fel vid hämtning av historik:\n"
 "%s"
 
-#: ../src/gva-properties.c:100
+#: ../src/gva-properties.c:464
 msgid "History not available"
 msgstr "Historik är inte tillgänglig"
 
-#: ../src/gva-ui.c:85
+#: ../src/gva-tree-view.c:421
+msgid "Available Game"
+msgid_plural "Available Games"
+msgstr[0] "Tillgängligt spel"
+msgstr[1] "Tillgängliga spel"
+
+#: ../src/gva-tree-view.c:428
+msgid "Favorite Game"
+msgid_plural "Favorite Games"
+msgstr[0] "Favoritspel"
+msgstr[1] "Favoritspel"
+
+#: ../src/gva-tree-view.c:435
+msgid "Search Result"
+msgid_plural "Search Results"
+msgstr[0] "Sökresultat"
+msgstr[1] "Sökresultat"
+
+#: ../src/gva-ui.c:100
 msgid "M.A.M.E. Front-End"
 msgstr "Gränssnitt för M.A.M.E."
 
-#: ../src/gva-ui.c:90
+#: ../src/gva-ui.c:105
 msgid "translator-credits"
 msgstr "Daniel Nylander <po@danielnylander.se>"
 
-#: ../src/gva-ui.c:370
+#: ../src/gva-ui.c:585
 msgid "_About"
 msgstr "_Om"
 
-#: ../src/gva-ui.c:372
+#: ../src/gva-ui.c:587
 msgid "Show information about the application"
 msgstr "Visa information om programmet"
 
-#: ../src/gva-ui.c:377
+#: ../src/gva-ui.c:592
 msgid "_Contents"
 msgstr "_Innehåll"
 
-#: ../src/gva-ui.c:384
+#: ../src/gva-ui.c:594
+msgid "Open the help documentation"
+msgstr "Öppna hjälpdokumentationen"
+
+#: ../src/gva-ui.c:599
 msgid "Add to _Favorites"
 msgstr "Lägg till i _favoriter"
 
-#: ../src/gva-ui.c:386
+#: ../src/gva-ui.c:601
 msgid "Add the selected game to my list of favorites"
 msgstr "Lägg till markerat spel i min favoritlista"
 
-#: ../src/gva-ui.c:398 ../src/gva-ui.c:454
+#: ../src/gva-ui.c:613
+#: ../src/gva-ui.c:683
 msgid "Play _Back..."
 msgstr "Spela _upp..."
 
-#: ../src/gva-ui.c:405
+#: ../src/gva-ui.c:620
 msgid "_Preferences"
 msgstr "_Inställningar"
 
-#: ../src/gva-ui.c:407
+#: ../src/gva-ui.c:622
 msgid "Configure the application"
 msgstr "Konfigurera programmet"
 
-#: ../src/gva-ui.c:419
+#: ../src/gva-ui.c:634
 msgid "_Properties"
 msgstr "_Egenskaper"
 
-#: ../src/gva-ui.c:426
+#: ../src/gva-ui.c:641
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: ../src/gva-ui.c:428
+#: ../src/gva-ui.c:643
 msgid "Quit the application"
 msgstr "Avsluta programmet"
 
-#: ../src/gva-ui.c:433
+#: ../src/gva-ui.c:648
 msgid "_Record"
 msgstr "Spela _in"
 
-#: ../src/gva-ui.c:435
+#: ../src/gva-ui.c:650
 msgid "Start the selected game and record keypresses to a file"
-msgstr ""
-"Starta det markerade spelet och spela in tangenttryckningar till en fil"
+msgstr "Starta det markerade spelet och spela in tangenttryckningar till en fil"
 
-#: ../src/gva-ui.c:440
+#: ../src/gva-ui.c:662
 msgid "Remove from _Favorites"
 msgstr "Ta bort från _favoriter"
 
-#: ../src/gva-ui.c:442
+#: ../src/gva-ui.c:664
 msgid "Remove the selected game from my list of favorites"
 msgstr "Ta bort det markerade spelet från min favoritlista"
 
-#: ../src/gva-ui.c:447
+#: ../src/gva-ui.c:669
+msgid "Save _As..."
+msgstr "Spara so_m..."
+
+#: ../src/gva-ui.c:676
 msgid "S_earch..."
 msgstr "Sö_k..."
 
-#: ../src/gva-ui.c:449
+#: ../src/gva-ui.c:678
 msgid "Show a custom list of games"
 msgstr "Visa en anpassad spellista"
 
-#: ../src/gva-ui.c:456
+#: ../src/gva-ui.c:685
 msgid "Play back a previously recorded game"
 msgstr "Spela upp ett tidigare inspelat spel"
 
-#: ../src/gva-ui.c:461
+#: ../src/gva-ui.c:690
 msgid "_Start"
 msgstr "_Starta"
 
-#: ../src/gva-ui.c:468
+#: ../src/gva-ui.c:697
+msgid "_Add Column"
+msgstr "_Lägg till kolumn"
+
+#: ../src/gva-ui.c:704
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: ../src/gva-ui.c:475
+#: ../src/gva-ui.c:711
 msgid "_Game"
 msgstr "_Spel"
 
-#: ../src/gva-ui.c:482
+#: ../src/gva-ui.c:718
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/gva-ui.c:489
+#: ../src/gva-ui.c:725
 msgid "_View"
 msgstr "_Visa"
 
-#: ../src/gva-ui.c:499
+#: ../src/gva-ui.c:735
 msgid "_Restore previous state when starting a game"
 msgstr "Å_terställ föregående tillstånd för start av spel"
 
-#: ../src/gva-ui.c:507
+#: ../src/gva-ui.c:743
 msgid "Start games in _fullscreen mode"
 msgstr "Starta spel i _helskärmsläge"
 
-#: ../src/gva-ui.c:518
+#: ../src/gva-ui.c:751
+msgid "Show _alternate versions of original games"
+msgstr "Visa _alternativa versioner av ursprungliga spel"
+
+#: ../src/gva-ui.c:762
 msgid "_Available Games"
 msgstr "_Tillgängliga spel"
 
-#: ../src/gva-ui.c:525
+#: ../src/gva-ui.c:769
 msgid "_Favorite Games"
 msgstr "_Favoritspel"
 
-#: ../src/gva-ui.c:532
+#: ../src/gva-ui.c:776
 msgid "Search _Results"
 msgstr "Sök_resultat"
 
-#: ../src/gva-ui.c:590
+#: ../src/gva-ui.c:871
 msgid "Failed to initialize user interface"
 msgstr "Misslyckades med att initiera användargränssnittet"
 
-#: ../src/main.c:43
+#: ../src/gva-ui.c:989
+#, c-format
+msgid "Add %s Column"
+msgstr "Lägg till %s-kolumn"
+
+#: ../src/gva-ui.c:991
+#, c-format
+msgid "Add a \"%s\" column to the game list"
+msgstr "Lägg till en \"%s\"-kolumn till spellistan"
+
+#: ../src/main.c:54
 msgid "Build the games database"
 msgstr "Bygg speldatabasen"
 
-#: ../src/main.c:47
+#: ../src/main.c:58
+msgid "Inspect an emulator setting"
+msgstr "Inspektera en emulatorinställning"
+
+#: ../src/main.c:59
+msgid "NAME"
+msgstr "NAMN"
+
+#: ../src/main.c:63
+msgid "Show the application version"
+msgstr "Visa programmets version"
+
+#: ../src/main.c:67
 msgid "Show which emulator will be used"
 msgstr "Visa vilken emulator som kommer att användas"
 
+#: ../src/main.c:106
+msgid "No ROM files found"
+msgstr "Inga ROM-filer hittades"
+
+#: ../src/main.c:111
+msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or that no ROM files are installed. Click <b>Help</b> for more details and troubleshooting tips."
+msgstr "GNOME Video Arcade kunde inte hitta några ROM-filer. Det kan vara så att MAME är felkonfigurerat eller att inga ROM-filer har installerats. Klicka på <b>Hjälp</b> för mer information och tips om felsökning."
+
+#: ../src/main.c:121
+msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or no ROM files are installed. Consult the user documentation for more details and troubleshooting tips."
+msgstr "GNOME Video Arcade kunde inte hitta några ROM-filer. Det kan vara så att MAME är felkonfigurerat eller att inga ROM-filer har installerats. Läs användardokumentationen för mer information och tips om felsökning."
+
+#~ msgid ""
+#~ "<big><b>Game Description</b></big>\n"
+#~ "Manufacturer, Year"
+#~ msgstr ""
+#~ "<big><b>Spelbeskrivning</b></big>\n"
+#~ "Tillverkare, År"
+#~ msgid "Child process exited with status (%d)"
+#~ msgstr "Barnprocessen avslutades med status (%d)"
 #~ msgid "(auto-save) GtkUIManager supplies the label"
 #~ msgstr "(auto-save) GtkUIManager anger etiketten"
-
 #~ msgid "(full-screen) GtkUIManager supplies the label"
 #~ msgstr "(full-screen) GtkUIManager anger etiketten"
-
 #~ msgid "Start playing the selected game"
 #~ msgstr "Starta det markerade spelet"
-
 #~ msgid "Show properties about the selected game"
 #~ msgstr "Visa egenskaperna för det markerade spelet"
-
 #~ msgid "Could not find xmame executable"
 #~ msgstr "Kunde inte hitta xmame"
+
