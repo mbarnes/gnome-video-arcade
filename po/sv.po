@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "Report-Msgid-Bugs-To: matthew@barnes.net\n"
-"POT-Creation-Date: 2009-04-23 17:37+0200\n"
-"PO-Revision-Date: 2009-04-23 17:49+0100\n"
+"POT-Creation-Date: 2009-04-23 18:12+0200\n"
+"PO-Revision-Date: 2009-04-23 18:20+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr "Starta markerat spel"
 
 #: ../data/gnome-video-arcade.glade.h:39
 msgid "Technical"
-msgstr "Techniskt"
+msgstr "Tekniskt"
 
 #: ../data/gnome-video-arcade.glade.h:40
 msgid "_Start Game"
@@ -761,6 +761,11 @@ msgstr "GNOME Video Arcade kunde inte hitta några ROM-filer. Det kan vara så a
 #: ../src/main.c:121
 msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or no ROM files are installed. Consult the user documentation for more details and troubleshooting tips."
 msgstr "GNOME Video Arcade kunde inte hitta några ROM-filer. Det kan vara så att MAME är felkonfigurerat eller att inga ROM-filer har installerats. Läs användardokumentationen för mer information och tips om felsökning."
+
+#: ../src/gva-input-file.c:506
+#, c-format
+msgid "Invalid or unsupported INP file format"
+msgstr "Ogiltigt INP-filformat eller stöds inte"
 
 #~ msgid ""
 #~ "<big><b>Game Description</b></big>\n"
