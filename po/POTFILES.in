@@ -8,6 +8,7 @@ src/gva-categories.c
 src/gva-column-manager.c
 src/gva-columns.c
 src/gva-history.c
+src/gva-input-file.c
 src/gva-main.c
 src/gva-mame-common.c
 src/gva-mame-process.c
