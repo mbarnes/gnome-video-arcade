@@ -1,3 +1,7 @@
+2009-04-23  Mario Blättermann <mariobl@gnome.org>
+
+	* de.po: Added German translation.
+
 2009-04-23  Matthew Barnes   <mbarnes@redhat.com>
 
 	* POTFILES.in: Add src/gva-input-file.c.
