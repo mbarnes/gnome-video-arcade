@@ -15,4 +15,4 @@ DOC_FIGURES = \
 	figures/gva_recorded_games.png		\
 	figures/gva_search_window.png
 
-DOC_LINGUAS = sv
+DOC_LINGUAS = de sv

@@ -1,0 +1,1087 @@
+# German translation of the gnome-video-arcade manual.
+# Mario Blättermann <mariobl@gnome.org>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade\n"
+"POT-Creation-Date: 2009-04-23 15:48+0000\n"
+"PO-Revision-Date: 2009-04-23 21:56+0100\n"
+"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:142(None)
+msgid ""
+"@@image: 'figures/gva_building_database.png'; "
+"md5=148adbf1c2d3240c68fc42c4c23a70b4"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:162(None)
+msgid ""
+"@@image: 'figures/gva_main_window.png'; md5=146c3e4eb7bc6a7b0d366bc903844293"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:406(None)
+msgid ""
+"@@image: 'figures/gva_search_window.png'; md5=cb85cf748755ccc2e3cfdc64b7783d94"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:458(None)
+msgid ""
+"@@image: 'figures/gva_recorded_games.png'; "
+"md5=77bf453222d3efea3bc4274aa4653ba6"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:509(None)
+msgid ""
+"@@image: 'figures/gva_general_preferences.png'; "
+"md5=1e74c6d14e1535ce12dee1b187408cd2"
+msgstr ""
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:618(None)
+msgid ""
+"@@image: 'figures/gva_column_preferences.png'; "
+"md5=56d51f7cd01cc78b37942a101f0032a9"
+msgstr ""
+
+#: C/gnome-video-arcade.xml:15(title)
+msgid "<application>GNOME Video Arcade</application> Manual"
+msgstr "<application>GNOME Video Arcade</application>-Handbuch"
+
+#: C/gnome-video-arcade.xml:18(para)
+msgid ""
+"GNOME Video Arcade is a front-end for the <application>Multiple Arcade "
+"Machine Emulator (MAME)</application>."
+msgstr ""
+"GNOME Video Arcade ist ein Front-end für den <application>Multiple Arcade "
+"Machine Emulator (MAME)</application>."
+
+#: C/gnome-video-arcade.xml:23(year)
+msgid "2007"
+msgstr "2007"
+
+#: C/gnome-video-arcade.xml:24(year)
+msgid "2008"
+msgstr "2008"
+
+#: C/gnome-video-arcade.xml:25(holder)
+msgid "Matthew Barnes"
+msgstr "Matthew Barnes"
+
+#: C/gnome-video-arcade.xml:2(para)
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or in "
+"the file COPYING-DOCS distributed with this manual."
+msgstr ""
+"Das vorliegende Dokument kann gemäß den Bedingungen der GNU Free "
+"Documentation License (GFDL), Version 1.1 oder jeder späteren, von der Free "
+"Software Foundation veröffentlichten Version ohne unveränderbare Abschnitte "
+"sowie ohne Texte auf dem vorderen und hinteren Buchdeckel kopiert, verteilt "
+"und/oder modifiziert werden. Eine Kopie der GFDL finden Sie unter diesem "
+"<ulink type=\"help\" url=\"ghelp:fdl\">Link</ulink> oder in der mit diesem "
+"Handbuch gelieferten Datei COPYING-DOCS."
+
+#: C/gnome-video-arcade.xml:12(para)
+msgid ""
+"This manual is part of a collection of GNOME manuals distributed under the "
+"GFDL. If you want to distribute this manual separately from the collection, "
+"you can do so by adding a copy of the license to the manual, as described in "
+"section 6 of the license."
+msgstr ""
+"Dieses Handbuch ist Teil einer Sammlung von GNOME-Handbüchern, die unter der "
+"GFDL veröffentlicht werden. Wenn Sie dieses Handbuch getrennt von der "
+"Sammlung weiterverbreiten möchten, können Sie das tun, indem Sie eine Kopie "
+"der Lizenz zum Handbuch hinzufügen, wie es in Abschnitt 6 der Lizenz "
+"beschrieben ist."
+
+#: C/gnome-video-arcade.xml:19(para)
+msgid ""
+"Many of the names used by companies to distinguish their products and "
+"services are claimed as trademarks. Where those names appear in any GNOME "
+"documentation, and the members of the GNOME Documentation Project are made "
+"aware of those trademarks, then the names are in capital letters or initial "
+"capital letters."
+msgstr ""
+"Viele der Namen, die von Unternehmen verwendet werden, um ihre Produkte und "
+"Dienstleistungen von anderen zu unterscheiden, sind eingetragene "
+"Warenzeichen. An den Stellen, an denen diese Namen in einer GNOME-"
+"Dokumentation erscheinen, werden die Namen in Großbuchstaben oder mit einem "
+"großen Anfangsbuchstaben geschrieben, wenn das GNOME-Dokumentationsprojekt "
+"auf diese Warenzeichen hingewiesen wird."
+
+#: C/gnome-video-arcade.xml:35(para)
+msgid ""
+"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
+"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
+"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
+"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK "
+"AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED "
+"VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION "
+"PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY "
+"CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR "
+"CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS "
+"LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS "
+"AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr ""
+"DIESES DOKUMENT WIRD »WIE VORLIEGEND« GELIEFERT, OHNE GARANTIEN IRGENDEINER "
+"ART, SOWOHL AUSDRÜCKLICH GENANNTE ALS AUCH ANGEDEUTETE. DIES BEZIEHT SICH "
+"AUCH OHNE EINSCHRÄNKUNG AUF GARANTIEN, DASS DIESES DOKUMENT ODER VERÄNDERTE "
+"FASSUNGEN DIESES DOKUMENTS FREI VON HANDELSDEFEKTEN, FÜR EINEN BESTIMMTEN "
+"ZWECK GEEIGNET IST ODER DASS ES KEINE RECHTE DRITTER VERLETZT. DAS VOLLE "
+"RISIKO WAS QUALITÄT, GENAUIGKEIT UND LEISTUNG DES DOKUMENTS ODER VERÄNDERTE "
+"FASSUNGEN DES DOKUMENTS LIEGT BEI IHNEN. SOLLTE EIN DOKUMENT ODER EINE "
+"VERÄNDERTE FASSUNG DAVON FEHLER IRGENDEINER ART BEINHALTEN, TRAGEN SIE (NICHT "
+"DER URSPRUNGSAUTOR, DER AUTOR ODER EIN MITWIRKENDER) DIE KOSTEN FÜR "
+"NOTWENDIGE DIENSTLEISTUNGEN, REPARATUREN ODER FEHLERKORREKTUREN. DIESER "
+"HAFTUNGSAUSSCHLUSS IST EIN ESSENZIELLER TEIL DIESER LIZENZ. DIE VERWENDUNG "
+"EINES DOKUMENTS ODER EINER VERÄNDERTEN VERSION DES DOKUMENTS IST NICHT "
+"GESTATTET AUßER UNTER BEACHTUNG DIESES HAFTUNGSAUSSCHLUSSES UND"
+
+#: C/gnome-video-arcade.xml:55(para)
+msgid ""
+"UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
+"NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
+"CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE "
+"DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR "
+"ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY "
+"CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK "
+"STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR "
+"LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED "
+"VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE "
+"POSSIBILITY OF SUCH DAMAGES."
+msgstr ""
+"UNTER KEINEN UMSTÄNDEN UND AUF BASIS KEINER RECHTSGRUNDLAGE, EGAL OB DURCH "
+"UNERLAUBTEN HANDLUNGEN (EINSCHLIEßLICH FAHRLÄSSIGKEIT), VERTRAG ODER "
+"ANDERWEITIG KANN DER AUTOR, URSPRUNGSAUTOR, EIN MITWIRKENDER ODER EIN "
+"VERTRIEBSPARTNER DIESES DOKUMENTS ODER EINER VERÄNDERTEN FASSUNG DES "
+"DOKUMENTS ODER EIN ZULIEFERER EINER DIESER PARTEIEN, HAFTBAR GEMACHT WERDEN "
+"FÜR DIREKTE, INDIREKTE, SPEZIELLE, VERSEHENTLICHE ODER FOLGESCHÄDEN JEGLICHER "
+"ART, EINSCHLIEßLICH UND OHNE EINSCHRÄNKUNGEN SCHÄDEN DURCH VERLUST VON "
+"KULANZ, ARBEITSAUSFALL, COMPUTERVERSAGEN ODER COMPUTERFEHLFUNKTIONEN ODER "
+"ALLE ANDEREN SCHÄDEN ODER VERLUSTE, DIE SICH AUS ODER IN VERBINDUNG MIT DER "
+"VERWENDUNG DES DOKUMENTS UND VERÄNDERTER FASSUNGEN DES DOKUMENTS ERGEBEN, "
+"AUCH WENN DIE OBEN GENANNTEN PARTEIEN ÜBER DIE MÖGLICHKEIT SOLCHER SCHÄDEN "
+"INFORMIERT WAREN."
+
+#: C/gnome-video-arcade.xml:28(para)
+msgid ""
+"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
+"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
+"<placeholder-1/>"
+msgstr ""
+"DAS DOKUMENT UND VERÄNDERTE FASSUNGEN DES DOKUMENTS WERDEN UNTER DEN "
+"BEDINGUNGEN DER GNU FREE DOCUMENTATION LICENSE ZUR VERFÜGUNG GESTELLT MIT DEM "
+"WEITERGEHENDEN VERSTÄNDNIS, DASS: <placeholder-1/>"
+
+#: C/gnome-video-arcade.xml:32(firstname)
+msgid "Matthew"
+msgstr "Matthew"
+
+#: C/gnome-video-arcade.xml:33(surname)
+msgid "Barnes"
+msgstr "Barnes"
+
+#: C/gnome-video-arcade.xml:39(revnumber)
+msgid "GNOME Video Arcade Manual 1.1"
+msgstr "GNOME Video Arcade-Handbuch 1.1"
+
+#: C/gnome-video-arcade.xml:40(date)
+msgid "2008-02-24"
+msgstr "24. Februar 2008"
+
+#: C/gnome-video-arcade.xml:44(releaseinfo)
+msgid "This manual describes version 0.5.6 of GNOME Video Arcade"
+msgstr ""
+"Dieses Handbuch beschreibt Version 0.5.6 von <application>GNOME Video Arcade</"
+"application>."
+
+#: C/gnome-video-arcade.xml:49(title)
+msgid "Introduction"
+msgstr "Einführung"
+
+#: C/gnome-video-arcade.xml:50(para)
+msgid ""
+"The <application>GNOME Video Arcade</application> application allows you to "
+"play classic coin-operated arcade games on your GNOME desktop using the "
+"<application>Multiple Arcade Machine Emulator (MAME)</application>."
+msgstr ""
+"Die Anwendung <application>GNOME Video Arcade</application> ermöglicht Ihnen "
+"das Spielen der von klassischen Münzautomaten bekannten Arcade-Spiele auf "
+"Ihrem GNOME-Desktop. Dabei kommt der <application>Multiple Arcade Machine "
+"Emulator (MAME)</application> zum Einsatz."
+
+#: C/gnome-video-arcade.xml:55(para)
+msgid ""
+"<application>GNOME Video Arcade</application> provides the following features:"
+msgstr ""
+"<application>GNOME Video Arcade</application> verfügt über die folgenden "
+"Funktionsmerkmale:"
+
+#: C/gnome-video-arcade.xml:60(para)
+msgid "Play classic arcade games on your desktop."
+msgstr "Das Spielen klassischer Arcade-Spiele auf Ihrem Desktop."
+
+#: C/gnome-video-arcade.xml:65(para)
+msgid "Tag favorite games to easily find them again later."
+msgstr ""
+"Markieren Ihrer Lieblingsspiele, um diese später leichter wiederzufinden."
+
+#: C/gnome-video-arcade.xml:70(para)
+msgid "Read historical information and tips about your favorite games."
+msgstr "Lesen geschichtlicher Informationen und Tips zu Ihren Lieblingsspielen."
+
+#: C/gnome-video-arcade.xml:75(para)
+msgid "Game recording and play back."
+msgstr "Aufnahme und Wiedergabe von Spielen."
+
+#: C/gnome-video-arcade.xml:80(para)
+msgid "Search."
+msgstr "Suche."
+
+#: C/gnome-video-arcade.xml:88(title)
+msgid "Getting Started"
+msgstr "Erste Schritte"
+
+#: C/gnome-video-arcade.xml:90(title)
+msgid "Starting GNOME Video Arcade"
+msgstr "Starten von GNOME Video Arcade"
+
+#: C/gnome-video-arcade.xml:91(para)
+msgid ""
+"You can start <application>GNOME Video Arcade</application> in the following "
+"ways:"
+msgstr ""
+"Sie können <application>GNOME Video Arcade</application> auf die folgenden "
+"Arten starten:"
+
+#: C/gnome-video-arcade.xml:96(term)
+msgid "<guimenu>Applications</guimenu> menu"
+msgstr "Menü <guimenu>Anwendungen</guimenu>"
+
+#: C/gnome-video-arcade.xml:98(para)
+msgid ""
+"Choose <menuchoice><guisubmenu>Games</guisubmenu><guimenuitem>Video Arcade</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Wählen Sie <menuchoice><guisubmenu>Spiele</guisubmenu><guimenuitem>Video "
+"Arcade</guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:108(term)
+msgid "Command line"
+msgstr "Befehlszeile"
+
+#: C/gnome-video-arcade.xml:110(para)
+msgid ""
+"To start <application>GNOME Video Arcade</application> from a command line, "
+"type the following command, then press <keycap>Return</keycap>:"
+msgstr ""
+"Um <application>GNOME Video Arcade</application> in einer Befehlszeile zu "
+"starten, geben Sie den folgenden Befehl ein und drücken dann die "
+"<keycap>Eingabetaste</keycap>:"
+
+#: C/gnome-video-arcade.xml:115(command)
+msgid "gnome-video-arcade"
+msgstr "gnome-video-arcade"
+
+#: C/gnome-video-arcade.xml:118(para)
+msgid ""
+"To view other command line options that are available, type <command>gnome-"
+"video-arcade --help</command>, then press <keycap>Return</keycap>."
+msgstr ""
+"Um weitere verfügbare Befehlszeilenoptionen anzuzeigen, geben Sie "
+"<command>gnome-video-arcade --help</command> ein und drücken dann die "
+"<keycap>Eingabetaste</keycap>."
+
+#: C/gnome-video-arcade.xml:129(title)
+msgid "When You Start GNOME Video Arcade"
+msgstr "Beim Start von <application>GNOME Video Arcade</application>"
+
+#: C/gnome-video-arcade.xml:130(para)
+msgid ""
+"The first time <application>GNOME Video Arcade</application> starts, it will "
+"build a database of game information and analyze available ROM files to "
+"determine which games are playable. This process may take several minutes to "
+"complete, during which time the following window is displayed:"
+msgstr ""
+"Wenn <application>GNOME Video Arcade</application> zum ersten Mal startet, "
+"wird eine Datenbank aus den Spielinformationen erstellt und verfügbare ROM-"
+"Dateien dahingehend untersucht, ob diese Spiele ausführbar sind. Dieser "
+"Vorgang kann durchaus einige Minuten in Anspruch nehmen, währenddessen "
+"folgendes Fenster angezeigt wird:"
+
+#: C/gnome-video-arcade.xml:138(title)
+msgid "GNOME Video Arcade Building the Game Database"
+msgstr "GNOME Video Arcade während der Erstellung der Spiele-Datenbank"
+
+#: C/gnome-video-arcade.xml:145(para)
+msgid ""
+"Shows GNOME Video Arcade main window while the database is being built. Most "
+"of the elements are grayed out, and a progress bar is shown at the bottom."
+msgstr ""
+"Zeigt das Hauptfenster von <application>GNOME Video Arcade</application> "
+"während der Erstellung der Spiele-Datenbank. Die meisten Bedienelemente sind "
+"ausgegraut. Am unteren Rand wird eine Fortschrittsleiste angezeigt."
+
+#: C/gnome-video-arcade.xml:154(para)
+msgid "The window will then change to look like this:"
+msgstr "Danach sieht das Fenster wie folgt aus:"
+
+#: C/gnome-video-arcade.xml:158(title)
+msgid "GNOME Video Arcade Start Up Window"
+msgstr "<application>GNOME Video Arcade</application>-Startfenster"
+
+#: C/gnome-video-arcade.xml:165(para)
+msgid ""
+"Shows GNOME Video Arcade main window with a sample list of games. Contains "
+"menubar, game list, view buttons, start game button, properties button and "
+"statusbar."
+msgstr ""
+"Zeigt das Hauptfenster von <application>GNOME Video Arcade</application> mit "
+"einer Beispielliste von Spielen. Enthält Menüleiste, Spieleliste, Startknopf, "
+"Eigenschaften-Knopf und Statuszeile."
+
+#: C/gnome-video-arcade.xml:174(para)
+msgid ""
+"You may see a different list of games, depending on which ROM images are "
+"installed on your system."
+msgstr ""
+"Sie sehen eine Spieleliste, abhängig von den auf Ihrem System installierten "
+"ROM-Abbildern."
+
+#: C/gnome-video-arcade.xml:179(para)
+msgid ""
+"If you know that ROM images are installed on your system but "
+"<application>GNOME Video Arcade</application> does not list any games, it may "
+"be that <application>MAME</application> is misconfigured or none of the "
+"installed ROM images are playable. See the Troubleshooting section for more "
+"information."
+msgstr ""
+"Falls Sie wissen, dass ROM-Abbilder auf ihrem System installiert sind, aber "
+"<application>GNOME Video Arcade</application> keine Spiele anzeigt, könnte es "
+"sein, dass entweder <application>MAME</application> falsch konfiguriert ist "
+"oder keines der installierten ROM-Abbilder ausführbar ist. Weitere "
+"Informationen hierzu finden Sie im Abschnitt »Fehlerbehandlung«."
+
+#: C/gnome-video-arcade.xml:188(para)
+msgid ""
+"Occasionally, the database may be rebuilt when <application>GNOME Video "
+"Arcade</application> starts. Most of the time it will skip this process and "
+"go straight to the window in Figure 2."
+msgstr ""
+"Gelegentlich wird beim Start von <application>GNOME Video Arcade</"
+"application> die Datenbank neu erstellt. Meistens jedoch wird dieser Schritt "
+"übersprungen, und es geht direkt weiter, wie in Abbildung 2 gezeigt."
+
+#: C/gnome-video-arcade.xml:194(para)
+msgid ""
+"The <application>GNOME Video Arcade</application> window contains the "
+"following elements:"
+msgstr ""
+"Das Fenster von <application>GNOME Video Arcade</application> enthält die "
+"folgenden Elemente:"
+
+#: C/gnome-video-arcade.xml:200(term)
+msgid "Menubar"
+msgstr "Menüleiste"
+
+#: C/gnome-video-arcade.xml:202(para)
+msgid ""
+"The menus on the menubar contain all the commands needed to use "
+"<application>GNOME Video Arcade</application>."
+msgstr ""
+"Die Menüs in der Menüleiste enthalten alle Befehle, die Sie in "
+"<application>GNOME Video Arcade</application> benötigen."
+
+#: C/gnome-video-arcade.xml:209(term)
+msgid "Game List"
+msgstr "Spieleliste"
+
+#: C/gnome-video-arcade.xml:211(para)
+msgid "The game list displays a list of games to choose from."
+msgstr ""
+"Die Spieleliste zeigt eine Liste von Spielen an, aus denen Sie wählen können."
+
+#: C/gnome-video-arcade.xml:217(term)
+msgid "View Buttons"
+msgstr "Ansichtsknöpfe"
+
+#: C/gnome-video-arcade.xml:219(para)
+msgid ""
+"The view buttons control which games are displayed in the game list. Choose "
+"between displaying all available games, a list of favorite games, or previous "
+"search results."
+msgstr ""
+"Die Ansichtsknöpfe legen fest, welche Spiele in der Spieleliste angezeigt "
+"werden sollen. Wählen Sie aus allen verfügbaren Spielen, einer Liste Ihrer "
+"bevorzugten Spiele oder aus früheren Suchergebnissen."
+
+#: C/gnome-video-arcade.xml:227(term)
+msgid "<guibutton>Start Game</guibutton> Button"
+msgstr "<guibutton>Spiel starten</guibutton>-Knopf"
+
+#: C/gnome-video-arcade.xml:229(para)
+msgid ""
+"The <guibutton>Start Game</guibutton> button starts the highlighted game in "
+"the game list."
+msgstr ""
+"Der <guibutton>Spiel starten</guibutton>-Knopf startet das in der Spieleliste "
+"ausgewählte Spiel."
+
+#: C/gnome-video-arcade.xml:236(term)
+msgid "<guibutton>Properties</guibutton> Button"
+msgstr "<guibutton>Eigenschaften</guibutton>-Knopf"
+
+#: C/gnome-video-arcade.xml:238(para)
+msgid ""
+"The <guibutton>Properties</guibutton> button displays additional information "
+"about the highlighted game in the game list."
+msgstr ""
+"Der <guibutton>Eigenschaften</guibutton>-Knopf zeigt zusätzliche "
+"Informationen über das in der Spieleliste ausgewählte Spiel an."
+
+#: C/gnome-video-arcade.xml:245(term)
+msgid "Statusbar"
+msgstr "Statuszeile"
+
+#: C/gnome-video-arcade.xml:247(para)
+msgid ""
+"The statusbar displays the <application>MAME</application> version used to "
+"play games and contextual information about the menu items. It also displays "
+"a progress bar while building the game database."
+msgstr ""
+"Die Statuszeile zeigt Informationen über die für die Ausführung von Spielen "
+"verwendete ROM-Version sowie Kontext-Informationen über die Menüeinträge an. "
+"Weiterhin wird eine Fortschrittsleiste während der Erstellung der Spiele-"
+"Datenbank angezeigt."
+
+#: C/gnome-video-arcade.xml:260(title)
+msgid "Usage"
+msgstr "Benutzung"
+
+#: C/gnome-video-arcade.xml:262(title)
+msgid "To Start a Game"
+msgstr "Starten eines Spiels"
+
+#: C/gnome-video-arcade.xml:263(para)
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Start Game</guibutton> button or choose "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>S</keycap></"
+"keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Start</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"Wählen Sie ein Spiel aus der Spieleliste und klicken Sie darauf, um es "
+"auszuwählen. Dann klicken Sie auf den <guibutton>Spiel starten</guibutton>-"
+"Knopf oder wählen <menuchoice><shortcut><keycombo><keycap>Strg</"
+"keycap><keycap>S</keycap></keycombo></shortcut><guimenu>Spiel</"
+"guimenu><guimenuitem>Starten</guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:278(para)
+msgid "You can also start a game by double-clicking on it in the game list."
+msgstr ""
+"Sie können ein Spiel auch starten, indem Sie in der Spieleliste darauf "
+"doppelklicken."
+
+#: C/gnome-video-arcade.xml:284(title)
+msgid "To View Properties of a Game"
+msgstr "Eigenschaften eines Spiels anzeigen"
+
+#: C/gnome-video-arcade.xml:285(para)
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Properties</guibutton> button or choose "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>P</keycap></"
+"keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Properties</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Wählen Sie ein Spiel aus der Liste und klicken Sie darauf, um es auszuwählen. "
+"Dann klicken Sie auf den <guibutton>Eigenschaften</guibutton>-Knopf oder "
+"wählen <menuchoice><shortcut><keycombo><keycap>Strg</keycap><keycap>P</"
+"keycap></keycombo></shortcut><guimenu>Ansicht</"
+"guimenu><guimenuitem>Eigenschaften</guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:299(para)
+msgid ""
+"The <guilabel>Properties</guilabel> dialog displays information about the "
+"highlighted game, including some history about the game, tips and tricks to "
+"help improve your scores, pictures of the arcade cabinet, screen shots of the "
+"game in progress and some technical information about <application>MAME</"
+"application>'s emulation of the game."
+msgstr ""
+"Der Dialog <guilabel>Eigenschaften</guilabel> zeigt Informationen über das "
+"ausgewählte Spiel an, beispielsweise geschichtliche Informationen über das "
+"Spiel, Tipps und Tricks zur Verbesserung Ihres Punktestandes, Bilder aus dem "
+"Arcade-Kabinett, Bildschirmfotos des Spiels in Aktion sowie Informationen "
+"über die <application>MAME</application>-Emulation des Spiels."
+
+#: C/gnome-video-arcade.xml:306(para)
+msgid ""
+"To close the <guilabel>Properties</guilabel> dialog, click the "
+"<guibutton>Close</guibutton> button."
+msgstr ""
+"Um den <guilabel>Eigenschaften</guilabel>-Dialog zu schließen, klicken Sie "
+"auf <guibutton>Schließen</guibutton>."
+
+#: C/gnome-video-arcade.xml:311(para)
+msgid ""
+"Some of these features are not yet completed and will be available in a "
+"future version of <application>GNOME Video Arcade</application>."
+msgstr ""
+"Einige dieser Funktionsmerkmale sind noch nicht vollständig und werden in "
+"zukünftigen Versionen von <application>GNOME Video Arcade</application> zur "
+"Verfügung stehen."
+
+#: C/gnome-video-arcade.xml:318(title)
+msgid "To Tag a Game as a Favorite"
+msgstr "Ein Spiel als bevorzugtes Spiel markieren"
+
+#: C/gnome-video-arcade.xml:319(para)
+msgid ""
+"To tag a game as a favorite, choose a game from the game list and click on it "
+"to highlight it. Then choose <menuchoice><shortcut><keycombo><keycap>Ctrl</"
+"keycap><keycap>+</keycap></keycombo></shortcut><guimenu>Game</"
+"guimenu><guimenuitem>Add to Favorites</guimenuitem></menuchoice>. The heart "
+"icon for the highlighted game will light up to indicate that the game has "
+"been added to your list of favorites."
+msgstr ""
+"Um ein Spiel als bevorzugt zu markieren, wählen Sie das Spiel in der "
+"Spieleliste aus und klicken Sie darauf, um es auszuwählen. Wählen Sie dann "
+"<menuchoice><shortcut><keycombo><keycap>Strg</keycap><keycap>+</keycap></"
+"keycombo></shortcut><guimenu>Spiel</guimenu><guimenuitem>Zu bevorzugten "
+"Spielen hinzufügen</guimenuitem></menuchoice>. Das Herz-Symbol des "
+"ausgewählten Speils wird nun hervorgehoben, um anzuzeigen, dass dieses Spiel "
+"zu Ihrer Liste der bevorzugten Spiele hinzugefügt wurde."
+
+#: C/gnome-video-arcade.xml:335(para)
+msgid ""
+"If a game is no longer your favorite, click on its name in the game list to "
+"highlight it. Then choose <menuchoice><shortcut><keycombo><keycap>Ctrl</"
+"keycap><keycap>-</keycap></keycombo></shortcut><guimenu>Game</"
+"guimenu><guimenuitem>Remove from Favorites</guimenuitem></menuchoice>. The "
+"heart icon for the highlighted game will turn gray to indicate that the game "
+"has been removed from your list of favorites."
+msgstr ""
+"Falls Sie ein Spiel nicht mehr als bevorzugt einstufen, klicken Sie auf "
+"dessen Namen in der Spieleliste, um es auszuwählen. Wählen Sie dann "
+"<menuchoice><shortcut><keycombo><keycap>Strg</keycap><keycap>-</keycap></"
+"keycombo></shortcut><guimenu>Spiel</guimenu><guimenuitem>Aus bevorzugten "
+"Spielen entfernen</guimenuitem></menuchoice>. Das Herz-Symbol des gewählten "
+"Spiels wird nun ausgegraut dargestellt, um anzuzeigen, dass dieses Spiel aus "
+"der Liste der bevorzugten Spiele entfernt wurde."
+
+#: C/gnome-video-arcade.xml:352(para)
+msgid ""
+"You can also click directly on a heart icon in the game list to tag the game "
+"as a favorite or not a favorite."
+msgstr ""
+"Sie können auch direkt auf eines der Herz-Symbole in der Spieleliste klicken, "
+"um ein Spiel als bevorzugt zu markieren oder die Markierung zurückzunehmen."
+
+#: C/gnome-video-arcade.xml:359(title)
+msgid "To Change Which Games Are Displayed"
+msgstr "Anpassen der Ansicht der Spieleliste"
+
+#: C/gnome-video-arcade.xml:360(para)
+msgid ""
+"To show all available games in the game list, click the <guibutton>Available "
+"Games</guibutton> view button or choose <menuchoice><guimenu>View</"
+"guimenu><guimenuitem>Available Games</guimenuitem></menuchoice>."
+msgstr ""
+"Um alle verfügbaren Spiele in der Spieleliste anzuzeigen, klicken Sie auf den "
+"Knopf <guibutton>Verfügbare Spiele</guibutton> oder wählen Sie "
+"<menuchoice><guimenu>Ansicht</guimenu><guimenuitem>Verfügbare Spiele</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:368(para)
+msgid ""
+"To show only your favorite games in the game list, click the "
+"<guibutton>Favorite Games</guibutton> view button or choose "
+"<menuchoice><guimenu>View</guimenu><guimenuitem>Favorite Games</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"Um nur Ihre bevorzugten Spiele in der Spieleliste anzuzeigen, klicken Sie auf "
+"den Knopf <guibutton>Bevorzugte Spiele</guibutton> oder wählen Sie "
+"<menuchoice><guimenu>Ansicht</guimenu><guimenuitem>Bevorzugte Spiele</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:376(para)
+msgid ""
+"To show your previous search results in the game list, click the "
+"<guibutton>Search Results</guibutton> view button or choose "
+"<menuchoice><guimenu>View</guimenu><guimenuitem>Search Results</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"Um Ihre früheren Suchergebnisse in der Spieleliste anzuzeigen, klicken Sie "
+"auf den Knopf <guibutton>Suchergebnisse</guibutton> oder wählen Sie "
+"<menuchoice><guimenu>Ansicht</guimenu><guimenuitem>Suchergebnisse</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:386(title)
+msgid "To Search for Games"
+msgstr "Suchen nach Spielen"
+
+#: C/gnome-video-arcade.xml:387(para)
+msgid ""
+"Choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>F</"
+"keycap></keycombo></shortcut><guimenu>Edit</guimenu><guimenuitem>Search...</"
+"guimenuitem></menuchoice> to display the following dialog:"
+msgstr ""
+"Wählen Sie <menuchoice><shortcut><keycombo><keycap>Strg</keycap><keycap>F</"
+"keycap></keycombo></shortcut><guimenu>Bearbeiten</guimenu><guimenuitem>Suchen "
+"…</guimenuitem></menuchoice>, um den folgenden Dialog anzuzeigen:"
+
+#: C/gnome-video-arcade.xml:402(title)
+msgid "GNOME Video Arcade Search Dialog"
+msgstr "Suchdialog von <application>GNOME Video Arcade</application>"
+
+#: C/gnome-video-arcade.xml:409(para)
+msgid ""
+"Shows GNOME Video Arcade search dialog. Contains text entry box, find button "
+"and close button."
+msgstr ""
+"Zeigt den Suchdialog von <application>GNOME Video Arcade</application>. "
+"Enthält Texteingabefeld, den Knopf <guilabel>Suchen</guilabel> und den Knopf "
+"<guilabel>Schließen</guilabel>."
+
+#: C/gnome-video-arcade.xml:417(para)
+msgid ""
+"Type your search criteria in the entry box. Search by the title of the game, "
+"the company that manufactured the game, the year the game was released, or "
+"the name of the game's ROM set or <application>MAME</application> driver."
+msgstr ""
+"Geben Sie Ihre Suchkriterien in das Textfeld ein. Suchen Sie anhand des "
+"Namens des Spiels, des Spieleherstellers, dem Erscheinungsjahr oder dem vom "
+"<application>MAME</application>-Treiber im ROM-Abbild des Spiels festgelegten "
+"Namen."
+
+#: C/gnome-video-arcade.xml:423(para)
+msgid ""
+"Click the <guibutton>Find</guibutton> button to start your search. The "
+"<guilabel>Search</guilabel> dialog will close and the results of your search "
+"will be displayed in the game list."
+msgstr ""
+"Klicken Sie auf <guibutton>Suchen</guibutton>, um Ihre Suche zu starten. Der "
+"<guilabel>Suchdialog</guilabel> wird geschlossen und die Suchergebnisse "
+"werden in der Spieleliste angezeigt."
+
+#: C/gnome-video-arcade.xml:428(para)
+msgid ""
+"Click the <guibutton>Close</guibutton> button to close the <guilabel>Search</"
+"guilabel> dialog without searching."
+msgstr ""
+"Klicken Sie auf <guibutton>Schließen</guibutton>, um den "
+"<guilabel>Suchdialog</guilabel> ohne Suchvorgang zu schließen."
+
+#: C/gnome-video-arcade.xml:434(title)
+msgid "To Record a Game"
+msgstr "Aufzeichnen eines Spiels"
+
+#: C/gnome-video-arcade.xml:435(para)
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then choose "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>R</keycap></"
+"keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Record</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"Wählen Sie ein Spiel aus der Spieleliste und klicken Sie darauf, um es "
+"auszuwählen. Dann wählen Sie <menuchoice><shortcut><keycombo><keycap>Strg</"
+"keycap><keycap>R</keycap></keycombo></shortcut><guimenu>Spiel</"
+"guimenu><guimenuitem>Aufzeichnen</guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:449(para)
+msgid ""
+"After you exit from <application>MAME</application>, your new recording will "
+"be highlighted in the following window:"
+msgstr ""
+"Nach dem Beenden von <application>MAME</application> wird Ihre neue "
+"Aufzeichnung im folgenden Fenster hervorgehoben:"
+
+#: C/gnome-video-arcade.xml:454(title)
+msgid "GNOME Video Arcade Recorded Games Window"
+msgstr "Fenster »Aufgezeichnete Spiele« von GNOME Video Arcade"
+
+#: C/gnome-video-arcade.xml:461(para)
+msgid ""
+"Shows GNOME Video Arcade recorded games window. Contains list of game "
+"recordings, play back button, delete button and close button."
+msgstr ""
+"Zeigt das Fenster »Augezeichnete Spiele« von <application>GNOME Video Arcade</"
+"application>. enthält eine Liste der aufgezeichneten Spiele sowie die Knöpfe "
+"<guilabel>Entfernen</guilabel> und <guilabel>Schließen</guilabel>."
+
+#: C/gnome-video-arcade.xml:469(para)
+msgid ""
+"Each entry shows the title of the game that was recorded, and the date and "
+"time when recording began. Click on the game's title to customize the "
+"comment. You can add more information to the comment such as the final score "
+"or level reached."
+msgstr ""
+"Jeder der Einträge zeigt den Titel des aufgezeichneten Spiels sowie die Zeit "
+"und das Datum des Beginns der Aufzeichnung an. Klicken Sie auf den Titel des "
+"Spiels, um den Kommentar zu bearbeiten. Sie können auch weitere Informationen "
+"wie den letzten Punktestand oder den erreichten Level hinzufügen."
+
+#: C/gnome-video-arcade.xml:477(title)
+msgid "To Play Back a Recorded Game"
+msgstr "Wiedergabe eines aufgezeichneten Spiels"
+
+#: C/gnome-video-arcade.xml:478(para)
+msgid ""
+"Choose <menuchoice><guimenu>Game</guimenu><guimenuitem>Play Back...</"
+"guimenuitem></menuchoice> to display the <guilabel>Recorded Games</guilabel> "
+"window. Choose a game recording to play back and click on it to highlight it. "
+"Then click the <guibutton>Play Back</guibutton> button."
+msgstr ""
+"Wählen Sie <menuchoice><guimenu>Spiel</guimenu><guimenuitem>Wiedergabe …</"
+"guimenuitem></menuchoice>, um das Fenster <guilabel>Aufgezeichnete Spiele</"
+"guilabel> anzuzeigen. Wählen Sie ein aufgezeichnetes Spiel zur Wiedergabe aus "
+"und klicken Sie darauf, um es auszuwählen. Klicken Sie dann auf den Knopf "
+"<guibutton>Wiedergabe</guibutton>."
+
+#: C/gnome-video-arcade.xml:492(title)
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: C/gnome-video-arcade.xml:493(para)
+msgid ""
+"To modify the preferences of <application>GNOME Video Arcade</application>, "
+"choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Um die Einstellungen von <application>GNOME Video Arcade</application> "
+"anzupassen, wählen Sie <menuchoice><guimenu>Bearbeiten</"
+"guimenu><guimenuitem>Einstellungen</guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:500(para)
+msgid ""
+"The <guilabel>Preferences</guilabel> dialog contains the following sections:"
+msgstr ""
+"Der <guilabel>Einstellungsdialog</guilabel> enthält die folgenden Abschnitte:"
+
+#: C/gnome-video-arcade.xml:505(title)
+msgid "General"
+msgstr "Allgemein"
+
+#: C/gnome-video-arcade.xml:512(para)
+msgid "Shows the General tab of the Preferences window."
+msgstr ""
+"Zeigt den Reiter <guilabel>Allgemein</guilabel> des Einstellungsfensters."
+
+#: C/gnome-video-arcade.xml:521(guilabel)
+msgid "Start games in fullscreen mode"
+msgstr "Spiele im Vollbildmodus starten"
+
+#: C/gnome-video-arcade.xml:526(para)
+msgid ""
+"Select this option to start games in fullscreen mode. Otherwise, games will "
+"be started in a window."
+msgstr ""
+"Wählen Sie diese Option, um Spiele im Vollbildmodus zu starten. Anderenfalls "
+"werden die Spiele in einem Fenster gestartet."
+
+#: C/gnome-video-arcade.xml:534(guilabel)
+msgid "Restore previous state when starting a game"
+msgstr "Vorherigen Zustand beim Starten eines Spiels wiederherstellen"
+
+#: C/gnome-video-arcade.xml:539(para)
+msgid ""
+"Select this option to continue where you left off when you last exited "
+"<application>MAME</application>. If this option is not selected, the emulator "
+"will boot the arcade machine each time a game is started."
+msgstr ""
+"Wählen Sie diese Option, um das Spiel da fortzusetzen, wo Sie es beim letzten "
+"Beenden von <application>MAME</application> hinterlassen haben. Falls diese "
+"Option nicht aktiviert ist, startet der Emulator jedes Mal beim Starten des "
+"Spiels die Arcade-Maschine neu."
+
+#: C/gnome-video-arcade.xml:546(para)
+msgid ""
+"State restoration does not take effect until the second time the game is "
+"started with the option enabled. It does not apply to recording or playing "
+"back games."
+msgstr ""
+"Die Wiederherstellng des Status hat keinen Effekt, solange das Spiel mit "
+"dieser aktivierten Option nicht neu gestartet wird. Sie wirkt sich auch nicht "
+"auf die Aufzeichnung und Wiedergabe von Spielen aus."
+
+#: C/gnome-video-arcade.xml:553(para)
+msgid "Not all games support this feature."
+msgstr "Nicht alle Spiele unterstützen dieses Funktionsmarkmal."
+
+#: C/gnome-video-arcade.xml:561(guilabel)
+msgid "Show alternate versions of original games"
+msgstr "Alternative Versionen originaler Spiele anzeigen"
+
+#: C/gnome-video-arcade.xml:566(para)
+msgid ""
+"Select this option to show alternate versions of original games in the game "
+"list in the main window."
+msgstr ""
+"Wählen Sie diese Option, um alternative Versionen originaler Spiele in der "
+"Spieleliste im Hauptfenster anzuzeigen."
+
+#: C/gnome-video-arcade.xml:574(title)
+msgid "What are alternate versions?"
+msgstr "Was sind alternative Versionen?"
+
+#: C/gnome-video-arcade.xml:575(para)
+msgid ""
+"From the <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\"><application>MAME</application> FAQ</ulink>:"
+msgstr ""
+"Aus den <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\">Häufig gestellten Fragen zu <application>MAME</application></ulink>:"
+
+#: C/gnome-video-arcade.xml:580(para)
+msgid ""
+"Games were often licensed to other companies for a variety of reasons: the "
+"most common was that the makers wished to sell the game in a country or "
+"region in which they had no distribution of their own. In the early 80s, "
+"Namco had no US distribution network so their games were licensed to Atari, "
+"Bally-Midway, and others. Conversely, Atari licensed their games to Japanese "
+"companies (usually Namco) for sale there."
+msgstr ""
+"Spiele wurden oft aus verschiedenen Gründen an andere Unternehmen lizensiert. "
+"Der häufigste Grund war der, dass die Hersteller ihr spiel in Ländern oder "
+"Regionen anbieten wollten, in denen sie über kein eigenes Vertriebsnetz "
+"verfügten. In den frühen Achtziger Jahren hatte Namco kein solches "
+"Vertriebsnetz in den USA, so dass die Spiele an Atari, Bally-Midway und "
+"andere lizensiert wurden. Umgekehrt verkaufte Atari Lizenzen an japanische "
+"Unternehmen (z.B. Namco), um seine Spiele dort anzubieten."
+
+#: C/gnome-video-arcade.xml:589(para)
+msgid ""
+"Sometimes a set of ROMs with a different copyright date is found, or a "
+"bootleg set, or another alternate version. When the <quote>parent</quote> "
+"game has already been emulated in <application>MAME</application>, these "
+"alternates are usually easy to add. In some cases, alternate versions are "
+"slightly different: Game levels are in a different order, the game is harder "
+"or faster, etc."
+msgstr ""
+"Manchmal findet sich ein Satz von ROM-Abbildern mit einem anderen Copyright-"
+"Datum, oder ein Bootleg-Satz oder eine andere alternative Version. Wenn das "
+"»ursprüngliche« Spiel bereits in <application>MAME</application> emuliert "
+"wurde, lassen sich diese ROM-Abbilder meist leicht hinzufügen. In manchen "
+"Fällen unterscheiden sich die alternativen Versionen leicht von der "
+"Originalversion: Level sind anders angeordnet, das Spiel ist schwerer oder "
+"schneller usw."
+
+#: C/gnome-video-arcade.xml:598(para)
+msgid ""
+"In some cases, ROMs were hacked to run on hardware they were not intended "
+"for. For example, when <productname>Pac-Man</productname> was <quote>hot,</"
+"quote> some arcade operators found a way to dump <productname>Pac-Man</"
+"productname> ROMs and hack them to work on <productname>Scramble</"
+"productname> machines so they wouldn't have to purchase extra "
+"<productname>Pac-Man</productname> boards. Since these hacked versions are "
+"masterpieces in their own right, the <application>MAME</application> "
+"developers have included them."
+msgstr ""
+"In einigen Fällen wurden ROMs gehackt, um das Spiel auf Hardware zum Laufen "
+"zu bringen, die eigentlich nicht dafür bestimmt war. Als beispielsweise "
+"<productname>Pac-Man</productname> gerade »hot« war, fanden einige Arcade-"
+"Betreiber einen Weg, um die ROMs von <productname>Pac-Man</productname> zu "
+"»dumpen« und zu hacken, so dass diese auch auf <productname>Scramble</"
+"productname>-Maschinen liefen. Auf diese Weise brauchten keine neuen "
+"<productname>Pac-Man</productname>-Geräte angeschafft zu werden. Weil diese "
+"gehackten Versionen auf ihre ganz eigene Art und Weise echte Glanzstücke "
+"sind, haben die Macher von <application>MAME</application> diese in ihre "
+"Entwicklung einbezogen."
+
+#: C/gnome-video-arcade.xml:614(title)
+msgid "Columns"
+msgstr "Spalten"
+
+#: C/gnome-video-arcade.xml:621(para)
+msgid "Shows the Columns tab of the Preferences window."
+msgstr "Zeigt den Reiter <guilabel>Spalten</guilabel> des Einstellungsfensters."
+
+#: C/gnome-video-arcade.xml:627(para)
+msgid ""
+"The <guilabel>Columns</guilabel> tab allows you to configure the game list in "
+"the main window to show additional information about the available games. The "
+"column names are listed in the order that they appear in the game list. "
+"Reorder columns and show additional columns using the <guibutton>Move Up</"
+"guibutton>, <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> and "
+"<guibutton>Hide</guibutton> buttons to the right of the column list."
+msgstr ""
+"Der Reiter <guilabel>Spalten</guilabel> ermöglicht Ihnen die Anpassung der "
+"Anzeige der zusätzlichen Informationen in der Spieleliste. Die Spaltennamen "
+"werden in der Reihenfolge aufgelistet, in der Sie in der Spieleliste "
+"erscheinen. Mit den Knöpfen <guibutton>Hinauf</guibutton>, "
+"<guibutton>Hinunter</guibutton>, <guibutton>Anzeigen</guibutton> und "
+"<guibutton>Verbergen</guibutton> rechts neben der Spieleliste ordnen Sie die "
+"Spalten neu an oder wählen zusätzlich anzuzeigende Spalten aus."
+
+#: C/gnome-video-arcade.xml:640(title)
+msgid "Troubleshooting"
+msgstr "Fehlerbehandlung"
+
+#: C/gnome-video-arcade.xml:643(title)
+msgid "No games listed in the main window"
+msgstr "Keine Spiele werden im Hauptfenster angezeigt"
+
+#: C/gnome-video-arcade.xml:645(title)
+msgid "Are any ROM images installed?"
+msgstr "Sind irgendwelche ROM-Abbilder installiert?"
+
+#: C/gnome-video-arcade.xml:648(para)
+msgid ""
+"For legal reasons, games are not bundled with <application>GNOME Video "
+"Arcade</application> or <application>MAME</application>. The <ulink url="
+"\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\"><application>MAME</"
+"application> FAQ</ulink> has some suggestions for obtaining ROM images:"
+msgstr ""
+"Aus rechtlichen Gründen werden mit <application>GNOME Video Arcade</"
+"application> oder <application>MAME</application> keine Spiele mitgeliefert. "
+"Die <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\">Häufig "
+"gestellten Fragen zu <application>MAME</application></ulink> enthalten einige "
+"Vorschläge über den Bezug von ROM-Abbildern:"
+
+#: C/gnome-video-arcade.xml:656(para)
+msgid ""
+"There are several means of obtaining ROM images for use in <application>MAME</"
+"application>:"
+msgstr ""
+"Es gibt mehrere Möglichkeiten für den Bezug von ROM-Abbildern zur Nutzung in "
+"<application>MAME</application>:"
+
+#: C/gnome-video-arcade.xml:662(para)
+msgid ""
+"A small number of ROM images are now available with the copyright holders' "
+"permission at the <ulink url=\"http://mamedev.org/roms/\">mamedev.org ROMs "
+"page</ulink>."
+msgstr ""
+"Eine kleine Anzahl von ROM-Abbildern ist derzeit mit der Genehmigung der "
+"Urheberrechtsinhaber auf der <ulink url=\"http://mamedev.org/roms/\">ROM-"
+"Seite von mamedev.org</ulink> zu finden."
+
+#: C/gnome-video-arcade.xml:669(para)
+msgid ""
+"The <ulink url=\"http://www.hanaho.com/Products/HotRodJoystick.php"
+"\"><productname>HotRod Joystick</productname> control panel</ulink> from "
+"<ulink url=\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> comes "
+"bundled with a CD that includes <application>MAME</application> and a "
+"selection of Capcom ROMs. Hanaho also sells the <ulink url=\"http://www."
+"hanaho.com/Products/ArcadePC.php\"><productname>ArcadePC</productname> "
+"cabinet</ulink> with a different selection of Capcom ROMs."
+msgstr ""
+"Das Steuergerät <ulink url=\"http://www.hanaho.com/Products/HotRodJoystick.php"
+"\"><productname>HotRod Joystick</productname></ulink> von <ulink url=\"http://"
+"www.hanaho.com/\">Hanaho Games, Inc.</ulink> wird mit einer CD geliefert, die "
+"<application>MAME</application> und eine Auswahl von ROM-Abbildern von Capcom "
+"enthält. Hanaho bietet auch das <ulink url=\"http://www.hanaho.com/Products/"
+"ArcadePC.php\"><productname>ArcadePC</productname>-Cabinet</ulink> mit einer "
+"weiteren Auswahl von Capcom-ROM-Abbildern an."
+
+#: C/gnome-video-arcade.xml:682(para)
+msgid ""
+"You can purchase your own arcade PCBs (on <ulink url=\"http://www.ebay.com/"
+"\">eBay</ulink>, for example), buy a ROM reader, and use it to copy the ROM "
+"chips' contents into files for your personal use."
+msgstr ""
+"Sie können auch Ihre eigenen Arcade-PCBs erwerben, z.B. auf <ulink url="
+"\"http://www.ebay.de/\">eBay</ulink>. Kaufen Sie dort ein ROM-Lesegerät und "
+"verwenden Sie es, um den Inhalt der ROM-Chips auszulesen und für private "
+"Verwendung in einer Datei zu speichern."
+
+#: C/gnome-video-arcade.xml:690(para)
+msgid ""
+"Always check if the particular arcade games' copyright owner is selling the "
+"ROMs legally (as with Capcom). That way you will support the companies that "
+"support emulation."
+msgstr ""
+"Überprüfen Sie stets, ob der jeweilige Urheberrechtsinhaber des Arcade-Spiels "
+"die ROM-Abbilder legal vertreibt (z.B. mit Capcom). Auf diesem Wege "
+"unterstützen Sie die Unternehmen, die ihrerseits die Emulation unterstützen."
+
+#: C/gnome-video-arcade.xml:698(title)
+msgid "Can <application>MAME</application> find the installed ROM images?"
+msgstr ""
+"Kann <application>MAME</application> die installierten ROM-Abbilder finden?"
+
+#: C/gnome-video-arcade.xml:701(para)
+msgid ""
+"<application>GNOME Video Arcade</application> relies on <application>MAME</"
+"application> to find installed ROM images. To test where <application>MAME</"
+"application> is configured to look for ROM images, type the following command "
+"on a command line, then press <keycap>Return</keycap>:"
+msgstr ""
+"<application>GNOME Video Arcade</application> benutzt <application>MAME</"
+"application>, um nach installierten ROM-Abbildern zu suchen. Um zu "
+"überprüfen, ob <application>MAME</application> für die Suche nach diesen "
+"Abbildern eingestellt ist, geben Sie Folgendes in einer Befehlszeile ein und "
+"drücken Sie dann die <keycap>Eingabetaste</keycap>:"
+
+#: C/gnome-video-arcade.xml:709(command)
+msgid "gnome-video-arcade --inspect rompath"
+msgstr "gnome-video-arcade --inspect rompath"
+
+#: C/gnome-video-arcade.xml:711(para)
+msgid ""
+"The command should print a directory name such as <computeroutput>/usr/share/"
+"mame/roms</computeroutput>. Move ROM images to this directory and restart "
+"<application>GNOME Video Arcade</application>."
+msgstr ""
+"Der Befehl sollte einen Ordnernamen wie <computeroutput>/usr/share/mame/roms</"
+"computeroutput> ausgeben. Verschieben Sie ROM-Abbilder in diesen Ordner und "
+"starten Sie <application>GNOME Video Arcade</application> neu."
+
+#: C/gnome-video-arcade.xml:717(para)
+msgid ""
+"If the command does not print a directory name, it may mean that "
+"<application>MAME</application> is not properly configured on your system. If "
+"you obtained <application>MAME</application> from a <productname>GNU/Linux</"
+"productname> distribution, please contact the maintainers of that "
+"distribution for further instructions."
+msgstr ""
+"Falls der Befehl keinen Ordnernamen ausgibt, könnte das bedeuten, dass "
+"<application>MAME</application> auf ihrem System nicht sauber konfiguriert "
+"ist. Falls Sie <application>MAME</application> zusammen mit einer "
+"<productname>GNU/Linux</productname>-Distribution erhalten haben, setzen Sie "
+"sich mit den Verwaltern dieser Distribution für weitere Anweisungen in "
+"Verbindung."
+
+#: C/gnome-video-arcade.xml:727(title)
+msgid "Is the Available Games view selected?"
+msgstr "Ist die Ansicht »Verfügbare Spiele« ausgewählt?"
+
+#: C/gnome-video-arcade.xml:730(para)
+msgid ""
+"If no games have been tagged as favorites, the <guilabel>Favorite Games</"
+"guilabel> view will be empty. Similarly, if no searches have been run, the "
+"<guilabel>Search Results</guilabel> view will be empty. Switch to the "
+"<guilabel>Available Games</guilabel> view to ensure all available games are "
+"listed."
+msgstr ""
+"Falls keine Spiele als bevorzugt markiert wurden, bleibt die Ansicht "
+"<guilabel>Bevorzugte Spiele</guilabel> leer. Ähnlich verhält es sich mit der "
+"Liste der Suchergebnisse. Falls bisher keine Suchvorgänge ausgeführt wurden, "
+"wird auch diese Ansicht leer bleiben.Wechseln Sie zu <guilabel>Verfügbare "
+"Spiele</guilabel>, um sicherzustellen, dass alle verfügbaren Spiele "
+"aufgelistet werden."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: C/gnome-video-arcade.xml:0(None)
+msgid "translator-credits"
+msgstr "Mario Blättermann <mariobl@gnome.org>, 2009"
