@@ -460,6 +460,14 @@ gva_input_file_get_type (void)
         return type;
 }
 
+/**
+ * gva_input_file_new:
+ * @filename: path to a MAME INP file
+ *
+ * Creates a new #GvaInputFile for the given @filename.
+ *
+ * Returns: a new #GvaInputFile
+ **/
 GvaInputFile *
 gva_input_file_new (const gchar *filename)
 {
@@ -468,6 +476,17 @@ gva_input_file_new (const gchar *filename)
         return g_object_new (GVA_TYPE_INPUT_FILE, "filename", filename, NULL);
 }
 
+/**
+ * gva_input_file_read:
+ * @input_file: a #GvaInputFile
+ * @error: return location for a #GError, or %NULL
+ *
+ * Reads header information from a MAME INP file.  The information is
+ * made available through the various accessor functions.  If an error
+ * occurs while reading, the function returns %FALSE and sets @error.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
 gboolean
 gva_input_file_read (GvaInputFile *input_file,
                      GError **error)
@@ -524,6 +543,16 @@ exit:
         return success;
 }
 
+/**
+ * gva_input_file_play_back:
+ * @input_file: a #GvaInputFile
+ * @error: return location for a #GError, or %NULL
+ *
+ * Begins play back of @input_file and returns the resulting #GvaProcess.
+ * If an error occurs, it returns %NULL and sets @error.
+ *
+ * Returns: a new #GvaProcess, or %NULL
+ **/
 GvaProcess *
 gva_input_file_play_back (GvaInputFile *input_file,
                           GError **error)
@@ -548,6 +577,14 @@ gva_input_file_play_back (GvaInputFile *input_file,
         return process;
 }
 
+/**
+ * gva_input_file_get_filename:
+ * @input_file: a #GvaInputFile
+ *
+ * Returns the filename for @input_file.
+ *
+ * Returns: filename for @input_file
+ **/
 const gchar *
 gva_input_file_get_filename (GvaInputFile *input_file)
 {
@@ -556,6 +593,15 @@ gva_input_file_get_filename (GvaInputFile *input_file)
         return input_file->priv->filename;
 }
 
+/**
+ * gva_input_file_get_format:
+ * @input_file: a #GvaInputFile
+ *
+ * Returns a description of the INP header format.  Possible formats
+ * are "INP simple format", "INP extended format", and "INP version x.y".
+ *
+ * Returns: description of the header format
+ **/
 const gchar *
 gva_input_file_get_format (GvaInputFile *input_file)
 {
@@ -567,6 +613,14 @@ gva_input_file_get_format (GvaInputFile *input_file)
         return input_file->priv->format;
 }
 
+/**
+ * gva_input_file_get_game:
+ * @input_file: a #GvaInputFile
+ *
+ * Returns the corresponding ROM name for @input_file.
+ *
+ * Returns: corresponding ROM name for @input_file
+ **/
 const gchar *
 gva_input_file_get_game (GvaInputFile *input_file)
 {
@@ -575,6 +629,14 @@ gva_input_file_get_game (GvaInputFile *input_file)
         return input_file->priv->game;
 }
 
+/**
+ * gva_input_file_get_origin:
+ * @input_file: a #GvaInputFile
+ *
+ * Returns a description of the MAME program that recorded the INP file.
+ *
+ * Returns: description of the MAME program that recorded the INP file
+ **/
 const gchar *
 gva_input_file_get_origin (GvaInputFile *input_file)
 {
@@ -583,6 +645,14 @@ gva_input_file_get_origin (GvaInputFile *input_file)
         return input_file->priv->origin;
 }
 
+/**
+ * gva_input_file_get_timestamp:
+ * @input_file: a #GvaInputFile
+ *
+ * Returns an approximation of when the game recording began.
+ *
+ * Returns: approximation of when the game recording began
+ **/
 time_t
 gva_input_file_get_timestamp (GvaInputFile *input_file)
 {

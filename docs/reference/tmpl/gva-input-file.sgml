@@ -1,0 +1,124 @@
+<!-- ##### SECTION Title ##### -->
+GvaInputFile
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GvaInputFile ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GvaInputFile:filename ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaInputFile:format ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaInputFile:game ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaInputFile:origin ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaInputFile:timestamp ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gva_input_file_new ##### -->
+<para>
+
+</para>
+
+@filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_input_file_read ##### -->
+<para>
+
+</para>
+
+@input_file: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_input_file_play_back ##### -->
+<para>
+
+</para>
+
+@input_file: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_input_file_get_filename ##### -->
+<para>
+
+</para>
+
+@input_file: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_input_file_get_format ##### -->
+<para>
+
+</para>
+
+@input_file: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_input_file_get_game ##### -->
+<para>
+
+</para>
+
+@input_file: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_input_file_get_origin ##### -->
+<para>
+
+</para>
+
+@input_file: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_input_file_get_timestamp ##### -->
+<para>
+
+</para>
+
+@input_file: 
+@Returns: 
+
+

@@ -39,6 +39,7 @@
     <xi:include href="xml/gva-cell-renderer-pixbuf.xml"/>
     <xi:include href="xml/gva-column-manager.xml"/>
     <xi:include href="xml/gva-game-store.xml"/>
+    <xi:include href="xml/gva-input-file.xml"/>
     <xi:include href="xml/gva-link-button.xml"/>
     <xi:include href="xml/gva-mame-process.xml"/>
     <xi:include href="xml/gva-mute-button.xml"/>

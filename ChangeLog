@@ -1,3 +1,13 @@
+2009-04-26  Matthew Barnes  <mbarnes@redhat.com>
+
+	* NEWS: Update for 0.6.7
+
+	* docs/reference:
+	Update developer documentation.
+
+	* src/gva-input-file.c:
+	Document the new functions.
+
 2009-04-13  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:

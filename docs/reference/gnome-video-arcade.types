@@ -1,6 +1,7 @@
 #include <gva-cell-renderer-pixbuf.h>
 #include <gva-column-manager.h>
 #include <gva-game-store.h>
+#include <gva-input-file.h>
 #include <gva-link-button.h>
 #include <gva-mame-process.h>
 #include <gva-mute-button.h>
@@ -10,6 +11,7 @@
 gva_cell_renderer_pixbuf_get_type
 gva_column_manager_get_type
 gva_game_store_get_type
+gva_input_file_get_type
 gva_link_button_get_type
 gva_mame_process_get_type
 gva_mute_button_get_type

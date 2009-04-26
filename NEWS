@@ -1,7 +1,7 @@
 GNOME Video Arcade 0.6.7
 ========================
 
-        Released April ??, 2009
+        Released April 26, 2009
 
         What's New
         ----------
@@ -10,6 +10,16 @@ GNOME Video Arcade 0.6.7
           Pierre Riteau and Antoine Jacoutot for their assistance.
         * Set the GVA_DEBUG environment variable to "inp" to show
           input file header information.
+
+        User Interface Translations
+        ---------------------------
+        * Complete German translation by Mario Blättermann
+        * Complete Swedish translation by Daniel Nylander
+
+        Documentation Translations
+        --------------------------
+        * Partial German translation by Mario Blättermann
+        * Partial Swedish translation by Daniel Nylander
 
 GNOME Video Arcade 0.6.6
 ========================

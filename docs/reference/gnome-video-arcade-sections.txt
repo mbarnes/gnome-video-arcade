@@ -125,6 +125,31 @@ gva_game_store_get_type
 </SECTION>
 
 <SECTION>
+<FILE>gva-input-file</FILE>
+<TITLE>GvaInputFile</TITLE>
+GvaInputFile
+gva_input_file_new
+gva_input_file_read
+gva_input_file_play_back
+gva_input_file_get_filename
+gva_input_file_get_format
+gva_input_file_get_game
+gva_input_file_get_origin
+gva_input_file_get_timestamp
+<SUBSECTION Standard>
+GVA_INPUT_FILE
+GVA_IS_INPUT_FILE
+GVA_TYPE_INPUT_FILE
+GVA_INPUT_FILE_CLASS
+GVA_IS_INPUT_FILE_CLASS
+GVA_INPUT_FILE_GET_CLASS
+GvaInputFileClass
+<SUBSECTION Private>
+GvaInputFilePrivate
+gva_input_file_get_type
+</SECTION>
+
+<SECTION>
 <FILE>gva-link-button</FILE>
 <TITLE>GvaLinkButton</TITLE>
 GvaLinkButton

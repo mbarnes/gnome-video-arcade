@@ -251,7 +251,7 @@ gva_game_store_new (void)
 /**
  * gva_game_store_new_from_query:
  * @sql: an SQL query
- * @error: return locations for a #GError, or %NULL
+ * @error: return location for a #GError, or %NULL
  *
  * This may be the most powerful function in
  * <emphasis>GNOME Video Arcade</emphasis>.
