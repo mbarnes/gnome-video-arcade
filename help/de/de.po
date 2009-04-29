@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "POT-Creation-Date: 2009-04-23 15:48+0000\n"
-"PO-Revision-Date: 2009-04-23 21:56+0100\n"
+"PO-Revision-Date: 2009-04-29 16:16+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid ""
 "@@image: 'figures/gva_building_database.png'; "
 "md5=148adbf1c2d3240c68fc42c4c23a70b4"
-msgstr ""
+msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -50,7 +50,7 @@ msgstr ""
 msgid ""
 "@@image: 'figures/gva_general_preferences.png'; "
 "md5=1e74c6d14e1535ce12dee1b187408cd2"
-msgstr ""
+msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -58,7 +58,7 @@ msgstr ""
 msgid ""
 "@@image: 'figures/gva_column_preferences.png'; "
 "md5=56d51f7cd01cc78b37942a101f0032a9"
-msgstr ""
+msgstr "translated"
 
 #: C/gnome-video-arcade.xml:15(title)
 msgid "<application>GNOME Video Arcade</application> Manual"
