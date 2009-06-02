@@ -882,7 +882,7 @@ db_parser_start_element_input (ParserData *data,
         error_code = G_KEY_FILE_ERROR_KEY_NOT_FOUND;
         if (g_error_matches (local_error, G_KEY_FILE_ERROR, error_code))
                 g_clear_error (&local_error);
- 
+
         db_parser_bind_int (stmt, "@input_players_alt", max_alternating);
         db_parser_bind_int (stmt, "@input_players_sim", max_simultaneous);
 

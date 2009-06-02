@@ -133,7 +133,7 @@ input_file_dump_header (GvaInputFile *input_file)
         g_debug ("Input file: %s", inpname);
         g_debug ("Game: %s", game);
         g_debug ("%s", format);
-        g_debug ("Created %s", ctime (&timestamp)); 
+        g_debug ("Created %s", ctime (&timestamp));
         g_debug ("Recorded using %s", origin);
         g_debug ("--");
 

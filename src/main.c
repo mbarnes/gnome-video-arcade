@@ -173,7 +173,7 @@ start (void)
         {
                 gva_error_handle (&error);
                 return;
-        }        
+        }
 
         gtk_action_set_sensitive (GVA_ACTION_SEARCH, TRUE);
         gtk_action_set_sensitive (GVA_ACTION_SHOW_CLONES, TRUE);

@@ -170,7 +170,7 @@ columns_driver_status_set_properties (GtkTreeViewColumn *column,
                 -1);
 
         /* XXX For the "good" icon I want some kind of positive symbol; a
-         *     checkmark or thumbs up or something.  The GTK_STOCK_APPLY 
+         *     checkmark or thumbs up or something.  The GTK_STOCK_APPLY
          *     image seems to be the closest match at this time (a green
          *     checkmark), but may not be suitable for all icon themes. */
 
