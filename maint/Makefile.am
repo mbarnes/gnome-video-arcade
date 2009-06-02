@@ -31,3 +31,5 @@ libgladegva_la_LIBADD = \
 EXTRA_DIST = \
 	$(gladecatalog_DATA) \
 	$(gladepixmap_DATA)
+
+-include $(top_srcdir)/git.mk

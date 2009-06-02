@@ -16,3 +16,5 @@ DOC_FIGURES = \
 	figures/gva_search_window.png
 
 DOC_LINGUAS = de sv
+
+-include $(top_srcdir)/git.mk

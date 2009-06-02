@@ -49,3 +49,5 @@ DISTCLEANFILES = \
 MAINTAINERCLEANFILES = \
 	gnome-video-arcade.glade.bak	\
 	gnome-video-arcade.gladep.bak
+
+-include $(top_srcdir)/git.mk

@@ -95,3 +95,5 @@ gnome_video_arcade_LDADD = \
 
 gnome_video_arcade_DEPENDENCIES = \
 	@MAME_BACKEND@
+
+-include $(top_srcdir)/git.mk
