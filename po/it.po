@@ -1,0 +1,770 @@
+# Italian translation of gnome-video-arcade.
+# Diego Pierotto <ita.translations@tiscali.it>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade\n"
+"Report-Msgid-Bugs-To: matthew@barnes.net\n"
+"POT-Creation-Date: 2009-04-23 21:07+0200\n"
+"PO-Revision-Date: 2009-06-01 19:35+0100\n"
+"Last-Translator: Diego Pierotto <ita.translations@tiscali.it>\n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../data/gnome-video-arcade.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../data/gnome-video-arcade.glade.h:2
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>Versioni alternative</b>"
+
+#: ../data/gnome-video-arcade.glade.h:3
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/gnome-video-arcade.glade.h:4
+msgid "<b>CPU</b>"
+msgstr "<b>CPU</b>"
+
+#: ../data/gnome-video-arcade.glade.h:5
+msgid "<b>Columns</b>"
+msgstr "<b>Colonne</b>"
+
+#: ../data/gnome-video-arcade.glade.h:6
+msgid "<b>Game List</b>"
+msgstr "<b>Elenco giochi</b>"
+
+#: ../data/gnome-video-arcade.glade.h:7
+msgid "<b>General</b>"
+msgstr "<b>Generale</b>"
+
+#: ../data/gnome-video-arcade.glade.h:8
+msgid "<b>Original Version</b>"
+msgstr "<b>Versione originale</b>"
+
+#: ../data/gnome-video-arcade.glade.h:9
+msgid "<b>Sound</b>"
+msgstr "<b>Suono</b>"
+
+#. The same text is in gnome-video-arcade.glade,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.glade.h:10
+#: ../src/gva-columns.c:708
+msgid "<b>There are known problems with this game:</b>"
+msgstr "<b>Esistono problemi noti con il gioco:</b>"
+
+#: ../data/gnome-video-arcade.glade.h:11
+msgid "<b>Video</b>"
+msgstr "<b>Video</b>"
+
+#: ../data/gnome-video-arcade.glade.h:12
+msgid "<big><b>Errors detected in ROM files</b></big>"
+msgstr "<big><b>Errori rilevati nei file ROM</b></big>"
+
+#: ../data/gnome-video-arcade.glade.h:13
+msgid "<small><i><b>Note:</b> Setting this will not take effect until the second time the game is started. It does not apply to recording or playing back games.</i></small>"
+msgstr "<small><i><b>Nota:</b> L'impostazione non avrà effetto finché il gioco non sarà avviato una seconda volta. Non si applica alla registrazione o riproduzione dei giochi.</i></small>"
+
+#: ../data/gnome-video-arcade.glade.h:14
+msgid "<small><i>If these games worked with previous versions of MAME, it is likely their ROM requirements have changed.  If so, you will need to acquire more recent ROM files.</i></small>"
+msgstr "<small><i>Se i giochi funzionano con le versioni precedenti di MAME, può essere che i requisti delle loro ROM siano cambiati. Se è così, devi recuperare dei file ROM più recenti.</i></small>"
+
+#: ../data/gnome-video-arcade.glade.h:15
+msgid "An audit of the available games has detected errors in some of the ROM files. The following games will not be available in GNOME Video Arcade."
+msgstr "La verifica dei giochi disponibili ha rilevato errori in alcuni file ROM. I seguenti giochi non saranno disponibili in GNOME Video Arcade."
+
+#: ../data/gnome-video-arcade.glade.h:16
+msgid "Choose the order of information to appear in the game list."
+msgstr "Scegli l'ordine delle informazioni da mostrare nell'elenco giochi."
+
+#: ../data/gnome-video-arcade.glade.h:17
+msgid "Close this window"
+msgstr "Chiudi la finestra"
+
+#: ../data/gnome-video-arcade.glade.h:18
+msgid "Columns"
+msgstr "Colonne"
+
+#: ../data/gnome-video-arcade.glade.h:19
+msgid "Delete the selected game recordings"
+msgstr "Elimina le registrazioni dei giochi selezionati"
+
+#: ../data/gnome-video-arcade.glade.h:20
+msgid "GNOME Video Arcade"
+msgstr "GNOME Video Arcade"
+
+#: ../data/gnome-video-arcade.glade.h:21
+msgid "Gallery"
+msgstr "Anteprima"
+
+#: ../data/gnome-video-arcade.glade.h:22
+msgid "General"
+msgstr "Generale"
+
+#: ../data/gnome-video-arcade.glade.h:23
+msgid "History"
+msgstr "Cronologia"
+
+#: ../data/gnome-video-arcade.glade.h:24
+#: ../src/gva-ui.c:771
+msgid "Only show my favorite games"
+msgstr "Mostra solo i giochi preferiti"
+
+#: ../data/gnome-video-arcade.glade.h:25
+msgid "Play _Back"
+msgstr "Ripro_duci"
+
+#: ../data/gnome-video-arcade.glade.h:26
+#: ../src/gva-ui.c:615
+msgid "Play back the selected game recording"
+msgstr "Riproduci la registrazione del gioco selezionato"
+
+#: ../data/gnome-video-arcade.glade.h:27
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: ../data/gnome-video-arcade.glade.h:28
+msgid "Properties"
+msgstr "Proprietà"
+
+#: ../data/gnome-video-arcade.glade.h:29
+msgid "Recorded Games"
+msgstr "Giochi registrati"
+
+#: ../data/gnome-video-arcade.glade.h:30
+#: ../src/gva-ui.c:671
+msgid "Save ROM errors to a file"
+msgstr "Salva errori ROM su file"
+
+#. This label precedes the search entry.&#10;e.g. Search for: Pac-Man
+#: ../data/gnome-video-arcade.glade.h:32
+msgid "Search for:"
+msgstr "Cerca:"
+
+#: ../data/gnome-video-arcade.glade.h:33
+#: ../src/gva-ui.c:764
+msgid "Show all available games"
+msgstr "Mostra tutti i giochi disponibili"
+
+#: ../data/gnome-video-arcade.glade.h:34
+#: ../src/gva-ui.c:636
+msgid "Show information about the selected game"
+msgstr "Mostra informazioni sul gioco selezionato"
+
+#: ../data/gnome-video-arcade.glade.h:35
+#: ../src/gva-ui.c:778
+msgid "Show my search results"
+msgstr "Mostra i risultati della ricerca"
+
+#: ../data/gnome-video-arcade.glade.h:36
+#: ../src/gva-ui.c:608
+msgid "Show next game"
+msgstr "Mostra gioco successivo"
+
+#: ../data/gnome-video-arcade.glade.h:37
+#: ../src/gva-ui.c:629
+msgid "Show previous game"
+msgstr "Mostra gioco precedente"
+
+#: ../data/gnome-video-arcade.glade.h:38
+#: ../src/gva-ui.c:692
+msgid "Start the selected game"
+msgstr "Avvia il gioco selezionato"
+
+#: ../data/gnome-video-arcade.glade.h:39
+msgid "Technical"
+msgstr "Info tecniche"
+
+#: ../data/gnome-video-arcade.glade.h:40
+msgid "_Start Game"
+msgstr "_Avvia gioco"
+
+#: ../data/gnome-video-arcade.glade.h:41
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../data/gnome-video-arcade.glade.h:42
+#: ../src/gva-columns.c:773
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>GIOCO NON FUNZIONANTE.</b>"
+
+#: ../data/gnome-video-arcade.glade.h:43
+#: ../src/gva-columns.c:764
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr "• Lo schermo vibrante nella modalità cocktail non è supportato."
+
+#: ../data/gnome-video-arcade.glade.h:44
+#: ../src/gva-columns.c:728
+msgid "• The colors are completely wrong."
+msgstr "• I colori sono completamente sbagliati."
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.glade.h:46
+#: ../src/gva-columns.c:719
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• I colori non sono precisi al 100%."
+
+#: ../data/gnome-video-arcade.glade.h:47
+#: ../src/gva-columns.c:783
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• Il gioco ha una protezione che non è completamente emulata."
+
+#: ../data/gnome-video-arcade.glade.h:48
+#: ../src/gva-columns.c:755
+msgid "• The game lacks sound."
+msgstr "• Il gioco ha difetti audio."
+
+#: ../data/gnome-video-arcade.glade.h:50
+#: ../src/gva-columns.c:746
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• L'emulazione del suono non è precisa al 100%."
+
+#: ../data/gnome-video-arcade.glade.h:52
+#: ../src/gva-columns.c:737
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• L'emulazione del video non è precisa al 100%."
+
+#: ../src/gconf-bridge.c:1218
+#, c-format
+msgid "GConf error: %s"
+msgstr "Errore GConf: %s"
+
+#: ../src/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "Qualsiasi ulteriore errore sarà mostrato solo sul terminale."
+
+#: ../src/gva-audit.c:238
+msgid "Save As"
+msgstr "Salva come"
+
+#: ../src/gva-categories.c:71
+msgid "This program is not configured to show category information."
+msgstr "Il programma non è configurato per mostrare informazioni della categoria."
+
+#: ../src/gva-column-manager.c:554
+msgid "Managed View"
+msgstr "Gestione visualizzazione"
+
+#: ../src/gva-column-manager.c:555
+msgid "The GtkTreeView being managed"
+msgstr "GtkTreeView viene gestito"
+
+#: ../src/gva-column-manager.c:611
+msgid "Move _Up"
+msgstr "Sposta _Su"
+
+#: ../src/gva-column-manager.c:624
+msgid "Move _Down"
+msgstr "Sposta _Giù"
+
+#: ../src/gva-column-manager.c:637
+msgid "_Show"
+msgstr "_Visualizza"
+
+#: ../src/gva-column-manager.c:646
+msgid "_Hide"
+msgstr "_Nascondi"
+
+#: ../src/gva-columns.c:279
+#, c-format
+msgid "Remove %s Column"
+msgstr "Rimuovi colonna %s"
+
+#: ../src/gva-columns.c:281
+#, c-format
+msgid "Remove the \"%s\" column from the game list"
+msgstr "Rimuovi colonna \"%s\" dall'elenco giochi"
+
+#: ../src/gva-columns.c:819
+msgid "Click here to remove from favorites"
+msgstr "Fai click qui per rimuovere dai preferiti"
+
+#: ../src/gva-columns.c:821
+msgid "Click here to add to favorites"
+msgstr "Fai click qui per aggiungere ai preferiti"
+
+#: ../src/gva-columns.c:913
+#: ../src/gva-properties.c:412
+msgid "(Game Description Unknown)"
+msgstr "(Descrizione gioco sconosciuta)"
+
+#: ../src/gva-columns.c:916
+#: ../src/gva-properties.c:415
+msgid "(Manufacturer Unknown)"
+msgstr "(Produttore sconosciuto)"
+
+#: ../src/gva-columns.c:919
+#: ../src/gva-properties.c:418
+msgid "(Year Unknown)"
+msgstr "(Anno sconosciuto)"
+
+#: ../src/gva-columns.c:943
+#: ../src/gva-main.c:974
+msgid "ROM Name"
+msgstr "Nome ROM"
+
+#: ../src/gva-columns.c:945
+msgid "BIOS"
+msgstr "BIOS"
+
+#: ../src/gva-columns.c:947
+#: ../src/gva-main.c:967
+msgid "Category"
+msgstr "Categoria"
+
+#: ../src/gva-columns.c:949
+msgid "Favorite"
+msgstr "Preferiti"
+
+#: ../src/gva-columns.c:952
+msgid "Driver"
+msgstr "Driver"
+
+#: ../src/gva-columns.c:960
+msgid "Samples"
+msgstr "Esempi"
+
+#: ../src/gva-columns.c:962
+msgid "Title"
+msgstr "Titolo"
+
+#: ../src/gva-columns.c:965
+msgid "Year"
+msgstr "Anno"
+
+#: ../src/gva-columns.c:968
+#: ../src/gva-main.c:953
+msgid "Manufacturer"
+msgstr "Produttore"
+
+#: ../src/gva-columns.c:974
+msgid "Players"
+msgstr "Giocatori"
+
+#: ../src/gva-columns.c:977
+msgid "Players (Alt.)"
+msgstr "Giocatori (Alt.)"
+
+#: ../src/gva-columns.c:980
+msgid "Players (Sim.)"
+msgstr "Giocatori (Sim.)"
+
+#: ../src/gva-columns.c:985
+msgid "Status"
+msgstr "Stato"
+
+#: ../src/gva-columns.c:996
+msgid "Comment"
+msgstr "Commento"
+
+#: ../src/gva-columns.c:1000
+msgid "Played On"
+msgstr "Giocato il"
+
+#: ../src/gva-history.c:43
+msgid "This program is not configured to show history information."
+msgstr "Il programma non è configurato per mostrare informazioni della cronologia."
+
+#: ../src/gva-input-file.c:506
+#, c-format
+msgid "Invalid or unsupported INP file format"
+msgstr "Formato file INP non valido o non supportato"
+
+#: ../src/gva-main.c:240
+msgid "Building game database..."
+msgstr "Creazione database giochi..."
+
+#: ../src/gva-main.c:298
+msgid "Analyzing ROM files..."
+msgstr "Analisi file ROM..."
+
+#: ../src/gva-main.c:939
+msgid "Search for any of the following:"
+msgstr "Cerca uno dei seguenti:"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../src/gva-main.c:946
+msgid "Game Title"
+msgstr "Titolo gioco"
+
+#: ../src/gva-main.c:960
+msgid "Copyright Year"
+msgstr "Anno Copyright"
+
+#: ../src/gva-main.c:981
+msgid "BIOS Name"
+msgstr "Nome BIOS"
+
+#: ../src/gva-main.c:988
+msgid "Driver Name"
+msgstr "Nome driver"
+
+#: ../src/gva-mame-common.c:224
+#, c-format
+msgid "%s: No such configuration key"
+msgstr "%s: Nessuna chiave di configurazione simile"
+
+#: ../src/gva-mame-sdlmame.c:66
+#: ../src/gva-mame-xmame.c:62
+#, c-format
+msgid "Could not determine emulator version"
+msgstr "Impossibile determinare la versione dell'emulatore"
+
+#: ../src/gva-mute-button.c:126
+msgid "Muted"
+msgstr "Muto"
+
+#: ../src/gva-mute-button.c:127
+msgid "Whether the button state is muted"
+msgstr "Se lo stato del pulsante è muto"
+
+#: ../src/gva-mute-button.c:229
+msgid "In-game sound is muted"
+msgstr "Suono muto all'interno del gioco"
+
+#: ../src/gva-mute-button.c:234
+msgid "In-game sound is enabled"
+msgstr "Suono abilitato all'interno del gioco"
+
+#: ../src/gva-nplayers.c:99
+msgid "This program is not configured to show detailed number of players information."
+msgstr "Il programma non è configurato per mostrare il numero dettagliato delle informazioni dei giocatori."
+
+#: ../src/gva-nplayers.c:179
+msgid "Up to four players alternating or two players simultaneously"
+msgstr "Fino a quattro giocatori alternati o due giocatori simultanei"
+
+#: ../src/gva-nplayers.c:183
+msgid "Up to eight players alternating or two players simultaneously"
+msgstr "Fino a otto giocatori alternati o due giocatori simultanei"
+
+#: ../src/gva-nplayers.c:198
+#: ../src/gva-nplayers.c:241
+#: ../src/gva-nplayers.c:277
+msgid "One player only"
+msgstr "Solo un giocatore"
+
+#: ../src/gva-nplayers.c:201
+msgid "One or two players"
+msgstr "Uno o due giocatori"
+
+#: ../src/gva-nplayers.c:204
+msgid "Up to three players"
+msgstr "Fino a tre giocatori"
+
+#: ../src/gva-nplayers.c:207
+msgid "Up to four players"
+msgstr "Fino a quattro giocatori"
+
+#: ../src/gva-nplayers.c:210
+msgid "Up to five players"
+msgstr "Fino a cinque giocatori"
+
+#: ../src/gva-nplayers.c:213
+msgid "Up to six players"
+msgstr "Fino a sei giocatori"
+
+#: ../src/gva-nplayers.c:216
+msgid "Up to seven players"
+msgstr "Fino a sette giocatori"
+
+#: ../src/gva-nplayers.c:219
+msgid "Up to eight players"
+msgstr "Fino a otto giocatori"
+
+#: ../src/gva-nplayers.c:244
+msgid "One or two players alternating"
+msgstr "Uno o due giocatori alternati"
+
+#: ../src/gva-nplayers.c:247
+msgid "Up to three players alternating"
+msgstr "Fino a tre giocatori alternati"
+
+#: ../src/gva-nplayers.c:250
+msgid "Up to four players alternating"
+msgstr "Fino a quattro giocatori alternati"
+
+#: ../src/gva-nplayers.c:253
+msgid "Up to five players alternating"
+msgstr "Fino a cinque giocatori alternati"
+
+#: ../src/gva-nplayers.c:256
+msgid "Up to six players alternating"
+msgstr "Fino a sei giocatori alternati"
+
+#: ../src/gva-nplayers.c:259
+msgid "Up to seven players alternating"
+msgstr "Fino a sette giocatori alternati"
+
+#: ../src/gva-nplayers.c:262
+msgid "Up to eight players alternating"
+msgstr "Fino a otto giocatori alternati"
+
+#: ../src/gva-nplayers.c:280
+msgid "One or two players simultaneously"
+msgstr "Uno o due giocatori simultanei"
+
+#: ../src/gva-nplayers.c:283
+msgid "Up to three players simultaneously"
+msgstr "Fino a tre giocatori simultanei"
+
+#: ../src/gva-nplayers.c:286
+msgid "Up to four players simultaneously"
+msgstr "Fino a quattro giocatori simultanei"
+
+#: ../src/gva-nplayers.c:289
+msgid "Up to five players simultaneously"
+msgstr "Fino a cinque giocatori simultanei"
+
+#: ../src/gva-nplayers.c:292
+msgid "Up to six players simultaneously"
+msgstr "Fino a sei giocatori simultanei"
+
+#: ../src/gva-nplayers.c:295
+msgid "Up to seven players simultaneously"
+msgstr "Fino a sette giocatori simultanei"
+
+#: ../src/gva-nplayers.c:298
+msgid "Up to eight players simultaneously"
+msgstr "Fino a otto giocatori simultanei"
+
+#: ../src/gva-play-back.c:54
+msgid "Delete selected game recordings?"
+msgstr "Eliminare le registrazioni del gioco selezionato?"
+
+#: ../src/gva-play-back.c:58
+msgid "This operation will permanently erase the recorded games you have selected.  Are you sure you want to proceed?"
+msgstr "L'operazione cancellerà in modo permanente i giochi registrati che hai selezionato. Sei sicuro di voler continuare?"
+
+#: ../src/gva-play-back.c:62
+msgid "Do Not Delete"
+msgstr "Non eliminare"
+
+#: ../src/gva-properties.c:148
+msgid "Show this game"
+msgstr "Mostra il gioco"
+
+#: ../src/gva-properties.c:459
+#, c-format
+msgid ""
+"Error while fetching history:\n"
+"%s"
+msgstr ""
+"Errore durante il recupero cronologia:\n"
+"%s"
+
+#: ../src/gva-properties.c:464
+msgid "History not available"
+msgstr "Cronologia non disponibile"
+
+#: ../src/gva-tree-view.c:421
+msgid "Available Game"
+msgid_plural "Available Games"
+msgstr[0] "Gioco disponibile"
+msgstr[1] "Giochi disponibili"
+
+#: ../src/gva-tree-view.c:428
+msgid "Favorite Game"
+msgid_plural "Favorite Games"
+msgstr[0] "Gioco preferito"
+msgstr[1] "Giochi preferiti"
+
+#: ../src/gva-tree-view.c:435
+msgid "Search Result"
+msgid_plural "Search Results"
+msgstr[0] "Risultato ricerca"
+msgstr[1] "Risultati ricerca"
+
+#: ../src/gva-ui.c:100
+msgid "M.A.M.E. Front-End"
+msgstr "Interfaccia M.A.M.E."
+
+#: ../src/gva-ui.c:105
+msgid "translator-credits"
+msgstr "Diego Pierotto <ita.translations@tiscali.it>, 2009"
+
+#: ../src/gva-ui.c:585
+msgid "_About"
+msgstr "_Informazioni su..."
+
+#: ../src/gva-ui.c:587
+msgid "Show information about the application"
+msgstr "Mostra informazioni sul programma"
+
+#: ../src/gva-ui.c:592
+msgid "_Contents"
+msgstr "_Sommario"
+
+#: ../src/gva-ui.c:594
+msgid "Open the help documentation"
+msgstr "Apri la documentazione di aiuto"
+
+#: ../src/gva-ui.c:599
+msgid "Add to _Favorites"
+msgstr "Aggiungi ai _Preferiti"
+
+#: ../src/gva-ui.c:601
+msgid "Add the selected game to my list of favorites"
+msgstr "Aggiungi il gioco selezionato all'elenco dei preferiti"
+
+#: ../src/gva-ui.c:613
+#: ../src/gva-ui.c:683
+msgid "Play _Back..."
+msgstr "Ripro_duci..."
+
+#: ../src/gva-ui.c:620
+msgid "_Preferences"
+msgstr "_Preferenze"
+
+#: ../src/gva-ui.c:622
+msgid "Configure the application"
+msgstr "Configura il programma"
+
+#: ../src/gva-ui.c:634
+msgid "_Properties"
+msgstr "_Proprietà"
+
+#: ../src/gva-ui.c:641
+msgid "_Quit"
+msgstr "_Esci"
+
+#: ../src/gva-ui.c:643
+msgid "Quit the application"
+msgstr "Esci dal programma"
+
+#: ../src/gva-ui.c:648
+msgid "_Record"
+msgstr "_Registra"
+
+#: ../src/gva-ui.c:650
+msgid "Start the selected game and record keypresses to a file"
+msgstr "Avvia il gioco selezionato e registra i tasti premuti in un file"
+
+#: ../src/gva-ui.c:662
+msgid "Remove from _Favorites"
+msgstr "Rimuovi dai _Preferiti"
+
+#: ../src/gva-ui.c:664
+msgid "Remove the selected game from my list of favorites"
+msgstr "Rimuovi il gioco selezionato dall'elenco dei preferiti"
+
+#: ../src/gva-ui.c:669
+msgid "Save _As..."
+msgstr "Sa_lva come..."
+
+#: ../src/gva-ui.c:676
+msgid "S_earch..."
+msgstr "C_erca..."
+
+#: ../src/gva-ui.c:678
+msgid "Show a custom list of games"
+msgstr "Mostra un elenco dei giochi personalizzato"
+
+#: ../src/gva-ui.c:685
+msgid "Play back a previously recorded game"
+msgstr "Riproduci un gioco registrato precedentemente"
+
+#: ../src/gva-ui.c:690
+msgid "_Start"
+msgstr "_Avvia"
+
+#: ../src/gva-ui.c:697
+msgid "_Add Column"
+msgstr "Aggiungi _colonna"
+
+#: ../src/gva-ui.c:704
+msgid "_Edit"
+msgstr "_Modifica"
+
+#: ../src/gva-ui.c:711
+msgid "_Game"
+msgstr "_Gioco"
+
+#: ../src/gva-ui.c:718
+msgid "_Help"
+msgstr "A_iuto"
+
+#: ../src/gva-ui.c:725
+msgid "_View"
+msgstr "_Visualizza"
+
+#: ../src/gva-ui.c:735
+msgid "_Restore previous state when starting a game"
+msgstr "_Ripristina lo stato precedente all'avvio del gioco"
+
+#: ../src/gva-ui.c:743
+msgid "Start games in _fullscreen mode"
+msgstr "Avvia giochi a sc_hermo intero"
+
+#: ../src/gva-ui.c:751
+msgid "Show _alternate versions of original games"
+msgstr "Mostra le versioni _alternative dei giochi originali"
+
+#: ../src/gva-ui.c:762
+msgid "_Available Games"
+msgstr "Giochi _disponibili"
+
+#: ../src/gva-ui.c:769
+msgid "_Favorite Games"
+msgstr "Giochi _preferiti"
+
+#: ../src/gva-ui.c:776
+msgid "Search _Results"
+msgstr "Risultati della _ricerca"
+
+#: ../src/gva-ui.c:871
+msgid "Failed to initialize user interface"
+msgstr "Impossibile inizializzare l'interfaccia utente"
+
+#: ../src/gva-ui.c:989
+#, c-format
+msgid "Add %s Column"
+msgstr "Aggiungi colonna %s "
+
+#: ../src/gva-ui.c:991
+#, c-format
+msgid "Add a \"%s\" column to the game list"
+msgstr "Aggiungi una colonna \"%s\" all'elenco dei giochi"
+
+#: ../src/main.c:54
+msgid "Build the games database"
+msgstr "Crea database dei giochi"
+
+#: ../src/main.c:58
+msgid "Inspect an emulator setting"
+msgstr "Verifica opzioni dell'emulatore"
+
+#: ../src/main.c:59
+msgid "NAME"
+msgstr "NOME"
+
+#: ../src/main.c:63
+msgid "Show the application version"
+msgstr "Mostra versione del programma"
+
+#: ../src/main.c:67
+msgid "Show which emulator will be used"
+msgstr "Mostra quale emulatore sarà utilizzato"
+
+#: ../src/main.c:106
+msgid "No ROM files found"
+msgstr "Nessun file ROM trovato"
+
+#: ../src/main.c:111
+msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or that no ROM files are installed. Click <b>Help</b> for more details and troubleshooting tips."
+msgstr "GNOME Video Arcade non è in grado di trovare i file ROM. MAME potrebbe non essere configurato correttamente oppure i file ROM non essere installati. Fai click su <b>Aiuto</b> per maggiori dettagli e suggerimenti per la risoluzione."
+
+#: ../src/main.c:121
+msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or no ROM files are installed. Consult the user documentation for more details and troubleshooting tips."
+msgstr "GNOME Video Arcade non è in grado di trovare i file ROM. MAME potrebbe non essere configurato correttamente oppure i file ROM non essere installati. Consulta la documentazione utente per maggiori dettagli e suggerimenti per la risoluzione."
+
