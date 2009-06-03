@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "Report-Msgid-Bugs-To: matthew@barnes.net\n"
 "POT-Creation-Date: 2009-04-23 21:07+0200\n"
-"PO-Revision-Date: 2009-06-01 19:35+0100\n"
+"PO-Revision-Date: 2009-06-03 20:25+0100\n"
 "Last-Translator: Diego Pierotto <ita.translations@tiscali.it>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -595,7 +595,7 @@ msgstr "Diego Pierotto <ita.translations@tiscali.it>, 2009"
 
 #: ../src/gva-ui.c:585
 msgid "_About"
-msgstr "_Informazioni su..."
+msgstr "I_nformazioni"
 
 #: ../src/gva-ui.c:587
 msgid "Show information about the application"
