@@ -1,3 +1,8 @@
+2009-06-12  Diego Pierotto  <ita.translations@tiscali.it>
+
+	* it/it.po: Add Italian translation.
+	* Makefile.am: Added it to DOC_LINGUAS.
+
 2009-04-23  Mario Blättermann  <mariobl@gnome.org>
 
 	* de/de.po: Added German translation

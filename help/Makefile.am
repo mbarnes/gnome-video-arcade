@@ -15,6 +15,6 @@ DOC_FIGURES = \
 	figures/gva_recorded_games.png		\
 	figures/gva_search_window.png
 
-DOC_LINGUAS = de es sv
+DOC_LINGUAS = de es it sv
 
 -include $(top_srcdir)/git.mk
