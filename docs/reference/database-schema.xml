@@ -166,7 +166,7 @@ CREATE TABLE playback (
 </programlisting>
 </simplesect>
 
-<simpleset>
+<simplesect>
 <title>Table: window</title>
 <programlisting>
 CREATE TABLE window (
@@ -177,7 +177,7 @@ CREATE TABLE window (
 	height,
 	maximized);
 </programlisting>
-</simpleset>
+</simplesect>
 
 <simplesect>
 <title>View: available</title>

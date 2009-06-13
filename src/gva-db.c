@@ -185,6 +185,20 @@
                 "default_ DEFAULT 'no' " \
                 "CHECK (default_ in ('yes', 'no')));"
 
+#define SQL_CREATE_TABLE_CONFSETTING \
+        "CREATE TABLE IF NOT EXISTS confsetting (" \
+                "game NOT NULL, " \
+                "configuration NOT NULL, " \
+                "name NOT NULL, " \
+                "default_ DEFAULT 'no' " \
+                "CHECK (default_ in ('yes', 'no')));"
+
+#define SQL_CREATE_TABLE_ADJUSTER \
+        "CREATE TABLE IF NOT EXISTS adjuster (" \
+                "game NOT NULL, " \
+                "name NOT NULL, " \
+                "default_ NOT NULL);"
+
 /* The playback table survives database builds. */
 #define SQL_CREATE_TABLE_PLAYBACK \
         "CREATE TABLE IF NOT EXISTS playback (" \
@@ -222,6 +236,8 @@
         "DROP TABLE IF EXISTS display; " \
         "DROP TABLE IF EXISTS control; " \
         "DROP TABLE IF EXISTS dipvalue; " \
+        "DROP TABLE IF EXISTS confsetting; " \
+        "DROP TABLE IF EXISTS adjuster; " \
         "DROP VIEW IF EXISTS available"
 
 #define SQL_INSERT_GAME \
@@ -336,6 +352,19 @@
                 "@name, " \
                 "@default_);"
 
+#define SQL_INSERT_CONFSETTING \
+        "INSERT INTO confsetting VALUES (" \
+                "@game, " \
+                "@configuration, " \
+                "@name, " \
+                "@default_);"
+
+#define SQL_INSERT_ADJUSTER \
+        "INSERT INTO adjuster VALUES (" \
+                "@game, " \
+                "@name, " \
+                "@default_);"
+
 typedef struct _ParserData ParserData;
 
 struct _ParserData
@@ -352,9 +381,12 @@ struct _ParserData
         sqlite3_stmt *insert_display_stmt;
         sqlite3_stmt *insert_control_stmt;
         sqlite3_stmt *insert_dipvalue_stmt;
+        sqlite3_stmt *insert_confsetting_stmt;
+        sqlite3_stmt *insert_adjuster_stmt;
 
         const gchar *element_stack[MAX_ELEMENT_DEPTH];
         guint element_stack_depth;
+        gchar *configuration;
         gchar *dipswitch;
         gchar *game;
 };
@@ -362,6 +394,7 @@ struct _ParserData
 /* Canonical names of XML elements and attributes */
 static struct
 {
+        const gchar *adjuster;
         const gchar *aspectx;
         const gchar *aspecty;
         const gchar *bios;
@@ -375,6 +408,8 @@ static struct
         const gchar *cocktail;
         const gchar *coins;
         const gchar *color;
+        const gchar *configuration;
+        const gchar *confsetting;
         const gchar *control;
         const gchar *crc;
         const gchar *default_;
@@ -500,6 +535,32 @@ db_parser_exec_stmt (sqlite3_stmt *stmt,
 }
 
 static void
+db_parser_start_element_adjuster (ParserData *data,
+                                  const gchar **attribute_name,
+                                  const gchar **attribute_value,
+                                  GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_adjuster_stmt;
+        gint ii;
+
+        db_parser_bind_text (stmt, "@game", data->game);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else if (attribute_name[ii] == intern.default_)
+                        param = "@default_";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
 db_parser_start_element_biosset (ParserData *data,
                                  const gchar **attribute_name,
                                  const gchar **attribute_value,
@@ -551,6 +612,49 @@ db_parser_start_element_chip (ParserData *data,
                         param = "@type";
                 else if (attribute_name[ii] == intern.clock)
                         param = "@clock";
+                else
+                        continue;
+
+                db_parser_bind_text (stmt, param, attribute_value[ii]);
+        }
+}
+
+static void
+db_parser_start_element_configuration (ParserData *data,
+                                       const gchar **attribute_name,
+                                       const gchar **attribute_value,
+                                       GError **error)
+{
+        gint ii;
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+                if (attribute_name[ii] == intern.name)
+                        data->configuration = g_strdup (attribute_value[ii]);
+}
+
+static void
+db_parser_start_element_confsetting (ParserData *data,
+                                     const gchar **attribute_name,
+                                     const gchar **attribute_value,
+                                     GError **error)
+{
+        sqlite3_stmt *stmt = data->insert_confsetting_stmt;
+        gint ii;
+
+        /* Bind default values. */
+        db_parser_bind_text (stmt, "@default_", "no");
+
+        db_parser_bind_text (stmt, "@game", data->game);
+        db_parser_bind_text (stmt, "@configuration", data->configuration);
+
+        for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                const gchar *param;
+
+                if (attribute_name[ii] == intern.name)
+                        param = "@name";
+                else if (attribute_name[ii] == intern.default_)
+                        param = "@default_";
                 else
                         continue;
 
@@ -1068,12 +1172,24 @@ db_parser_start_element (GMarkupParseContext *context,
         /* Skip unused elements to speed up parsing. */
 
 #if 0
-        if (element_name == intern.biosset)
+        if (element_name == intern.adjuster)
+                db_parser_start_element_adjuster (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.biosset)
                 db_parser_start_element_biosset (
                         data, attribute_name, attribute_value, error);
 
         else if (element_name == intern.chip)
                 db_parser_start_element_chip (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.configuration)
+                db_parser_start_element_configuration (
+                        data, attribute_name, attribute_value, error);
+
+        else if (element_name == intern.confsetting)
+                db_parser_start_element_confsetting (
                         data, attribute_name, attribute_value, error);
 
         else if (element_name == intern.control)
@@ -1127,6 +1243,14 @@ db_parser_start_element (GMarkupParseContext *context,
 }
 
 static void
+db_parser_end_element_configuration (ParserData *data,
+                                     GError **error)
+{
+        g_free (data->configuration);
+        data->configuration = NULL;
+}
+
+static void
 db_parser_end_element_dipswitch (ParserData *data,
                                  GError **error)
 {
@@ -1172,11 +1296,20 @@ db_parser_end_element (GMarkupParseContext *context,
         /* Skip unused elements to speed up parsing. */
 
 #if 0
-        if (element_name == intern.biosset)
+        if (element_name == intern.adjuster)
+                db_parser_exec_stmt (data->insert_adjuster_stmt, error);
+
+        else if (element_name == intern.biosset)
                 db_parser_exec_stmt (data->insert_biosset_stmt, error);
 
         else if (element_name == intern.chip)
                 db_parser_exec_stmt (data->insert_chip_stmt, error);
+
+        else if (element_name == intern.configuration)
+                db_parser_end_element_configuration (data, error);
+
+        else if (element_name == intern.confsetting)
+                db_parser_exec_stmt (data->insert_confsetting_stmt, error);
 
         else if (element_name == intern.control)
                 db_parser_exec_stmt (data->insert_control_stmt, error);
@@ -1274,6 +1407,12 @@ db_parser_data_new (GvaProcess *process)
         if (!gva_db_prepare (SQL_INSERT_DIPVALUE, &data->insert_dipvalue_stmt, &error))
                 g_error ("%s", error->message);
 
+        if (!gva_db_prepare (SQL_INSERT_CONFSETTING, &data->insert_confsetting_stmt, &error))
+                g_error ("%s", error->message);
+
+        if (!gva_db_prepare (SQL_INSERT_ADJUSTER, &data->insert_adjuster_stmt, &error))
+                g_error ("%s", error->message);
+
         return data;
 }
 
@@ -1292,7 +1431,10 @@ db_parser_data_free (ParserData *data)
         sqlite3_finalize (data->insert_display_stmt);
         sqlite3_finalize (data->insert_control_stmt);
         sqlite3_finalize (data->insert_dipvalue_stmt);
+        sqlite3_finalize (data->insert_confsetting_stmt);
+        sqlite3_finalize (data->insert_adjuster_stmt);
 
+        g_free (data->configuration);
         g_free (data->dipswitch);
         g_free (data->game);
 
@@ -1356,11 +1498,13 @@ db_create_tables (GError **error)
 {
         return gva_db_execute (SQL_CREATE_TABLE_MAME, error)
                 && gva_db_execute (SQL_CREATE_TABLE_GAME, error)
+                && gva_db_execute (SQL_CREATE_TABLE_ADJUSTER, error)
                 && gva_db_execute (SQL_CREATE_TABLE_BIOSSET, error)
                 && gva_db_execute (SQL_CREATE_TABLE_ROM, error)
                 && gva_db_execute (SQL_CREATE_TABLE_DISK, error)
                 && gva_db_execute (SQL_CREATE_TABLE_SAMPLE, error)
                 && gva_db_execute (SQL_CREATE_TABLE_CHIP, error)
+                && gva_db_execute (SQL_CREATE_TABLE_CONFSETTING, error)
                 && gva_db_execute (SQL_CREATE_TABLE_DISPLAY, error)
                 && gva_db_execute (SQL_CREATE_TABLE_CONTROL, error)
                 && gva_db_execute (SQL_CREATE_TABLE_DIPVALUE, error)
@@ -1493,79 +1637,82 @@ gva_db_build (GError **error)
         g_return_val_if_fail (db != NULL, NULL);
 
         /* Initialize the list of canonical names. */
-        intern.aspectx      = g_intern_static_string ("aspectx");
-        intern.aspecty      = g_intern_static_string ("aspecty");
-        intern.bios         = g_intern_static_string ("bios");
-        intern.biosset      = g_intern_static_string ("biosset");
-        intern.build        = g_intern_static_string ("build");
-        intern.buttons      = g_intern_static_string ("buttons");
-        intern.channels     = g_intern_static_string ("channels");
-        intern.chip         = g_intern_static_string ("chip");
-        intern.clock        = g_intern_static_string ("clock");
-        intern.cloneof      = g_intern_static_string ("cloneof");
-        intern.cocktail     = g_intern_static_string ("cocktail");
-        intern.coins        = g_intern_static_string ("coins");
-        intern.color        = g_intern_static_string ("color");
-        intern.control      = g_intern_static_string ("control");
-        intern.crc          = g_intern_static_string ("crc");
-        intern.default_     = g_intern_static_string ("default_");
-        intern.description  = g_intern_static_string ("description");
-        intern.dipswitch    = g_intern_static_string ("dipswitch");
-        intern.dipvalue     = g_intern_static_string ("dipvalue");
-        intern.disk         = g_intern_static_string ("disk");
-        intern.display      = g_intern_static_string ("display");
-        intern.dispose      = g_intern_static_string ("dispose");
-        intern.driver       = g_intern_static_string ("driver");
-        intern.emulation    = g_intern_static_string ("emulation");
-        intern.flipx        = g_intern_static_string ("flipx");
-        intern.game         = g_intern_static_string ("game");
-        intern.graphic      = g_intern_static_string ("graphic");
-        intern.hbend        = g_intern_static_string ("hbend");
-        intern.hbstart      = g_intern_static_string ("hbstart");
-        intern.height       = g_intern_static_string ("height");
-        intern.htotal       = g_intern_static_string ("htotal");
-        intern.index_       = g_intern_static_string ("index_");
-        intern.input        = g_intern_static_string ("input");
-        intern.isbios       = g_intern_static_string ("isbios");
-        intern.keydelta     = g_intern_static_string ("keydelta");
-        intern.mame         = g_intern_static_string ("mame");
-        intern.manufacturer = g_intern_static_string ("manufacturer");
-        intern.maximum      = g_intern_static_string ("maximum");
-        intern.md5          = g_intern_static_string ("md5");
-        intern.merge        = g_intern_static_string ("merge");
-        intern.minimum      = g_intern_static_string ("minimum");
-        intern.name         = g_intern_static_string ("name");
-        intern.offset       = g_intern_static_string ("offset");
-        intern.orientation  = g_intern_static_string ("orientation");
-        intern.palettesize  = g_intern_static_string ("palettesize");
-        intern.pixclock     = g_intern_static_string ("pixclock");
-        intern.players      = g_intern_static_string ("players");
-        intern.protection   = g_intern_static_string ("protection");
-        intern.refresh      = g_intern_static_string ("refresh");
-        intern.region       = g_intern_static_string ("region");
-        intern.reverse      = g_intern_static_string ("reverse");
-        intern.rom          = g_intern_static_string ("rom");
-        intern.romof        = g_intern_static_string ("romof");
-        intern.rotate       = g_intern_static_string ("rotate");
-        intern.runnable     = g_intern_static_string ("runnable");
-        intern.sample       = g_intern_static_string ("sample");
-        intern.sampleof     = g_intern_static_string ("sampleof");
-        intern.savestate    = g_intern_static_string ("savestate");
-        intern.screen       = g_intern_static_string ("screen");
-        intern.sensitivity  = g_intern_static_string ("sensitivity");
-        intern.service      = g_intern_static_string ("service");
-        intern.sha1         = g_intern_static_string ("sha1");
-        intern.size         = g_intern_static_string ("size");
-        intern.sound        = g_intern_static_string ("sound");
-        intern.sourcefile   = g_intern_static_string ("sourcefile");
-        intern.status       = g_intern_static_string ("status");
-        intern.tilt         = g_intern_static_string ("tilt");
-        intern.type         = g_intern_static_string ("type");
-        intern.vbend        = g_intern_static_string ("vbend");
-        intern.vbstart      = g_intern_static_string ("vbstart");
-        intern.vtotal       = g_intern_static_string ("vtotal");
-        intern.width        = g_intern_static_string ("width");
-        intern.year         = g_intern_static_string ("year");
+        intern.adjuster      = g_intern_static_string ("adjuster");
+        intern.aspectx       = g_intern_static_string ("aspectx");
+        intern.aspecty       = g_intern_static_string ("aspecty");
+        intern.bios          = g_intern_static_string ("bios");
+        intern.biosset       = g_intern_static_string ("biosset");
+        intern.build         = g_intern_static_string ("build");
+        intern.buttons       = g_intern_static_string ("buttons");
+        intern.channels      = g_intern_static_string ("channels");
+        intern.chip          = g_intern_static_string ("chip");
+        intern.clock         = g_intern_static_string ("clock");
+        intern.cloneof       = g_intern_static_string ("cloneof");
+        intern.cocktail      = g_intern_static_string ("cocktail");
+        intern.coins         = g_intern_static_string ("coins");
+        intern.color         = g_intern_static_string ("color");
+        intern.configuration = g_intern_static_string ("configuration");
+        intern.confsetting   = g_intern_static_string ("confsetting");
+        intern.control       = g_intern_static_string ("control");
+        intern.crc           = g_intern_static_string ("crc");
+        intern.default_      = g_intern_static_string ("default_");
+        intern.description   = g_intern_static_string ("description");
+        intern.dipswitch     = g_intern_static_string ("dipswitch");
+        intern.dipvalue      = g_intern_static_string ("dipvalue");
+        intern.disk          = g_intern_static_string ("disk");
+        intern.display       = g_intern_static_string ("display");
+        intern.dispose       = g_intern_static_string ("dispose");
+        intern.driver        = g_intern_static_string ("driver");
+        intern.emulation     = g_intern_static_string ("emulation");
+        intern.flipx         = g_intern_static_string ("flipx");
+        intern.game          = g_intern_static_string ("game");
+        intern.graphic       = g_intern_static_string ("graphic");
+        intern.hbend         = g_intern_static_string ("hbend");
+        intern.hbstart       = g_intern_static_string ("hbstart");
+        intern.height        = g_intern_static_string ("height");
+        intern.htotal        = g_intern_static_string ("htotal");
+        intern.index_        = g_intern_static_string ("index_");
+        intern.input         = g_intern_static_string ("input");
+        intern.isbios        = g_intern_static_string ("isbios");
+        intern.keydelta      = g_intern_static_string ("keydelta");
+        intern.mame          = g_intern_static_string ("mame");
+        intern.manufacturer  = g_intern_static_string ("manufacturer");
+        intern.maximum       = g_intern_static_string ("maximum");
+        intern.md5           = g_intern_static_string ("md5");
+        intern.merge         = g_intern_static_string ("merge");
+        intern.minimum       = g_intern_static_string ("minimum");
+        intern.name          = g_intern_static_string ("name");
+        intern.offset        = g_intern_static_string ("offset");
+        intern.orientation   = g_intern_static_string ("orientation");
+        intern.palettesize   = g_intern_static_string ("palettesize");
+        intern.pixclock      = g_intern_static_string ("pixclock");
+        intern.players       = g_intern_static_string ("players");
+        intern.protection    = g_intern_static_string ("protection");
+        intern.refresh       = g_intern_static_string ("refresh");
+        intern.region        = g_intern_static_string ("region");
+        intern.reverse       = g_intern_static_string ("reverse");
+        intern.rom           = g_intern_static_string ("rom");
+        intern.romof         = g_intern_static_string ("romof");
+        intern.rotate        = g_intern_static_string ("rotate");
+        intern.runnable      = g_intern_static_string ("runnable");
+        intern.sample        = g_intern_static_string ("sample");
+        intern.sampleof      = g_intern_static_string ("sampleof");
+        intern.savestate     = g_intern_static_string ("savestate");
+        intern.screen        = g_intern_static_string ("screen");
+        intern.sensitivity   = g_intern_static_string ("sensitivity");
+        intern.service       = g_intern_static_string ("service");
+        intern.sha1          = g_intern_static_string ("sha1");
+        intern.size          = g_intern_static_string ("size");
+        intern.sound         = g_intern_static_string ("sound");
+        intern.sourcefile    = g_intern_static_string ("sourcefile");
+        intern.status        = g_intern_static_string ("status");
+        intern.tilt          = g_intern_static_string ("tilt");
+        intern.type          = g_intern_static_string ("type");
+        intern.vbend         = g_intern_static_string ("vbend");
+        intern.vbstart       = g_intern_static_string ("vbstart");
+        intern.vtotal        = g_intern_static_string ("vtotal");
+        intern.width         = g_intern_static_string ("width");
+        intern.year          = g_intern_static_string ("year");
 
         if (!gva_db_reset (error))
                 return NULL;
