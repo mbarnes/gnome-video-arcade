@@ -1,0 +1,763 @@
+# Punjabi translation of gnome-video-arcade.
+# Copyright (C) 2009 gnome-video-arcade's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-video-arcade package.
+#
+# A S Alam <aalam@users.sf.net>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
+"POT-Creation-Date: 2009-06-13 01:04+0000\n"
+"PO-Revision-Date: 2009-06-14 07:21+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <punjab-l10n@list.sf.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 0.3\n"
+
+#: ../data/gnome-video-arcade.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../data/gnome-video-arcade.glade.h:2
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>ਅਲਟਰਨੇਟ ਵਰਜਨ</b>"
+
+#: ../data/gnome-video-arcade.glade.h:3
+msgid "<b>BIOS</b>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:4
+msgid "<b>CPU</b>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:5
+msgid "<b>Columns</b>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:6
+msgid "<b>Game List</b>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:7
+msgid "<b>General</b>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:8
+msgid "<b>Original Version</b>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:9
+msgid "<b>Sound</b>"
+msgstr ""
+
+#. The same text is in gnome-video-arcade.glade,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.glade.h:10 ../src/gva-columns.c:708
+msgid "<b>There are known problems with this game:</b>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:11
+msgid "<b>Video</b>"
+msgstr "<b>ਵੀਡਿਓ</b>"
+
+#: ../data/gnome-video-arcade.glade.h:12
+msgid "<big><b>Errors detected in ROM files</b></big>"
+msgstr "<big><b>ROM ਫਾਇਲਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਮਿਲੀਆਂ</b></big>"
+
+#: ../data/gnome-video-arcade.glade.h:13
+msgid ""
+"<small><i><b>Note:</b> Setting this will not take effect until the second "
+"time the game is started. It does not apply to recording or playing back "
+"games.</i></small>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:14
+msgid ""
+"<small><i>If these games worked with previous versions of MAME, it is likely "
+"their ROM requirements have changed.  If so, you will need to acquire more "
+"recent ROM files.</i></small>"
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:15
+msgid ""
+"An audit of the available games has detected errors in some of the ROM "
+"files. The following games will not be available in GNOME Video Arcade."
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:16
+msgid "Choose the order of information to appear in the game list."
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:17
+msgid "Close this window"
+msgstr "ਇਹ ਵਿੰਡੋ ਬੰਦ ਕਰੋ"
+
+#: ../data/gnome-video-arcade.glade.h:18
+msgid "Columns"
+msgstr "ਕਾਲਮ"
+
+#: ../data/gnome-video-arcade.glade.h:19
+msgid "Delete the selected game recordings"
+msgstr "ਚੁਣੀ ਖੇਡ ਰਿਕਾਰਡਿੰਗ ਹਟਾਓ"
+
+#: ../data/gnome-video-arcade.glade.h:20
+msgid "GNOME Video Arcade"
+msgstr "ਗਨੋਮ ਵੀਡਿਓ ਅਰਕੇਡ"
+
+#: ../data/gnome-video-arcade.glade.h:21
+msgid "Gallery"
+msgstr "ਗੈਲਰੀ"
+
+#: ../data/gnome-video-arcade.glade.h:22
+msgid "General"
+msgstr "ਆਮ"
+
+#: ../data/gnome-video-arcade.glade.h:23
+msgid "History"
+msgstr "ਅਤੀਤ"
+
+#: ../data/gnome-video-arcade.glade.h:24 ../src/gva-ui.c:771
+msgid "Only show my favorite games"
+msgstr "ਕੇਵਲ ਮੇਰੀਆਂ ਪਸੰਦੀਦਾ ਖੇਡਾਂ ਹੀ ਵੇਖਾਓ"
+
+#: ../data/gnome-video-arcade.glade.h:25
+msgid "Play _Back"
+msgstr "ਚਲਾਓ(_B)"
+
+#: ../data/gnome-video-arcade.glade.h:26 ../src/gva-ui.c:615
+msgid "Play back the selected game recording"
+msgstr "ਚੁਣੀ ਖੇਡ ਰਿਕਾਰਡ ਚਲਾਓ"
+
+#: ../data/gnome-video-arcade.glade.h:27
+msgid "Preferences"
+msgstr "ਮੇਰੀ ਪਸੰਦ"
+
+#: ../data/gnome-video-arcade.glade.h:28
+msgid "Properties"
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: ../data/gnome-video-arcade.glade.h:29
+msgid "Recorded Games"
+msgstr "ਰਿਕਾਰਡ ਕੀਤੀਆਂ ਖੇਡਾਂ"
+
+#: ../data/gnome-video-arcade.glade.h:30 ../src/gva-ui.c:671
+msgid "Save ROM errors to a file"
+msgstr ""
+
+#. This label precedes the search entry.&#10;e.g. Search for: Pac-Man
+#: ../data/gnome-video-arcade.glade.h:32
+msgid "Search for:"
+msgstr "ਖੋਜ:"
+
+#: ../data/gnome-video-arcade.glade.h:33 ../src/gva-ui.c:764
+msgid "Show all available games"
+msgstr "ਸਭ ਉਪਲੱਬਧ ਖੇਡਾਂ ਵੇਖੋ"
+
+#: ../data/gnome-video-arcade.glade.h:34 ../src/gva-ui.c:636
+msgid "Show information about the selected game"
+msgstr "ਚੁਣੀ ਖੇਡ ਬਾਰੇ ਜਾਣਕਾਰੀ ਵੇਖੋ"
+
+#: ../data/gnome-video-arcade.glade.h:35 ../src/gva-ui.c:778
+msgid "Show my search results"
+msgstr "ਮੇਰੇ ਖੋਜ ਨਤੀਜੇ ਵੇਖੋ"
+
+#: ../data/gnome-video-arcade.glade.h:36 ../src/gva-ui.c:608
+msgid "Show next game"
+msgstr "ਅਗਲੀ ਖੇਡ ਵੇਖੋ"
+
+#: ../data/gnome-video-arcade.glade.h:37 ../src/gva-ui.c:629
+msgid "Show previous game"
+msgstr "ਪਿਛਲੀ ਖੇਡ ਵੇਖੋ"
+
+#: ../data/gnome-video-arcade.glade.h:38 ../src/gva-ui.c:692
+msgid "Start the selected game"
+msgstr "ਚੁਣੀ ਖੇਡ ਸ਼ੁਰੂ ਕਰੋ"
+
+#: ../data/gnome-video-arcade.glade.h:39
+msgid "Technical"
+msgstr "ਤਕਨੀਕੀ"
+
+#: ../data/gnome-video-arcade.glade.h:40
+msgid "_Start Game"
+msgstr "ਖੇਡ ਸ਼ੁਰੂ(_S)"
+
+#: ../data/gnome-video-arcade.glade.h:41
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../data/gnome-video-arcade.glade.h:42 ../src/gva-columns.c:773
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>ਇਹ ਖੇਡ ਕੰਮ ਨਹੀਂ ਕਰਦੀ ਹੈ।</b>"
+
+#: ../data/gnome-video-arcade.glade.h:43 ../src/gva-columns.c:764
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:44 ../src/gva-columns.c:728
+msgid "• The colors are completely wrong."
+msgstr "• ਰੰਗ ਪੂਰੀ ਤਰ੍ਹਾਂ ਗਲਤ ਹਨ।"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.glade.h:46 ../src/gva-columns.c:719
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:47 ../src/gva-columns.c:783
+msgid "• The game has protection which isn't fully emulated."
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:48 ../src/gva-columns.c:755
+msgid "• The game lacks sound."
+msgstr "• ਖੇਡ ਵਿੱਚ ਆਵਾਜ਼ ਨਹੀਂ ਹੈ।"
+
+#: ../data/gnome-video-arcade.glade.h:50 ../src/gva-columns.c:746
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr ""
+
+#: ../data/gnome-video-arcade.glade.h:52 ../src/gva-columns.c:737
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr ""
+
+#: ../src/gconf-bridge.c:1218
+#, c-format
+msgid "GConf error: %s"
+msgstr "GConf ਗਲਤੀ: %s"
+
+#: ../src/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "ਅੱਗੇ ਤੋਂ ਸਭ ਗਲਤੀਆਂ ਟਰਮੀਨਲ 'ਤੇ ਹੀ ਦਿੱਸਣਗੀਆਂ।"
+
+#: ../src/gva-audit.c:238
+msgid "Save As"
+msgstr "ਇੰਝ ਸੰਭਾਲੋ"
+
+#: ../src/gva-categories.c:71
+msgid "This program is not configured to show category information."
+msgstr ""
+
+#: ../src/gva-column-manager.c:554
+msgid "Managed View"
+msgstr "ਪਰਬੰਧ ਅਧੀਨ ਝਲਕ"
+
+#: ../src/gva-column-manager.c:555
+msgid "The GtkTreeView being managed"
+msgstr ""
+
+#: ../src/gva-column-manager.c:611
+msgid "Move _Up"
+msgstr "ਉੱਤੇ ਭੇਜੋ(_U)"
+
+#: ../src/gva-column-manager.c:624
+msgid "Move _Down"
+msgstr "ਹੇਠਾਂ ਭੇਜੋ(_D)"
+
+#: ../src/gva-column-manager.c:637
+msgid "_Show"
+msgstr "ਵੇਖੋ(_S)"
+
+#: ../src/gva-column-manager.c:646
+msgid "_Hide"
+msgstr "ਓਹਲੇ(_H)"
+
+#: ../src/gva-columns.c:279
+#, c-format
+msgid "Remove %s Column"
+msgstr "%s ਕਾਲਮ ਹਟਾਓ"
+
+#: ../src/gva-columns.c:281
+#, c-format
+msgid "Remove the \"%s\" column from the game list"
+msgstr ""
+
+#: ../src/gva-columns.c:819
+msgid "Click here to remove from favorites"
+msgstr "ਪਸੰਦ ਵਿੱਚੋਂ ਹਟਾਉਣ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ"
+
+#: ../src/gva-columns.c:821
+msgid "Click here to add to favorites"
+msgstr "ਪਸੰਦ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ"
+
+#: ../src/gva-columns.c:913 ../src/gva-properties.c:412
+msgid "(Game Description Unknown)"
+msgstr "(ਖੇਡ ਵੇਰਵਾ ਅਣਜਾਣ)"
+
+#: ../src/gva-columns.c:916 ../src/gva-properties.c:415
+msgid "(Manufacturer Unknown)"
+msgstr "(ਨਿਰਮਾਤਾ ਅਣਜਾਣ)"
+
+#: ../src/gva-columns.c:919 ../src/gva-properties.c:418
+msgid "(Year Unknown)"
+msgstr "(ਸਾਲ ਅਣਜਾਣ)"
+
+#: ../src/gva-columns.c:943 ../src/gva-main.c:974
+msgid "ROM Name"
+msgstr "ROM ਨਾਂ"
+
+#: ../src/gva-columns.c:945
+msgid "BIOS"
+msgstr "BIOS"
+
+#: ../src/gva-columns.c:947 ../src/gva-main.c:967
+msgid "Category"
+msgstr "ਕੈਟਾਗਰੀ"
+
+#: ../src/gva-columns.c:949
+msgid "Favorite"
+msgstr "ਪਸੰਦ"
+
+#: ../src/gva-columns.c:952
+msgid "Driver"
+msgstr "ਡਰਾਇਵਰ"
+
+#: ../src/gva-columns.c:960
+msgid "Samples"
+msgstr "ਸੈਂਪਲ"
+
+#: ../src/gva-columns.c:962
+msgid "Title"
+msgstr "ਟਾਈਟਲ"
+
+#: ../src/gva-columns.c:965
+msgid "Year"
+msgstr "ਸਾਲ"
+
+#: ../src/gva-columns.c:968 ../src/gva-main.c:953
+msgid "Manufacturer"
+msgstr "ਨਿਰਮਾਤਾ"
+
+#: ../src/gva-columns.c:974
+msgid "Players"
+msgstr "ਖਿਡਾਰੀ"
+
+#: ../src/gva-columns.c:977
+msgid "Players (Alt.)"
+msgstr ""
+
+#: ../src/gva-columns.c:980
+msgid "Players (Sim.)"
+msgstr ""
+
+#: ../src/gva-columns.c:985
+msgid "Status"
+msgstr "ਹਾਲਤ"
+
+#: ../src/gva-columns.c:996
+msgid "Comment"
+msgstr "ਟਿੱਪਣੀ"
+
+#: ../src/gva-columns.c:1000
+msgid "Played On"
+msgstr ""
+
+#: ../src/gva-history.c:43
+msgid "This program is not configured to show history information."
+msgstr ""
+
+#: ../src/gva-input-file.c:525
+#, c-format
+msgid "Invalid or unsupported INP file format"
+msgstr ""
+
+#: ../src/gva-main.c:240
+msgid "Building game database..."
+msgstr "ਖੇਡ ਡਾਟਾਬੇਸ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ..."
+
+#: ../src/gva-main.c:298
+msgid "Analyzing ROM files..."
+msgstr ""
+
+#: ../src/gva-main.c:939
+msgid "Search for any of the following:"
+msgstr "ਹੇਠ ਦਿੱਤੇ ਵਿੱਚੋਂ ਕਿਸੇ ਲਈ ਵੀ ਖੋਜ:"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../src/gva-main.c:946
+msgid "Game Title"
+msgstr "ਖੇਡ ਟਾਈਟਲ"
+
+#: ../src/gva-main.c:960
+msgid "Copyright Year"
+msgstr "ਕਾਪੀਰਾਈਟ ਸਾਲ"
+
+#: ../src/gva-main.c:981
+msgid "BIOS Name"
+msgstr "BIOS ਨਾਂ"
+
+#: ../src/gva-main.c:988
+msgid "Driver Name"
+msgstr "ਡਰਾਇਵਰ ਨਾਂ"
+
+#: ../src/gva-mame-common.c:224
+#, c-format
+msgid "%s: No such configuration key"
+msgstr ""
+
+#: ../src/gva-mame-sdlmame.c:66 ../src/gva-mame-xmame.c:62
+#, c-format
+msgid "Could not determine emulator version"
+msgstr ""
+
+#: ../src/gva-mute-button.c:126
+msgid "Muted"
+msgstr "ਚੁੱਪ"
+
+#: ../src/gva-mute-button.c:127
+msgid "Whether the button state is muted"
+msgstr ""
+
+#: ../src/gva-mute-button.c:229
+msgid "In-game sound is muted"
+msgstr ""
+
+#: ../src/gva-mute-button.c:234
+msgid "In-game sound is enabled"
+msgstr ""
+
+#: ../src/gva-nplayers.c:99
+msgid ""
+"This program is not configured to show detailed number of players "
+"information."
+msgstr ""
+
+#: ../src/gva-nplayers.c:179
+msgid "Up to four players alternating or two players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:183
+msgid "Up to eight players alternating or two players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:198 ../src/gva-nplayers.c:241
+#: ../src/gva-nplayers.c:277
+msgid "One player only"
+msgstr "ਕੇਵਲ ਇੱਕ ਖਿਡਾਰੀ ਹੀ"
+
+#: ../src/gva-nplayers.c:201
+msgid "One or two players"
+msgstr "ਇੱਕ ਜਾਂ ਦੋ ਖਿਡਾਰੀ"
+
+#: ../src/gva-nplayers.c:204
+msgid "Up to three players"
+msgstr "ਤਿੰਨ ਖਿਡਾਰੀਆਂ ਤੱਕ"
+
+#: ../src/gva-nplayers.c:207
+msgid "Up to four players"
+msgstr "ਚਾਰ ਖਿਡਾਰੀਆਂ ਤੱਕ"
+
+#: ../src/gva-nplayers.c:210
+msgid "Up to five players"
+msgstr "ਪੰਜ ਖਿਡਾਰੀਆਂ ਤੱਕ"
+
+#: ../src/gva-nplayers.c:213
+msgid "Up to six players"
+msgstr "ਛੇ ਖਿਡਾਰੀਆਂ ਤੱਕ"
+
+#: ../src/gva-nplayers.c:216
+msgid "Up to seven players"
+msgstr "ਸੱਤ ਖਿਡਾਰੀਆਂ ਤੱਕ"
+
+#: ../src/gva-nplayers.c:219
+msgid "Up to eight players"
+msgstr "ਅੱਠ ਖਿਡਾਰੀਆਂ ਤੱਕ"
+
+#: ../src/gva-nplayers.c:244
+msgid "One or two players alternating"
+msgstr ""
+
+#: ../src/gva-nplayers.c:247
+msgid "Up to three players alternating"
+msgstr ""
+
+#: ../src/gva-nplayers.c:250
+msgid "Up to four players alternating"
+msgstr ""
+
+#: ../src/gva-nplayers.c:253
+msgid "Up to five players alternating"
+msgstr ""
+
+#: ../src/gva-nplayers.c:256
+msgid "Up to six players alternating"
+msgstr ""
+
+#: ../src/gva-nplayers.c:259
+msgid "Up to seven players alternating"
+msgstr ""
+
+#: ../src/gva-nplayers.c:262
+msgid "Up to eight players alternating"
+msgstr ""
+
+#: ../src/gva-nplayers.c:280
+msgid "One or two players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:283
+msgid "Up to three players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:286
+msgid "Up to four players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:289
+msgid "Up to five players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:292
+msgid "Up to six players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:295
+msgid "Up to seven players simultaneously"
+msgstr ""
+
+#: ../src/gva-nplayers.c:298
+msgid "Up to eight players simultaneously"
+msgstr ""
+
+#: ../src/gva-play-back.c:54
+msgid "Delete selected game recordings?"
+msgstr ""
+
+#: ../src/gva-play-back.c:58
+msgid ""
+"This operation will permanently erase the recorded games you have selected.  "
+"Are you sure you want to proceed?"
+msgstr ""
+
+#: ../src/gva-play-back.c:62
+msgid "Do Not Delete"
+msgstr "ਨਾ ਹਟਾਓ"
+
+#: ../src/gva-properties.c:148
+msgid "Show this game"
+msgstr "ਇਹ ਖੇਡ ਵੇਖੋ"
+
+#: ../src/gva-properties.c:459
+#, c-format
+msgid ""
+"Error while fetching history:\n"
+"%s"
+msgstr ""
+
+#: ../src/gva-properties.c:464
+msgid "History not available"
+msgstr "ਅਤੀਤ ਉਪਲੱਬਧ ਨਹੀਂ"
+
+#: ../src/gva-tree-view.c:421
+msgid "Available Game"
+msgid_plural "Available Games"
+msgstr[0] "ਉਪਲੱਬਧ ਖੇਡ"
+msgstr[1] "ਉਪਲੱਬਧ ਖੇਡਾਂ"
+
+#: ../src/gva-tree-view.c:428
+msgid "Favorite Game"
+msgid_plural "Favorite Games"
+msgstr[0] "ਪਸੰਦੀਦਾ ਖੇਡ"
+msgstr[1] "ਪਸੰਦੀਦਾ ਖੇਡਾਂ"
+
+#: ../src/gva-tree-view.c:435
+msgid "Search Result"
+msgid_plural "Search Results"
+msgstr[0] "ਖੋਜ ਨਤੀਜਾ"
+msgstr[1] "ਖੋਜ ਨਤੀਜੇ"
+
+#: ../src/gva-ui.c:100
+msgid "M.A.M.E. Front-End"
+msgstr ""
+
+#: ../src/gva-ui.c:105
+msgid "translator-credits"
+msgstr ""
+"ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ\n"
+"Punjabi OpenSource Team\n"
+"http://www.satluj.com"
+
+#: ../src/gva-ui.c:585
+msgid "_About"
+msgstr "ਇਸ ਬਾਰੇ(_A)..."
+
+#: ../src/gva-ui.c:587
+msgid "Show information about the application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਬਾਰੇ ਜਾਣਕਾਰੀ ਵੇਖੋ"
+
+#: ../src/gva-ui.c:592
+msgid "_Contents"
+msgstr "ਸਮੱਗਰੀ(_C)..."
+
+#: ../src/gva-ui.c:594
+msgid "Open the help documentation"
+msgstr "ਮੱਦਦ ਡੌਕੂਮੈਂਟ ਖੋਲ੍ਹੋ"
+
+#: ../src/gva-ui.c:599
+msgid "Add to _Favorites"
+msgstr "ਪਸੰਦ ਵਿੱਚ ਸ਼ਾਮਲ(_F)"
+
+#: ../src/gva-ui.c:601
+msgid "Add the selected game to my list of favorites"
+msgstr ""
+
+#: ../src/gva-ui.c:613 ../src/gva-ui.c:683
+msgid "Play _Back..."
+msgstr "ਚਲਾਓ(_B)..."
+
+#: ../src/gva-ui.c:620
+msgid "_Preferences"
+msgstr "ਮੇਰੀ ਪਸੰਦ(_P)"
+
+#: ../src/gva-ui.c:622
+msgid "Configure the application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਸੰਰਚਨਾ"
+
+#: ../src/gva-ui.c:634
+msgid "_Properties"
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ(_P)"
+
+#: ../src/gva-ui.c:641
+msgid "_Quit"
+msgstr "ਬੰਦ ਕਰੋ(_Q)"
+
+#: ../src/gva-ui.c:643
+msgid "Quit the application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ ਬੰਦ ਕਰੋ।"
+
+#: ../src/gva-ui.c:648
+msgid "_Record"
+msgstr "ਰਿਕਾਰਡ(_R)"
+
+#: ../src/gva-ui.c:650
+msgid "Start the selected game and record keypresses to a file"
+msgstr ""
+
+#: ../src/gva-ui.c:662
+msgid "Remove from _Favorites"
+msgstr "ਪਸੰਦ ਵਿੱਚੋਂ ਹਟਾਓ(_F)"
+
+#: ../src/gva-ui.c:664
+msgid "Remove the selected game from my list of favorites"
+msgstr ""
+
+#: ../src/gva-ui.c:669
+msgid "Save _As..."
+msgstr "...ਵਾਂਗ ਸੰਭਾਲੋ(_A)"
+
+#: ../src/gva-ui.c:676
+msgid "S_earch..."
+msgstr "ਖੋਜ(_e)..."
+
+#: ../src/gva-ui.c:678
+msgid "Show a custom list of games"
+msgstr ""
+
+#: ../src/gva-ui.c:685
+msgid "Play back a previously recorded game"
+msgstr ""
+
+#: ../src/gva-ui.c:690
+msgid "_Start"
+msgstr "ਸ਼ੁਰੂ(_S)"
+
+#: ../src/gva-ui.c:697
+msgid "_Add Column"
+msgstr "ਕਾਲਮ ਸ਼ਾਮਲ(_A)"
+
+#: ../src/gva-ui.c:704
+msgid "_Edit"
+msgstr "ਸੋਧ(_E)"
+
+#: ../src/gva-ui.c:711
+msgid "_Game"
+msgstr "ਖੇਡ(_G)"
+
+#: ../src/gva-ui.c:718
+msgid "_Help"
+msgstr "ਮੱਦਦ(_H)"
+
+#: ../src/gva-ui.c:725
+msgid "_View"
+msgstr "ਵੇਖੋ(_V)"
+
+#: ../src/gva-ui.c:735
+msgid "_Restore previous state when starting a game"
+msgstr ""
+
+#: ../src/gva-ui.c:743
+msgid "Start games in _fullscreen mode"
+msgstr ""
+
+#: ../src/gva-ui.c:751
+msgid "Show _alternate versions of original games"
+msgstr ""
+
+#: ../src/gva-ui.c:762
+msgid "_Available Games"
+msgstr "ਉਪਲੱਬਧ ਖੇਡਾਂ(_A)"
+
+#: ../src/gva-ui.c:769
+msgid "_Favorite Games"
+msgstr "ਪਸੰਦੀਦਾ ਖੇਡਾਂ(_F)"
+
+#: ../src/gva-ui.c:776
+msgid "Search _Results"
+msgstr "ਖੋਜ ਨਤੀਜੇ(_R)"
+
+#: ../src/gva-ui.c:871
+msgid "Failed to initialize user interface"
+msgstr "ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
+
+#: ../src/gva-ui.c:989
+#, c-format
+msgid "Add %s Column"
+msgstr "%s ਕਾਲਮ ਸ਼ਾਮਲ"
+
+#: ../src/gva-ui.c:991
+#, c-format
+msgid "Add a \"%s\" column to the game list"
+msgstr ""
+
+#: ../src/main.c:54
+msgid "Build the games database"
+msgstr "ਖੇਡ ਡਾਟਾਬੇਸ ਬਣਾਓ"
+
+#: ../src/main.c:58
+msgid "Inspect an emulator setting"
+msgstr ""
+
+#: ../src/main.c:59
+msgid "NAME"
+msgstr "ਨਾਂ"
+
+#: ../src/main.c:63
+msgid "Show the application version"
+msgstr ""
+
+#: ../src/main.c:67
+msgid "Show which emulator will be used"
+msgstr ""
+
+#: ../src/main.c:106
+msgid "No ROM files found"
+msgstr ""
+
+#: ../src/main.c:111
+msgid ""
+"GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
+"is misconfigured or that no ROM files are installed. Click <b>Help</b> for "
+"more details and troubleshooting tips."
+msgstr ""
+
+#: ../src/main.c:121
+msgid ""
+"GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
+"is misconfigured or no ROM files are installed. Consult the user "
+"documentation for more details and troubleshooting tips."
+msgstr ""
+
+
