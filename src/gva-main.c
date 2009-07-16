@@ -187,7 +187,7 @@ gva_main_init (void)
         gtk_entry_set_text (GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY), text);
         g_free (text);
 
-#if !GTK_CHECK_VERSION(2,14,0) && !defined WITH_GNOME
+#if !GTK_CHECK_VERSION(2,14,0) && !defined HAVE_GNOME
         /* Requires that we link against libgnome. */
         gtk_action_set_sensitive (GVA_ACTION_CONTENTS, FALSE);
 #endif

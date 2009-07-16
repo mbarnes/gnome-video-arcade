@@ -1,3 +1,26 @@
+GNOME Video Arcade 0.6.8
+========================
+
+        Released July ??, 2009
+
+        What's New
+        ----------
+        * Introduce an optional dependency on the GLib bindings for
+          D-Bus, which is used to inhibit GNOME's screen saver from
+          starting while playing a game in fullscreen mode.
+
+        User Interface Translations
+        ---------------------------
+        Complete Italian translation by Diego Pierotto
+        Partial Danish translation by Lars C. Jensen
+        Partial Punjabi translation by A S Alam
+        Partial Spanish translation by Jorge Gonzalez
+
+        Documentation Translations
+        --------------------------
+        Complete Italian translation by Diego Pierotto
+        Partial Spanish translation by Jorge Gonzalez
+
 GNOME Video Arcade 0.6.7
 ========================
 

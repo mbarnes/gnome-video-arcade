@@ -23,7 +23,7 @@
 #include "gva-error.h"
 #include "gva-mame.h"
 
-#ifdef WITH_GNOME
+#ifdef HAVE_GNOME
 #include <gnome.h>
 #endif
 
@@ -345,7 +345,7 @@ gva_help_display (GtkWindow *parent,
 exit:
         g_string_free (uri, TRUE);
 
-#elif defined WITH_GNOME
+#elif defined HAVE_GNOME
         GtkWidget *dialog;
         GError *error = NULL;
 

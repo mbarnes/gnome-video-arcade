@@ -64,6 +64,21 @@ installed prior to compiling the source code:
        should be something similar to sqlite-devel (Fedora) or
        libsqlite3-dev (Debian/Ubuntu).
 
+   - Header files for D-Bus GLib bindings. (optional)
+
+       The D-Bus GLib header files should be available from your
+       GNU/Linux distribution as a "development" package.  The exact
+       package name varies by distribution, but it should be something
+       similar to dbus-glib-devel (Fedora) or libdbus-glib-1-dev
+       (Debian/Ubuntu).
+
+       GNOME Video Arcade uses D-Bus for better desktop integration.
+       Currently it is only used to inhibit the screen saver from
+       starting while playing a game in fullscreen mode, but its usage
+       may expand in future releases.  If you prefer not to use D-Bus,
+       you can configure GNOME Video Arcade to not link against it.
+       See the Installation section to find out how.
+
    - Header files for libgnomeui version 2.14 (or higher). (optional)
 
        The libgnomeui header files should be available from your
@@ -179,8 +194,10 @@ installed, the documentation can be viewed through Devhelp.
 The --with-gnome and --without-gnome configure options tell "make"
 whether to link against high-level GNOME libraries like libgnomeui.
 Similarly, the --with-wnck and --without-wnck configure options
-tell "make" whether to link against libwnck.  See the previous
-section for details on what these libraries are used for.
+tell "make" whether to link against libwnck, and the --with-dbus
+and --without-dbus configure options tell "make" whether to link
+against D-Bus.  See the previous section for details on what these
+libraries are used for.
 
 UPDATE: --with-gnome is now ignored if GTK+ >= 2.14 is detected.
 

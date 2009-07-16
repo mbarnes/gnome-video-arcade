@@ -633,7 +633,7 @@ gva_mame_run_game (const gchar *name,
                         g_string_append (arguments, "-window ");
         }
 
-#ifdef WITH_WNCK
+#ifdef HAVE_WNCK
         if (gva_mame_supports_maximize ())
                 g_string_append (arguments, "-nomaximize ");
 #endif
@@ -710,7 +710,7 @@ gva_mame_record_game (const gchar *name,
                         g_string_append (arguments, "-window ");
         }
 
-#ifdef WITH_WNCK
+#ifdef HAVE_WNCK
         if (gva_mame_supports_maximize ())
                 g_string_append (arguments, "-nomaximize ");
 #endif
@@ -784,7 +784,7 @@ gva_mame_playback_game (const gchar *name,
                         g_string_append (arguments, "-window ");
         }
 
-#ifdef WITH_WNCK
+#ifdef HAVE_WNCK
         if (gva_mame_supports_maximize ())
                 g_string_append (arguments, "-nomaximize ");
 #endif

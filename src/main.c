@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef WITH_GNOME
+#ifdef HAVE_GNOME
 #include <gnome.h>
 #endif
 
@@ -42,6 +42,10 @@
 #include "gva-tree-view.h"
 #include "gva-ui.h"
 #include "gva-util.h"
+
+#ifdef HAVE_DBUS
+#include "gva-dbus.h"
+#endif
 
 #define SQL_COUNT_ROMS \
         "SELECT count(*) FROM game WHERE " \
@@ -105,7 +109,7 @@ warn_if_no_roms (void)
                 "<big><b>%s</b></big>",
                 _("No ROM files found"));
 
-#if GTK_CHECK_VERSION(2,14,0) || defined WITH_GNOME
+#if GTK_CHECK_VERSION(2,14,0) || defined HAVE_GNOME
         gtk_message_dialog_format_secondary_markup (
                 GTK_MESSAGE_DIALOG (dialog),
                 _("GNOME Video Arcade was unable to locate any ROM files. "
@@ -199,7 +203,7 @@ start (void)
 gint
 main (gint argc, gchar **argv)
 {
-#ifdef WITH_GNOME
+#ifdef HAVE_GNOME
         GnomeProgram *program;
         GOptionContext *context;
 #endif
@@ -212,7 +216,7 @@ main (gint argc, gchar **argv)
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 
-#ifdef WITH_GNOME
+#ifdef HAVE_GNOME
         context = g_option_context_new (NULL);
         g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
         g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
@@ -289,11 +293,16 @@ main (gint argc, gchar **argv)
         gva_nplayers_init (&error);
         gva_error_handle (&error);
 
+#ifdef HAVE_DBUS
+        gva_dbus_init (&error);
+        gva_error_handle (&error);
+#endif
+
         gtk_init_add ((GtkFunction) start, NULL);
 
         gtk_main ();
 
-#ifdef WITH_GNOME
+#ifdef HAVE_GNOME
         g_object_unref (program);
 #endif
 

@@ -1,0 +1,39 @@
+<!-- ##### SECTION Title ##### -->
+gva-dbus
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gva_dbus_init ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_dbus_inhibit_screen_saver ##### -->
+<para>
+
+</para>
+
+@process: 
+@reason: 
+@error: 
+@Returns: 
+
+

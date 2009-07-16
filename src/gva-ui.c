@@ -36,6 +36,10 @@
 #include "gva-util.h"
 #include "gva-wnck.h"
 
+#ifdef HAVE_DBUS
+#include "gva-dbus.h"
+#endif
+
 static GladeXML *xml = NULL;
 static GtkUIManager *manager = NULL;
 static GtkActionGroup *action_group = NULL;
@@ -267,6 +271,19 @@ action_play_back_cb (GtkAction *action)
         process = gva_mame_playback_game (name, inpname, &error);
         gva_error_handle (&error);
 
+#ifdef HAVE_DBUS
+        if (process != NULL)
+        {
+                const gchar *reason;
+
+                /* Translators: This is passed through D-Bus as the
+                 * reason to inhibit GNOME screen saver. */
+                reason = _("Watching a fullscreen game");
+                gva_dbus_inhibit_screen_saver (process, reason, &error);
+                gva_error_handle (&error);
+        }
+#endif
+
         if (process != NULL)
         {
                 gva_wnck_listen_for_new_window (process, name);
@@ -380,6 +397,19 @@ action_record_cb (GtkAction *action)
 
         process = gva_mame_record_game (name, inpname, &error);
         gva_error_handle (&error);
+
+#ifdef HAVE_DBUS
+        if (process != NULL)
+        {
+                const gchar *reason;
+
+                /* Translators: This is passed through D-Bus as the
+                 * reason to inhibit GNOME screen saver. */
+                reason = _("Recording a fullscreen game");
+                gva_dbus_inhibit_screen_saver (process, reason, &error);
+                gva_error_handle (&error);
+        }
+#endif
 
         if (process != NULL)
         {
@@ -534,6 +564,19 @@ action_start_cb (GtkAction *action)
 
         process = gva_mame_run_game (name, &error);
         gva_error_handle (&error);
+
+#ifdef HAVE_DBUS
+        if (process != NULL)
+        {
+                const gchar *reason;
+
+                /* Translators: This is passed through D-Bus as the
+                 * reason to inhibit GNOME screen saver. */
+                reason = _("Playing a fullscreen game");
+                gva_dbus_inhibit_screen_saver (process, reason, &error);
+                gva_error_handle (&error);
+        }
+#endif
 
         if (process != NULL)
         {

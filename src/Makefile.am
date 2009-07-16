@@ -4,10 +4,9 @@ bin_PROGRAMS = gnome-video-arcade
 
 AM_CFLAGS = \
 	-Wall \
-	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
-	@GIT_CFLAGS@ @GCONF_CFLAGS@ \
-	@GLADE_CFLAGS@ @GNOME_CFLAGS@ \
-	@SQLITE_CFLAGS@ @WNCK_CFLAGS@
+	@DBUS_CFLAGS@ @GLIB_CFLAGS@ @GTK_CFLAGS@ \
+	@GIT_CFLAGS@ @GCONF_CFLAGS@ @GLADE_CFLAGS@ \
+	@GNOME_CFLAGS@ @SQLITE_CFLAGS@ @WNCK_CFLAGS@
 
 # The DATADIR, LIBDIR, PREFIX, and SYSCONFDIR definitions
 # are only needed for libgnome.  GLib handles it better.
@@ -22,6 +21,12 @@ AM_CPPFLAGS = \
 
 AM_LDFLAGS = \
 	-export-dynamic
+
+if HAVE_DBUS
+DBUS_SOURCES = \
+	gva-dbus.c			\
+	gva-dbus.h
+endif
 
 gnome_video_arcade_SOURCES = \
 	gconf-bridge.c			\
@@ -80,6 +85,7 @@ gnome_video_arcade_SOURCES = \
 	gva-util.h			\
 	gva-wnck.c			\
 	gva-wnck.h			\
+	$(DBUS_SOURCES)			\
 	main.c
 
 EXTRA_gnome_video_arcade_SOURCES = \
@@ -87,11 +93,10 @@ EXTRA_gnome_video_arcade_SOURCES = \
 	gva-mame-xmame.c
 
 gnome_video_arcade_LDADD = \
-	@GLIB_LIBS@ @GTK_LIBS@ \
-	@GIT_LIBS@ @GCONF_LIBS@ \
-	@GLADE_LIBS@ @GNOME_LIBS@ \
-	@MAME_BACKEND@ @SQLITE_LIBS@ \
-	@WNCK_LIBS@
+	@DBUS_LIBS@ @GLIB_LIBS@ @GTK_LIBS@ \
+	@GIT_LIBS@ @GCONF_LIBS@ @GLADE_LIBS@ \
+	@GNOME_LIBS@ @MAME_BACKEND@ \
+	@SQLITE_LIBS@ @WNCK_LIBS@
 
 gnome_video_arcade_DEPENDENCIES = \
 	@MAME_BACKEND@

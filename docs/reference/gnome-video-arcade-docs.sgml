@@ -23,6 +23,7 @@
     <xi:include href="xml/gva-categories.xml"/>
     <xi:include href="xml/gva-columns.xml"/>
     <xi:include href="xml/gva-db.xml"/>
+    <xi:include href="xml/gva-dbus.xml"/>
     <xi:include href="xml/gva-error.xml"/>
     <xi:include href="xml/gva-favorites.xml"/>
     <xi:include href="xml/gva-history.xml"/>

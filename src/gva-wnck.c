@@ -18,7 +18,7 @@
 
 #include "gva-wnck.h"
 
-#ifdef WITH_WNCK
+#ifdef HAVE_WNCK
 
 #define WNCK_I_KNOW_THIS_IS_UNSTABLE
 #include <libwnck/libwnck.h>
@@ -271,7 +271,7 @@ wnck_window_opened_cb (WnckScreen *screen,
         gva_main_cursor_normal ();
 }
 
-#endif /* WITH_WNCK */
+#endif /* HAVE_WNCK */
 
 /**
  * gva_wnck_listen_for_new_window:
@@ -291,7 +291,7 @@ void
 gva_wnck_listen_for_new_window (GvaProcess *process,
                                 const gchar *game)
 {
-#ifdef WITH_WNCK
+#ifdef HAVE_WNCK
         g_return_if_fail (GVA_IS_PROCESS (process));
         g_return_if_fail (game != NULL);
 
@@ -319,5 +319,5 @@ gva_wnck_listen_for_new_window (GvaProcess *process,
                 G_CALLBACK (wnck_window_opened_cb), process);
 
         gva_main_cursor_busy ();
-#endif /* WITH_WNCK */
+#endif /* HAVE_WNCK */
 }

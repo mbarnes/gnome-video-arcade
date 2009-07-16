@@ -45,6 +45,31 @@ PKG_CHECK_MODULES(GIT, $GIT_MODULES)
 AC_SUBST(GIT_CFLAGS)
 AC_SUBST(GIT_LIBS)
 
+SQLITE_MODULES="sqlite3 >= 3.0.0"
+PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
+AC_SUBST(SQLITE_CFLAGS)
+AC_SUBST(SQLITE_LIBS)
+
+# --with-dbus=[yes|no]
+DBUS_CFLAGS=
+DBUS_LIBS=
+AC_ARG_WITH([dbus],
+        [AC_HELP_STRING([--with-dbus],
+        [use D-Bus for better desktop integration [default=yes]])],
+        with_dbus="$withval", with_dbus="yes")
+if test "$with_dbus" = "yes"; then
+DBUS_MODULES="dbus-glib-1"  # minimum version?
+PKG_CHECK_MODULES(DBUS, $DBUS_MODULES)
+AC_DEFINE_UNQUOTED(HAVE_DBUS, 1,
+        [Define to 1 if you are using GLib bindings for D-Bus])
+else
+DBUS_CFLAGS=
+DBUS_LIBS=
+fi
+AM_CONDITIONAL(HAVE_DBUS, test $with_dbus = yes)
+AC_SUBST(DBUS_CFLAGS)
+AC_SUBST(DBUS_LIBS)
+
 # --with-gnome=[yes|no]
 GNOME_CFLAGS=
 GNOME_LIBS=
@@ -58,17 +83,12 @@ AC_ARG_WITH([gnome],
 if test "$with_gnome" = "yes"; then
 GNOME_MODULES="libgnomeui-2.0 >= 2.14.0"
 PKG_CHECK_MODULES(GNOME, $GNOME_MODULES)
-AC_DEFINE_UNQUOTED(WITH_GNOME, 1,
-        [Define to 1 if you are linking against GNOME libraries])
+AC_DEFINE_UNQUOTED(HAVE_GNOME, 1,
+        [Define to 1 if you are using GNOME libraries])
 fi
 fi
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
-
-SQLITE_MODULES="sqlite3 >= 3.0.0"
-PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
-AC_SUBST(SQLITE_CFLAGS)
-AC_SUBST(SQLITE_LIBS)
 
 # --with-wnck=[yes|no]
 AC_ARG_WITH([wnck],
@@ -78,8 +98,8 @@ AC_ARG_WITH([wnck],
 if test "$with_wnck" = "yes"; then
 WNCK_MODULES="libwnck-1.0 >= 2.16.0"
 PKG_CHECK_MODULES(WNCK, $WNCK_MODULES)
-AC_DEFINE_UNQUOTED(WITH_WNCK, 1,
-        [Define to 1 if you are linking against libwnck])
+AC_DEFINE_UNQUOTED(HAVE_WNCK, 1,
+        [Define to 1 if you are using libwnck])
 else
 WNCK_CFLAGS=
 WNCK_LIBS=
@@ -216,6 +236,7 @@ echo "    MAME Program    : $MAME"
 echo "    Category File   : $with_category"
 echo "    History File    : $with_history"
 echo "    NPlayers File   : $with_nplayers"
+echo "    Use D-Bus       : $with_dbus"
 echo "    Use libgnomeui  : $with_gnome"
 echo "    Use libwnck     : $with_wnck"
 echo

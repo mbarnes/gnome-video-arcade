@@ -84,6 +84,12 @@ gva_db_set_error
 </SECTION>
 
 <SECTION>
+<FILE>gva-dbus</FILE>
+gva_dbus_init
+gva_dbus_inhibit_screen_saver
+</SECTION>
+
+<SECTION>
 <FILE>gva-error</FILE>
 GVA_ERROR
 GVA_SQLITE_ERROR

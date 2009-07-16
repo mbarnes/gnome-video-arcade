@@ -1,3 +1,32 @@
+2009-07-16  Matthew Barnes  <mbarnes@redhat.com>
+
+	* README:
+	Mention dbus-glib-1 as an optional dependency.
+
+	* configure.ac:
+	Add an optional dependency on dbus-glib-1.
+
+	* docs/reference:
+	Update developer documentation.
+
+	* src/Makefile.am:
+	Add DBUS_CFLAGS and DBUS_LIBS, if enabled.
+	Add gva-dbus.[ch]
+
+	* src/main (main):
+	If D-Bus bindings are available, call gva_dbus_init().
+
+	* src/gva-dbus.c:
+	* src/gva-dbus.h:
+	New file implements D-Bus operations for better desktop
+	integration.  So far the only operation is to inhibit the
+	screen saver in fullscreen mode.
+
+	* src/gva-ui.c (action_play_back_cb), (action_record_cb),
+	(action_start_cb):
+	If D-Bus bindings are available, call gva_dbus_inhibit_screen_saver()
+	when starting, recording or playing back a game in fullscreen mode.
+
 2009-06-12  Matthew Barnes  <mbarnes@redhat.com>
 
 	* configure.ac:
