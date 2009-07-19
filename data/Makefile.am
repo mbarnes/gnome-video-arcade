@@ -15,7 +15,7 @@ gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 
 uidir = $(datadir)/gnome-video-arcade
 ui_DATA = \
-	gnome-video-arcade.glade	\
+	gnome-video-arcade.builder	\
 	gnome-video-arcade.ui
 
 if GCONF_SCHEMAS_INSTALL
@@ -47,7 +47,6 @@ DISTCLEANFILES = \
 	$(desktop_DATA)
 
 MAINTAINERCLEANFILES = \
-	gnome-video-arcade.glade.bak	\
-	gnome-video-arcade.gladep.bak
+	gnome-video-arcade.builder.bak
 
 -include $(top_srcdir)/git.mk

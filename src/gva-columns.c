@@ -703,7 +703,7 @@ columns_tooltip_driver_status (GtkTreeModel *model,
                 0, GTK_EXPAND | GTK_FILL, 0, 0);
         gtk_widget_show (widget);
 
-        /* The same text is in gnome-video-arcade.glade,
+        /* The same text is in gnome-video-arcade.builder,
          * so it has to be translated with markup anyway. */
         text = _("<b>There are known problems with this game:</b>");
         widget = gtk_label_new (text);

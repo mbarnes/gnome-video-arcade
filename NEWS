@@ -8,6 +8,7 @@ GNOME Video Arcade 0.6.8
         * Introduce an optional dependency on the GLib bindings for
           D-Bus, which is used to inhibit GNOME's screen saver from
           starting while playing a game in fullscreen mode.
+        * Drop dependency on libglade.  Use GtkBuilder instead.
 
         User Interface Translations
         ---------------------------

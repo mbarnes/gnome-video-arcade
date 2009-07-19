@@ -18,9 +18,6 @@
 
 #include "gva-ui.h"
 
-#include <glade/glade.h>
-#include <glade/glade-build.h>
-
 #include "gva-audit.h"
 #include "gva-column-manager.h"
 #include "gva-error.h"
@@ -40,7 +37,7 @@
 #include "gva-dbus.h"
 #endif
 
-static GladeXML *xml = NULL;
+static GtkBuilder *builder = NULL;
 static GtkUIManager *manager = NULL;
 static GtkActionGroup *action_group = NULL;
 static gboolean initialized = FALSE;
@@ -870,27 +867,17 @@ ui_init (void)
                 G_N_ELEMENTS (view_radio_entries),
                 0, G_CALLBACK (action_view_changed_cb), NULL);
 
-#define REGISTER_WIDGET(type) \
-        (glade_register_widget \
-        ((type), glade_standard_build_widget, NULL, NULL))
-
-        filename = gva_find_data_file (PACKAGE ".glade");
-        if (filename != NULL)
+        filename = gva_find_data_file (PACKAGE ".builder");
+        if (filename != NULL && error == NULL)
         {
-                REGISTER_WIDGET (GTK_TYPE_LINK_BUTTON);
-                REGISTER_WIDGET (GVA_TYPE_COLUMN_MANAGER);
-                REGISTER_WIDGET (GVA_TYPE_MUTE_BUTTON);
-
-                glade_provide ("gva");
-                xml = glade_xml_new (filename, NULL, NULL);
-                glade_xml_signal_autoconnect (xml);
+                builder = gtk_builder_new ();
+                gtk_builder_add_from_file (builder, filename, &error);
+                gtk_builder_connect_signals (builder, NULL);
         }
         g_free (filename);
 
-#undef REGISTER_WIDGET
-
         filename = gva_find_data_file (PACKAGE ".ui");
-        if (filename != NULL)
+        if (filename != NULL && error == NULL)
         {
                 manager = gtk_ui_manager_new ();
                 gtk_ui_manager_insert_action_group (manager, action_group, 0);
@@ -910,7 +897,7 @@ ui_init (void)
         if (error != NULL)
                 g_error ("%s", error->message);
 
-        if (xml == NULL || manager == NULL)
+        if (builder == NULL || manager == NULL)
                 g_error ("%s", _("Failed to initialize user interface"));
 }
 
@@ -954,16 +941,16 @@ gva_ui_get_action (const gchar *action_name)
 GtkWidget *
 gva_ui_get_widget (const gchar *widget_name)
 {
-        GtkWidget *widget;
+        GObject *object;
 
         g_return_val_if_fail (widget_name != NULL, NULL);
 
         if (G_UNLIKELY (!initialized))
                 ui_init ();
 
-        widget = glade_xml_get_widget (xml, widget_name);
-        g_assert (widget != NULL);
-        return widget;
+        object = gtk_builder_get_object (builder, widget_name);
+        g_assert (object != NULL);
+        return GTK_WIDGET (object);
 }
 
 /**
