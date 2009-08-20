@@ -75,7 +75,6 @@ msgstr "<b>Det finns kända problem med detta spel:</b>"
 
 #. The labels begin with a UTF-8 encoded bullet character.
 #: ../src/gva-columns.c:719
-#, c-format
 msgid "• The colors aren't 100% accurate."
 msgstr "• Färgerna är inte 100% korrekta."
 
@@ -84,12 +83,10 @@ msgid "• The colors are completely wrong."
 msgstr "• Färgerna är helt fel."
 
 #: ../src/gva-columns.c:737
-#, c-format
 msgid "• The video emulation isn't 100% accurate."
 msgstr "• Videoemuleringen är inte 100% korrekt."
 
 #: ../src/gva-columns.c:746
-#, c-format
 msgid "• The sound emulation isn't 100% accurate."
 msgstr "• Ljudemuleringen är inte 100% korrekt."
 
