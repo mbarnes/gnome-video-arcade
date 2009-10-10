@@ -716,6 +716,7 @@ columns_tooltip_driver_status (GtkTreeModel *model,
 
         /* The labels begin with a UTF-8 encoded bullet character. */
 
+        /* xgettext:no-c-format */
         text = _("• The colors aren't 100% accurate.");
         widget = gtk_label_new (text);
         gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
@@ -734,6 +735,7 @@ columns_tooltip_driver_status (GtkTreeModel *model,
         if (strcmp (driver_color, "preliminary") == 0)
                 gtk_widget_show (widget);
 
+        /* xgettext:no-c-format */
         text = _("• The video emulation isn't 100% accurate.");
         widget = gtk_label_new (text);
         gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
@@ -743,6 +745,7 @@ columns_tooltip_driver_status (GtkTreeModel *model,
         if (strcmp (driver_graphic, "imperfect") == 0)
                 gtk_widget_show (widget);
 
+        /* xgettext:no-c-format */
         text = _("• The sound emulation isn't 100% accurate.");
         widget = gtk_label_new (text);
         gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
