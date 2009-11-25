@@ -4,13 +4,14 @@
 # Lars Christian Jensen <larschrjensen@gmail.com>, 2009.
 # Joe Hansen (joedalton2@yahoo.dk), 2009.
 # Korrekturlæsning: Kris Thomsen, 2009.
+# Korrekturlæsning: Torben Grøn Helligsø, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "Report-Msgid-Bugs-To: matthew@barnes.net\n"
-"POT-Creation-Date: 2009-11-07 11:05+0100\n"
-"PO-Revision-Date: 2009-10-26 23:07+0200\n"
+"POT-Creation-Date: 2009-11-26 00:42+0100\n"
+"PO-Revision-Date: 2009-11-12 23:07+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -20,79 +21,75 @@ msgstr ""
 
 #: ../data/gnome-video-arcade.builder.h:1
 msgid " "
-msgstr ""
+msgstr " "
 
 #: ../data/gnome-video-arcade.builder.h:2
-#, fuzzy
 msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
-msgstr "• <b>DETTE SPIL FUNGERER IKKE.</b>"
+msgstr "&#x2022; <b>DETTE SPIL FUNGERER IKKE.</b>"
 
 #: ../data/gnome-video-arcade.builder.h:3
-#, fuzzy
 msgid "&#x2022; Screen flipping in cocktail mode is not supported."
-msgstr "• Skærmvipning i cocktailtilstand er ikke understøttet."
+msgstr "&#x2022; Vip af skærm i cocktailtilstand er ikke understøttet."
 
 #: ../data/gnome-video-arcade.builder.h:4
-#, fuzzy
 msgid "&#x2022; The colors are completely wrong."
-msgstr "• Farverne er helt forkerte."
+msgstr "&#x2022; Farverne er helt forkerte."
 
 #: ../data/gnome-video-arcade.builder.h:6
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&#x2022; The colors aren't 100% accurate."
-msgstr "• Farverne er ikke 100 % korrekte."
+msgstr "&#x2022; Farverne er ikke 100 % korrekte."
 
 #: ../data/gnome-video-arcade.builder.h:7
-#, fuzzy
 msgid "&#x2022; The game has protection which isn't fully emulated."
-msgstr "• Spillet har beskyttelse, hvilket ikke er fuldt ud emuleret."
+msgstr "&#x2022; Spillet har beskyttelse, hvilket ikke er fuldt ud emuleret."
 
 #: ../data/gnome-video-arcade.builder.h:8
-#, fuzzy
 msgid "&#x2022; The game lacks sound."
-msgstr "• Spillet mangler lyd."
+msgstr "&#x2022; Spillet mangler lyd."
 
 #: ../data/gnome-video-arcade.builder.h:10
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&#x2022; The sound emulation isn't 100% accurate."
-msgstr "• Lydemuleringen er ikke 100 % korrekt."
+msgstr "&#x2022; Lydemuleringen er ikke 100 % korrekt."
 
 #: ../data/gnome-video-arcade.builder.h:12
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&#x2022; The video emulation isn't 100% accurate."
-msgstr "• Videoemuleringen er ikke 100 % korrekt."
+msgstr "&#x2022; Videoemuleringen er ikke 100 % korrekt."
 
 #: ../data/gnome-video-arcade.builder.h:13
 msgid "<b>Alternate Versions</b>"
-msgstr ""
+msgstr "<b>Alternative versioner</b>"
 
 #: ../data/gnome-video-arcade.builder.h:14
 msgid "<b>BIOS</b>"
-msgstr ""
+msgstr "<b>BIOS</b>"
 
 #: ../data/gnome-video-arcade.builder.h:15
 msgid "<b>CPU</b>"
-msgstr ""
+msgstr "<b>CPU</b>"
 
 #: ../data/gnome-video-arcade.builder.h:16
 msgid "<b>Columns</b>"
-msgstr ""
+msgstr "<b>Kolonner</b>"
 
 #: ../data/gnome-video-arcade.builder.h:17
 msgid "<b>Game List</b>"
-msgstr ""
+msgstr "<b>Spilliste</b>"
 
 #: ../data/gnome-video-arcade.builder.h:18
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Generelt</b>"
 
+# eller original version
 #: ../data/gnome-video-arcade.builder.h:19
 msgid "<b>Original Version</b>"
-msgstr ""
+msgstr "<b>Oprindelig version</b>"
 
 #: ../data/gnome-video-arcade.builder.h:20
 msgid "<b>Sound</b>"
-msgstr ""
+msgstr "<b>Lyd</b>"
 
 #. The same text is in gnome-video-arcade.builder,
 #. * so it has to be translated with markup anyway.
@@ -102,11 +99,11 @@ msgstr "<b>Der er kendte problemer med dette spil:</b>"
 
 #: ../data/gnome-video-arcade.builder.h:22
 msgid "<b>Video</b>"
-msgstr ""
+msgstr "<b>Video</b>"
 
 #: ../data/gnome-video-arcade.builder.h:23
 msgid "<big><b>Errors detected in ROM files</b></big>"
-msgstr ""
+msgstr "<big><b>Fejl i ROM-filer</b></big>"
 
 #: ../data/gnome-video-arcade.builder.h:24
 msgid ""
@@ -114,6 +111,9 @@ msgid ""
 "time the game is started. It does not apply to recording or playing back "
 "games.</i></small>"
 msgstr ""
+"<small><i><b>Bemærk:</b> Indstilling af denne vil ikke slå igennem før anden "
+"gang spillet startes. Den gælder ikke ved optagelse eller afspilning af spil."
+"</i></small>"
 
 #: ../data/gnome-video-arcade.builder.h:25
 msgid ""
@@ -121,74 +121,75 @@ msgid ""
 "their ROM requirements have changed.  If so, you will need to acquire more "
 "recent ROM files.</i></small>"
 msgstr ""
+"<small><i>Hvis disse spil virkede med tidligere versioner af MAME, så er det "
+"sandsynligt, at deres ROM-krav har ændret sig.  Hvis det er tilfældet, må du "
+"indhente nyere ROM-filer.</i></small>"
 
 #: ../data/gnome-video-arcade.builder.h:26
 msgid ""
 "An audit of the available games has detected errors in some of the ROM "
 "files. The following games will not be available in GNOME Video Arcade."
 msgstr ""
+"En gennemgang af de tilgængelige spil har afdækket fejl i nogle af ROM-"
+"filerne. De følgende spil vil ikke være tilgængelige i GNOME Video Arcade."
 
+# Vælg rækkefølgen på informationen der vises i spillisten
 #: ../data/gnome-video-arcade.builder.h:27
 msgid "Choose the order of information to appear in the game list."
-msgstr ""
+msgstr "Vælg rækkefølge for spillistens indhold."
 
 #: ../data/gnome-video-arcade.builder.h:28
 msgid "Close this window"
-msgstr ""
+msgstr "Luk dette vindue"
 
 #: ../data/gnome-video-arcade.builder.h:29
-#, fuzzy
 msgid "Columns"
-msgstr "_Tilføj kolonne"
+msgstr "Kolonner"
 
 #: ../data/gnome-video-arcade.builder.h:30
-#, fuzzy
 msgid "Delete the selected game recordings"
-msgstr "Slet valgte spiloptagelser?"
+msgstr "Slet de valgte spiloptagelser"
 
 #: ../data/gnome-video-arcade.builder.h:31
 msgid "GNOME Video Arcade"
-msgstr ""
+msgstr "GNOME Video Arcade"
 
 #: ../data/gnome-video-arcade.builder.h:32
 msgid "Gallery"
-msgstr ""
+msgstr "Galleri"
 
 #: ../data/gnome-video-arcade.builder.h:33
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: ../data/gnome-video-arcade.builder.h:34
 msgid "History"
-msgstr ""
+msgstr "Historik"
 
 #: ../data/gnome-video-arcade.builder.h:35 ../src/gva-ui.c:811
 msgid "Only show my favorite games"
 msgstr "Vis kun mine foretrukne spil"
 
+# Er du sikker på "Afspil" ikke er tilstrækkelig?
 #: ../data/gnome-video-arcade.builder.h:36
-#, fuzzy
 msgid "Play _Back"
-msgstr "Af_spil..."
+msgstr "Afspil _igen"
 
 #: ../data/gnome-video-arcade.builder.h:37 ../src/gva-ui.c:655
 msgid "Play back the selected game recording"
 msgstr "Afspil den valgte spiloptagelse"
 
 #: ../data/gnome-video-arcade.builder.h:38
-#, fuzzy
 msgid "Preferences"
-msgstr "_Indstillinger"
+msgstr "Indstillinger"
 
 #: ../data/gnome-video-arcade.builder.h:39
-#, fuzzy
 msgid "Properties"
-msgstr "_Egenskaber"
+msgstr "Egenskaber"
 
 #: ../data/gnome-video-arcade.builder.h:40
-#, fuzzy
 msgid "Recorded Games"
-msgstr "_Foretrukne spil"
+msgstr "Optagede spil"
 
 #: ../data/gnome-video-arcade.builder.h:41 ../src/gva-ui.c:711
 msgid "Save ROM errors to a file"
@@ -196,7 +197,7 @@ msgstr "Gem ROM-fejl i en fil"
 
 #: ../data/gnome-video-arcade.builder.h:42
 msgid "Search for:"
-msgstr ""
+msgstr "Søg efter:"
 
 #: ../data/gnome-video-arcade.builder.h:43 ../src/gva-ui.c:804
 msgid "Show all available games"
@@ -224,12 +225,11 @@ msgstr "Start det valgte spil"
 
 #: ../data/gnome-video-arcade.builder.h:49
 msgid "Technical"
-msgstr ""
+msgstr "Teknisk"
 
 #: ../data/gnome-video-arcade.builder.h:50
-#, fuzzy
 msgid "_Start Game"
-msgstr "_Start"
+msgstr "_Start spil"
 
 #: ../src/gconf-bridge.c:1218
 #, c-format
