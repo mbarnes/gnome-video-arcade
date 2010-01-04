@@ -150,6 +150,10 @@ gva_main_init (void)
                 gva_ui_get_managed_widget ("/main-menu"),
                 FALSE, FALSE, 0);
 
+        gtk_box_reorder_child (
+                GTK_BOX (GVA_WIDGET_MAIN_VBOX),
+                gva_ui_get_managed_widget ("/main-menu"), 0);
+
         gtk_action_connect_proxy (
                 GVA_ACTION_VIEW_AVAILABLE,
                 GVA_WIDGET_MAIN_VIEW_BUTTON_0);
