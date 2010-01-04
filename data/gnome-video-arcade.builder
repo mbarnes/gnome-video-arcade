@@ -196,6 +196,7 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="main-start-game-button">
+                    <property name="label" translatable="yes">_Start Game</property>
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
@@ -204,42 +205,8 @@
                     <property name="has_default">True</property>
                     <property name="receives_default">False</property>
                     <property name="tooltip_text" translatable="yes">Start the selected game</property>
-                    <child>
-                      <object class="GtkAlignment" id="main-start-game-button-alignment">
-                        <property name="visible">True</property>
-                        <property name="xscale">0</property>
-                        <property name="yscale">0</property>
-                        <child>
-                          <object class="GtkHBox" id="main-start-game-button-hbox">
-                            <property name="visible">True</property>
-                            <property name="spacing">2</property>
-                            <child>
-                              <object class="GtkImage" id="main-start-game-button-image">
-                                <property name="visible">True</property>
-                                <property name="stock">gtk-execute</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="main-start-game-button-label">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">_Start Game</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                    <property name="image">main-start-game-image</property>
+                    <property name="use_underline">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -369,6 +336,7 @@
             </child>
             <child>
               <object class="GtkButton" id="play-back-button">
+                <property name="label" translatable="yes">Play _Back</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_focus">True</property>
@@ -377,43 +345,9 @@
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Play back the selected game recording</property>
+                <property name="image">play-back-button-image</property>
+                <property name="use_underline">True</property>
                 <signal name="clicked" handler="gva_play_back_clicked_cb"/>
-                <child>
-                  <object class="GtkAlignment" id="play-back-button-alignment">
-                    <property name="visible">True</property>
-                    <property name="xscale">0</property>
-                    <property name="yscale">0</property>
-                    <child>
-                      <object class="GtkHBox" id="play-back-button-hbox">
-                        <property name="visible">True</property>
-                        <property name="spacing">2</property>
-                        <child>
-                          <object class="GtkImage" id="play-back-button-image">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-media-play</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="play-back-button-label">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Play _Back</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1774,5 +1708,13 @@ Manufacturer, Year</property>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkImage" id="main-start-game-image">
+    <property name="visible">True</property>
+    <property name="stock">gtk-execute</property>
+  </object>
+  <object class="GtkImage" id="play-back-button-image">
+    <property name="visible">True</property>
+    <property name="stock">gtk-media-play</property>
   </object>
 </interface>
