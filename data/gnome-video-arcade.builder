@@ -10,6 +10,7 @@
     <child>
       <object class="GtkVBox" id="main-vbox">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkHBox" id="main-hbox">
             <property name="visible">True</property>
@@ -42,6 +43,7 @@
           <object class="GtkVBox" id="main-contents">
             <property name="visible">True</property>
             <property name="border_width">12</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">12</property>
             <child>
               <object class="GtkHBox" id="main-top-hbox">
@@ -117,6 +119,7 @@
               <object class="GtkVBox" id="main-center-vbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">2</property>
                 <child>
                   <object class="GtkScrolledWindow" id="main-scrolled-window">
@@ -280,6 +283,7 @@
       <object class="GtkVBox" id="play-back-vbox">
         <property name="visible">True</property>
         <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">12</property>
         <child>
           <object class="GtkScrolledWindow" id="play-back-scrolled-window">
@@ -402,6 +406,7 @@
         <property name="visible">True</property>
         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
         <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">12</property>
         <child>
           <object class="GtkNotebook" id="preferences-notebook">
@@ -413,11 +418,13 @@
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkVBox" id="preferences-general-vbox">
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="preferences-general-label">
@@ -441,6 +448,7 @@
                           <object class="GtkVBox" id="preferences-general-inner-vbox">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="preferences-full-screen">
@@ -510,6 +518,7 @@
                   <object class="GtkVBox" id="preferences-game-list-vbox">
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="preferences-game-list-label">
@@ -532,6 +541,7 @@
                           <object class="GtkVBox" id="preferences-game-list-inner-vbox">
                             <property name="visible">True</property>
                             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="preferences-show-clones">
@@ -573,6 +583,7 @@
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="preferences-columns-label">
@@ -596,6 +607,7 @@
                       <object class="GtkVBox" id="preferences-columns-inner-vbox">
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="preferences-columns-instructions1">
@@ -688,6 +700,7 @@
       <object class="GtkVBox" id="properties-vbox">
         <property name="visible">True</property>
         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">12</property>
         <child>
           <object class="GtkTable" id="properties-table">
@@ -887,6 +900,7 @@ Manufacturer, Year</property>
                         <property name="visible">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="border_width">12</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkFrame" id="properties-status-frame">
@@ -920,6 +934,7 @@ Manufacturer, Year</property>
                                         <child>
                                           <object class="GtkVBox" id="properties-status-vbox">
                                             <property name="visible">True</property>
+                                            <property name="orientation">vertical</property>
                                             <property name="spacing">6</property>
                                             <child>
                                               <object class="GtkLabel" id="properties-status-header">
@@ -937,6 +952,7 @@ Manufacturer, Year</property>
                                             <child>
                                               <object class="GtkVBox" id="properties-status-detail-vbox">
                                                 <property name="visible">True</property>
+                                                <property name="orientation">vertical</property>
                                                 <child>
                                                   <object class="GtkLabel" id="properties-imperfect-color-label">
                                                     <property name="visible">True</property>
@@ -1056,6 +1072,7 @@ Manufacturer, Year</property>
                         <child>
                           <object class="GtkVBox" id="properties-bios-vbox">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="properties-bios-header">
@@ -1095,6 +1112,7 @@ Manufacturer, Year</property>
                         <child>
                           <object class="GtkVBox" id="properties-cpu-vbox">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="properties-cpu-header">
@@ -1115,6 +1133,7 @@ Manufacturer, Year</property>
                                 <child>
                                   <object class="GtkVBox" id="properties-cpu-inner-vbox">
                                     <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <object class="GtkLabel" id="properties-cpu0-label">
@@ -1182,6 +1201,7 @@ Manufacturer, Year</property>
                         <child>
                           <object class="GtkVBox" id="properties-sound-vbox">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="properties-sound-header">
@@ -1198,6 +1218,7 @@ Manufacturer, Year</property>
                                 <child>
                                   <object class="GtkVBox" id="properties-sound-inner-vbox">
                                     <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <object class="GtkLabel" id="properties-sound0-label">
@@ -1265,6 +1286,7 @@ Manufacturer, Year</property>
                         <child>
                           <object class="GtkVBox" id="properties-video-vbox">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="properties-video-header">
@@ -1285,6 +1307,7 @@ Manufacturer, Year</property>
                                 <child>
                                   <object class="GtkVBox" id="properties-video-inner-vbox">
                                     <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <object class="GtkLabel" id="properties-video0-label">
@@ -1352,6 +1375,7 @@ Manufacturer, Year</property>
                         <child>
                           <object class="GtkVBox" id="properties-original-vbox">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="properties-original-header">
@@ -1368,6 +1392,7 @@ Manufacturer, Year</property>
                                 <child>
                                   <object class="GtkVBox" id="properties-original-links">
                                     <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <placeholder/>
@@ -1389,6 +1414,7 @@ Manufacturer, Year</property>
                         <child>
                           <object class="GtkVBox" id="properties-alternate-vbox">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="properties-alternate-header">
@@ -1405,6 +1431,7 @@ Manufacturer, Year</property>
                                 <child>
                                   <object class="GtkVBox" id="properties-alternate-links">
                                     <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
                                     <property name="spacing">6</property>
                                     <child>
                                       <placeholder/>
