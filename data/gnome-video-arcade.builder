@@ -956,7 +956,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-imperfect-color-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; The colors aren't 100% accurate.</property>
+                                                    <property name="label" translatable="yes">• The colors aren't 100% accurate.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -967,7 +967,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-color-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; The colors are completely wrong.</property>
+                                                    <property name="label" translatable="yes">• The colors are completely wrong.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -978,7 +978,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-imperfect-graphic-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; The video emulation isn't 100% accurate.</property>
+                                                    <property name="label" translatable="yes">• The video emulation isn't 100% accurate.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -989,7 +989,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-imperfect-sound-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; The sound emulation isn't 100% accurate.</property>
+                                                    <property name="label" translatable="yes">• The sound emulation isn't 100% accurate.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -1000,7 +1000,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-sound-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; The game lacks sound.</property>
+                                                    <property name="label" translatable="yes">• The game lacks sound.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -1011,7 +1011,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-cocktail-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; Screen flipping in cocktail mode is not supported.</property>
+                                                    <property name="label" translatable="yes">• Screen flipping in cocktail mode is not supported.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -1022,7 +1022,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-emulation-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
+                                                    <property name="label" translatable="yes">• &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
                                                     <property name="use_markup">True</property>
                                                   </object>
                                                   <packing>
@@ -1035,7 +1035,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-protection-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">&#x2022; The game has protection which isn't fully emulated.</property>
+                                                    <property name="label" translatable="yes">• The game has protection which isn't fully emulated.</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
