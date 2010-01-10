@@ -1,0 +1,4 @@
+2010-01-10  Matthew Barnes  <mbarnes@redhat.com>
+
+	* *: The ChangeLog is auto-generated when releasing. If you
+	are seeing this, use 'git log' for a detailed list of changes.
