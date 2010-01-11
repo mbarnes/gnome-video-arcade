@@ -117,7 +117,7 @@ properties_label_clicked_cb (GvaLinkButton *button,
                              const gchar *game)
 {
         GdkEvent *event;
-	GtkWidget *widget;
+        GtkWidget *widget;
 
         /* Force the cursor back to normal before the button is destroyed.
          * XXX We're passing the wrong type of event here, but it should be
@@ -126,8 +126,8 @@ properties_label_clicked_cb (GvaLinkButton *button,
         g_signal_emit_by_name (button, "leave-notify-event", event);
         gdk_event_free (event);
 
-	widget = GVA_WIDGET_PROPERTIES_TECHNICAL_SCROLLED_WINDOW;
-	gtk_widget_grab_focus (widget);
+        widget = GVA_WIDGET_PROPERTIES_TECHNICAL_SCROLLED_WINDOW;
+        gtk_widget_grab_focus (widget);
 
         gva_properties_show_game (game);
         gva_tree_view_set_selected_game (game);
