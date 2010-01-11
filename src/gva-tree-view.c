@@ -330,7 +330,7 @@ gva_tree_view_run_query (const gchar *expression,
         model = gva_game_store_new_from_query (string->str, error);
 
         /* Don't touch widgets if gtk_main_quit() has been called. */
-        if (!gtk_main_iteration_do (FALSE))
+        if (model != NULL && !gtk_main_iteration_do (FALSE))
         {
                 sensitive = (gtk_tree_model_iter_n_children (model, NULL) > 0);
                 gtk_widget_set_sensitive (GTK_WIDGET (view), sensitive);

@@ -119,6 +119,8 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
  *      Corresponds to the "available.driver_savestate" database field.
  * @GVA_GAME_STORE_COLUMN_DRIVER_PALETTESIZE:
  *      Corresponds to the "available.driver_palettesize" database field.
+ * @GVA_GAME_STORE_COLUMN_LAST_PLAYED:
+ *      Corresponds to the "lastplayed.timestamp" database field.
  * @GVA_GAME_STORE_COLUMN_COMMENT:
  *      Corresponds to the "playback.comment" database field.
  * @GVA_GAME_STORE_COLUMN_INODE:
@@ -166,6 +168,7 @@ typedef enum
         GVA_GAME_STORE_COLUMN_DRIVER_PROTECTION,  /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_DRIVER_SAVESTATE,   /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_DRIVER_PALETTESIZE, /* G_TYPE_INT */
+        GVA_GAME_STORE_COLUMN_LAST_PLAYED,        /* GVA_TYPE_TIME */
         GVA_GAME_STORE_COLUMN_COMMENT,            /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_INODE,              /* G_TYPE_INT64 */
         GVA_GAME_STORE_COLUMN_INPFILE,            /* G_TYPE_STRING */

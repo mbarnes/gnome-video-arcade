@@ -199,6 +199,12 @@
                 "name NOT NULL, " \
                 "default_ NOT NULL);"
 
+/* The lastplayed table survives database builds. */
+#define SQL_CREATE_TABLE_LASTPLAYED \
+        "CREATE TABLE IF NOT EXISTS lastplayed (" \
+                "name PRIMARY KEY ON CONFLICT REPLACE, " \
+                "timestamp);"
+
 /* The playback table survives database builds. */
 #define SQL_CREATE_TABLE_PLAYBACK \
         "CREATE TABLE IF NOT EXISTS playback (" \
@@ -219,7 +225,9 @@
 #define SQL_CREATE_VIEW_AVAILABLE \
         "CREATE VIEW IF NOT EXISTS available AS " \
                 "SELECT game.*, bios.description AS bios, " \
-                "isfavorite(game.name) AS favorite FROM game " \
+                "isfavorite(game.name) AS favorite, " \
+                "lastplayed.timestamp AS lastplayed " \
+                "FROM game LEFT JOIN lastplayed USING (name) " \
                 "LEFT JOIN (SELECT name, description FROM game WHERE " \
                 "isbios = 'yes') AS bios ON game.romof = bios.name " \
                 "WHERE (romset IN ('good', 'best available') " \
@@ -1508,6 +1516,7 @@ db_create_tables (GError **error)
                 && gva_db_execute (SQL_CREATE_TABLE_DISPLAY, error)
                 && gva_db_execute (SQL_CREATE_TABLE_CONTROL, error)
                 && gva_db_execute (SQL_CREATE_TABLE_DIPVALUE, error)
+                && gva_db_execute (SQL_CREATE_TABLE_LASTPLAYED, error)
                 && gva_db_execute (SQL_CREATE_TABLE_PLAYBACK, error)
                 && gva_db_execute (SQL_CREATE_TABLE_WINDOW, error)
                 && gva_db_execute (SQL_CREATE_VIEW_AVAILABLE, error);

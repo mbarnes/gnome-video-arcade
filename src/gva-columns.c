@@ -244,15 +244,34 @@ columns_time_set_properties (GtkTreeViewColumn *column,
 {
         GvaGameStoreColumn column_id;
         GValue value;
-        gchar text[256];
+        gchar text[256] = { '\0' };
+        time_t *time_ptr;
 
         memset (&value, 0, sizeof (GValue));
         column_id = gtk_tree_view_column_get_sort_column_id (column);
         gtk_tree_model_get_value (model, iter, column_id, &value);
 
-        strftime (
-                text, sizeof (text), nl_langinfo (D_T_FMT),
-                localtime (g_value_get_boxed (&value)));
+        time_ptr = g_value_get_boxed (&value);
+
+        /* Render epoch values as empty cells. */
+        if (*time_ptr > (time_t) 0)
+        {
+                GDate date, today;
+                gboolean date_is_today;
+
+                g_date_clear (&date, 1);
+                g_date_clear (&today, 1);
+
+                g_date_set_time_t (&date, *time_ptr);
+                g_date_set_time_t (&today, time (NULL));
+
+                date_is_today = (g_date_compare (&date, &today) == 0);
+
+                strftime (
+                        text, sizeof (text),
+                        nl_langinfo (date_is_today ? T_FMT : D_FMT),
+                        localtime (time_ptr));
+        }
 
         g_object_set (renderer, "text", text, NULL);
 
@@ -522,6 +541,26 @@ columns_factory_input_players_sim (GvaGameStoreColumn column_id)
 #else
         return NULL;
 #endif
+}
+
+static GtkTreeViewColumn *
+columns_factory_lastplayed (GvaGameStoreColumn column_id)
+{
+        GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
+
+        column = gtk_tree_view_column_new ();
+        gtk_tree_view_column_set_reorderable (column, TRUE);
+        gtk_tree_view_column_set_sort_column_id (column, column_id);
+
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+        gtk_tree_view_column_set_cell_data_func (
+                column, renderer, (GtkTreeCellDataFunc)
+                columns_time_set_properties, NULL, NULL);
+
+        return column;
 }
 
 static GtkTreeViewColumn *
@@ -996,6 +1035,8 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "driver_protection",  NULL },
         { "driver_savestate",   NULL },
         { "driver_palettesize", NULL },
+        { "lastplayed",         N_("Last Played"),
+                                columns_factory_lastplayed },
         { "comment",            N_("Comment"),
                                 columns_factory_comment },
         { "inode",              NULL },
@@ -1013,6 +1054,7 @@ static gchar *default_column_order[] =
 #ifdef CATEGORY_FILE
         "category",
 #endif
+        "lastplayed",
         "bios",
         "driver_status",
         "input_players",

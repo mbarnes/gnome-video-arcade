@@ -153,6 +153,7 @@ game_store_constructor (GType type,
         types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_PROTECTION */
         types[column++] = G_TYPE_STRING;     /* COLUMN_DRIVER_SAVESTATE */
         types[column++] = G_TYPE_INT;        /* COLUMN_DRIVER_PALETTESIZE */
+        types[column++] = GVA_TYPE_TIME;     /* COLUMN_LAST_PLAYED */
         types[column++] = G_TYPE_STRING;     /* COLUMN_COMMENT */
         types[column++] = G_TYPE_INT64;      /* COLUMN_INODE */
         types[column++] = G_TYPE_STRING;     /* COLUMN_INPFILE */
@@ -369,6 +370,16 @@ gva_game_store_new_from_query (const gchar *sql,
                                 if (v_string == NULL)
                                         v_string = "";
                                 g_value_set_string (value, v_string);
+                        }
+                        else if (type == GVA_TYPE_TIME)
+                        {
+                                sqlite3_int64 v_int64;
+                                time_t v_time;
+
+                                /* XXX Is this widely portable? */
+                                v_int64 = sqlite3_column_int64 (stmt, ii);
+                                v_time = (time_t) v_int64;
+                                g_value_set_boxed (value, &v_time);
                         }
                         else
                         {

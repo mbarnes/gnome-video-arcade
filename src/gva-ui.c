@@ -20,6 +20,7 @@
 
 #include "gva-audit.h"
 #include "gva-column-manager.h"
+#include "gva-db.h"
 #include "gva-error.h"
 #include "gva-favorites.h"
 #include "gva-game-store.h"
@@ -36,6 +37,9 @@
 #ifdef HAVE_DBUS
 #include "gva-dbus.h"
 #endif
+
+#define SQL_INSERT_LASTPLAYED \
+        "INSERT INTO lastplayed VALUES ('%s', %" G_GINT64_FORMAT ")"
 
 static GtkBuilder *builder = NULL;
 static GtkUIManager *manager = NULL;
@@ -65,6 +69,47 @@ static const gchar *license =
 "along with this program.  If not, see <http://www.gnu.org/licenses/>.";
 
 static void
+log_lastplayed (GvaProcess *process,
+                gint status,
+                gchar *name)
+{
+        GtkTreePath *path;
+        gchar *sql;
+        time_t now;
+        GError *error = NULL;
+
+        if (process->error != NULL)
+                return;
+
+        time (&now);
+
+        /* Record the time in the database. */
+        sql = g_strdup_printf (SQL_INSERT_LASTPLAYED, name, (gint64) now);
+        gva_db_execute (sql, &error);
+        gva_error_handle (&error);
+        g_free (sql);
+
+        /* Record the time in the tree model. */
+        path = gva_tree_view_lookup (name);
+        if (path != NULL)
+        {
+                GtkTreeModel *model;
+                GtkTreeIter iter;
+
+                model = gva_tree_view_get_model ();
+                gtk_tree_model_get_iter (model, &iter, path);
+
+                gtk_tree_store_set (
+                        GTK_TREE_STORE (model), &iter,
+                        GVA_GAME_STORE_COLUMN_LAST_PLAYED, &now, -1);
+
+                gtk_tree_path_free (path);
+        }
+
+        g_free (name);
+}
+
+static void
 record_game_exited (GvaProcess *process,
                     gint status,
                     gchar *inpname)
@@ -72,7 +117,6 @@ record_game_exited (GvaProcess *process,
         if (process->error == NULL)
                 gva_play_back_show (inpname);
 
-        g_object_unref (process);
         g_free (inpname);
 }
 
@@ -286,6 +330,9 @@ action_play_back_cb (GtkAction *action)
                 gva_wnck_listen_for_new_window (process, name);
                 g_signal_connect_after (
                         process, "exited",
+                        G_CALLBACK (log_lastplayed), g_strdup (name));
+                g_signal_connect_after (
+                        process, "exited",
                         G_CALLBACK (g_object_unref), NULL);
         }
 
@@ -413,8 +460,16 @@ action_record_cb (GtkAction *action)
                 gva_wnck_listen_for_new_window (process, name);
                 g_signal_connect_after (
                         process, "exited",
-                        G_CALLBACK (record_game_exited), inpname);
+                        G_CALLBACK (log_lastplayed), g_strdup (name));
+                g_signal_connect_after (
+                        process, "exited",
+                        G_CALLBACK (record_game_exited), g_strdup (inpname));
+                g_signal_connect_after (
+                        process, "exited",
+                        G_CALLBACK (g_object_unref), NULL);
         }
+
+        g_free (inpname);
 }
 
 /**
@@ -578,6 +633,9 @@ action_start_cb (GtkAction *action)
         if (process != NULL)
         {
                 gva_wnck_listen_for_new_window (process, name);
+                g_signal_connect_after (
+                        process, "exited",
+                        G_CALLBACK (log_lastplayed), g_strdup (name));
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (g_object_unref), NULL);
