@@ -33,6 +33,10 @@
 /* Based on MAME's DTD */
 #define MAX_ELEMENT_DEPTH 4
 
+/* The new <dipswitch> and <configuration> attributes in 0.136 are
+ * REQUIRED, but we are leaving them as optional in the table schema
+ * for backward compatibility with older MAME versions. */
+
 #define SQL_CREATE_TABLE_MAME \
         "CREATE TABLE IF NOT EXISTS mame (" \
                 "build, " \
@@ -180,16 +184,22 @@
 #define SQL_CREATE_TABLE_DIPVALUE \
         "CREATE TABLE IF NOT EXISTS dipvalue (" \
                 "game NOT NULL, " \
+                /* new in 0.136 */ "tag, " \
+                /* new in 0.136 */ "mask, " \
                 "dipswitch NOT NULL, " \
                 "name NOT NULL, " \
+                /* new in 0.136 */ "value, " \
                 "default_ DEFAULT 'no' " \
                 "CHECK (default_ in ('yes', 'no')));"
 
 #define SQL_CREATE_TABLE_CONFSETTING \
         "CREATE TABLE IF NOT EXISTS confsetting (" \
                 "game NOT NULL, " \
+                /* new in 0.136 */ "tag, " \
+                /* new in 0.136 */ "mask, " \
                 "configuration NOT NULL, " \
                 "name NOT NULL, " \
+                /* new in 0.136 */ "value, " \
                 "default_ DEFAULT 'no' " \
                 "CHECK (default_ in ('yes', 'no')));"
 
@@ -356,15 +366,21 @@
 #define SQL_INSERT_DIPVALUE \
         "INSERT INTO dipvalue VALUES (" \
                 "@game, " \
+                "@tag, " \
+                "@mask, " \
                 "@dipswitch, " \
                 "@name, " \
+                "@value, " \
                 "@default_);"
 
 #define SQL_INSERT_CONFSETTING \
         "INSERT INTO confsetting VALUES (" \
                 "@game, " \
+                "@tag, " \
+                "@mask, " \
                 "@configuration, " \
                 "@name, " \
+                "@value, " \
                 "@default_);"
 
 #define SQL_INSERT_ADJUSTER \
@@ -397,6 +413,8 @@ struct _ParserData
         gchar *configuration;
         gchar *dipswitch;
         gchar *game;
+        gchar *mask;
+        gchar *tag;
 };
 
 /* Canonical names of XML elements and attributes */
@@ -442,6 +460,7 @@ static struct
         const gchar *keydelta;
         const gchar *mame;
         const gchar *manufacturer;
+        const gchar *mask;
         const gchar *maximum;
         const gchar *md5;
         const gchar *merge;
@@ -471,8 +490,10 @@ static struct
         const gchar *sound;
         const gchar *sourcefile;
         const gchar *status;
+        const gchar *tag;
         const gchar *tilt;
         const gchar *type;
+        const gchar *value;
         const gchar *vbend;
         const gchar *vbstart;
         const gchar *vtotal;
@@ -636,8 +657,14 @@ db_parser_start_element_configuration (ParserData *data,
         gint ii;
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                if (attribute_name[ii] == intern.mask)
+                        data->mask = g_strdup (attribute_value[ii]);
                 if (attribute_name[ii] == intern.name)
                         data->configuration = g_strdup (attribute_value[ii]);
+                if (attribute_name[ii] == intern.tag)
+                        data->tag = g_strdup (attribute_value[ii]);
+        }
 }
 
 static void
@@ -652,7 +679,15 @@ db_parser_start_element_confsetting (ParserData *data,
         /* Bind default values. */
         db_parser_bind_text (stmt, "@default_", "no");
 
+        /* XXX Combining the <configuration> and <confsetting> elements
+         *     into one table is biting us now since 0.136 added "tag"
+         *     and "mask" attributes to <configuration>, because we now
+         *     have to duplicate those values in each "confsetting" row.
+         *     We may need to redesign these tables if we ever actually
+         *     use them. */
         db_parser_bind_text (stmt, "@game", data->game);
+        db_parser_bind_text (stmt, "@tag", data->tag);
+        db_parser_bind_text (stmt, "@mask", data->mask);
         db_parser_bind_text (stmt, "@configuration", data->configuration);
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
@@ -663,6 +698,8 @@ db_parser_start_element_confsetting (ParserData *data,
                         param = "@name";
                 else if (attribute_name[ii] == intern.default_)
                         param = "@default_";
+                else if (attribute_name[ii] == intern.value)
+                        param = "@value";
                 else
                         continue;
 
@@ -716,8 +753,14 @@ db_parser_start_element_dipswitch (ParserData *data,
         gint ii;
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
+        {
+                if (attribute_name[ii] == intern.mask)
+                        data->mask = g_strdup (attribute_value[ii]);
                 if (attribute_name[ii] == intern.name)
                         data->dipswitch = g_strdup (attribute_value[ii]);
+                if (attribute_name[ii] == intern.tag)
+                        data->tag = g_strdup (attribute_value[ii]);
+        }
 }
 
 static void
@@ -732,7 +775,15 @@ db_parser_start_element_dipvalue (ParserData *data,
         /* Bind default values. */
         db_parser_bind_text (stmt, "@default_", "no");
 
+        /* XXX Combining the <dipswitch> and <dipvalue> elements into
+         *     one table is biting us now since 0.136 added "tag" and
+         *     "mask" attributes to <dipswitch>, because we now have
+         *     to duplicate those values in each "dipvalue" row.  We
+         *     may need to redesign these tables if we ever actually
+         *     use them. */
         db_parser_bind_text (stmt, "@game", data->game);
+        db_parser_bind_text (stmt, "@tag", data->tag);
+        db_parser_bind_text (stmt, "@mask", data->mask);
         db_parser_bind_text (stmt, "@dipswitch", data->dipswitch);
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
@@ -743,6 +794,8 @@ db_parser_start_element_dipvalue (ParserData *data,
                         param = "@name";
                 else if (attribute_name[ii] == intern.default_)
                         param = "@default_";
+                else if (attribute_name[ii] == intern.value)
+                        param = "@value";
                 else
                         continue;
 
@@ -1254,6 +1307,12 @@ static void
 db_parser_end_element_configuration (ParserData *data,
                                      GError **error)
 {
+        g_free (data->tag);
+        data->tag = NULL;
+
+        g_free (data->mask);
+        data->mask = NULL;
+
         g_free (data->configuration);
         data->configuration = NULL;
 }
@@ -1262,6 +1321,12 @@ static void
 db_parser_end_element_dipswitch (ParserData *data,
                                  GError **error)
 {
+        g_free (data->tag);
+        data->tag = NULL;
+
+        g_free (data->mask);
+        data->mask = NULL;
+
         g_free (data->dipswitch);
         data->dipswitch = NULL;
 }
@@ -1445,6 +1510,8 @@ db_parser_data_free (ParserData *data)
         g_free (data->configuration);
         g_free (data->dipswitch);
         g_free (data->game);
+        g_free (data->mask);
+        g_free (data->tag);
 
         g_slice_free (ParserData, data);
 }
@@ -1686,6 +1753,7 @@ gva_db_build (GError **error)
         intern.keydelta      = g_intern_static_string ("keydelta");
         intern.mame          = g_intern_static_string ("mame");
         intern.manufacturer  = g_intern_static_string ("manufacturer");
+        intern.mask          = g_intern_static_string ("mask");
         intern.maximum       = g_intern_static_string ("maximum");
         intern.md5           = g_intern_static_string ("md5");
         intern.merge         = g_intern_static_string ("merge");
@@ -1715,8 +1783,10 @@ gva_db_build (GError **error)
         intern.sound         = g_intern_static_string ("sound");
         intern.sourcefile    = g_intern_static_string ("sourcefile");
         intern.status        = g_intern_static_string ("status");
+        intern.tag           = g_intern_static_string ("tag");
         intern.tilt          = g_intern_static_string ("tilt");
         intern.type          = g_intern_static_string ("type");
+        intern.value         = g_intern_static_string ("value");
         intern.vbend         = g_intern_static_string ("vbend");
         intern.vbstart       = g_intern_static_string ("vbstart");
         intern.vtotal        = g_intern_static_string ("vtotal");
