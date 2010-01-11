@@ -19,6 +19,9 @@ AC_SUBST(GVA_VERSION)
 
 AC_SUBST(abs_top_builddir)
 
+# Automake 1.11 - Silent Build Rules
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
 # Dependencies
 GLIB_MODULES="glib-2.0 >= 2.12"
 PKG_CHECK_MODULES(GLIB, $GLIB_MODULES)
