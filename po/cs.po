@@ -1,0 +1,823 @@
+# Czech translation for gnome-video-arcade.
+# Copyright (C) 2009 the author(s) of gnome-video-arcade.
+# This file is distributed under the same license as the gnome-video-arcade package.
+# Marek Černocký <marek@manet.cz>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-12 01:40+0100\n"
+"PO-Revision-Date: 2009-12-07 09:48+0100\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../data/gnome-video-arcade.builder.h:1
+msgid " "
+msgstr " "
+
+#: ../data/gnome-video-arcade.builder.h:2
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>Alternativní verze</b>"
+
+#: ../data/gnome-video-arcade.builder.h:3
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/gnome-video-arcade.builder.h:4
+msgid "<b>CPU</b>"
+msgstr "<b>Procesor</b>"
+
+#: ../data/gnome-video-arcade.builder.h:5
+msgid "<b>Columns</b>"
+msgstr "<b>Sloupce</b>"
+
+#: ../data/gnome-video-arcade.builder.h:6
+msgid "<b>Game List</b>"
+msgstr "<b>Seznam her</b>"
+
+#: ../data/gnome-video-arcade.builder.h:7
+msgid "<b>General</b>"
+msgstr "<b>Obecné</b>"
+
+#: ../data/gnome-video-arcade.builder.h:8
+msgid "<b>Original Version</b>"
+msgstr "<b>Originální verze</b>"
+
+#: ../data/gnome-video-arcade.builder.h:9
+msgid "<b>Sound</b>"
+msgstr "<b>Zvuk</b>"
+
+#. The same text is in gnome-video-arcade.builder,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.builder.h:10 ../src/gva-columns.c:747
+msgid "<b>There are known problems with this game:</b>"
+msgstr "<b>Existují známé problémy s touto hrou:</b>"
+
+#: ../data/gnome-video-arcade.builder.h:11
+msgid "<b>Video</b>"
+msgstr "<b>Obraz</b>"
+
+#: ../data/gnome-video-arcade.builder.h:12
+msgid "<big><b>Errors detected in ROM files</b></big>"
+msgstr "<big><b>Zjištěna chyba v souborech ROM</b></big>"
+
+#: ../data/gnome-video-arcade.builder.h:13
+msgid ""
+"<small><i><b>Note:</b> Setting this will not take effect until the second "
+"time the game is started. It does not apply to recording or playing back "
+"games.</i></small>"
+msgstr ""
+"<small><i><b>Poznámka:</b> Nastavení se nepoužije, dokud hru nespustíte "
+"podruhé. To neplatí pro záznam a přehrávání her.</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:14
+msgid ""
+"<small><i>If these games worked with previous versions of MAME, it is likely "
+"their ROM requirements have changed.  If so, you will need to acquire more "
+"recent ROM files.</i></small>"
+msgstr ""
+"<small><i>Pokud tyto hry s dřívější verzí MAME fungovaly, byly nejspíše "
+"změněny požadavky na jejich ROM. V takovém případě musíte získat novější "
+"soubory ROM.</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:15
+msgid ""
+"An audit of the available games has detected errors in some of the ROM "
+"files. The following games will not be available in GNOME Video Arcade."
+msgstr ""
+"Kontrola dostupných her objevila chybu v některém ze souborů ROM. "
+"Následující hry nebudou v GNOME Video Arcade dostupné."
+
+#: ../data/gnome-video-arcade.builder.h:16
+msgid "Choose the order of information to appear in the game list."
+msgstr "Vyberte pořadí informací, jak se mají objevit v seznamu her."
+
+#: ../data/gnome-video-arcade.builder.h:17
+msgid "Close this window"
+msgstr "Zavřít toto okno"
+
+#: ../data/gnome-video-arcade.builder.h:18
+msgid "Columns"
+msgstr "Sloupce"
+
+#: ../data/gnome-video-arcade.builder.h:19
+msgid "Delete the selected game recordings"
+msgstr "Smazat vybrané záznamy her"
+
+#: ../data/gnome-video-arcade.builder.h:20
+msgid "GNOME Video Arcade"
+msgstr "GNOME Video Arcade"
+
+#: ../data/gnome-video-arcade.builder.h:21
+msgid "Gallery"
+msgstr "Galerie"
+
+#: ../data/gnome-video-arcade.builder.h:22
+msgid "General"
+msgstr "Obecné"
+
+#: ../data/gnome-video-arcade.builder.h:23
+msgid "History"
+msgstr "Historie"
+
+#: ../data/gnome-video-arcade.builder.h:24 ../src/gva-ui.c:869
+msgid "Only show my favorite games"
+msgstr "Zobrazit pouze mé oblíbené hry"
+
+#: ../data/gnome-video-arcade.builder.h:25
+msgid "Play _Back"
+msgstr "_Přehrát"
+
+#: ../data/gnome-video-arcade.builder.h:26 ../src/gva-ui.c:713
+msgid "Play back the selected game recording"
+msgstr "Přehrát vybraný záznam hry"
+
+#: ../data/gnome-video-arcade.builder.h:27
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: ../data/gnome-video-arcade.builder.h:28
+msgid "Properties"
+msgstr "Vlastnosti"
+
+#: ../data/gnome-video-arcade.builder.h:29
+msgid "Recorded Games"
+msgstr "Záznamy her"
+
+#: ../data/gnome-video-arcade.builder.h:30 ../src/gva-ui.c:769
+msgid "Save ROM errors to a file"
+msgstr "Uložit chyby ROM do souboru"
+
+#. This label precedes the search entry. e.g. Search for: Pac-Man
+#: ../data/gnome-video-arcade.builder.h:32
+msgid "Search for:"
+msgstr "Vyhledat:"
+
+#: ../data/gnome-video-arcade.builder.h:33 ../src/gva-ui.c:862
+msgid "Show all available games"
+msgstr "Zobrazit všechny dostupné hry"
+
+#: ../data/gnome-video-arcade.builder.h:34 ../src/gva-ui.c:734
+msgid "Show information about the selected game"
+msgstr "Zobrazit informace o vybrané hře"
+
+#: ../data/gnome-video-arcade.builder.h:35 ../src/gva-ui.c:876
+msgid "Show my search results"
+msgstr "Zobrazit mé výsledky hledání"
+
+#: ../data/gnome-video-arcade.builder.h:36 ../src/gva-ui.c:706
+msgid "Show next game"
+msgstr "Zobrazit následující hru"
+
+#: ../data/gnome-video-arcade.builder.h:37 ../src/gva-ui.c:727
+msgid "Show previous game"
+msgstr "Zobrazit předchozí hru"
+
+#: ../data/gnome-video-arcade.builder.h:38 ../src/gva-ui.c:790
+msgid "Start the selected game"
+msgstr "Spustit vybranou hru"
+
+#: ../data/gnome-video-arcade.builder.h:39
+msgid "Technical"
+msgstr "Technické"
+
+#: ../data/gnome-video-arcade.builder.h:40
+msgid "_Start Game"
+msgstr "_Spustit hru"
+
+#: ../data/gnome-video-arcade.builder.h:41 ../src/gva-columns.c:815
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>TATO HRA NEPRACUJE.</b>"
+
+#: ../data/gnome-video-arcade.builder.h:42 ../src/gva-columns.c:806
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr "• Překlápění obrazu ve smíšeném režimu není podporované."
+
+#: ../data/gnome-video-arcade.builder.h:43 ../src/gva-columns.c:768
+msgid "• The colors are completely wrong."
+msgstr "• Barvy jsou úplně špatně."
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.builder.h:45 ../src/gva-columns.c:759
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• Barvy nejsou 100% správně."
+
+#: ../data/gnome-video-arcade.builder.h:46 ../src/gva-columns.c:825
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• Hra má ochranu, která není plně emulovaná."
+
+#: ../data/gnome-video-arcade.builder.h:47 ../src/gva-columns.c:797
+msgid "• The game lacks sound."
+msgstr "• Hře schází zvuk."
+
+#: ../data/gnome-video-arcade.builder.h:49 ../src/gva-columns.c:788
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• Emulace zvuku není 100% správná."
+
+#: ../data/gnome-video-arcade.builder.h:51 ../src/gva-columns.c:778
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• Emulace obrazu není 100% správná."
+
+#: ../src/gconf-bridge.c:1218
+#, c-format
+msgid "GConf error: %s"
+msgstr "Chyba GConf: %s"
+
+#: ../src/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "Všechny další chyby se zobrazují pouze v terminálu."
+
+#: ../src/gva-audit.c:238
+msgid "Save As"
+msgstr "Uložit jako"
+
+#: ../src/gva-categories.c:71
+msgid "This program is not configured to show category information."
+msgstr "Tento program není nastavený, aby mohl zobrazit informace o kategorii."
+
+#: ../src/gva-column-manager.c:554
+msgid "Managed View"
+msgstr "Správcovské zobrazení"
+
+#: ../src/gva-column-manager.c:555
+msgid "The GtkTreeView being managed"
+msgstr "Je spravován GtkTreeView"
+
+#: ../src/gva-column-manager.c:611
+msgid "Move _Up"
+msgstr "Přesunout _víš"
+
+#: ../src/gva-column-manager.c:624
+msgid "Move _Down"
+msgstr "Přesunout _níž"
+
+#: ../src/gva-column-manager.c:637
+msgid "_Show"
+msgstr "_Zobrazit"
+
+#: ../src/gva-column-manager.c:646
+msgid "_Hide"
+msgstr "_Skrýt"
+
+#: ../src/gva-columns.c:298
+#, c-format
+msgid "Remove %s Column"
+msgstr "Odebrat sloupec %s"
+
+#: ../src/gva-columns.c:300
+#, c-format
+msgid "Remove the \"%s\" column from the game list"
+msgstr "Odebrat sloupec „%s“ ze seznamu her"
+
+#: ../src/gva-columns.c:861
+msgid "Click here to remove from favorites"
+msgstr "Kliknutím zde odeberete z oblíbených"
+
+#: ../src/gva-columns.c:863
+msgid "Click here to add to favorites"
+msgstr "Kliknutím zde přidáte do oblíbených"
+
+#: ../src/gva-columns.c:955 ../src/gva-properties.c:412
+msgid "(Game Description Unknown)"
+msgstr "(Neznámý popis hry)"
+
+#: ../src/gva-columns.c:958 ../src/gva-properties.c:415
+msgid "(Manufacturer Unknown)"
+msgstr "(Neznámý výrobce)"
+
+#: ../src/gva-columns.c:961 ../src/gva-properties.c:418
+msgid "(Year Unknown)"
+msgstr "(Neznámý rok)"
+
+#: ../src/gva-columns.c:985 ../src/gva-main.c:978
+msgid "ROM Name"
+msgstr "Název ROM"
+
+#: ../src/gva-columns.c:987
+msgid "BIOS"
+msgstr "BIOS"
+
+#: ../src/gva-columns.c:989 ../src/gva-main.c:971
+msgid "Category"
+msgstr "Kategorie"
+
+#: ../src/gva-columns.c:991
+msgid "Favorite"
+msgstr "Oblíbená"
+
+#: ../src/gva-columns.c:994
+msgid "Driver"
+msgstr "Ovladač"
+
+#: ../src/gva-columns.c:1002
+msgid "Samples"
+msgstr "Ukázky"
+
+#: ../src/gva-columns.c:1004
+msgid "Title"
+msgstr "Název"
+
+#: ../src/gva-columns.c:1007
+msgid "Year"
+msgstr "Rok"
+
+#: ../src/gva-columns.c:1010 ../src/gva-main.c:957
+msgid "Manufacturer"
+msgstr "Výrobce"
+
+#: ../src/gva-columns.c:1016
+msgid "Players"
+msgstr "Hráči"
+
+#: ../src/gva-columns.c:1019
+msgid "Players (Alt.)"
+msgstr "Hráči (stříd.)"
+
+#: ../src/gva-columns.c:1022
+msgid "Players (Sim.)"
+msgstr "Hráči (souč.)"
+
+#: ../src/gva-columns.c:1027
+msgid "Status"
+msgstr "Stav"
+
+#: ../src/gva-columns.c:1038
+#, fuzzy
+msgid "Last Played"
+msgstr "Hráno"
+
+#: ../src/gva-columns.c:1040
+msgid "Comment"
+msgstr "Poznámka"
+
+#: ../src/gva-columns.c:1044
+msgid "Played On"
+msgstr "Hráno"
+
+#: ../src/gva-history.c:43
+msgid "This program is not configured to show history information."
+msgstr "Tento program není nastavený, aby mohl zobrazit informace o historii."
+
+#: ../src/gva-input-file.c:525
+#, c-format
+msgid "Invalid or unsupported INP file format"
+msgstr "Neplatný nebo nepodporovaný formát souboru INP"
+
+#: ../src/gva-main.c:244
+msgid "Building game database..."
+msgstr "Buduje se databáze her…"
+
+#: ../src/gva-main.c:302
+msgid "Analyzing ROM files..."
+msgstr "Analyzují se soubory ROM…"
+
+#: ../src/gva-main.c:943
+msgid "Search for any of the following:"
+msgstr "Hledat některou z následujících věcí:"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../src/gva-main.c:950
+msgid "Game Title"
+msgstr "Název hry"
+
+#: ../src/gva-main.c:964
+msgid "Copyright Year"
+msgstr "Rok vydání"
+
+#: ../src/gva-main.c:985
+msgid "BIOS Name"
+msgstr "Název BIOSu"
+
+#: ../src/gva-main.c:992
+msgid "Driver Name"
+msgstr "Název ovladače"
+
+#: ../src/gva-mame-common.c:224
+#, c-format
+msgid "%s: No such configuration key"
+msgstr "%s: Žádný takový klíč nastavení neexistuje"
+
+#: ../src/gva-mame-sdlmame.c:66 ../src/gva-mame-xmame.c:62
+#, c-format
+msgid "Could not determine emulator version"
+msgstr "Nelze zjistit verzi emulátoru"
+
+#: ../src/gva-mute-button.c:126
+msgid "Muted"
+msgstr "Ztišeno"
+
+#: ../src/gva-mute-button.c:127
+msgid "Whether the button state is muted"
+msgstr "Zda je tlačítko nastavené na ztišení"
+
+#: ../src/gva-mute-button.c:229
+msgid "In-game sound is muted"
+msgstr "Zvuk ve hře je ztišený"
+
+#: ../src/gva-mute-button.c:234
+msgid "In-game sound is enabled"
+msgstr "Zvuk ve hře je zapnutý"
+
+#: ../src/gva-nplayers.c:99
+msgid ""
+"This program is not configured to show detailed number of players "
+"information."
+msgstr ""
+"Tento program není nastavený, aby mohl zobrazit podrobné informace o hráčích."
+
+#: ../src/gva-nplayers.c:179
+msgid "Up to four players alternating or two players simultaneously"
+msgstr "Až čtyři hráči střídavě nebo dva hráči současně"
+
+#: ../src/gva-nplayers.c:183
+msgid "Up to eight players alternating or two players simultaneously"
+msgstr "Až osm hráčů střídavě nebo dva hráči současně"
+
+#: ../src/gva-nplayers.c:198 ../src/gva-nplayers.c:241
+#: ../src/gva-nplayers.c:277
+msgid "One player only"
+msgstr "Pouze jeden hráč"
+
+#: ../src/gva-nplayers.c:201
+msgid "One or two players"
+msgstr "Jeden nebo dva hráči"
+
+#: ../src/gva-nplayers.c:204
+msgid "Up to three players"
+msgstr "Až tři hráči"
+
+#: ../src/gva-nplayers.c:207
+msgid "Up to four players"
+msgstr "Až čtyři hráči"
+
+#: ../src/gva-nplayers.c:210
+msgid "Up to five players"
+msgstr "Až pět hráčů"
+
+#: ../src/gva-nplayers.c:213
+msgid "Up to six players"
+msgstr "Až šest hráčů"
+
+#: ../src/gva-nplayers.c:216
+msgid "Up to seven players"
+msgstr "Až sedm hráčů"
+
+#: ../src/gva-nplayers.c:219
+msgid "Up to eight players"
+msgstr "Až osm hráčů"
+
+#: ../src/gva-nplayers.c:244
+msgid "One or two players alternating"
+msgstr "Jeden nebo dva hráči střídavě"
+
+#: ../src/gva-nplayers.c:247
+msgid "Up to three players alternating"
+msgstr "Až tři hráči střídavě"
+
+#: ../src/gva-nplayers.c:250
+msgid "Up to four players alternating"
+msgstr "Až čtyři hráči střídavě"
+
+#: ../src/gva-nplayers.c:253
+msgid "Up to five players alternating"
+msgstr "Až pět hráčů střídavě"
+
+#: ../src/gva-nplayers.c:256
+msgid "Up to six players alternating"
+msgstr "Až šest hráčů střídavě"
+
+#: ../src/gva-nplayers.c:259
+msgid "Up to seven players alternating"
+msgstr "Až sedm hráčů střídavě"
+
+#: ../src/gva-nplayers.c:262
+msgid "Up to eight players alternating"
+msgstr "Až osm hráčů střídavě"
+
+#: ../src/gva-nplayers.c:280
+msgid "One or two players simultaneously"
+msgstr "Jeden nebo dva hráči současně"
+
+#: ../src/gva-nplayers.c:283
+msgid "Up to three players simultaneously"
+msgstr "Až tři hráči současně"
+
+#: ../src/gva-nplayers.c:286
+msgid "Up to four players simultaneously"
+msgstr "Až čtyři hráči současně"
+
+#: ../src/gva-nplayers.c:289
+msgid "Up to five players simultaneously"
+msgstr "Až pět hráčů současně"
+
+#: ../src/gva-nplayers.c:292
+msgid "Up to six players simultaneously"
+msgstr "Až šest hráčů současně"
+
+#: ../src/gva-nplayers.c:295
+msgid "Up to seven players simultaneously"
+msgstr "Až sedm hráčů současně"
+
+#: ../src/gva-nplayers.c:298
+msgid "Up to eight players simultaneously"
+msgstr "Až osm hráčů současně"
+
+#: ../src/gva-play-back.c:54
+msgid "Delete selected game recordings?"
+msgstr "Smazat vybrané záznamy her?"
+
+#: ../src/gva-play-back.c:58
+msgid ""
+"This operation will permanently erase the recorded games you have selected.  "
+"Are you sure you want to proceed?"
+msgstr ""
+"Tato operace trvale smaže záznamy her, které jste vybrali. Opravdu chcete "
+"pokračovat?"
+
+#: ../src/gva-play-back.c:62
+msgid "Do Not Delete"
+msgstr "Nemazat"
+
+#: ../src/gva-properties.c:148
+msgid "Show this game"
+msgstr "Zobrazit tuto hru"
+
+#: ../src/gva-properties.c:459
+#, c-format
+msgid ""
+"Error while fetching history:\n"
+"%s"
+msgstr ""
+"Chyba při získávání historie:\n"
+"%s"
+
+#: ../src/gva-properties.c:464
+msgid "History not available"
+msgstr "Historie není dostupná"
+
+#: ../src/gva-tree-view.c:421
+msgid "Available Game"
+msgid_plural "Available Games"
+msgstr[0] "dostupná hra"
+msgstr[1] "dostupné hry"
+msgstr[2] "dostupných her"
+
+#: ../src/gva-tree-view.c:428
+msgid "Favorite Game"
+msgid_plural "Favorite Games"
+msgstr[0] "oblíbená hra"
+msgstr[1] "oblíbené hry"
+msgstr[2] "oblíbených her"
+
+#: ../src/gva-tree-view.c:435
+msgid "Search Result"
+msgid_plural "Search Results"
+msgstr[0] "výsledek hledání"
+msgstr[1] "výsledky hledání"
+msgstr[2] "výsledků hledání"
+
+#: ../src/gva-ui.c:145
+msgid "M.A.M.E. Front-End"
+msgstr "Uživatelské rozhraní k M.A.M.E."
+
+#: ../src/gva-ui.c:150
+msgid "translator-credits"
+msgstr "Marek Černocký <marek@manet.cz>"
+
+#. Translators: This is passed through D-Bus as the
+#. * reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:322
+msgid "Watching a fullscreen game"
+msgstr "Sleduje se hra na celé obrazovce"
+
+#. Translators: This is passed through D-Bus as the
+#. * reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:452
+msgid "Recording a fullscreen game"
+msgstr "Zaznamenává se hra na celé obrazovce"
+
+#. Translators: This is passed through D-Bus as the
+#. * reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:627
+msgid "Playing a fullscreen game"
+msgstr "Hraje se hra na celé obrazovce"
+
+#: ../src/gva-ui.c:683
+msgid "_About"
+msgstr "O _aplikaci"
+
+#: ../src/gva-ui.c:685
+msgid "Show information about the application"
+msgstr "Zobrazit informace o aplikaci"
+
+#: ../src/gva-ui.c:690
+msgid "_Contents"
+msgstr "_Obsah"
+
+#: ../src/gva-ui.c:692
+msgid "Open the help documentation"
+msgstr "Otevřít dokumentaci s nápovědou"
+
+#: ../src/gva-ui.c:697
+msgid "Add to _Favorites"
+msgstr "Přidat do _oblíbených"
+
+#: ../src/gva-ui.c:699
+msgid "Add the selected game to my list of favorites"
+msgstr "Přidat vybranou hru do seznamu mých oblíbených"
+
+#: ../src/gva-ui.c:711 ../src/gva-ui.c:781
+msgid "Play _Back..."
+msgstr "_Přehrát…"
+
+#: ../src/gva-ui.c:718
+msgid "_Preferences"
+msgstr "_Předvolby"
+
+#: ../src/gva-ui.c:720
+msgid "Configure the application"
+msgstr "Nastavit aplikaci"
+
+#: ../src/gva-ui.c:732
+msgid "_Properties"
+msgstr "_Vlastnosti"
+
+#: ../src/gva-ui.c:739
+msgid "_Quit"
+msgstr "_Ukončit"
+
+#: ../src/gva-ui.c:741
+msgid "Quit the application"
+msgstr "Ukončit aplikaci"
+
+#: ../src/gva-ui.c:746
+msgid "_Record"
+msgstr "_Zaznamenat"
+
+#: ../src/gva-ui.c:748
+msgid "Start the selected game and record keypresses to a file"
+msgstr "Spustit vybranou hru a zaznamenávat stisky kláves do souboru"
+
+#: ../src/gva-ui.c:760
+msgid "Remove from _Favorites"
+msgstr "Odebrat z _oblíbených"
+
+#: ../src/gva-ui.c:762
+msgid "Remove the selected game from my list of favorites"
+msgstr "Odebrat vybranou hru z mého seznamu oblíbených"
+
+#: ../src/gva-ui.c:767
+msgid "Save _As..."
+msgstr "Uložit _jako…"
+
+#: ../src/gva-ui.c:774
+msgid "S_earch..."
+msgstr "_Hledat…"
+
+#: ../src/gva-ui.c:776
+msgid "Show a custom list of games"
+msgstr "Zobrazit vlastní seznam her"
+
+#: ../src/gva-ui.c:783
+msgid "Play back a previously recorded game"
+msgstr "Přehrát dříve zaznamenanou hru"
+
+#: ../src/gva-ui.c:788
+msgid "_Start"
+msgstr "_Spustit"
+
+#: ../src/gva-ui.c:795
+msgid "_Add Column"
+msgstr "Přid_at sloupec"
+
+#: ../src/gva-ui.c:802
+msgid "_Edit"
+msgstr "_Upravit"
+
+#: ../src/gva-ui.c:809
+msgid "_Game"
+msgstr "_Hra"
+
+#: ../src/gva-ui.c:816
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: ../src/gva-ui.c:823
+msgid "_View"
+msgstr "_Zobrazit"
+
+#: ../src/gva-ui.c:833
+msgid "_Restore previous state when starting a game"
+msgstr "Při spuštění hry _obnovit předchozí stav"
+
+#: ../src/gva-ui.c:841
+msgid "Start games in _fullscreen mode"
+msgstr "Spouštět hry v režimu _celé obrazovky"
+
+#: ../src/gva-ui.c:849
+msgid "Show _alternate versions of original games"
+msgstr "Zobrazit _alternativní verze k originálním hrám"
+
+#: ../src/gva-ui.c:860
+msgid "_Available Games"
+msgstr "_Dostupné hry"
+
+#: ../src/gva-ui.c:867
+msgid "_Favorite Games"
+msgstr "_Oblíbené hry"
+
+#: ../src/gva-ui.c:874
+msgid "Search _Results"
+msgstr "Výsledky _hledání"
+
+#: ../src/gva-ui.c:959
+msgid "Failed to initialize user interface"
+msgstr "Selhala inicializace uživatelského rozhraní"
+
+#: ../src/gva-ui.c:1077
+#, c-format
+msgid "Add %s Column"
+msgstr "Přidat sloupec %s"
+
+#: ../src/gva-ui.c:1079
+#, c-format
+msgid "Add a \"%s\" column to the game list"
+msgstr "Přidat sloupec „%s“ do seznamu her"
+
+#: ../src/main.c:58
+msgid "Build the games database"
+msgstr "Vybudovat databázi her"
+
+#: ../src/main.c:62
+msgid "Inspect an emulator setting"
+msgstr "Projít nastavení emulátoru"
+
+#: ../src/main.c:63
+msgid "NAME"
+msgstr "NÁZEV"
+
+#: ../src/main.c:67
+msgid "Show the application version"
+msgstr "Zobrazit verzi aplikace"
+
+#: ../src/main.c:71
+msgid "Show which emulator will be used"
+msgstr "Zobrazit, který emulátor bude použit"
+
+#: ../src/main.c:110
+msgid "No ROM files found"
+msgstr "Nenalezen žádný soubor ROM"
+
+#: ../src/main.c:115
+msgid ""
+"GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
+"is misconfigured or that no ROM files are installed. Click <b>Help</b> for "
+"more details and troubleshooting tips."
+msgstr ""
+"GNOME Video Arcade nemůže najít žádný soubor ROM. Je možné, že je špatně "
+"nastavené MAME nebo že nejsou nainstalované žádné soubory ROM. Klikněte na "
+"<b>Nápověda</b>, pokud chcete více podrobností a rady k problémům."
+
+#: ../src/main.c:125
+msgid ""
+"GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
+"is misconfigured or no ROM files are installed. Consult the user "
+"documentation for more details and troubleshooting tips."
+msgstr ""
+"GNOME Video Arcade nemůže najít žádný soubor ROM. Je možné, že je špatně "
+"nastavené MAME nebo že nejsou nainstalované žádné soubory ROM. Nahlédněte do "
+"uživatelské dokumentace, pokud chcete více podrobností a rady k problémům."
+
+#~ msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
+#~ msgstr "&#x2022; <b>TATO HRA NEPRACUJE.</b>"
+
+#~ msgid "&#x2022; Screen flipping in cocktail mode is not supported."
+#~ msgstr "&#x2022; Překlápění obrazu ve smíšeném režimu není podporované."
+
+#~ msgid "&#x2022; The colors are completely wrong."
+#~ msgstr "&#x2022; Barvy jsou úplně špatně."
+
+#~ msgid "&#x2022; The colors aren't 100% accurate."
+#~ msgstr "&#x2022; Barvy nejsou 100% správně."
+
+#~ msgid "&#x2022; The game has protection which isn't fully emulated."
+#~ msgstr "&#x2022; Hra má ochranu, která není plně emulovaná."
+
+#~ msgid "&#x2022; The game lacks sound."
+#~ msgstr "&#x2022; Hře schází zvuk."
+
+#~ msgid "&#x2022; The sound emulation isn't 100% accurate."
+#~ msgstr "&#x2022; Emulace zvuku není 100% správná."
+
+#~ msgid "&#x2022; The video emulation isn't 100% accurate."
+#~ msgstr "&#x2022; Emulace obrazu není 100% správná."
