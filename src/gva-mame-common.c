@@ -300,7 +300,6 @@ gva_mame_get_search_paths (const gchar *config_key,
 GList *
 gva_mame_get_input_files (GError **error)
 {
-        GHashTable *hash_table;
         const gchar *basename;
         const gchar *directory;
         GList *list = NULL;
@@ -311,11 +310,6 @@ gva_mame_get_input_files (GError **error)
         dir = g_dir_open (directory, 0, error);
         if (dir == NULL)
                 return NULL;
-
-        hash_table = g_hash_table_new_full (
-                g_str_hash, g_str_equal,
-                (GDestroyNotify) g_free,
-                (GDestroyNotify) g_free);
 
         while ((basename = g_dir_read_name (dir)) != NULL)
         {

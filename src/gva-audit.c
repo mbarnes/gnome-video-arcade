@@ -492,15 +492,12 @@ gva_audit_detect_changes (void)
 {
         gboolean changes = FALSE;
         gchar **directories;
-        time_t db_mtime;
         struct stat st;
         guint length, ii;
         GError *error = NULL;
 
         if (g_stat (gva_db_get_filename (), &st) < 0)
                 return FALSE;
-
-        db_mtime = st.st_mtime;
 
         directories = gva_mame_get_search_paths ("rompath", &error);
         length = (directories != NULL) ? g_strv_length (directories) : 0;

@@ -732,7 +732,6 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
 void
 gva_properties_init (void)
 {
-        GtkWindow *window;
         GtkTreeView *view;
         GtkSettings *settings;
         GtkWidget *text_view;
@@ -746,7 +745,6 @@ gva_properties_init (void)
         GtkNotebook *notebook;
 #endif
 
-        window = GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW);
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         text_view = GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW;
 

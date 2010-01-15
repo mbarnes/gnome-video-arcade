@@ -453,10 +453,6 @@ gva_main_connect_proxy_cb (GtkUIManager *manager,
         /* Show GtkMenuItem tooltips in the statusbar. */
         if (GTK_IS_MENU_ITEM (proxy))
         {
-                GtkStatusbar *statusbar;
-
-                statusbar = GTK_STATUSBAR (GVA_WIDGET_MAIN_STATUSBAR);
-
                 g_signal_connect (
                         proxy, "select",
                         G_CALLBACK (main_menu_item_select_cb), action);

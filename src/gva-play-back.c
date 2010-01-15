@@ -210,11 +210,9 @@ play_back_add_input_file (GvaInputFile *input_file,
 void
 gva_play_back_init (void)
 {
-        GtkWindow *window;
         GtkTreeView *view;
         GtkTreeViewColumn *column;
 
-        window = GTK_WINDOW (GVA_WIDGET_PLAY_BACK_WINDOW);
         view = GTK_TREE_VIEW (GVA_WIDGET_PLAY_BACK_TREE_VIEW);
 
         gtk_tree_view_set_model (view, gva_game_store_new ());
