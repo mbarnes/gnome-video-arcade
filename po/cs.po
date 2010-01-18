@@ -1,14 +1,14 @@
 # Czech translation for gnome-video-arcade.
 # Copyright (C) 2009 the author(s) of gnome-video-arcade.
 # This file is distributed under the same license as the gnome-video-arcade package.
-# Marek Černocký <marek@manet.cz>, 2009.
+# Marek Černocký <marek@manet.cz>, 2009, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-12 01:40+0100\n"
-"PO-Revision-Date: 2009-12-07 09:48+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
+"POT-Creation-Date: 2010-01-15 13:40+0000\n"
+"PO-Revision-Date: 2010-01-12 22:21+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -299,7 +299,7 @@ msgstr "(Neznámý výrobce)"
 msgid "(Year Unknown)"
 msgstr "(Neznámý rok)"
 
-#: ../src/gva-columns.c:985 ../src/gva-main.c:978
+#: ../src/gva-columns.c:985 ../src/gva-main.c:974
 msgid "ROM Name"
 msgstr "Název ROM"
 
@@ -307,7 +307,7 @@ msgstr "Název ROM"
 msgid "BIOS"
 msgstr "BIOS"
 
-#: ../src/gva-columns.c:989 ../src/gva-main.c:971
+#: ../src/gva-columns.c:989 ../src/gva-main.c:967
 msgid "Category"
 msgstr "Kategorie"
 
@@ -331,7 +331,7 @@ msgstr "Název"
 msgid "Year"
 msgstr "Rok"
 
-#: ../src/gva-columns.c:1010 ../src/gva-main.c:957
+#: ../src/gva-columns.c:1010 ../src/gva-main.c:953
 msgid "Manufacturer"
 msgstr "Výrobce"
 
@@ -352,9 +352,8 @@ msgid "Status"
 msgstr "Stav"
 
 #: ../src/gva-columns.c:1038
-#, fuzzy
 msgid "Last Played"
-msgstr "Hráno"
+msgstr "Naposledy hráno"
 
 #: ../src/gva-columns.c:1040
 msgid "Comment"
@@ -381,24 +380,24 @@ msgstr "Buduje se databáze her…"
 msgid "Analyzing ROM files..."
 msgstr "Analyzují se soubory ROM…"
 
-#: ../src/gva-main.c:943
+#: ../src/gva-main.c:939
 msgid "Search for any of the following:"
 msgstr "Hledat některou z následujících věcí:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:950
+#: ../src/gva-main.c:946
 msgid "Game Title"
 msgstr "Název hry"
 
-#: ../src/gva-main.c:964
+#: ../src/gva-main.c:960
 msgid "Copyright Year"
 msgstr "Rok vydání"
 
-#: ../src/gva-main.c:985
+#: ../src/gva-main.c:981
 msgid "BIOS Name"
 msgstr "Název BIOSu"
 
-#: ../src/gva-main.c:992
+#: ../src/gva-main.c:988
 msgid "Driver Name"
 msgstr "Název ovladače"
 
@@ -798,26 +797,3 @@ msgstr ""
 "nastavené MAME nebo že nejsou nainstalované žádné soubory ROM. Nahlédněte do "
 "uživatelské dokumentace, pokud chcete více podrobností a rady k problémům."
 
-#~ msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
-#~ msgstr "&#x2022; <b>TATO HRA NEPRACUJE.</b>"
-
-#~ msgid "&#x2022; Screen flipping in cocktail mode is not supported."
-#~ msgstr "&#x2022; Překlápění obrazu ve smíšeném režimu není podporované."
-
-#~ msgid "&#x2022; The colors are completely wrong."
-#~ msgstr "&#x2022; Barvy jsou úplně špatně."
-
-#~ msgid "&#x2022; The colors aren't 100% accurate."
-#~ msgstr "&#x2022; Barvy nejsou 100% správně."
-
-#~ msgid "&#x2022; The game has protection which isn't fully emulated."
-#~ msgstr "&#x2022; Hra má ochranu, která není plně emulovaná."
-
-#~ msgid "&#x2022; The game lacks sound."
-#~ msgstr "&#x2022; Hře schází zvuk."
-
-#~ msgid "&#x2022; The sound emulation isn't 100% accurate."
-#~ msgstr "&#x2022; Emulace zvuku není 100% správná."
-
-#~ msgid "&#x2022; The video emulation isn't 100% accurate."
-#~ msgstr "&#x2022; Emulace obrazu není 100% správná."
