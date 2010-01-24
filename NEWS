@@ -1,26 +1,44 @@
 GNOME Video Arcade 0.6.8
 ========================
 
-        Released July ??, 2009
+        Released January 23, 2010
 
         What's New
         ----------
+        * "Last Played" column, which when sorted shows the most
+          recently played games.
         * Introduce an optional dependency on the GLib bindings for
           D-Bus, which is used to inhibit GNOME's screen saver from
           starting while playing a game in fullscreen mode.
         * Drop dependency on libglade.  Use GtkBuilder instead.
 
+        Bugs Fixed
+        ----------
+        GNOME #597947: Missing no-c-format marker when string contains %
+                       (reported by Claude Paroz)
+        GNOME #598038: Remove old translation helper files (reported by
+                       Claude Paroz)
+        GNOME #605766: Non-translatable strings in the catalog (reported
+                       by Flamarion Jorge)
+
         User Interface Translations
         ---------------------------
+        Complete Czech translation by Marek Cernocky
+        Complete German translation by Mario Blättermann
         Complete Italian translation by Diego Pierotto
-        Partial Danish translation by Lars C. Jensen
+        Partial Danish translation by Lars C. Jensen and Joe Hansen
+        Partial French translation by Claude Paroz
+        Partial Greek translation by Kostas Papadimas
         Partial Punjabi translation by A S Alam
-        Partial Spanish translation by Jorge Gonzalez
+        Partial Slovenian translation by Matej Urbančič and Andrej Žnidaršič
+        Partial Spanish translation by Jorge Gonzalez and Omar Campagne
+        Partial Swedish translation by Daniel Nylander
 
         Documentation Translations
         --------------------------
         Complete Italian translation by Diego Pierotto
-        Partial Spanish translation by Jorge Gonzalez
+        Partial German translation by Mario Blättermann
+        Partial Spanish translation by Jorge Gonzalez and Omar Campagne
 
 GNOME Video Arcade 0.6.7
 ========================
