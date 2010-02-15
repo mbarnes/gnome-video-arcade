@@ -99,7 +99,7 @@ history_process_link (HistoryEntry *entry,
 gboolean
 gva_history_init (GError **error)
 {
-        HistoryEntry *entry;
+        HistoryEntry *entry = NULL;
         GIOChannel *channel;
         GIOStatus status;
         GString *buffer;
