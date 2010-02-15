@@ -233,6 +233,14 @@ main (gint argc, gchar **argv)
                 g_error ("%s", error->message);
 #endif
 
+#ifdef HAVE_GSTREAMER
+        if (!gst_init_check (&argc, &argv, &error))
+                g_error ("%s", error->message);
+#endif
+
+        /* This installs handlers for our custom debug log levels. */
+        gva_get_debug_flags ();
+
         /* Change the working directory to that of the MAME executable.
          * Why?  Because SDLMAME's default configuration uses relative
          * search paths such as "rompath = roms".  The paths are relative

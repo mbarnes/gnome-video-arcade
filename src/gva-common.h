@@ -19,6 +19,8 @@
 /**
  * SECTION: gva-common
  * @short_description: Common Definitions
+ *
+ * Common symbols used throughout GNOME Video Arcade.
  **/
 
 #ifndef GVA_COMMON_H
@@ -28,10 +30,13 @@
 #include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#include <glib.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
-#include <gtk/gtk.h>
+
+#if HAVE_GSTREAMER
+#include <gst/gst.h>
+#endif
 
 #include <sqlite3.h>
 #include <gconf/gconf-client.h>
@@ -39,6 +44,7 @@
 
 #define GVA_GCONF_PREFIX                "/apps/" PACKAGE
 #define GVA_GCONF_ALL_COLUMNS_KEY       GVA_GCONF_PREFIX "/all-columns"
+#define GVA_GCONF_AUTO_PLAY_KEY         GVA_GCONF_PREFIX "/auto-play"
 #define GVA_GCONF_AUTO_SAVE_KEY         GVA_GCONF_PREFIX "/auto-save"
 #define GVA_GCONF_COLUMNS_KEY           GVA_GCONF_PREFIX "/columns"
 #define GVA_GCONF_FAVORITES_KEY         GVA_GCONF_PREFIX "/favorites"

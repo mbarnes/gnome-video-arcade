@@ -43,6 +43,8 @@ G_BEGIN_DECLS
  *      Print all communication between GVA and MAME.
  * @GVA_DEBUG_INP:
  *      Print information about input files.
+ * @GVA_DEBUG_GST:
+ *      Print GStreamer activity.
  *
  * These flags indicate which types of debugging messages will be triggered
  * at runtime. Debugging messages can be triggered by setting the GVA_DEBUG
@@ -50,11 +52,12 @@ G_BEGIN_DECLS
  **/
 typedef enum
 {
-        GVA_DEBUG_NONE = 0,
-        GVA_DEBUG_MAME = 1 << 0,
-        GVA_DEBUG_SQL  = 1 << 1,
-        GVA_DEBUG_IO   = 1 << 2,
-        GVA_DEBUG_INP  = 1 << 3
+        GVA_DEBUG_NONE  = 0,
+        GVA_DEBUG_MAME  = 1 << (G_LOG_LEVEL_USER_SHIFT + 0),
+        GVA_DEBUG_SQL   = 1 << (G_LOG_LEVEL_USER_SHIFT + 1),
+        GVA_DEBUG_IO    = 1 << (G_LOG_LEVEL_USER_SHIFT + 2),
+        GVA_DEBUG_INP   = 1 << (G_LOG_LEVEL_USER_SHIFT + 3),
+        GVA_DEBUG_GST   = 1 << (G_LOG_LEVEL_USER_SHIFT + 4)
 } GvaDebugFlags;
 
 gchar *         gva_choose_inpname              (const gchar *game);

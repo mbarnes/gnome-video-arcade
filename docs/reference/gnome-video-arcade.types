@@ -4,6 +4,7 @@
 #include <gva-input-file.h>
 #include <gva-link-button.h>
 #include <gva-mame-process.h>
+#include <gva-music-button.h>
 #include <gva-mute-button.h>
 #include <gva-process.h>
 #include <gva-time.h>
@@ -14,6 +15,7 @@ gva_game_store_get_type
 gva_input_file_get_type
 gva_link_button_get_type
 gva_mame_process_get_type
+gva_music_button_get_type
 gva_mute_button_get_type
 gva_process_get_type
 gva_time_get_type

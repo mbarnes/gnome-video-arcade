@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <interface>
   <!-- interface-requires gtk+ 2.12 -->
+  <!-- interface-requires gva 0.0 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkWindow" id="main-window">
     <property name="title" translatable="yes">GNOME Video Arcade</property>
@@ -63,25 +64,28 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="tooltip-text" translatable="yes">Show my search results</property>
+                        <property name="tooltip_text" translatable="yes">Show my search results</property>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
                 </child>
                 <child>
                   <object class="GvaMuteButton" id="main-mute-button">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="receives_default">True</property>
                     <property name="has_tooltip">True</property>
                     <property name="tooltip_markup">In-game sound is enabled</property>
                     <property name="tooltip_text">In-game sound is enabled</property>
-                    <property name="relief">GTK_RELIEF_NONE</property>
-                    <child>
-                      <placeholder/>
-                    </child>
+                    <property name="relief">none</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -93,6 +97,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -600,6 +605,7 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
@@ -686,6 +692,7 @@
     <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
+    <signal name="hide" handler="gva_properties_hide_cb"/>
     <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
     <signal name="show" handler="gva_properties_show_cb"/>
     <child>
@@ -702,7 +709,7 @@
             <property name="n_columns">2</property>
             <property name="column_spacing">12</property>
             <child>
-              <object class="GtkHBox" id="properties-hbox">
+              <object class="GtkHBox" id="properties-upper-hbox">
                 <property name="visible">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="spacing">3</property>
@@ -790,7 +797,6 @@ Manufacturer, Year</property>
             <child>
               <object class="GtkNotebook" id="properties-history-notebook">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="show_tabs">False</property>
                 <property name="show_border">False</property>
@@ -842,7 +848,6 @@ Manufacturer, Year</property>
             <child>
               <object class="GtkNotebook" id="properties-gallery-notebook">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="show_tabs">False</property>
                 <property name="show_border">False</property>
@@ -956,7 +961,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-imperfect-color-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The colors aren't 100% accurate.</property>
+                                                    <property name="label" translatable="yes">&#x2022; The colors aren't 100% accurate.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -967,7 +972,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-color-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The colors are completely wrong.</property>
+                                                    <property name="label" translatable="yes">&#x2022; The colors are completely wrong.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -978,7 +983,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-imperfect-graphic-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The video emulation isn't 100% accurate.</property>
+                                                    <property name="label" translatable="yes">&#x2022; The video emulation isn't 100% accurate.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -989,7 +994,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-imperfect-sound-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The sound emulation isn't 100% accurate.</property>
+                                                    <property name="label" translatable="yes">&#x2022; The sound emulation isn't 100% accurate.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -1000,7 +1005,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-sound-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The game lacks sound.</property>
+                                                    <property name="label" translatable="yes">&#x2022; The game lacks sound.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -1011,7 +1016,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-cocktail-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• Screen flipping in cocktail mode is not supported.</property>
+                                                    <property name="label" translatable="yes">&#x2022; Screen flipping in cocktail mode is not supported.</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
                                                   <packing>
@@ -1022,7 +1027,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-emulation-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
+                                                    <property name="label" translatable="yes">&#x2022; &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
                                                     <property name="use_markup">True</property>
                                                   </object>
                                                   <packing>
@@ -1035,7 +1040,7 @@ Manufacturer, Year</property>
                                                   <object class="GtkLabel" id="properties-preliminary-protection-label">
                                                     <property name="visible">True</property>
                                                     <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The game has protection which isn't fully emulated.</property>
+                                                    <property name="label" translatable="yes">&#x2022; The game has protection which isn't fully emulated.</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -1493,29 +1498,106 @@ Manufacturer, Year</property>
           </packing>
         </child>
         <child>
-          <object class="GtkHButtonBox" id="properties-button-box">
+          <object class="GtkHBox" id="properties-lower-hbox">
             <property name="visible">True</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="layout_style">end</property>
+            <property name="spacing">12</property>
             <child>
-              <object class="GtkButton" id="properties-close-button">
-                <property name="label">gtk-close</property>
+              <object class="GtkTable" id="properties-music-table">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="has_focus">True</property>
-                <property name="is_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="tooltip_text" translatable="yes">Close this window</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="gva_properties_close_clicked_cb" object="properties-window"/>
+                <property name="n_rows">2</property>
+                <property name="n_columns">2</property>
+                <property name="column_spacing">6</property>
+                <child>
+                  <object class="GtkAlignment" id="properties-music-alignment">
+                    <property name="visible">True</property>
+                    <property name="yalign">1</property>
+                    <property name="yscale">0</property>
+                    <child>
+                      <object class="GvaMusicButton" id="properties-music-button">
+                        <property name="width_request">64</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Play a music clip</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="properties-music-status">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">&lt;small&gt;&lt;/small&gt;</property>
+                    <property name="use_markup">True</property>
+                    <property name="ellipsize">end</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="properties-music-auto-play">
+                    <property name="label">(auto-play) GtkUIManager supplies the label</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="draw_indicator">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkAlignment" id="properties-button-box-alignment">
+                <property name="visible">True</property>
+                <property name="yalign">1</property>
+                <property name="yscale">0</property>
+                <child>
+                  <object class="GtkHButtonBox" id="properties-button-box">
+                    <property name="visible">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="layout_style">end</property>
+                    <child>
+                      <object class="GtkButton" id="properties-close-button">
+                        <property name="label">gtk-close</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="can_default">True</property>
+                        <property name="has_default">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="tooltip_text" translatable="yes">Close this window</property>
+                        <property name="use_stock">True</property>
+                        <signal name="clicked" handler="gtk_widget_hide" object="properties-window"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>

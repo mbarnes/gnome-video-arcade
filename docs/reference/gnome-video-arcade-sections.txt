@@ -176,6 +176,7 @@ gva_link_button_get_type
 <FILE>gva-history</FILE>
 gva_history_init
 gva_history_lookup
+gva_history_lookup_id
 </SECTION>
 
 <SECTION>
@@ -263,6 +264,29 @@ gva_mame_process_get_type
 </SECTION>
 
 <SECTION>
+<FILE>gva-music-button</FILE>
+<TITLE>GvaMusicButton</TITLE>
+GvaMusicButton
+gva_music_button_new
+gva_music_button_play
+gva_music_button_pause
+gva_music_button_get_game
+gva_music_button_set_game
+gva_music_button_get_status
+<SUBSECTION Standard>
+GVA_MUSIC_BUTTON
+GVA_IS_MUSIC_BUTTON
+GVA_TYPE_MUSIC_BUTTON
+GVA_MUSIC_BUTTON_CLASS
+GVA_IS_MUSIC_BUTTON_CLASS
+GVA_MUSIC_BUTTON_GET_CLASS
+GvaMusicButtonClass
+<SUBSECTION Private>
+GvaMusicButtonPrivate
+gva_music_button_get_type
+</SECTION>
+
+<SECTION>
 <FILE>gva-mute-button</FILE>
 <TITLE>GvaMuteButton</TITLE>
 GvaMuteButton
@@ -303,6 +327,8 @@ gva_play_back_window_hide_cb
 <SECTION>
 <FILE>gva-preferences</FILE>
 gva_preferences_init
+gva_preferences_get_auto_play
+gva_preferences_set_auto_play
 gva_preferences_get_auto_save
 gva_preferences_set_auto_save
 gva_preferences_get_full_screen
@@ -350,7 +376,7 @@ gva_process_get_type
 <FILE>gva-properties</FILE>
 gva_properties_init
 gva_properties_show_game
-gva_properties_close_clicked_cb
+gva_properties_hide_cb
 gva_properties_show_cb
 </SECTION>
 
@@ -386,6 +412,7 @@ gva_time_get_type
 <SECTION>
 <FILE>gva-ui</FILE>
 GVA_ACTION_ABOUT
+GVA_ACTION_AUTO_PLAY
 GVA_ACTION_AUTO_SAVE
 GVA_ACTION_CONTENTS
 GVA_ACTION_FULL_SCREEN
@@ -452,6 +479,9 @@ GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW
 GVA_WIDGET_PROPERTIES_IMPERFECT_COLOR_LABEL
 GVA_WIDGET_PROPERTIES_IMPERFECT_GRAPHIC_LABEL
 GVA_WIDGET_PROPERTIES_IMPERFECT_SOUND_LABEL
+GVA_WIDGET_PROPERTIES_MUSIC_AUTO_PLAY
+GVA_WIDGET_PROPERTIES_MUSIC_BUTTON
+GVA_WIDGET_PROPERTIES_MUSIC_STATUS
 GVA_WIDGET_PROPERTIES_NOTEBOOK
 GVA_WIDGET_PROPERTIES_ORIGINAL_LINKS
 GVA_WIDGET_PROPERTIES_ORIGINAL_VBOX

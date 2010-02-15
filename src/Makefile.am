@@ -6,7 +6,7 @@ AM_CFLAGS = \
 	-Wall \
 	@DBUS_CFLAGS@ @GLIB_CFLAGS@ @GTK_CFLAGS@ \
 	@GIT_CFLAGS@ @GCONF_CFLAGS@ @GNOME_CFLAGS@ \
-	@SQLITE_CFLAGS@ @WNCK_CFLAGS@
+	@GSTREAMER_CFLAGS@ @SQLITE_CFLAGS@ @WNCK_CFLAGS@
 
 # The DATADIR, LIBDIR, PREFIX, and SYSCONFDIR definitions
 # are only needed for libgnome.  GLib handles it better.
@@ -63,6 +63,8 @@ gnome_video_arcade_SOURCES = \
 	gva-mame-process.c		\
 	gva-mame-process.h		\
 	gva-mame.h			\
+	gva-music-button.c		\
+	gva-music-button.h		\
 	gva-mute-button.c		\
 	gva-mute-button.h		\
 	gva-nplayers.c			\
@@ -95,7 +97,8 @@ EXTRA_gnome_video_arcade_SOURCES = \
 gnome_video_arcade_LDADD = \
 	@DBUS_LIBS@ @GLIB_LIBS@ @GTK_LIBS@ \
 	@GIT_LIBS@ @GCONF_LIBS@ @GNOME_LIBS@ \
-	@MAME_BACKEND@ @SQLITE_LIBS@ @WNCK_LIBS@
+	@GSTREAMER_LIBS@ @MAME_BACKEND@ \
+	@SQLITE_LIBS@ @WNCK_LIBS@
 
 gnome_video_arcade_DEPENDENCIES = \
 	@MAME_BACKEND@

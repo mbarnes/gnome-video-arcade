@@ -16,6 +16,23 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/auto-play</applyto>
+      <key>/schemas/apps/gnome-video-arcade/auto-play</key>
+      <owner>gnome-video-arcade</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Auto-play music clip</short>
+        <long>Enable automatic playing of in-game music clips.
+        If true, and a music clip is available for the selected game,
+        the clip will automatically begin playing when the user opens the
+        Properties window or when the user selects a different game while
+        the Properties window is visible.  Music clips are streamed from
+        http://www.arcade-history.com/.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/auto-save</applyto>
       <key>/schemas/apps/gnome-video-arcade/auto-save</key>
       <owner>gnome-video-arcade</owner>
@@ -177,7 +194,7 @@
 
     <schema>
       <applyto>/apps/gnome-video-arcade/sound-muted</applyto>
-      <key>/apps/gnome-video-arcade/sound-muted</key>
+      <key>/schemas/apps/gnome-video-arcade/sound-muted</key>
       <owner>gnome-video-arcade</owner>
       <type>bool</type>
       <default>false</default>

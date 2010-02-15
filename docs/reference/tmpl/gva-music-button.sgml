@@ -1,0 +1,100 @@
+<!-- ##### SECTION Title ##### -->
+GvaMusicButton
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GvaMusicButton ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GvaMusicButton::pause ##### -->
+<para>
+
+</para>
+
+@gvamusicbutton: the object which received the signal.
+
+<!-- ##### SIGNAL GvaMusicButton::play ##### -->
+<para>
+
+</para>
+
+@gvamusicbutton: the object which received the signal.
+
+<!-- ##### ARG GvaMusicButton:game ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GvaMusicButton:status ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gva_music_button_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_music_button_play ##### -->
+<para>
+
+</para>
+
+@music_button: 
+
+
+<!-- ##### FUNCTION gva_music_button_pause ##### -->
+<para>
+
+</para>
+
+@music_button: 
+
+
+<!-- ##### FUNCTION gva_music_button_get_game ##### -->
+<para>
+
+</para>
+
+@music_button: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_music_button_set_game ##### -->
+<para>
+
+</para>
+
+@music_button: 
+@game: 
+
+
+<!-- ##### FUNCTION gva_music_button_get_status ##### -->
+<para>
+
+</para>
+
+@music_button: 
+@Returns: 
+
+

@@ -1641,7 +1641,7 @@ db_function_match (sqlite3_context *context,
 static void
 db_trace_cb (gpointer unused, const gchar *message)
 {
-        g_debug ("%s", message);
+        g_log (G_LOG_DOMAIN, GVA_DEBUG_SQL, "%s", message);
 }
 
 /**

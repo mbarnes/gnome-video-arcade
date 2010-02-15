@@ -33,6 +33,19 @@
 void
 gva_preferences_init (void)
 {
+        /* Auto Play */
+
+        /* This actually appears in the Properties window,
+         * but it's still a preference so we manage it here. */
+
+        gtk_action_connect_proxy (
+                GVA_ACTION_AUTO_PLAY,
+                GVA_WIDGET_PROPERTIES_MUSIC_AUTO_PLAY);
+
+        gconf_bridge_bind_property (
+                gconf_bridge_get (), GVA_GCONF_AUTO_PLAY_KEY,
+                G_OBJECT (GVA_ACTION_AUTO_PLAY), "active");
+
         /* Auto Save */
 
         gtk_action_connect_proxy (
@@ -74,6 +87,48 @@ gva_preferences_init (void)
 }
 
 /**
+ * gva_preferences_get_auto_play:
+ *
+ * Returns the user's preference for whether to automatically
+ * play a music clip of the selected game when the user opens
+ * the Properties window or when the user selects a different
+ * game while the Properties window is visible.
+ *
+ * Returns: %TRUE to automatically play music clips
+ **/
+gboolean
+gva_preferences_get_auto_play (void)
+{
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_PLAY);
+
+        return gtk_toggle_action_get_active (toggle_action);
+}
+
+/**
+ * gva_preferences_set_auto_play:
+ * @auto_play: the user's preference
+ *
+ * Accepts the user's preference for whether to automatically
+ * play a music clip of the selected game when the user opens
+ * the Properties window or when the user selects a different
+ * game while the Properties window is visible.
+ *
+ * The preference is stored in GConf key
+ * <filename>/apps/gnome-video-arcade/auto-play</filename>.
+ **/
+void
+gva_preferences_set_auto_play (gboolean auto_play)
+{
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_PLAY);
+
+        gtk_toggle_action_set_active (toggle_action, auto_play);
+}
+
+/**
  * gva_preferences_get_auto_save:
  *
  * Returns the user's preference for whether to restore the emulated
@@ -84,8 +139,11 @@ gva_preferences_init (void)
 gboolean
 gva_preferences_get_auto_save (void)
 {
-        return gtk_toggle_action_get_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_SAVE));
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_SAVE);
+
+        return gtk_toggle_action_get_active (toggle_action);
 }
 
 /**
@@ -101,8 +159,11 @@ gva_preferences_get_auto_save (void)
 void
 gva_preferences_set_auto_save (gboolean auto_save)
 {
-        gtk_toggle_action_set_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_SAVE), auto_save);
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_SAVE);
+
+        gtk_toggle_action_set_active (toggle_action, auto_save);
 }
 
 /**
@@ -116,8 +177,11 @@ gva_preferences_set_auto_save (gboolean auto_save)
 gboolean
 gva_preferences_get_full_screen (void)
 {
-        return gtk_toggle_action_get_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN));
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN);
+
+        return gtk_toggle_action_get_active (toggle_action);
 }
 
 /**
@@ -133,8 +197,11 @@ gva_preferences_get_full_screen (void)
 void
 gva_preferences_set_full_screen (gboolean full_screen)
 {
-        gtk_toggle_action_set_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN), full_screen);
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_FULL_SCREEN);
+
+        gtk_toggle_action_set_active (toggle_action, full_screen);
 }
 
 /**
@@ -148,8 +215,11 @@ gva_preferences_set_full_screen (gboolean full_screen)
 gboolean
 gva_preferences_get_show_clones (void)
 {
-        return gtk_toggle_action_get_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_SHOW_CLONES));
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_SHOW_CLONES);
+
+        return gtk_toggle_action_get_active (toggle_action);
 }
 
 /**
@@ -165,8 +235,11 @@ gva_preferences_get_show_clones (void)
 void
 gva_preferences_set_show_clones (gboolean show_clones)
 {
-        gtk_toggle_action_set_active (
-                GTK_TOGGLE_ACTION (GVA_ACTION_SHOW_CLONES), show_clones);
+        GtkToggleAction *toggle_action;
+
+        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_SHOW_CLONES);
+
+        gtk_toggle_action_set_active (toggle_action, show_clones);
 }
 
 /**

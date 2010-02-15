@@ -31,6 +31,7 @@
 
 /* Actions */
 #define GVA_ACTION_ABOUT                (gva_ui_get_action ("about"))
+#define GVA_ACTION_AUTO_PLAY            (gva_ui_get_action ("auto-play"))
 #define GVA_ACTION_AUTO_SAVE            (gva_ui_get_action ("auto-save"))
 #define GVA_ACTION_CONTENTS             (gva_ui_get_action ("contents"))
 #define GVA_ACTION_FULL_SCREEN          (gva_ui_get_action ("full-screen"))
@@ -142,6 +143,14 @@
         (gva_ui_get_widget ("properties-imperfect-graphic-label"))
 #define GVA_WIDGET_PROPERTIES_IMPERFECT_SOUND_LABEL \
         (gva_ui_get_widget ("properties-imperfect-sound-label"))
+#define GVA_WIDGET_PROPERTIES_MUSIC_AUTO_PLAY \
+        (gva_ui_get_widget ("properties-music-auto-play"))
+#define GVA_WIDGET_PROPERTIES_MUSIC_BUTTON \
+        (gva_ui_get_widget ("properties-music-button"))
+#define GVA_WIDGET_PROPERTIES_MUSIC_STATUS \
+        (gva_ui_get_widget ("properties-music-status"))
+#define GVA_WIDGET_PROPERTIES_MUSIC_TABLE \
+        (gva_ui_get_widget ("properties-music-table"))
 #define GVA_WIDGET_PROPERTIES_NOTEBOOK \
         (gva_ui_get_widget ("properties-notebook"))
 #define GVA_WIDGET_PROPERTIES_ORIGINAL_LINKS \

@@ -34,6 +34,7 @@ G_BEGIN_DECLS
 gboolean        gva_history_init                (GError **error);
 gchar *         gva_history_lookup              (const gchar *game,
                                                  GError **error);
+guint           gva_history_lookup_id           (const gchar *game);
 
 G_END_DECLS
 

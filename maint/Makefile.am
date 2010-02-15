@@ -14,11 +14,12 @@ gladegvadir = `$(PKG_CONFIG) --variable=moduledir gladeui-1.0`
 
 libgladegva_la_CFLAGS = \
 	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
-	@GCONF_CFLAGS@
+	@GCONF_CFLAGS@ @GSTREAMER_CFLAGS@
 
 libgladegva_la_SOURCES = \
 	$(top_srcdir)/src/gva-column-manager.c \
 	$(top_srcdir)/src/gva-link-button.c \
+	$(top_srcdir)/src/gva-music-button.c \
 	$(top_srcdir)/src/gva-mute-button.c
 
 libgladegva_la_LDFLAGS = \
@@ -26,7 +27,7 @@ libgladegva_la_LDFLAGS = \
 
 libgladegva_la_LIBADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
-	@GCONF_LIBS@
+	@GCONF_LIBS@ @GSTREAMER_LIBS@
 
 EXTRA_DIST = \
 	$(gladecatalog_DATA) \

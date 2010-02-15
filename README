@@ -46,7 +46,7 @@ installed prior to compiling the source code:
        varies by distribution, but it should be something similar to
        gtk2-devel (Fedora) or libgtk2.0-dev (Debian/Ubuntu).
 
-   - Header files for GConf version 2.0 (or higher)
+   - Header files for GConf version 2.0 (or higher).
 
        GNOME Video Arcade uses GConf to remember preferences, favorites
        and other miscellaneous user data.  The GConf header files should
@@ -78,6 +78,18 @@ installed prior to compiling the source code:
        may expand in future releases.  If you prefer not to use D-Bus,
        you can configure GNOME Video Arcade to not link against it.
        See the Installation section to find out how.
+
+   - Header files for GStreamer version 0.10 (or higher). (optional)
+
+       The GStreamer header files should be available from your
+       GNU/Linux distribution as a "development" package.  The exact
+       package name varies by distribution, but it should be something
+       similar to gstreamer-devel (Fedora) or libgstreamer0.10-dev
+       (Debian/Ubuntu).
+
+       GNOME Video Arcade uses GStreamer to stream video game music
+       clips in the Properties window.  The music clips are streamed
+       from http://www.arcade-history.com.
 
    - Header files for libgnomeui version 2.14 (or higher). (optional)
 
@@ -142,11 +154,11 @@ including GNOME Video Arcade.  This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.6.7 and may change in forthcoming releases.
+version 0.7.0 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.6.7
+   $ cd /path/to/gnome-video-arcade-0.7.0
    $ ./configure
    $ make
    $ su -c "make install"
@@ -193,11 +205,13 @@ installed, the documentation can be viewed through Devhelp.
 
 The --with-gnome and --without-gnome configure options tell "make"
 whether to link against high-level GNOME libraries like libgnomeui.
-Similarly, the --with-wnck and --without-wnck configure options
-tell "make" whether to link against libwnck, and the --with-dbus
-and --without-dbus configure options tell "make" whether to link
-against D-Bus.  See the previous section for details on what these
-libraries are used for.
+Similar "with"/"without" options are available for other optional
+libraries including D-Bus, GStreamer and libwnck.  See the previous
+section for details on what these libraries are used for.
+
+For a complete list of configure options, run:
+
+   $ ./configure --help
 
 UPDATE: --with-gnome is now ignored if GTK+ >= 2.14 is detected.
 

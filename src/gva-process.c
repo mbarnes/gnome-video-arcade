@@ -258,7 +258,9 @@ process_debug_message (GvaProcess *process,
         pid = gva_process_get_pid (process);
         copy = g_strchomp (g_strdup (line));
 
-        g_debug ("Process %d %s %s", (gint) pid, sep, copy);
+        g_log (
+                G_LOG_DOMAIN, GVA_DEBUG_IO,
+                "Process %d %s %s", (gint) pid, sep, copy);
 
         g_free (copy);
 }
@@ -449,7 +451,7 @@ process_class_init (GvaProcessClass *class)
         class->stderr_read_line = process_stderr_read_line;
 
         /**
-         * GvaProcess:pid:
+         * GvaProcess:pid
          *
          * The ID of the child process.
          **/
@@ -465,7 +467,7 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_CONSTRUCT_ONLY));
 
         /**
-         * GvaProcess:stdin:
+         * GvaProcess:stdin
          *
          * The file descriptor for the child process' stdin pipe.
          **/
@@ -481,7 +483,7 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_CONSTRUCT_ONLY));
 
         /**
-         * GvaProcess:stdout:
+         * GvaProcess:stdout
          *
          * The file descriptor for the child process' stdout pipe.
          **/
@@ -497,7 +499,7 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_CONSTRUCT_ONLY));
 
         /**
-         * GvaProcess:stderr:
+         * GvaProcess:stderr
          *
          * The file descriptor for the child process' stderr pipe.
          **/
@@ -513,7 +515,7 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_CONSTRUCT_ONLY));
 
         /**
-         * GvaProcess:priority:
+         * GvaProcess:priority
          *
          * Priority of the event sources that watch for incoming data.
          **/
@@ -530,7 +532,7 @@ process_class_init (GvaProcessClass *class)
                         G_PARAM_CONSTRUCT_ONLY));
 
         /**
-         * GvaProcess:progress:
+         * GvaProcess:progress
          *
          * Progress value, the meaning of which is defined by the
          * application.
@@ -747,8 +749,7 @@ gva_process_write_stdin (GvaProcess *process,
         g_return_val_if_fail (GVA_IS_PROCESS (process), FALSE);
         g_return_val_if_fail (data != NULL, FALSE);
 
-        if (gva_get_debug_flags () & GVA_DEBUG_IO)
-                process_debug_message (process, data, "<<<");
+        process_debug_message (process, data, "<<<");
 
         while (status == G_IO_STATUS_AGAIN)
                 status = g_io_channel_write_chars (
@@ -828,8 +829,7 @@ gva_process_stdout_read_line (GvaProcess *process)
         g_return_val_if_fail (class->stdout_read_line != NULL, NULL);
         line = class->stdout_read_line (process);
 
-        if (gva_get_debug_flags () & GVA_DEBUG_IO)
-                process_debug_message (process, line, ">>>");
+        process_debug_message (process, line, ">>>");
 
         return line;
 }
@@ -858,8 +858,7 @@ gva_process_stderr_read_line (GvaProcess *process)
         g_return_val_if_fail (class->stderr_read_line != NULL, NULL);
         line = class->stderr_read_line (process);
 
-        if (gva_get_debug_flags () & GVA_DEBUG_IO)
-                process_debug_message (process, line, "!!!");
+        process_debug_message (process, line, "!!!");
 
         return line;
 }

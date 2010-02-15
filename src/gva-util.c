@@ -38,6 +38,18 @@ gchar *opt_inspect;
 gboolean opt_version;
 gboolean opt_which_emulator;
 
+static void
+log_handler (const gchar *log_domain,
+             GLogLevelFlags log_level,
+             const gchar *message,
+             const gchar *log_level_id)
+{
+        if ((gva_get_debug_flags () & log_level) != 0)
+                g_print (
+                        "%s-LOG-DEBUG-%s: %s\n",
+                        log_domain, log_level_id, message);
+}
+
 static gboolean
 inpname_exists (const gchar *inppath, const gchar *inpname)
 {
@@ -166,10 +178,27 @@ gva_get_debug_flags (void)
                         { "mame",  GVA_DEBUG_MAME },
                         { "sql",   GVA_DEBUG_SQL },
                         { "io",    GVA_DEBUG_IO },
-                        { "inp",   GVA_DEBUG_INP }
+                        { "inp",   GVA_DEBUG_INP },
+                        { "gst",   GVA_DEBUG_GST }
                 };
 
                 const gchar *env = g_getenv ("GVA_DEBUG");
+
+                g_log_set_handler (
+                        G_LOG_DOMAIN, GVA_DEBUG_MAME,
+                        (GLogFunc) log_handler, "MAME");
+                g_log_set_handler (
+                        G_LOG_DOMAIN, GVA_DEBUG_SQL,
+                        (GLogFunc) log_handler, "SQL");
+                g_log_set_handler (
+                        G_LOG_DOMAIN, GVA_DEBUG_IO,
+                        (GLogFunc) log_handler, "IO");
+                g_log_set_handler (
+                        G_LOG_DOMAIN, GVA_DEBUG_INP,
+                        (GLogFunc) log_handler, "INP");
+                g_log_set_handler (
+                        G_LOG_DOMAIN, GVA_DEBUG_GST,
+                        (GLogFunc) log_handler, "GST");
 
                 flags = g_parse_debug_string (
                         (env != NULL) ? env : "", debug_keys,

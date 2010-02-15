@@ -130,12 +130,12 @@ input_file_dump_header (GvaInputFile *input_file)
 
         inpname = g_strdelimit (g_path_get_basename (filename), ".", '\0');
 
-        g_debug ("Input file: %s", inpname);
-        g_debug ("Game: %s", game);
-        g_debug ("%s", format);
-        g_debug ("Created %s", ctime (&timestamp));
-        g_debug ("Recorded using %s", origin);
-        g_debug ("--");
+        g_log (G_LOG_DOMAIN, GVA_DEBUG_INP, "Input file: %s", inpname);
+        g_log (G_LOG_DOMAIN, GVA_DEBUG_INP, "Game: %s", game);
+        g_log (G_LOG_DOMAIN, GVA_DEBUG_INP, "%s", format);
+        g_log (G_LOG_DOMAIN, GVA_DEBUG_INP, "Created %s", ctime (&timestamp));
+        g_log (G_LOG_DOMAIN, GVA_DEBUG_INP, "Recorded using %s", origin);
+        g_log (G_LOG_DOMAIN, GVA_DEBUG_INP, "--");
 
         g_free (inpname);
 }

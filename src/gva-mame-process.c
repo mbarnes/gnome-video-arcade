@@ -82,14 +82,12 @@ mame_process_stderr_read_line (GvaProcess *process)
 static void
 mame_process_exited (GvaProcess *process, gint status)
 {
-        if (WIFEXITED (status) && (gva_get_debug_flags () & GVA_DEBUG_MAME))
-        {
-                GPid pid;
-
-                status = WEXITSTATUS (status);
-                pid = gva_process_get_pid (process);
-                g_debug ("Process %d exited with status %d", pid, status);
-        }
+        if (WIFEXITED (status))
+                g_log (
+                        G_LOG_DOMAIN, GVA_DEBUG_MAME,
+                        "Process %d exited with status %d",
+                        gva_process_get_pid (process),
+                        WEXITSTATUS (status));
 }
 
 static void
@@ -201,10 +199,10 @@ gva_mame_process_spawn (const gchar *arguments,
                 command_line, &child_pid, &standard_input,
                 &standard_output, &standard_error, error);
 
-        if (gva_get_debug_flags () & GVA_DEBUG_MAME)
-                g_debug (
-                        "Spawned \"%s\" as process %d",
-                        command_line, (gint) child_pid);
+        g_log (
+                G_LOG_DOMAIN, GVA_DEBUG_MAME,
+                "Spawned \"%s\" as process %d",
+                command_line, (gint) child_pid);
 
         g_free (command_line);
 

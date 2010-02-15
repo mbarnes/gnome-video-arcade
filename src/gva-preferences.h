@@ -31,6 +31,8 @@
 G_BEGIN_DECLS
 
 void           gva_preferences_init             (void);
+gboolean       gva_preferences_get_auto_play    (void);
+void           gva_preferences_set_auto_play    (gboolean auto_play);
 gboolean       gva_preferences_get_auto_save    (void);
 void           gva_preferences_set_auto_save    (gboolean auto_save);
 gboolean       gva_preferences_get_full_screen  (void);

@@ -32,13 +32,12 @@
 @game: 
 
 
-<!-- ##### FUNCTION gva_properties_close_clicked_cb ##### -->
+<!-- ##### FUNCTION gva_properties_hide_cb ##### -->
 <para>
 
 </para>
 
 @window: 
-@button: 
 
 
 <!-- ##### FUNCTION gva_properties_show_cb ##### -->

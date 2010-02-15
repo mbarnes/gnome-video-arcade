@@ -35,8 +35,7 @@ void            gva_properties_show_game        (const gchar *game);
 
 /* Signal Handlers */
 
-void            gva_properties_close_clicked_cb (GtkWindow *window,
-                                                 GtkButton *button);
+void            gva_properties_hide_cb          (GtkWindow *window);
 void            gva_properties_show_cb          (GtkWindow *window);
 
 G_END_DECLS

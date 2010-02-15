@@ -88,6 +88,24 @@ fi
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
 
+# --with-gstreamer=[yes|no]
+AC_ARG_WITH([gstreamer],
+        [AC_HELP_STRING([--with-gstreamer],
+        [use GStreamer to stream music [default=yes]])],
+        with_gstreamer="$withval", with_gstreamer="yes")
+if test "$with_gstreamer" = "yes"; then
+GSTREAMER_MODULES="gstreamer-0.10"
+PKG_CHECK_MODULES(GSTREAMER, $GSTREAMER_MODULES)
+AC_DEFINE_UNQUOTED(HAVE_GSTREAMER, 1,
+        [Define to 1 if you are using GStreamer])
+else
+GSTREAMER_CFLAGS=
+GSTREAMER_LIBS=
+fi
+AM_CONDITIONAL(HAVE_GSTREAMER, test $with_gstreamer = yes)
+AC_SUBST(GSTREAMER_CFLAGS)
+AC_SUBST(GSTREAMER_LIBS)
+
 # --with-wnck=[yes|no]
 AC_ARG_WITH([wnck],
         [AC_HELP_STRING([--with-wnck],
@@ -235,6 +253,7 @@ echo "    Category File   : $with_category"
 echo "    History File    : $with_history"
 echo "    NPlayers File   : $with_nplayers"
 echo "    Use D-Bus       : $with_dbus"
+echo "    Use GStreamer   : $with_gstreamer"
 echo "    Use libgnomeui  : $with_gnome"
 echo "    Use libwnck     : $with_wnck"
 echo

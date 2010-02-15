@@ -18,10 +18,21 @@
 
 #include "gva-history.h"
 
+#include <stdlib.h>
+
 #include "gva-error.h"
 
-static GArray *history_file_offset_array = NULL;
-static GHashTable *history_file_offset_table = NULL;
+#define BASE_URI "http://www.arcade-history.com/"
+
+typedef struct _HistoryEntry HistoryEntry;
+
+struct _HistoryEntry {
+        guint id;
+        goffset offset;
+};
+
+static GPtrArray *history_file_array = NULL;
+static GHashTable *history_file_table = NULL;
 
 static GIOChannel *
 history_file_open (GError **error)
@@ -48,28 +59,30 @@ history_file_open (GError **error)
 }
 
 static void
-history_file_mark (const gchar *line, gint64 offset)
+history_process_info (HistoryEntry *entry,
+                      const gchar *line)
 {
         gchar **games;
         guint length, ii;
 
-        g_array_append_val (history_file_offset_array, offset);
-
-        /* Skip "$info=" prefix. */
-        games = g_strsplit (line + 6, ",", -1);
+        games = g_strsplit (line, ",", -1);
         length = g_strv_length (games);
 
         for (ii = 0; ii < length; ii++)
-        {
-                if (*g_strstrip (games[ii]) == '\0')
-                        continue;
-
-                g_hash_table_insert (
-                        history_file_offset_table, g_strdup (games[ii]),
-                        GUINT_TO_POINTER (history_file_offset_array->len - 1));
-        }
+                if (*g_strstrip (games[ii]) != '\0')
+                        g_hash_table_insert (
+                                history_file_table,
+                                g_strdup (games[ii]), entry);
 
         g_strfreev (games);
+}
+
+static void
+history_process_link (HistoryEntry *entry,
+                      const gchar *line)
+{
+        if ((line = strstr (line, "&id=")) != NULL)
+                entry->id = (guint) strtol (line + 4, NULL, 10);
 }
 
 /**
@@ -86,25 +99,25 @@ history_file_mark (const gchar *line, gint64 offset)
 gboolean
 gva_history_init (GError **error)
 {
+        HistoryEntry *entry;
         GIOChannel *channel;
         GIOStatus status;
         GString *buffer;
-        gint64 offset = 0;
+        goffset offset = 0;
 
-        g_return_val_if_fail (history_file_offset_array == NULL, FALSE);
-        g_return_val_if_fail (history_file_offset_table == NULL, FALSE);
+        g_return_val_if_fail (history_file_array == NULL, FALSE);
+        g_return_val_if_fail (history_file_table == NULL, FALSE);
+
+        history_file_array = g_ptr_array_new ();
+
+        history_file_table = g_hash_table_new_full (
+                g_str_hash, g_str_equal,
+                (GDestroyNotify) g_free,
+                (GDestroyNotify) NULL);
 
         channel = history_file_open (error);
         if (channel == NULL)
                 return FALSE;
-
-        history_file_offset_array =
-                g_array_new (FALSE, FALSE, sizeof (gint64));
-
-        history_file_offset_table = g_hash_table_new_full (
-                g_str_hash, g_str_equal,
-                (GDestroyNotify) g_free,
-                (GDestroyNotify) NULL);
 
         buffer = g_string_sized_new (1024);
 
@@ -121,7 +134,19 @@ gva_history_init (GError **error)
                 offset += buffer->len;
 
                 if (g_str_has_prefix (buffer->str, "$info="))
-                        history_file_mark (buffer->str, offset);
+                {
+                        entry = g_slice_new0 (HistoryEntry);
+                        g_ptr_array_add (history_file_array, entry);
+                        history_process_info (entry, buffer->str + 6);
+                }
+                else if (g_str_has_prefix (buffer->str, "$<a"))
+                {
+                        history_process_link (entry, buffer->str + 1);
+                }
+                else if (g_str_has_prefix (buffer->str, "$bio"))
+                {
+                        entry->offset = offset;
+                }
         }
 
         g_string_free (buffer, TRUE);
@@ -144,18 +169,16 @@ gchar *
 gva_history_lookup (const gchar *game,
                     GError **error)
 {
+        HistoryEntry *entry;
         GIOChannel *channel;
         GIOStatus status;
         GString *buffer;
         GString *history;
         gboolean free_history;
-        gpointer key, value;
-        gint64 offset;
-        guint index;
 
         g_return_val_if_fail (game != NULL, NULL);
-        g_return_val_if_fail (history_file_offset_array != NULL, NULL);
-        g_return_val_if_fail (history_file_offset_table != NULL, NULL);
+        g_return_val_if_fail (history_file_array != NULL, NULL);
+        g_return_val_if_fail (history_file_table != NULL, NULL);
 
         channel = history_file_open (error);
         if (channel == NULL)
@@ -165,18 +188,14 @@ gva_history_lookup (const gchar *game,
         history = g_string_sized_new (8096);
         free_history = TRUE;  /* assume failure */
 
-        if (!g_hash_table_lookup_extended (
-                history_file_offset_table, game, &key, &value))
+        entry = g_hash_table_lookup (history_file_table, game);
+        if (entry == NULL || entry->offset == 0)
                 goto exit;
-
-        index = GPOINTER_TO_UINT (value);
-        g_assert (index < history_file_offset_array->len);
-        offset = g_array_index (history_file_offset_array, gint64, index);
 
         status = G_IO_STATUS_AGAIN;
         while (status == G_IO_STATUS_AGAIN)
                 status = g_io_channel_seek_position (
-                        channel, offset, G_SEEK_SET, error);
+                        channel, entry->offset, G_SEEK_SET, error);
         if (status == G_IO_STATUS_ERROR)
                 goto exit;
 
@@ -229,4 +248,25 @@ exit:
         g_string_free (buffer, TRUE);
 
         return g_string_free (history, free_history);
+}
+
+/**
+ * gva_history_lookup_id:
+ * @game: the name of a game
+ *
+ * Returns the numeric ID for @game at http://www.arcade-history.com/.
+ * This is used to help locate game-specific resources on the website.
+ *
+ * Returns: ID for @game, or zero if unknown
+ **/
+guint
+gva_history_lookup_id (const gchar *game)
+{
+        HistoryEntry *entry;
+
+        g_return_val_if_fail (game != NULL, 0);
+
+        entry = g_hash_table_lookup (history_file_table, game);
+
+        return (entry != NULL) ? entry->id : 0;
 }
