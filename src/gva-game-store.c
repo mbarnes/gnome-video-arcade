@@ -42,6 +42,28 @@ game_store_get_index (GvaGameStore *game_store)
         return index;
 }
 
+static gboolean
+game_store_build_index_cb (GtkTreeModel *model,
+                           GtkTreePath *path,
+                           GtkTreeIter *iter,
+                           GHashTable *index)
+{
+        GvaGameStoreColumn column_id;
+        GtkTreeRowReference *reference;
+        gchar *name;
+
+        /* This is faster than calling gva_game_store_index_insert(). */
+
+        column_id = GVA_GAME_STORE_COLUMN_NAME;
+        gtk_tree_model_get (model, iter, column_id, &name, -1);
+        reference = gtk_tree_row_reference_new (model, path);
+
+        /* Index takes ownership of both the name and row reference. */
+        g_hash_table_insert (index, name, reference);
+
+        return FALSE;
+}
+
 static gint
 game_store_compare (GtkTreeModel *model,
                     GtkTreeIter *iter_a,
@@ -273,6 +295,7 @@ gva_game_store_new_from_query (const gchar *sql,
         sqlite3_stmt *stmt;
         GvaGameStoreColumn *column_ids;
         GValue *column_values;
+        GHashTable *index;
         const gchar *name;
         gint n_columns, ii;
         gint name_column = -1;
@@ -397,14 +420,18 @@ gva_game_store_new_from_query (const gchar *sql,
                         GTK_TREE_STORE (model), &iter,
                         (gint *) column_ids, column_values, n_columns + 1);
 
-                /* Add an entry for this row to the index. */
-                gva_game_store_index_insert (
-                        GVA_GAME_STORE (model), g_strdup (name), &iter);
-
                 /* Keep the UI responsive. */
                 if (gtk_main_iteration_do (FALSE))
                         goto fail;
         }
+
+        /* Keeping GtkTreeRowReferences up-to-date while inserting
+         * potentially thousands of rows is very expensive.  So we
+         * rebuild the index after we're done inserting rows. */
+        index = game_store_get_index (GVA_GAME_STORE (model));
+        gtk_tree_model_foreach (
+                model, (GtkTreeModelForeachFunc)
+                game_store_build_index_cb, index);
 
         /* Query complete. */
 
