@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
-"POT-Creation-Date: 2010-01-16 04:14+0000\n"
-"PO-Revision-Date: 2010-01-18 14:02+0100\n"
+"POT-Creation-Date: 2010-02-18 04:51+0000\n"
+"PO-Revision-Date: 2010-02-20 20:40+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,213 +24,212 @@ msgid " "
 msgstr " "
 
 #: ../data/gnome-video-arcade.builder.h:2
+msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "&#x2022; <b>TA IGRA NE DELUJE.</b>"
+
+#: ../data/gnome-video-arcade.builder.h:3
+msgid "&#x2022; Screen flipping in cocktail mode is not supported."
+msgstr "&#x2022; Obračanje zaslona v cocktail načinu ni podprto."
+
+#: ../data/gnome-video-arcade.builder.h:4
+msgid "&#x2022; The colors are completely wrong."
+msgstr "&#x2022; Barve so popolnoma napačne."
+
+#: ../data/gnome-video-arcade.builder.h:6
+#, no-c-format
+msgid "&#x2022; The colors aren't 100% accurate."
+msgstr "&#x2022; Barve niso 100% natančne."
+
+#: ../data/gnome-video-arcade.builder.h:7
+msgid "&#x2022; The game has protection which isn't fully emulated."
+msgstr "&#x2022; Igra ima zaščito, ki ni polno posnemana."
+
+#: ../data/gnome-video-arcade.builder.h:8
+msgid "&#x2022; The game lacks sound."
+msgstr "&#x2022; Igri manjka zvok."
+
+#: ../data/gnome-video-arcade.builder.h:10
+#, no-c-format
+msgid "&#x2022; The sound emulation isn't 100% accurate."
+msgstr "&#x2022; Posnemanje zvoka ni 100% natančno."
+
+#: ../data/gnome-video-arcade.builder.h:12
+#, no-c-format
+msgid "&#x2022; The video emulation isn't 100% accurate."
+msgstr "&#x2022; Posnemanje videa ni 100% natančno."
+
+#: ../data/gnome-video-arcade.builder.h:13
 msgid "<b>Alternate Versions</b>"
 msgstr "<b>Dodatne različice</b>"
 
-#: ../data/gnome-video-arcade.builder.h:3
+#: ../data/gnome-video-arcade.builder.h:14
 msgid "<b>BIOS</b>"
 msgstr "<b>BIOS</b>"
 
-#: ../data/gnome-video-arcade.builder.h:4
+#: ../data/gnome-video-arcade.builder.h:15
 msgid "<b>CPU</b>"
 msgstr "<b>CPE</b>"
 
-#: ../data/gnome-video-arcade.builder.h:5
+#: ../data/gnome-video-arcade.builder.h:16
 msgid "<b>Columns</b>"
 msgstr "<b>Stolpci</b>"
 
-#: ../data/gnome-video-arcade.builder.h:6
+#: ../data/gnome-video-arcade.builder.h:17
 msgid "<b>Game List</b>"
 msgstr "<b>Seznam iger</b>"
 
-#: ../data/gnome-video-arcade.builder.h:7
+#: ../data/gnome-video-arcade.builder.h:18
 msgid "<b>General</b>"
 msgstr "<b>Splošno</b>"
 
-#: ../data/gnome-video-arcade.builder.h:8
+#: ../data/gnome-video-arcade.builder.h:19
 msgid "<b>Original Version</b>"
 msgstr "<b>Izvirna različica</b>"
 
-#: ../data/gnome-video-arcade.builder.h:9
+#: ../data/gnome-video-arcade.builder.h:20
 msgid "<b>Sound</b>"
 msgstr "<b>Zvok</b>"
 
 #. The same text is in gnome-video-arcade.builder,
 #. * so it has to be translated with markup anyway.
-#: ../data/gnome-video-arcade.builder.h:10
+#: ../data/gnome-video-arcade.builder.h:21
 #: ../src/gva-columns.c:747
 msgid "<b>There are known problems with this game:</b>"
 msgstr "<b>Z igro so povezane znane težave:</b>"
 
-#: ../data/gnome-video-arcade.builder.h:11
+#: ../data/gnome-video-arcade.builder.h:22
 msgid "<b>Video</b>"
 msgstr "<b>Video</b>"
 
-#: ../data/gnome-video-arcade.builder.h:12
+#: ../data/gnome-video-arcade.builder.h:23
 msgid "<big><b>Errors detected in ROM files</b></big>"
 msgstr "<big><b>V ROM datotekah so zaznane napake</b></big>"
 
-#: ../data/gnome-video-arcade.builder.h:13
+#: ../data/gnome-video-arcade.builder.h:24
+msgid "<small></small>"
+msgstr "<small></small>"
+
+#: ../data/gnome-video-arcade.builder.h:25
 msgid "<small><i><b>Note:</b> Setting this will not take effect until the second time the game is started. It does not apply to recording or playing back games.</i></small>"
 msgstr "<small><i><b>Opomba:</b> Nastavitev ne bo na voljo do ponovnega zagona igre. Ne velja za snemanje ali predvajanje iger.</i></small>"
 
-#: ../data/gnome-video-arcade.builder.h:14
+#: ../data/gnome-video-arcade.builder.h:26
 msgid "<small><i>If these games worked with previous versions of MAME, it is likely their ROM requirements have changed.  If so, you will need to acquire more recent ROM files.</i></small>"
 msgstr "<small><i>V primeru, da so igre delovale s prejšnjimi različicam MAME, so se verjetno spremenile njihove ROM zahteve. V tem primeru pridobite bolj nedavne datoteke ROM.</i></small>"
 
-#: ../data/gnome-video-arcade.builder.h:15
+#: ../data/gnome-video-arcade.builder.h:27
 msgid "An audit of the available games has detected errors in some of the ROM files. The following games will not be available in GNOME Video Arcade."
 msgstr "Nadzor dostopnih iger je zaznal napake v nekaterih datotekah ROM. Sledeče igre ne bodo dostopne v GNOME video arkadi. "
 
-#: ../data/gnome-video-arcade.builder.h:16
+#: ../data/gnome-video-arcade.builder.h:28
 msgid "Choose the order of information to appear in the game list."
 msgstr "Izbor vrstnega reda podrobnosti v seznamu iger."
 
-#: ../data/gnome-video-arcade.builder.h:17
+#: ../data/gnome-video-arcade.builder.h:29
 msgid "Close this window"
 msgstr "Zapri to okno"
 
-#: ../data/gnome-video-arcade.builder.h:18
+#: ../data/gnome-video-arcade.builder.h:30
 msgid "Columns"
 msgstr "Stolpci"
 
-#: ../data/gnome-video-arcade.builder.h:19
+#: ../data/gnome-video-arcade.builder.h:31
 msgid "Delete the selected game recordings"
 msgstr "Izbrisanje izbranih posnetkov iger"
 
-#: ../data/gnome-video-arcade.builder.h:20
+#: ../data/gnome-video-arcade.builder.h:32
 msgid "GNOME Video Arcade"
 msgstr "GNOME video arkada"
 
-#: ../data/gnome-video-arcade.builder.h:21
+#: ../data/gnome-video-arcade.builder.h:33
 msgid "Gallery"
 msgstr "Galerija"
 
-#: ../data/gnome-video-arcade.builder.h:22
+#: ../data/gnome-video-arcade.builder.h:34
 msgid "General"
 msgstr "Splošno"
 
-#: ../data/gnome-video-arcade.builder.h:23
+#: ../data/gnome-video-arcade.builder.h:35
 msgid "History"
 msgstr "Zgodovina"
 
-#: ../data/gnome-video-arcade.builder.h:24
-#: ../src/gva-ui.c:869
+#: ../data/gnome-video-arcade.builder.h:36
+#: ../src/gva-ui.c:898
 msgid "Only show my favorite games"
 msgstr "Pokaži le moje najljubše igre"
 
-#: ../data/gnome-video-arcade.builder.h:25
+#: ../data/gnome-video-arcade.builder.h:37
 msgid "Play _Back"
 msgstr "Pred_vajanje"
 
-#: ../data/gnome-video-arcade.builder.h:26
-#: ../src/gva-ui.c:713
+#: ../data/gnome-video-arcade.builder.h:38
+msgid "Play a music clip"
+msgstr "Predvajaj glasbeni posnetek"
+
+#: ../data/gnome-video-arcade.builder.h:39
+#: ../src/gva-ui.c:734
 msgid "Play back the selected game recording"
 msgstr "Predvajanje izbranega posnetka igre"
 
-#: ../data/gnome-video-arcade.builder.h:27
+#: ../data/gnome-video-arcade.builder.h:40
 msgid "Preferences"
 msgstr "Nastavitve"
 
-#: ../data/gnome-video-arcade.builder.h:28
+#: ../data/gnome-video-arcade.builder.h:41
 msgid "Properties"
 msgstr "Lastnosti"
 
-#: ../data/gnome-video-arcade.builder.h:29
+#: ../data/gnome-video-arcade.builder.h:42
 msgid "Recorded Games"
 msgstr "Posnete igre"
 
-#: ../data/gnome-video-arcade.builder.h:30
-#: ../src/gva-ui.c:769
+#: ../data/gnome-video-arcade.builder.h:43
+#: ../src/gva-ui.c:790
 msgid "Save ROM errors to a file"
 msgstr "Shranjevanje ROM napak v datoteko"
 
 #. This label precedes the search entry. e.g. Search for: Pac-Man
-#: ../data/gnome-video-arcade.builder.h:32
+#: ../data/gnome-video-arcade.builder.h:45
 msgid "Search for:"
 msgstr "Poišči:"
 
-#: ../data/gnome-video-arcade.builder.h:33
-#: ../src/gva-ui.c:862
+#: ../data/gnome-video-arcade.builder.h:46
+#: ../src/gva-ui.c:891
 msgid "Show all available games"
 msgstr "Pokaži vse razpoližljive igre"
 
-#: ../data/gnome-video-arcade.builder.h:34
-#: ../src/gva-ui.c:734
+#: ../data/gnome-video-arcade.builder.h:47
+#: ../src/gva-ui.c:755
 msgid "Show information about the selected game"
 msgstr "Pokaži podrobnosti izbrane igre"
 
-#: ../data/gnome-video-arcade.builder.h:35
-#: ../src/gva-ui.c:876
+#: ../data/gnome-video-arcade.builder.h:48
+#: ../src/gva-ui.c:905
 msgid "Show my search results"
 msgstr "Pokaži rezultate iskanja"
 
-#: ../data/gnome-video-arcade.builder.h:36
-#: ../src/gva-ui.c:706
+#: ../data/gnome-video-arcade.builder.h:49
+#: ../src/gva-ui.c:727
 msgid "Show next game"
 msgstr "Pokaži naslednjo igro"
 
-#: ../data/gnome-video-arcade.builder.h:37
-#: ../src/gva-ui.c:727
+#: ../data/gnome-video-arcade.builder.h:50
+#: ../src/gva-ui.c:748
 msgid "Show previous game"
 msgstr "Pokaži predhodno igro "
 
-#: ../data/gnome-video-arcade.builder.h:38
-#: ../src/gva-ui.c:790
+#: ../data/gnome-video-arcade.builder.h:51
+#: ../src/gva-ui.c:811
 msgid "Start the selected game"
 msgstr "Zaženi izbrano igro"
 
-#: ../data/gnome-video-arcade.builder.h:39
+#: ../data/gnome-video-arcade.builder.h:52
 msgid "Technical"
 msgstr "Tehnično"
 
-#: ../data/gnome-video-arcade.builder.h:40
+#: ../data/gnome-video-arcade.builder.h:53
 msgid "_Start Game"
 msgstr "_Zaženi igro"
-
-#: ../data/gnome-video-arcade.builder.h:41
-#: ../src/gva-columns.c:815
-msgid "• <b>THIS GAME DOESN'T WORK.</b>"
-msgstr "• <b>TA IGRA NE DELUJE.</b>"
-
-#: ../data/gnome-video-arcade.builder.h:42
-#: ../src/gva-columns.c:806
-msgid "• Screen flipping in cocktail mode is not supported."
-msgstr "• Obračanje zaslona v cocktail načinu ni podprto."
-
-#: ../data/gnome-video-arcade.builder.h:43
-#: ../src/gva-columns.c:768
-msgid "• The colors are completely wrong."
-msgstr "• Barve so popolnoma napačne."
-
-#. The labels begin with a UTF-8 encoded bullet character.
-#: ../data/gnome-video-arcade.builder.h:45
-#: ../src/gva-columns.c:759
-#, no-c-format
-msgid "• The colors aren't 100% accurate."
-msgstr "• Barve niso 100% natančne."
-
-#: ../data/gnome-video-arcade.builder.h:46
-#: ../src/gva-columns.c:825
-msgid "• The game has protection which isn't fully emulated."
-msgstr "• Igra ima zaščito, ki ni polno posnemana."
-
-#: ../data/gnome-video-arcade.builder.h:47
-#: ../src/gva-columns.c:797
-msgid "• The game lacks sound."
-msgstr "• Igri manjka zvok."
-
-#: ../data/gnome-video-arcade.builder.h:49
-#: ../src/gva-columns.c:788
-#, no-c-format
-msgid "• The sound emulation isn't 100% accurate."
-msgstr "• Posnemanje zvoka ni 100% natančno."
-
-#: ../data/gnome-video-arcade.builder.h:51
-#: ../src/gva-columns.c:778
-#, no-c-format
-msgid "• The video emulation isn't 100% accurate."
-msgstr "• Posnemanje videa ni 100% natančno."
 
 #: ../src/gconf-bridge.c:1218
 #, c-format
@@ -283,6 +282,42 @@ msgstr "Odstrani stolpec %s"
 msgid "Remove the \"%s\" column from the game list"
 msgstr "Odstranitev stolpca \"%s\" iz seznama iger"
 
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../src/gva-columns.c:759
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• Barve niso 100% natančne."
+
+#: ../src/gva-columns.c:768
+msgid "• The colors are completely wrong."
+msgstr "• Barve so popolnoma napačne."
+
+#: ../src/gva-columns.c:778
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• Posnemanje videa ni 100% natančno."
+
+#: ../src/gva-columns.c:788
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• Posnemanje zvoka ni 100% natančno."
+
+#: ../src/gva-columns.c:797
+msgid "• The game lacks sound."
+msgstr "• Igri manjka zvok."
+
+#: ../src/gva-columns.c:806
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr "• Obračanje zaslona v cocktail načinu ni podprto."
+
+#: ../src/gva-columns.c:815
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>TA IGRA NE DELUJE.</b>"
+
+#: ../src/gva-columns.c:825
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• Igra ima zaščito, ki ni polno posnemana."
+
 #: ../src/gva-columns.c:861
 msgid "Click here to remove from favorites"
 msgstr "Kliknite sem za odstranitev iz priljubljenih "
@@ -292,17 +327,17 @@ msgid "Click here to add to favorites"
 msgstr "Kliknite sem za dodajanje k priljubljenim "
 
 #: ../src/gva-columns.c:955
-#: ../src/gva-properties.c:412
+#: ../src/gva-properties.c:414
 msgid "(Game Description Unknown)"
 msgstr "(Neznan opis igre)"
 
 #: ../src/gva-columns.c:958
-#: ../src/gva-properties.c:415
+#: ../src/gva-properties.c:417
 msgid "(Manufacturer Unknown)"
 msgstr "(Neznan proizvajalec)"
 
 #: ../src/gva-columns.c:961
-#: ../src/gva-properties.c:418
+#: ../src/gva-properties.c:420
 msgid "(Year Unknown)"
 msgstr "(Neznano leto)"
 
@@ -373,7 +408,7 @@ msgstr "Opomba"
 msgid "Played On"
 msgstr "Igrano ob"
 
-#: ../src/gva-history.c:43
+#: ../src/gva-history.c:54
 msgid "This program is not configured to show history information."
 msgstr "Ta program ni nastavljen za prikaz podrobnosti zgodovine."
 
@@ -421,6 +456,23 @@ msgstr "%s: ni takšnega nastavitvenega ključa"
 #, c-format
 msgid "Could not determine emulator version"
 msgstr "Različice posnemovalnika ni mogoče določiti"
+
+#: ../src/gva-music-button.c:116
+msgid "No music available"
+msgstr "Glasba niso na voljo"
+
+#: ../src/gva-music-button.c:119
+msgid "Unable to play music"
+msgstr "Glasbe ni mogoče predvajati"
+
+#: ../src/gva-music-button.c:146
+#, c-format
+msgid "Buffering %d%%..."
+msgstr "Polnjenje medpomnilnika %d%% ..."
+
+#: ../src/gva-music-button.c:265
+msgid "Connecting..."
+msgstr "Povezovanje ..."
 
 #: ../src/gva-mute-button.c:126
 msgid "Muted"
@@ -552,11 +604,11 @@ msgstr "Dejanje trajno izbriše izbrane posnete igre. Ali ste prepričani, da ž
 msgid "Do Not Delete"
 msgstr "Ne izbriši"
 
-#: ../src/gva-properties.c:148
+#: ../src/gva-properties.c:150
 msgid "Show this game"
 msgstr "Prikaži to igro"
 
-#: ../src/gva-properties.c:459
+#: ../src/gva-properties.c:461
 #, c-format
 msgid ""
 "Error while fetching history:\n"
@@ -565,7 +617,7 @@ msgstr ""
 "Napaka med pridobivanjem zgodovine:\n"
 "%s"
 
-#: ../src/gva-properties.c:464
+#: ../src/gva-properties.c:466
 msgid "History not available"
 msgstr "Zgodovina ni na voljo"
 
@@ -593,171 +645,179 @@ msgstr[1] "Rezultat iskanja"
 msgstr[2] "Rezultata iskanja"
 msgstr[3] "Rezultati iskanja"
 
-#: ../src/gva-ui.c:145
+#: ../src/gva-ui.c:146
 msgid "M.A.M.E. Front-End"
 msgstr "Začelje M.A.M.E."
 
-#: ../src/gva-ui.c:150
+#: ../src/gva-ui.c:151
 msgid "translator-credits"
 msgstr "Andrej Žnidaršič"
 
 #. Translators: This is passed through D-Bus as the
 #. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:322
+#: ../src/gva-ui.c:335
 msgid "Watching a fullscreen game"
 msgstr "Ogled igre v celozaslonskem načinu"
 
 #. Translators: This is passed through D-Bus as the
 #. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:452
+#: ../src/gva-ui.c:469
 msgid "Recording a fullscreen game"
 msgstr "Snemanje igre v celozaslonskem načinu"
 
 #. Translators: This is passed through D-Bus as the
 #. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:627
+#: ../src/gva-ui.c:648
 msgid "Playing a fullscreen game"
 msgstr "Igranje igre v celozaslonskem načinu"
 
-#: ../src/gva-ui.c:683
+#: ../src/gva-ui.c:704
 msgid "_About"
 msgstr "O _programu"
 
-#: ../src/gva-ui.c:685
+#: ../src/gva-ui.c:706
 msgid "Show information about the application"
 msgstr "Prikaži podrobnosti o programu"
 
-#: ../src/gva-ui.c:690
+#: ../src/gva-ui.c:711
 msgid "_Contents"
 msgstr "_Vsebina"
 
-#: ../src/gva-ui.c:692
+#: ../src/gva-ui.c:713
 msgid "Open the help documentation"
 msgstr "Odpre dokumente pomoči"
 
-#: ../src/gva-ui.c:697
+#: ../src/gva-ui.c:718
 msgid "Add to _Favorites"
 msgstr "Dodaj med _priljubljene"
 
-#: ../src/gva-ui.c:699
+#: ../src/gva-ui.c:720
 msgid "Add the selected game to my list of favorites"
 msgstr "Dodajanje izbrane igre na seznam priljubljenih"
 
-#: ../src/gva-ui.c:711
-#: ../src/gva-ui.c:781
+#: ../src/gva-ui.c:732
+#: ../src/gva-ui.c:802
 msgid "Play _Back..."
 msgstr "Predvajanje ..."
 
-#: ../src/gva-ui.c:718
+#: ../src/gva-ui.c:739
 msgid "_Preferences"
 msgstr "_Lastnosti"
 
-#: ../src/gva-ui.c:720
+#: ../src/gva-ui.c:741
 msgid "Configure the application"
 msgstr "Nastavi program"
 
-#: ../src/gva-ui.c:732
+#: ../src/gva-ui.c:753
 msgid "_Properties"
 msgstr "_Lastnosti"
 
-#: ../src/gva-ui.c:739
+#: ../src/gva-ui.c:760
 msgid "_Quit"
 msgstr "_Končaj"
 
-#: ../src/gva-ui.c:741
+#: ../src/gva-ui.c:762
 msgid "Quit the application"
 msgstr "Končaj program"
 
-#: ../src/gva-ui.c:746
+#: ../src/gva-ui.c:767
 msgid "_Record"
 msgstr "_Posnami"
 
-#: ../src/gva-ui.c:748
+#: ../src/gva-ui.c:769
 msgid "Start the selected game and record keypresses to a file"
 msgstr "Zažene izbrano igro in posname pritiske tipk v datoteko"
 
-#: ../src/gva-ui.c:760
+#: ../src/gva-ui.c:781
 msgid "Remove from _Favorites"
 msgstr "Odstrani iz _priljubljenih"
 
-#: ../src/gva-ui.c:762
+#: ../src/gva-ui.c:783
 msgid "Remove the selected game from my list of favorites"
 msgstr "Odstranitev izbrane igre s seznama priljubljenih"
 
-#: ../src/gva-ui.c:767
+#: ../src/gva-ui.c:788
 msgid "Save _As..."
 msgstr "Shrani _kot ..."
 
-#: ../src/gva-ui.c:774
+#: ../src/gva-ui.c:795
 msgid "S_earch..."
 msgstr "_Poišči ..."
 
-#: ../src/gva-ui.c:776
+#: ../src/gva-ui.c:797
 msgid "Show a custom list of games"
 msgstr "Prikaži seznam iger po meri"
 
-#: ../src/gva-ui.c:783
+#: ../src/gva-ui.c:804
 msgid "Play back a previously recorded game"
 msgstr "Predvajanje prej posnete igre"
 
-#: ../src/gva-ui.c:788
+#: ../src/gva-ui.c:809
 msgid "_Start"
 msgstr "_Začni"
 
-#: ../src/gva-ui.c:795
+#: ../src/gva-ui.c:816
 msgid "_Add Column"
 msgstr "_Dodaj stolpec"
 
-#: ../src/gva-ui.c:802
+#: ../src/gva-ui.c:823
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: ../src/gva-ui.c:809
+#: ../src/gva-ui.c:830
 msgid "_Game"
 msgstr "I_gra"
 
-#: ../src/gva-ui.c:816
+#: ../src/gva-ui.c:837
 msgid "_Help"
 msgstr "Pomo_č"
 
-#: ../src/gva-ui.c:823
+#: ../src/gva-ui.c:844
 msgid "_View"
 msgstr "_Pogled"
 
-#: ../src/gva-ui.c:833
+#: ../src/gva-ui.c:854
+msgid "Play music _automatically"
+msgstr "_Samodejno predvajanje glasbe"
+
+#: ../src/gva-ui.c:856
+msgid "Automatically play a music clip from the selected game"
+msgstr "Samodejno predvajanje glasbenega posnetka iz izbrane igre "
+
+#: ../src/gva-ui.c:862
 msgid "_Restore previous state when starting a game"
 msgstr "_Obnovi prejšnje stanje med zaganjanjem igre"
 
-#: ../src/gva-ui.c:841
+#: ../src/gva-ui.c:870
 msgid "Start games in _fullscreen mode"
 msgstr "Zagon iger v _celozaslonskem načinu"
 
-#: ../src/gva-ui.c:849
+#: ../src/gva-ui.c:878
 msgid "Show _alternate versions of original games"
 msgstr "Pokaži _dodatne različice izvirnih iger"
 
-#: ../src/gva-ui.c:860
+#: ../src/gva-ui.c:889
 msgid "_Available Games"
 msgstr "_Razpoložljive igre"
 
-#: ../src/gva-ui.c:867
+#: ../src/gva-ui.c:896
 msgid "_Favorite Games"
 msgstr "_Priljubljene igre"
 
-#: ../src/gva-ui.c:874
+#: ../src/gva-ui.c:903
 msgid "Search _Results"
 msgstr "_Rezultati iskanja"
 
-#: ../src/gva-ui.c:959
+#: ../src/gva-ui.c:988
 msgid "Failed to initialize user interface"
 msgstr "Uporabniškega vmesnika ni mogoče zagnati."
 
-#: ../src/gva-ui.c:1077
+#: ../src/gva-ui.c:1106
 #, c-format
 msgid "Add %s Column"
 msgstr "Dodaj stolpec %s"
 
-#: ../src/gva-ui.c:1079
+#: ../src/gva-ui.c:1108
 #, c-format
 msgid "Add a \"%s\" column to the game list"
 msgstr "Dodajanje stolpca \"%s\" na seznam iger"
@@ -793,21 +853,4 @@ msgstr "ROM datotek ni mogoče najti. Verjetno je MAME nastavljen napačno ali p
 #: ../src/main.c:125
 msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or no ROM files are installed. Consult the user documentation for more details and troubleshooting tips."
 msgstr "ROM datotek ni mogoče najti. Verjetno je MAME nastavljen napačno ali pa datoteke ROM niso nameščene. Za več podrobnosti in namige odpravljanja napak si poglejte uporabniške dokumente."
-
-#~ msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
-#~ msgstr "&#x2022; <b>TA IGRA NE DELUJE.</b>"
-#~ msgid "&#x2022; Screen flipping in cocktail mode is not supported."
-#~ msgstr "&#x2022; Obračanje zaslona v cocktail načinu ni podprto."
-#~ msgid "&#x2022; The colors are completely wrong."
-#~ msgstr "&#x2022; Barve so popolnoma napačne."
-#~ msgid "&#x2022; The colors aren't 100% accurate."
-#~ msgstr "&#x2022; Barve niso 100% natančne."
-#~ msgid "&#x2022; The game has protection which isn't fully emulated."
-#~ msgstr "&#x2022; Igra ima zaščito, ki ni polno posnemana."
-#~ msgid "&#x2022; The game lacks sound."
-#~ msgstr "&#x2022; Igri manjka zvok."
-#~ msgid "&#x2022; The sound emulation isn't 100% accurate."
-#~ msgstr "&#x2022; Posnemanje zvoka ni 100% natančno."
-#~ msgid "&#x2022; The video emulation isn't 100% accurate."
-#~ msgstr "&#x2022; Posnemanje videa ni 100% natančno."
 
