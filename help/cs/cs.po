@@ -1,0 +1,1063 @@
+# Czech translation for gnome-video-arcade.
+# Copyright (C) 2010 gnome-video-arcade's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-video-arcade package.
+# Marek Černocký <marek@manet.cz>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade master\n"
+"POT-Creation-Date: 2010-02-21 18:51+0000\n"
+"PO-Revision-Date: 2010-02-25 20:10+0100\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:142(None)
+msgid ""
+"@@image: 'figures/gva_building_database.png'; "
+"md5=148adbf1c2d3240c68fc42c4c23a70b4"
+msgstr ""
+"@@image: 'figures/gva_building_database.png'; "
+"md5=148adbf1c2d3240c68fc42c4c23a70b4"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:162(None)
+msgid ""
+"@@image: 'figures/gva_main_window.png'; md5=146c3e4eb7bc6a7b0d366bc903844293"
+msgstr ""
+"@@image: 'figures/gva_main_window.png'; md5=146c3e4eb7bc6a7b0d366bc903844293"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:406(None)
+msgid ""
+"@@image: 'figures/gva_search_window.png'; "
+"md5=cb85cf748755ccc2e3cfdc64b7783d94"
+msgstr ""
+"@@image: 'figures/gva_search_window.png'; "
+"md5=cb85cf748755ccc2e3cfdc64b7783d94"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:458(None)
+msgid ""
+"@@image: 'figures/gva_recorded_games.png'; "
+"md5=77bf453222d3efea3bc4274aa4653ba6"
+msgstr ""
+"@@image: 'figures/gva_recorded_games.png'; "
+"md5=77bf453222d3efea3bc4274aa4653ba6"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:509(None)
+msgid ""
+"@@image: 'figures/gva_general_preferences.png'; "
+"md5=1e74c6d14e1535ce12dee1b187408cd2"
+msgstr ""
+"@@image: 'figures/gva_general_preferences.png'; "
+"md5=1e74c6d14e1535ce12dee1b187408cd2"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/gnome-video-arcade.xml:618(None)
+msgid ""
+"@@image: 'figures/gva_column_preferences.png'; "
+"md5=56d51f7cd01cc78b37942a101f0032a9"
+msgstr ""
+"@@image: 'figures/gva_column_preferences.png'; "
+"md5=56d51f7cd01cc78b37942a101f0032a9"
+
+#: C/gnome-video-arcade.xml:15(title)
+msgid "<application>GNOME Video Arcade</application> Manual"
+msgstr "Příručka k aplikaci <application>GNOME Video Arcade</application>"
+
+#: C/gnome-video-arcade.xml:18(para)
+msgid ""
+"GNOME Video Arcade is a front-end for the <application>Multiple Arcade "
+"Machine Emulator (MAME)</application>."
+msgstr ""
+"GNOME Video Arcade je grafické uživatelské rozhraní k programu "
+"<application>Multiple Arcade Machine Emulator (MAME)</application>."
+
+#: C/gnome-video-arcade.xml:23(year)
+msgid "2007"
+msgstr "2007"
+
+#: C/gnome-video-arcade.xml:24(year)
+msgid "2008"
+msgstr "2008"
+
+#: C/gnome-video-arcade.xml:25(holder)
+msgid "Matthew Barnes"
+msgstr "Matthew Barnes"
+
+#: C/gnome-video-arcade.xml:2(para)
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or "
+"in the file COPYING-DOCS distributed with this manual."
+msgstr ""
+"Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU "
+"Free Documentation License, verze 1.1 nebo jakékoli další verze vydané "
+"nadací Free Software Foundation; bez neměnných oddílů, bez textů předních "
+"desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu "
+"jménem <ulink type=\"help\" url=\"ghelp:fdl\">GNU Free Documentation "
+"License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou."
+
+#: C/gnome-video-arcade.xml:12(para)
+msgid ""
+"This manual is part of a collection of GNOME manuals distributed under the "
+"GFDL. If you want to distribute this manual separately from the collection, "
+"you can do so by adding a copy of the license to the manual, as described in "
+"section 6 of the license."
+msgstr ""
+"Tato příručka je součástí kolekce příruček GNOME, distribuovaných pod "
+"licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, "
+"musíte přiložit kopii licence dle popisu v sekci 6 dané licence."
+
+#: C/gnome-video-arcade.xml:19(para)
+msgid ""
+"Many of the names used by companies to distinguish their products and "
+"services are claimed as trademarks. Where those names appear in any GNOME "
+"documentation, and the members of the GNOME Documentation Project are made "
+"aware of those trademarks, then the names are in capital letters or initial "
+"capital letters."
+msgstr ""
+"Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou "
+"ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a "
+"členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se "
+"jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s "
+"velkým písmenem na začátku."
+
+#: C/gnome-video-arcade.xml:35(para)
+msgid ""
+"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
+"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
+"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
+"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
+"RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
+"MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
+"MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
+"WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
+"SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN "
+"ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION "
+"OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr ""
+"DOKUMENT JE POSKYTOVÁN V PODOBĚ „JAK JE“ BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, "
+"NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ "
+"VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO "
+"NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, "
+"NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO "
+"JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO "
+"JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY "
+"ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO "
+"LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI "
+"ÚPRAVY TOHOTO DOKUMENTU; DÁLE"
+
+#: C/gnome-video-arcade.xml:55(para)
+msgid ""
+"UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
+"NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
+"CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE "
+"DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON "
+"FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF "
+"ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, "
+"WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES "
+"OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED "
+"VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE "
+"POSSIBILITY OF SUCH DAMAGES."
+msgstr ""
+"ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN "
+"(VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, "
+"KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO "
+"UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN "
+"ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ "
+"ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY "
+"DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO "
+"JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE "
+"K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY "
+"TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ."
+
+#: C/gnome-video-arcade.xml:28(para)
+msgid ""
+"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
+"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
+"<placeholder-1/>"
+msgstr ""
+"DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU "
+"FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <placeholder-1/>"
+
+#: C/gnome-video-arcade.xml:32(firstname)
+msgid "Matthew"
+msgstr "Matthew"
+
+#: C/gnome-video-arcade.xml:33(surname)
+msgid "Barnes"
+msgstr "Barnes"
+
+#: C/gnome-video-arcade.xml:39(revnumber)
+msgid "GNOME Video Arcade Manual 1.1"
+msgstr "Příručka aplikace GNOME Video Arcade verze 1.1"
+
+#: C/gnome-video-arcade.xml:40(date)
+msgid "2008-02-24"
+msgstr "24. 2. 2008"
+
+#: C/gnome-video-arcade.xml:44(releaseinfo)
+msgid "This manual describes version 0.5.6 of GNOME Video Arcade"
+msgstr "Tato příručka popisuje aplikaci GNOME Video Arcade ve verzi 0.5.6"
+
+#: C/gnome-video-arcade.xml:49(title)
+msgid "Introduction"
+msgstr "Úvod"
+
+#: C/gnome-video-arcade.xml:50(para)
+msgid ""
+"The <application>GNOME Video Arcade</application> application allows you to "
+"play classic coin-operated arcade games on your GNOME desktop using the "
+"<application>Multiple Arcade Machine Emulator (MAME)</application>."
+msgstr ""
+"Aplikace <application>GNOME Video Arcade</application> umožňuje hrát ve "
+"vašem pracovním prostředí GNOME klasické arkádové hry, které bývaly hitem v "
+"herních automatech na mince. Používá k tomu program <application>Multiple "
+"Arcade Machine Emulator (MAME)</application>."
+
+#: C/gnome-video-arcade.xml:55(para)
+msgid ""
+"<application>GNOME Video Arcade</application> provides the following "
+"features:"
+msgstr ""
+"Aplikace <application>GNOME Video Arcade</application> poskytuje následující "
+"funkce:"
+
+#: C/gnome-video-arcade.xml:60(para)
+msgid "Play classic arcade games on your desktop."
+msgstr "Hraní klasických arkádových her na vašem stolním počítači."
+
+#: C/gnome-video-arcade.xml:65(para)
+msgid "Tag favorite games to easily find them again later."
+msgstr "Označování oblíbených her, abyste je později snadno našli."
+
+#: C/gnome-video-arcade.xml:70(para)
+msgid "Read historical information and tips about your favorite games."
+msgstr "Čtení informací o historii her a rad k vašim oblíbeným hrám."
+
+#: C/gnome-video-arcade.xml:75(para)
+msgid "Game recording and play back."
+msgstr "Zaznamenávání průběhu hry a pozdější přehrání záznamu."
+
+#: C/gnome-video-arcade.xml:80(para)
+msgid "Search."
+msgstr "Vyhledávání."
+
+#: C/gnome-video-arcade.xml:88(title)
+msgid "Getting Started"
+msgstr "Začínáme"
+
+#: C/gnome-video-arcade.xml:90(title)
+msgid "Starting GNOME Video Arcade"
+msgstr "Spuštění GNOME Video Arcade"
+
+#: C/gnome-video-arcade.xml:91(para)
+msgid ""
+"You can start <application>GNOME Video Arcade</application> in the following "
+"ways:"
+msgstr ""
+"Aplikaci <application>GNOME Video Arcade</application> můžete spustit "
+"následujícími způsoby:"
+
+#: C/gnome-video-arcade.xml:96(term)
+msgid "<guimenu>Applications</guimenu> menu"
+msgstr "Nabídka <guimenu>Aplikace</guimenu>"
+
+#: C/gnome-video-arcade.xml:98(para)
+msgid ""
+"Choose <menuchoice><guisubmenu>Games</guisubmenu><guimenuitem>Video Arcade</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Zvolte <menuchoice><guisubmenu>Hry</guisubmenu><guimenuitem>Video Arcade</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:108(term)
+msgid "Command line"
+msgstr "Příkazový řádek"
+
+#: C/gnome-video-arcade.xml:110(para)
+msgid ""
+"To start <application>GNOME Video Arcade</application> from a command line, "
+"type the following command, then press <keycap>Return</keycap>:"
+msgstr ""
+"Pokud chcete aplikaci <application>GNOME Video Arcade</application> spustit "
+"z příkazového řádku, napište následující příkaz a stiskněte <keycap>Enter</"
+"keycap>:"
+
+#: C/gnome-video-arcade.xml:115(command)
+msgid "gnome-video-arcade"
+msgstr "gnome-video-arcade"
+
+#: C/gnome-video-arcade.xml:118(para)
+msgid ""
+"To view other command line options that are available, type <command>gnome-"
+"video-arcade --help</command>, then press <keycap>Return</keycap>."
+msgstr ""
+"Jestli si chcete zobrazit dostupné přepínače pro příkazový řádek, napište "
+"<command>gnome-video-arcade --help</command> a stiskněte <keycap>Enter</"
+"keycap>."
+
+#: C/gnome-video-arcade.xml:129(title)
+msgid "When You Start GNOME Video Arcade"
+msgstr "Když spustíte GNOME Video Arcade"
+
+#: C/gnome-video-arcade.xml:130(para)
+msgid ""
+"The first time <application>GNOME Video Arcade</application> starts, it will "
+"build a database of game information and analyze available ROM files to "
+"determine which games are playable. This process may take several minutes to "
+"complete, during which time the following window is displayed:"
+msgstr ""
+"Když spustíte aplikaci <application>GNOME Video Arcade</application> poprvé, "
+"sestaví se databáze informací o hrách a analyzují se dostupné soubory ROM, "
+"aby se určilo, které hry jsou hratelné. Dokončení tohoto procesu může zabrat "
+"několik minut a v jeho průběhu uvidíte následující okno:"
+
+#: C/gnome-video-arcade.xml:138(title)
+msgid "GNOME Video Arcade Building the Game Database"
+msgstr "GNOME Video Arcade sestavující databázi her"
+
+#: C/gnome-video-arcade.xml:145(para)
+msgid ""
+"Shows GNOME Video Arcade main window while the database is being built. Most "
+"of the elements are grayed out, and a progress bar is shown at the bottom."
+msgstr ""
+"Ukazuje hlavní okno GNOME Video Arcade během sestavování databáze. Většina "
+"prvků je zašedlá a v dolní části s zobrazuje ukazatel průběhu."
+
+#: C/gnome-video-arcade.xml:154(para)
+msgid "The window will then change to look like this:"
+msgstr "Po dokončení se okno změní nějak takto:"
+
+#: C/gnome-video-arcade.xml:158(title)
+msgid "GNOME Video Arcade Start Up Window"
+msgstr "Okno GNOME Video Arcade po spuštění"
+
+#: C/gnome-video-arcade.xml:165(para)
+msgid ""
+"Shows GNOME Video Arcade main window with a sample list of games. Contains "
+"menubar, game list, view buttons, start game button, properties button and "
+"statusbar."
+msgstr ""
+"Ukazuje hlavní okno aplikace GNOME Video Arcade s příkladem seznamu her. "
+"Obsahuje lištu nabídek, seznam her, zobrazovací tlačítko, tlačitko na "
+"spuštění hry, tlačítko nastavení a stavovou lištu."
+
+#: C/gnome-video-arcade.xml:174(para)
+msgid ""
+"You may see a different list of games, depending on which ROM images are "
+"installed on your system."
+msgstr ""
+"Ve skutečnosti můžete vidět odlišný seznam her, záleží na tom, jaké máte v "
+"systému nainstalované obrazy ROM."
+
+#: C/gnome-video-arcade.xml:179(para)
+msgid ""
+"If you know that ROM images are installed on your system but "
+"<application>GNOME Video Arcade</application> does not list any games, it "
+"may be that <application>MAME</application> is misconfigured or none of the "
+"installed ROM images are playable. See the Troubleshooting section for more "
+"information."
+msgstr ""
+"Pokud víte, že máte v systému nainstalované obrazy ROM a aplikace "
+"<application>GNOME Video Arcade</application> přesto žádné hry nezobrazuje, "
+"může to být nesprávným nastavením programu <application>MAME</application> a "
+"nebo tím, že žádný z nainstalovaných obrazů ROM není hratelný. Jak tyto věci "
+"řešit najdete v oddíle Řešení problémů"
+
+#: C/gnome-video-arcade.xml:188(para)
+msgid ""
+"Occasionally, the database may be rebuilt when <application>GNOME Video "
+"Arcade</application> starts. Most of the time it will skip this process and "
+"go straight to the window in Figure 2."
+msgstr ""
+"Příležitostně může být databáze při spuštění <application>GNOME Video "
+"Arcade</application> přebudována. Po většinu času je ale tento proces "
+"přeskočen a objeví se přímo okno jako na obrázku 2."
+
+#: C/gnome-video-arcade.xml:194(para)
+msgid ""
+"The <application>GNOME Video Arcade</application> window contains the "
+"following elements:"
+msgstr ""
+"Okno <application>GNOME Video Arcade</application> obsahuje následující "
+"části:"
+
+#: C/gnome-video-arcade.xml:200(term)
+msgid "Menubar"
+msgstr "Lištu nabídek"
+
+#: C/gnome-video-arcade.xml:202(para)
+msgid ""
+"The menus on the menubar contain all the commands needed to use "
+"<application>GNOME Video Arcade</application>."
+msgstr ""
+"Nabídky v liště nabídek obsahují všechny příkazy potřebné k používání "
+"aplikace <application>GNOME Video Arcade</application>."
+
+#: C/gnome-video-arcade.xml:209(term)
+msgid "Game List"
+msgstr "Seznam her"
+
+#: C/gnome-video-arcade.xml:211(para)
+msgid "The game list displays a list of games to choose from."
+msgstr "Seznam her zobrazuje výpis her, ze kterých si můžete vybírat."
+
+#: C/gnome-video-arcade.xml:217(term)
+msgid "View Buttons"
+msgstr "Zobrazovací tlačítka"
+
+#: C/gnome-video-arcade.xml:219(para)
+msgid ""
+"The view buttons control which games are displayed in the game list. Choose "
+"between displaying all available games, a list of favorite games, or "
+"previous search results."
+msgstr ""
+"Zobrazovací tlačítka určují, které z her budou zobrazené v seznamu her. "
+"Můžete volit mezi zobrazením všech dostupných her, seznamem oblíbených her "
+"nebo předchozích výsledků hledání."
+
+#: C/gnome-video-arcade.xml:227(term)
+msgid "<guibutton>Start Game</guibutton> Button"
+msgstr "Tlačítko <guibutton>Spustit</guibutton>"
+
+#: C/gnome-video-arcade.xml:229(para)
+msgid ""
+"The <guibutton>Start Game</guibutton> button starts the highlighted game in "
+"the game list."
+msgstr ""
+"Tlačítko <guibutton>Spustit</guibutton> spustí hru, která je v seznamu her "
+"zvýrazněná."
+
+#: C/gnome-video-arcade.xml:236(term)
+msgid "<guibutton>Properties</guibutton> Button"
+msgstr "Tlačítko <guibutton>Vlastnosti</guibutton>"
+
+#: C/gnome-video-arcade.xml:238(para)
+msgid ""
+"The <guibutton>Properties</guibutton> button displays additional information "
+"about the highlighted game in the game list."
+msgstr ""
+"Tlačítko <guibutton>Vlastnosti</guibutton> zobrazí doplňující informace o "
+"hře, která je v seznamu her zvýrazněná."
+
+#: C/gnome-video-arcade.xml:245(term)
+msgid "Statusbar"
+msgstr "Stavová lišta"
+
+#: C/gnome-video-arcade.xml:247(para)
+msgid ""
+"The statusbar displays the <application>MAME</application> version used to "
+"play games and contextual information about the menu items. It also displays "
+"a progress bar while building the game database."
+msgstr ""
+"Stavová lišta zobrazuje verzi programu <application>MAME</application> "
+"použitého k hraní her a kontextové informace k položkám nabídky. Rovněž "
+"zobrazuje ukazatel průběhu během sestavování databáze her."
+
+#: C/gnome-video-arcade.xml:260(title)
+msgid "Usage"
+msgstr "Použití"
+
+#: C/gnome-video-arcade.xml:262(title)
+msgid "To Start a Game"
+msgstr "Jak spustit hru"
+
+#: C/gnome-video-arcade.xml:263(para)
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Start Game</guibutton> button or choose "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>S</keycap></"
+"keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Start</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"Zvolte hru ze seznamu her a klikněte na ni, aby se zvýraznila. Klikněte na "
+"tlačítko <guibutton>Spustit hru</guibutton> nebo zvolte "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>S</keycap></"
+"keycombo></shortcut><guimenu>Hra</guimenu><guimenuitem>Spustit</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:278(para)
+msgid "You can also start a game by double-clicking on it in the game list."
+msgstr "Hru můžete také spustit tak, že na ni v seznamu dvojitě kliknete."
+
+#: C/gnome-video-arcade.xml:284(title)
+msgid "To View Properties of a Game"
+msgstr "Jak zobrazit vlastnosti hry"
+
+#: C/gnome-video-arcade.xml:285(para)
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Properties</guibutton> button or choose "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>P</keycap></"
+"keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Properties</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Zvolte ze seznamu her hru a klikněte na ni nebo ji zvýrazněte. Klikněte na "
+"tlačítko <guibutton>Vlastnosti</guibutton> nebo zvolte "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>P</keycap></"
+"keycombo></shortcut><guimenu>Zobrazit</guimenu><guimenuitem>Vlastnosti</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:299(para)
+msgid ""
+"The <guilabel>Properties</guilabel> dialog displays information about the "
+"highlighted game, including some history about the game, tips and tricks to "
+"help improve your scores, pictures of the arcade cabinet, screen shots of "
+"the game in progress and some technical information about <application>MAME</"
+"application>'s emulation of the game."
+msgstr ""
+"Dialogové okno <guilabel>Vlastnosti</guilabel> zobrazuje informace o "
+"zvýrazněné hře, včetně historie hraní této hry, rad a triků k vylepšení "
+"hodnocení, obrázků ze sbírky arkád, snímků obrazovky z průběhu hry a některé "
+"technické informace o herním emulátoru <application>MAME</application>."
+
+#: C/gnome-video-arcade.xml:306(para)
+msgid ""
+"To close the <guilabel>Properties</guilabel> dialog, click the "
+"<guibutton>Close</guibutton> button."
+msgstr ""
+"Kliknutím na tlačítko <guibutton>Zavřít</guibutton> dialogové okno "
+"<guilabel>Vlastnosti</guilabel> zavřete."
+
+#: C/gnome-video-arcade.xml:311(para)
+msgid ""
+"Some of these features are not yet completed and will be available in a "
+"future version of <application>GNOME Video Arcade</application>."
+msgstr ""
+"Některé z těchto vlastností nejsou ještě zcela dodělané a budou dostupné v "
+"příštích verzích aplikace <application>GNOME Video Arcade</application>."
+
+#: C/gnome-video-arcade.xml:318(title)
+msgid "To Tag a Game as a Favorite"
+msgstr "Jak označit hru jako oblíbenou"
+
+#: C/gnome-video-arcade.xml:319(para)
+msgid ""
+"To tag a game as a favorite, choose a game from the game list and click on "
+"it to highlight it. Then choose "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>+</keycap></"
+"keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Add to Favorites</"
+"guimenuitem></menuchoice>. The heart icon for the highlighted game will "
+"light up to indicate that the game has been added to your list of favorites."
+msgstr ""
+"Když chcete hru označit jako oblíbenou, vyberte ji v seznamu her a klikněte "
+"na ni, aby byla zvýrazněná. Zvolte "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>+</keycap></"
+"keycombo></shortcut><guimenu>Hra</guimenu><guimenuitem>Přidat do oblíbených</"
+"guimenuitem></menuchoice>. Ikona ve sloupci Oblíbená se pro vybranou hru "
+"obarví, čímž se signalizuje, že hra patří v seznamu mezi oblíbené."
+
+#: C/gnome-video-arcade.xml:335(para)
+msgid ""
+"If a game is no longer your favorite, click on its name in the game list to "
+"highlight it. Then choose <menuchoice><shortcut><keycombo><keycap>Ctrl</"
+"keycap><keycap>-</keycap></keycombo></shortcut><guimenu>Game</"
+"guimenu><guimenuitem>Remove from Favorites</guimenuitem></menuchoice>. The "
+"heart icon for the highlighted game will turn gray to indicate that the game "
+"has been removed from your list of favorites."
+msgstr ""
+"Pokud hra přestane být vaší oblíbenou, klikněte na její název, aby se "
+"zvýraznila. Pak zvolte <menuchoice><shortcut><keycombo><keycap>Ctrl</"
+"keycap><keycap>-</keycap></keycombo></shortcut><guimenu>Hra</"
+"guimenu><guimenuitem>Odebrat z oblíbených</guimenuitem></menuchoice>. Ikona "
+"ve sloupci Oblíbená zpátky zešedne, čímž se signalizuje, že hra v seznamu "
+"nepatří mezi vaše oblíbené."
+
+#: C/gnome-video-arcade.xml:352(para)
+msgid ""
+"You can also click directly on a heart icon in the game list to tag the game "
+"as a favorite or not a favorite."
+msgstr ""
+"Změnit označení, zda hra je nebo není oblíbená, můžete také přímo kliknutím "
+"na ikonu ve sloupci Oblíbená v seznamu her."
+
+#: C/gnome-video-arcade.xml:359(title)
+msgid "To Change Which Games Are Displayed"
+msgstr "Jak změnit, které hry jsou zobrazené"
+
+#: C/gnome-video-arcade.xml:360(para)
+msgid ""
+"To show all available games in the game list, click the <guibutton>Available "
+"Games</guibutton> view button or choose <menuchoice><guimenu>View</"
+"guimenu><guimenuitem>Available Games</guimenuitem></menuchoice>."
+msgstr ""
+"Pokud chcete v seznamu her zobrazit všechny dostupné hry, klikněte na "
+"zobrazovací tlačítko <guibutton>Dostupné hry</guibutton> nebo zvolte "
+"<menuchoice><guimenu>Zobrazit</guimenu><guimenuitem>Dostupné hry</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:368(para)
+msgid ""
+"To show only your favorite games in the game list, click the "
+"<guibutton>Favorite Games</guibutton> view button or choose "
+"<menuchoice><guimenu>View</guimenu><guimenuitem>Favorite Games</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Pokud chcete v seznamu her zobrazit jen své oblíbené hry, klikněte na "
+"zobrazovací tlačítko <guibutton>Oblíbené hry</guibutton> nebo zvolte "
+"<menuchoice><guimenu>Zobrazit</guimenu><guimenuitem>Oblíbené hry</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:376(para)
+msgid ""
+"To show your previous search results in the game list, click the "
+"<guibutton>Search Results</guibutton> view button or choose "
+"<menuchoice><guimenu>View</guimenu><guimenuitem>Search Results</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Pokud chcete v seznamu her zobrazit výsledky předchozího hledání, klikněte "
+"na zobrazovací tlačítko <guibutton>Výsledky hledání</guibutton> nebo zvolte "
+"<menuchoice><guimenu>Zobrazit</guimenu><guimenuitem>Výsledky hledání</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:386(title)
+msgid "To Search for Games"
+msgstr "Jak vyhledat hry"
+
+#: C/gnome-video-arcade.xml:387(para)
+msgid ""
+"Choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>F</"
+"keycap></keycombo></shortcut><guimenu>Edit</guimenu><guimenuitem>Search...</"
+"guimenuitem></menuchoice> to display the following dialog:"
+msgstr ""
+"Zvolte <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>F</"
+"keycap></keycombo></shortcut><guimenu>Upravit</guimenu><guimenuitem>Hledat…</"
+"guimenuitem></menuchoice> a zobrazí se následující dialogové okno:"
+
+#: C/gnome-video-arcade.xml:402(title)
+msgid "GNOME Video Arcade Search Dialog"
+msgstr "Dialogové okno hledání v GNOME Video Arcade"
+
+#: C/gnome-video-arcade.xml:409(para)
+msgid ""
+"Shows GNOME Video Arcade search dialog. Contains text entry box, find button "
+"and close button."
+msgstr ""
+"Ukazuje dialogové okno hledání v GNOME Video Arcade. Obsahuje vstupní "
+"textové pole a tlačítka Hledat a Zavřít."
+
+#: C/gnome-video-arcade.xml:417(para)
+msgid ""
+"Type your search criteria in the entry box. Search by the title of the game, "
+"the company that manufactured the game, the year the game was released, or "
+"the name of the game's ROM set or <application>MAME</application> driver."
+msgstr ""
+"Do textového pole zadejte, co chcete vyhledat. Vyhledává se v názvech her, "
+"výrobcích her, letech vydání her a názvu sady ROM pro hru nebo ovladače "
+"<application>MAME</application>."
+
+#: C/gnome-video-arcade.xml:423(para)
+msgid ""
+"Click the <guibutton>Find</guibutton> button to start your search. The "
+"<guilabel>Search</guilabel> dialog will close and the results of your search "
+"will be displayed in the game list."
+msgstr ""
+"Kliknutím na tlačítko <guibutton>Hledat</guibutton> hledání spustíte. "
+"Dialogové okno <guilabel>Hledat</guilabel> se zavře a výsledky hledání se "
+"zobrazí v seznamu her."
+
+#: C/gnome-video-arcade.xml:428(para)
+msgid ""
+"Click the <guibutton>Close</guibutton> button to close the <guilabel>Search</"
+"guilabel> dialog without searching."
+msgstr ""
+"Kliknutím na <guibutton>Zavřít</guibutton> dialogové okno <guilabel>Hledat</"
+"guilabel> zavřete, aniž by se hledání provedlo."
+
+#: C/gnome-video-arcade.xml:434(title)
+msgid "To Record a Game"
+msgstr "Jak zaznamenat průběh hry"
+
+#: C/gnome-video-arcade.xml:435(para)
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then "
+"choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>R</"
+"keycap></keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Record</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Vyberte si v seznamu her hru a kliknutím ji zvýrazněte. Potom zvolte "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>R</keycap></"
+"keycombo></shortcut><guimenu>Hra</guimenu><guimenuitem>Zaznamenat</"
+"guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:449(para)
+msgid ""
+"After you exit from <application>MAME</application>, your new recording will "
+"be highlighted in the following window:"
+msgstr ""
+"Po ukončení emulátoru <application>MAME</application> bude váš nový záznam "
+"zvýrazněný v následujícím okně:"
+
+#: C/gnome-video-arcade.xml:454(title)
+msgid "GNOME Video Arcade Recorded Games Window"
+msgstr "Okno záznamů her v aplikaci GNOME Video Arcade"
+
+#: C/gnome-video-arcade.xml:461(para)
+msgid ""
+"Shows GNOME Video Arcade recorded games window. Contains list of game "
+"recordings, play back button, delete button and close button."
+msgstr ""
+"Ukazuje okno se záznamy her v aplikaci GNOME Video Arcade. Obsahuje seznam "
+"záznamů her a tlačítka Přehrát, Smazat a Zavřít."
+
+#: C/gnome-video-arcade.xml:469(para)
+msgid ""
+"Each entry shows the title of the game that was recorded, and the date and "
+"time when recording began. Click on the game's title to customize the "
+"comment. You can add more information to the comment such as the final score "
+"or level reached."
+msgstr ""
+"Každá položka zobrazuje název zaznamenané hry a datum a čas, kdy záznam "
+"započal. Kliknutím na název hry si můžete přizpůsobit poznámku. Do ní můžete "
+"přidat další informace, jako například jakého skóre bylo dosaženo, ať už "
+"celkové nebo v jednotlivých úrovních."
+
+#: C/gnome-video-arcade.xml:477(title)
+msgid "To Play Back a Recorded Game"
+msgstr "Jak přehrát zaznamenanou hru"
+
+#: C/gnome-video-arcade.xml:478(para)
+msgid ""
+"Choose <menuchoice><guimenu>Game</guimenu><guimenuitem>Play Back...</"
+"guimenuitem></menuchoice> to display the <guilabel>Recorded Games</guilabel> "
+"window. Choose a game recording to play back and click on it to highlight "
+"it. Then click the <guibutton>Play Back</guibutton> button."
+msgstr ""
+"Zvolte <menuchoice><guimenu>Hra</guimenu><guimenuitem>Přehrát…</"
+"guimenuitem></menuchoice> a zobrazí se okno <guilabel>Záznamy her</"
+"guilabel>. Vyberte záznam hry, který chcete přehrát a kliknutím jej "
+"zvýrazněte. Pak klikněte na tlačítko <guibutton>Přehrát</guibutton>."
+
+#: C/gnome-video-arcade.xml:492(title)
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: C/gnome-video-arcade.xml:493(para)
+msgid ""
+"To modify the preferences of <application>GNOME Video Arcade</application>, "
+"choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Pokud chcete změnit předvolby aplikace <application>GNOME Video Arcade</"
+"application>, zvolte <menuchoice><guimenu>Upravit</"
+"guimenu><guimenuitem>Předvolby</guimenuitem></menuchoice>."
+
+#: C/gnome-video-arcade.xml:500(para)
+msgid ""
+"The <guilabel>Preferences</guilabel> dialog contains the following sections:"
+msgstr ""
+"Dialogové okno <guilabel>Předvolby</guilabel> obsahuje následující části:"
+
+#: C/gnome-video-arcade.xml:505(title)
+msgid "General"
+msgstr "Obecné"
+
+#: C/gnome-video-arcade.xml:512(para)
+msgid "Shows the General tab of the Preferences window."
+msgstr "Ukazuje kartu Obecné v okně Předvolby."
+
+#: C/gnome-video-arcade.xml:521(guilabel)
+msgid "Start games in fullscreen mode"
+msgstr "Spouštění her v režimu celé obrazovky"
+
+#: C/gnome-video-arcade.xml:526(para)
+msgid ""
+"Select this option to start games in fullscreen mode. Otherwise, games will "
+"be started in a window."
+msgstr ""
+"Tuto volbu vyberte, pokud chcete hry spouštět v režimu celé obrazovky. V "
+"opačném případě se hry budou spouštět v okně."
+
+#: C/gnome-video-arcade.xml:534(guilabel)
+msgid "Restore previous state when starting a game"
+msgstr "Při spuštění hry obnovit předchozí stav"
+
+#: C/gnome-video-arcade.xml:539(para)
+msgid ""
+"Select this option to continue where you left off when you last exited "
+"<application>MAME</application>. If this option is not selected, the "
+"emulator will boot the arcade machine each time a game is started."
+msgstr ""
+"Tuto volbu vyberte, pokud chcete ve hře pokračovat v místě, kde jste "
+"naposledy ukončili program <application>MAME</application>. Pokud tato volba "
+"vybraná není, emulátor při každém spuštění provede nové čisté zavedení "
+"herního stroje."
+
+#: C/gnome-video-arcade.xml:546(para)
+msgid ""
+"State restoration does not take effect until the second time the game is "
+"started with the option enabled. It does not apply to recording or playing "
+"back games."
+msgstr ""
+"Obnovení stavu nemá efekt, dokud hra není podruhé spuštěná s touto zapnutou "
+"volbou. Nepoužívá se k záznamu a přehrávání her."
+
+#: C/gnome-video-arcade.xml:553(para)
+msgid "Not all games support this feature."
+msgstr "Ne všechny hry podporují tuto funkci."
+
+#: C/gnome-video-arcade.xml:561(guilabel)
+msgid "Show alternate versions of original games"
+msgstr "Zobrazit alternativní verze k originálním hrám"
+
+#: C/gnome-video-arcade.xml:566(para)
+msgid ""
+"Select this option to show alternate versions of original games in the game "
+"list in the main window."
+msgstr ""
+"Tuto volbu vyberte, pokud chcete v seznamu her v hlavním okně zobrazovat "
+"alternativní verze k originálním hrám."
+
+#: C/gnome-video-arcade.xml:574(title)
+msgid "What are alternate versions?"
+msgstr "Co jsou to alternativní verze?"
+
+#: C/gnome-video-arcade.xml:575(para)
+msgid ""
+"From the <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\"><application>MAME</application> FAQ</ulink>:"
+msgstr ""
+"Z <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\">Častých dotazů a odpovědí k <application>MAME</application></ulink>:"
+
+#: C/gnome-video-arcade.xml:580(para)
+msgid ""
+"Games were often licensed to other companies for a variety of reasons: the "
+"most common was that the makers wished to sell the game in a country or "
+"region in which they had no distribution of their own. In the early 80s, "
+"Namco had no US distribution network so their games were licensed to Atari, "
+"Bally-Midway, and others. Conversely, Atari licensed their games to Japanese "
+"companies (usually Namco) for sale there."
+msgstr ""
+"Hry jsou často z různých důvodů licencované pro jiné firmy: nejčastější je, "
+"že si tvůrce přeje hru prodávat v zemi nebo regionu, ve kterém nemá vlastní "
+"zastoupení. Z počátku 80 let nemělo Namco distribuční síť v USA, takže své "
+"hry licencovalo firmám Atari, Bally-Midway a dalším. Naopak Atari "
+"licencovalo své hry japonským firmám (obvykle pro Namco) kvůli prodeji na "
+"japonském trhu."
+
+#: C/gnome-video-arcade.xml:589(para)
+msgid ""
+"Sometimes a set of ROMs with a different copyright date is found, or a "
+"bootleg set, or another alternate version. When the <quote>parent</quote> "
+"game has already been emulated in <application>MAME</application>, these "
+"alternates are usually easy to add. In some cases, alternate versions are "
+"slightly different: Game levels are in a different order, the game is harder "
+"or faster, etc."
+msgstr ""
+"Občas můžete najít sadu ROM s jiným datem vydání, pirátskou sadu nebo jinou "
+"alternativní verzi. Pokud je <quote>rodičovská</quote> hra v programu "
+"<application>MAME</application> již emulovaná, je obvykle snadné přidat i "
+"tuto alternativu. V některých případech může být alternativní verze mírně "
+"odlišná: Úrovně hry jsou v jiném pořadí, hra je těžší nebo rychlejší apod."
+
+#: C/gnome-video-arcade.xml:598(para)
+msgid ""
+"In some cases, ROMs were hacked to run on hardware they were not intended "
+"for. For example, when <productname>Pac-Man</productname> was <quote>hot,</"
+"quote> some arcade operators found a way to dump <productname>Pac-Man</"
+"productname> ROMs and hack them to work on <productname>Scramble</"
+"productname> machines so they wouldn't have to purchase extra "
+"<productname>Pac-Man</productname> boards. Since these hacked versions are "
+"masterpieces in their own right, the <application>MAME</application> "
+"developers have included them."
+msgstr ""
+"V některých případech bývají ROM nabourané, aby běžely na jiném hardwaru, "
+"než pro který byly určeny. Například když byla hra <productname>Pac-Man</"
+"productname> <quote>žhavým hitem</quote>, někteří provozovatelé arkád našli "
+"způsob, jak získat výpis ROM této hry a nabourali se do něj, aby pracoval na "
+"strojích <productname>Scramble</productname>, takže nemuseli zvlášť kupovat "
+"desku s hrou <productname>Pac-Man</productname>. Protože tyto nabourané "
+"verze jsou svým vlastním způsobem mistrovskými díly, vývojáři "
+"<application>MAME</application> je rovněž zahrnuli do podpory."
+
+#: C/gnome-video-arcade.xml:614(title)
+msgid "Columns"
+msgstr "Sloupce"
+
+#: C/gnome-video-arcade.xml:621(para)
+msgid "Shows the Columns tab of the Preferences window."
+msgstr "Ukazuje kartu Sloupce v okně Předvolby."
+
+#: C/gnome-video-arcade.xml:627(para)
+msgid ""
+"The <guilabel>Columns</guilabel> tab allows you to configure the game list "
+"in the main window to show additional information about the available games. "
+"The column names are listed in the order that they appear in the game list. "
+"Reorder columns and show additional columns using the <guibutton>Move Up</"
+"guibutton>, <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> "
+"and <guibutton>Hide</guibutton> buttons to the right of the column list."
+msgstr ""
+"Na kartě <guilabel>Slupce</guilabel> můžete nastavit seznam her v hlavním "
+"okně tak, aby ukazoval doplňující informace o dostupných hrách. Názvy "
+"sloupců jsou vypsané v pořadí, v jakém se objevují v seznamu her. Změnit "
+"pořadí a viditelnost sloupců můžete pomocí tlačítek <guibutton>Přesunout "
+"výš</guibutton>, <guibutton>Přesunout níž</guibutton>, <guibutton>Zobrazit</"
+"guibutton> a <guibutton>Skrýt</guibutton> napravo od seznamu."
+
+#: C/gnome-video-arcade.xml:640(title)
+msgid "Troubleshooting"
+msgstr "Řešení problémů"
+
+#: C/gnome-video-arcade.xml:643(title)
+msgid "No games listed in the main window"
+msgstr "V hlavním okně není vypsaná žádná hra"
+
+#: C/gnome-video-arcade.xml:645(title)
+msgid "Are any ROM images installed?"
+msgstr "Jsou nainstalované nějaké obrazy ROM?"
+
+#: C/gnome-video-arcade.xml:648(para)
+msgid ""
+"For legal reasons, games are not bundled with <application>GNOME Video "
+"Arcade</application> or <application>MAME</application>. The <ulink url="
+"\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\"><application>MAME</"
+"application> FAQ</ulink> has some suggestions for obtaining ROM images:"
+msgstr ""
+"Z licenčních důvodů nejsou hry dodávány dohromady s <application>GNOME Video "
+"Arcade</application> nebo <application>MAME</application>. V <ulink url="
+"\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\">Častých dotazech a "
+"odpovědích k <application>MAME</application></ulink> najdete doporučení, jak "
+"obrazy ROM získat:"
+
+#: C/gnome-video-arcade.xml:656(para)
+msgid ""
+"There are several means of obtaining ROM images for use in "
+"<application>MAME</application>:"
+msgstr ""
+"Je tam uvedeno několik poučení, jak obrazy ROM získat pro použití v programu "
+"<application>MAME</application>:"
+
+#: C/gnome-video-arcade.xml:662(para)
+msgid ""
+"A small number of ROM images are now available with the copyright holders' "
+"permission at the <ulink url=\"http://mamedev.org/roms/\">mamedev.org ROMs "
+"page</ulink>."
+msgstr ""
+"Pár obrazů ROM je nyní dostupných se svolením držitelů autorských práv na "
+"<ulink url=\"http://mamedev.org/roms/\">stránce ROM na mamedev.org</ulink>."
+
+#: C/gnome-video-arcade.xml:669(para)
+msgid ""
+"The <ulink url=\"http://www.hanaho.com/Products/HotRodJoystick.php"
+"\"><productname>HotRod Joystick</productname> control panel</ulink> from "
+"<ulink url=\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> comes "
+"bundled with a CD that includes <application>MAME</application> and a "
+"selection of Capcom ROMs. Hanaho also sells the <ulink url=\"http://www."
+"hanaho.com/Products/ArcadePC.php\"><productname>ArcadePC</productname> "
+"cabinet</ulink> with a different selection of Capcom ROMs."
+msgstr ""
+"<ulink url=\"http://www.hanaho.com/Products/HotRodJoystick.php"
+"\"><productname>HotRod Joystick</productname> control panel</ulink> od "
+"<ulink url=\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> přináší "
+"výběrové CD obsahující program <application>MAME</application> a výběr "
+"stažených ROM. Firma Hanaho rovněž prodává <ulink url=\"http://www.hanaho."
+"com/Products/ArcadePC.php\">sbírku <productname>ArcadePC</productname></"
+"ulink> s různorodým výběrem stažených ROM."
+
+#: C/gnome-video-arcade.xml:682(para)
+msgid ""
+"You can purchase your own arcade PCBs (on <ulink url=\"http://www.ebay.com/"
+"\">eBay</ulink>, for example), buy a ROM reader, and use it to copy the ROM "
+"chips' contents into files for your personal use."
+msgstr ""
+"Můžete si také zakoupit vlastní PCB s arkádami (například na <ulink url="
+"\"http://www.ebay.com/\">eBay</ulink>), k tomu koupit čtečku ROM a použít ji "
+"ke zkopírování obsahu paměti ROM do souboru pro osobní použití."
+
+#: C/gnome-video-arcade.xml:690(para)
+msgid ""
+"Always check if the particular arcade games' copyright owner is selling the "
+"ROMs legally (as with Capcom). That way you will support the companies that "
+"support emulation."
+msgstr ""
+"Vždy si zkontrolujte (např. přes Capcom), zda konkrétní vlastník autorských "
+"práv arkádové hry prodává ROM legálně. Tímto způsobem zajistíte podporu pro "
+"firmy, které emulace podporují."
+
+#: C/gnome-video-arcade.xml:698(title)
+msgid "Can <application>MAME</application> find the installed ROM images?"
+msgstr ""
+"Dokáže program <application>MAME</application> najít nainstalované obrazy "
+"ROM?"
+
+#: C/gnome-video-arcade.xml:701(para)
+msgid ""
+"<application>GNOME Video Arcade</application> relies on <application>MAME</"
+"application> to find installed ROM images. To test where <application>MAME</"
+"application> is configured to look for ROM images, type the following "
+"command on a command line, then press <keycap>Return</keycap>:"
+msgstr ""
+"Aplikace <application>GNOME Video Arcade</application> se spoléhá na to, že "
+"si program <application>MAME</application> najde nainstalované obrazy ROM. "
+"Jestli chcete otestovat, kam má program <application>MAME</application> "
+"nastavené hledání obrazů ROM, napište následující příkaz do příkazového "
+"řádku a zmáčkněte <keycap>Ener</keycap>:"
+
+#: C/gnome-video-arcade.xml:709(command)
+msgid "gnome-video-arcade --inspect rompath"
+msgstr "gnome-video-arcade --inspect rompath"
+
+#: C/gnome-video-arcade.xml:711(para)
+msgid ""
+"The command should print a directory name such as <computeroutput>/usr/share/"
+"mame/roms</computeroutput>. Move ROM images to this directory and restart "
+"<application>GNOME Video Arcade</application>."
+msgstr ""
+"Příkaz by měl vypsat název adresáře, jako např. <computeroutput>/usr/share/"
+"mame/roms</computeroutput>. Přesuňte obrazy ROM do této složky a aplikaci "
+"<application>GNOME Video Arcade</application> restartujte."
+
+#: C/gnome-video-arcade.xml:717(para)
+msgid ""
+"If the command does not print a directory name, it may mean that "
+"<application>MAME</application> is not properly configured on your system. "
+"If you obtained <application>MAME</application> from a <productname>GNU/"
+"Linux</productname> distribution, please contact the maintainers of that "
+"distribution for further instructions."
+msgstr ""
+"Jestliže příkaz název adresáře nevypíše, může to znamenat, že program "
+"<application>MAME</application> není ve vašem systému správně nastavený. "
+"Pokud jste jej získali ze své distribuce <productname>GNU/Linux</"
+"productname>, zkuste prosím kontaktovat správce balíčku z vaší distribuce, "
+"aby vám poradil."
+
+#: C/gnome-video-arcade.xml:727(title)
+msgid "Is the Available Games view selected?"
+msgstr "Je vybráno zobrazení Dostupné hry?"
+
+#: C/gnome-video-arcade.xml:730(para)
+msgid ""
+"If no games have been tagged as favorites, the <guilabel>Favorite Games</"
+"guilabel> view will be empty. Similarly, if no searches have been run, the "
+"<guilabel>Search Results</guilabel> view will be empty. Switch to the "
+"<guilabel>Available Games</guilabel> view to ensure all available games are "
+"listed."
+msgstr ""
+"Když není žádná z her označená jako oblíbená, bude zobrazení "
+"<guilabel>Oblíbené hry</guilabel> prázdné. Podobně, když nebylo spuštěno "
+"žádné hledání, bude prázdné zobrazení <guilabel>Výsledky hledání</guilabel>. "
+"Přepněte se na zobrazení <guilabel>Dostupné hry</guilabel>, abyste měli "
+"jistotu, že se vypisují všechny dostupné hry."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/gnome-video-arcade.xml:0(None)
+msgid "translator-credits"
+msgstr "Marek Černocký <marek@manet.cz>"
