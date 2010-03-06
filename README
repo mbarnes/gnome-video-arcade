@@ -39,7 +39,7 @@ installed prior to compiling the source code:
        documentation.  This should be available from your GNU/Linux
        distribution as a pre-compiled package.
 
-   - Header files for GTK+ version 2.10 (or higher).
+   - Header files for GTK+ version 2.18 (or higher).
 
        The GTK+ header files should be available from your GNU/Linux
        distribution as a "development" package.  The exact package name
@@ -90,25 +90,6 @@ installed prior to compiling the source code:
        GNOME Video Arcade uses GStreamer to stream video game music
        clips in the Properties window.  The music clips are streamed
        from http://www.arcade-history.com.
-
-   - Header files for libgnomeui version 2.14 (or higher). (optional)
-
-       The libgnomeui header files should be available from your
-       GNU/Linux distribution as a "development" package.  The exact
-       package name varies by distribution, but it should be something
-       similar to libgnomeui-devel (Fedora) or libgnomeui-dev
-       (Debian/Ubuntu).
-
-       This library is only needed to make the Help->Contents menu item
-       work.  If you are already using a GNOME desktop, you should already
-       have this library installed.  But if you would rather not drag in
-       the entire GNOME development platform, you can configure GNOME
-       Video Arcade to not link against GNOME libraries.  See the
-       Installation section to find out how.
-
-       UPDATE: As of version 2.14, GTK+ can now open help on its own.  So
-               you no longer need libgnomeui if you're on a sufficiently
-               up-to-date system.
 
    - Header files for libwnck version 2.16 (or higher). (optional)
 
@@ -203,17 +184,13 @@ The --enable-gtk-doc configure option tells "make" to generate
 developer documentation while building GNOME Video Arcade.  Once
 installed, the documentation can be viewed through Devhelp.
 
-The --with-gnome and --without-gnome configure options tell "make"
-whether to link against high-level GNOME libraries like libgnomeui.
-Similar "with"/"without" options are available for other optional
-libraries including D-Bus, GStreamer and libwnck.  See the previous
-section for details on what these libraries are used for.
+Several "with"/"without" options are available for optional libraries
+including D-Bus, GStreamer and libwnck.  See the previous section for
+details on what these libraries are used for.
 
 For a complete list of configure options, run:
 
    $ ./configure --help
-
-UPDATE: --with-gnome is now ignored if GTK+ >= 2.14 is detected.
 
 Usage
 -----

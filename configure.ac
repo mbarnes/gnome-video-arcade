@@ -2,7 +2,7 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.6.9)
+m4_define([gva_version], 0.7.0)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
         [mbarnes@redhat.com], gnome-video-arcade)
@@ -23,7 +23,7 @@ AC_SUBST(abs_top_builddir)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 # Dependencies
-GLIB_MODULES="glib-2.0 >= 2.12"
+GLIB_MODULES="glib-2.0 >= 2.18"
 PKG_CHECK_MODULES(GLIB, $GLIB_MODULES)
 AC_SUBST(GLIB_CFLAGS)
 AC_SUBST(GLIB_LIBS)
@@ -67,26 +67,6 @@ fi
 AM_CONDITIONAL(HAVE_DBUS, test $with_dbus = yes)
 AC_SUBST(DBUS_CFLAGS)
 AC_SUBST(DBUS_LIBS)
-
-# --with-gnome=[yes|no]
-GNOME_CFLAGS=
-GNOME_LIBS=
-if pkg-config --atleast-version=2.14 gtk+-2.0; then
-with_gnome="n/a"
-else
-AC_ARG_WITH([gnome],
-        [AC_HELP_STRING([--with-gnome],
-        [require GNOME libraries [default=yes]])],
-        with_gnome="$withval", with_gnome="yes")
-if test "$with_gnome" = "yes"; then
-GNOME_MODULES="libgnomeui-2.0 >= 2.14.0"
-PKG_CHECK_MODULES(GNOME, $GNOME_MODULES)
-AC_DEFINE_UNQUOTED(HAVE_GNOME, 1,
-        [Define to 1 if you are using GNOME libraries])
-fi
-fi
-AC_SUBST(GNOME_CFLAGS)
-AC_SUBST(GNOME_LIBS)
 
 # --with-gstreamer=[yes|no]
 AC_ARG_WITH([gstreamer],
@@ -254,6 +234,5 @@ echo "    History File    : $with_history"
 echo "    NPlayers File   : $with_nplayers"
 echo "    Use D-Bus       : $with_dbus"
 echo "    Use GStreamer   : $with_gstreamer"
-echo "    Use libgnomeui  : $with_gnome"
 echo "    Use libwnck     : $with_wnck"
 echo

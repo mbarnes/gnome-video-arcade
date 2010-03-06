@@ -191,11 +191,6 @@ gva_main_init (void)
         gtk_entry_set_text (GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY), text);
         g_free (text);
 
-#if !GTK_CHECK_VERSION(2,14,0) && !defined HAVE_GNOME
-        /* Requires that we link against libgnome. */
-        gtk_action_set_sensitive (GVA_ACTION_CONTENTS, FALSE);
-#endif
-
         gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
         gtk_action_set_sensitive (GVA_ACTION_SEARCH, FALSE);
@@ -355,9 +350,7 @@ gva_main_init_search_completion (GError **error)
         sqlite3_stmt *stmt;
         gint errcode;
 
-#if GTK_CHECK_VERSION(2,13,1)
         GList *list;
-#endif
 
         if (!gva_db_prepare (SQL_COMPLETION_LIST, &stmt, error))
                 return FALSE;
@@ -413,14 +406,9 @@ gva_main_init_search_completion (GError **error)
                 completion, "match-selected",
                 G_CALLBACK (main_entry_completion_match_selected_cb), NULL);
 
-        /* XXX GtkEntryCompletion does not implement get_cells().
-         *     http://bugzilla.gnome.org/show_bug.cgi?id=523787
-         *     Fixed in GTK+ 2.13.1. */
-#if GTK_CHECK_VERSION(2,13,1)
         list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (completion));
         g_object_set (list->data, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         g_list_free (list);
-#endif
 
         renderer = gtk_cell_renderer_text_new ();
         g_object_set (renderer, "sensitive", FALSE, "xalign", 1.0, NULL);

@@ -24,10 +24,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef HAVE_GNOME
-#include <gnome.h>
-#endif
-
 #include "gva-audit.h"
 #include "gva-categories.h"
 #include "gva-db.h"
@@ -109,7 +105,6 @@ warn_if_no_roms (void)
                 "<big><b>%s</b></big>",
                 _("No ROM files found"));
 
-#if GTK_CHECK_VERSION(2,14,0) || defined HAVE_GNOME
         gtk_message_dialog_format_secondary_markup (
                 GTK_MESSAGE_DIALOG (dialog),
                 _("GNOME Video Arcade was unable to locate any ROM files. "
@@ -119,14 +114,6 @@ warn_if_no_roms (void)
 
         gtk_dialog_add_button (
                 GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
-#else
-        gtk_message_dialog_format_secondary_markup (
-                GTK_MESSAGE_DIALOG (dialog),
-                _("GNOME Video Arcade was unable to locate any ROM files. "
-                  "It could be that MAME is misconfigured or no ROM files "
-                  "are installed. Consult the user documentation for more "
-                  "details and troubleshooting tips."));
-#endif
 
         if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_HELP)
                 gva_help_display (GTK_WINDOW (dialog), "troubleshooting");
@@ -203,10 +190,6 @@ start (void)
 gint
 main (gint argc, gchar **argv)
 {
-#ifdef HAVE_GNOME
-        GnomeProgram *program;
-        GOptionContext *context;
-#endif
         gchar *path;
         GError *error = NULL;
 
@@ -216,22 +199,10 @@ main (gint argc, gchar **argv)
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 
-#ifdef HAVE_GNOME
-        context = g_option_context_new (NULL);
-        g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
-        g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
-
-        program = gnome_program_init (
-                PACKAGE, VERSION, LIBGNOMEUI_MODULE, argc, argv,
-                GNOME_PROGRAM_STANDARD_PROPERTIES,
-                GNOME_PARAM_GOPTION_CONTEXT, context,
-                GNOME_PARAM_NONE);
-#else
         gtk_init_with_args (
                 &argc, &argv, NULL, entries, GETTEXT_PACKAGE, &error);
         if (error != NULL)
                 g_error ("%s", error->message);
-#endif
 
 #ifdef HAVE_GSTREAMER
         if (!gst_init_check (&argc, &argv, &error))
@@ -309,10 +280,6 @@ main (gint argc, gchar **argv)
         gtk_init_add ((GtkFunction) start, NULL);
 
         gtk_main ();
-
-#ifdef HAVE_GNOME
-        g_object_unref (program);
-#endif
 
         return EXIT_SUCCESS;
 }
