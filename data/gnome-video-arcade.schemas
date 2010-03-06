@@ -101,6 +101,30 @@
     </schema>
 
     <schema>
+      <applyto>/apps/gnome-video-arcade/properties-height</applyto>
+      <key>/schemas/apps/gnome-video-arcade/properties-height</key>
+      <owner>gnome-video-arcade</owner>
+      <type>int</type>
+      <default>400</default>
+      <locale name="C">
+        <short>Properties height</short>
+        <long>The height of the Properties window.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/properties-maximized</applyto>
+      <key>/schemas/apps/gnome-video-arcade/properties-maximized</key>
+      <owner>gnome-video-arcade</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Properties maximized</short>
+        <long>True if the Properties window is maximized.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <applyto>/apps/gnome-video-arcade/properties-page</applyto>
       <key>/schemas/apps/gnome-video-arcade/properties-page</key>
       <owner>gnome-video-arcade</owner>
@@ -109,6 +133,18 @@
       <locale name="C">
         <short>Properties page</short>
         <long>The most recently selected page in the Properties window.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/properties-width</applyto>
+      <key>/schemas/apps/gnome-video-arcade/properties-width</key>
+      <owner>gnome-video-arcade</owner>
+      <type>int</type>
+      <default>500</default>
+      <locale name="C">
+        <short>Properties width</short>
+        <long>The width of the Properties window.</long>
       </locale>
     </schema>
 

@@ -802,6 +802,10 @@ gva_properties_init (void)
                 GVA_WIDGET_PROPERTIES_MUSIC_BUTTON, "notify::status",
                 G_CALLBACK (properties_notify_music_status_cb), NULL);
 
+        gconf_bridge_bind_window (
+                gconf_bridge_get (), GVA_GCONF_PROPERTIES_PREFIX,
+                GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW), TRUE, FALSE);
+
         font_name = gva_get_monospace_font_name ();
         desc = pango_font_description_from_string (font_name);
         gtk_widget_modify_font (text_view, desc);
