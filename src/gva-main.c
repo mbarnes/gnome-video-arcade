@@ -185,7 +185,7 @@ gva_main_init (void)
 
         gconf_bridge_bind_window (
                 gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
-                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, FALSE);
+                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, TRUE);
 
         /* Initialize the search entry. */
         text = gva_main_get_last_search_text ();

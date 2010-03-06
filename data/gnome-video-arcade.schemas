@@ -251,5 +251,27 @@
       </locale>
     </schema>
 
+    <schema>
+      <applyto>/apps/gnome-video-arcade/window-x</applyto>
+      <key>/schemas/apps/gnome-video-arcade/window-x</key>
+      <owner>gnome-video-arcade</owner>
+      <type>int</type>
+      <locale name="C">
+        <short>Window X coordinate</short>
+        <long>The X coordinate of the main window.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <applyto>/apps/gnome-video-arcade/window-y</applyto>
+      <key>/schemas/apps/gnome-video-arcade/window-y</key>
+      <owner>gnome-video-arcade</owner>
+      <type>int</type>
+      <locale name="C">
+        <short>Window Y coordinate</short>
+        <long>The Y coordinate of the main window.</long>
+      </locale>
+    </schema>
+
   </schemalist>
 </gconfschemafile>
