@@ -156,23 +156,6 @@ gva_input_file_get_type
 </SECTION>
 
 <SECTION>
-<FILE>gva-link-button</FILE>
-<TITLE>GvaLinkButton</TITLE>
-GvaLinkButton
-gva_link_button_new
-<SUBSECTION Standard>
-GVA_LINK_BUTTON
-GVA_IS_LINK_BUTTON
-GVA_TYPE_LINK_BUTTON
-GVA_LINK_BUTTON_CLASS
-GVA_IS_LINK_BUTTON_CLASS
-GVA_LINK_BUTTON_GET_CLASS
-GvaLinkButtonClass
-<SUBSECTION Private>
-gva_link_button_get_type
-</SECTION>
-
-<SECTION>
 <FILE>gva-history</FILE>
 gva_history_init
 gva_history_lookup

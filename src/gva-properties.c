@@ -25,7 +25,6 @@
 #include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-history.h"
-#include "gva-link-button.h"
 #include "gva-music-button.h"
 #include "gva-preferences.h"
 #include "gva-tree-view.h"
@@ -115,18 +114,10 @@ properties_scroll_to_top (void)
 }
 
 static void
-properties_label_clicked_cb (GvaLinkButton *button,
-                             const gchar *game)
+properties_link_clicked_cb (GtkLabel *label,
+                            const gchar *game)
 {
-        GdkEvent *event;
         GtkWidget *widget;
-
-        /* Force the cursor back to normal before the button is destroyed.
-         * XXX We're passing the wrong type of event here, but it should be
-         *     okay for this particular case. */
-        event = gtk_get_current_event ();
-        g_signal_emit_by_name (button, "leave-notify-event", event);
-        gdk_event_free (event);
 
         widget = GVA_WIDGET_PROPERTIES_TECHNICAL_SCROLLED_WINDOW;
         gtk_widget_grab_focus (widget);
@@ -143,22 +134,27 @@ properties_add_game_label (GtkBox *box,
 {
         GtkWidget *widget;
 
+        widget = gtk_label_new (NULL);
+        gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
+
         if (available)
         {
-                widget = gva_link_button_new (description);
-                gtk_button_set_alignment (GTK_BUTTON (widget), 0.0, 0.5);
-                gtk_widget_set_tooltip_text (widget, _("Show this game"));
+                gchar *markup;
+
+                markup = g_markup_printf_escaped (
+                        "<a href=\"%s\" title=\"%s\">%s</a>",
+                        game, _("Show this game"), description);
+
+                gtk_label_set_markup (GTK_LABEL (widget), markup);
 
                 g_signal_connect (
-                        widget, "clicked",
-                        G_CALLBACK (properties_label_clicked_cb),
-                        (gpointer) g_intern_string (game));
+                        widget, "activate-link",
+                        G_CALLBACK (properties_link_clicked_cb), NULL);
+
+                g_free (markup);
         }
         else
-        {
-                widget = gtk_label_new (description);
-                gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.5);
-        }
+                gtk_label_set_text (GTK_LABEL (widget), description);
 
         gtk_box_pack_start (box, widget, FALSE, FALSE, 0);
         gtk_widget_show (widget);

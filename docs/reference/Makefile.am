@@ -100,7 +100,6 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/gva-game-store.o			\
 	$(top_builddir)/src/gva-history.o			\
 	$(top_builddir)/src/gva-input-file.o			\
-	$(top_builddir)/src/gva-link-button.o			\
 	$(top_builddir)/src/gva-main.o				\
 	$(top_builddir)/src/gva-mame-common.o			\
 	$(top_builddir)/src/gva-mame-process.o			\
