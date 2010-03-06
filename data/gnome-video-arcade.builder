@@ -159,6 +159,11 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="secondary_icon_stock">gtk-clear</property>
+                        <property name="secondary_icon_activatable">True</property>
+                        <property name="secondary_icon_tooltip_text">Clear the search</property>
+                        <signal name="icon_release" handler="gva_main_search_entry_icon_release_cb"/>
+                        <signal name="changed" handler="gva_main_search_entry_changed_cb"/>
                         <signal name="remove_widget" handler="gtk_widget_hide" object="main-search-hbox"/>
                         <signal name="notify" handler="gva_main_search_entry_notify_cb"/>
                         <signal name="activate" handler="gva_main_search_entry_activate_cb"/>

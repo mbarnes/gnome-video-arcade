@@ -107,6 +107,7 @@ main_entry_completion_match_selected_cb (GtkEntryCompletion *completion,
 
         gva_main_set_last_selected_match (column_name, search_text);
         gva_main_execute_search ();
+        gtk_widget_grab_focus (GVA_WIDGET_MAIN_TREE_VIEW);
 
         g_free (column_name);
         g_free (search_text);
@@ -653,6 +654,25 @@ gva_main_statusbar_remove (guint context_id,
 }
 
 /**
+ * gva_main_clear_search:
+ *
+ * Clears the search entry and, if the Search Results view is active,
+ * any results from the previous search.
+ **/
+void
+gva_main_clear_search (void)
+{
+        GtkWidget *widget;
+
+        widget = GVA_WIDGET_MAIN_SEARCH_ENTRY;
+        gtk_entry_set_text (GTK_ENTRY (widget), "");
+        gva_main_set_last_selected_match (NULL, NULL);
+
+        if (gva_tree_view_get_selected_view () == 2)
+                gva_main_execute_search ();
+}
+
+/**
  * gva_main_execute_search:
  *
  * Executes a game database search and configures the main window to
@@ -711,8 +731,6 @@ gva_main_execute_search (void)
                         gtk_tree_path_free (path);
                 }
         }
-
-        gtk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 /**
@@ -873,6 +891,48 @@ gva_main_search_entry_activate_cb (GtkEntry *entry)
 {
         gva_main_set_last_selected_match (NULL, NULL);
         gva_main_execute_search ();
+        gtk_widget_grab_focus (GVA_WIDGET_MAIN_TREE_VIEW);
+}
+
+/**
+ * gva_main_search_entry_changed_cb:
+ * @entry: the search entry
+ *
+ * Handler for #GtkEditable::changed signals to the search entry.
+ *
+ * Updates the sensitivity of the clear search icon.
+ **/
+void
+gva_main_search_entry_changed_cb (GtkEntry *entry)
+{
+        GtkEntryIconPosition position;
+        gboolean sensitive;
+        const gchar *text;
+
+        text = gtk_entry_get_text (entry);
+        position = GTK_ENTRY_ICON_SECONDARY;
+        sensitive = (text != NULL) && (*text != '\0');
+
+        gtk_entry_set_icon_sensitive (entry, position, sensitive);
+}
+
+/**
+ * gva_main_search_entry_icon_release_cb:
+ * @entry: the search entry
+ * @position: the position of the clicked icon
+ * @event: the button release event
+ *
+ * Handler for #GtkEntry::icon-release signals to the search entry.
+ *
+ * If @position is %GTK_ENTRY_ICON_SECONDARY, clears the search entry.
+ **/
+void
+gva_main_search_entry_icon_release_cb (GtkEntry *entry,
+                                       GtkEntryIconPosition position,
+                                       GdkEvent *event)
+{
+        if (position == GTK_ENTRY_ICON_SECONDARY)
+                gva_main_clear_search ();
 }
 
 /**

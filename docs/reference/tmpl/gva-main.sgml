@@ -134,6 +134,13 @@
 @message_id: 
 
 
+<!-- ##### FUNCTION gva_main_clear_search ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### FUNCTION gva_main_execute_search ##### -->
 <para>
 
@@ -182,6 +189,24 @@
 </para>
 
 @entry: 
+
+
+<!-- ##### FUNCTION gva_main_search_entry_changed_cb ##### -->
+<para>
+
+</para>
+
+@entry: 
+
+
+<!-- ##### FUNCTION gva_main_search_entry_icon_release_cb ##### -->
+<para>
+
+</para>
+
+@entry: 
+@position: 
+@event: 
 
 
 <!-- ##### FUNCTION gva_main_search_entry_notify_cb ##### -->
