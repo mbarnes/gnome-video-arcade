@@ -42,6 +42,9 @@
 #define SQL_INSERT_LASTPLAYED \
         "INSERT INTO lastplayed VALUES ('%s', %" G_GINT64_FORMAT ")"
 
+#define WEBSITE_URL \
+        "http://mbarnes.github.com/gnome-video-arcade"
+
 static GtkBuilder *builder = NULL;
 static GtkUIManager *manager = NULL;
 static GtkActionGroup *action_group = NULL;
@@ -147,6 +150,8 @@ action_about_cb (GtkAction *action)
                 "copyright", copyright,
                 "license", license,
                 "wrap-license", TRUE,
+                "website", WEBSITE_URL,
+                "website-label", _("Visit the Website"),
                 "authors", authors,
                 "translator-credits", _("translator-credits"),
                 "logo", logo,
