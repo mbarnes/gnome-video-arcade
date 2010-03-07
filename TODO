@@ -1,0 +1,60 @@
+Pending Tasks for GNOME Video Arcade
+
+This is a list of outstanding tasks that need to be completed before
+GNOME Video Arcade can reach version 1.0.  These are also good starting
+points for contributing to GNOME Video Arcade.
+
+Suggestions are always welcome.  You can email me directly or file an
+enhancement request at:
+
+  https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-video-arcade
+
+
+                              - Matthew Barnes <mbarnes@redhat.com>
+
+
+- The gallery page in Properties.
+
+  This is the #1 blocker for version 1.0, and I've been indecisive about
+  it for years now.  In addition to searching for the usual locally installed
+  content that every other front-end supports, I'd also like for it to fetch
+  images from online resources such as arcade-history.com, arcadeflyers.com,
+  and maws.mameworld.info.  Downloaded images should be cached locally as a
+  web browser would, complete with a tunable size constraint and automatic
+  removal of expired content.
+
+  I'm unsure of what the user interface should look like.  The simpler the
+  better.  Perhaps just an image and a "Next" button.  Other features to
+  consider are zooming and a full-screen slideshow mode (might be neat in
+  combination with the streamed music).
+
+  A GIO-based solution is preferred over adding more library dependencies,
+  but that's not a hard requirement.
+
+
+- Once the gallery feature is complete, considering adding an optional
+  in-game screen capture to the game list tooltip.  Add a preferences
+  checkbox under "Game List" to turn this on or off:
+
+      [ ] Show a screen capture in the game's pop-up bubble
+
+
+- Support starting games from a saved state (<F7> key in MAME).  The user
+  interface should look similar to the Recorded Games window, showing the
+  corresponding "save position" key and allowing the user to add a custom
+  description of the save state.  Also explain how to save and restore
+  states in MAME via the <F7> and <Shift+F7> keys.
+
+  Obviously this would override the "Restore previous state when starting
+  a game" preference.
+
+
+- Update the user documentation and images.  In particular, the section on
+  searching is badly out of date.
+
+
+- Describe how to report bugs or suggest enhancements on the website.
+
+
+- Get a new logo.  Something Tango-compliant.
+
