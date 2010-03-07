@@ -1709,6 +1709,7 @@ gva_db_build (GError **error)
 {
         GvaProcess *process;
         ParserData *data;
+        gchar *filename;
 
         g_return_val_if_fail (db != NULL, NULL);
 
@@ -1795,6 +1796,22 @@ gva_db_build (GError **error)
 
         if (!gva_db_reset (error))
                 return NULL;
+
+        /* LEGACY: In version 0.7.0, the database file was moved from
+         * $(XDG_DATA_HOME)/applications/gnome-video-arcade/games.db to
+         * $(XDG_DATA_HOME)/gnome-video-arcade/games.db.  Remove the old
+         * location to avoid leaving behind two databases.  This is a
+         * best-effort operation, so we can disregard errors. */
+        filename = g_build_filename (
+                g_get_user_data_dir (),
+                "applications", PACKAGE, "games.db", NULL);
+        if (g_file_test (filename, G_FILE_TEST_IS_REGULAR))
+        {
+                g_unlink (filename);
+                *strrchr (filename, G_DIR_SEPARATOR) = '\0';
+                g_rmdir (filename);
+        }
+        g_free (filename);
 
         process = gva_mame_list_xml (error);
         if (process == NULL)

@@ -308,8 +308,7 @@ gva_get_user_data_dir (void)
         if (G_UNLIKELY (user_data_dir == NULL))
         {
                 user_data_dir = g_build_filename (
-                        g_get_user_data_dir (),
-                        "applications", PACKAGE, NULL);
+                        g_get_user_data_dir (), PACKAGE, NULL);
 
                 if (g_mkdir_with_parents (user_data_dir, 0777) < 0)
                         g_warning (
