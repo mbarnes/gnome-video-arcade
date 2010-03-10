@@ -129,7 +129,7 @@ AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
 # MAME Program
 AC_ARG_VAR([SDLMAME], [SDLMAME command])
-AC_PATH_PROG([SDLMAME], [sdlmame],, [$PATH:/usr/local/games:/usr/games])
+AC_PATH_PROGS([SDLMAME], [mame sdlmame],, [$PATH:/usr/local/games:/usr/games])
 if test "x$SDLMAME" != "x"; then
         MAME=$SDLMAME
         MAME_BACKEND='gva-mame-sdlmame.$(OBJEXT)'
