@@ -79,13 +79,15 @@ installed prior to compiling the source code:
        you can configure GNOME Video Arcade to not link against it.
        See the Installation section to find out how.
 
-   - Header files for GStreamer version 0.10 (or higher). (optional)
+   - Header files and base plugins for GStreamer. (optional)
 
        The GStreamer header files should be available from your
        GNU/Linux distribution as a "development" package.  The exact
        package name varies by distribution, but it should be something
        similar to gstreamer-devel (Fedora) or libgstreamer0.10-dev
-       (Debian/Ubuntu).
+       (Debian/Ubuntu).  The base plugins package name should be
+       similar to gstreamer-plugins-base-devel (Fedora) or
+       libgstreamer-plugins-base0.10-dev (Debian/Ubuntu).
 
        GNOME Video Arcade uses GStreamer to stream video game music
        clips in the Properties window.  The music clips are streamed

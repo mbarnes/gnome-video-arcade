@@ -74,7 +74,7 @@ AC_ARG_WITH([gstreamer],
         [use GStreamer to stream music [default=yes]])],
         with_gstreamer="$withval", with_gstreamer="yes")
 if test "$with_gstreamer" = "yes"; then
-GSTREAMER_MODULES="gstreamer-0.10"
+GSTREAMER_MODULES="gstreamer-plugins-base-0.10"
 PKG_CHECK_MODULES(GSTREAMER, $GSTREAMER_MODULES)
 AC_DEFINE_UNQUOTED(HAVE_GSTREAMER, 1,
         [Define to 1 if you are using GStreamer])
