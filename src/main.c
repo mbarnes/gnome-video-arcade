@@ -45,7 +45,8 @@
 
 #define SQL_COUNT_ROMS \
         "SELECT count(*) FROM game WHERE " \
-        "romset NOTNULL AND romset != 'not found'"
+        "romset NOTNULL AND romset != 'not found' " \
+        "AND isbios != 'yes'"
 
 static GOptionEntry entries[] =
 {
