@@ -987,6 +987,11 @@ db_parser_start_element_game (ParserData *data,
         if (g_error_matches (local_error, G_KEY_FILE_ERROR, error_code))
                 g_clear_error (&local_error);
 
+        /* Silence "group not found" errors. */
+        error_code = G_KEY_FILE_ERROR_GROUP_NOT_FOUND;
+        if (g_error_matches (local_error, G_KEY_FILE_ERROR, error_code))
+                g_clear_error (&local_error);
+
         if (category != NULL)
                 db_parser_bind_text (stmt, "@category", category);
         else if (local_error != NULL)
@@ -1045,6 +1050,11 @@ db_parser_start_element_input (ParserData *data,
 
         /* Silence "key not found" errors. */
         error_code = G_KEY_FILE_ERROR_KEY_NOT_FOUND;
+        if (g_error_matches (local_error, G_KEY_FILE_ERROR, error_code))
+                g_clear_error (&local_error);
+
+        /* Silence "group not found" errors. */
+        error_code = G_KEY_FILE_ERROR_GROUP_NOT_FOUND;
         if (g_error_matches (local_error, G_KEY_FILE_ERROR, error_code))
                 g_clear_error (&local_error);
 
