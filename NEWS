@@ -1,12 +1,32 @@
 GNOME Video Arcade 0.7.0
 ========================
 
-        Released ???, 2010
+        Released March 11, 2010
 
         What's New
         ----------
         * In the Properties window you can now listen to music clips of
           the selected game.  Not all games have music clips available.
+          Requires GStreamer libraries.
+        * Search entry has a "clear search" button.
+        * Position of main window is remembered across sessions.
+        * Size of Properties window is remembered across sessions.
+        * About dialog has a link to the GNOME Video Arcade website.
+        * Better error handling when data files like Catver.ini and
+          nplayers.ini are missing or unparsable.
+        * Fixed the strange resizing behavior in the Properties window.
+          Window expanded fine but shrunk very slowly while trying to
+          continuously word wrap the history content.
+        * GTK+ requirement bumped from 2.12 to 2.18.
+        * libgnome dependency is completely gone.
+
+        Updated Translations
+        --------------------
+        Czech (Marek Cernocky)
+        Galician (Fran Diéguez)
+        German (Mario Blättermann)
+        Slovenian (Andrej Žnidaršič)
+        Spanish (Jorge González)
 
 GNOME Video Arcade 0.6.8
 ========================
