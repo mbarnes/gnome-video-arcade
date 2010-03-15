@@ -177,13 +177,6 @@ start (void)
                 gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
                 G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
 
-        /* Force a tree view update. */
-        if (gva_tree_view_get_selected_view () == 0)
-        {
-                gva_tree_view_update (&error);
-                gva_error_handle (&error);
-        }
-
         /* Present a helpful dialog if no ROMs were found. */
         warn_if_no_roms ();
 }

@@ -889,6 +889,16 @@ static GtkToggleActionEntry toggle_entries[] =
 
 static GtkRadioActionEntry view_radio_entries[] =
 {
+        /* This is a bogus view that we switch away from on startup.
+         * It ensures that restoring the previous session's view from
+         * GConf always triggers a GtkRadioAction::changed emission. */
+        { "view-initial",
+          NULL,
+          NULL,
+          NULL,
+          NULL,
+          -1 },
+
         { "view-available",
           NULL,
           N_("_Available Games"),
@@ -957,7 +967,7 @@ ui_init (void)
         gtk_action_group_add_radio_actions (
                 action_group, view_radio_entries,
                 G_N_ELEMENTS (view_radio_entries),
-                0, G_CALLBACK (action_view_changed_cb), NULL);
+                -1, G_CALLBACK (action_view_changed_cb), NULL);
 
         filename = gva_find_data_file (PACKAGE ".builder");
         if (filename != NULL && error == NULL)

@@ -438,7 +438,11 @@ gva_tree_view_update_status_bar (void)
                         break;
 
                 default:
-                        g_return_if_reached ();
+                        /* We hit this at startup before the initial
+                         * view is determined.  Do not emit a warning. */
+                        count = 0;
+                        units = "";
+                        break;
         }
 
         if (mame_version != NULL)
