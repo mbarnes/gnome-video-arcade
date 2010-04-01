@@ -133,4 +133,6 @@ include $(top_srcdir)/gtk-doc.make
 # e.g. EXTRA_DIST += version.xml.in
 EXTRA_DIST += version.xml.in
 
+TESTS = $(GTKDOC_CHECK)
+
 -include $(top_srcdir)/git.mk
