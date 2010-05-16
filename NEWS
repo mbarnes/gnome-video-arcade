@@ -1,3 +1,15 @@
+GNOME Video Arcade 0.7.1
+========================
+
+        Released ????, 2010
+
+        What's New
+        ----------
+        * GNOME Video Arcade now detects changes to your ROMs directory,
+          such as adding or removing games, while its running and offers
+          to rescan your ROM files in order to present an updated game
+          list without having to restart the application.
+
 GNOME Video Arcade 0.7.0
 ========================
 

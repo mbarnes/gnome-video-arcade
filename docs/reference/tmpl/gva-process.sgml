@@ -17,6 +17,9 @@ GvaProcess
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GvaProcess ##### -->
 <para>
 
@@ -223,6 +226,7 @@ GvaProcess
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gva_process_get_time_elapsed ##### -->

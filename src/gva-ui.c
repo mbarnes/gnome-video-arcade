@@ -47,7 +47,8 @@
 
 static GtkBuilder *builder = NULL;
 static GtkUIManager *manager = NULL;
-static GtkActionGroup *action_group = NULL;
+static GtkActionGroup *standard_actions = NULL;
+static GtkActionGroup *lockable_actions = NULL;
 static gboolean initialized = FALSE;
 
 /* About Dialog Information */
@@ -702,7 +703,7 @@ action_view_changed_cb (GtkRadioAction *action,
         gva_error_handle (&error);
 }
 
-static GtkActionEntry entries[] =
+static GtkActionEntry standard_entries[] =
 {
         { "about",
           GTK_STOCK_ABOUT,
@@ -718,6 +719,58 @@ static GtkActionEntry entries[] =
           N_("Open the help documentation"),
           G_CALLBACK (action_contents_cb) },
 
+        { "preferences",
+          GTK_STOCK_PREFERENCES,
+          N_("_Preferences"),
+          NULL,
+          N_("Configure the application"),
+          G_CALLBACK (action_preferences_cb) },
+
+        { "quit",
+          GTK_STOCK_QUIT,
+          N_("_Quit"),
+          NULL,
+          N_("Quit the application"),
+          G_CALLBACK (action_quit_cb) },
+
+        { "add-column-menu",
+          NULL,
+          N_("_Add Column"),
+          NULL,
+          NULL,
+          NULL },
+
+        { "edit-menu",
+          NULL,
+          N_("_Edit"),
+          NULL,
+          NULL,
+          NULL },
+
+        { "game-menu",
+          NULL,
+          N_("_Game"),
+          NULL,
+          NULL,
+          NULL },
+
+        { "help-menu",
+          NULL,
+          N_("_Help"),
+          NULL,
+          NULL,
+          NULL },
+
+        { "view-menu",
+          NULL,
+          N_("_View"),
+          NULL,
+          NULL,
+          NULL }
+};
+
+static GtkActionEntry lockable_entries[] =
+{
         { "insert-favorite",
           GTK_STOCK_ADD,
           N_("Add to _Favorites"),
@@ -739,13 +792,6 @@ static GtkActionEntry entries[] =
           N_("Play back the selected game recording"),
           G_CALLBACK (action_play_back_cb) },
 
-        { "preferences",
-          GTK_STOCK_PREFERENCES,
-          N_("_Preferences"),
-          NULL,
-          N_("Configure the application"),
-          G_CALLBACK (action_preferences_cb) },
-
         { "previous-game",
           GTK_STOCK_GO_BACK,
           NULL,
@@ -759,13 +805,6 @@ static GtkActionEntry entries[] =
           "<Control>p",
           N_("Show information about the selected game"),
           G_CALLBACK (action_properties_cb) },
-
-        { "quit",
-          GTK_STOCK_QUIT,
-          N_("_Quit"),
-          NULL,
-          N_("Quit the application"),
-          G_CALLBACK (action_quit_cb) },
 
         { "record",
           GTK_STOCK_MEDIA_RECORD,
@@ -814,45 +853,10 @@ static GtkActionEntry entries[] =
           N_("_Start"),
           "<Control>s",
           N_("Start the selected game"),
-          G_CALLBACK (action_start_cb) },
-
-        { "add-column-menu",
-          NULL,
-          N_("_Add Column"),
-          NULL,
-          NULL,
-          NULL },
-
-        { "edit-menu",
-          NULL,
-          N_("_Edit"),
-          NULL,
-          NULL,
-          NULL },
-
-        { "game-menu",
-          NULL,
-          N_("_Game"),
-          NULL,
-          NULL,
-          NULL },
-
-        { "help-menu",
-          NULL,
-          N_("_Help"),
-          NULL,
-          NULL,
-          NULL },
-
-        { "view-menu",
-          NULL,
-          N_("_View"),
-          NULL,
-          NULL,
-          NULL }
+          G_CALLBACK (action_start_cb) }
 };
 
-static GtkToggleActionEntry toggle_entries[] =
+static GtkToggleActionEntry standard_toggle_entries[] =
 {
         { "auto-play",
           NULL,
@@ -876,8 +880,11 @@ static GtkToggleActionEntry toggle_entries[] =
           NULL,
           NULL,
           NULL,     /* GConfBridge monitors the state */
-          FALSE },  /* GConf overrides this */
+          FALSE }   /* GConf overrides this */
+};
 
+static GtkToggleActionEntry lockable_toggle_entries[] =
+{
         { "show-clones",
           NULL,
           N_("Show _alternate versions of original games"),
@@ -955,19 +962,34 @@ ui_init (void)
          * when we use the GVA_WIDGET_MAIN_WINDOW macro below. */
         initialized = TRUE;
 
-        action_group = gtk_action_group_new ("main");
+        standard_actions = gtk_action_group_new ("standard");
         gtk_action_group_set_translation_domain (
-                action_group, GETTEXT_PACKAGE);
+                standard_actions, GETTEXT_PACKAGE);
         gtk_action_group_add_actions (
-                action_group, entries,
-                G_N_ELEMENTS (entries), NULL);
+                standard_actions, standard_entries,
+                G_N_ELEMENTS (standard_entries), NULL);
         gtk_action_group_add_toggle_actions (
-                action_group, toggle_entries,
-                G_N_ELEMENTS (toggle_entries), NULL);
+                standard_actions, standard_toggle_entries,
+                G_N_ELEMENTS (standard_toggle_entries), NULL);
+
+        lockable_actions = gtk_action_group_new ("lockable");
+        gtk_action_group_set_translation_domain (
+                lockable_actions, GETTEXT_PACKAGE);
+        gtk_action_group_add_actions (
+                lockable_actions, lockable_entries,
+                G_N_ELEMENTS (lockable_entries), NULL);
+        gtk_action_group_add_toggle_actions (
+                lockable_actions, lockable_toggle_entries,
+                G_N_ELEMENTS (lockable_toggle_entries), NULL);
         gtk_action_group_add_radio_actions (
-                action_group, view_radio_entries,
+                lockable_actions, view_radio_entries,
                 G_N_ELEMENTS (view_radio_entries),
                 -1, G_CALLBACK (action_view_changed_cb), NULL);
+
+        manager = gtk_ui_manager_new ();
+
+        gtk_ui_manager_insert_action_group (manager, standard_actions, 0);
+        gtk_ui_manager_insert_action_group (manager, lockable_actions, 0);
 
         filename = gva_find_data_file (PACKAGE ".builder");
         if (filename != NULL && error == NULL)
@@ -981,9 +1003,6 @@ ui_init (void)
         filename = gva_find_data_file (PACKAGE ".ui");
         if (filename != NULL && error == NULL)
         {
-                manager = gtk_ui_manager_new ();
-                gtk_ui_manager_insert_action_group (manager, action_group, 0);
-
                 gtk_window_add_accel_group (
                         GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
                         gtk_ui_manager_get_accel_group (manager));
@@ -1024,9 +1043,15 @@ gva_ui_get_action (const gchar *action_name)
         if (G_UNLIKELY (!initialized))
                 ui_init ();
 
-        action = gtk_action_group_get_action (action_group, action_name);
-        g_assert (action != NULL);
-        return action;
+        action = gtk_action_group_get_action (standard_actions, action_name);
+        if (action != NULL)
+                return action;
+
+        action = gtk_action_group_get_action (lockable_actions, action_name);
+        if (action != NULL)
+                return action;
+
+        g_error ("No action named '%s'", action_name);
 }
 
 /**
@@ -1125,7 +1150,7 @@ gva_ui_add_column_actions (GtkTreeView *view)
 
                 action = gtk_action_new (
                         action_name, action_label, action_tooltip, NULL);
-                gtk_action_group_add_action (action_group, action);
+                gtk_action_group_add_action (standard_actions, action);
 
                 visible = gtk_tree_view_column_get_visible (column);
                 gtk_action_set_visible (action, !visible);
@@ -1149,4 +1174,34 @@ gva_ui_add_column_actions (GtkTreeView *view)
 
                 list = g_list_delete_link (list, list);
         }
+}
+
+/**
+ * gva_ui_lock:
+ *
+ * Locks down the user interface to prevent the user from interfereing
+ * with a long-running task.  Once the long-running task has completed,
+ * call gva_ui_unlock() to restore full interactivity.
+ **/
+void
+gva_ui_lock (void)
+{
+        /* Hide secondary windows that may interfere. */
+        gtk_widget_hide (GVA_WIDGET_PLAY_BACK_WINDOW);
+        gtk_widget_hide (GVA_WIDGET_PROPERTIES_WINDOW);
+
+        gtk_action_group_set_sensitive (lockable_actions, FALSE);
+        gtk_widget_set_sensitive (GVA_WIDGET_MAIN_TREE_VIEW, FALSE);
+}
+
+/**
+ * gva_ui_unlock:
+ *
+ * Undoes the effects of gva_ui_lock().
+ **/
+void
+gva_ui_unlock (void)
+{
+        gtk_action_group_set_sensitive (lockable_actions, TRUE);
+        gtk_widget_set_sensitive (GVA_WIDGET_MAIN_TREE_VIEW, TRUE);
 }

@@ -17,11 +17,15 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_properties_init ##### -->
 <para>
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gva_properties_show_game ##### -->

@@ -17,11 +17,15 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_favorites_copy ##### -->
 <para>
 
 </para>
 
+@void: 
 @Returns: 
 
 

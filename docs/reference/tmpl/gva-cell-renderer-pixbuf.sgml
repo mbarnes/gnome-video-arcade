@@ -17,6 +17,9 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GvaCellRendererPixbuf ##### -->
 <para>
 
@@ -36,6 +39,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 

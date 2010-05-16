@@ -17,6 +17,9 @@ GvaMuteButton
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GvaMuteButton ##### -->
 <para>
 
@@ -33,6 +36,7 @@ GvaMuteButton
 
 </para>
 
+@void: 
 @Returns: 
 
 

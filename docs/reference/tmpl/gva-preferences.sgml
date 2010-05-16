@@ -17,11 +17,15 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_preferences_init ##### -->
 <para>
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gva_preferences_get_auto_play ##### -->
@@ -29,6 +33,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -45,6 +50,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -61,6 +67,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -77,6 +84,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 

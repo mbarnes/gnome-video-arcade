@@ -129,35 +129,25 @@ start (void)
 
         if (gva_db_needs_rebuilt ())
         {
-                gva_main_progress_bar_show ();
-
                 if (!gva_main_build_database (&error))
                 {
                         gva_error_handle (&error);
                         return;
                 }
 
-                gva_main_progress_bar_set_fraction (0.0);
-
                 if (!gva_main_analyze_roms (&error))
                 {
                         gva_error_handle (&error);
                         return;
                 }
-
-                gva_main_progress_bar_hide ();
         }
         else if (gva_audit_detect_changes ())
         {
-                gva_main_progress_bar_show ();
-
                 if (!gva_main_analyze_roms (&error))
                 {
                         gva_error_handle (&error);
                         return;
                 }
-
-                gva_main_progress_bar_hide ();
         }
 
         /* Do this after ROMs are analyzed. */
@@ -167,11 +157,7 @@ start (void)
                 return;
         }
 
-        gtk_action_set_sensitive (GVA_ACTION_SEARCH, TRUE);
-        gtk_action_set_sensitive (GVA_ACTION_SHOW_CLONES, TRUE);
-        gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, TRUE);
-        gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, TRUE);
-        gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, TRUE);
+        gva_ui_unlock ();
 
         gconf_bridge_bind_property (
                 gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
@@ -179,6 +165,118 @@ start (void)
 
         /* Present a helpful dialog if no ROMs were found. */
         warn_if_no_roms ();
+}
+
+static void
+rompath_changed_cb (GFileMonitor *monitor,
+                    GFile *file,
+                    GFile *other_file,
+                    GFileMonitorEvent event_type)
+{
+        static GtkWidget *dialog = NULL;
+        gint response;
+
+        if (dialog != NULL)
+                return;
+
+        /* Filter out events we don't care about. */
+        switch (event_type)
+        {
+                case G_FILE_MONITOR_EVENT_CHANGED:
+                case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+                case G_FILE_MONITOR_EVENT_DELETED:
+                case G_FILE_MONITOR_EVENT_CREATED:
+                        break;
+                default:
+                        return;
+        }
+
+        dialog = gtk_message_dialog_new_with_markup (
+                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
+                GTK_DIALOG_DESTROY_WITH_PARENT,
+                GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+                "<big><b>%s</b></big>",
+                _("Changes detected in ROM files"));
+
+        gtk_message_dialog_format_secondary_text (
+                GTK_MESSAGE_DIALOG (dialog),
+                _("GNOME Video Arcade has detected changes in your "
+                  "ROM files and will need to audit them in order to "
+                  "update the game list. However the audit may take "
+                  "several minutes to complete. Wold you like to "
+                  "perform the audit now?\n\nIf you skip the audit now, "
+                  "it will be performed automatically the next time you "
+                  "start GNOME Video Arcade."));
+
+        gtk_dialog_add_buttons (
+                GTK_DIALOG (dialog),
+                _("_Skip Audit"), GTK_RESPONSE_NO,
+                _("_Audit ROM Files"), GTK_RESPONSE_YES,
+                NULL);
+
+        response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+        /* Don't destroy the dialog just yet.  If the file monitor
+         * trips again while we're analyzing ROMs, we want the NULL
+         * check at the top of the function to evaluate TRUE so we
+         * return immediately. */
+        gtk_widget_hide (dialog);
+
+        if (response == GTK_RESPONSE_YES)
+        {
+                GError *error = NULL;
+
+                gva_ui_lock ();
+
+                gva_main_analyze_roms (&error);
+                gva_error_handle (&error);
+
+                gva_tree_view_update (&error);
+                gva_error_handle (&error);
+
+                gva_ui_unlock ();
+
+                /* Present a helpful dialog if no ROMs were found. */
+                warn_if_no_roms ();
+        }
+
+        gtk_widget_destroy (dialog);
+        dialog = NULL;
+}
+
+static void
+setup_file_monitors (void)
+{
+        gchar **search_paths;
+        guint length, ii;
+
+        /* We don't care about errors while setting up file monitors
+         * since it's just a "nice to have" feature. */
+
+        search_paths = gva_mame_get_search_paths ("rompath", NULL);
+        length = (search_paths != NULL) ? g_strv_length (search_paths) : 0;
+
+        for (ii = 0; ii < length; ii++)
+        {
+                GFileMonitor *monitor;
+                GFile *file;
+
+                file = g_file_new_for_path (search_paths[ii]);
+                monitor = g_file_monitor (file, 0, NULL, NULL);
+                g_object_unref (file);
+
+                if (monitor == NULL)
+                        continue;
+
+                g_signal_connect (
+                        monitor, "changed",
+                        G_CALLBACK (rompath_changed_cb), NULL);
+
+                /* We leak the file monitor reference, but the
+                 * monitor lives for the entire session anyway. */
+        }
+
+        g_strfreev (search_paths);
 }
 
 gint
@@ -272,6 +370,7 @@ main (gint argc, gchar **argv)
 #endif
 
         gtk_init_add ((GtkFunction) start, NULL);
+        gtk_init_add ((GtkFunction) setup_file_monitors, NULL);
 
         gtk_main ();
 

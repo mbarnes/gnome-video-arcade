@@ -17,6 +17,9 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO GVA_ACTION_ABOUT ##### -->
 <para>
 
@@ -211,5 +214,21 @@
 </para>
 
 @view: 
+
+
+<!-- ##### FUNCTION gva_ui_lock ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION gva_ui_unlock ##### -->
+<para>
+
+</para>
+
+@void: 
 
 

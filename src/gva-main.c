@@ -192,14 +192,7 @@ gva_main_init (void)
         gtk_entry_set_text (GTK_ENTRY (GVA_WIDGET_MAIN_SEARCH_ENTRY), text);
         g_free (text);
 
-        gtk_action_set_sensitive (GVA_ACTION_PROPERTIES, FALSE);
-        gtk_action_set_sensitive (GVA_ACTION_RECORD, FALSE);
-        gtk_action_set_sensitive (GVA_ACTION_SEARCH, FALSE);
-        gtk_action_set_sensitive (GVA_ACTION_SHOW_CLONES, FALSE);
-        gtk_action_set_sensitive (GVA_ACTION_START, FALSE);
-        gtk_action_set_sensitive (GVA_ACTION_VIEW_AVAILABLE, FALSE);
-        gtk_action_set_sensitive (GVA_ACTION_VIEW_FAVORITES, FALSE);
-        gtk_action_set_sensitive (GVA_ACTION_VIEW_RESULTS, FALSE);
+        gva_ui_lock ();
 
         gtk_action_set_visible (GVA_ACTION_INSERT_FAVORITE, FALSE);
         gtk_action_set_visible (GVA_ACTION_REMOVE_FAVORITE, FALSE);
@@ -237,6 +230,8 @@ gva_main_build_database (GError **error)
         if (process == NULL)
                 goto exit;
 
+        gva_main_progress_bar_show ();
+        gva_main_progress_bar_set_fraction (0.0);
         gva_main_statusbar_push (context_id, _("Building game database..."));
 
         g_signal_connect (
@@ -253,6 +248,7 @@ gva_main_build_database (GError **error)
         success = TRUE;
 
         gva_main_statusbar_pop (context_id);
+        gva_main_progress_bar_hide ();
 
 exit:
         if (process != NULL)
@@ -295,6 +291,8 @@ gva_main_analyze_roms (GError **error)
         if (process2 == NULL)
                 goto exit;
 
+        gva_main_progress_bar_show ();
+        gva_main_progress_bar_set_fraction (0.0);
         gva_main_statusbar_push (context_id, _("Analyzing ROM files..."));
 
         g_signal_connect (
@@ -317,6 +315,7 @@ gva_main_analyze_roms (GError **error)
         success = TRUE;
 
         gva_main_statusbar_pop (context_id);
+        gva_main_progress_bar_hide ();
 
 exit:
         if (process != NULL)

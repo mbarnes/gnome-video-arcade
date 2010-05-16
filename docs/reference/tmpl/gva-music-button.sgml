@@ -17,6 +17,9 @@ GvaMusicButton
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GvaMusicButton ##### -->
 <para>
 
@@ -52,6 +55,7 @@ GvaMusicButton
 
 </para>
 
+@void: 
 @Returns: 
 
 

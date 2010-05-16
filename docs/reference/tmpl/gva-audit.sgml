@@ -17,11 +17,15 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_audit_init ##### -->
 <para>
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gva_audit_roms ##### -->
@@ -47,6 +51,7 @@
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gva_audit_detect_changes ##### -->
@@ -54,6 +59,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 

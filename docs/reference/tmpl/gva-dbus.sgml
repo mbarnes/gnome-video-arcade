@@ -17,6 +17,9 @@ gva-dbus
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_dbus_init ##### -->
 <para>
 

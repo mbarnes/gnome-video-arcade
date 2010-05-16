@@ -17,6 +17,9 @@ gva-wnck
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_wnck_listen_for_new_window ##### -->
 <para>
 

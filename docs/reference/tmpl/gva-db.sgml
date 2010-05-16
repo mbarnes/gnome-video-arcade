@@ -17,6 +17,9 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_db_init ##### -->
 <para>
 
@@ -120,6 +123,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -137,6 +141,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 

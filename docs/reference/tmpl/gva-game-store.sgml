@@ -17,6 +17,9 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GvaGameStore ##### -->
 <para>
 
@@ -72,6 +75,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 

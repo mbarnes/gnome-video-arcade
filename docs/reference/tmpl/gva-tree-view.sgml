@@ -17,11 +17,15 @@
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gva_tree_view_init ##### -->
 <para>
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gva_tree_view_lookup ##### -->
@@ -57,6 +61,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -65,6 +70,7 @@
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gva_tree_view_get_selected_game ##### -->
@@ -72,6 +78,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -88,6 +95,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -104,6 +112,7 @@
 
 </para>
 
+@void: 
 @Returns: 
 
 

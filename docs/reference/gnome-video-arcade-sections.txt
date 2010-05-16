@@ -424,6 +424,8 @@ gva_ui_get_action
 gva_ui_get_widget
 gva_ui_get_managed_widget
 gva_ui_add_column_actions
+gva_ui_lock
+gva_ui_unlock
 <SUBSECTION Private>
 GVA_WIDGET_AUDIT_SAVE_BUTTON
 GVA_WIDGET_AUDIT_TREE_VIEW
