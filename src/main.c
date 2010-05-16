@@ -203,7 +203,7 @@ rompath_changed_cb (GFileMonitor *monitor,
                 _("GNOME Video Arcade has detected changes in your "
                   "ROM files and will need to audit them in order to "
                   "update the game list. However the audit may take "
-                  "several minutes to complete. Wold you like to "
+                  "several minutes to complete. Would you like to "
                   "perform the audit now?\n\nIf you skip the audit now, "
                   "it will be performed automatically the next time you "
                   "start GNOME Video Arcade."));
