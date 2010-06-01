@@ -282,6 +282,7 @@ setup_file_monitors (void)
 gint
 main (gint argc, gchar **argv)
 {
+        UniqueApp *app;
         gchar *path;
         GError *error = NULL;
 
@@ -329,19 +330,51 @@ main (gint argc, gchar **argv)
                         g_printerr ("%s\n", error->message);
                         g_clear_error (&error);
                 }
-                exit (0);
+                exit (EXIT_SUCCESS);
         }
 
         if (opt_version)
         {
                 g_print ("%s\n", PACKAGE_STRING);
-                exit (0);
+                exit (EXIT_SUCCESS);
         }
 
         if (opt_which_emulator)
         {
                 g_print ("%s\n", MAME_PROGRAM);
-                exit (0);
+                exit (EXIT_SUCCESS);
+        }
+
+        /* If another instance is running, exit now. */
+        app = unique_app_new ("org.gnome.GnomeVideoArcade", NULL);
+        if (unique_app_is_running (app))
+        {
+                gint exit_status;
+
+                if (opt_build_database)
+                {
+                        g_printerr (
+                                "Cannot build database: "
+                                PACKAGE_NAME " is already running\n");
+                        exit_status = EXIT_FAILURE;
+                }
+                else
+                {
+                        /* XXX Not handling response, but no real need to. */
+                        unique_app_send_message (app, UNIQUE_ACTIVATE, NULL);
+                        exit_status = EXIT_SUCCESS;
+                }
+
+                g_object_unref (app);
+
+                exit (exit_status);
+        }
+        else
+        {
+                GtkWindow *window;
+
+                window = GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW);
+                unique_app_watch_window (app, window);
         }
 
         gtk_window_set_default_icon_name (PACKAGE);
@@ -373,6 +406,8 @@ main (gint argc, gchar **argv)
         gtk_init_add ((GtkFunction) setup_file_monitors, NULL);
 
         gtk_main ();
+
+        g_object_unref (app);
 
         return EXIT_SUCCESS;
 }
