@@ -39,6 +39,7 @@
 #endif
 
 #include <sqlite3.h>
+#include <unique/unique.h>
 #include <gconf/gconf-client.h>
 #include "gconf-bridge.h"               /* Embedded in GVA */
 

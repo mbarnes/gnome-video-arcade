@@ -9,6 +9,10 @@ GNOME Video Arcade 0.7.1
           such as adding or removing games, while its running and offers
           to rescan your ROM files in order to present an updated game
           list without having to restart the application.
+        * GNOME Video Arcade is now a "single-instance" application.
+          That means if you launch it while it's already running, it
+          will simply present the existing window instead of creating
+          a second window.  This adds a new dependency on libunique.
 
 GNOME Video Arcade 0.7.0
 ========================
