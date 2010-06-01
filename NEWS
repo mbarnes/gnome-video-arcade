@@ -1,7 +1,7 @@
 GNOME Video Arcade 0.7.1
 ========================
 
-        Released ????, 2010
+        Released May 31, 2010
 
         What's New
         ----------
@@ -13,6 +13,14 @@ GNOME Video Arcade 0.7.1
           That means if you launch it while it's already running, it
           will simply present the existing window instead of creating
           a second window.  This adds a new dependency on libunique.
+
+        Updated Translations
+        --------------------
+        Brazilian Portuguese (Flamarion Jorge)
+        Danish (Lars Christian Jensen)
+        French (Bruno Brouard)
+        Norwegian Bokmål (Kjartan Maraas)
+        Slovenian (Andrej Žnidaršič)
 
 GNOME Video Arcade 0.7.0
 ========================
