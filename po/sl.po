@@ -1,15 +1,16 @@
+# Slovenian translations for gnome-video-arcade.
 # Copyright (C) 2009 gnome-video-arcade's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-video-arcade package.
 #
-# Andrej Žnidaršič <andrej.znidarsic@gmail.com>, 2009.
+# Andrej Žnidaršič <andrej.znidarsic@gmail.com>, 2009 - 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
 "POT-Creation-Date: 2010-05-16 22:14+0000\n"
-"PO-Revision-Date: 2010-05-21 16:44+0100\n"
-"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"PO-Revision-Date: 2010-07-19 14:39+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +96,7 @@ msgstr "<b>Zvok</b>"
 #: ../data/gnome-video-arcade.builder.h:21
 #: ../src/gva-columns.c:747
 msgid "<b>There are known problems with this game:</b>"
-msgstr "<b>Z igro so povezane znane težave:</b>"
+msgstr "<b>Z igro so povezane številne težave:</b>"
 
 #: ../data/gnome-video-arcade.builder.h:22
 msgid "<b>Video</b>"
@@ -111,15 +112,15 @@ msgstr "<small></small>"
 
 #: ../data/gnome-video-arcade.builder.h:25
 msgid "<small><i><b>Note:</b> Setting this will not take effect until the second time the game is started. It does not apply to recording or playing back games.</i></small>"
-msgstr "<small><i><b>Opomba:</b> Nastavitev ne bo na voljo do ponovnega zagona igre. Ne velja za snemanje ali predvajanje iger.</i></small>"
+msgstr "<small><i><b>Opomba:</b> nastavitev ne bo na voljo do ponovnega zagona igre. Ne velja za snemanje ali predvajanje iger.</i></small>"
 
 #: ../data/gnome-video-arcade.builder.h:26
 msgid "<small><i>If these games worked with previous versions of MAME, it is likely their ROM requirements have changed.  If so, you will need to acquire more recent ROM files.</i></small>"
-msgstr "<small><i>V primeru, da so igre delovale s prejšnjimi različicam MAME, so se verjetno spremenile njihove ROM zahteve. V tem primeru pridobite bolj nedavne datoteke ROM.</i></small>"
+msgstr "<small><i>V primeru, da so igre delovale s prejšnjimi različicam MAME, so se verjetno spremenile njihove ROM zahteve. V tem primeru je treba te datoteke posodobiti.</i></small>"
 
 #: ../data/gnome-video-arcade.builder.h:27
 msgid "An audit of the available games has detected errors in some of the ROM files. The following games will not be available in GNOME Video Arcade."
-msgstr "Preučevanje dostopnih iger je zaznalo napake v nekaterih datotekah ROM. Sledeče igre ne bodo dostopne v GNOME video arkadi. "
+msgstr "Pri pregledu razpoložljivih iger so bile zaznane napake v nekaterih datotekah ROM. Naslednje igre zaradi napak ne bodo na voljo."
 
 #: ../data/gnome-video-arcade.builder.h:28
 msgid "Choose the order of information to appear in the game list."
@@ -135,7 +136,7 @@ msgstr "Stolpci"
 
 #: ../data/gnome-video-arcade.builder.h:31
 msgid "Delete the selected game recordings"
-msgstr "Izbrisanje izbranih posnetkov iger"
+msgstr "Izbris izbranih posnetkov iger"
 
 #: ../data/gnome-video-arcade.builder.h:32
 msgid "GNOME Video Arcade"
@@ -196,7 +197,7 @@ msgstr "Poišči:"
 #: ../data/gnome-video-arcade.builder.h:46
 #: ../src/gva-ui.c:913
 msgid "Show all available games"
-msgstr "Pokaži vse razpoližljive igre"
+msgstr "Pokaži vse razpoložljive igre"
 
 #: ../data/gnome-video-arcade.builder.h:47
 #: ../src/gva-ui.c:806
@@ -229,7 +230,7 @@ msgstr "Tehnično"
 
 #: ../data/gnome-video-arcade.builder.h:53
 msgid "_Start Game"
-msgstr "_Zaženi igro"
+msgstr "_Začni igro"
 
 #: ../src/gconf-bridge.c:1222
 #, c-format
@@ -238,7 +239,7 @@ msgstr "Napaka GConf: %s"
 
 #: ../src/gconf-bridge.c:1232
 msgid "All further errors shown only on terminal."
-msgstr "Vse nadaljnje napake so prikazane le v terminalu."
+msgstr "Vse nadaljnje napake bodo prikazane le v terminalu."
 
 #: ../src/gva-audit.c:238
 msgid "Save As"
@@ -280,7 +281,7 @@ msgstr "Odstrani stolpec %s"
 #: ../src/gva-columns.c:300
 #, c-format
 msgid "Remove the \"%s\" column from the game list"
-msgstr "Odstranitev stolpca \"%s\" iz seznama iger"
+msgstr "Odstranjevanje stolpca \"%s\" iz seznama iger"
 
 #. The labels begin with a UTF-8 encoded bullet character.
 #: ../src/gva-columns.c:759
@@ -344,7 +345,7 @@ msgstr "(Neznano leto)"
 #: ../src/gva-columns.c:985
 #: ../src/gva-main.c:1021
 msgid "ROM Name"
-msgstr "Ime ROM-a"
+msgstr "Ime ROMa"
 
 #: ../src/gva-columns.c:987
 msgid "BIOS"
@@ -390,7 +391,7 @@ msgstr "Igralci (izmenjujoče)"
 
 #: ../src/gva-columns.c:1022
 msgid "Players (Sim.)"
-msgstr "Igralci (hkrati)"
+msgstr "Igralci (sočasno)"
 
 #: ../src/gva-columns.c:1027
 msgid "Status"
@@ -398,7 +399,7 @@ msgstr "Stanje"
 
 #: ../src/gva-columns.c:1038
 msgid "Last Played"
-msgstr "Zadnjič igrano"
+msgstr "Nazadnje igrano"
 
 #: ../src/gva-columns.c:1040
 msgid "Comment"
@@ -410,7 +411,7 @@ msgstr "Igrano ob"
 
 #: ../src/gva-history.c:54
 msgid "This program is not configured to show history information."
-msgstr "Ta program ni nastavljen za prikaz podrobnosti zgodovine."
+msgstr "Program ni nastavljen za prikaz podrobnosti zgodovine."
 
 #: ../src/gva-input-file.c:525
 #, c-format
@@ -419,7 +420,7 @@ msgstr "Neveljaven ali nepodprt zapis datoteke INP"
 
 #: ../src/gva-main.c:235
 msgid "Building game database..."
-msgstr "Gradnja podatkovne zbirke iger ..."
+msgstr "Izgradnja podatkovne zbirke iger ..."
 
 #: ../src/gva-main.c:296
 msgid "Analyzing ROM files..."
@@ -436,11 +437,11 @@ msgstr "Naslov igre"
 
 #: ../src/gva-main.c:1007
 msgid "Copyright Year"
-msgstr "Leto objave avtoskih pravic"
+msgstr "Leto objave avtorskih pravic"
 
 #: ../src/gva-main.c:1028
 msgid "BIOS Name"
-msgstr "Ime BIOS-a"
+msgstr "Ime BIOS"
 
 #: ../src/gva-main.c:1035
 msgid "Driver Name"
@@ -459,7 +460,7 @@ msgstr "Različice posnemovalnika ni mogoče določiti"
 
 #: ../src/gva-music-button.c:116
 msgid "No music available"
-msgstr "Glasba niso na voljo"
+msgstr "Glasba ni na voljo"
 
 #: ../src/gva-music-button.c:119
 msgid "Unable to play music"
@@ -484,7 +485,7 @@ msgstr "Ali je stanje gumba nemo"
 
 #: ../src/gva-mute-button.c:229
 msgid "In-game sound is muted"
-msgstr "Zvok v igri je nem"
+msgstr "Zvok igre je nastavljen na nemo"
 
 #: ../src/gva-mute-button.c:234
 msgid "In-game sound is enabled"
@@ -496,11 +497,11 @@ msgstr "Ta program ni nastavljen za prikaz podatkov podrobnega števila igralcev
 
 #: ../src/gva-nplayers.c:179
 msgid "Up to four players alternating or two players simultaneously"
-msgstr "Do štirje igralci izmenjujoče ali dva igralca hkrati"
+msgstr "Do štirje igralci izmenjujoče ali dva igralca sočasno"
 
 #: ../src/gva-nplayers.c:183
 msgid "Up to eight players alternating or two players simultaneously"
-msgstr "Do osem igralcev izmenjujoče ali štirje igralci hkrati"
+msgstr "Do osem igralcev izmenjujoče ali štirje igralci sočasno"
 
 #: ../src/gva-nplayers.c:198
 #: ../src/gva-nplayers.c:241
@@ -566,31 +567,31 @@ msgstr "Do osem igralcev izmenjujoče"
 
 #: ../src/gva-nplayers.c:280
 msgid "One or two players simultaneously"
-msgstr "En ali dva igralca hkrati"
+msgstr "En ali dva igralca sočasno"
 
 #: ../src/gva-nplayers.c:283
 msgid "Up to three players simultaneously"
-msgstr "Do trije igralci hkrati"
+msgstr "Do trije igralci sočasno"
 
 #: ../src/gva-nplayers.c:286
 msgid "Up to four players simultaneously"
-msgstr "Do štirje igralci hkrati"
+msgstr "Do štirje igralci sočasno"
 
 #: ../src/gva-nplayers.c:289
 msgid "Up to five players simultaneously"
-msgstr "Do pet igralcev hkrati"
+msgstr "Do pet igralcev sočasno"
 
 #: ../src/gva-nplayers.c:292
 msgid "Up to six players simultaneously"
-msgstr "Do šest igralcev hkrati"
+msgstr "Do šest igralcev sočasno"
 
 #: ../src/gva-nplayers.c:295
 msgid "Up to seven players simultaneously"
-msgstr "Do sedem igralcev hkrati"
+msgstr "Do sedem igralcev sočasno"
 
 #: ../src/gva-nplayers.c:298
 msgid "Up to eight players simultaneously"
-msgstr "Do osem igralcev hkrati"
+msgstr "Do osem igralcev sočasno"
 
 #: ../src/gva-play-back.c:54
 msgid "Delete selected game recordings?"
@@ -624,7 +625,7 @@ msgstr "Zgodovina ni na voljo"
 #: ../src/gva-tree-view.c:421
 msgid "Available Game"
 msgid_plural "Available Games"
-msgstr[0] "Razpoložljivih iger"
+msgstr[0] "Razpoložljive igre"
 msgstr[1] "Razpoložljiva igra"
 msgstr[2] "Razpoložljivi igri"
 msgstr[3] "Razpoložljive igre"
@@ -632,7 +633,7 @@ msgstr[3] "Razpoložljive igre"
 #: ../src/gva-tree-view.c:428
 msgid "Favorite Game"
 msgid_plural "Favorite Games"
-msgstr[0] "Priljubljenih iger"
+msgstr[0] "Priljubljene igre"
 msgstr[1] "Priljubljena igra"
 msgstr[2] "Priljubljeni igri"
 msgstr[3] "Priljubljene igre"
@@ -681,7 +682,7 @@ msgstr "O _programu"
 
 #: ../src/gva-ui.c:712
 msgid "Show information about the application"
-msgstr "Prikaži podrobnosti o programu"
+msgstr "Prikaži podrobnosti programa"
 
 #: ../src/gva-ui.c:717
 msgid "_Contents"
@@ -782,7 +783,7 @@ msgstr "_Začni"
 
 #: ../src/gva-ui.c:863
 msgid "Play music _automatically"
-msgstr "_Samodejno predvajanje glasbe"
+msgstr "_Samodejno predvajaj glasbo"
 
 #: ../src/gva-ui.c:865
 msgid "Automatically play a music clip from the selected game"
@@ -790,7 +791,7 @@ msgstr "Samodejno predvajanje glasbenega posnetka iz izbrane igre "
 
 #: ../src/gva-ui.c:871
 msgid "_Restore previous state when starting a game"
-msgstr "_Obnovi prejšnje stanje med zaganjanjem igre"
+msgstr "_Obnovi predhodno stanje med zaganjanjem igre"
 
 #: ../src/gva-ui.c:879
 msgid "Start games in _fullscreen mode"
@@ -814,7 +815,7 @@ msgstr "_Rezultati iskanja"
 
 #: ../src/gva-ui.c:1022
 msgid "Failed to initialize user interface"
-msgstr "Uporabniškega vmesnika ni mogoče zagnati."
+msgstr "Uporabniškega vmesnika ni mogoče začeti."
 
 #: ../src/gva-ui.c:1146
 #, c-format
@@ -828,7 +829,7 @@ msgstr "Dodajanje stolpca \"%s\" na seznam iger"
 
 #: ../src/main.c:55
 msgid "Build the games database"
-msgstr "Zgradi podatkovno zbirko iger"
+msgstr "Izgradi podatkovno zbirko iger"
 
 #: ../src/main.c:59
 msgid "Inspect an emulator setting"
@@ -852,7 +853,7 @@ msgstr "ROM datotek ni mogoče najti"
 
 #: ../src/main.c:111
 msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or that no ROM files are installed. Click <b>Help</b> for more details and troubleshooting tips."
-msgstr "ROM datotek ni mogoče najti. Verjetno je MAME nastavljen napačno ali pa datoteke ROM niso nameščene. Za več podrobnosti in namige odpravljanja napak kliknite <b>Pomoč</b>."
+msgstr "ROM datotek ni mogoče najti. Verjetno je začelje MAME napačno nastavljeno ali pa datoteke ROM niso nameščene. Za več podrobnosti in namige odpravljanja napak kliknite <b>Pomoč</b>."
 
 #: ../src/main.c:199
 msgid "Changes detected in ROM files"
@@ -864,9 +865,9 @@ msgid ""
 "\n"
 "If you skip the audit now, it will be performed automatically the next time you start GNOME Video Arcade."
 msgstr ""
-"GNOME Video Arcade je zaznal spremembe v vaših datotekah ROM in jih bo moral preučite za posodobitev seznama iger. Preučitev lahko traja več minut. Ali želite izvesti preučevanje sedaj?\n"
+"GNOME Video Arcade je zaznal spremembe v vaših datotekah ROM in jih bo moral preučiti za posodobitev seznama iger. Preučevanje lahko traja več minut. Ali želite začeti takoj?\n"
 "\n"
-"V primeru da sedaj preskočite preučevanje, bo samodejno izvedeno ob naslednjemu zagonu GNOME Video Arcade. "
+"V primeru, da sedaj preučevanje preskočite, bo samodejno izvedeno ob naslednjemu zagonu programa. "
 
 #: ../src/main.c:213
 msgid "_Skip Audit"
@@ -875,13 +876,4 @@ msgstr "P_reskoči preučevanje"
 #: ../src/main.c:214
 msgid "_Audit ROM Files"
 msgstr "_Preuči datoteke ROM"
-
-#~ msgid ""
-#~ "GNOME Video Arcade was unable to locate any ROM files. It could be that "
-#~ "MAME is misconfigured or no ROM files are installed. Consult the user "
-#~ "documentation for more details and troubleshooting tips."
-#~ msgstr ""
-#~ "ROM datotek ni mogoče najti. Verjetno je MAME nastavljen napačno ali pa "
-#~ "datoteke ROM niso nameščene. Za več podrobnosti in namige odpravljanja "
-#~ "napak si poglejte uporabniške dokumente."
 
