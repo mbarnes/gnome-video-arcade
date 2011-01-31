@@ -31,8 +31,8 @@ cell_renderer_pixbuf_activate (GtkCellRenderer *cell,
                                GdkEvent *event,
                                GtkWidget *widget,
                                const gchar *path,
-                               GdkRectangle *background_area,
-                               GdkRectangle *cell_area,
+                               const GdkRectangle *background_area,
+                               const GdkRectangle *cell_area,
                                GtkCellRendererState flags)
 {
         GtkTreePath *tree_path;
@@ -77,8 +77,10 @@ cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
 static void
 cell_renderer_pixbuf_init (GvaCellRendererPixbuf *cell_renderer_pixbuf)
 {
-        GTK_CELL_RENDERER (cell_renderer_pixbuf)->mode =
-                GTK_CELL_RENDERER_MODE_ACTIVATABLE;
+        GtkCellRendererMode mode;
+
+        mode = GTK_CELL_RENDERER_MODE_ACTIVATABLE;
+        g_object_set (cell_renderer_pixbuf, "mode", mode, NULL);
 }
 
 GType
