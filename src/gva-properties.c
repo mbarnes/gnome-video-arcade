@@ -478,7 +478,7 @@ properties_update_music (const gchar *name)
         music_button = GVA_MUSIC_BUTTON (GVA_WIDGET_PROPERTIES_MUSIC_BUTTON);
         gva_music_button_set_game (music_button, name);
 
-        if (GTK_WIDGET_VISIBLE (GVA_WIDGET_PROPERTIES_WINDOW)
+        if (gtk_widget_get_visible (GVA_WIDGET_PROPERTIES_WINDOW)
                 && gva_preferences_get_auto_play ())
                 gva_music_button_play (music_button);
 }
@@ -778,13 +778,13 @@ gva_properties_init (void)
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         text_view = GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW;
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_PREVIOUS_GAME,
-                GVA_WIDGET_PROPERTIES_BACK_BUTTON);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_BACK_BUTTON),
+                GVA_ACTION_PREVIOUS_GAME);
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_NEXT_GAME,
-                GVA_WIDGET_PROPERTIES_FORWARD_BUTTON);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_FORWARD_BUTTON),
+                GVA_ACTION_NEXT_GAME);
 
         gconf_bridge_bind_property (
                 gconf_bridge_get (), GVA_GCONF_PROPERTIES_PAGE_KEY,
