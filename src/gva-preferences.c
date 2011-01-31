@@ -38,9 +38,9 @@ gva_preferences_init (void)
         /* This actually appears in the Properties window,
          * but it's still a preference so we manage it here. */
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_AUTO_PLAY,
-                GVA_WIDGET_PROPERTIES_MUSIC_AUTO_PLAY);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_MUSIC_AUTO_PLAY),
+                GVA_ACTION_AUTO_PLAY);
 
         gconf_bridge_bind_property (
                 gconf_bridge_get (), GVA_GCONF_AUTO_PLAY_KEY,
@@ -48,9 +48,9 @@ gva_preferences_init (void)
 
         /* Auto Save */
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_AUTO_SAVE,
-                GVA_WIDGET_PREFERENCES_AUTO_SAVE);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_PREFERENCES_AUTO_SAVE),
+                GVA_ACTION_AUTO_SAVE);
 
         gtk_action_set_sensitive (
                 GVA_ACTION_AUTO_SAVE,
@@ -62,9 +62,9 @@ gva_preferences_init (void)
 
         /* Full Screen */
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_FULL_SCREEN,
-                GVA_WIDGET_PREFERENCES_FULL_SCREEN);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_PREFERENCES_FULL_SCREEN),
+                GVA_ACTION_FULL_SCREEN);
 
         gtk_action_set_sensitive (
                 GVA_ACTION_FULL_SCREEN,
@@ -77,9 +77,9 @@ gva_preferences_init (void)
 
         /* Show Clones */
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_SHOW_CLONES,
-                GVA_WIDGET_PREFERENCES_SHOW_CLONES);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_PREFERENCES_SHOW_CLONES),
+                GVA_ACTION_SHOW_CLONES);
 
         gconf_bridge_bind_property (
                 gconf_bridge_get (), GVA_GCONF_SHOW_CLONES_KEY,
