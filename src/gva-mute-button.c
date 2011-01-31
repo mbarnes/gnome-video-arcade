@@ -137,7 +137,7 @@ mute_button_init (GvaMuteButton *mute_button)
 
         mute_button->priv = GVA_MUTE_BUTTON_GET_PRIVATE (mute_button);
 
-        GTK_WIDGET_UNSET_FLAGS (mute_button, GTK_CAN_FOCUS);
+        gtk_widget_set_can_focus (GTK_WIDGET (mute_button), FALSE);
         gtk_button_set_relief (GTK_BUTTON (mute_button), GTK_RELIEF_NONE);
 
         widget = gtk_image_new ();
