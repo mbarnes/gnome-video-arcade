@@ -338,14 +338,17 @@ columns_popup_menu_cb (GtkTreeViewColumn *column)
 static void
 columns_setup_popup_menu (GtkTreeViewColumn *column)
 {
-        g_return_if_fail (column->button != NULL);
+        GtkWidget *button;
+
+        button = gtk_tree_view_column_get_button (column);
+        g_return_if_fail (GTK_IS_WIDGET (button));
 
         g_signal_connect_swapped (
-                column->button, "button-press-event",
+                button, "button-press-event",
                 G_CALLBACK (columns_button_press_event_cb), column);
 
         g_signal_connect_swapped (
-                column->button, "popup-menu",
+                button, "popup-menu",
                 G_CALLBACK (columns_popup_menu_cb), column);
 
 }
@@ -500,7 +503,7 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
         gint ii;
 
         /* Remember, we don't own the pixbuf reference. */
-        pixbuf = columns_get_icon_name ("stock_person");
+        pixbuf = columns_get_icon_name ("avatar-default");
 
         column = gtk_tree_view_column_new ();
         gtk_tree_view_column_set_reorderable (column, TRUE);
@@ -1351,10 +1354,13 @@ gva_columns_save (GtkTreeView *view)
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
 
+#if 0
         /* This function is also a "columns-changed" signal handler.
-         * Abort the save if the tree view is being destroyed. */
+         * Abort the save if the tree view is being destroyed.
+         * FIXME Needs to be adapted to gtk+-3.0. */
         if (GTK_OBJECT_FLAGS (view) & GTK_IN_DESTRUCTION)
                 return;
+#endif
 
         client = gconf_client_get_default ();
 
