@@ -122,7 +122,7 @@ warn_if_no_roms (void)
         gtk_widget_destroy (dialog);
 }
 
-static void
+static gboolean
 start (void)
 {
         GError *error = NULL;
@@ -130,32 +130,20 @@ start (void)
         if (gva_db_needs_rebuilt ())
         {
                 if (!gva_main_build_database (&error))
-                {
-                        gva_error_handle (&error);
-                        return;
-                }
+                        goto exit;
 
                 if (!gva_main_analyze_roms (&error))
-                {
-                        gva_error_handle (&error);
-                        return;
-                }
+                        goto exit;
         }
         else if (gva_audit_detect_changes ())
         {
                 if (!gva_main_analyze_roms (&error))
-                {
-                        gva_error_handle (&error);
-                        return;
-                }
+                        goto exit;
         }
 
         /* Do this after ROMs are analyzed. */
         if (!gva_main_init_search_completion (&error))
-        {
-                gva_error_handle (&error);
-                return;
-        }
+                goto exit;
 
         gva_ui_unlock ();
 
@@ -165,6 +153,11 @@ start (void)
 
         /* Present a helpful dialog if no ROMs were found. */
         warn_if_no_roms ();
+
+exit:
+        gva_error_handle (&error);
+
+        return FALSE;
 }
 
 static void
@@ -244,7 +237,7 @@ rompath_changed_cb (GFileMonitor *monitor,
         dialog = NULL;
 }
 
-static void
+static gboolean
 setup_file_monitors (void)
 {
         gchar **search_paths;
@@ -277,6 +270,8 @@ setup_file_monitors (void)
         }
 
         g_strfreev (search_paths);
+
+        return FALSE;
 }
 
 gint
@@ -402,8 +397,8 @@ main (gint argc, gchar **argv)
         gva_error_handle (&error);
 #endif
 
-        gtk_init_add ((GtkFunction) start, NULL);
-        gtk_init_add ((GtkFunction) setup_file_monitors, NULL);
+        g_idle_add ((GSourceFunc) start, NULL);
+        g_idle_add ((GSourceFunc) setup_file_monitors, NULL);
 
         gtk_main ();
 
