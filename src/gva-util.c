@@ -419,7 +419,7 @@ gva_search_collate_key (const gchar *string)
  * @error: return location for a #GError, or %NULL
  *
  * Convenience function that passes @command_line to g_shell_parse_argv(),
- * and passes the resulting argument list to gdk_spawn_on_screen_with_pipes().
+ * and passes the resulting argument list to g_spawn_async_with_pipes().
  * If an error occurs, it results %FALSE and sets @error.
  *
  * Returns: %TRUE if successful, %FALSE if an error occurred
@@ -440,11 +440,10 @@ gva_spawn_with_pipes (const gchar *command_line,
         if (!g_shell_parse_argv (command_line, NULL, &argv, error))
                 return FALSE;
 
-        success = gdk_spawn_on_screen_with_pipes (
-                gdk_screen_get_default (), NULL, argv, NULL,
-                G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, child_pid,
-                standard_input, standard_output, standard_error,
-                error);
+        success = g_spawn_async_with_pipes (
+                NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL,
+                NULL, child_pid, standard_input, standard_output,
+                standard_error, error);
 
         g_strfreev (argv);
 
