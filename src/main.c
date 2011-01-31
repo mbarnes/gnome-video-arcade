@@ -1,4 +1,4 @@
-/* Copyright 2007 - 2010 Matthew Barnes
+/* Copyright 2007-2011 Matthew Barnes
  *
  * This file is part of GNOME Video Arcade.
  *
