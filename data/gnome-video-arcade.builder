@@ -124,10 +124,10 @@
                         <property name="rules_hint">True</property>
                         <property name="show_expanders">False</property>
                         <signal name="button_press_event" handler="gva_tree_view_button_press_event_cb"/>
-                        <signal name="query_tooltip" handler="gva_tree_view_query_tooltip_cb"/>
-                        <signal name="popup_menu" handler="gva_tree_view_popup_menu_cb"/>
                         <signal name="columns_changed" handler="gva_columns_save"/>
                         <signal name="row_activated" handler="gva_tree_view_row_activated_cb"/>
+                        <signal name="query_tooltip" handler="gva_tree_view_query_tooltip_cb"/>
+                        <signal name="popup_menu" handler="gva_tree_view_popup_menu_cb"/>
                       </object>
                     </child>
                   </object>
@@ -162,11 +162,11 @@
                         <property name="secondary_icon_stock">gtk-clear</property>
                         <property name="secondary_icon_activatable">True</property>
                         <property name="secondary_icon_tooltip_text">Clear the search</property>
-                        <signal name="icon_release" handler="gva_main_search_entry_icon_release_cb"/>
                         <signal name="changed" handler="gva_main_search_entry_changed_cb"/>
-                        <signal name="remove_widget" handler="gtk_widget_hide" object="main-search-hbox"/>
                         <signal name="notify" handler="gva_main_search_entry_notify_cb"/>
                         <signal name="activate" handler="gva_main_search_entry_activate_cb"/>
+                        <signal name="remove_widget" handler="gtk_widget_hide" object="main-search-hbox"/>
+                        <signal name="icon_release" handler="gva_main_search_entry_icon_release_cb"/>
                       </object>
                       <packing>
                         <property name="position">1</property>
@@ -242,7 +242,6 @@
             <child>
               <object class="GtkStatusbar" id="main-statusbar">
                 <property name="visible">True</property>
-                <property name="has_resize_grip">False</property>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -275,8 +274,8 @@
     <property name="default_height">250</property>
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
-    <signal name="hide" handler="gva_play_back_window_hide_cb"/>
     <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
+    <signal name="hide" handler="gva_play_back_window_hide_cb"/>
     <child>
       <object class="GtkVBox" id="play-back-vbox">
         <property name="visible">True</property>
@@ -697,9 +696,9 @@
     <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
-    <signal name="hide" handler="gva_properties_hide_cb"/>
-    <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
     <signal name="show" handler="gva_properties_show_cb"/>
+    <signal name="delete_event" handler="gtk_widget_hide_on_delete"/>
+    <signal name="hide" handler="gva_properties_hide_cb"/>
     <child>
       <object class="GtkVBox" id="properties-vbox">
         <property name="visible">True</property>
