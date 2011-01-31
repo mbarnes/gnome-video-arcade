@@ -2,7 +2,7 @@
 
 AC_PREREQ([2.54])
 
-m4_define([gva_version], 0.7.2)
+m4_define([gva_version], 0.8)
 
 AC_INIT([GNOME Video Arcade], [gva_version],
         [mbarnes@redhat.com], gnome-video-arcade)
@@ -23,12 +23,12 @@ AC_SUBST(abs_top_builddir)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 # Dependencies
-GLIB_MODULES="glib-2.0 >= 2.18"
+GLIB_MODULES="glib-2.0 >= 2.27.5"
 PKG_CHECK_MODULES(GLIB, $GLIB_MODULES)
 AC_SUBST(GLIB_CFLAGS)
 AC_SUBST(GLIB_LIBS)
 
-GTK_MODULES="gtk+-2.0 >= 2.12"
+GTK_MODULES="gtk+-3.0 >= 2.99.2"
 PKG_CHECK_MODULES(GTK, $GTK_MODULES)
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
@@ -48,7 +48,7 @@ PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
 AC_SUBST(SQLITE_CFLAGS)
 AC_SUBST(SQLITE_LIBS)
 
-UNIQUE_MODULES="unique-1.0 >= 1.0"
+UNIQUE_MODULES="unique-3.0 >= 2.91"
 PKG_CHECK_MODULES(UNIQUE, $UNIQUE_MODULES)
 AC_SUBST(UNIQUE_CFLAGS)
 AC_SUBST(UNIQUE_LIBS)
