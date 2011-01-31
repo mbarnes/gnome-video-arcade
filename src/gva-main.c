@@ -116,7 +116,8 @@ main_entry_completion_match_selected_cb (GtkEntryCompletion *completion,
 }
 
 static void
-main_menu_item_select_cb (GtkItem *item, GtkAction *action)
+main_menu_item_select_cb (GtkMenuItem *item,
+                          GtkAction *action)
 {
         gchar *tooltip;
 
@@ -127,7 +128,7 @@ main_menu_item_select_cb (GtkItem *item, GtkAction *action)
 }
 
 static void
-main_menu_item_deselect_cb (GtkItem *item)
+main_menu_item_deselect_cb (GtkMenuItem *item)
 {
         gva_main_statusbar_pop (menu_tooltip_cid);
 }
@@ -155,25 +156,25 @@ gva_main_init (void)
                 GTK_BOX (GVA_WIDGET_MAIN_VBOX),
                 gva_ui_get_managed_widget ("/main-menu"), 0);
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_VIEW_AVAILABLE,
-                GVA_WIDGET_MAIN_VIEW_BUTTON_0);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_VIEW_BUTTON_0),
+                GVA_ACTION_VIEW_AVAILABLE);
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_VIEW_FAVORITES,
-                GVA_WIDGET_MAIN_VIEW_BUTTON_1);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_VIEW_BUTTON_1),
+                GVA_ACTION_VIEW_FAVORITES);
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_VIEW_RESULTS,
-                GVA_WIDGET_MAIN_VIEW_BUTTON_2);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_VIEW_BUTTON_2),
+                GVA_ACTION_VIEW_RESULTS);
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_PROPERTIES,
-                GVA_WIDGET_MAIN_PROPERTIES_BUTTON);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_PROPERTIES_BUTTON),
+                GVA_ACTION_PROPERTIES);
 
-        gtk_action_connect_proxy (
-                GVA_ACTION_START,
-                GVA_WIDGET_MAIN_START_GAME_BUTTON);
+        gtk_activatable_set_related_action (
+                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_START_GAME_BUTTON),
+                GVA_ACTION_START);
 
         gtk_widget_set_sensitive (
                 GVA_WIDGET_MAIN_MUTE_BUTTON,
@@ -465,11 +466,13 @@ gva_main_cursor_busy (void)
         GdkCursor *cursor;
         GdkDisplay *display;
         GtkWidget *widget;
+        GdkWindow *window;
 
         widget = GVA_WIDGET_MAIN_WINDOW;
+        window = gtk_widget_get_window (widget);
         display = gtk_widget_get_display (widget);
         cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-        gdk_window_set_cursor (widget->window, cursor);
+        gdk_window_set_cursor (window, cursor);
         gdk_cursor_unref (cursor);
 }
 
@@ -483,9 +486,11 @@ void
 gva_main_cursor_normal (void)
 {
         GtkWidget *widget;
+        GdkWindow *window;
 
         widget = GVA_WIDGET_MAIN_WINDOW;
-        gdk_window_set_cursor (widget->window, NULL);
+        window = gtk_widget_get_window (widget);
+        gdk_window_set_cursor (window, NULL);
 }
 
 /**
@@ -948,7 +953,7 @@ gva_main_search_entry_notify_cb (GtkEntry *entry,
                                  GParamSpec *pspec)
 {
         if (g_str_equal (pspec->name, "has-focus"))
-                if (!GTK_WIDGET_HAS_FOCUS (GTK_ENTRY (entry)))
+                if (!gtk_widget_has_focus (GTK_WIDGET (entry)))
                         gtk_widget_hide (GVA_WIDGET_MAIN_SEARCH_HBOX);
 }
 
