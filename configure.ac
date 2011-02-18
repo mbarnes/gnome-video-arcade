@@ -133,16 +133,16 @@ AC_PATH_PROG(BASENAME, basename)
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
 # MAME Program
-AC_ARG_VAR([SDLMAME], [SDLMAME command])
-AC_PATH_PROGS([SDLMAME], [mame sdlmame],, [$PATH:/usr/local/games:/usr/games])
-if test "x$SDLMAME" != "x"; then
-        MAME=$SDLMAME
+AC_ARG_VAR([MAME], [MAME command])
+AC_PATH_PROGS([MAME], [mame sdlmame],, [$PATH:/usr/local/games:/usr/games])
+if test "x$MAME" != "x"; then
+        MAME_PROGRAM=$MAME
         MAME_BACKEND='gva-mame-sdlmame.$(OBJEXT)'
 else
         AC_ARG_VAR([XMAME], [XMAME command])
         AC_PATH_PROG([XMAME], [xmame],, [$PATH:/usr/local/games:/usr/games])
         if test "x$XMAME" != "x"; then
-                MAME=$XMAME
+                MAME_PROGRAM=$XMAME
                 MAME_BACKEND='gva-mame-xmame.$(OBJEXT)'
         fi
 fi
@@ -152,13 +152,13 @@ if test "x$MAME" = "x"; then
         Unable to find a MAME program.
 
         Please install either sdlmame or xmame, or specify the
-        MAME command with a SDLMAME or XMAME environment variable.
+        MAME command with a MAME or XMAME environment variable.
 
         e.g. XMAME=/path/to/program/xmame.x11 ./configure
 ])
 fi
 AC_SUBST([MAME_BACKEND])
-AC_DEFINE_UNQUOTED(MAME_PROGRAM, "$MAME", [Location of the MAME program])
+AC_DEFINE_UNQUOTED(MAME_PROGRAM, "$MAME_PROGRAM", [Location of the MAME program])
 
 # Localization
 AH_TEMPLATE(GETTEXT_PACKAGE, [Package name for gettext])
@@ -233,7 +233,7 @@ echo
 echo "    Configuration Summary"
 echo "    ---------------------"
 echo
-echo "    MAME Program    : $MAME"
+echo "    MAME Program    : $MAME_PROGRAM"
 echo "    Category File   : $with_category"
 echo "    History File    : $with_history"
 echo "    NPlayers File   : $with_nplayers"
