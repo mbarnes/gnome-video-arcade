@@ -6,18 +6,20 @@
 # Jorge González <jorgegonz@svn.gnome.org>, 2009.
 # Omar Campagne <ocampagne@gmail.com>, 2009.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade.help.master\n"
-"POT-Creation-Date: 2009-07-11 12:15+0000\n"
-"PO-Revision-Date: 2009-07-18 19:32+0200\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2009-07-18 17:44+0000\n"
+"PO-Revision-Date: 2011-02-21 15:14+0100\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -797,7 +799,7 @@ msgstr "General"
 
 #: C/gnome-video-arcade.xml:512(para)
 msgid "Shows the General tab of the Preferences window."
-msgstr "Muestra la solapa «General» en la ventana de «Preferencias»."
+msgstr "Muestra la pestaña «General» en la ventana de «Preferencias»."
 
 #: C/gnome-video-arcade.xml:521(guilabel)
 msgid "Start games in fullscreen mode"
@@ -925,7 +927,7 @@ msgstr "Columnas"
 
 #: C/gnome-video-arcade.xml:621(para)
 msgid "Shows the Columns tab of the Preferences window."
-msgstr "Muestra la solapa «Columnas» en la ventana de «Preferencias»."
+msgstr "Muestra la pestaña «Columnas» en la ventana de «Preferencias»."
 
 #: C/gnome-video-arcade.xml:627(para)
 msgid ""
@@ -936,7 +938,7 @@ msgid ""
 "guibutton>, <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> "
 "and <guibutton>Hide</guibutton> buttons to the right of the column list."
 msgstr ""
-"La solapa <guilabel>Columnas</guilabel> le permite configurar la lista de "
+"La pestaña <guilabel>Columnas</guilabel> le permite configurar la lista de "
 "juegos de la ventana principal para así mostrar información adicional acerca "
 "de los juegos disponibles. La nombres en la columna se organizan de acuerdo "
 "al orden en que aparecen en la lista de juegos. Puede reorganizar las "
