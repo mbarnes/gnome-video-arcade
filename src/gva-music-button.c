@@ -152,15 +152,12 @@ static void
 music_button_handle_state_changed (GvaMusicButton *music_button,
                                    GstMessage *message)
 {
-        GstElement *element;
         GtkWidget *image;
         GtkIconSize icon_size;
         GstState old_state;
         GstState new_state;
         GstState pending;
         gchar *stock_id;
-
-        element = music_button->priv->element;
 
         image = gtk_button_get_image (GTK_BUTTON (music_button));
         gtk_image_get_stock (GTK_IMAGE (image), &stock_id, &icon_size);
