@@ -587,16 +587,13 @@ gva_tree_view_set_selected_view (gint view)
 const gchar *
 gva_tree_view_get_last_selected_game (void)
 {
+        GSettings *settings;
         const gchar *retval = NULL;
-        GConfClient *client;
         gchar *game;
-        GError *error = NULL;
 
-        client = gconf_client_get_default ();
-        game = gconf_client_get_string (
-                client, GVA_GCONF_SELECTED_GAME_KEY, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        settings = gva_get_settings ();
+
+        game = g_settings_get_string (settings, GVA_SETTING_SELECTED_GAME);
 
         if (game != NULL)
         {
@@ -621,16 +618,13 @@ gva_tree_view_get_last_selected_game (void)
 void
 gva_tree_view_set_last_selected_game (const gchar *game)
 {
-        GConfClient *client;
-        GError *error = NULL;
+        GSettings *settings;
 
         g_return_if_fail (game != NULL);
 
-        client = gconf_client_get_default ();
-        gconf_client_set_string (
-                client, GVA_GCONF_SELECTED_GAME_KEY, game, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        settings = gva_get_settings ();
+
+        g_settings_set_string (settings, GVA_SETTING_SELECTED_GAME, game);
 }
 
 /**
@@ -646,26 +640,25 @@ void
 gva_tree_view_get_last_sort_column_id (GvaGameStoreColumn *column_id,
                                        GtkSortType *order)
 {
-        GConfClient *client;
+        GSettings *settings;
         gchar *column_name = NULL;
         gboolean descending;
-        GError *error = NULL;
 
         g_return_if_fail (column_id != NULL);
         g_return_if_fail (order != NULL);
 
-        client = gconf_client_get_default ();
-        gconf_client_get_pair (
-                client, GVA_GCONF_SORT_COLUMN_KEY,
-                GCONF_VALUE_STRING, GCONF_VALUE_BOOL,
-                &column_name, &descending, &error);
-        gva_error_handle (&error);
+        settings = gva_get_settings ();
+
+        g_settings_get (
+                settings, GVA_SETTING_SORT_COLUMN,
+                "(sb)", &column_name, &descending);
+
         if (column_name == NULL)
                 *column_id = GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID;
         else if (!gva_columns_lookup_id (column_name, column_id))
                 *column_id = GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID;
+
         *order = descending ? GTK_SORT_DESCENDING : GTK_SORT_ASCENDING;
-        g_object_unref (client);
 }
 
 /**
@@ -684,22 +677,21 @@ void
 gva_tree_view_set_last_sort_column_id (GvaGameStoreColumn column_id,
                                        GtkSortType order)
 {
-        GConfClient *client;
+        GSettings *settings;
         const gchar *column_name;
         gboolean descending;
-        GError *error = NULL;
 
-        client = gconf_client_get_default ();
+        settings = gva_get_settings ();
+
         column_name = gva_columns_lookup_name (column_id);
         if (column_name == NULL)
                 column_name = "default";
+
         descending = (order == GTK_SORT_DESCENDING);
-        gconf_client_set_pair (
-                client, GVA_GCONF_SORT_COLUMN_KEY,
-                GCONF_VALUE_STRING, GCONF_VALUE_BOOL,
-                &column_name, &descending, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+
+        g_settings_set (
+                settings, GVA_SETTING_SORT_COLUMN,
+                "(sb)", column_name, descending);
 }
 
 /**

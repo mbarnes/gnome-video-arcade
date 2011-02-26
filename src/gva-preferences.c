@@ -22,6 +22,7 @@
 #include "gva-error.h"
 #include "gva-mame.h"
 #include "gva-ui.h"
+#include "gva-util.h"
 
 /**
  * gva_preferences_init:
@@ -33,6 +34,10 @@
 void
 gva_preferences_init (void)
 {
+        GSettings *settings;
+
+        settings = gva_get_settings ();
+
         /* Auto Play */
 
         /* This actually appears in the Properties window,
@@ -42,9 +47,10 @@ gva_preferences_init (void)
                 GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_MUSIC_AUTO_PLAY),
                 GVA_ACTION_AUTO_PLAY);
 
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_AUTO_PLAY_KEY,
-                G_OBJECT (GVA_ACTION_AUTO_PLAY), "active");
+        g_settings_bind (
+                settings, GVA_SETTING_AUTO_PLAY,
+                GVA_ACTION_AUTO_PLAY, "active",
+                G_SETTINGS_BIND_DEFAULT);
 
         /* Auto Save */
 
@@ -56,9 +62,11 @@ gva_preferences_init (void)
                 GVA_ACTION_AUTO_SAVE,
                 gva_mame_supports_auto_save ());
 
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_AUTO_SAVE_KEY,
-                G_OBJECT (GVA_ACTION_AUTO_SAVE), "active");
+        g_settings_bind (
+                settings, GVA_SETTING_AUTO_SAVE,
+                GVA_ACTION_AUTO_SAVE, "active",
+                G_SETTINGS_BIND_DEFAULT |
+                G_SETTINGS_BIND_NO_SENSITIVITY);
 
         /* Full Screen */
 
@@ -71,9 +79,11 @@ gva_preferences_init (void)
                 gva_mame_supports_full_screen () ||
                 gva_mame_supports_window ());
 
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_FULL_SCREEN_KEY,
-                G_OBJECT (GVA_ACTION_FULL_SCREEN), "active");
+        g_settings_bind (
+                settings, GVA_SETTING_FULL_SCREEN,
+                GVA_ACTION_FULL_SCREEN, "active",
+                G_SETTINGS_BIND_DEFAULT |
+                G_SETTINGS_BIND_NO_SENSITIVITY);
 
         /* Show Clones */
 
@@ -81,9 +91,10 @@ gva_preferences_init (void)
                 GTK_ACTIVATABLE (GVA_WIDGET_PREFERENCES_SHOW_CLONES),
                 GVA_ACTION_SHOW_CLONES);
 
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_SHOW_CLONES_KEY,
-                G_OBJECT (GVA_ACTION_SHOW_CLONES), "active");
+        g_settings_bind (
+                settings, GVA_SETTING_SHOW_CLONES,
+                GVA_ACTION_SHOW_CLONES, "active",
+                G_SETTINGS_BIND_DEFAULT);
 }
 
 /**

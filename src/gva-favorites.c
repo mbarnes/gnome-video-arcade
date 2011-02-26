@@ -21,32 +21,30 @@
 #include <string.h>
 
 #include "gva-error.h"
+#include "gva-util.h"
 
-static GSList *favorites = NULL;
-static GConfClient *client = NULL;
+static GList *favorites = NULL;
 static gboolean initialized = FALSE;
 
 static void
 favorites_load (void)
 {
-        GSList *iter;
-        GError *error = NULL;
+        GSettings *settings;
+        GVariantIter *iter;
+        gchar *string;
 
-        client = gconf_client_get_default ();
+        g_return_if_fail (favorites == NULL);
 
-        favorites = gconf_client_get_list (
-                client, GVA_GCONF_FAVORITES_KEY,
-                GCONF_VALUE_STRING, &error);
-        gva_error_handle (&error);
-
-        for (iter = favorites; iter != NULL; iter = iter->next)
+        settings = gva_get_settings ();
+        g_settings_get (settings, GVA_SETTING_FAVORITES, "as", &iter);
+        while (g_variant_iter_loop (iter, "s", &string))
         {
-                gchar *game = iter->data;
-                iter->data = (gchar *) g_intern_string (game);
-                g_free (game);
+                const gchar *game = g_intern_string (string);
+                favorites = g_list_prepend (favorites, (gpointer) game);
         }
+        g_variant_iter_free (iter);
 
-        favorites = g_slist_sort (favorites, (GCompareFunc) strcmp);
+        favorites = g_list_sort (favorites, (GCompareFunc) strcmp);
 
         initialized = TRUE;
 }
@@ -54,29 +52,37 @@ favorites_load (void)
 static void
 favorites_save (void)
 {
-        GError *error = NULL;
+        GSettings *settings;
+        GVariantBuilder builder;
+        GVariant *variant;
+        GList *iter;
 
-        gconf_client_set_list (
-                client, GVA_GCONF_FAVORITES_KEY,
-                GCONF_VALUE_STRING, favorites, &error);
-        gva_error_handle (&error);
+        settings = gva_get_settings ();
+
+        g_variant_builder_init (&builder, (GVariantType *) "as");
+        for (iter = favorites; iter != NULL; iter = iter->next)
+                g_variant_builder_add (&builder, "s", iter->data);
+        variant = g_variant_builder_end (&builder);
+
+        /* This consumes the floating GVariant reference. */
+        g_settings_set_value (settings, GVA_SETTING_FAVORITES, variant);
 }
 
 /**
  * gva_favorites_copy:
  *
  * Returns a copy of the favorite games list.  The contents of the list
- * must not be freed.  The list itself should be freed with g_slist_free().
+ * must not be freed.  The list itself should be freed with g_list_free().
  *
  * Returns: a copy of the favorite games list
  **/
-GSList *
+GList *
 gva_favorites_copy (void)
 {
         if (G_UNLIKELY (!initialized))
                 favorites_load ();
 
-        return g_slist_copy (favorites);
+        return g_list_copy (favorites);
 }
 
 /**
@@ -95,10 +101,10 @@ gva_favorites_insert (const gchar *game)
 
         game = g_intern_string (game);
 
-        if (g_slist_find (favorites, game) != NULL)
+        if (g_list_find (favorites, game) != NULL)
                 return;
 
-        favorites = g_slist_insert_sorted (
+        favorites = g_list_insert_sorted (
                 favorites, (gchar *) game, (GCompareFunc) strcmp);
 
         favorites_save ();
@@ -120,7 +126,7 @@ gva_favorites_remove (const gchar *game)
 
         game = g_intern_string (game);
 
-        favorites = g_slist_remove_all (favorites, game);
+        favorites = g_list_remove_all (favorites, game);
 
         favorites_save ();
 }
@@ -143,5 +149,5 @@ gva_favorites_contains (const gchar *game)
 
         game = g_intern_string (game);
 
-        return (g_slist_find (favorites, game) != NULL);
+        return (g_list_find (favorites, game) != NULL);
 }

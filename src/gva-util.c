@@ -25,9 +25,6 @@
 
 #define DEFAULT_MONOSPACE_FONT_NAME     "Monospace 10"
 
-#define GCONF_MONOSPACE_FONT_NAME_KEY \
-        "/desktop/gnome/interface/monospace_font_name"
-
 /* Command Line Options */
 gboolean opt_build_database;
 gchar *opt_inspect;
@@ -222,21 +219,15 @@ gva_get_last_version (void)
 
         if (G_UNLIKELY (first_time))
         {
-                GConfClient *client;
-                GError *error = NULL;
+                GSettings *settings;
 
-                client = gconf_client_get_default ();
+                settings = gva_get_settings ();
 
-                last_version = gconf_client_get_string (
-                        client, GVA_GCONF_VERSION_KEY, &error);
-                gva_error_handle (&error);
+                last_version = g_settings_get_string (
+                        settings, GVA_SETTING_VERSION);
 
-                gconf_client_set_string (
-                        client, GVA_GCONF_VERSION_KEY,
-                        PACKAGE_VERSION, &error);
-                gva_error_handle (&error);
-
-                g_object_unref (client);
+                g_settings_set_string (
+                        settings, GVA_SETTING_VERSION, PACKAGE_VERSION);
 
                 first_time = FALSE;
         }
@@ -255,21 +246,38 @@ gva_get_last_version (void)
 gchar *
 gva_get_monospace_font_name (void)
 {
-        GConfClient *client;
+        GSettings *settings;
         gchar *font_name;
-        GError *error = NULL;
 
-        client = gconf_client_get_default ();
-        font_name = gconf_client_get_string (
-                client, GCONF_MONOSPACE_FONT_NAME_KEY, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        settings = g_settings_new ("org.gnome.desktop.interface");
+        font_name = g_settings_get_string (settings, "monospace-font-name");
+        g_object_unref (settings);
 
         /* Fallback to a reasonable default. */
         if (font_name == NULL)
                 font_name = g_strdup (DEFAULT_MONOSPACE_FONT_NAME);
 
         return font_name;
+}
+
+/**
+ * gva_get_settings:
+ *
+ * Returns the #GSettings object loaded with the schema for
+ * <emphasis>GNOME Video Arcade</emphasis>.
+ *
+ * Returns: the #GSettings object for
+ *          <emphasis>GNOME Video Arcade</emphasis>
+ **/
+GSettings *
+gva_get_settings (void)
+{
+        static GSettings *settings = NULL;
+
+        if (G_UNLIKELY (settings == NULL))
+                settings = g_settings_new ("org.gnome.VideoArcade");
+
+        return settings;
 }
 
 /**

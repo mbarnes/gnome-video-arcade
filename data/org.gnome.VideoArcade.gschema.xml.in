@@ -1,0 +1,175 @@
+<schemalist>
+
+  <schema id="org.gnome.VideoArcade" path="/org/gnome/video-arcade/" gettext-domain="gnome-video-arcade">
+
+    <key name="all-columns" type="as">
+      <default>['favorite','description']</default>
+      <_summary>All available column names</_summary>
+      <_description>List of all available column names.  The user may choose
+      to only display a subset of them (see "columns").</_description>
+    </key>
+
+    <key name="auto-play" type="b">
+      <default>false</default>
+      <_summary>Auto-play music clip</_summary>
+      <_description>Enable automatic playing of in-game music clips.
+      If true, and a music clip is available for the selected game,
+      the clip will automatically begin playing when the user opens the
+      Properties window or when the user selects a different game while
+      the Properties window is visible.  Music clips are streamed from
+      http://www.arcade-history.com/.</_description>
+    </key>
+
+    <key name="auto-save" type="b">
+      <default>false</default>
+      <_summary>Save and restore state</_summary>
+      <_description>Enable automatic restore at startup and save at exit.
+      If true, the emulator will try to restore the previous state of
+      the arcade machine when starting a game.  If false, the emulator
+      will boot the arcade machine from a cold start.  This setting does
+      not apply to recording games or playing back previously recorded
+      games.  In those cases the emulator will always reboot the arcade
+      machine.</_description>
+    </key>
+
+    <key name="columns" type="as">
+      <default>['favorite','description']</default>
+      <_summary>Column names</_summary>
+      <_description>List of column names to display.</_description>
+    </key>
+
+    <key name="favorites" type="as">
+      <default>[]</default>
+      <_summary>Favorite games</_summary>
+      <_description>List of the user's favorite games.</_description>
+    </key>
+
+    <key name="full-screen" type="b">
+      <default>true</default>
+      <_summary>Start games in full screen mode</_summary>
+      <_description>If true, automatically switch to full screen mode when
+      starting a game.  If false, start the game in a window.</_description>
+    </key>
+
+    <key name="error-file" type="s">
+      <default>''</default>
+      <_summary>ROM error filename</_summary>
+      <_description>Suggested filename for the ROM error "Save As" dialog.
+      </_description>
+    </key>
+
+    <key name="properties-height" type="i">
+      <default>400</default>
+      <_summary>Properties height</_summary>
+      <_description>The height of the Properties window.</_description>
+    </key>
+
+    <key name="properties-maximized" type="b">
+      <default>false</default>
+      <_summary>Properties maximized</_summary>
+      <_description>True if the Properties window is maximized.</_description>
+    </key>
+
+    <key name="properties-page" type="i">
+      <default>0</default>
+      <_summary>Properties page</_summary>
+      <_description>The most recently selected page in the Properties window.
+      </_description>
+    </key>
+
+    <key name="properties-width" type="i">
+      <default>500</default>
+      <_summary>Properties width</_summary>
+      <_description>The width of the Properties window.</_description>
+    </key>
+
+    <key name="search" type="s">
+      <default>''</default>
+      <_summary>Search text</_summary>
+      <_description>The most recent text in the search entry.</_description>
+    </key>
+
+    <key name="selected-game" type="s">
+      <default>''</default>
+      <_summary>Selected game</_summary>
+      <_description>The most recently selected game.</_description>
+    </key>
+
+    <key name="selected-match" type="(ss)">
+      <default>('','')</default>
+      <_summary>Selected completion match</_summary>
+      <_description>The most recently selected match from a search completion
+      list.  The first value is the column name of the match, and the second
+      value is the text of the match.  Example: (manufacturer, Williams).
+      Empty values indicate the completion feature was not used in the most
+      recent search.</_description>
+    </key>
+
+    <key name="selected-view" type="i">
+      <default>0</default>
+      <_summary>Selected view</_summary>
+      <_description>The most recently selected view.</_description>
+    </key>
+
+    <key name="show-clones" type="b">
+      <default>true</default>
+      <_summary>Show cloned games</_summary>
+      <_description>If true, show both original and cloned games in the
+      main window.  If false, show only original games.</_description>
+    </key>
+
+    <key name="sort-column" type="(sb)">
+      <default>('default',false)</default>
+      <_summary>Sort column and sort order</_summary>
+      <_description>The first value is the most recently sorted column name
+      (or "default" for default sorting), and the second value is the
+      sort order.  True indicates descending order; False indicates
+      ascending order.</_description>
+    </key>
+
+    <key name="sound-muted" type="b">
+      <default>false</default>
+      <_summary>Sound muted</_summary>
+      <_description>If true, games are started without sound.</_description>
+    </key>
+
+    <key name="version" type="s">
+      <default>''</default>
+      <_summary>Program version</_summary>
+      <_description>The most recently run version of GNOME Video Arcade.
+      </_description>
+    </key>
+
+    <key name="window-height" type="i">
+      <default>400</default>
+      <_summary>Window height</_summary>
+      <_description>The height of the main window.</_description>
+    </key>
+
+    <key name="window-maximized" type="b">
+      <default>false</default>
+      <_summary>Window maximized</_summary>
+      <_description>True if the main window is maximized.</_description>
+    </key>
+
+    <key name="window-width" type="i">
+      <default>500</default>
+      <_summary>Window width</_summary>
+      <_description>The width of the main window.</_description>
+    </key>
+
+    <key name="window-x" type="i">
+      <default>0</default>
+      <_summary>Window X coordinate</_summary>
+      <_description>The X coordinate of the main window.</_description>
+    </key>
+
+    <key name="window-y" type="i">
+      <default>0</default>
+      <_summary>Window Y coordinate</_summary>
+      <_description>The Y coordinate of the main window.</_description>
+    </key>
+
+  </schema>
+
+</schemalist>

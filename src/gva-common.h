@@ -40,28 +40,25 @@
 
 #include <sqlite3.h>
 #include <unique/unique.h>
-#include <gconf/gconf-client.h>
-#include "gconf-bridge.h"               /* Embedded in GVA */
 
-#define GVA_GCONF_PREFIX                "/apps/" PACKAGE
-#define GVA_GCONF_ALL_COLUMNS_KEY       GVA_GCONF_PREFIX "/all-columns"
-#define GVA_GCONF_AUTO_PLAY_KEY         GVA_GCONF_PREFIX "/auto-play"
-#define GVA_GCONF_AUTO_SAVE_KEY         GVA_GCONF_PREFIX "/auto-save"
-#define GVA_GCONF_COLUMNS_KEY           GVA_GCONF_PREFIX "/columns"
-#define GVA_GCONF_FAVORITES_KEY         GVA_GCONF_PREFIX "/favorites"
-#define GVA_GCONF_FULL_SCREEN_KEY       GVA_GCONF_PREFIX "/full-screen"
-#define GVA_GCONF_ERROR_FILE_KEY        GVA_GCONF_PREFIX "/error-file"
-#define GVA_GCONF_PROPERTIES_PAGE_KEY   GVA_GCONF_PREFIX "/properties-page"
-#define GVA_GCONF_PROPERTIES_PREFIX     GVA_GCONF_PREFIX "/properties"
-#define GVA_GCONF_SEARCH_KEY            GVA_GCONF_PREFIX "/search"
-#define GVA_GCONF_SELECTED_GAME_KEY     GVA_GCONF_PREFIX "/selected-game"
-#define GVA_GCONF_SELECTED_MATCH_KEY    GVA_GCONF_PREFIX "/selected-match"
-#define GVA_GCONF_SELECTED_VIEW_KEY     GVA_GCONF_PREFIX "/selected-view"
-#define GVA_GCONF_SHOW_CLONES_KEY       GVA_GCONF_PREFIX "/show-clones"
-#define GVA_GCONF_SORT_COLUMN_KEY       GVA_GCONF_PREFIX "/sort-column"
-#define GVA_GCONF_SOUND_MUTED           GVA_GCONF_PREFIX "/sound-muted"
-#define GVA_GCONF_VERSION_KEY           GVA_GCONF_PREFIX "/version"
-#define GVA_GCONF_WINDOW_PREFIX         GVA_GCONF_PREFIX "/window"
+#define GVA_SETTING_ALL_COLUMNS                 "all-columns"
+#define GVA_SETTING_AUTO_PLAY                   "auto-play"
+#define GVA_SETTING_AUTO_SAVE                   "auto-save"
+#define GVA_SETTING_COLUMNS                     "columns"
+#define GVA_SETTING_FAVORITES                   "favorites"
+#define GVA_SETTING_FULL_SCREEN                 "full-screen"
+#define GVA_SETTING_ERROR_FILE                  "error-file"
+#define GVA_SETTING_PROPERTIES_PAGE             "properties-page"
+#define GVA_SETTING_PROPERTIES_PREFIX           "properties"
+#define GVA_SETTING_SEARCH                      "search"
+#define GVA_SETTING_SELECTED_GAME               "selected-game"
+#define GVA_SETTING_SELECTED_MATCH              "selected-match"
+#define GVA_SETTING_SELECTED_VIEW               "selected-view"
+#define GVA_SETTING_SHOW_CLONES                 "show-clones"
+#define GVA_SETTING_SORT_COLUMN                 "sort-column"
+#define GVA_SETTING_SOUND_MUTED                 "sound-muted"
+#define GVA_SETTING_VERSION                     "version"
+#define GVA_SETTING_WINDOW_PREFIX               "window"
 
 G_BEGIN_DECLS
 

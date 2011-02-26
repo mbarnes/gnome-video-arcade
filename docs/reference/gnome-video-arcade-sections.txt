@@ -496,6 +496,7 @@ gva_get_debug_flags
 GvaDebugFlags
 gva_get_last_version
 gva_get_monospace_font_name
+gva_get_settings
 gva_get_time_elapsed
 gva_get_user_data_dir
 gva_help_display

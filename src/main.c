@@ -125,7 +125,10 @@ warn_if_no_roms (void)
 static gboolean
 start (void)
 {
+        GSettings *settings;
         GError *error = NULL;
+
+        settings = gva_get_settings ();
 
         if (gva_db_needs_rebuilt ())
         {
@@ -147,9 +150,10 @@ start (void)
 
         gva_ui_unlock ();
 
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
-                G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
+        g_settings_bind (
+                settings, GVA_SETTING_SELECTED_VIEW,
+                GVA_ACTION_VIEW_AVAILABLE, "current-value",
+                G_SETTINGS_BIND_DEFAULT);
 
         /* Present a helpful dialog if no ROMs were found. */
         warn_if_no_roms ();
@@ -341,7 +345,7 @@ main (gint argc, gchar **argv)
         }
 
         /* If another instance is running, exit now. */
-        app = unique_app_new ("org.gnome.GnomeVideoArcade", NULL);
+        app = unique_app_new ("org.gnome.VideoArcade", NULL);
         if (unique_app_is_running (app))
         {
                 gint exit_status;

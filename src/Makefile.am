@@ -5,8 +5,8 @@ bin_PROGRAMS = gnome-video-arcade
 AM_CFLAGS = \
 	-Wall \
 	@DBUS_CFLAGS@ @GLIB_CFLAGS@ @GTK_CFLAGS@ \
-	@GIT_CFLAGS@ @GCONF_CFLAGS@ @GSTREAMER_CFLAGS@ \
-	@SQLITE_CFLAGS@ @UNIQUE_CFLAGS@ @WNCK_CFLAGS@
+	@GIT_CFLAGS@ @GSTREAMER_CFLAGS@ @SQLITE_CFLAGS@ \
+	@UNIQUE_CFLAGS@ @WNCK_CFLAGS@
 
 AM_CPPFLAGS = \
 	-DG_LOG_DOMAIN=\"Gva\" \
@@ -23,8 +23,6 @@ DBUS_SOURCES = \
 endif
 
 gnome_video_arcade_SOURCES = \
-	gconf-bridge.c			\
-	gconf-bridge.h			\
 	gva-audit.c			\
 	gva-audit.h			\
 	gva-categories.h		\
@@ -88,9 +86,8 @@ EXTRA_gnome_video_arcade_SOURCES = \
 
 gnome_video_arcade_LDADD = \
 	@DBUS_LIBS@ @GLIB_LIBS@ @GTK_LIBS@ \
-	@GIT_LIBS@ @GCONF_LIBS@ @GSTREAMER_LIBS@ \
-	@MAME_BACKEND@ @SQLITE_LIBS@ @UNIQUE_LIBS@ \
-	@WNCK_LIBS@
+	@GIT_LIBS@ @GSTREAMER_LIBS@ @MAME_BACKEND@ \
+	@SQLITE_LIBS@ @UNIQUE_LIBS@ @WNCK_LIBS@
 
 gnome_video_arcade_DEPENDENCIES = \
 	@MAME_BACKEND@

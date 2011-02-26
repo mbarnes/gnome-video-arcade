@@ -763,7 +763,8 @@ void
 gva_properties_init (void)
 {
         GtkTreeView *view;
-        GtkSettings *settings;
+        GSettings *settings;
+        GtkSettings *gtk_settings;
         GtkWidget *text_view;
         GHashTable *color_hash;
         PangoFontDescription *desc;
@@ -774,6 +775,8 @@ gva_properties_init (void)
 #ifndef HISTORY_FILE
         GtkNotebook *notebook;
 #endif
+
+        settings = gva_get_settings ();
 
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         text_view = GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW;
@@ -786,9 +789,10 @@ gva_properties_init (void)
                 GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_FORWARD_BUTTON),
                 GVA_ACTION_NEXT_GAME);
 
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_PROPERTIES_PAGE_KEY,
-                G_OBJECT (GVA_WIDGET_PROPERTIES_NOTEBOOK), "page");
+        g_settings_bind (
+                settings, GVA_SETTING_PROPERTIES_PAGE,
+                GVA_WIDGET_PROPERTIES_NOTEBOOK, "page",
+                G_SETTINGS_BIND_DEFAULT);
 
         g_signal_connect (
                 gtk_tree_view_get_selection (view), "changed",
@@ -798,9 +802,11 @@ gva_properties_init (void)
                 GVA_WIDGET_PROPERTIES_MUSIC_BUTTON, "notify::status",
                 G_CALLBACK (properties_notify_music_status_cb), NULL);
 
+#if 0 /* GSETTINGS */
         gconf_bridge_bind_window (
                 gconf_bridge_get (), GVA_GCONF_PROPERTIES_PREFIX,
                 GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW), TRUE, FALSE);
+#endif
 
         font_name = gva_get_monospace_font_name ();
         desc = pango_font_description_from_string (font_name);
@@ -808,8 +814,8 @@ gva_properties_init (void)
         pango_font_description_free (desc);
         g_free (font_name);
 
-        settings = gtk_settings_get_default ();
-        g_object_get (settings, "color-hash", &color_hash, NULL);
+        gtk_settings = gtk_settings_get_default ();
+        g_object_get (gtk_settings, "color-hash", &color_hash, NULL);
         color = g_hash_table_lookup (color_hash, "tooltip_bg_color");
         widget = GVA_WIDGET_PROPERTIES_STATUS_EVENT_BOX;
         gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, color);

@@ -26,6 +26,7 @@
 #include "gva-game-store.h"
 #include "gva-mame.h"
 #include "gva-ui.h"
+#include "gva-util.h"
 
 #define SQL_SELECT_BAD_GAMES \
         "SELECT name, description FROM game WHERE romset == 'bad'"
@@ -223,16 +224,15 @@ audit_exit (GvaProcess *process,
 static gchar *
 audit_run_save_dialog (void)
 {
-        const gchar *key = GVA_GCONF_ERROR_FILE_KEY;
+        const gchar *key = GVA_SETTING_ERROR_FILE;
         GtkFileChooser *file_chooser;
         GtkWidget *dialog;
-        GConfClient *client;
+        GSettings *settings;
         gchar *filename;
         gchar *folder;
         gchar *name;
-        GError *error = NULL;
 
-        client = gconf_client_get_default ();
+        settings = gva_get_settings ();
 
         dialog = gtk_file_chooser_dialog_new (
                 _("Save As"),
@@ -246,8 +246,7 @@ audit_run_save_dialog (void)
 
         /* Suggest the previous filename, if available. */
 
-        filename = gconf_client_get_string (client, key, &error);
-        gva_error_handle (&error);
+        filename = g_settings_get_string (settings, key);
 
         if (filename != NULL && *filename != '\0')
         {
@@ -273,12 +272,10 @@ audit_run_save_dialog (void)
         if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
         {
                 filename = gtk_file_chooser_get_filename (file_chooser);
-                gconf_client_set_string (client, key, filename, &error);
-                gva_error_handle (&error);
+                g_settings_set_string (settings, key, filename);
         }
 
         gtk_widget_destroy (dialog);
-        g_object_unref (client);
 
         return filename;
 }

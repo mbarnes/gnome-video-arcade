@@ -77,6 +77,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_get_settings ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_get_time_elapsed ##### -->
 <para>
 

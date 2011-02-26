@@ -143,7 +143,10 @@ main_menu_item_deselect_cb (GtkMenuItem *item)
 void
 gva_main_init (void)
 {
+        GSettings *settings;
         gchar *text;
+
+        settings = gva_get_settings ();
 
         gva_tree_view_init ();
 
@@ -180,13 +183,16 @@ gva_main_init (void)
                 GVA_WIDGET_MAIN_MUTE_BUTTON,
                 gva_mame_supports_sound ());
 
-        gconf_bridge_bind_property (
-                gconf_bridge_get (), GVA_GCONF_SOUND_MUTED,
-                G_OBJECT (GVA_WIDGET_MAIN_MUTE_BUTTON), "muted");
+        g_settings_bind (
+                settings, GVA_SETTING_SOUND_MUTED,
+                GVA_WIDGET_MAIN_MUTE_BUTTON, "muted",
+                G_SETTINGS_BIND_DEFAULT);
 
+#if 0  /* GSETTINGS */
         gconf_bridge_bind_window (
                 gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
                 GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, TRUE);
+#endif
 
         /* Initialize the search entry. */
         text = gva_main_get_last_search_text ();
@@ -748,14 +754,11 @@ gva_main_execute_search (void)
 gchar *
 gva_main_get_last_search_text (void)
 {
-        GConfClient *client;
+        GSettings *settings;
         gchar *text;
-        GError *error = NULL;
 
-        client = gconf_client_get_default ();
-        text = gconf_client_get_string (client, GVA_GCONF_SEARCH_KEY, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        settings = gva_get_settings ();
+        text = g_settings_get_string (settings, GVA_SETTING_SEARCH);
 
         return (text != NULL) ? g_strstrip (text) : g_strdup ("");
 }
@@ -774,15 +777,12 @@ gva_main_get_last_search_text (void)
 void
 gva_main_set_last_search_text (const gchar *text)
 {
-        GConfClient *client;
-        GError *error = NULL;
+        GSettings *settings;
 
         g_return_if_fail (text != NULL);
 
-        client = gconf_client_get_default ();
-        gconf_client_set_string (client, GVA_GCONF_SEARCH_KEY, text, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        settings = gva_get_settings ();
+        g_settings_set_string (settings, GVA_SETTING_SEARCH, text);
 }
 
 /**
@@ -803,25 +803,18 @@ gboolean
 gva_main_get_last_selected_match (gchar **column_name,
                                   gchar **search_text)
 {
-        GConfClient *client;
-        gboolean success;
-        GError *error = NULL;
+        GSettings *settings;
 
         g_return_val_if_fail (column_name != NULL, FALSE);
         g_return_val_if_fail (search_text != NULL, FALSE);
 
+        settings = gva_get_settings ();
+
         *column_name = *search_text = NULL;
 
-        client = gconf_client_get_default ();
-        success = gconf_client_get_pair (
-                client, GVA_GCONF_SELECTED_MATCH_KEY,
-                GCONF_VALUE_STRING, GCONF_VALUE_STRING,
-                column_name, search_text, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
-
-        if (!success)
-                return FALSE;
+        g_settings_get (
+                settings, GVA_SETTING_SELECTED_MATCH,
+                "(ss)", column_name, search_text);
 
         /* The value may be unset.  Treat it as a failure. */
         if (*column_name == NULL || *search_text == NULL)
@@ -863,22 +856,14 @@ void
 gva_main_set_last_selected_match (const gchar *column_name,
                                   const gchar *search_text)
 {
-        GConfClient *client;
-        GError *error = NULL;
+        GSettings *settings;
 
-        if (column_name == NULL)
-                column_name = "";
+        settings = gva_get_settings ();
 
-        if (search_text == NULL)
-                search_text = "";
-
-        client = gconf_client_get_default ();
-        gconf_client_set_pair (
-                client, GVA_GCONF_SELECTED_MATCH_KEY,
-                GCONF_VALUE_STRING, GCONF_VALUE_STRING,
-                &column_name, &search_text, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        g_settings_set (
+                settings, GVA_SETTING_SELECTED_MATCH, "(ss)",
+                (column_name != NULL) ? column_name : "",
+                (search_text != NULL) ? search_text : "");
 }
 
 /**

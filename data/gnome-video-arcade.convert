@@ -1,0 +1,23 @@
+[org.gnome.VideoArcade]
+all-columns = /apps/gnome-video-arcade/all-columns
+auto-play = /apps/gnome-video-arcade/auto-play
+auto-save = /apps/gnome-video-arcade/auto-save
+columns = /apps/gnome-video-arcade/columns
+favorites = /apps/gnome-video-arcade/favorites
+full-screen = /apps/gnome-video-arcade/full-screen
+error-file = /apps/gnome-video-arcade/error-file
+properties-height = /apps/gnome-video-arcade/properties-height
+properties-maximized = /apps/gnome-video-arcade/properties-maximized
+properties-page = /apps/gnome-video-arcade/properties-page
+properties-width = /apps/gnome-video-arcade/properties-width
+search = /apps/gnome-video-arcade/search
+selected-game = /apps/gnome-video-arcade/selected-game
+selected-view = /apps/gnome-video-arcade/selected-view
+show-clones = /apps/gnome-video-arcade/show-clones
+sound-muted = /apps/gnome-video-arcade/sound-muted
+version = /apps/gnome-video-arcade/version
+window-height = /apps/gnome-video-arcade/window-height
+window-maximized = /apps/gnome-video-arcade/window-maximized
+window-width = /apps/gnome-video-arcade/window-width
+window-x = /apps/gnome-video-arcade/window-x
+window-y = /apps/gnome-video-arcade/window-y

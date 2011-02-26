@@ -29,7 +29,7 @@ SCAN_OPTIONS=
 
 # Extra options to supply to gtkdoc-mkdb.
 # e.g. MKDB_OPTIONS=--sgml-mode --output-format=xml
-MKDB_OPTIONS=--sgml-mode --output-format=xml
+MKDB_OPTIONS=--sgml-mode --output-format=xml --name-space=gva
 
 # Extra options to supply to gtkdoc-mktmpl
 # e.g. MKTMPL_OPTIONS=--only-section-tmpl
@@ -47,7 +47,7 @@ CFILE_GLOB=$(top_srcdir)/src/*.c
 
 # Header files to ignore when scanning.
 # e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h
-IGNORE_HFILES=gconf-bridge.h gva-common.h
+IGNORE_HFILES=gva-common.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
@@ -78,7 +78,6 @@ INCLUDES=							\
 	$(GLIB_CFLAGS)						\
 	$(GTK_CFLAGS)						\
 	$(GIT_CFLAGS)						\
-	$(GCONF_CFLAGS)						\
 	$(GSTREAMER_CFLAGS)					\
 	$(SQLITE_CFLAGS)					\
 	$(UNIQUE_CFLAGS)					\
@@ -89,7 +88,6 @@ DBUS_OBJECTS = $(top_builddir)/src/gva-dbus.o
 endif
 
 GTKDOC_LIBS=							\
-	$(top_builddir)/src/gconf-bridge.o			\
 	$(top_builddir)/src/gva-audit.o				\
 	$(top_builddir)/src/gva-categories.o			\
 	$(top_builddir)/src/gva-cell-renderer-pixbuf.o		\
@@ -122,7 +120,6 @@ GTKDOC_LIBS=							\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
 	$(GIT_LIBS)						\
-	$(GCONF_LIBS)						\
 	$(GSTREAMER_LIBS)					\
 	$(SQLITE_LIBS)						\
 	$(UNIQUE_LIBS)						\
@@ -135,6 +132,7 @@ include $(top_srcdir)/gtk-doc.make
 # e.g. EXTRA_DIST += version.xml.in
 EXTRA_DIST += version.xml.in
 
+TESTS_ENVIRONMENT = cd $(srcdir)
 TESTS = $(GTKDOC_CHECK)
 
 -include $(top_srcdir)/git.mk

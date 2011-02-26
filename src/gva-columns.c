@@ -27,6 +27,7 @@
 #include "gva-nplayers.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
+#include "gva-util.h"
 
 #define MAX_PLAYER_ICONS 8
 
@@ -350,7 +351,6 @@ columns_setup_popup_menu (GtkTreeViewColumn *column)
         g_signal_connect_swapped (
                 button, "popup-menu",
                 G_CALLBACK (columns_popup_menu_cb), column);
-
 }
 
 /*****************************************************************************
@@ -1188,17 +1188,17 @@ gva_columns_lookup_title (GvaGameStoreColumn column_id)
 
 /* Helper for gva_columns_load() */
 static gboolean
-columns_load_remove_name (GSList **p_list, const gchar *name)
+columns_load_remove_name (GList **p_list, const gchar *name)
 {
-        GSList *link;
+        GList *link;
 
-        link = g_slist_find_custom (*p_list, name, (GCompareFunc) strcmp);
+        link = g_list_find_custom (*p_list, name, (GCompareFunc) strcmp);
 
         if (link == NULL)
                 return FALSE;
 
         g_free (link->data);
-        *p_list = g_slist_delete_link (*p_list, link);
+        *p_list = g_list_delete_link (*p_list, link);
 
         return TRUE;
 }
@@ -1220,12 +1220,13 @@ columns_load_remove_name (GSList **p_list, const gchar *name)
 void
 gva_columns_load (GtkTreeView *view)
 {
-        GConfClient *client;
-        GSList *all_columns;
-        GSList *new_columns;
-        GSList *visible_columns;
+        GSettings *settings;
+        GVariantIter *iter;
+        GList *all_columns = NULL;
+        GList *new_columns = NULL;
+        GList *visible_columns = NULL;
+        gchar *string;
         gint ii;
-        GError *error = NULL;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
 
@@ -1235,21 +1236,26 @@ gva_columns_load (GtkTreeView *view)
          * we're loading. */
         g_signal_handlers_block_by_func (view, gva_columns_save, NULL);
 
-        client = gconf_client_get_default ();
-        all_columns = gconf_client_get_list (
-                client, GVA_GCONF_ALL_COLUMNS_KEY, GCONF_VALUE_STRING, &error);
-        gva_error_handle (&error);
-        visible_columns = gconf_client_get_list (
-                client, GVA_GCONF_COLUMNS_KEY, GCONF_VALUE_STRING, &error);
-        gva_error_handle (&error);
-        g_object_unref (client);
+        settings = gva_get_settings ();
+
+        g_settings_get (settings, GVA_SETTING_ALL_COLUMNS, "as", &iter);
+        while (g_variant_iter_next (iter, "s", &string))
+                all_columns = g_list_prepend (all_columns, string);
+        all_columns = g_list_reverse (all_columns);
+        g_variant_iter_free (iter);
+
+        g_settings_get (settings, GVA_SETTING_COLUMNS, "as", &iter);
+        while (g_variant_iter_next (iter, "s", &string))
+                visible_columns = g_list_prepend (visible_columns, string);
+        visible_columns = g_list_reverse (visible_columns);
+        g_variant_iter_free (iter);
 
         if (visible_columns == NULL)
         {
                 /* Fall back to the default columns. */
-                visible_columns = g_slist_append (
+                visible_columns = g_list_append (
                         visible_columns, g_strdup ("favorite"));
-                visible_columns = g_slist_append (
+                visible_columns = g_list_append (
                         visible_columns, g_strdup ("description"));
         }
 
@@ -1257,7 +1263,7 @@ gva_columns_load (GtkTreeView *view)
         for (ii = 0; ii < G_N_ELEMENTS (default_column_order); ii++)
         {
                 gchar *name = g_strdup (default_column_order[ii]);
-                new_columns = g_slist_append (new_columns, name);
+                new_columns = g_list_append (new_columns, name);
         }
 
         while (all_columns != NULL)
@@ -1271,7 +1277,7 @@ gva_columns_load (GtkTreeView *view)
                 visible = columns_load_remove_name (&visible_columns, name);
 
                 g_free (name);
-                all_columns = g_slist_delete_link (all_columns, all_columns);
+                all_columns = g_list_delete_link (all_columns, all_columns);
 
                 if (column != NULL)
                 {
@@ -1294,7 +1300,7 @@ gva_columns_load (GtkTreeView *view)
                 columns_load_remove_name (&new_columns, name);
 
                 g_free (name);
-                visible_columns = g_slist_delete_link (
+                visible_columns = g_list_delete_link (
                         visible_columns, visible_columns);
 
                 if (column != NULL)
@@ -1317,7 +1323,7 @@ gva_columns_load (GtkTreeView *view)
                 column = gva_columns_new_from_name (name);
 
                 g_free (name);
-                new_columns = g_slist_delete_link (new_columns, new_columns);
+                new_columns = g_list_delete_link (new_columns, new_columns);
 
                 if (column != NULL)
                 {
@@ -1348,9 +1354,10 @@ gva_columns_load (GtkTreeView *view)
 void
 gva_columns_save (GtkTreeView *view)
 {
-        GConfClient *client;
-        GSList *list;
-        GError *error = NULL;
+        GSettings *settings;
+        GVariantBuilder builder;
+        GVariant *variant;
+        GSList *list, *iter;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
 
@@ -1362,23 +1369,27 @@ gva_columns_save (GtkTreeView *view)
                 return;
 #endif
 
-        client = gconf_client_get_default ();
+        settings = gva_get_settings ();
 
+        g_variant_builder_init (&builder, (GVariantType *) "as");
         list = gva_columns_get_names (view, FALSE);
-        gconf_client_set_list (
-                client, GVA_GCONF_ALL_COLUMNS_KEY,
-                GCONF_VALUE_STRING, list, &error);
-        gva_error_handle (&error);
+        for (iter = list; iter != NULL; iter = iter->next)
+                g_variant_builder_add (&builder, "s", iter->data);
+        variant = g_variant_builder_end (&builder);
         g_slist_free (list);
 
+        /* This sinks the floating GVariant reference. */
+        g_settings_set_value (settings, GVA_SETTING_ALL_COLUMNS, variant);
+
+        g_variant_builder_init (&builder, (GVariantType *) "as");
         list = gva_columns_get_names (view, TRUE);
-        gconf_client_set_list (
-                client, GVA_GCONF_COLUMNS_KEY,
-                GCONF_VALUE_STRING, list, &error);
-        gva_error_handle (&error);
+        for (iter = list; iter != NULL; iter = iter->next)
+                g_variant_builder_add (&builder, "s", iter->data);
+        variant = g_variant_builder_end (&builder);
         g_slist_free (list);
 
-        g_object_unref (client);
+        /* This sinks the floating GVariant reference. */
+        g_settings_set_value (settings, GVA_SETTING_COLUMNS, variant);
 }
 
 /**

@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-GSList *        gva_favorites_copy              (void);
+GList *         gva_favorites_copy              (void);
 void            gva_favorites_insert            (const gchar *game);
 void            gva_favorites_remove            (const gchar *game);
 gboolean        gva_favorites_contains          (const gchar *game);

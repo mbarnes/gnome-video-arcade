@@ -1,6 +1,6 @@
 ### Process this file with automake to produce Makefile.in
 
-SUBDIRS = data po src docs help
+SUBDIRS = po data src docs help
 
 if GLADE_CATALOG
 SUBDIRS += maint

@@ -2,7 +2,7 @@
 
 [encoding: UTF-8]
 [type: gettext/glade]data/gnome-video-arcade.builder
-src/gconf-bridge.c
+data/org.gnome.VideoArcade.gschema.xml.in
 src/gva-audit.c
 src/gva-categories.c
 src/gva-column-manager.c
