@@ -97,7 +97,7 @@ AC_ARG_WITH([wnck],
         [manage game windows with libwnck [default=yes]])],
         with_wnck="$withval", with_wnck="yes")
 if test "$with_wnck" = "yes"; then
-WNCK_MODULES="libwnck-1.0 >= 2.16.0"
+WNCK_MODULES="libwnck-3.0 >= 2.91.6"
 PKG_CHECK_MODULES(WNCK, $WNCK_MODULES)
 AC_DEFINE_UNQUOTED(HAVE_WNCK, 1,
         [Define to 1 if you are using libwnck])
