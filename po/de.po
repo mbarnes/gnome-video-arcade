@@ -1,12 +1,12 @@
 # German translation of gnome-video-arcade.
-# Mario Blättermann <mariobl@gnome.org>, 2009, 2010.
+# Mario Blättermann <mariobl@gnome.org>, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
-"POT-Creation-Date: 2010-05-16 03:14+0000\n"
-"PO-Revision-Date: 2010-05-16 21:12+0100\n"
+"POT-Creation-Date: 2011-02-26 18:24+0000\n"
+"PO-Revision-Date: 2011-02-27 15:48+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "<b>Knopf</b>"
 
 #. The same text is in gnome-video-arcade.builder,
 #. * so it has to be translated with markup anyway.
-#: ../data/gnome-video-arcade.builder.h:21 ../src/gva-columns.c:747
+#: ../data/gnome-video-arcade.builder.h:21 ../src/gva-columns.c:750
 msgid "<b>There are known problems with this game:</b>"
 msgstr "<b>Zu diesem Spiel sind Probleme bekannt:</b>"
 
@@ -239,14 +239,266 @@ msgstr "Technisch"
 msgid "_Start Game"
 msgstr "Spiel _starten"
 
-#: ../src/gconf-bridge.c:1222
-#, c-format
-msgid "GConf error: %s"
-msgstr "GConf-Fehler: %s"
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
+#| msgid "Show all available games"
+msgid "All available column names"
+msgstr "Alle verfügbaren Spaltennamen"
 
-#: ../src/gconf-bridge.c:1232
-msgid "All further errors shown only on terminal."
-msgstr "Alle weiteren Fehler werden nur im Terminal angezeigt."
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:2
+#| msgid "Play a music clip"
+msgid "Auto-play music clip"
+msgstr "Musik automatisch abspielen"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:3
+#| msgid "Columns"
+msgid "Column names"
+msgstr "Spaltennamen"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:4
+msgid ""
+"Enable automatic playing of in-game music clips. If true, and a music clip is "
+"available for the selected game, the clip will automatically begin playing "
+"when the user opens the Properties window or when the user selects a "
+"different game while the Properties window is visible. Music clips are "
+"streamed from http://www.arcade-history.com/."
+msgstr ""
+"Aktivierung des automatischen Abspielens der im Spiel enthaltenen Audioclips. "
+"Falls »wahr« und ein Audio-Clip für das gewählte Spiel verfügbar ist, wird "
+"dieser Clip automatisch abgespielt, wenn der Benutzer entweder das "
+"Eigenschaftsfenster öffnet oder ein anderes Spiel gewählt wird, während das "
+"Eigenschaftsfenster geöffnet ist. Die Audio-Clips kommen als Datenstrom von "
+"http://www.arcade-history.com/."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:5
+msgid ""
+"Enable automatic restore at startup and save at exit. If true, the emulator "
+"will try to restore the previous state of the arcade machine when starting a "
+"game. If false, the emulator will boot the arcade machine from a cold start. "
+"This setting does not apply to recording games or playing back previously "
+"recorded games. In those cases the emulator will always reboot the arcade "
+"machine."
+msgstr ""
+"Automatisches Wiederherstellen beim Start und Speichern beim Beenden "
+"aktivieren. Der Emulator versucht, den vorherigen Status der Arcade-Maschine "
+"beim Start eines Spiels wiederherzustellen. Falls nicht aktiviert, führt der "
+"Emulator einen Kaltstart der Arcade-Maschine aus. Diese Einstellung "
+"beeinflusst die Aufzeichnung von Spielen oder das Abspielen vorher "
+"aufgezeichneter Spiele nicht. In solchen Fällen startet der Emulator die "
+"Arcade-Maschine stets neu."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
+#| msgid "_Favorite Games"
+msgid "Favorite games"
+msgstr "Bevorzugte Spiele"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:7
+msgid ""
+"If true, automatically switch to full screen mode when starting a game. If "
+"false, start the game in a window."
+msgstr ""
+"Falls aktiviert, wird beim Start eines Spiels automatisch in den "
+"Vollbildmodus gewechselt. Falls deaktiviert, startet das Spiel in einem "
+"Fenster."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:8
+msgid "If true, games are started without sound."
+msgstr "Falls wahr, werden Spiele ohne Klangausgabe gestartet."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:9
+msgid ""
+"If true, show both original and cloned games in the main window. If false, "
+"show only original games."
+msgstr ""
+"Falls wahr, werden sowohl originale als auch geklonte Spiele im Hauptfenster "
+"angezeigt. Falls falsch, werden nur originale Spiele angezeigt."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:10
+msgid ""
+"List of all available column names. The user may choose to only display a "
+"subset of them (see \"columns\")."
+msgstr ""
+"Liste aller verfügbaren Spaltennamen. Der Benutzer kann auswählen, ob nur ein "
+"bestimmter Teil davon angezeigt wird (siehe »Spalten«) "
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:11
+msgid "List of column names to display."
+msgstr "Liste der anzuzeigenden Spaltennamen."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:12
+msgid "List of the user's favorite games."
+msgstr "Liste der bevorzugten Spiele des Benutzers."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:13
+msgid "Program version"
+msgstr "Programmversion"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:14
+#| msgid "Properties"
+msgid "Properties height"
+msgstr "Eigenschaftsfensterhöhe"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:15
+#| msgid "Properties"
+msgid "Properties maximized"
+msgstr "Eigenschaftsfenster maximiert"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:16
+#| msgid "Properties"
+msgid "Properties page"
+msgstr "Eigenschaftsseite"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:17
+#| msgid "Properties"
+msgid "Properties width"
+msgstr "Eigenschaftsfensterbreite"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:18
+#| msgid "Save ROM errors to a file"
+msgid "ROM error filename"
+msgstr "Name der ROM-Fehlerdatei"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:19
+msgid "Save and restore state"
+msgstr "Status speichern und wiederherstellen"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:20
+#| msgid "Search Result"
+#| msgid_plural "Search Results"
+msgid "Search text"
+msgstr "Suchtext"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:21
+msgid "Selected completion match"
+msgstr "Ausgewählte Vervollständigung"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
+#| msgid "Start the selected game"
+msgid "Selected game"
+msgstr "Ausgewähltes Spiel"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:23
+msgid "Selected view"
+msgstr "Ausgewählte Ansicht"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:24
+#| msgid "Show next game"
+msgid "Show cloned games"
+msgstr "Geklonte Spiele anzeigen"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:25
+msgid "Sort column and sort order"
+msgstr "Spaltensortierung und Reihenfolge"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
+#| msgid "In-game sound is muted"
+msgid "Sound muted"
+msgstr "Klang ist stummgeschaltet"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:27
+#| msgid "Start games in _fullscreen mode"
+msgid "Start games in full screen mode"
+msgstr "Spiele im Vollbildmodus starten"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:28
+msgid "Suggested filename for the ROM error \"Save As\" dialog."
+msgstr ""
+"Vorgeschlagener Dateiname für den »Speichern unter«-Dialog für ROM-Fehler."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:29
+msgid "The X coordinate of the main window."
+msgstr "Die X-Koordinate des Hauptfensters."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:30
+msgid "The Y coordinate of the main window."
+msgstr "Die Y-Koordinate des Hauptfensters."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:31
+msgid ""
+"The first value is the most recently sorted column name (or \"default\" for "
+"default sorting), and the second value is the sort order. True indicates "
+"descending order; False indicates ascending order."
+msgstr ""
+"Der erste Wert ist der am häufigsten sortierte Spaltenname (oder »default« "
+"für Standardsortierung). Der zweite Wert bezeichnet die Sortierreihenfolge. "
+"»Wahr« bedeutet absteigende Ordnung, »falsch« bedeutet aufsteigende Ordnung."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:32
+msgid "The height of the Properties window."
+msgstr "Die Höhe des Eigenschaftsfensters."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:33
+msgid "The height of the main window."
+msgstr "Die Höhe des Hauptfensters."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:34
+msgid "The most recent text in the search entry."
+msgstr "Der am häufigsten im Suchfeld eingegebene Text."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:35
+msgid "The most recently run version of GNOME Video Arcade."
+msgstr "Die am häufigsten gestartete Version von GNOME Video Arcade."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
+#| msgid "Start the selected game"
+msgid "The most recently selected game."
+msgstr "Das am häufigsten ausgewählte Spiel."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:37
+msgid ""
+"The most recently selected match from a search completion list. The first "
+"value is the column name of the match, and the second value is the text of "
+"the match. Example: (manufacturer, Williams). Empty values indicate the "
+"completion feature was not used in the most recent search."
+msgstr ""
+"Der am häufigsten ausgewählte Treffer aus der Liste der "
+"Suchvervollständigung. Der erste Wert ist der Spaltenname des jeweiligen "
+"Treffers. der zweite Wert der Text des Treffers. Beispiel: (Hersteller, "
+"Williams). Ein leerer Wert bedeutet, dass die Suchvervollständigung im "
+"häufigsten Suchvorgang nicht genutzt wurde."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:38
+msgid "The most recently selected page in the Properties window."
+msgstr "Die am häufigsten ausgewählte Seite im Eigenschaftsfenster."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:39
+msgid "The most recently selected view."
+msgstr "Die am häüfigsten ausgewählte Ansicht."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:40
+msgid "The width of the Properties window."
+msgstr "Die Breite des Eigenschaftsfensters."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:41
+msgid "The width of the main window."
+msgstr "Die Breite des Hauptfensters."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:42
+msgid "True if the Properties window is maximized."
+msgstr "Falls wahr, ist das Eigenschaftsfenster maximiert."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:43
+msgid "True if the main window is maximized."
+msgstr "Falls wahr, ist das Hauptfenster maximiert."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:44
+msgid "Window X coordinate"
+msgstr "X-Koordinate des Fensters"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:45
+msgid "Window Y coordinate"
+msgstr "Y-Koordinate des Fensters"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:46
+msgid "Window height"
+msgstr "Fensterhöhe"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:47
+msgid "Window maximized"
+msgstr "Fenster maximiert"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:48
+msgid "Window width"
+msgstr "Fensterbreite"
 
 #: ../src/gva-audit.c:238
 msgid "Save As"
@@ -282,135 +534,135 @@ msgstr "_Anzeigen"
 msgid "_Hide"
 msgstr "_Verbergen"
 
-#: ../src/gva-columns.c:298
+#: ../src/gva-columns.c:299
 #, c-format
 msgid "Remove %s Column"
 msgstr "Spalte %s entfernen"
 
-#: ../src/gva-columns.c:300
+#: ../src/gva-columns.c:301
 #, c-format
 msgid "Remove the \"%s\" column from the game list"
 msgstr "Spalte »%s« aus der Spieleliste entfernen"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-columns.c:759
+#: ../src/gva-columns.c:762
 #, no-c-format
 msgid "• The colors aren't 100% accurate."
 msgstr "• Die Farben sind nicht 100% akkurat."
 
-#: ../src/gva-columns.c:768
+#: ../src/gva-columns.c:771
 msgid "• The colors are completely wrong."
 msgstr "• Die Farben sind völlig falsch."
 
-#: ../src/gva-columns.c:778
+#: ../src/gva-columns.c:781
 #, no-c-format
 msgid "• The video emulation isn't 100% accurate."
 msgstr "• Die Video-Emulation ist nicht 100% akkurat."
 
-#: ../src/gva-columns.c:788
+#: ../src/gva-columns.c:791
 #, no-c-format
 msgid "• The sound emulation isn't 100% accurate."
 msgstr "• Die Klang-Emulation ist nicht 100% akkurat."
 
-#: ../src/gva-columns.c:797
+#: ../src/gva-columns.c:800
 msgid "• The game lacks sound."
 msgstr "• Das Spiel bietet keine Klänge."
 
-#: ../src/gva-columns.c:806
+#: ../src/gva-columns.c:809
 msgid "• Screen flipping in cocktail mode is not supported."
 msgstr "• Umdrehen des Bildschirms im Cocktail-Modus wird nicht unterstützt."
 
-#: ../src/gva-columns.c:815
+#: ../src/gva-columns.c:818
 msgid "• <b>THIS GAME DOESN'T WORK.</b>"
 msgstr "• <b>DIESES SPIEL FUKTIONIERT NICHT.</b>"
 
-#: ../src/gva-columns.c:825
+#: ../src/gva-columns.c:828
 msgid "• The game has protection which isn't fully emulated."
 msgstr ""
 "• Das Spiel hat eine Schutzfunktion, die nicht vollständig emuliert werden "
 "kann."
 
-#: ../src/gva-columns.c:861
+#: ../src/gva-columns.c:864
 msgid "Click here to remove from favorites"
 msgstr "Hier klicken, um aus der Bevorzugt-Liste zu entfernen"
 
-#: ../src/gva-columns.c:863
+#: ../src/gva-columns.c:866
 msgid "Click here to add to favorites"
 msgstr "Hier klicken, um zur Bevorzugt-Liste hinzuzufügen"
 
-#: ../src/gva-columns.c:955 ../src/gva-properties.c:410
+#: ../src/gva-columns.c:958 ../src/gva-properties.c:410
 msgid "(Game Description Unknown)"
 msgstr "(Beschreibung unbekannt)"
 
-#: ../src/gva-columns.c:958 ../src/gva-properties.c:413
+#: ../src/gva-columns.c:961 ../src/gva-properties.c:413
 msgid "(Manufacturer Unknown)"
 msgstr "(Hersteller unbekannt)"
 
-#: ../src/gva-columns.c:961 ../src/gva-properties.c:416
+#: ../src/gva-columns.c:964 ../src/gva-properties.c:416
 msgid "(Year Unknown)"
 msgstr "(Jahr unbekannt)"
 
-#: ../src/gva-columns.c:985 ../src/gva-main.c:1021
+#: ../src/gva-columns.c:988 ../src/gva-main.c:1011
 msgid "ROM Name"
 msgstr "ROM-Name"
 
-#: ../src/gva-columns.c:987
+#: ../src/gva-columns.c:990
 msgid "BIOS"
 msgstr "BIOS"
 
-#: ../src/gva-columns.c:989 ../src/gva-main.c:1014
+#: ../src/gva-columns.c:992 ../src/gva-main.c:1004
 msgid "Category"
 msgstr "Kategorie"
 
-#: ../src/gva-columns.c:991
+#: ../src/gva-columns.c:994
 msgid "Favorite"
 msgstr "Bevorzugt"
 
-#: ../src/gva-columns.c:994
+#: ../src/gva-columns.c:997
 msgid "Driver"
 msgstr "Treiber"
 
-#: ../src/gva-columns.c:1002
+#: ../src/gva-columns.c:1005
 msgid "Samples"
 msgstr "Samples"
 
-#: ../src/gva-columns.c:1004
+#: ../src/gva-columns.c:1007
 msgid "Title"
 msgstr "Titel"
 
-#: ../src/gva-columns.c:1007
+#: ../src/gva-columns.c:1010
 msgid "Year"
 msgstr "Jahr"
 
-#: ../src/gva-columns.c:1010 ../src/gva-main.c:1000
+#: ../src/gva-columns.c:1013 ../src/gva-main.c:990
 msgid "Manufacturer"
 msgstr "Hersteller"
 
-#: ../src/gva-columns.c:1016
+#: ../src/gva-columns.c:1019
 msgid "Players"
 msgstr "Spieler"
 
-#: ../src/gva-columns.c:1019
+#: ../src/gva-columns.c:1022
 msgid "Players (Alt.)"
 msgstr "Spieler (Abw.)"
 
-#: ../src/gva-columns.c:1022
+#: ../src/gva-columns.c:1025
 msgid "Players (Sim.)"
 msgstr "Spieler (Glz.)"
 
-#: ../src/gva-columns.c:1027
+#: ../src/gva-columns.c:1030
 msgid "Status"
 msgstr "Status"
 
-#: ../src/gva-columns.c:1038
+#: ../src/gva-columns.c:1041
 msgid "Last Played"
 msgstr "Zuletzt gespielt"
 
-#: ../src/gva-columns.c:1040
+#: ../src/gva-columns.c:1043
 msgid "Comment"
 msgstr "Kommentar"
 
-#: ../src/gva-columns.c:1044
+#: ../src/gva-columns.c:1047
 msgid "Played On"
 msgstr "Gespielt auf"
 
@@ -425,32 +677,32 @@ msgstr ""
 msgid "Invalid or unsupported INP file format"
 msgstr "Ungültiges oder nicht unterstütztes INP-Dateiformat"
 
-#: ../src/gva-main.c:235
+#: ../src/gva-main.c:242
 msgid "Building game database..."
 msgstr "Spiele-Datenbank wird erstellt …"
 
-#: ../src/gva-main.c:296
+#: ../src/gva-main.c:303
 msgid "Analyzing ROM files..."
 msgstr "ROM-Dateien werden analysiert …"
 
-#: ../src/gva-main.c:986
+#: ../src/gva-main.c:976
 msgid "Search for any of the following:"
 msgstr "Nach einem der folgenden suchen:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:993
+#: ../src/gva-main.c:983
 msgid "Game Title"
 msgstr "Titel des Spiels"
 
-#: ../src/gva-main.c:1007
+#: ../src/gva-main.c:997
 msgid "Copyright Year"
 msgstr "Copyright-Jahr"
 
-#: ../src/gva-main.c:1028
+#: ../src/gva-main.c:1018
 msgid "BIOS Name"
 msgstr "BIOS-Name"
 
-#: ../src/gva-main.c:1035
+#: ../src/gva-main.c:1025
 msgid "Driver Name"
 msgstr "Treibername"
 
@@ -477,7 +729,7 @@ msgstr "Musik kann nicht abgespielt werden"
 msgid "Buffering %d%%..."
 msgstr "%d%% wird gepuffert …"
 
-#: ../src/gva-music-button.c:265
+#: ../src/gva-music-button.c:262
 msgid "Connecting..."
 msgstr "Verbindung wird hergestellt ..."
 
@@ -868,12 +1120,11 @@ msgstr ""
 "Dateien installiert. Klicken Sie auf <b>Hilfe</b> für weitere Einzelheiten "
 "und Tipps zur Fehlerbehandlung."
 
-#: ../src/main.c:199
-#| msgid "<big><b>Errors detected in ROM files</b></big>"
+#: ../src/main.c:196
 msgid "Changes detected in ROM files"
 msgstr "Änderungen in ROM-Dateien erkannt"
 
-#: ../src/main.c:203
+#: ../src/main.c:200
 msgid ""
 "GNOME Video Arcade has detected changes in your ROM files and will need to "
 "audit them in order to update the game list. However the audit may take "
@@ -890,20 +1141,11 @@ msgstr ""
 "Falls Sie die Überprüfung jetzt überspringen, wird sie beim nächsten Start "
 "von GNOME Video Arcade ausgeführt."
 
-#: ../src/main.c:213
+#: ../src/main.c:210
 msgid "_Skip Audit"
 msgstr "Prüfung über_springen"
 
-#: ../src/main.c:214
+#: ../src/main.c:211
 msgid "_Audit ROM Files"
 msgstr "ROM-D_ateien überprüfen"
 
-#~ msgid ""
-#~ "GNOME Video Arcade was unable to locate any ROM files. It could be that "
-#~ "MAME is misconfigured or no ROM files are installed. Consult the user "
-#~ "documentation for more details and troubleshooting tips."
-#~ msgstr ""
-#~ "GNOME Video Arcade war nicht in der Lage, ROM-Dateien zu finden. "
-#~ "Möglicherweise ist MAME nicht korrekt konfiguriert oder es sind keine ROM-"
-#~ "Dateien installiert. Ziehen Sie die Benutzerdokumentation für weitere "
-#~ "Einzelheiten und Tipps zur Fehlerbehandlung zu Rate."
