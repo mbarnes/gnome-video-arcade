@@ -509,6 +509,11 @@ gva_main_cursor_normal (void)
 void
 gva_main_progress_bar_show (void)
 {
+        GtkWindow *window;
+
+        window = GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW);
+        gtk_window_set_has_resize_grip (window, FALSE);
+
         gva_main_progress_bar_set_fraction (0.0);
         gtk_widget_show (GVA_WIDGET_MAIN_PROGRESS_BAR);
         gva_main_cursor_busy ();
@@ -524,6 +529,11 @@ gva_main_progress_bar_show (void)
 void
 gva_main_progress_bar_hide (void)
 {
+        GtkWindow *window;
+
+        window = GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW);
+        gtk_window_set_has_resize_grip (window, TRUE);
+
         gtk_widget_hide (GVA_WIDGET_MAIN_PROGRESS_BAR);
         gva_main_cursor_normal ();
 }
