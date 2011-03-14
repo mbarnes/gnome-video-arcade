@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade.po.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
-"POT-Creation-Date: 2011-02-27 12:32+0000\n"
-"PO-Revision-Date: 2011-03-03 09:35+0100\n"
+"POT-Creation-Date: 2011-03-05 10:38+0000\n"
+"PO-Revision-Date: 2011-03-14 12:18+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -269,6 +269,12 @@ msgid ""
 "recorded games. In those cases the emulator will always reboot the arcade "
 "machine."
 msgstr ""
+"Activar la restauración automática al iniciar y guardar al salir. Si es "
+"cierto, el emulador intentará restaurar el estado anterior de la máquina de "
+"arcade al iniciar un juego. Si es falso, el emulador arrancará la máquina de "
+"arcade desde cero. Esta configuración no se aplica al grabar juegos o al "
+"reproducir juegos grabados anteriormente. En estos casos, el emulador "
+"siempre reiniciará la máquina de arcade."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
 msgid "Favorite games"
@@ -291,12 +297,16 @@ msgid ""
 "If true, show both original and cloned games in the main window. If false, "
 "show only original games."
 msgstr ""
+"Si es cierto, mostrar los juegos originales y clonados en la ventana "
+"principal. Si es falso, mostrar sólo los juegos originales."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:10
 msgid ""
 "List of all available column names. The user may choose to only display a "
 "subset of them (see \"columns\")."
 msgstr ""
+"Lista de todos los nombres de columnas disponibles. El usuario debe elegir "
+"mostrar sólo un grupo de ellas (vea «columnas»)."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:11
 msgid "List of column names to display."
@@ -356,7 +366,7 @@ msgstr "Mostrar juegos clonados"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:25
 msgid "Sort column and sort order"
-msgstr ""
+msgstr "Ordenar columna y orden de clasificación"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
 msgid "Sound muted"
@@ -369,6 +379,7 @@ msgstr "Iniciar juegos en modo a pantalla completa"
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:28
 msgid "Suggested filename for the ROM error \"Save As\" dialog."
 msgstr ""
+"Nombre de archivo sugerido para el diálogo de error de ROM «Guardar como»."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:29
 msgid "The X coordinate of the main window."
@@ -384,6 +395,10 @@ msgid ""
 "default sorting), and the second value is the sort order. True indicates "
 "descending order; False indicates ascending order."
 msgstr ""
+"El primer valor es la columna ordenada más recientemente (o «predeterminada» "
+"para una ordenación predeterminada), y el segundo valor es el orden de "
+"clasificación. Cierto indica orden descendente; falso indica orden "
+"ascendente."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:32
 msgid "The height of the Properties window."
@@ -399,7 +414,7 @@ msgstr "El texto buscado más recientemente en la entrada de búsqueda."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:35
 msgid "The most recently run version of GNOME Video Arcade."
-msgstr ""
+msgstr "La versión ejecutable más reciente de GNOME Vídeo Arcade."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
 msgid "The most recently selected game."
