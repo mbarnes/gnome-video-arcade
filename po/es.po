@@ -10,9 +10,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade.po.master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
-"POT-Creation-Date: 2011-03-05 10:38+0000\n"
-"PO-Revision-Date: 2011-03-14 12:18+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2011-03-14 21:17+0000\n"
+"PO-Revision-Date: 2011-03-17 11:06+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -259,6 +260,12 @@ msgid ""
 "different game while the Properties window is visible. Music clips are "
 "streamed from http://www.arcade-history.com/."
 msgstr ""
+"Activar la reproducción automática de clips de música en juegos. Si es "
+"cierto, y hay un clip de música disponible para el juego seleccionado, el "
+"clip se reproducirá automáticamente cuando el usuario abra la ventana "
+"«Propiedades» o cuando el usuario seleccione un juego diferente mientras la "
+"ventana «Propiedades» esté visible. Los clips de música se escuchan desde  "
+"http://www.arcade-history.com/."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:5
 msgid ""
@@ -350,7 +357,7 @@ msgstr "Busca texto"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:21
 msgid "Selected completion match"
-msgstr ""
+msgstr "Patrón de completado seleccionado"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
 msgid "Selected game"
@@ -427,6 +434,11 @@ msgid ""
 "the match. Example: (manufacturer, Williams). Empty values indicate the "
 "completion feature was not used in the most recent search."
 msgstr ""
+"El patrón de completado seleccionado más recientemente desde una lista de "
+"finalización de búsqueda. El primer valor es el nombre de la columna del "
+"patrón, y el segundo valor es el texto del patrón. Ejemplo: (fabricante, "
+"Williams). Un valor vacío indica que la característica de completado no se "
+"usó en la búsqueda más reciente."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:38
 msgid "The most recently selected page in the Properties window."
