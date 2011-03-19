@@ -1,7 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Video Arcade
-Comment=Play classic arcade games
+_Name=GNOME Video Arcade
+_GenericName=Video Arcade
+_Comment=Play classic arcade games
 Exec=gnome-video-arcade
 Icon=gnome-video-arcade
 Terminal=false

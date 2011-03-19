@@ -2,6 +2,7 @@
 
 [encoding: UTF-8]
 [type: gettext/glade]data/gnome-video-arcade.builder
+data/gnome-video-arcade.desktop.in
 data/org.gnome.VideoArcade.gschema.xml.in
 src/gva-audit.c
 src/gva-categories.c
