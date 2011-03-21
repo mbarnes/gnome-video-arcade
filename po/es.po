@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-video-arcade.po.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=&keywords=I18N+L10N\n"
-"POT-Creation-Date: 2011-03-14 21:17+0000\n"
-"PO-Revision-Date: 2011-03-17 11:06+0100\n"
+"POT-Creation-Date: 2011-03-19 14:18+0000\n"
+"PO-Revision-Date: 2011-03-21 11:38+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -156,6 +156,7 @@ msgid "Delete the selected game recordings"
 msgstr "Borrar las partidas grabadas seleccionadas"
 
 #: ../data/gnome-video-arcade.builder.h:32
+#: ../data/gnome-video-arcade.desktop.in.h:1
 msgid "GNOME Video Arcade"
 msgstr "GNOME vídeo arcade"
 
@@ -239,6 +240,16 @@ msgstr "Técnico"
 #: ../data/gnome-video-arcade.builder.h:53
 msgid "_Start Game"
 msgstr "_Iniciar juego"
+
+#: ../data/gnome-video-arcade.desktop.in.h:2
+#| msgid "Playing a fullscreen game"
+msgid "Play classic arcade games"
+msgstr "Jugar a juegos de arcade clásicos"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+#| msgid "GNOME Video Arcade"
+msgid "Video Arcade"
+msgstr "Vídeo arcade"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
 msgid "All available column names"
