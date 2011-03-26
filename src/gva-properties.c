@@ -497,7 +497,8 @@ properties_update_sound (const gchar *name)
         sql = g_strdup_printf (
                 SQL_SELECT_SOUND, name, G_N_ELEMENTS (sound_labels));
 
-        if (!gva_db_get_table (sql, &result, &rows, &columns, &error)) {
+        if (!gva_db_get_table (sql, &result, &rows, &columns, &error))
+        {
                 gva_error_handle (&error);
                 rows = columns = 0;
         }
@@ -642,7 +643,8 @@ properties_update_video (const gchar *name)
         sql = g_strdup_printf (
                 SQL_SELECT_VIDEO, name, G_N_ELEMENTS (video_labels));
 
-        if (!gva_db_get_table (sql, &result, &rows, &columns, &error)) {
+        if (!gva_db_get_table (sql, &result, &rows, &columns, &error))
+        {
                 gva_error_handle (&error);
                 rows = columns = 0;
         }

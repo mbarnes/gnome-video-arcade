@@ -891,7 +891,8 @@ gva_mame_get_input_directory (GError **error)
 {
         static gchar *directory = NULL;
 
-        if (G_UNLIKELY (directory == NULL)) {
+        if (G_UNLIKELY (directory == NULL))
+        {
                 const gchar *config_key = "input_directory";
                 directory = gva_mame_get_config_value (config_key, error);
         }
@@ -914,7 +915,8 @@ gva_mame_get_snapshot_directory (GError **error)
 {
         static gchar *directory = NULL;
 
-        if (G_UNLIKELY (directory == NULL)) {
+        if (G_UNLIKELY (directory == NULL))
+        {
                 const gchar *config_key = "snapshot_directory";
                 directory = gva_mame_get_config_value (config_key, error);
         }
@@ -937,7 +939,8 @@ gva_mame_get_state_directory (GError **error)
 {
         static gchar *directory = NULL;
 
-        if (G_UNLIKELY (directory == NULL)) {
+        if (G_UNLIKELY (directory == NULL))
+        {
                 const gchar *config_key = "state_directory";
                 directory = gva_mame_get_config_value (config_key, error);
         }

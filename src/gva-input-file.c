@@ -61,7 +61,8 @@ typedef struct _GvaInpHeaderSimple GvaInpHeaderSimple;
 typedef struct _GvaInpHeaderExtended GvaInpHeaderExtended;
 typedef struct _GvaInpHeaderVersioned GvaInpHeaderVersioned;
 
-enum {
+enum
+{
         PROP_0,
         PROP_FILENAME,
         PROP_FORMAT,

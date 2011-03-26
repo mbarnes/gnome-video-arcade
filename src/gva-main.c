@@ -41,7 +41,8 @@
         "SELECT DISTINCT year, 'year' FROM available;"
 
 /* Entry completion columns */
-enum {
+enum
+{
         COLUMN_NAME,
         COLUMN_TEXT,
         COLUMN_TYPE,

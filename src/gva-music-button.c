@@ -41,13 +41,15 @@ struct _GvaMusicButtonPrivate
         guint seeking : 1;
 };
 
-enum {
+enum
+{
         PROP_0,
         PROP_GAME,
         PROP_STATUS
 };
 
-enum {
+enum
+{
         PAUSE,
         PLAY,
         LAST_SIGNAL

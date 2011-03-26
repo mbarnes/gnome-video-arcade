@@ -26,7 +26,8 @@
 
 typedef struct _HistoryEntry HistoryEntry;
 
-struct _HistoryEntry {
+struct _HistoryEntry
+{
         guint id;
         goffset offset;
 };

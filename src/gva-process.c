@@ -30,7 +30,8 @@
         (G_TYPE_INSTANCE_GET_PRIVATE \
         ((obj), GVA_TYPE_PROCESS, GvaProcessPrivate))
 
-enum {
+enum
+{
         PROP_0,
         PROP_PID,
         PROP_STDIN,
@@ -40,7 +41,8 @@ enum {
         PROP_PROGRESS
 };
 
-enum {
+enum
+{
         STDOUT_READY,
         STDERR_READY,
         EXITED,
