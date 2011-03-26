@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
-"POT-Creation-Date: 2011-02-26 18:24+0000\n"
-"PO-Revision-Date: 2011-02-27 23:55+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2011-03-19 14:18+0000\n"
+"PO-Revision-Date: 2011-03-26 19:22+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -150,6 +151,7 @@ msgid "Delete the selected game recordings"
 msgstr "Smazat vybrané záznamy her"
 
 #: ../data/gnome-video-arcade.builder.h:32
+#: ../data/gnome-video-arcade.desktop.in.h:1
 msgid "GNOME Video Arcade"
 msgstr "GNOME Video Arcade"
 
@@ -234,18 +236,25 @@ msgstr "Technické"
 msgid "_Start Game"
 msgstr "_Spustit hru"
 
+#: ../data/gnome-video-arcade.desktop.in.h:2
+#| msgid "Playing a fullscreen game"
+msgid "Play classic arcade games"
+msgstr "Hrát klasické arkádové hry"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+#| msgid "GNOME Video Arcade"
+msgid "Video Arcade"
+msgstr "Video Arcade"
+
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
-#| msgid "Show all available games"
 msgid "All available column names"
 msgstr "Všechny dostupné názvy sloupců"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:2
-#| msgid "Play a music clip"
 msgid "Auto-play music clip"
 msgstr "Automaticky přehrát hudební klip"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:3
-#| msgid "Columns"
 msgid "Column names"
 msgstr "Názvy sloupců"
 
@@ -279,7 +288,6 @@ msgstr ""
 "V takových případech emulátor stroj arcade vždy restartuje."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
-#| msgid "_Favorite Games"
 msgid "Favorite games"
 msgstr "Oblíbené hry"
 
@@ -324,27 +332,22 @@ msgid "Program version"
 msgstr "Verze programu"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:14
-#| msgid "Properties"
 msgid "Properties height"
 msgstr "Výška Vlastností"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:15
-#| msgid "Properties"
 msgid "Properties maximized"
 msgstr "Maximalizace Vlastností"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:16
-#| msgid "Properties"
 msgid "Properties page"
 msgstr "Stránka Vlastností"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:17
-#| msgid "Properties"
 msgid "Properties width"
 msgstr "Šířka Vlastností"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:18
-#| msgid "Save ROM errors to a file"
 msgid "ROM error filename"
 msgstr "Název souboru s chybami ROM"
 
@@ -353,8 +356,6 @@ msgid "Save and restore state"
 msgstr "Ukládat a obnovovat stav"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:20
-#| msgid "Search Result"
-#| msgid_plural "Search Results"
 msgid "Search text"
 msgstr "Hledaný text"
 
@@ -363,7 +364,6 @@ msgid "Selected completion match"
 msgstr "Vybrané doplňování shody"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
-#| msgid "Start the selected game"
 msgid "Selected game"
 msgstr "Vybraná hra"
 
@@ -372,7 +372,6 @@ msgid "Selected view"
 msgstr "Vybrané zobrazení"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:24
-#| msgid "Show next game"
 msgid "Show cloned games"
 msgstr "Zobrazovat klonované hry"
 
@@ -381,12 +380,10 @@ msgid "Sort column and sort order"
 msgstr "Sloupec a pořadí řazení"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
-#| msgid "In-game sound is muted"
 msgid "Sound muted"
 msgstr "Zvuk ztišen"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:27
-#| msgid "Start games in _fullscreen mode"
 msgid "Start games in full screen mode"
 msgstr "Spouštět hry v režimu celé obrazovky"
 
@@ -431,7 +428,6 @@ msgid "The most recently run version of GNOME Video Arcade."
 msgstr "Verze GNOME Video Arcade, která běžela úplně naposledy."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
-#| msgid "Start the selected game"
 msgid "The most recently selected game."
 msgstr "Hra, která byla vybrána úplně naposledy."
 
@@ -589,7 +585,7 @@ msgstr "(Neznámý výrobce)"
 msgid "(Year Unknown)"
 msgstr "(Neznámý rok)"
 
-#: ../src/gva-columns.c:988 ../src/gva-main.c:1011
+#: ../src/gva-columns.c:988 ../src/gva-main.c:1021
 msgid "ROM Name"
 msgstr "Název ROM"
 
@@ -597,7 +593,7 @@ msgstr "Název ROM"
 msgid "BIOS"
 msgstr "BIOS"
 
-#: ../src/gva-columns.c:992 ../src/gva-main.c:1004
+#: ../src/gva-columns.c:992 ../src/gva-main.c:1014
 msgid "Category"
 msgstr "Kategorie"
 
@@ -621,7 +617,7 @@ msgstr "Název"
 msgid "Year"
 msgstr "Rok"
 
-#: ../src/gva-columns.c:1013 ../src/gva-main.c:990
+#: ../src/gva-columns.c:1013 ../src/gva-main.c:1000
 msgid "Manufacturer"
 msgstr "Výrobce"
 
@@ -670,24 +666,24 @@ msgstr "Buduje se databáze her…"
 msgid "Analyzing ROM files..."
 msgstr "Analyzují se soubory ROM…"
 
-#: ../src/gva-main.c:976
+#: ../src/gva-main.c:986
 msgid "Search for any of the following:"
 msgstr "Hledat některou z následujících věcí:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:983
+#: ../src/gva-main.c:993
 msgid "Game Title"
 msgstr "Název hry"
 
-#: ../src/gva-main.c:997
+#: ../src/gva-main.c:1007
 msgid "Copyright Year"
 msgstr "Rok vydání"
 
-#: ../src/gva-main.c:1018
+#: ../src/gva-main.c:1028
 msgid "BIOS Name"
 msgstr "Název BIOSu"
 
-#: ../src/gva-main.c:1025
+#: ../src/gva-main.c:1035
 msgid "Driver Name"
 msgstr "Název ovladače"
 
