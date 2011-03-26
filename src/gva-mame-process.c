@@ -24,7 +24,10 @@
 #include "gva-error.h"
 #include "gva-util.h"
 
-static gpointer parent_class = NULL;
+G_DEFINE_TYPE (
+        GvaMameProcess,
+        gva_mame_process,
+        GVA_TYPE_PROCESS)
 
 static void
 mame_process_check_for_error (GvaProcess *process, const gchar *line)
@@ -59,7 +62,8 @@ mame_process_stdout_read_line (GvaProcess *process)
         gchar *line;
 
         /* Chain up to parent's stdout_read_line() method. */
-        line = GVA_PROCESS_CLASS (parent_class)->stdout_read_line (process);
+        line = GVA_PROCESS_CLASS (gva_mame_process_parent_class)->
+                stdout_read_line (process);
 
         mame_process_check_for_error (process, line);
 
@@ -72,7 +76,8 @@ mame_process_stderr_read_line (GvaProcess *process)
         gchar *line;
 
         /* Chain up to parent's stderr_read_line() method. */
-        line = GVA_PROCESS_CLASS (parent_class)->stderr_read_line (process);
+        line = GVA_PROCESS_CLASS (gva_mame_process_parent_class)->
+                stderr_read_line (process);
 
         mame_process_check_for_error (process, line);
 
@@ -91,11 +96,9 @@ mame_process_exited (GvaProcess *process, gint status)
 }
 
 static void
-mame_process_class_init (GvaProcessClass *class)
+gva_mame_process_class_init (GvaMameProcessClass *class)
 {
         GvaProcessClass *process_class;
-
-        parent_class = g_type_class_peek_parent (class);
 
         process_class = GVA_PROCESS_CLASS (class);
         process_class->stdout_read_line = mame_process_stdout_read_line;
@@ -103,32 +106,9 @@ mame_process_class_init (GvaProcessClass *class)
         process_class->exited = mame_process_exited;
 }
 
-GType
-gva_mame_process_get_type (void)
+static void
+gva_mame_process_init (GvaMameProcess *mame_process)
 {
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                static const GTypeInfo type_info =
-                {
-                        sizeof (GvaMameProcessClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) mame_process_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaMameProcess),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) NULL,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        GVA_TYPE_PROCESS, "GvaMameProcess", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**

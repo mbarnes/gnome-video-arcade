@@ -41,7 +41,10 @@ struct _GvaColumnManagerPrivate
         GtkWidget *hide_button;
 };
 
-static gpointer parent_class = NULL;
+G_DEFINE_TYPE (
+        GvaColumnManager,
+        gva_column_manager,
+        GTK_TYPE_HBOX)
 
 static void
 column_manager_move_selected_up (GvaColumnManager *manager)
@@ -402,7 +405,8 @@ column_manager_constructor (GType type,
         GObject *object;
 
         /* Chain up to parent's constructor() method. */
-        object = G_OBJECT_CLASS (parent_class)->constructor (
+        object = G_OBJECT_CLASS (
+                gva_column_manager_parent_class)->constructor (
                 type, n_construct_properties, construct_properties);
 
         priv = GVA_COLUMN_MANAGER_GET_PRIVATE (object);
@@ -515,7 +519,7 @@ column_manager_dispose (GObject *object)
         }
 
         /* Chain up to parent's dispose() method. */
-        G_OBJECT_CLASS (parent_class)->dispose (object);
+        G_OBJECT_CLASS (gva_column_manager_parent_class)->dispose (object);
 }
 
 static void
@@ -528,15 +532,14 @@ column_manager_finalize (GObject *object)
         gtk_tree_row_reference_free (priv->move_reference);
 
         /* Chain up to parent's finalize() method. */
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (gva_column_manager_parent_class)->finalize (object);
 }
 
 static void
-column_manager_class_init (GvaColumnManagerClass *class)
+gva_column_manager_class_init (GvaColumnManagerClass *class)
 {
         GObjectClass *object_class;
 
-        parent_class = g_type_class_peek_parent (class);
         g_type_class_add_private (class, sizeof (GvaColumnManagerPrivate));
 
         object_class = G_OBJECT_CLASS (class);
@@ -558,7 +561,7 @@ column_manager_class_init (GvaColumnManagerClass *class)
 }
 
 static void
-column_manager_init (GvaColumnManager *manager)
+gva_column_manager_init (GvaColumnManager *manager)
 {
         GvaColumnManagerPrivate *priv;
         GtkTreeViewColumn *column;
@@ -651,34 +654,6 @@ column_manager_init (GvaColumnManager *manager)
         g_signal_connect_swapped (
                 priv->hide_button, "clicked",
                 G_CALLBACK (column_manager_hide_selected), manager);
-}
-
-GType
-gva_column_manager_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                static const GTypeInfo type_info =
-                {
-                        sizeof (GvaColumnManagerClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) column_manager_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaColumnManager),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) column_manager_init,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        GTK_TYPE_HBOX, "GvaColumnManager", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**

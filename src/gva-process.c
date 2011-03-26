@@ -70,9 +70,13 @@ struct _GvaProcessPrivate
         gint status;
 };
 
-static gpointer parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
 static GSList *active_list = NULL;
+
+G_DEFINE_TYPE (
+        GvaProcess,
+        gva_process,
+        G_TYPE_OBJECT)
 
 static GIOChannel *
 process_new_channel (gint fd)
@@ -276,7 +280,7 @@ process_constructor (GType type,
         GObject *object;
 
         /* Chain up to parent's constructor() method. */
-        object = G_OBJECT_CLASS (parent_class)->constructor (
+        object = G_OBJECT_CLASS (gva_process_parent_class)->constructor (
                 type, n_construct_properties, construct_properties);
 
         priv = GVA_PROCESS_GET_PRIVATE (object);
@@ -420,7 +424,7 @@ process_finalize (GObject *object)
         g_queue_free (process->priv->stderr_lines);
 
         /* Chain up to parent's finalize() method. */
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (gva_process_parent_class)->finalize (object);
 }
 
 static gchar *
@@ -436,11 +440,10 @@ process_stderr_read_line (GvaProcess *process)
 }
 
 static void
-process_class_init (GvaProcessClass *class)
+gva_process_class_init (GvaProcessClass *class)
 {
         GObjectClass *object_class;
 
-        parent_class = g_type_class_peek_parent (class);
         g_type_class_add_private (class, sizeof (GvaProcessPrivate));
 
         object_class = G_OBJECT_CLASS (class);
@@ -600,7 +603,7 @@ process_class_init (GvaProcessClass *class)
 }
 
 static void
-process_init (GvaProcess *process)
+gva_process_init (GvaProcess *process)
 {
         process->priv = GVA_PROCESS_GET_PRIVATE (process);
 
@@ -609,34 +612,6 @@ process_init (GvaProcess *process)
 
         g_get_current_time (&process->priv->start_time);
         active_list = g_slist_prepend (active_list, g_object_ref (process));
-}
-
-GType
-gva_process_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                static const GTypeInfo type_info =
-                {
-                        sizeof (GvaProcessClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) process_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaProcess),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) process_init,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        G_TYPE_OBJECT, "GvaProcess", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**

@@ -29,7 +29,10 @@
 
 #define DEFAULT_SORT_COLUMN     GVA_GAME_STORE_COLUMN_DESCRIPTION
 
-static gpointer parent_class = NULL;
+G_DEFINE_TYPE (
+        GvaGameStore,
+        gva_game_store,
+        GTK_TYPE_TREE_STORE)
 
 static GHashTable *
 game_store_get_index (GvaGameStore *game_store)
@@ -184,7 +187,7 @@ game_store_constructor (GType type,
         g_assert (column == GVA_GAME_STORE_NUM_COLUMNS);
 
         /* Chain up to parent's constructor() method. */
-        object = G_OBJECT_CLASS (parent_class)->constructor (
+        object = G_OBJECT_CLASS (gva_game_store_parent_class)->constructor (
                 type, n_construct_properties, construct_properties);
 
         gtk_tree_store_set_column_types (
@@ -205,18 +208,16 @@ game_store_constructor (GType type,
 }
 
 static void
-game_store_class_init (GvaGameStoreClass *class)
+gva_game_store_class_init (GvaGameStoreClass *class)
 {
         GObjectClass *object_class;
-
-        parent_class = g_type_class_peek_parent (class);
 
         object_class = G_OBJECT_CLASS (class);
         object_class->constructor = game_store_constructor;
 }
 
 static void
-game_store_init (GvaGameStore *game_store)
+gva_game_store_init (GvaGameStore *game_store)
 {
         GHashTable *index;
 
@@ -228,34 +229,6 @@ game_store_init (GvaGameStore *game_store)
         g_object_set_data_full (
                 G_OBJECT (game_store), "index", index,
                 (GDestroyNotify) g_hash_table_destroy);
-}
-
-GType
-gva_game_store_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                static const GTypeInfo type_info =
-                {
-                        sizeof (GvaGameStoreClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) game_store_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaGameStore),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) game_store_init,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        GTK_TYPE_TREE_STORE, "GvaGameStore", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**

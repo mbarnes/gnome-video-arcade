@@ -39,8 +39,12 @@ enum
         LAST_SIGNAL
 };
 
-static gpointer parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
+
+G_DEFINE_TYPE (
+        GvaCellRendererPixbuf,
+        gva_cell_renderer_pixbuf,
+        GTK_TYPE_CELL_RENDERER_PIXBUF)
 
 static void
 cell_renderer_pixbuf_set_property (GObject *object,
@@ -114,19 +118,18 @@ cell_renderer_pixbuf_render (GtkCellRenderer *cell,
         gtk_cell_renderer_set_sensitive (cell, priv->active);
 
         /* Chain up to parent's render() method. */
-        GTK_CELL_RENDERER_CLASS (parent_class)->render (
-                cell, cr, widget, background_area, cell_area, flags);
+        GTK_CELL_RENDERER_CLASS (gva_cell_renderer_pixbuf_parent_class)->
+                render (cell, cr, widget, background_area, cell_area, flags);
 
         gtk_cell_renderer_set_sensitive (cell, sensitive);
 }
 
 static void
-cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
+gva_cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
 {
         GObjectClass *object_class;
         GtkCellRendererClass *cell_renderer_class;
 
-        parent_class = g_type_class_peek_parent (class);
         g_type_class_add_private (class, sizeof (GvaCellRendererPixbufPrivate));
 
         object_class = G_OBJECT_CLASS (class);
@@ -172,40 +175,11 @@ cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
 }
 
 static void
-cell_renderer_pixbuf_init (GvaCellRendererPixbuf *cell)
+gva_cell_renderer_pixbuf_init (GvaCellRendererPixbuf *cell)
 {
         cell->priv = GVA_CELL_RENDERER_PIXBUF_GET_PRIVATE (cell);
 
         g_object_set (cell, "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE, NULL);
-}
-
-GType
-gva_cell_renderer_pixbuf_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                static const GTypeInfo type_info =
-                {
-                        sizeof (GvaCellRendererPixbufClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) cell_renderer_pixbuf_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaCellRendererPixbuf),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) cell_renderer_pixbuf_init,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        GTK_TYPE_CELL_RENDERER_PIXBUF,
-                        "GvaCellRendererPixbuf", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**

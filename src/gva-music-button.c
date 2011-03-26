@@ -55,8 +55,12 @@ enum
         LAST_SIGNAL
 };
 
-static gpointer parent_class;
 static gulong signals[LAST_SIGNAL];
+
+G_DEFINE_TYPE (
+        GvaMusicButton,
+        gva_music_button,
+        GTK_TYPE_BUTTON)
 
 #ifdef HAVE_GSTREAMER
 
@@ -328,7 +332,7 @@ music_button_dispose (GObject *object)
 #endif
 
         /* Chain up to parent's dispose() method. */
-        G_OBJECT_CLASS (parent_class)->dispose (object);
+        G_OBJECT_CLASS (gva_music_button_parent_class)->dispose (object);
 }
 
 static void
@@ -344,7 +348,7 @@ music_button_finalize (GObject *object)
         g_free (priv->status);
 
         /* Chain up to parent's finalize() method. */
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (gva_music_button_parent_class)->finalize (object);
 }
 
 static void
@@ -412,12 +416,11 @@ music_button_play (GvaMusicButton *music_button)
 }
 
 static void
-music_button_class_init (GvaMusicButtonClass *class)
+gva_music_button_class_init (GvaMusicButtonClass *class)
 {
         GObjectClass *object_class;
         GtkButtonClass *button_class;
 
-        parent_class = g_type_class_peek_parent (class);
         g_type_class_add_private (class, sizeof (GvaMusicButtonPrivate));
 
         object_class = G_OBJECT_CLASS (class);
@@ -495,7 +498,7 @@ music_button_class_init (GvaMusicButtonClass *class)
 }
 
 static void
-music_button_init (GvaMusicButton *music_button)
+gva_music_button_init (GvaMusicButton *music_button)
 {
 #ifdef HAVE_GSTREAMER
         GstElement *element;
@@ -511,34 +514,6 @@ music_button_init (GvaMusicButton *music_button)
                 gst_element_get_bus (element),
                 (GstBusFunc) music_button_bus_cb, music_button);
 #endif
-}
-
-GType
-gva_music_button_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                const GTypeInfo type_info =
-                {
-                        sizeof (GvaMusicButtonClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) music_button_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaMusicButton),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) music_button_init,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        GTK_TYPE_BUTTON, "GvaMusicButton", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**

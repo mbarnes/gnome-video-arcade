@@ -111,7 +111,10 @@ struct _GvaInpHeaderVersioned
         gchar origin[32];       /* MAME version string */
 };
 
-static gpointer parent_class = NULL;
+G_DEFINE_TYPE (
+        GvaInputFile,
+        gva_input_file,
+        G_TYPE_OBJECT)
 
 static void
 input_file_dump_header (GvaInputFile *input_file)
@@ -332,15 +335,14 @@ input_file_finalize (GObject *object)
         g_free (priv->origin);
 
         /* Chain up to parent's finalize() method. */
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        G_OBJECT_CLASS (gva_input_file_parent_class)->finalize (object);
 }
 
 static void
-input_file_class_init (GvaInputFileClass *class)
+gva_input_file_class_init (GvaInputFileClass *class)
 {
         GObjectClass *object_class;
 
-        parent_class = g_type_class_peek_parent (class);
         g_type_class_add_private (class, sizeof (GvaInputFilePrivate));
 
         object_class = G_OBJECT_CLASS (class);
@@ -428,37 +430,9 @@ input_file_class_init (GvaInputFileClass *class)
 }
 
 static void
-input_file_init (GvaInputFile *input_file)
+gva_input_file_init (GvaInputFile *input_file)
 {
         input_file->priv = GVA_INPUT_FILE_GET_PRIVATE (input_file);
-}
-
-GType
-gva_input_file_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                static const GTypeInfo type_info =
-                {
-                        sizeof (GvaInputFileClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) input_file_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaInputFile),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) input_file_init,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        G_TYPE_OBJECT, "GvaInputFile", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**

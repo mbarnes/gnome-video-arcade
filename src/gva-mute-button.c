@@ -36,7 +36,10 @@ enum
         PROP_MUTED
 };
 
-static gpointer parent_class;
+G_DEFINE_TYPE (
+        GvaMuteButton,
+        gva_mute_button,
+        GTK_TYPE_BUTTON)
 
 static void
 mute_button_set_property (GObject *object,
@@ -88,7 +91,7 @@ mute_button_dispose (GObject *object)
         }
 
         /* Chain up to parent's dispose() method. */
-        G_OBJECT_CLASS (parent_class)->dispose (object);
+        G_OBJECT_CLASS (gva_mute_button_parent_class)->dispose (object);
 }
 
 static void
@@ -102,12 +105,11 @@ mute_button_clicked (GtkButton *button)
 }
 
 static void
-mute_button_class_init (GvaMuteButtonClass *class)
+gva_mute_button_class_init (GvaMuteButtonClass *class)
 {
         GObjectClass *object_class;
         GtkButtonClass *button_class;
 
-        parent_class = g_type_class_peek_parent (class);
         g_type_class_add_private (class, sizeof (GvaMuteButtonPrivate));
 
         object_class = G_OBJECT_CLASS (class);
@@ -131,7 +133,7 @@ mute_button_class_init (GvaMuteButtonClass *class)
 }
 
 static void
-mute_button_init (GvaMuteButton *mute_button)
+gva_mute_button_init (GvaMuteButton *mute_button)
 {
         GtkWidget *widget;
 
@@ -144,34 +146,6 @@ mute_button_init (GvaMuteButton *mute_button)
         gtk_container_add (GTK_CONTAINER (mute_button), widget);
         mute_button->priv->image = g_object_ref (widget);
         gtk_widget_show (widget);
-}
-
-GType
-gva_mute_button_get_type (void)
-{
-        static GType type = 0;
-
-        if (G_UNLIKELY (type == 0))
-        {
-                const GTypeInfo type_info =
-                {
-                        sizeof (GvaMuteButtonClass),
-                        (GBaseInitFunc) NULL,
-                        (GBaseFinalizeFunc) NULL,
-                        (GClassInitFunc) mute_button_class_init,
-                        (GClassFinalizeFunc) NULL,
-                        NULL,  /* class_data */
-                        sizeof (GvaMuteButton),
-                        0,     /* n_preallocs */
-                        (GInstanceInitFunc) mute_button_init,
-                        NULL   /* value_table */
-                };
-
-                type = g_type_register_static (
-                        GTK_TYPE_BUTTON, "GvaMuteButton", &type_info, 0);
-        }
-
-        return type;
 }
 
 /**
