@@ -19,6 +19,8 @@ gva_mame_version_lookup
 <TITLE>GvaCellRendererPixbuf</TITLE>
 GvaCellRendererPixbuf
 gva_cell_renderer_pixbuf_new
+gva_cell_renderer_pixbuf_get_active
+gva_cell_renderer_pixbuf_set_active
 <SUBSECTION Standard>
 GVA_CELL_RENDERER_PIXBUF
 GVA_IS_CELL_RENDERER_PIXBUF
@@ -28,6 +30,7 @@ GVA_IS_CELL_RENDERER_PIXBUF_CLASS
 GVA_CELL_RENDERER_PIXBUF_GET_CLASS
 GvaCellRendererPixbufClass
 <SUBSECTION Private>
+GvaCellRendererPixbufPrivate
 gva_cell_renderer_pixbuf_get_type
 </SECTION>
 

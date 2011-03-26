@@ -18,13 +18,65 @@
 
 #include "gva-cell-renderer-pixbuf.h"
 
-enum {
+#define GVA_CELL_RENDERER_PIXBUF_GET_PRIVATE(obj) \
+        (G_TYPE_INSTANCE_GET_PRIVATE \
+        ((obj), GVA_TYPE_CELL_RENDERER_PIXBUF, GvaCellRendererPixbufPrivate))
+
+struct _GvaCellRendererPixbufPrivate
+{
+        gboolean active;
+};
+
+enum
+{
+        PROP_0,
+        PROP_ACTIVE
+};
+
+enum
+{
         CLICKED,
         LAST_SIGNAL
 };
 
 static gpointer parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
+
+static void
+cell_renderer_pixbuf_set_property (GObject *object,
+                                   guint property_id,
+                                   const GValue *value,
+                                   GParamSpec *pspec)
+{
+        switch (property_id)
+        {
+                case PROP_ACTIVE:
+                        gva_cell_renderer_pixbuf_set_active (
+                                GVA_CELL_RENDERER_PIXBUF (object),
+                                g_value_get_boolean (value));
+                        return;
+        }
+
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+}
+
+static void
+cell_renderer_pixbuf_get_property (GObject *object,
+                                   guint property_id,
+                                   GValue *value,
+                                   GParamSpec *pspec)
+{
+        switch (property_id)
+        {
+                case PROP_ACTIVE:
+                        g_value_set_boolean (
+                                value, gva_cell_renderer_pixbuf_get_active (
+                                GVA_CELL_RENDERER_PIXBUF (object)));
+                        return;
+        }
+
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+}
 
 static gboolean
 cell_renderer_pixbuf_activate (GtkCellRenderer *cell,
@@ -46,14 +98,59 @@ cell_renderer_pixbuf_activate (GtkCellRenderer *cell,
 }
 
 static void
+cell_renderer_pixbuf_render (GtkCellRenderer *cell,
+                             cairo_t *cr,
+                             GtkWidget *widget,
+                             const GdkRectangle *background_area,
+                             const GdkRectangle *cell_area,
+                             GtkCellRendererState flags)
+{
+        GvaCellRendererPixbufPrivate *priv;
+        gboolean sensitive;
+
+        priv = GVA_CELL_RENDERER_PIXBUF_GET_PRIVATE (cell);
+
+        sensitive = gtk_cell_renderer_get_sensitive (cell);
+        gtk_cell_renderer_set_sensitive (cell, priv->active);
+
+        /* Chain up to parent's render() method. */
+        GTK_CELL_RENDERER_CLASS (parent_class)->render (
+                cell, cr, widget, background_area, cell_area, flags);
+
+        gtk_cell_renderer_set_sensitive (cell, sensitive);
+}
+
+static void
 cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
 {
+        GObjectClass *object_class;
         GtkCellRendererClass *cell_renderer_class;
 
         parent_class = g_type_class_peek_parent (class);
+        g_type_class_add_private (class, sizeof (GvaCellRendererPixbufPrivate));
+
+        object_class = G_OBJECT_CLASS (class);
+        object_class->set_property = cell_renderer_pixbuf_set_property;
+        object_class->get_property = cell_renderer_pixbuf_get_property;
 
         cell_renderer_class = GTK_CELL_RENDERER_CLASS (class);
         cell_renderer_class->activate = cell_renderer_pixbuf_activate;
+        cell_renderer_class->render = cell_renderer_pixbuf_render;
+
+        /**
+         * GvaCellRendererPixbuf:active
+         *
+         * Whether to draw the pixbuf as active.
+         **/
+        g_object_class_install_property (
+                object_class,
+                PROP_ACTIVE,
+                g_param_spec_boolean (
+                        "active",
+                        NULL,
+                        NULL,
+                        FALSE,
+                        G_PARAM_READWRITE));
 
         /**
          * GvaCellRendererPixbuf::clicked:
@@ -75,12 +172,11 @@ cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
 }
 
 static void
-cell_renderer_pixbuf_init (GvaCellRendererPixbuf *cell_renderer_pixbuf)
+cell_renderer_pixbuf_init (GvaCellRendererPixbuf *cell)
 {
-        GtkCellRendererMode mode;
+        cell->priv = GVA_CELL_RENDERER_PIXBUF_GET_PRIVATE (cell);
 
-        mode = GTK_CELL_RENDERER_MODE_ACTIVATABLE;
-        g_object_set (cell_renderer_pixbuf, "mode", mode, NULL);
+        g_object_set (cell, "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE, NULL);
 }
 
 GType
@@ -123,4 +219,38 @@ GtkCellRenderer *
 gva_cell_renderer_pixbuf_new (void)
 {
         return g_object_new (GVA_TYPE_CELL_RENDERER_PIXBUF, NULL);
+}
+
+/**
+ * gva_cell_renderer_pixbuf_get_active:
+ * @cell: a #GvaCellRendererPixbuf
+ *
+ * Returns whether @cell should be drawn as active.
+ *
+ * Returns: whether to draw the pixbuf as active
+ **/
+gboolean
+gva_cell_renderer_pixbuf_get_active (GvaCellRendererPixbuf *cell)
+{
+        g_return_val_if_fail (GVA_IS_CELL_RENDERER_PIXBUF (cell), FALSE);
+
+        return cell->priv->active;
+}
+
+/**
+ * gva_cell_renderer_pixbuf_set_active:
+ * @cell: a #GvaCellRendererPixbuf
+ * @active: whether to draw the pixbuf as active
+ *
+ * Sets whether @cell should be drawn as active.
+ **/
+void
+gva_cell_renderer_pixbuf_set_active (GvaCellRendererPixbuf *cell,
+                                     gboolean active)
+{
+        g_return_if_fail (GVA_IS_CELL_RENDERER_PIXBUF (cell));
+
+        cell->priv->active = active;
+
+        g_object_notify (G_OBJECT (cell), "active");
 }

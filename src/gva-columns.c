@@ -486,7 +486,7 @@ columns_factory_favorite (GvaGameStoreColumn column_id)
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         gtk_tree_view_column_add_attribute (
-                column, renderer, "sensitive", column_id);
+                column, renderer, "active", column_id);
 
         g_signal_connect (
                 renderer, "clicked",

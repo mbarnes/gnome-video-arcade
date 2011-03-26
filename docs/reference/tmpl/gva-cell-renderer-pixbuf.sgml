@@ -34,6 +34,11 @@
 @gvacellrendererpixbuf: the object which received the signal.
 @arg1: 
 
+<!-- ##### ARG GvaCellRendererPixbuf:active ##### -->
+<para>
+
+</para>
+
 <!-- ##### FUNCTION gva_cell_renderer_pixbuf_new ##### -->
 <para>
 
@@ -41,5 +46,23 @@
 
 @void: 
 @Returns: 
+
+
+<!-- ##### FUNCTION gva_cell_renderer_pixbuf_get_active ##### -->
+<para>
+
+</para>
+
+@cell: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_cell_renderer_pixbuf_set_active ##### -->
+<para>
+
+</para>
+
+@cell: 
+@active: 
 
 

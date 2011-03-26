@@ -53,6 +53,7 @@ G_BEGIN_DECLS
 
 typedef struct _GvaCellRendererPixbuf GvaCellRendererPixbuf;
 typedef struct _GvaCellRendererPixbufClass GvaCellRendererPixbufClass;
+typedef struct _GvaCellRendererPixbufPrivate GvaCellRendererPixbufPrivate;
 
 /**
  * GvaCellRendererPixbuf:
@@ -63,18 +64,24 @@ typedef struct _GvaCellRendererPixbufClass GvaCellRendererPixbufClass;
 struct _GvaCellRendererPixbuf
 {
         GtkCellRendererPixbuf parent;
+	GvaCellRendererPixbufPrivate *priv;
 };
 
 struct _GvaCellRendererPixbufClass
 {
         GtkCellRendererPixbufClass parent_class;
 
-        void (*clicked) (GvaCellRendererPixbuf *cell_renderer_pixbuf,
+        void (*clicked) (GvaCellRendererPixbuf *cell,
                          GtkTreePath *tree_path);
 };
 
 GType             gva_cell_renderer_pixbuf_get_type   (void);
 GtkCellRenderer * gva_cell_renderer_pixbuf_new        (void);
+gboolean          gva_cell_renderer_pixbuf_get_active
+                                                (GvaCellRendererPixbuf *cell);
+void              gva_cell_renderer_pixbuf_set_active
+                                                (GvaCellRendererPixbuf *cell,
+                                                 gboolean active);
 
 G_END_DECLS
 
