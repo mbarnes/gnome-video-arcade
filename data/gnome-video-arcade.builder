@@ -781,6 +781,7 @@ Manufacturer, Year</property>
               </object>
               <packing>
                 <property name="bottom_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -1529,6 +1530,7 @@ Manufacturer, Year</property>
                   <packing>
                     <property name="bottom_attach">2</property>
                     <property name="x_options"></property>
+                    <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
                 <child>
@@ -1542,6 +1544,7 @@ Manufacturer, Year</property>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="right_attach">2</property>
+                    <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
                 <child>
@@ -1558,6 +1561,7 @@ Manufacturer, Year</property>
                     <property name="right_attach">2</property>
                     <property name="top_attach">1</property>
                     <property name="bottom_attach">2</property>
+                    <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
               </object>
