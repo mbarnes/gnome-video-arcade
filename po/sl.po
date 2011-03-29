@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
-"POT-Creation-Date: 2011-03-05 10:38+0000\n"
-"PO-Revision-Date: 2011-03-05 17:48+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2011-03-27 02:28+0000\n"
+"PO-Revision-Date: 2011-03-28 08:37+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -140,6 +140,7 @@ msgid "Delete the selected game recordings"
 msgstr "Izbris izbranih posnetkov iger"
 
 #: ../data/gnome-video-arcade.builder.h:32
+#: ../data/gnome-video-arcade.desktop.in.h:1
 msgid "GNOME Video Arcade"
 msgstr "GNOME video arkada"
 
@@ -232,6 +233,14 @@ msgstr "Tehnično"
 #: ../data/gnome-video-arcade.builder.h:53
 msgid "_Start Game"
 msgstr "_Začni igro"
+
+#: ../data/gnome-video-arcade.desktop.in.h:2
+msgid "Play classic arcade games"
+msgstr "Igrajte klasične arkadne igre"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+msgid "Video Arcade"
+msgstr "Video arkada"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
 msgid "All available column names"
@@ -433,27 +442,27 @@ msgstr "Shrani kot"
 msgid "This program is not configured to show category information."
 msgstr "Program ni nastavljen za prikaz podrobnosti kategorije."
 
-#: ../src/gva-column-manager.c:554
+#: ../src/gva-column-manager.c:557
 msgid "Managed View"
 msgstr "Upravljan pogled"
 
-#: ../src/gva-column-manager.c:555
+#: ../src/gva-column-manager.c:558
 msgid "The GtkTreeView being managed"
 msgstr "GtkTreeView je upravljan"
 
-#: ../src/gva-column-manager.c:611
+#: ../src/gva-column-manager.c:614
 msgid "Move _Up"
 msgstr "Premakni navz_gor"
 
-#: ../src/gva-column-manager.c:624
+#: ../src/gva-column-manager.c:627
 msgid "Move _Down"
 msgstr "Premakni _navzdol"
 
-#: ../src/gva-column-manager.c:637
+#: ../src/gva-column-manager.c:640
 msgid "_Show"
 msgstr "_Pokaži"
 
-#: ../src/gva-column-manager.c:646
+#: ../src/gva-column-manager.c:649
 msgid "_Hide"
 msgstr "_Skrij"
 
@@ -527,7 +536,7 @@ msgid "(Year Unknown)"
 msgstr "(Neznano leto)"
 
 #: ../src/gva-columns.c:988
-#: ../src/gva-main.c:1021
+#: ../src/gva-main.c:1022
 msgid "ROM Name"
 msgstr "Ime ROMa"
 
@@ -536,7 +545,7 @@ msgid "BIOS"
 msgstr "BIOS"
 
 #: ../src/gva-columns.c:992
-#: ../src/gva-main.c:1014
+#: ../src/gva-main.c:1015
 msgid "Category"
 msgstr "Kategorija"
 
@@ -561,7 +570,7 @@ msgid "Year"
 msgstr "Leto"
 
 #: ../src/gva-columns.c:1013
-#: ../src/gva-main.c:1000
+#: ../src/gva-main.c:1001
 msgid "Manufacturer"
 msgstr "Proizvajalec"
 
@@ -593,41 +602,41 @@ msgstr "Opomba"
 msgid "Played On"
 msgstr "Igrano ob"
 
-#: ../src/gva-history.c:54
+#: ../src/gva-history.c:55
 msgid "This program is not configured to show history information."
 msgstr "Program ni nastavljen za prikaz podrobnosti zgodovine."
 
-#: ../src/gva-input-file.c:525
+#: ../src/gva-input-file.c:500
 #, c-format
 msgid "Invalid or unsupported INP file format"
 msgstr "Neveljaven ali nepodprt zapis datoteke INP"
 
-#: ../src/gva-main.c:242
+#: ../src/gva-main.c:243
 msgid "Building game database..."
 msgstr "Izgradnja podatkovne zbirke iger ..."
 
-#: ../src/gva-main.c:303
+#: ../src/gva-main.c:304
 msgid "Analyzing ROM files..."
 msgstr "Preučevanje datotek ROM ..."
 
-#: ../src/gva-main.c:986
+#: ../src/gva-main.c:987
 msgid "Search for any of the following:"
 msgstr "Poišči karkoli od navedenega:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:993
+#: ../src/gva-main.c:994
 msgid "Game Title"
 msgstr "Naslov igre"
 
-#: ../src/gva-main.c:1007
+#: ../src/gva-main.c:1008
 msgid "Copyright Year"
 msgstr "Leto objave avtorskih pravic"
 
-#: ../src/gva-main.c:1028
+#: ../src/gva-main.c:1029
 msgid "BIOS Name"
 msgstr "Ime BIOS"
 
-#: ../src/gva-main.c:1035
+#: ../src/gva-main.c:1036
 msgid "Driver Name"
 msgstr "Ime gonilnika"
 
@@ -642,36 +651,36 @@ msgstr "%s: ni takšnega nastavitvenega ključa"
 msgid "Could not determine emulator version"
 msgstr "Različice posnemovalnika ni mogoče določiti"
 
-#: ../src/gva-music-button.c:116
+#: ../src/gva-music-button.c:122
 msgid "No music available"
 msgstr "Glasba ni na voljo"
 
-#: ../src/gva-music-button.c:119
+#: ../src/gva-music-button.c:125
 msgid "Unable to play music"
 msgstr "Glasbe ni mogoče predvajati"
 
-#: ../src/gva-music-button.c:146
+#: ../src/gva-music-button.c:152
 #, c-format
 msgid "Buffering %d%%..."
 msgstr "Polnjenje medpomnilnika %d%% ..."
 
-#: ../src/gva-music-button.c:262
+#: ../src/gva-music-button.c:268
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
-#: ../src/gva-mute-button.c:126
+#: ../src/gva-mute-button.c:128
 msgid "Muted"
 msgstr "Nemo"
 
-#: ../src/gva-mute-button.c:127
+#: ../src/gva-mute-button.c:129
 msgid "Whether the button state is muted"
 msgstr "Ali je stanje gumba nemo"
 
-#: ../src/gva-mute-button.c:229
+#: ../src/gva-mute-button.c:203
 msgid "In-game sound is muted"
 msgstr "Zvok igre je nastavljen na nemo"
 
-#: ../src/gva-mute-button.c:234
+#: ../src/gva-mute-button.c:208
 msgid "In-game sound is enabled"
 msgstr "Zvok v igri je omogočen"
 
