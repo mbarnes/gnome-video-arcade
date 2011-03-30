@@ -449,7 +449,8 @@ gva_music_button_class_init (GvaMusicButtonClass *class)
                         NULL,
                         NULL,
                         NULL,
-                        G_PARAM_READWRITE));
+                        G_PARAM_READWRITE |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaMusicButton:status
@@ -464,7 +465,8 @@ gva_music_button_class_init (GvaMusicButtonClass *class)
                         NULL,
                         NULL,
                         NULL,
-                        G_PARAM_READABLE));
+                        G_PARAM_READABLE |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaMusicButton::pause

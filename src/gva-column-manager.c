@@ -557,7 +557,8 @@ gva_column_manager_class_init (GvaColumnManagerClass *class)
                         _("Managed View"),
                         _("The GtkTreeView being managed"),
                         GTK_TYPE_TREE_VIEW,
-                        G_PARAM_READWRITE));
+                        G_PARAM_READWRITE |
+                        G_PARAM_STATIC_STRINGS));
 }
 
 static void

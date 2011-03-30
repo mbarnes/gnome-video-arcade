@@ -364,7 +364,8 @@ gva_input_file_class_init (GvaInputFileClass *class)
                         NULL,
                         NULL,
                         G_PARAM_READWRITE |
-                        G_PARAM_CONSTRUCT_ONLY));
+                        G_PARAM_CONSTRUCT_ONLY |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaInputFile:format:
@@ -379,7 +380,8 @@ gva_input_file_class_init (GvaInputFileClass *class)
                         NULL,
                         NULL,
                         NULL,
-                        G_PARAM_READABLE));
+                        G_PARAM_READABLE |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaInputFile:game:
@@ -394,7 +396,8 @@ gva_input_file_class_init (GvaInputFileClass *class)
                         NULL,
                         NULL,
                         NULL,
-                        G_PARAM_READABLE));
+                        G_PARAM_READABLE |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaInputFile:origin:
@@ -409,7 +412,8 @@ gva_input_file_class_init (GvaInputFileClass *class)
                         NULL,
                         NULL,
                         NULL,
-                        G_PARAM_READABLE));
+                        G_PARAM_READABLE |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaInputFile:timestamp:
@@ -426,7 +430,8 @@ gva_input_file_class_init (GvaInputFileClass *class)
                         G_MININT64,
                         G_MAXINT64,
                         0,
-                        G_PARAM_READABLE));
+                        G_PARAM_READABLE |
+                        G_PARAM_STATIC_STRINGS));
 }
 
 static void

@@ -127,7 +127,8 @@ gva_mute_button_class_init (GvaMuteButtonClass *class)
                         _("Whether the button state is muted"),
                         FALSE,
                         G_PARAM_READWRITE |
-                        G_PARAM_CONSTRUCT));
+                        G_PARAM_CONSTRUCT |
+                        G_PARAM_STATIC_STRINGS));
 }
 
 static void

@@ -153,7 +153,8 @@ gva_cell_renderer_pixbuf_class_init (GvaCellRendererPixbufClass *class)
                         NULL,
                         NULL,
                         FALSE,
-                        G_PARAM_READWRITE));
+                        G_PARAM_READWRITE |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaCellRendererPixbuf::clicked:

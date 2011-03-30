@@ -469,7 +469,8 @@ gva_process_class_init (GvaProcessClass *class)
                         NULL,
                         0, G_MAXUINT, 0,
                         G_PARAM_READWRITE |
-                        G_PARAM_CONSTRUCT_ONLY));
+                        G_PARAM_CONSTRUCT_ONLY |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaProcess:stdin
@@ -485,7 +486,8 @@ gva_process_class_init (GvaProcessClass *class)
                         NULL,
                         -1, G_MAXINT, -1,
                         G_PARAM_READWRITE |
-                        G_PARAM_CONSTRUCT_ONLY));
+                        G_PARAM_CONSTRUCT_ONLY |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaProcess:stdout
@@ -501,7 +503,8 @@ gva_process_class_init (GvaProcessClass *class)
                         NULL,
                         -1, G_MAXINT, -1,
                         G_PARAM_READWRITE |
-                        G_PARAM_CONSTRUCT_ONLY));
+                        G_PARAM_CONSTRUCT_ONLY |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaProcess:stderr
@@ -517,7 +520,8 @@ gva_process_class_init (GvaProcessClass *class)
                         NULL,
                         -1, G_MAXINT, -1,
                         G_PARAM_READWRITE |
-                        G_PARAM_CONSTRUCT_ONLY));
+                        G_PARAM_CONSTRUCT_ONLY |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaProcess:priority
@@ -534,7 +538,8 @@ gva_process_class_init (GvaProcessClass *class)
                         G_MININT, G_MAXINT,
                         G_PRIORITY_DEFAULT_IDLE,
                         G_PARAM_READWRITE |
-                        G_PARAM_CONSTRUCT_ONLY));
+                        G_PARAM_CONSTRUCT_ONLY |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaProcess:progress
@@ -550,7 +555,8 @@ gva_process_class_init (GvaProcessClass *class)
                         NULL,
                         NULL,
                         0, G_MAXUINT, 0,
-                        G_PARAM_READWRITE));
+                        G_PARAM_READWRITE |
+                        G_PARAM_STATIC_STRINGS));
 
         /**
          * GvaProcess::stdout-ready:
