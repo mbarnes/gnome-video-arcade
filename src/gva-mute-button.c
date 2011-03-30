@@ -18,8 +18,6 @@
 
 #include "gva-mute-button.h"
 
-#include <glib/gi18n.h>
-
 #define GVA_MUTE_BUTTON_GET_PRIVATE(obj) \
         (G_TYPE_INSTANCE_GET_PRIVATE \
         ((obj), GVA_TYPE_MUTE_BUTTON, GvaMuteButtonPrivate))
