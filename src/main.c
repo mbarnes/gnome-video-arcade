@@ -43,6 +43,8 @@
 #include "gva-dbus.h"
 #endif
 
+#define APPLICATION_ID "org.gnome.VideoArcade"
+
 #define SQL_COUNT_ROMS \
         "SELECT count(*) FROM game WHERE " \
         "romset NOTNULL AND romset != 'not found' " \
@@ -281,7 +283,8 @@ setup_file_monitors (void)
 gint
 main (gint argc, gchar **argv)
 {
-        UniqueApp *app;
+        GtkApplication *application;
+        GApplicationFlags flags;
         gchar *path;
         GError *error = NULL;
 
@@ -344,9 +347,16 @@ main (gint argc, gchar **argv)
                 exit (EXIT_SUCCESS);
         }
 
+        /* Register the application with the session bus. */
+        flags = G_APPLICATION_FLAGS_NONE;
+        application = gtk_application_new (APPLICATION_ID, flags);
+        g_application_register (G_APPLICATION (application), NULL, &error);
+
+        if (error != NULL)
+                g_error ("%s", error->message);
+
         /* If another instance is running, exit now. */
-        app = unique_app_new ("org.gnome.VideoArcade", NULL);
-        if (unique_app_is_running (app))
+        if (g_application_get_is_remote (G_APPLICATION (application)))
         {
                 gint exit_status;
 
@@ -359,12 +369,11 @@ main (gint argc, gchar **argv)
                 }
                 else
                 {
-                        /* XXX Not handling response, but no real need to. */
-                        unique_app_send_message (app, UNIQUE_ACTIVATE, NULL);
+                        g_application_activate (G_APPLICATION (application));
                         exit_status = EXIT_SUCCESS;
                 }
 
-                g_object_unref (app);
+                g_object_unref (application);
 
                 exit (exit_status);
         }
@@ -373,7 +382,7 @@ main (gint argc, gchar **argv)
                 GtkWindow *window;
 
                 window = GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW);
-                unique_app_watch_window (app, window);
+                gtk_application_add_window (application, window);
         }
 
         gtk_window_set_default_icon_name (PACKAGE);
@@ -406,7 +415,7 @@ main (gint argc, gchar **argv)
 
         gtk_main ();
 
-        g_object_unref (app);
+        g_object_unref (application);
 
         return EXIT_SUCCESS;
 }

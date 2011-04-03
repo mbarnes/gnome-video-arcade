@@ -80,7 +80,6 @@ INCLUDES=							\
 	$(GIT_CFLAGS)						\
 	$(GSTREAMER_CFLAGS)					\
 	$(SQLITE_CFLAGS)					\
-	$(UNIQUE_CFLAGS)					\
 	$(WNCK_CFLAGS)
 
 if HAVE_DBUS
@@ -122,7 +121,6 @@ GTKDOC_LIBS=							\
 	$(GIT_LIBS)						\
 	$(GSTREAMER_LIBS)					\
 	$(SQLITE_LIBS)						\
-	$(UNIQUE_LIBS)						\
 	$(WNCK_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.

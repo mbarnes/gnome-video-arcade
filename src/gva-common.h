@@ -39,7 +39,6 @@
 #endif
 
 #include <sqlite3.h>
-#include <unique/unique.h>
 
 #define GVA_SETTING_ALL_COLUMNS                 "all-columns"
 #define GVA_SETTING_AUTO_PLAY                   "auto-play"
