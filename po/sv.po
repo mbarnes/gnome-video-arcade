@@ -1,14 +1,14 @@
 # Swedish translation for gnome-video-arcade.
-# Copyright (C) 2007, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2007, 2009, 2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-video-arcade package.
-# Daniel Nylander <po@danielnylander.se>, 2007, 2009.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 22:51+0100\n"
-"PO-Revision-Date: 2011-03-06 23:00+0100\n"
+"POT-Creation-Date: 2011-04-09 10:54+0200\n"
+"PO-Revision-Date: 2011-04-09 10:55+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -136,6 +136,7 @@ msgid "Delete the selected game recordings"
 msgstr "Ta bort inspelningar för det markerade spelet"
 
 #: ../data/gnome-video-arcade.builder.h:32
+#: ../data/gnome-video-arcade.desktop.in.h:1
 msgid "GNOME Video Arcade"
 msgstr "GNOME Video Arcade"
 
@@ -228,6 +229,14 @@ msgstr "Tekniskt"
 #: ../data/gnome-video-arcade.builder.h:53
 msgid "_Start Game"
 msgstr "_Starta spel"
+
+#: ../data/gnome-video-arcade.desktop.in.h:2
+msgid "Play classic arcade games"
+msgstr "Spela klassiska arkadspel"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+msgid "Video Arcade"
+msgstr "Arkadspel"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
 msgid "All available column names"
@@ -429,27 +438,27 @@ msgstr "Spara som"
 msgid "This program is not configured to show category information."
 msgstr "Det här programmet är inte konfigurerat att visa kategoriinformation."
 
-#: ../src/gva-column-manager.c:554
+#: ../src/gva-column-manager.c:557
 msgid "Managed View"
 msgstr "Hanterad vy"
 
-#: ../src/gva-column-manager.c:555
+#: ../src/gva-column-manager.c:558
 msgid "The GtkTreeView being managed"
 msgstr "GtkTreeView som hanteras"
 
-#: ../src/gva-column-manager.c:611
+#: ../src/gva-column-manager.c:615
 msgid "Move _Up"
 msgstr "Flytta _uppåt"
 
-#: ../src/gva-column-manager.c:624
+#: ../src/gva-column-manager.c:628
 msgid "Move _Down"
 msgstr "Flytta _nedåt"
 
-#: ../src/gva-column-manager.c:637
+#: ../src/gva-column-manager.c:641
 msgid "_Show"
 msgstr "_Visa"
 
-#: ../src/gva-column-manager.c:646
+#: ../src/gva-column-manager.c:650
 msgid "_Hide"
 msgstr "_Dölj"
 
@@ -523,7 +532,7 @@ msgid "(Year Unknown)"
 msgstr "(Året är okänt)"
 
 #: ../src/gva-columns.c:988
-#: ../src/gva-main.c:1021
+#: ../src/gva-main.c:1022
 msgid "ROM Name"
 msgstr "ROM-namn"
 
@@ -532,7 +541,7 @@ msgid "BIOS"
 msgstr "BIOS"
 
 #: ../src/gva-columns.c:992
-#: ../src/gva-main.c:1014
+#: ../src/gva-main.c:1015
 msgid "Category"
 msgstr "Kategori"
 
@@ -557,7 +566,7 @@ msgid "Year"
 msgstr "År"
 
 #: ../src/gva-columns.c:1013
-#: ../src/gva-main.c:1000
+#: ../src/gva-main.c:1001
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
@@ -589,41 +598,41 @@ msgstr "Kommentar"
 msgid "Played On"
 msgstr "Spelades den"
 
-#: ../src/gva-history.c:54
+#: ../src/gva-history.c:55
 msgid "This program is not configured to show history information."
 msgstr "Det här programmet är inte konfigurerat att visa historikinformation."
 
-#: ../src/gva-input-file.c:525
+#: ../src/gva-input-file.c:505
 #, c-format
 msgid "Invalid or unsupported INP file format"
 msgstr "Ogiltigt INP-filformat eller stöds inte"
 
-#: ../src/gva-main.c:242
+#: ../src/gva-main.c:243
 msgid "Building game database..."
 msgstr "Bygger speldatabasen..."
 
-#: ../src/gva-main.c:303
+#: ../src/gva-main.c:304
 msgid "Analyzing ROM files..."
 msgstr "Analyserar ROM-filer..."
 
-#: ../src/gva-main.c:986
+#: ../src/gva-main.c:987
 msgid "Search for any of the following:"
 msgstr "Sök efter något av följande:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:993
+#: ../src/gva-main.c:994
 msgid "Game Title"
 msgstr "Speltitel"
 
-#: ../src/gva-main.c:1007
+#: ../src/gva-main.c:1008
 msgid "Copyright Year"
 msgstr "Copyright (år)"
 
-#: ../src/gva-main.c:1028
+#: ../src/gva-main.c:1029
 msgid "BIOS Name"
 msgstr "BIOS-namn"
 
-#: ../src/gva-main.c:1035
+#: ../src/gva-main.c:1036
 msgid "Driver Name"
 msgstr "Drivrutinens namn"
 
@@ -638,20 +647,20 @@ msgstr "%s: Ingen sådan konfigurationsnyckel"
 msgid "Could not determine emulator version"
 msgstr "Kunde inte fastställa emulatorns version"
 
-#: ../src/gva-music-button.c:116
+#: ../src/gva-music-button.c:122
 msgid "No music available"
 msgstr "Ingen musik finns tillgänglig"
 
-#: ../src/gva-music-button.c:119
+#: ../src/gva-music-button.c:125
 msgid "Unable to play music"
 msgstr "Kunde inte spela musik"
 
-#: ../src/gva-music-button.c:146
+#: ../src/gva-music-button.c:152
 #, c-format
 msgid "Buffering %d%%..."
 msgstr "Buffrar %d%%..."
 
-#: ../src/gva-music-button.c:262
+#: ../src/gva-music-button.c:268
 msgid "Connecting..."
 msgstr "Ansluter..."
 
@@ -663,11 +672,11 @@ msgstr "Tyst"
 msgid "Whether the button state is muted"
 msgstr "Huruvida knapptillståndet är tystat"
 
-#: ../src/gva-mute-button.c:229
+#: ../src/gva-mute-button.c:202
 msgid "In-game sound is muted"
 msgstr "Ljud i spelet är inaktiverat"
 
-#: ../src/gva-mute-button.c:234
+#: ../src/gva-mute-button.c:207
 msgid "In-game sound is enabled"
 msgstr "Ljud i spelet är aktiverat"
 
@@ -1005,39 +1014,39 @@ msgstr "Lägg till %s-kolumn"
 msgid "Add a \"%s\" column to the game list"
 msgstr "Lägg till en \"%s\"-kolumn till spellistan"
 
-#: ../src/main.c:55
+#: ../src/main.c:57
 msgid "Build the games database"
 msgstr "Bygg speldatabasen"
 
-#: ../src/main.c:59
+#: ../src/main.c:61
 msgid "Inspect an emulator setting"
 msgstr "Inspektera en emulatorinställning"
 
-#: ../src/main.c:60
+#: ../src/main.c:62
 msgid "NAME"
 msgstr "NAMN"
 
-#: ../src/main.c:64
+#: ../src/main.c:66
 msgid "Show the application version"
 msgstr "Visa programmets version"
 
-#: ../src/main.c:68
+#: ../src/main.c:70
 msgid "Show which emulator will be used"
 msgstr "Visa vilken emulator som kommer att användas"
 
-#: ../src/main.c:107
+#: ../src/main.c:109
 msgid "No ROM files found"
 msgstr "Inga ROM-filer hittades"
 
-#: ../src/main.c:111
+#: ../src/main.c:113
 msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or that no ROM files are installed. Click <b>Help</b> for more details and troubleshooting tips."
 msgstr "GNOME Video Arcade kunde inte hitta några ROM-filer. Det kan vara så att MAME är felkonfigurerat eller att inga ROM-filer har installerats. Klicka på <b>Hjälp</b> för mer information och tips om felsökning."
 
-#: ../src/main.c:196
+#: ../src/main.c:198
 msgid "Changes detected in ROM files"
 msgstr "Ändringar upptäcktes i ROM-filer"
 
-#: ../src/main.c:200
+#: ../src/main.c:202
 msgid ""
 "GNOME Video Arcade has detected changes in your ROM files and will need to audit them in order to update the game list. However the audit may take several minutes to complete. Would you like to perform the audit now?\n"
 "\n"
@@ -1047,11 +1056,11 @@ msgstr ""
 "\n"
 "Om du hoppar över granskningen nu så kommer den att genomföras automatiskt nästa gång du startar GNOME Video Arcade."
 
-#: ../src/main.c:210
+#: ../src/main.c:212
 msgid "_Skip Audit"
 msgstr "_Hoppa över granskning"
 
-#: ../src/main.c:211
+#: ../src/main.c:213
 msgid "_Audit ROM Files"
 msgstr "_Granska ROM-filer"
 
