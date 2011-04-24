@@ -160,26 +160,6 @@ gva_main_init (void)
                 GTK_BOX (GVA_WIDGET_MAIN_VBOX),
                 gva_ui_get_managed_widget ("/main-menu"), 0);
 
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_VIEW_BUTTON_0),
-                GVA_ACTION_VIEW_AVAILABLE);
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_VIEW_BUTTON_1),
-                GVA_ACTION_VIEW_FAVORITES);
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_VIEW_BUTTON_2),
-                GVA_ACTION_VIEW_RESULTS);
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_PROPERTIES_BUTTON),
-                GVA_ACTION_PROPERTIES);
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_MAIN_START_GAME_BUTTON),
-                GVA_ACTION_START);
-
         gtk_widget_set_sensitive (
                 GVA_WIDGET_MAIN_MUTE_BUTTON,
                 gva_mame_supports_sound ());

@@ -783,14 +783,6 @@ gva_properties_init (void)
         view = GTK_TREE_VIEW (GVA_WIDGET_MAIN_TREE_VIEW);
         text_view = GVA_WIDGET_PROPERTIES_HISTORY_TEXT_VIEW;
 
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_BACK_BUTTON),
-                GVA_ACTION_PREVIOUS_GAME);
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_FORWARD_BUTTON),
-                GVA_ACTION_NEXT_GAME);
-
         g_settings_bind (
                 settings, GVA_SETTING_PROPERTIES_PAGE,
                 GVA_WIDGET_PROPERTIES_NOTEBOOK, "page",

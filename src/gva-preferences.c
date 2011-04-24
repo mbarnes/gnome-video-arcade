@@ -43,20 +43,12 @@ gva_preferences_init (void)
         /* This actually appears in the Properties window,
          * but it's still a preference so we manage it here. */
 
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_PROPERTIES_MUSIC_AUTO_PLAY),
-                GVA_ACTION_AUTO_PLAY);
-
         g_settings_bind (
                 settings, GVA_SETTING_AUTO_PLAY,
                 GVA_ACTION_AUTO_PLAY, "active",
                 G_SETTINGS_BIND_DEFAULT);
 
         /* Auto Save */
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_PREFERENCES_AUTO_SAVE),
-                GVA_ACTION_AUTO_SAVE);
 
         gtk_action_set_sensitive (
                 GVA_ACTION_AUTO_SAVE,
@@ -70,10 +62,6 @@ gva_preferences_init (void)
 
         /* Full Screen */
 
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_PREFERENCES_FULL_SCREEN),
-                GVA_ACTION_FULL_SCREEN);
-
         gtk_action_set_sensitive (
                 GVA_ACTION_FULL_SCREEN,
                 gva_mame_supports_full_screen () ||
@@ -86,10 +74,6 @@ gva_preferences_init (void)
                 G_SETTINGS_BIND_NO_SENSITIVITY);
 
         /* Show Clones */
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_PREFERENCES_SHOW_CLONES),
-                GVA_ACTION_SHOW_CLONES);
 
         g_settings_bind (
                 settings, GVA_SETTING_SHOW_CLONES,

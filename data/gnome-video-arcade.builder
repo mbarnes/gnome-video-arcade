@@ -2,6 +2,227 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <!-- interface-requires gva 0.0 -->
+  <object class="GtkActionGroup" id="lockable-actions">
+    <child>
+      <object class="GtkAction" id="insert-favorite">
+        <property name="label" translatable="yes">Add to _Favorites</property>
+        <property name="stock_id">gtk-add</property>
+        <property name="icon_name">Add the selected game to my list of favorites</property>
+        <signal name="activate" handler="gva_action_insert_favorite_cb" swapped="no"/>
+      </object>
+      <accelerator key="plus" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="next-game">
+        <property name="tooltip" translatable="yes">Show next game</property>
+        <property name="stock_id">gtk-go-forward</property>
+        <signal name="activate" handler="gva_action_next_game_cb" swapped="no"/>
+      </object>
+      <accelerator key="Right" modifiers="GDK_MOD1_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="play-back">
+        <property name="label" translatable="yes">Play _Back...</property>
+        <property name="tooltip" translatable="yes">Play back the selected game recording</property>
+        <property name="stock_id">gtk-media-play</property>
+        <signal name="activate" handler="gva_action_play_back_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="previous-game">
+        <property name="tooltip" translatable="yes">Show previous game</property>
+        <property name="stock_id">gtk-go-back</property>
+        <signal name="activate" handler="gva_action_previous_game_cb" swapped="no"/>
+      </object>
+      <accelerator key="Left" modifiers="GDK_MOD1_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="properties">
+        <property name="label" translatable="yes">_Properties</property>
+        <property name="tooltip" translatable="yes">Show information about the selected game</property>
+        <property name="stock_id">gtk-properties</property>
+        <signal name="activate" handler="gva_action_properties_cb" swapped="no"/>
+      </object>
+      <accelerator key="p" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="record">
+        <property name="label" translatable="yes">_Record</property>
+        <property name="tooltip" translatable="yes">Start the selected game and record keypresses to a file</property>
+        <property name="stock_id">gtk-media-record</property>
+        <signal name="activate" handler="gva_action_record_cb" swapped="no"/>
+      </object>
+      <accelerator key="r" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="remove-column">
+        <property name="label">(Label is set at runtime)</property>
+        <property name="tooltip">(Tooltip is set at runtime)</property>
+        <signal name="activate" handler="gva_action_remove_column_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="remove-favorite">
+        <property name="label" translatable="yes">Remove from _Favorites</property>
+        <property name="tooltip" translatable="yes">Remove the selected game from my list of favorites</property>
+        <property name="stock_id">gtk-remove</property>
+        <signal name="activate" handler="gva_action_remove_favorite_cb" swapped="no"/>
+      </object>
+      <accelerator key="minus" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkAction" id="save-errors">
+        <property name="label" translatable="yes">Save _As...</property>
+        <property name="tooltip" translatable="yes">Save ROM errors to a file</property>
+        <property name="stock_id">gtk-save-as</property>
+        <signal name="activate" handler="gva_action_save_errors_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="search">
+        <property name="label" translatable="yes">S_earch...</property>
+        <property name="tooltip" translatable="yes">Show a custom list of games</property>
+        <property name="stock_id">gtk-find</property>
+        <signal name="activate" handler="gva_action_search_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="show-play-back">
+        <property name="label" translatable="yes">Play _Back...</property>
+        <property name="tooltip" translatable="yes">Play back a previously recorded game</property>
+        <property name="stock_id">gtk-media-play</property>
+        <signal name="activate" handler="gva_action_show_play_back_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="start">
+        <property name="label" translatable="yes">_Start</property>
+        <property name="tooltip" translatable="yes">Start the selected game</property>
+        <property name="stock_id">gtk-execute</property>
+        <signal name="activate" handler="gva_action_start_cb" swapped="no"/>
+      </object>
+      <accelerator key="s" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkToggleAction" id="show-clones">
+        <property name="label" translatable="yes">Show _alternate versions of original games</property>
+        <signal name="toggled" handler="gva_action_show_clones_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkRadioAction" id="view-inital">
+        <property name="label">(This is a bogus view that we switch away from on startup.)</property>
+        <property name="draw_as_radio">True</property>
+        <property name="active">True</property>
+        <property name="value">-1</property>
+        <signal name="changed" handler="gva_action_view_changed_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkRadioAction" id="view-available">
+        <property name="label" translatable="yes">_Available Games</property>
+        <property name="tooltip" translatable="yes">Show all available games</property>
+        <property name="draw_as_radio">True</property>
+        <property name="group">view-inital</property>
+      </object>
+      <accelerator key="1" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkRadioAction" id="view-favorites">
+        <property name="label" translatable="yes">_Favorite Games</property>
+        <property name="tooltip" translatable="yes">Only show my favorite games</property>
+        <property name="draw_as_radio">True</property>
+        <property name="value">1</property>
+        <property name="group">view-inital</property>
+      </object>
+      <accelerator key="2" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
+      <object class="GtkRadioAction" id="view-results">
+        <property name="label" translatable="yes">Search _Results</property>
+        <property name="tooltip" translatable="yes">Show my search results</property>
+        <property name="draw_as_radio">True</property>
+        <property name="value">2</property>
+        <property name="group">view-inital</property>
+      </object>
+      <accelerator key="3" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+  </object>
+  <object class="GtkActionGroup" id="standard-actions">
+    <child>
+      <object class="GtkAction" id="about">
+        <property name="label" translatable="yes">_About</property>
+        <property name="tooltip" translatable="yes">Show information about the application</property>
+        <property name="stock_id">gtk-about</property>
+        <signal name="activate" handler="gva_action_about_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="contents">
+        <property name="label" translatable="yes">_Contents</property>
+        <property name="tooltip" translatable="yes">Open the help documentation</property>
+        <property name="stock_id">gtk-help</property>
+        <signal name="activate" handler="gva_action_contents_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="preferences">
+        <property name="label" translatable="yes">_Preferences</property>
+        <property name="tooltip" translatable="yes">Configure the application</property>
+        <property name="stock_id">gtk-preferences</property>
+        <signal name="activate" handler="gva_action_preferences_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="quit">
+        <property name="label" translatable="yes">_Quit</property>
+        <property name="tooltip" translatable="yes">Quit the application</property>
+        <property name="stock_id">gtk-quit</property>
+        <signal name="activate" handler="gva_action_quit_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="add-column-menu">
+        <property name="label" translatable="yes">_Add Column</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="edit-menu">
+        <property name="label" translatable="yes">_Edit</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="game-menu">
+        <property name="label" translatable="yes">_Game</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="help-menu">
+        <property name="label" translatable="yes">_Help</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="view-menu">
+        <property name="label" translatable="yes">_View</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleAction" id="auto-play">
+        <property name="label" translatable="yes">Play music _automatically</property>
+        <property name="tooltip" translatable="yes">Automatically play a music clip from the selected game</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleAction" id="auto-save">
+        <property name="label" translatable="yes">_Restore previous state when starting a game</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleAction" id="full-screen">
+        <property name="label" translatable="yes">Start games in _fullscreen mode</property>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="audit-window">
     <property name="width_request">400</property>
     <property name="can_focus">False</property>
@@ -120,7 +341,6 @@
             </child>
             <child>
               <object class="GtkScrolledWindow" id="audit-scrolled-window">
-                <property name="height_request">200</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -166,7 +386,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">Save ROM errors to a file</property>
                 <property name="tooltip_text" translatable="yes">Save ROM errors to a file</property>
-                <property name="use_action_appearance">False</property>
+                <property name="related_action">save-errors</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -250,7 +470,7 @@
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="tooltip_text" translatable="yes">Show all available games</property>
-                        <property name="use_action_appearance">False</property>
+                        <property name="related_action">view-available</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -265,7 +485,7 @@
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="tooltip_text" translatable="yes">Only show my favorite games</property>
-                        <property name="use_action_appearance">False</property>
+                        <property name="related_action">view-favorites</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -280,7 +500,7 @@
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="tooltip_text" translatable="yes">Show my search results</property>
-                        <property name="use_action_appearance">False</property>
+                        <property name="related_action">view-results</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -424,7 +644,7 @@
                     <property name="can_default">True</property>
                     <property name="receives_default">False</property>
                     <property name="tooltip_text" translatable="yes">Show information about the selected game</property>
-                    <property name="use_action_appearance">False</property>
+                    <property name="related_action">properties</property>
                     <property name="use_stock">True</property>
                   </object>
                   <packing>
@@ -437,13 +657,13 @@
                   <object class="GtkButton" id="main-start-game-button">
                     <property name="label" translatable="yes">_Start Game</property>
                     <property name="visible">True</property>
-                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="has_focus">True</property>
                     <property name="can_default">True</property>
                     <property name="has_default">True</property>
                     <property name="receives_default">False</property>
                     <property name="tooltip_text" translatable="yes">Start the selected game</property>
+                    <property name="related_action">start</property>
                     <property name="use_action_appearance">False</property>
                     <property name="image">main-start-game-image</property>
                     <property name="use_underline">True</property>
@@ -688,13 +908,13 @@
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="preferences-full-screen">
-                                <property name="label">(full-screen) GtkUIManager supplies the label</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="use_action_appearance">False</property>
+                                <property name="related_action">full-screen</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -705,13 +925,13 @@
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="preferences-auto-save">
-                                <property name="label">(auto-save) GtkUIManager supplies the label</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="use_action_appearance">False</property>
+                                <property name="related_action">auto-save</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -796,12 +1016,12 @@
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="preferences-show-clones">
-                                <property name="label">(show-clones) GtkUIManager supplies the label</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="use_action_appearance">False</property>
+                                <property name="related_action">show-clones</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -1014,12 +1234,12 @@
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Show previous game</property>
+                    <property name="related_action">previous-game</property>
                     <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkImage" id="properties-back-button-image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="stock">gtk-go-back</property>
                       </object>
                     </child>
@@ -1037,6 +1257,7 @@
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Show next game</property>
+                    <property name="related_action">next-game</property>
                     <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkImage" id="properties-forward-button-image">
@@ -1920,12 +2141,12 @@ Manufacturer, Year</property>
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="properties-music-auto-play">
-                    <property name="label">(auto-play) GtkUIManager supplies the label</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
-                    <property name="use_action_appearance">False</property>
+                    <property name="related_action">auto-play</property>
                     <property name="use_underline">True</property>
+                    <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
                   </object>
                   <packing>

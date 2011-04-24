@@ -320,10 +320,6 @@ gva_audit_init (void)
         view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
         column = gva_columns_new_from_id (GVA_GAME_STORE_COLUMN_DESCRIPTION);
         gtk_tree_view_append_column (view, column);
-
-        gtk_activatable_set_related_action (
-                GTK_ACTIVATABLE (GVA_WIDGET_AUDIT_SAVE_BUTTON),
-                GVA_ACTION_SAVE_ERRORS);
 }
 
 /**

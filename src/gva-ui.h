@@ -191,6 +191,29 @@ void            gva_ui_add_column_actions       (GtkTreeView *view);
 void            gva_ui_lock                     (void);
 void            gva_ui_unlock                   (void);
 
+/* GtkAction callbacks */
+
+void            gva_action_about_cb             (GtkAction *action);
+void            gva_action_contents_cb          (GtkAction *action);
+void            gva_action_insert_favorite_cb   (GtkAction *action);
+void            gva_action_next_game_cb         (GtkAction *action);
+void            gva_action_play_back_cb         (GtkAction *action);
+void            gva_action_preferences_cb       (GtkAction *action);
+void            gva_action_previous_game_cb     (GtkAction *action);
+void            gva_action_properties_cb        (GtkAction *action);
+void            gva_action_quit_cb              (GtkAction *action);
+void            gva_action_record_cb            (GtkAction *action);
+void            gva_action_remove_column_cb     (GtkAction *action);
+void            gva_action_remove_favorite_cb   (GtkAction *action);
+void            gva_action_save_errors_cb       (GtkAction *action);
+void            gva_action_search_cb            (GtkAction *action);
+void            gva_action_show_clones_cb       (GtkAction *action);
+void            gva_action_show_play_back_cb    (GtkAction *action);
+void            gva_action_start_cb             (GtkAction *action);
+
+void            gva_action_view_changed_cb      (GtkRadioAction *action,
+                                                 GtkRadioAction *current);
+
 G_END_DECLS
 
 #endif /* GVA_UI_H */
