@@ -1,15 +1,15 @@
 ### Process this file with automake to produce Makefile.in
 
 gladecatalog_DATA = gva.xml
-gladecatalogdir = `$(PKG_CONFIG) --variable=catalogdir gladeui-1.0`
+gladecatalogdir = `$(PKG_CONFIG) --variable=catalogdir gladeui-2.0`
 
 gladepixmap_DATA = \
 	widget-gva-column-manager.png \
 	widget-gva-mute-button.png
-gladepixmapdir = `$(PKG_CONFIG) --variable=pixmapdir gladeui-1.0`/hicolor/22x22/actions
+gladepixmapdir = `$(PKG_CONFIG) --variable=pixmapdir gladeui-2.0`/hicolor/22x22/actions
 
 gladegva_LTLIBRARIES = libgladegva.la
-gladegvadir = `$(PKG_CONFIG) --variable=moduledir gladeui-1.0`
+gladegvadir = `$(PKG_CONFIG) --variable=moduledir gladeui-2.0`
 
 libgladegva_la_CFLAGS = \
 	@GLIB_CFLAGS@ @GTK_CFLAGS@ @GSTREAMER_CFLAGS@
