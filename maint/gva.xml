@@ -1,25 +1,9 @@
 <glade-catalog name="gva" library="gladegva" depends="gtk+" book="gnome-video-arcade">
 
   <glade-widget-classes>
-
-    <glade-widget-class name="GvaColumnManager" generic-name="column-manager" title="Column Manager">
-      <properties>
-        <property id="managed-view"/>
-      </properties>
-    </glade-widget-class>
-
-    <glade-widget-class name="GvaMusicButton" generic-name="music-button" title="Music Button">
-      <properties>
-        <property id="game"/>
-      </properties>
-    </glade-widget-class>
-
-    <glade-widget-class name="GvaMuteButton" generic-name="mute-button" title="Mute Button">
-      <properties>
-        <property id="muted"/>
-      </properties>
-    </glade-widget-class>
-
+    <glade-widget-class name="GvaColumnManager" generic-name="column-manager" title="Column Manager"/>
+    <glade-widget-class name="GvaMusicButton" generic-name="music-button" title="Music Button"/>
+    <glade-widget-class name="GvaMuteButton" generic-name="mute-button" title="Mute Button"/>
   </glade-widget-classes>
 
   <glade-widget-group name="gva-widgets" title="GNOME Video Arcade">
