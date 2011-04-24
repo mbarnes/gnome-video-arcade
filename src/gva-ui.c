@@ -628,11 +628,17 @@ gva_action_search_cb (GtkAction *action)
 {
         GtkWidget *widget;
 
-        gtk_widget_show (GVA_WIDGET_MAIN_SEARCH_HBOX);
-
         widget = GVA_WIDGET_MAIN_SEARCH_ENTRY;
         gtk_widget_grab_focus (widget);
+
+        /* Show the search bar -after- grabbing focus or else
+         * Edit->Search (from the main menu) will immediately
+         * hide the search bar again. */
+        gtk_widget_show (GVA_WIDGET_MAIN_SEARCH_HBOX);
+
+        /* This triggers the entry completion. */
         g_signal_emit_by_name (widget, "changed");
+
         gtk_cell_editable_start_editing (GTK_CELL_EDITABLE (widget), NULL);
 }
 
