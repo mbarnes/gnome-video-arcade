@@ -678,9 +678,9 @@ gva_main_clear_search (void)
  *
  * Executes a game database search and configures the main window to
  * display the results.  More precisely, the function saves the search
- * entry contents to GConf, switches to the Search Results view, forces
- * an update, ensures a row in the resulting game list is selected, and
- * gives focus to the main tree view.
+ * entry contents to GSettings, switches to the Search Results view,
+ * forces an update, ensures a row in the resulting game list is selected,
+ * and gives focus to the main tree view.
  *
  * The SQL expression used in the database search is retrieved from
  * gva_main_get_search_expression().  It is applied while updating the
@@ -758,8 +758,7 @@ gva_main_get_last_search_text (void)
  * gva_main_set_last_search_text:
  * @text: the search entry text
  *
- * Writes @text to GConf key
- * <filename>/apps/gnome-video-arcade/search</filename>.
+ * Writes @text to GSettings key <filename>search</filename>.
  *
  * This is used to remember the search entry text from the previous session
  * of <emphasis>GNOME Video Arcade</emphasis> so that the same text can be
@@ -787,8 +786,8 @@ gva_main_set_last_search_text (const gchar *text)
  * most recent search, @column_name and @search_text are set to %NULL
  * and the function returns %FALSE.
  *
- * Returns: %TRUE if match values were successfully retrieved from GConf,
- *          %FALSE otherwise
+ * Returns: %TRUE if match values were successfully retrieved from
+ *          GSettings, %FALSE otherwise
  **/
 gboolean
 gva_main_get_last_selected_match (gchar **column_name,
@@ -834,9 +833,8 @@ fail:
  * @column_name: the column name of the completion match
  * @search_text: the search text of the completion match
  *
- * Writes @column_name and @search_text to GConf key
- * <filename>/apps/gnome-video-arcade/sql-expression</filename> as a
- * string pair.
+ * Writes @column_name and @search_text to GSettings key
+ * <filename>sql-expression</filename> as a string tuple.
  *
  * This is used to remember whether the search results from the previous
  * session of <emphasis>GNOME Video Arcade</emphasis> were the result of

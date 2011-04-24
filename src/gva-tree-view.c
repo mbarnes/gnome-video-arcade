@@ -608,8 +608,7 @@ gva_tree_view_get_last_selected_game (void)
  * gva_tree_view_set_last_selected_game:
  * @game: the name of a game
  *
- * Writes @game to GConf key
- * <filename>/apps/gnome-video-arcade/selected-game</filename>.
+ * Writes @game to GSettings key <filename>selected-game</filename>.
  *
  * This is used to remember which game was selected in the previous
  * session of <emphasis>GNOME Video Arcade</emphasis> so that the same
@@ -666,8 +665,8 @@ gva_tree_view_get_last_sort_column_id (GvaGameStoreColumn *column_id,
  * @column_id: sort column ID
  * @order: sort order
  *
- * Writes @column_id and @order to GConf key
- * <filename>/apps/gnome-video-arcade/sort-column</filename>.
+ * Writes @column_id and @order to GSettings key
+ * <filename>sort-column</filename>.
  *
  * This is used to remember which how the game list view was sorted in
  * the previous session of <emphasis>GNOME Video Arcade</emphasis> so that

@@ -110,8 +110,7 @@ gva_preferences_get_auto_play (void)
  * the Properties window or when the user selects a different
  * game while the Properties window is visible.
  *
- * The preference is stored in GConf key
- * <filename>/apps/gnome-video-arcade/auto-play</filename>.
+ * The preference is stored in GSettings key <filename>auto-play</filename>.
  **/
 void
 gva_preferences_set_auto_play (gboolean auto_play)
@@ -148,8 +147,7 @@ gva_preferences_get_auto_save (void)
  * Accepts the user's preference for whether to restore the emulated
  * machine's previous state when starting a game.
  *
- * The preference is stored in GConf key
- * <filename>/apps/gnome-video-arcade/auto-save</filename>.
+ * The preference is stored in GSettings key <filename>auto-save</filename>.
  **/
 void
 gva_preferences_set_auto_save (gboolean auto_save)
@@ -186,8 +184,7 @@ gva_preferences_get_full_screen (void)
  * Accepts the user's preference for whether to start games in full
  * screen mode.
  *
- * The preference is stored in GConf key
- * <filename>/apps/gnome-video-arcade/full-screen</filename>.
+ * The preference is stored in GSettings key <filename>full-screen</filename>.
  **/
 void
 gva_preferences_set_full_screen (gboolean full_screen)
@@ -224,8 +221,7 @@ gva_preferences_get_show_clones (void)
  * Accepts the user's preference for whether to show cloned games in
  * the main window.
  *
- * The preference is stored in GConf key
- * <filename>/apps/gnome-video-arcade/show-clones</filename>.
+ * The preference is stored in GSettings key <filename>show-clones</filename>.
  **/
 void
 gva_preferences_set_show_clones (gboolean show_clones)

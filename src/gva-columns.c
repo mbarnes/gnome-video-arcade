@@ -1109,7 +1109,7 @@ gva_columns_new_from_id (GvaGameStoreColumn column_id)
  * @column_name: the name of the column to create
  *
  * Creates a new #GtkTreeViewColumn from the given @column_name (as stored
- * in GConf), configured for use in the main tree view.
+ * in GSettings), configured for use in the main tree view.
  *
  * Returns: a new #GtkTreeViewColumn
  **/
@@ -1210,15 +1210,14 @@ columns_load_remove_name (GList **p_list, const gchar *name)
  * gva_columns_load:
  * @view: a #GtkTreeView
  *
- * Loads @view with columns in the order stored in the GConf key
- * <filename>/apps/gnome-video-arcade/all-columns</filename>, but only
- * makes visible those columns listed in
- * <filename>/apps/gnome-video-arcade/columns</filename>.  Newly supported
- * columns are appended to @view but remain invisible until explicitly
- * selected in the Preferences window.
+ * Loads @view with columns in the order stored in the GSettings key
+ * <filename>all-columns</filename>, but only makes visible those columns
+ * listed in <filename>columns</filename>.  Newly supported columns are
+ * appended to @view but remain invisible until explicitly selected in
+ * the Preferences window.
  *
- * Each column is loaded by reading the column name from GConf and passing
- * it to gva_columns_new_from_name() to create the #GtkTreeViewColumn.
+ * Each column is loaded by reading the column name from GSettings and
+ * passing it to gva_columns_new_from_name() to create the #GtkTreeViewColumn.
  **/
 void
 gva_columns_load (GtkTreeView *view)
@@ -1235,8 +1234,8 @@ gva_columns_load (GtkTreeView *view)
 
         /* Adding columns to the tree view will cause it to emit
          * "columns-changed" signals, for which gva_columns_save() is a
-         * handler.  Prevent the handler from modifying GConf keys while
-         * we're loading. */
+         * handler.  Prevent the handler from modifying GSettings keys
+         * while we're loading. */
         g_signal_handlers_block_by_func (view, gva_columns_save, NULL);
 
         settings = gva_get_settings ();
@@ -1349,10 +1348,9 @@ gva_columns_load (GtkTreeView *view)
  * gva_columns_save:
  * @view: a #GtkTreeView
  *
- * Writes the column order and visible columns of @view to the GConf
- * keys <filename>/apps/gnome-video-arcade/all-columns</filename> and
- * <filename>/apps/gnome-video-arcade/columns</filename> respectively,
- * using gva_columns_get_names() to extract the column names.
+ * Writes the column order and visible columns of @view to the GSettings
+ * keys <filename>all-columns</filename> and <filename>columns</filename>
+ * respectively, using gva_columns_get_names() to extract the column names.
  **/
 void
 gva_columns_save (GtkTreeView *view)
