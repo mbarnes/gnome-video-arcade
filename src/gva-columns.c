@@ -499,6 +499,7 @@ static GtkTreeViewColumn *
 columns_factory_input_players (GvaGameStoreColumn column_id)
 {
         GtkTreeViewColumn *column;
+        GtkCellRenderer *renderer;
         GdkPixbuf *pixbuf;
         gint ii;
 
@@ -511,8 +512,6 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
 
         for (ii = 0; ii < MAX_PLAYER_ICONS; ii++)
         {
-                GtkCellRenderer *renderer;
-
                 renderer = gtk_cell_renderer_pixbuf_new ();
                 g_object_set (renderer, "pixbuf", pixbuf, NULL);
                 gtk_tree_view_column_pack_start (column, renderer, FALSE);
@@ -522,6 +521,10 @@ columns_factory_input_players (GvaGameStoreColumn column_id)
                         columns_input_players_set_properties,
                         GINT_TO_POINTER (ii), NULL);
         }
+
+        /* Append an empty pixbuf renderer to fill leftover space. */
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        gtk_tree_view_column_pack_start (column, renderer, TRUE);
 
         return column;
 }
