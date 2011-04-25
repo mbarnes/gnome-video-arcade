@@ -1206,6 +1206,17 @@ columns_load_remove_name (GList **p_list, const gchar *name)
         return TRUE;
 }
 
+/* Helper for gva_columns_load() */
+static void
+columns_tree_view_destroy_cb (GtkTreeView *tree_view)
+{
+        /* GtkTreeView emits "column-changed" signals as it destroys
+         * its own columns.  We don't want those emissions to trigger
+         * gva_columns_save(). */
+        g_signal_handlers_disconnect_by_func (
+                tree_view, gva_columns_save, NULL);
+}
+
 /**
  * gva_columns_load:
  * @view: a #GtkTreeView
@@ -1231,12 +1242,6 @@ gva_columns_load (GtkTreeView *view)
         gint ii;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
-
-        /* Adding columns to the tree view will cause it to emit
-         * "columns-changed" signals, for which gva_columns_save() is a
-         * handler.  Prevent the handler from modifying GSettings keys
-         * while we're loading. */
-        g_signal_handlers_block_by_func (view, gva_columns_save, NULL);
 
         settings = gva_get_settings ();
 
@@ -1339,7 +1344,13 @@ gva_columns_load (GtkTreeView *view)
                 }
         }
 
-        g_signal_handlers_unblock_by_func (view, gva_columns_save, NULL);
+        g_signal_connect (
+                view, "columns-changed",
+                G_CALLBACK (gva_columns_save), NULL);
+
+        g_signal_connect (
+                view, "destroy",
+                G_CALLBACK (columns_tree_view_destroy_cb), NULL);
 
         gva_columns_save (view);
 }
@@ -1361,14 +1372,6 @@ gva_columns_save (GtkTreeView *view)
         GSList *list, *iter;
 
         g_return_if_fail (GTK_IS_TREE_VIEW (view));
-
-#if 0
-        /* This function is also a "columns-changed" signal handler.
-         * Abort the save if the tree view is being destroyed.
-         * FIXME Needs to be adapted to gtk+-3.0. */
-        if (GTK_OBJECT_FLAGS (view) & GTK_IN_DESTRUCTION)
-                return;
-#endif
 
         settings = gva_get_settings ();
 

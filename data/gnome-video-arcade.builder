@@ -561,7 +561,6 @@
                         <property name="rules_hint">True</property>
                         <property name="show_expanders">False</property>
                         <signal name="button-press-event" handler="gva_tree_view_button_press_event_cb" swapped="no"/>
-                        <signal name="columns-changed" handler="gva_columns_save" swapped="no"/>
                         <signal name="row-activated" handler="gva_tree_view_row_activated_cb" swapped="no"/>
                         <signal name="query-tooltip" handler="gva_tree_view_query_tooltip_cb" swapped="no"/>
                         <signal name="popup-menu" handler="gva_tree_view_popup_menu_cb" swapped="no"/>
