@@ -1017,7 +1017,7 @@ gva_process_kill (GvaProcess *process)
          *     after a reasonable duration, SIGKILL. */
 
         pid = process->priv->pid;
-        g_message ("Sending KILL signal to process %d.", pid);
+        g_message (_("Sending KILL signal to process %d."), pid);
         if (kill (pid, SIGKILL) < 0)
                 g_warning ("%s", g_strerror (errno));
 }

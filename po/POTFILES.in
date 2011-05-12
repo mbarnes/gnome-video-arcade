@@ -5,6 +5,7 @@
 data/gnome-video-arcade.desktop.in
 data/org.gnome.VideoArcade.gschema.xml.in
 src/gva-audit.c
+src/gva-db.c
 src/gva-categories.c
 src/gva-column-manager.c
 src/gva-columns.c
@@ -19,6 +20,7 @@ src/gva-music-button.c
 src/gva-mute-button.c
 src/gva-nplayers.c
 src/gva-play-back.c
+src/gva-process.c
 src/gva-properties.c
 src/gva-tree-view.c
 src/gva-ui.c
