@@ -96,8 +96,8 @@ gva_nplayers_init (GError **error)
         g_free (contents);
 #else
         g_message (
-                _("This program is not configured to show "
-                  "detailed number of players information."));
+                "This program is not configured to show "
+                "detailed number of players information.");
 #endif
 
         return success;

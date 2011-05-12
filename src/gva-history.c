@@ -52,8 +52,8 @@ history_file_open (GError **error)
         }
 #else
         g_message (
-                _("This program is not configured "
-                  "to show history information."));
+                "This program is not configured "
+                "to show history information.");
 #endif
 
         return channel;

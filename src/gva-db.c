@@ -1566,7 +1566,7 @@ db_parser_exit (GvaProcess *process,
                 gva_process_get_time_elapsed (process, &time_elapsed);
 
                 g_message (
-                        _("Database built in %ld.%ld seconds."),
+                        "Database built in %ld.%ld seconds.",
                         time_elapsed.tv_sec, time_elapsed.tv_usec / 100000);
         }
         else
@@ -2171,29 +2171,28 @@ gva_db_needs_rebuilt (void)
         /* Begin test cases for rebuilding the games database.
          * The macro tests whether the database SHOULD be rebuilt. */
 
-        reason = N_("the user requested it");
+        reason = "the user requested it";
         TEST_CASE (opt_build_database);
 
-        /* FIXME: string concatenation makes this untranslatable */
-        reason = PACKAGE_NAME N_("'s version changed");
+        reason = PACKAGE_NAME "'s version changed";
         TEST_CASE (gva_get_last_version () == NULL);
         TEST_CASE (strcmp (gva_get_last_version (), PACKAGE_VERSION) != 0);
 
-        reason = N_("the database does not have a build ID");
+        reason = "the database does not have a build ID";
         gva_db_get_build (&db_build_id, &error);
         gva_error_handle (&error);
         TEST_CASE (db_build_id == NULL);
 
-        reason = N_("the MAME version could not be determined");
+        reason = "the MAME version could not be determined";
         mame_version = gva_mame_get_version (&error);
         gva_error_handle (&error);
         TEST_CASE (mame_version == NULL);
 
-        reason = N_("the database build ID does not match the MAME version");
+        reason = "the database build ID does not match the MAME version";
         TEST_CASE (strstr (mame_version, db_build_id) == NULL);
 
 #ifdef CATEGORY_FILE
-        reason = N_("the category file changed");
+        reason = "the category file changed";
         TEST_CASE (gva_db_is_older_than (CATEGORY_FILE));
 #endif
 
@@ -2203,9 +2202,9 @@ gva_db_needs_rebuilt (void)
 
 exit:
         if (rebuild)
-                g_message (_("Building database because %s."), reason);
+                g_message ("Building database because %s.", reason);
         else
-                g_message (_("Database seems up-to-date; no rebuild necessary."));
+                g_message ("Database seems up-to-date; no rebuild necessary.");
 
         g_free (db_build_id);
         g_free (mame_version);

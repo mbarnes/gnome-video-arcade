@@ -68,8 +68,8 @@ gva_categories_init (GError **error)
         g_free (contents);
 #else
         g_message (
-                _("This program is not configured "
-                  "to show category information."));
+                "This program is not configured "
+                "to show category information.");
 #endif
 
         return success;
