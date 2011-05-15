@@ -242,6 +242,26 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_main_window_configure_event_cb ##### -->
+<para>
+
+</para>
+
+@window: 
+@event: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_main_window_window_state_event_cb ##### -->
+<para>
+
+</para>
+
+@window: 
+@event: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_main_window_destroy_cb ##### -->
 <para>
 

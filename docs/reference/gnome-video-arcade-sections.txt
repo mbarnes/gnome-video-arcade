@@ -192,6 +192,8 @@ gva_main_search_entry_changed_cb
 gva_main_search_entry_icon_release_cb
 gva_main_search_entry_notify_cb
 gva_main_search_query_tooltip_cb
+gva_main_window_configure_event_cb
+gva_main_window_window_state_event_cb
 gva_main_window_destroy_cb
 </SECTION>
 
@@ -503,6 +505,7 @@ gva_get_settings
 gva_get_time_elapsed
 gva_get_user_data_dir
 gva_help_display
+gva_save_window_state
 gva_search_collate_key
 gva_spawn_with_pipes
 </SECTION>

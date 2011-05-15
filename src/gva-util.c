@@ -378,6 +378,66 @@ exit:
 }
 
 /**
+ * gva_save_window_state:
+ * @window: a #GtkWindow
+ * @width_key: name of the window width integer setting, or %NULL
+ * @height_key: name of the window height integer setting, or %NULL
+ * @maximized_key: name of the window maximized boolean setting, or %NULL
+ * @x_key: name of the window X-position integer setting, or %NULL
+ * @y_key: name of the window Y-position integer setting, or %NULL
+ *
+ * Writes the dimensions, position and maximize state of @window to the
+ * given #GSettings keys.  If a key name argument is %NULL, the function
+ * will skip writing a value to that setting.
+ **/
+void
+gva_save_window_state (GtkWindow *window,
+                       const gchar *width_key,
+                       const gchar *height_key,
+                       const gchar *maximized_key,
+                       const gchar *x_key,
+                       const gchar *y_key)
+{
+        GSettings *settings;
+        GdkWindow *gdk_window;
+        GdkWindowState state;
+        gboolean maximized;
+
+        g_return_if_fail (GTK_IS_WINDOW (window));
+
+        settings = gva_get_settings ();
+
+        gdk_window = gtk_widget_get_window (GTK_WIDGET (window));
+        state = gdk_window_get_state (gdk_window);
+        maximized = ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0);
+
+        if (!maximized)
+        {
+                gint x, y;
+                gint width;
+                gint height;
+
+                gtk_window_get_position (window, &x, &y);
+                gtk_window_get_size (window, &width, &height);
+
+                if (x_key != NULL)
+                        g_settings_set_int (settings, x_key, x);
+
+                if (y_key != NULL)
+                        g_settings_set_int (settings, y_key, y);
+
+                if (width_key != NULL)
+                        g_settings_set_int (settings, width_key, width);
+
+                if (height_key != NULL)
+                        g_settings_set_int (settings, height_key, height);
+        }
+
+        if (maximized_key != NULL)
+                g_settings_set_boolean (settings, maximized_key, maximized);
+}
+
+/**
  * gva_search_collate_key:
  * @string: a string
  *

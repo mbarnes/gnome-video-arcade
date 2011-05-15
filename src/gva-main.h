@@ -77,6 +77,11 @@ gboolean      gva_main_search_query_tooltip_cb   (GtkWidget *widget,
                                                   gint y,
                                                   gboolean keyboard_mode,
                                                   GtkTooltip *tooltip);
+gboolean      gva_main_window_configure_event_cb (GtkWindow *window,
+                                                  GdkEventConfigure *event);
+gboolean      gva_main_window_window_state_event_cb
+                                                 (GtkWindow *window,
+                                                  GdkEventWindowState *event);
 void          gva_main_window_destroy_cb         (GtkWindow *window);
 
 G_END_DECLS

@@ -113,6 +113,19 @@
 @link_id: 
 
 
+<!-- ##### FUNCTION gva_save_window_state ##### -->
+<para>
+
+</para>
+
+@window: 
+@width_key: 
+@height_key: 
+@maximized_key: 
+@x_key: 
+@y_key: 
+
+
 <!-- ##### FUNCTION gva_search_collate_key ##### -->
 <para>
 

@@ -440,6 +440,8 @@
     <property name="default_height">400</property>
     <property name="icon_name">gnome-video-arcade</property>
     <signal name="destroy" handler="gva_main_window_destroy_cb" swapped="no"/>
+    <signal name="window-state-event" handler="gva_main_window_window_state_event_cb" swapped="no"/>
+    <signal name="configure-event" handler="gva_main_window_configure_event_cb" swapped="no"/>
     <child>
       <object class="GtkVBox" id="main-vbox">
         <property name="visible">True</property>

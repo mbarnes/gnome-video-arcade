@@ -169,11 +169,18 @@ gva_main_init (void)
                 GVA_WIDGET_MAIN_MUTE_BUTTON, "muted",
                 G_SETTINGS_BIND_DEFAULT);
 
-#if 0  /* GSETTINGS */
-        gconf_bridge_bind_window (
-                gconf_bridge_get (), GVA_GCONF_WINDOW_PREFIX,
-                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW), TRUE, TRUE);
-#endif
+        gtk_window_move (
+                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
+                g_settings_get_int (settings, "window-x"),
+                g_settings_get_int (settings, "window-y"));
+
+        gtk_window_resize (
+                GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW),
+                g_settings_get_int (settings, "window-width"),
+                g_settings_get_int (settings, "window-height"));
+
+        if (g_settings_get_boolean (settings, "window-maximized"))
+                gtk_window_maximize (GTK_WINDOW (GVA_WIDGET_MAIN_WINDOW));
 
         /* Initialize the search entry. */
         text = gva_main_get_last_search_text ();
@@ -1019,6 +1026,58 @@ gva_main_search_query_tooltip_cb (GtkWidget *widget,
         g_free (text);
 
         return TRUE;
+}
+
+/**
+ * gva_main_window_configure_event_cb:
+ * @window: the main window
+ * @event: a #GdkEventConfigure
+ *
+ * Handler for #GtkWidget::configure-event signals to the main window.
+ *
+ * Saves the main window state to dconf.
+ *
+ * Returns: %FALSE always
+ **/
+gboolean
+gva_main_window_configure_event_cb (GtkWindow *window,
+                                    GdkEventConfigure *event)
+{
+        gva_save_window_state (
+                window,
+                "window-width",
+                "window-height",
+                "window-maximized",
+                "window-x",
+                "window-y");
+
+        return FALSE;
+}
+
+/**
+ * gva_main_window_window_state_event_cb:
+ * @window: the main window
+ * @event: a #GdkEventWindowState
+ *
+ * Handler for #GtkWidget::window-state-event signals to the main window.
+ *
+ * Saves the main window state to dconf.
+ *
+ * Returns: %FALSE always
+ **/
+gboolean
+gva_main_window_window_state_event_cb (GtkWindow *window,
+                                       GdkEventWindowState *event)
+{
+        gva_save_window_state (
+                window,
+                "window-width",
+                "window-height",
+                "window-maximized",
+                "window-x",
+                "window-y");
+
+        return FALSE;
 }
 
 /**

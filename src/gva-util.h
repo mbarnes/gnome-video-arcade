@@ -71,6 +71,12 @@ void            gva_get_time_elapsed            (GTimeVal *start_time,
 const gchar *   gva_get_user_data_dir           (void);
 void            gva_help_display                (GtkWindow *parent,
                                                  const gchar *link_id);
+void            gva_save_window_state           (GtkWindow *window,
+                                                 const gchar *width_key,
+                                                 const gchar *height_key,
+                                                 const gchar *maximized_key,
+                                                 const gchar *x_key,
+                                                 const gchar *y_key);
 gchar *         gva_search_collate_key          (const gchar *string);
 gboolean        gva_spawn_with_pipes            (const gchar *command_line,
                                                  GPid *child_pid,
