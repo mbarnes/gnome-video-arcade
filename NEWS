@@ -1,3 +1,50 @@
+GNOME Video Arcade 0.8.0
+========================
+
+        Released May 15, 2011
+
+        What's New
+        ----------
+        * The feature set of version 0.8.0 is identical to 0.7.1, but now
+          uses current GNOME 3 technologies and drops several GNOME 2 era
+          dependencies such as GConf, libunique, and dbus-glib.
+
+        Bugs Fixed
+        ----------
+        GNOME #622933: Migrate from dbus-glib to GDBus
+                       (reported by Andre Klapper, patched by Bastien Nocera)
+        GNOME #642689: README out of date: sdlmame does not exist anymore
+                       (reported by Emmanuel Kasper)
+        GNOME #643000: Bump libwnck requirement to 2.91.6
+                       (reported and patched by Bastien Nocera)
+
+        Other Contributions
+        -------------------
+        * Add GenericName and make desktop file strings translatable.
+          Add to POTFILES.in. (Jordi Mallach)
+        * Remove deprecated "Encoding" key from desktop file. (Jordi Mallach)
+        * Remove gettext calls from all g_message() strings. (Jordi Mallach)
+
+        New Translations
+        ----------------
+        Catalan (Jordi Mallach)
+        Romanian (Lucian Adrian Grijincu)
+        Russian (Yuri Myasoedov)
+        Simplified Chinese (Yinghua Wang)
+
+        Updated Translations
+        --------------------
+        Brazilian Portuguese (Djavan Fagundes)
+        Czech (Marek Černocký)
+        Danish (Joe Hansen)
+        French (Claude Paroz)
+        Galician (Fran Diéguez)
+        German (Mario Blättermann)
+        Norwegian Bokmål (Kjartan Maraas)
+        Slovenian (Matej Urbančič, Andrej Žnidaršič)
+        Spanish (Jorge González, Daniel Mustieles)
+        Swedish (Daniel Nylander)
+
 GNOME Video Arcade 0.7.1
 ========================
 

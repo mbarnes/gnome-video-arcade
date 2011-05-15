@@ -58,21 +58,6 @@ installed prior to compiling the source code:
        should be something similar to sqlite-devel (Fedora) or
        libsqlite3-dev (Debian/Ubuntu).
 
-   - Header files for D-Bus GLib bindings. (optional)
-
-       The D-Bus GLib header files should be available from your
-       GNU/Linux distribution as a "development" package.  The exact
-       package name varies by distribution, but it should be something
-       similar to dbus-glib-devel (Fedora) or libdbus-glib-1-dev
-       (Debian/Ubuntu).
-
-       GNOME Video Arcade uses D-Bus for better desktop integration.
-       Currently it is only used to inhibit the screen saver from
-       starting while playing a game in fullscreen mode, but its usage
-       may expand in future releases.  If you prefer not to use D-Bus,
-       you can configure GNOME Video Arcade to not link against it.
-       See the Installation section to find out how.
-
    - Header files and base plugins for GStreamer. (optional)
 
        The GStreamer header files should be available from your
@@ -131,11 +116,11 @@ including GNOME Video Arcade.  This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.7.1 and may change in forthcoming releases.
+version 0.8.0 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.7.1
+   $ cd /path/to/gnome-video-arcade-0.8.0
    $ ./configure
    $ make
    $ su -c "make install"
