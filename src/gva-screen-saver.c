@@ -39,7 +39,7 @@
         (G_TYPE_INSTANCE_GET_PRIVATE \
         ((obj), GVA_TYPE_SCREEN_SAVER, GvaScreenSaverPrivate))
 
-struct GvaScreenSaverPrivate
+struct _GvaScreenSaverPrivate
 {
         gboolean disabled;
         gchar *reason;
