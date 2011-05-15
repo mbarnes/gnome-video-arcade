@@ -796,11 +796,13 @@ gva_properties_init (void)
                 GVA_WIDGET_PROPERTIES_MUSIC_BUTTON, "notify::status",
                 G_CALLBACK (properties_notify_music_status_cb), NULL);
 
-#if 0 /* GSETTINGS */
-        gconf_bridge_bind_window (
-                gconf_bridge_get (), GVA_GCONF_PROPERTIES_PREFIX,
-                GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW), TRUE, FALSE);
-#endif
+        gtk_window_resize (
+                GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW),
+                g_settings_get_int (settings, "properties-width"),
+                g_settings_get_int (settings, "properties-height"));
+
+        if (g_settings_get_boolean (settings, "properties-maximized"))
+                gtk_window_maximize (GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW));
 
         font_name = gva_get_monospace_font_name ();
         desc = pango_font_description_from_string (font_name);
@@ -918,4 +920,56 @@ gva_properties_show_cb (GtkWindow *window)
                 gva_music_button_play (music_button);
 
         properties_scroll_to_top ();
+}
+
+/**
+ * gva_properties_configure_event_cb:
+ * @window: the "Properties" window
+ * @event: a #GdkEventConfigure
+ *
+ * Handler for #GtkWidget::configure-event signals to the "Properties"
+ * window.
+ *
+ * Saves the "Properties" window state to dconf.
+ *
+ * Returns: %FALSE always
+ **/
+gboolean
+gva_properties_configure_event_cb (GtkWindow *window,
+                                   GdkEventConfigure *event)
+{
+        gva_save_window_state (
+                window,
+                "properties-width",
+                "properties-height",
+                "properties-maximized",
+                NULL, NULL);
+
+        return FALSE;
+}
+
+/**
+ * gva_properties_window_state_event_cb:
+ * @window: the "Properties" window
+ * @event: a #GdkEventWindowState
+ *
+ * Handler for #GtkWidget::window-state-event signals to the "Properties"
+ * window.
+ *
+ * Saves the "Properties" window state to dconf.
+ *
+ * Returns: %FALSE always
+ **/
+gboolean
+gva_properties_window_state_event_cb (GtkWindow *window,
+                                      GdkEventWindowState *event)
+{
+        gva_save_window_state (
+                window,
+                "properties-width",
+                "properties-height",
+                "properties-maximized",
+                NULL, NULL);
+
+        return FALSE;
 }

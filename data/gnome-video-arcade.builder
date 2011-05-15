@@ -1205,8 +1205,10 @@
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
     <signal name="show" handler="gva_properties_show_cb" swapped="no"/>
+    <signal name="configure-event" handler="gva_properties_configure_event_cb" swapped="no"/>
     <signal name="delete-event" handler="gtk_widget_hide_on_delete" swapped="no"/>
     <signal name="hide" handler="gva_properties_hide_cb" swapped="no"/>
+    <signal name="window-state-event" handler="gva_properties_window_state_event_cb" swapped="no"/>
     <child>
       <object class="GtkVBox" id="properties-vbox">
         <property name="visible">True</property>

@@ -37,6 +37,12 @@ void            gva_properties_show_game        (const gchar *game);
 
 void            gva_properties_hide_cb          (GtkWindow *window);
 void            gva_properties_show_cb          (GtkWindow *window);
+gboolean        gva_properties_configure_event_cb
+                                                (GtkWindow *window,
+                                                 GdkEventConfigure *event);
+gboolean        gva_properties_window_state_event_cb
+                                                (GtkWindow *window,
+                                                 GdkEventWindowState *event);
 
 G_END_DECLS
 

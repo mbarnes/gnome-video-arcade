@@ -52,3 +52,23 @@
 @window: 
 
 
+<!-- ##### FUNCTION gva_properties_configure_event_cb ##### -->
+<para>
+
+</para>
+
+@window: 
+@event: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gva_properties_window_state_event_cb ##### -->
+<para>
+
+</para>
+
+@window: 
+@event: 
+@Returns: 
+
+

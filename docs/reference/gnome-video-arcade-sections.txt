@@ -369,6 +369,8 @@ gva_properties_init
 gva_properties_show_game
 gva_properties_hide_cb
 gva_properties_show_cb
+gva_properties_configure_event_cb
+gva_properties_window_state_event_cb
 </SECTION>
 
 <SECTION>
