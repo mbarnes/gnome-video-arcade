@@ -74,17 +74,12 @@ INCLUDES=							\
 	-I$(top_srcdir)/src					\
 	-I$(top_builddir)					\
 	-I$(top_builddir)/src					\
-	$(DBUS_CFLAGS)						\
 	$(GLIB_CFLAGS)						\
 	$(GTK_CFLAGS)						\
 	$(GIT_CFLAGS)						\
 	$(GSTREAMER_CFLAGS)					\
 	$(SQLITE_CFLAGS)					\
 	$(WNCK_CFLAGS)
-
-if HAVE_DBUS
-DBUS_OBJECTS = $(top_builddir)/src/gva-dbus.o
-endif
 
 GTKDOC_LIBS=							\
 	$(top_builddir)/src/gva-audit.o				\
@@ -108,14 +103,13 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/gva-preferences.o			\
 	$(top_builddir)/src/gva-process.o			\
 	$(top_builddir)/src/gva-properties.o			\
+	$(top_builddir)/src/gva-screen-saver.o			\
 	$(top_builddir)/src/gva-time.o				\
 	$(top_builddir)/src/gva-tree-view.o			\
 	$(top_builddir)/src/gva-ui.o				\
 	$(top_builddir)/src/gva-util.o				\
 	$(top_builddir)/src/gva-wnck.o				\
 	$(top_builddir)/src/@MAME_BACKEND@			\
-	$(DBUS_OBJECTS)						\
-	$(DBUS_LIBS)						\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
 	$(GIT_LIBS)						\

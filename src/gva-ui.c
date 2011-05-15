@@ -31,13 +31,10 @@
 #include "gva-play-back.h"
 #include "gva-preferences.h"
 #include "gva-process.h"
+#include "gva-screen-saver.h"
 #include "gva-tree-view.h"
 #include "gva-util.h"
 #include "gva-wnck.h"
-
-#ifdef HAVE_DBUS
-#include "gva-dbus.h"
-#endif
 
 #define SQL_INSERT_LASTPLAYED \
         "INSERT INTO lastplayed VALUES ('%s', %" G_GINT64_FORMAT ")"
@@ -48,6 +45,7 @@
 static GtkBuilder *builder = NULL;
 static GtkUIManager *manager = NULL;
 static gboolean initialized = FALSE;
+static GvaScreenSaver *screen_saver = NULL;
 
 /* About Dialog Information */
 static const gchar *authors[] =
@@ -447,22 +445,27 @@ gva_action_play_back_cb (GtkAction *action)
         process = gva_mame_playback_game (name, inpname, &error);
         gva_error_handle (&error);
 
-#ifdef HAVE_DBUS
         if (process != NULL)
         {
-                const gchar *reason;
+                if (gva_preferences_get_full_screen ())
+                {
+                        const gchar *reason;
 
-                /* Translators: This is passed through D-Bus as the
-                 * reason to inhibit GNOME screen saver. */
-                reason = _("Watching a fullscreen game");
-                gva_dbus_inhibit_screen_saver (process, reason, &error);
-                gva_error_handle (&error);
-        }
-#endif
+                        /* Translators: This is passed through D-Bus as
+                         * the reason to inhibit GNOME screen saver. */
+                        reason = _("Watching a fullscreen game");
+                        gva_screen_saver_set_reason (screen_saver, reason);
+                        gva_screen_saver_disable (screen_saver);
 
-        if (process != NULL)
-        {
+                        g_signal_connect_data (
+                                process, "exited",
+                                G_CALLBACK (gva_screen_saver_enable),
+                                screen_saver, (GClosureNotify) NULL,
+                                G_CONNECT_AFTER | G_CONNECT_SWAPPED);
+                }
+
                 gva_wnck_listen_for_new_window (process, name);
+
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (log_lastplayed), g_strdup (name));
@@ -545,22 +548,27 @@ gva_action_record_cb (GtkAction *action)
         process = gva_mame_record_game (name, inpname, &error);
         gva_error_handle (&error);
 
-#ifdef HAVE_DBUS
         if (process != NULL)
         {
-                const gchar *reason;
+                if (gva_preferences_get_full_screen ())
+                {
+                        const gchar *reason;
 
-                /* Translators: This is passed through D-Bus as the
-                 * reason to inhibit GNOME screen saver. */
-                reason = _("Recording a fullscreen game");
-                gva_dbus_inhibit_screen_saver (process, reason, &error);
-                gva_error_handle (&error);
-        }
-#endif
+                        /* Translators: This is passed through D-Bus as
+                         * the reason to inhibit GNOME screen saver. */
+                        reason = _("Recording a fullscreen game");
+                        gva_screen_saver_set_reason (screen_saver, reason);
+                        gva_screen_saver_disable (screen_saver);
 
-        if (process != NULL)
-        {
+                        g_signal_connect_data (
+                                process, "exited",
+                                G_CALLBACK (gva_screen_saver_enable),
+                                screen_saver, (GClosureNotify) NULL,
+                                G_CONNECT_AFTER | G_CONNECT_SWAPPED);
+                }
+
                 gva_wnck_listen_for_new_window (process, name);
+
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (log_lastplayed), g_strdup (name));
@@ -684,22 +692,27 @@ gva_action_start_cb (GtkAction *action)
         process = gva_mame_run_game (name, &error);
         gva_error_handle (&error);
 
-#ifdef HAVE_DBUS
         if (process != NULL)
         {
-                const gchar *reason;
+                if (gva_preferences_get_full_screen ())
+                {
+                        const gchar *reason;
 
-                /* Translators: This is passed through D-Bus as the
-                 * reason to inhibit GNOME screen saver. */
-                reason = _("Playing a fullscreen game");
-                gva_dbus_inhibit_screen_saver (process, reason, &error);
-                gva_error_handle (&error);
-        }
-#endif
+                        /* Translators: This is passed through D-Bus as the
+                         * reason to inhibit GNOME screen saver. */
+                        reason = _("Playing a fullscreen game");
+                        gva_screen_saver_set_reason (screen_saver, reason);
+                        gva_screen_saver_disable (screen_saver);
 
-        if (process != NULL)
-        {
+                        g_signal_connect_data (
+                                process, "exited",
+                                G_CALLBACK (gva_screen_saver_enable),
+                                screen_saver, (GClosureNotify) NULL,
+                                G_CONNECT_AFTER | G_CONNECT_SWAPPED);
+                }
+
                 gva_wnck_listen_for_new_window (process, name);
+
                 g_signal_connect_after (
                         process, "exited",
                         G_CALLBACK (log_lastplayed), g_strdup (name));
@@ -999,4 +1012,15 @@ gva_ui_unlock (void)
 
         gtk_action_group_set_sensitive (action_group, TRUE);
         gtk_widget_set_sensitive (GVA_WIDGET_MAIN_TREE_VIEW, TRUE);
+}
+
+/**
+ * gva_ui_init:
+ *
+ * Initializes the screen saver inhibitor.
+ **/
+void
+gva_ui_init (void)
+{
+        screen_saver = gva_screen_saver_new ();
 }

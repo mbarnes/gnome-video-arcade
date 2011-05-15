@@ -6,6 +6,7 @@
 #include <gva-music-button.h>
 #include <gva-mute-button.h>
 #include <gva-process.h>
+#include <gva-screen-saver.h>
 #include <gva-time.h>
 
 gva_cell_renderer_pixbuf_get_type
@@ -16,4 +17,5 @@ gva_mame_process_get_type
 gva_music_button_get_type
 gva_mute_button_get_type
 gva_process_get_type
+gva_screen_saver_get_type
 gva_time_get_type

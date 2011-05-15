@@ -87,12 +87,6 @@ gva_db_set_error
 </SECTION>
 
 <SECTION>
-<FILE>gva-dbus</FILE>
-gva_dbus_init
-gva_dbus_inhibit_screen_saver
-</SECTION>
-
-<SECTION>
 <FILE>gva-error</FILE>
 GVA_ERROR
 GVA_SQLITE_ERROR
@@ -374,6 +368,28 @@ gva_properties_window_state_event_cb
 </SECTION>
 
 <SECTION>
+<FILE>gva-screen-saver</FILE>
+<TITLE>GvaScreenSaver</TITLE>
+GvaScreenSaver
+gva_screen_saver_new
+gva_screen_saver_enable
+gva_screen_saver_disable
+gva_screen_saver_get_reason
+gva_screen_saver_set_reason
+<SUBSECTION Standard>
+GVA_SCREEN_SAVER
+GVA_IS_SCREEN_SAVER
+GVA_TYPE_SCREEN_SAVER
+GVA_SCREEN_SAVER_CLASS
+GVA_IS_SCREEN_SAVER_CLASS
+GVA_SCREEN_SAVER_GET_CLASS
+GvaScreenSaverClass
+<SUBSECTION Private>
+GvaScreenSaverPrivate
+gva_screen_saver_get_type
+</SECTION>
+
+<SECTION>
 <FILE>gva-tree-view</FILE>
 gva_tree_view_init
 gva_tree_view_lookup
@@ -433,6 +449,7 @@ gva_ui_get_managed_widget
 gva_ui_add_column_actions
 gva_ui_lock
 gva_ui_unlock
+gva_ui_init
 <SUBSECTION Private>
 GVA_WIDGET_AUDIT_SAVE_BUTTON
 GVA_WIDGET_AUDIT_TREE_VIEW

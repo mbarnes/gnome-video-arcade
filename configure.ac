@@ -23,7 +23,7 @@ AC_SUBST(abs_top_builddir)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 # Dependencies
-GLIB_MODULES="glib-2.0 >= 2.28"
+GLIB_MODULES="glib-2.0 gio-2.0 >= 2.28"
 PKG_CHECK_MODULES(GLIB, $GLIB_MODULES)
 AC_SUBST(GLIB_CFLAGS)
 AC_SUBST(GLIB_LIBS)
@@ -46,26 +46,6 @@ AC_SUBST(SQLITE_LIBS)
 # Needed for the monospace font name.
 GDS_MODULES="gsettings-desktop-schemas"
 PKG_CHECK_MODULES(GSETTINGS_DESKTOP_SCHEMAS, $GDS_MODULES)
-
-# --with-dbus=[yes|no]
-DBUS_CFLAGS=
-DBUS_LIBS=
-AC_ARG_WITH([dbus],
-        [AC_HELP_STRING([--with-dbus],
-        [use D-Bus for better desktop integration [default=yes]])],
-        with_dbus="$withval", with_dbus="yes")
-if test "$with_dbus" = "yes"; then
-DBUS_MODULES="dbus-glib-1"  # minimum version?
-PKG_CHECK_MODULES(DBUS, $DBUS_MODULES)
-AC_DEFINE_UNQUOTED(HAVE_DBUS, 1,
-        [Define to 1 if you are using GLib bindings for D-Bus])
-else
-DBUS_CFLAGS=
-DBUS_LIBS=
-fi
-AM_CONDITIONAL(HAVE_DBUS, test $with_dbus = yes)
-AC_SUBST(DBUS_CFLAGS)
-AC_SUBST(DBUS_LIBS)
 
 # --with-gstreamer=[yes|no]
 AC_ARG_WITH([gstreamer],
@@ -231,7 +211,6 @@ echo "    MAME Program    : $MAME_PROGRAM"
 echo "    Category File   : $with_category"
 echo "    History File    : $with_history"
 echo "    NPlayers File   : $with_nplayers"
-echo "    Use D-Bus       : $with_dbus"
 echo "    Use GStreamer   : $with_gstreamer"
 echo "    Use libwnck     : $with_wnck"
 echo

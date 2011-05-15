@@ -190,6 +190,7 @@ GtkWidget *     gva_ui_get_managed_widget       (const gchar *widget_path);
 void            gva_ui_add_column_actions       (GtkTreeView *view);
 void            gva_ui_lock                     (void);
 void            gva_ui_unlock                   (void);
+void            gva_ui_init                     (void);
 
 /* GtkAction callbacks */
 

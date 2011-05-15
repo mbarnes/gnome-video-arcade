@@ -39,10 +39,6 @@
 #include "gva-ui.h"
 #include "gva-util.h"
 
-#ifdef HAVE_DBUS
-#include "gva-dbus.h"
-#endif
-
 #define APPLICATION_ID "org.gnome.VideoArcade"
 
 #define SQL_COUNT_ROMS \
@@ -395,6 +391,7 @@ main (gint argc, gchar **argv)
         gva_play_back_init ();
         gva_preferences_init ();
         gva_properties_init ();
+        gva_ui_init ();
 
         gva_categories_init (&error);
         gva_error_handle (&error);
@@ -404,11 +401,6 @@ main (gint argc, gchar **argv)
 
         gva_nplayers_init (&error);
         gva_error_handle (&error);
-
-#ifdef HAVE_DBUS
-        gva_dbus_init (&error);
-        gva_error_handle (&error);
-#endif
 
         g_idle_add ((GSourceFunc) start, NULL);
         g_idle_add ((GSourceFunc) setup_file_monitors, NULL);
