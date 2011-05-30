@@ -766,11 +766,9 @@ gva_properties_init (void)
 {
         GtkTreeView *view;
         GSettings *settings;
-        GtkSettings *gtk_settings;
+        GtkStyleContext *context;
         GtkWidget *text_view;
-        GHashTable *color_hash;
         PangoFontDescription *desc;
-        const GdkColor *color;
         GtkWidget *widget;
         gchar *font_name;
 
@@ -806,15 +804,16 @@ gva_properties_init (void)
 
         font_name = gva_get_monospace_font_name ();
         desc = pango_font_description_from_string (font_name);
-        gtk_widget_modify_font (text_view, desc);
+        gtk_widget_override_font (text_view, desc);
         pango_font_description_free (desc);
         g_free (font_name);
 
-        gtk_settings = gtk_settings_get_default ();
-        g_object_get (gtk_settings, "color-hash", &color_hash, NULL);
-        color = g_hash_table_lookup (color_hash, "tooltip_bg_color");
         widget = GVA_WIDGET_PROPERTIES_STATUS_FRAME;
-        gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, color);
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_add_class (context, GTK_STYLE_CLASS_WARNING);
+        widget = gtk_bin_get_child (GTK_BIN (widget));
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_add_class (context, GTK_STYLE_CLASS_WARNING);
 
 #ifndef HAVE_GSTREAMER
         gtk_widget_hide (GVA_WIDGET_PROPERTIES_MUSIC_TABLE);

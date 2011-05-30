@@ -518,7 +518,7 @@ exit:
         }
 
         if (mapped_file != NULL)
-                g_mapped_file_free (mapped_file);
+                g_mapped_file_unref (mapped_file);
 
         return success;
 }
