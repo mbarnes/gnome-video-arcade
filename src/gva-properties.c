@@ -577,44 +577,44 @@ properties_update_status (GtkTreeModel *model,
         widget = GVA_WIDGET_PROPERTIES_STATUS_FRAME;
         visible = (strcmp (driver_status, "imperfect") == 0) ||
                 (strcmp (driver_status, "preliminary") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         gtk_image_set_from_stock (
                 GTK_IMAGE (GVA_WIDGET_PROPERTIES_STATUS_IMAGE),
                 stock_id, GTK_ICON_SIZE_DND);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_IMPERFECT_COLOR_LABEL;
         visible = (strcmp (driver_color, "imperfect") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_IMPERFECT_GRAPHIC_LABEL;
         visible = (strcmp (driver_graphic, "imperfect") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_IMPERFECT_SOUND_LABEL;
         visible = (strcmp (driver_sound, "imperfect") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_COCKTAIL_LABEL;
         visible = (strcmp (driver_cocktail, "preliminary") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_COLOR_LABEL;
         visible = (strcmp (driver_color, "preliminary") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_EMULATION_LABEL;
         visible = (strcmp (driver_emulation, "preliminary") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_PROTECTION_LABEL;
         visible = (strcmp (driver_protection, "preliminary") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         widget = GVA_WIDGET_PROPERTIES_PRELIMINARY_SOUND_LABEL;
         visible = (strcmp (driver_sound, "preliminary") == 0);
-        g_object_set (widget, "visible", visible, NULL);
+        gtk_widget_set_visible (widget, visible);
 
         g_free (driver_status);
         g_free (driver_emulation);
@@ -813,8 +813,6 @@ gva_properties_init (void)
         gtk_settings = gtk_settings_get_default ();
         g_object_get (gtk_settings, "color-hash", &color_hash, NULL);
         color = g_hash_table_lookup (color_hash, "tooltip_bg_color");
-        widget = GVA_WIDGET_PROPERTIES_STATUS_EVENT_BOX;
-        gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, color);
         widget = GVA_WIDGET_PROPERTIES_STATUS_FRAME;
         gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, color);
 

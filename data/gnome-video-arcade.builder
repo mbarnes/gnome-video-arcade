@@ -1422,6 +1422,7 @@ Manufacturer, Year</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="resize_mode">queue</property>
+                    <property name="vscroll_policy">natural</property>
                     <child>
                       <object class="GtkVBox" id="properties-technical-vbox">
                         <property name="visible">True</property>
@@ -1437,26 +1438,56 @@ Manufacturer, Year</property>
                             <property name="label_yalign">0</property>
                             <property name="shadow_type">out</property>
                             <child>
-                              <object class="GtkAlignment" id="properties-status-frame-alignment">
+                              <object class="GtkHBox" id="properties-status-hbox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="border_width">6</property>
+                                <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkEventBox" id="properties-status-event-box">
+                                  <object class="GtkImage" id="properties-status-image">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="yalign">0</property>
+                                    <property name="stock">gtk-dialog-warning</property>
+                                    <property name="icon-size">5</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkVBox" id="properties-status-vbox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="spacing">6</property>
                                     <child>
-                                      <object class="GtkHBox" id="properties-status-hbox">
+                                      <object class="GtkLabel" id="properties-status-header">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="border_width">6</property>
-                                        <property name="spacing">12</property>
+                                        <property name="xalign">0</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;There are known problems with this game:&lt;/b&gt;</property>
+                                        <property name="use_markup">True</property>
+                                        <property name="ellipsize">end</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkVBox" id="properties-status-detail-vbox">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
-                                          <object class="GtkImage" id="properties-status-image">
+                                          <object class="GtkLabel" id="properties-imperfect-color-label">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="yalign">0</property>
-                                            <property name="stock">gtk-dialog-warning</property>
-                                            <property name="icon-size">5</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• The colors aren't 100% accurate.</property>
+                                            <property name="ellipsize">end</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1465,157 +1496,115 @@ Manufacturer, Year</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkVBox" id="properties-status-vbox">
+                                          <object class="GtkLabel" id="properties-preliminary-color-label">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="spacing">6</property>
-                                            <child>
-                                              <object class="GtkLabel" id="properties-status-header">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
-                                                <property name="xalign">0</property>
-                                                <property name="label" translatable="yes">&lt;b&gt;There are known problems with this game:&lt;/b&gt;</property>
-                                                <property name="use_markup">True</property>
-                                                <property name="ellipsize">end</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">False</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkVBox" id="properties-status-detail-vbox">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-imperfect-color-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The colors aren't 100% accurate.</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">0</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-preliminary-color-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The colors are completely wrong.</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">1</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-imperfect-graphic-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The video emulation isn't 100% accurate.</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">2</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-imperfect-sound-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The sound emulation isn't 100% accurate.</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">3</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-preliminary-sound-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The game lacks sound.</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">4</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-preliminary-cocktail-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• Screen flipping in cocktail mode is not supported.</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">5</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-preliminary-emulation-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
-                                                    <property name="use_markup">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">6</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel" id="properties-preliminary-protection-label">
-                                                    <property name="visible">True</property>
-                                                    <property name="can_focus">False</property>
-                                                    <property name="xalign">0</property>
-                                                    <property name="label" translatable="yes">• The game has protection which isn't fully emulated.</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">7</property>
-                                                  </packing>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">False</property>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• The colors are completely wrong.</property>
+                                            <property name="ellipsize">end</property>
                                           </object>
                                           <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
+                                        <child>
+                                          <object class="GtkLabel" id="properties-imperfect-graphic-label">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• The video emulation isn't 100% accurate.</property>
+                                            <property name="ellipsize">end</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="properties-imperfect-sound-label">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• The sound emulation isn't 100% accurate.</property>
+                                            <property name="ellipsize">end</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">3</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="properties-preliminary-sound-label">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• The game lacks sound.</property>
+                                            <property name="ellipsize">end</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">4</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="properties-preliminary-cocktail-label">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• Screen flipping in cocktail mode is not supported.</property>
+                                            <property name="ellipsize">end</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">5</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="properties-preliminary-emulation-label">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• &lt;b&gt;THIS GAME DOESN'T WORK.&lt;/b&gt;</property>
+                                            <property name="use_markup">True</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">6</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="properties-preliminary-protection-label">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">• The game has protection which isn't fully emulated.</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">7</property>
+                                          </packing>
+                                        </child>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
                                 </child>
                               </object>
                             </child>
@@ -1665,8 +1654,8 @@ Manufacturer, Year</property>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -1788,8 +1777,8 @@ Manufacturer, Year</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1982,8 +1971,8 @@ Manufacturer, Year</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -2004,8 +1993,8 @@ Manufacturer, Year</property>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -2030,8 +2019,8 @@ Manufacturer, Year</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -2052,8 +2041,8 @@ Manufacturer, Year</property>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>

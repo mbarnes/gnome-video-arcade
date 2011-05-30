@@ -169,8 +169,6 @@
         (gva_ui_get_widget ("properties-preliminary-sound-label"))
 #define GVA_WIDGET_PROPERTIES_SOUND_VBOX \
         (gva_ui_get_widget ("properties-sound-vbox"))
-#define GVA_WIDGET_PROPERTIES_STATUS_EVENT_BOX \
-        (gva_ui_get_widget ("properties-status-event-box"))
 #define GVA_WIDGET_PROPERTIES_STATUS_FRAME \
         (gva_ui_get_widget ("properties-status-frame"))
 #define GVA_WIDGET_PROPERTIES_STATUS_IMAGE \
