@@ -18,17 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
-
-#include <glib/gi18n.h>
-
-#include <gdk/gdk.h>
-
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#include <X11/keysym.h>
-#endif /* GDK_WINDOWING_X11 */
-
 #include "gva-screen-saver.h"
 
 #define SCREEN_SAVER_SERVICE   "org.gnome.ScreenSaver"
@@ -47,12 +36,6 @@ struct _GvaScreenSaverPrivate
         GDBusProxy *gss_proxy;
         gboolean have_screen_saver_dbus;
         guint32 cookie;
-
-        /* To save the X11 screen saver info */
-        gint timeout;
-        gint interval;
-        gint prefer_blanking;
-        gint allow_exposures;
 };
 
 enum
@@ -233,45 +216,6 @@ screen_saver_dbus_proxy_new_cb (GObject *source,
         screen_saver_update_dbus_presence (screen_saver);
 }
 
-#ifdef GDK_WINDOWING_X11
-static void
-screen_saver_enable_x11 (GvaScreenSaver *screen_saver)
-{
-        GdkDisplay *display;
-
-        display = gdk_display_get_default ();
-
-        XLockDisplay (GDK_DISPLAY_XDISPLAY (display));
-        XSetScreenSaver (
-                GDK_DISPLAY_XDISPLAY (display),
-                screen_saver->priv->timeout,
-                screen_saver->priv->interval,
-                screen_saver->priv->prefer_blanking,
-                screen_saver->priv->allow_exposures);
-        XUnlockDisplay (GDK_DISPLAY_XDISPLAY (display));
-}
-
-static void
-screen_saver_disable_x11 (GvaScreenSaver *screen_saver)
-{
-        GdkDisplay *display;
-
-        display = gdk_display_get_default ();
-
-        XLockDisplay (GDK_DISPLAY_XDISPLAY (display));
-        XGetScreenSaver (
-                GDK_DISPLAY_XDISPLAY (display),
-                &screen_saver->priv->timeout,
-                &screen_saver->priv->interval,
-                &screen_saver->priv->prefer_blanking,
-                &screen_saver->priv->allow_exposures);
-        XSetScreenSaver (
-                GDK_DISPLAY_XDISPLAY (display), 0, 0,
-                DontPreferBlanking, DontAllowExposures);
-        XUnlockDisplay (GDK_DISPLAY_XDISPLAY (display));
-}
-#endif
-
 static void
 screen_saver_set_property (GObject *object,
                            guint property_id,
@@ -420,13 +364,6 @@ gva_screen_saver_disable (GvaScreenSaver *screen_saver)
 
         if (screen_saver_is_running_dbus (screen_saver))
                 screen_saver_disable_dbus (screen_saver);
-        else 
-#ifdef GDK_WINDOWING_X11
-                screen_saver_disable_x11 (screen_saver);
-#else
-#warning Unimplemented
-        {}
-#endif
 }
 
 /**
@@ -447,13 +384,6 @@ gva_screen_saver_enable (GvaScreenSaver *screen_saver)
 
         if (screen_saver_is_running_dbus (screen_saver))
                 screen_saver_enable_dbus (screen_saver);
-        else
-#ifdef GDK_WINDOWING_X11
-                screen_saver_enable_x11 (screen_saver);
-#else
-#warning Unimplemented
-        {}
-#endif
 }
 
 /**

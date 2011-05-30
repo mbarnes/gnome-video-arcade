@@ -30,7 +30,7 @@
 #ifndef GVA_SCREEN_SAVER_H
 #define GVA_SCREEN_SAVER_H
 
-#include <glib-object.h>
+#include "gva-common.h"
 
 #define GVA_TYPE_SCREEN_SAVER \
         (gva_screen_saver_get_type ())
