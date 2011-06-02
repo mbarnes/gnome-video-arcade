@@ -176,22 +176,20 @@ gva_get_debug_flags (void)
                 };
 
                 const gchar *env = g_getenv ("GVA_DEBUG");
+                gint ii;
 
-                g_log_set_handler (
-                        G_LOG_DOMAIN, GVA_DEBUG_MAME,
-                        (GLogFunc) log_handler, "MAME");
-                g_log_set_handler (
-                        G_LOG_DOMAIN, GVA_DEBUG_SQL,
-                        (GLogFunc) log_handler, "SQL");
-                g_log_set_handler (
-                        G_LOG_DOMAIN, GVA_DEBUG_IO,
-                        (GLogFunc) log_handler, "IO");
-                g_log_set_handler (
-                        G_LOG_DOMAIN, GVA_DEBUG_INP,
-                        (GLogFunc) log_handler, "INP");
-                g_log_set_handler (
-                        G_LOG_DOMAIN, GVA_DEBUG_GST,
-                        (GLogFunc) log_handler, "GST");
+                for (ii = 0; ii < G_N_ELEMENTS (debug_keys); ii++)
+                {
+                        gchar *all_caps;
+
+                        all_caps = g_ascii_strup (debug_keys[ii].key, -1);
+
+                        g_log_set_handler (
+                                G_LOG_DOMAIN, debug_keys[ii].value,
+                                (GLogFunc) log_handler, all_caps);
+
+                        g_free (all_caps);
+                }
 
                 flags = g_parse_debug_string (
                         (env != NULL) ? env : "", debug_keys,
