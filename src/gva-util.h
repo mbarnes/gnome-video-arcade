@@ -70,6 +70,7 @@ GvaDebugFlags   gva_get_debug_flags             (void);
 const gchar *   gva_get_last_version            (void);
 gchar *         gva_get_monospace_font_name     (void);
 GSettings *     gva_get_settings                (void);
+SoupSession *   gva_get_soup_session            (void);
 void            gva_get_time_elapsed            (GTimeVal *start_time,
                                                  GTimeVal *time_elapsed);
 const gchar *   gva_get_user_data_dir           (void);

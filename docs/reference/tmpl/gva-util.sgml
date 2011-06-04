@@ -87,6 +87,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_get_soup_session ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_get_time_elapsed ##### -->
 <para>
 

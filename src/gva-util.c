@@ -23,6 +23,10 @@
 #include "gva-error.h"
 #include "gva-mame.h"
 
+/* SoupCache API is still unstable as of libsoup 2.35. */
+#define LIBSOUP_USE_UNSTABLE_REQUEST_API
+#include <libsoup/soup-cache.h>
+
 #define DEFAULT_MONOSPACE_FONT_NAME     "Monospace 10"
 
 /* Command Line Options */
@@ -277,6 +281,41 @@ gva_get_settings (void)
                 settings = g_settings_new ("org.gnome.VideoArcade");
 
         return settings;
+}
+
+/**
+ * gva_get_soup_session:
+ *
+ * Returns a #SoupSessionAsync configured to cache responses.
+ *
+ * Returns: the #SoupSession object for
+ *          <emphasis>GNOME Video Arcade</emphasis>
+ **/
+SoupSession *
+gva_get_soup_session (void)
+{
+        static SoupSession *soup_session = NULL;
+
+        if (G_UNLIKELY (soup_session == NULL))
+        {
+                soup_session = soup_session_async_new ();
+
+                soup_session_add_feature_by_type (
+                        soup_session, SOUP_TYPE_CACHE);
+
+                if (gva_get_debug_flags () & GVA_DEBUG_HTTP)
+                        soup_session_add_feature_by_type (
+                                soup_session, SOUP_TYPE_LOGGER);
+
+                /* Spoof the "User-Agent" header,
+                 * otherwise MAWS will block us. */
+                g_object_set (
+                        soup_session,
+                        SOUP_SESSION_USER_AGENT,
+                        "Mozilla/5.0", NULL);
+        }
+
+        return soup_session;
 }
 
 /**
