@@ -78,6 +78,7 @@ INCLUDES=							\
 	$(GTK_CFLAGS)						\
 	$(GIT_CFLAGS)						\
 	$(GSTREAMER_CFLAGS)					\
+	$(SOUP_CFLAGS)						\
 	$(SQLITE_CFLAGS)					\
 	$(WNCK_CFLAGS)
 
@@ -113,6 +114,7 @@ GTKDOC_LIBS=							\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
 	$(GIT_LIBS)						\
+	$(SOUP_LIBS)						\
 	$(GSTREAMER_LIBS)					\
 	$(SQLITE_LIBS)						\
 	$(WNCK_LIBS)
