@@ -120,48 +120,6 @@ warn_if_no_roms (void)
         gtk_widget_destroy (dialog);
 }
 
-static gboolean
-start (void)
-{
-        GSettings *settings;
-        GError *error = NULL;
-
-        settings = gva_get_settings ();
-
-        if (gva_db_needs_rebuilt ())
-        {
-                if (!gva_main_build_database (&error))
-                        goto exit;
-
-                if (!gva_main_analyze_roms (&error))
-                        goto exit;
-        }
-        else if (gva_audit_detect_changes ())
-        {
-                if (!gva_main_analyze_roms (&error))
-                        goto exit;
-        }
-
-        /* Do this after ROMs are analyzed. */
-        if (!gva_main_init_search_completion (&error))
-                goto exit;
-
-        gva_ui_unlock ();
-
-        g_settings_bind (
-                settings, GVA_SETTING_SELECTED_VIEW,
-                GVA_ACTION_VIEW_AVAILABLE, "current-value",
-                G_SETTINGS_BIND_DEFAULT);
-
-        /* Present a helpful dialog if no ROMs were found. */
-        warn_if_no_roms ();
-
-exit:
-        gva_error_handle (&error);
-
-        return FALSE;
-}
-
 static void
 rompath_changed_cb (GFileMonitor *monitor,
                     GFile *file,
@@ -274,6 +232,58 @@ setup_file_monitors (void)
         g_strfreev (search_paths);
 
         return FALSE;
+}
+
+static void
+start (void)
+{
+        GSettings *settings;
+        GError *error = NULL;
+
+        settings = gva_get_settings ();
+
+        if (gva_db_needs_rebuilt ())
+        {
+                if (!gva_main_build_database (&error))
+                {
+                        gva_error_handle (&error);
+                        return;
+                }
+
+                if (!gva_main_analyze_roms (&error))
+                {
+                        gva_error_handle (&error);
+                        return;
+                }
+        }
+        else if (gva_audit_detect_changes ())
+        {
+                if (!gva_main_analyze_roms (&error))
+                {
+                        gva_error_handle (&error);
+                        return;
+                }
+        }
+
+        /* Do this after ROMs are analyzed. */
+        if (!gva_main_init_search_completion (&error))
+        {
+                gva_error_handle (&error);
+                return;
+        }
+
+        gva_ui_unlock ();
+
+        g_settings_bind (
+                settings, GVA_SETTING_SELECTED_VIEW,
+                GVA_ACTION_VIEW_AVAILABLE, "current-value",
+                G_SETTINGS_BIND_DEFAULT);
+
+        /* Present a helpful dialog if no ROMs were found. */
+        warn_if_no_roms ();
+
+        /* Listen for changes to the 'rompath' directories. */
+        setup_file_monitors ();
 }
 
 gint
@@ -403,7 +413,6 @@ main (gint argc, gchar **argv)
         gva_error_handle (&error);
 
         g_idle_add ((GSourceFunc) start, NULL);
-        g_idle_add ((GSourceFunc) setup_file_monitors, NULL);
 
         gtk_main ();
 
