@@ -214,6 +214,10 @@ setup_file_monitors (void)
                 GFileMonitor *monitor;
                 GFile *file;
 
+                /* Skip paths that don't exist or are not directories. */
+                if (!g_file_test (search_paths[ii], G_FILE_TEST_IS_DIR))
+                        continue;
+
                 file = g_file_new_for_path (search_paths[ii]);
                 monitor = g_file_monitor (file, 0, NULL, NULL);
                 g_object_unref (file);
