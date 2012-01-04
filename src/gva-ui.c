@@ -40,7 +40,7 @@
         "INSERT INTO lastplayed VALUES ('%s', %" G_GINT64_FORMAT ")"
 
 #define WEBSITE_URL \
-        "http://mbarnes.github.com/gnome-video-arcade"
+        "http://live.gnome.org/GnomeVideoArcade"
 
 static GtkBuilder *builder = NULL;
 static GtkUIManager *manager = NULL;
