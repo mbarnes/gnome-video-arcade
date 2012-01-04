@@ -47,7 +47,7 @@ installed prior to compiling the source code:
        The GTK+ header files should be available from your GNU/Linux
        distribution as a "development" package.  The exact package name
        varies by distribution, but it should be something similar to
-       gtk3-devel (Fedora) or libgtk3.0-dev (Debian/Ubuntu).
+       gtk3-devel (Fedora) or libgtk-3-dev (Debian/Ubuntu).
 
    - Header files for SQLite version 3.x.
 
@@ -57,15 +57,6 @@ installed prior to compiling the source code:
        package.  The exact package name varies by distribution, but it
        should be something similar to sqlite-devel (Fedora) or
        libsqlite3-dev (Debian/Ubuntu).
-
-   - Header files for libsoup version 2.4 (or higher).
-
-       GNOME Video Arcade uses libsoup to download arcade-related images
-       off the web for use in the Properties window.  The libsoup header
-       files should be available from your GNU/Linux distribution as a
-       "development" package.  The exact package name varies by
-       distribution, but it should be something similar to libsoup-devel
-       (Fedora) or libsoup2.4-dev (Debian/Ubuntu).
 
    - Header files and base plugins for GStreamer. (optional)
 
@@ -81,12 +72,12 @@ installed prior to compiling the source code:
        clips in the Properties window.  The music clips are streamed
        from http://www.arcade-history.com.
 
-   - Header files for libwnck version 2.16 (or higher). (optional)
+   - Header files for libwnck version 2.91.6 (or higher). (optional)
 
        The libwnck header files should be available from your GNU/Linux
        distribution as a "development" package.  The exact package name
        varies by distribution, but it should be something similar to
-       libwnck-devel (Fedora) or libwnck-dev (Debian/Ubuntu).
+       libwnck-devel (Fedora) or libwnck-3-dev (Debian/Ubuntu).
 
        GNOME Video Arcade uses libwnck to implement "spatial" MAME
        windows, whereby the size and position of each game window is
