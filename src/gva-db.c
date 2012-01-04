@@ -63,7 +63,7 @@
                 "('good', 'best available', 'bad')), " \
                 "description NOT NULL, " \
                 "year, " \
-                "manufacturer NOT NULL, " \
+                "manufacturer, " \
                 "sound_channels, " \
                 "input_service DEFAULT 'no' " \
                 "CHECK (input_service in ('yes', 'no')), " \
