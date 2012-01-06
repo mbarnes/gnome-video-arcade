@@ -56,18 +56,19 @@ static const gchar *authors[] =
 static const gchar *copyright =
 "Copyright \xC2\xA9 2007-2011 Matthew Barnes";
 static const gchar *license =
-"GNOME Video Arcade is free software; you can redistribute it "
-"and/or modify it under the terms of the GNU General Public License "
-"as published by the Free Software Foundation; either version 3 of "
-"the License, or (at your option) any later version.\n"
-"\n"
-"GNOME Video Arcade is distributed in the hope that it will be "
-"useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
-"of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-"GNU General Public License for more details.\n"
-"\n"
-"You should have received a copy of the GNU General Public License "
-"along with this program.  If not, see <http://www.gnu.org/licenses/>.";
+N_("GNOME Video Arcade is free software; you can redistribute it "
+   "and/or modify it under the terms of the GNU General Public License "
+   "as published by the Free Software Foundation; either version 3 of "
+   "the License, or (at your option) any later version.\n"
+   "\n"
+   "GNOME Video Arcade is distributed in the hope that it will be "
+   "useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
+   "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+   "GNU General Public License for more details.\n"
+   "\n"
+   "You should have received a copy of the GNU General Public License "
+   "along with GNOME Video Arcade.  If not, see "
+   "<http://www.gnu.org/licenses/>.");
 
 /**
  * GVA_ACTION_ABOUT:
@@ -317,7 +318,7 @@ gva_action_about_cb (GtkAction *action)
                 "version", PACKAGE_VERSION,
                 "comments", _("M.A.M.E. Front-End"),
                 "copyright", copyright,
-                "license", license,
+                "license", _(license),
                 "wrap-license", TRUE,
                 "website", WEBSITE_URL,
                 "website-label", _("Visit the Website"),
