@@ -1,14 +1,14 @@
 # Catalan translation of GNOME Video Arcade.
-# Copyright © 2011 Free Software Foundation, Inc.
+# Copyright © 2011, 2012 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-video-arcade package.
-# Jordi Mallach <jordi@sindominio.net>, 2011.
+# Jordi Mallach <jordi@sindominio.net>, 2011, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-video-arcade 0.8\n"
+"Project-Id-Version: gnome-video-arcade 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-12 02:54+0200\n"
-"PO-Revision-Date: 2011-05-12 02:56+0200\n"
+"POT-Creation-Date: 2012-01-06 18:10+0100\n"
+"PO-Revision-Date: 2012-01-06 18:10+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -599,53 +599,6 @@ msgstr "Amplada de la finestra"
 msgid "Save As"
 msgstr "Anomena i desa"
 
-#: ../src/gva-db.c:1569
-#, c-format
-msgid "Database built in %ld.%ld seconds."
-msgstr "S'ha construït la base de dades en %ld.%ld segons."
-
-#. Begin test cases for rebuilding the games database.
-#. * The macro tests whether the database SHOULD be rebuilt.
-#: ../src/gva-db.c:2174
-msgid "the user requested it"
-msgstr "ho ha demanat l'usuari"
-
-#. FIXME: string concatenation makes this untranslatable
-#: ../src/gva-db.c:2178
-msgid "'s version changed"
-msgstr "ha canviat de versió"
-
-#: ../src/gva-db.c:2182
-msgid "the database does not have a build ID"
-msgstr "la base de dades no té un ID de construcció"
-
-#: ../src/gva-db.c:2187
-msgid "the MAME version could not be determined"
-msgstr "la versió del MAME no s'ha pogut determinar"
-
-#: ../src/gva-db.c:2192
-msgid "the database build ID does not match the MAME version"
-msgstr ""
-"l'ID de construcció de la base de dades no coincideix amb la versió del MAME"
-
-#: ../src/gva-db.c:2196
-msgid "the category file changed"
-msgstr "ha canviat el fitxer de categoria"
-
-#: ../src/gva-db.c:2206
-#, c-format
-msgid "Building database because %s."
-msgstr "S'està construint la base de dades perquè %s."
-
-#: ../src/gva-db.c:2208
-msgid "Database seems up-to-date; no rebuild necessary."
-msgstr "La base de dades sembla estar al dia, no cal reconstruir-la."
-
-#: ../src/gva-categories.c:71
-msgid "This program is not configured to show category information."
-msgstr ""
-"Aquest programa no està configurat per mostrar informació sobre la categoria."
-
 #: ../src/gva-column-manager.c:557
 msgid "Managed View"
 msgstr "Vista gestionada"
@@ -700,7 +653,7 @@ msgstr "(Fabricant desconegut)"
 msgid "(Year Unknown)"
 msgstr "(Any desconegut)"
 
-#: ../src/gva-columns.c:991 ../src/gva-main.c:1000
+#: ../src/gva-columns.c:991 ../src/gva-main.c:1007
 msgid "ROM Name"
 msgstr "Nom de la ROM"
 
@@ -708,7 +661,7 @@ msgstr "Nom de la ROM"
 msgid "BIOS"
 msgstr "BIOS"
 
-#: ../src/gva-columns.c:995 ../src/gva-main.c:993
+#: ../src/gva-columns.c:995 ../src/gva-main.c:1000
 msgid "Category"
 msgstr "Categoria"
 
@@ -732,7 +685,7 @@ msgstr "Títol"
 msgid "Year"
 msgstr "Any"
 
-#: ../src/gva-columns.c:1016 ../src/gva-main.c:979
+#: ../src/gva-columns.c:1016 ../src/gva-main.c:986
 msgid "Manufacturer"
 msgstr "Fabricant"
 
@@ -764,42 +717,37 @@ msgstr "Comentari"
 msgid "Played On"
 msgstr "Jugat el"
 
-#: ../src/gva-history.c:55
-msgid "This program is not configured to show history information."
-msgstr ""
-"Aquest programa no està configurat per mostrar informació de l'historial."
-
 #: ../src/gva-input-file.c:505
 #, c-format
 msgid "Invalid or unsupported INP file format"
 msgstr "El format del fitxer INP és invàlid o no està implementat"
 
-#: ../src/gva-main.c:223
+#: ../src/gva-main.c:230
 msgid "Building game database..."
 msgstr "S'està construint la base de dades dels jocs…"
 
-#: ../src/gva-main.c:284
+#: ../src/gva-main.c:291
 msgid "Analyzing ROM files..."
 msgstr "S'estan analitzant els fitxers ROM…"
 
-#: ../src/gva-main.c:965
+#: ../src/gva-main.c:972
 msgid "Search for any of the following:"
 msgstr "Cerca per qualsevol dels següents:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:972
+#: ../src/gva-main.c:979
 msgid "Game Title"
 msgstr "Títol del joc"
 
-#: ../src/gva-main.c:986
+#: ../src/gva-main.c:993
 msgid "Copyright Year"
 msgstr "Any del Copyright"
 
-#: ../src/gva-main.c:1007
+#: ../src/gva-main.c:1014
 msgid "BIOS Name"
 msgstr "Nom del BIOS"
 
-#: ../src/gva-main.c:1014
+#: ../src/gva-main.c:1021
 msgid "Driver Name"
 msgstr "Nom del controlador"
 
@@ -845,14 +793,6 @@ msgstr "El so dels jocs és silenciat"
 #: ../src/gva-mute-button.c:207
 msgid "In-game sound is enabled"
 msgstr "El so dels jocs és habilitat"
-
-#: ../src/gva-nplayers.c:99
-msgid ""
-"This program is not configured to show detailed number of players "
-"information."
-msgstr ""
-"Aquest programa no està configurat per mostrar informació detallada sobre el "
-"nombre de jugadors."
 
 #: ../src/gva-nplayers.c:179
 msgid "Up to four players alternating or two players simultaneously"
@@ -967,11 +907,6 @@ msgstr ""
 msgid "Do Not Delete"
 msgstr "No ho suprimeixes"
 
-#: ../src/gva-process.c:1020
-#, c-format
-msgid "Sending KILL signal to process %d."
-msgstr "S'està enviant el senyal KILL al procés %d."
-
 #: ../src/gva-properties.c:146
 msgid "Show this game"
 msgstr "Mostra aquest joc"
@@ -1007,75 +942,104 @@ msgid_plural "Search Results"
 msgstr[0] "Resultat de la cerca"
 msgstr[1] "Resultats de la cerca"
 
-#: ../src/gva-ui.c:320
+#: ../src/gva-ui.c:59
+msgid ""
+"GNOME Video Arcade is free software; you can redistribute it and/or modify "
+"it under the terms of the GNU General Public License as published by the "
+"Free Software Foundation; either version 3 of the License, or (at your "
+"option) any later version.\n"
+"\n"
+"GNOME Video Arcade is distributed in the hope that it will be useful, but "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
+"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"GNOME Video Arcade.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"El GNOME Video Arcade és programari lliure; podeu redistribuir-lo i/o "
+"modificar-lo sota els termes de la Llicència Pública General GNU tal com ha "
+"estat publicada per la Free Software Foundation; ja sigui la versió 3 de la "
+"Llicència o bé (si ho preferiu) qualsevol altra versió posterior.\n"
+"\n"
+"El GNOME Video Arcade es distribueix amb l'expectativa que serà útil, però "
+"SENSE CAP GARANTIA; ni tan sols la garantia implícita de COMERCIABILITAT o "
+"ADEQUACIÓ PER UN PROPÒSIT PARTICULAR. Vegeu la Llicència Pública General GNU "
+"per obtenir-ne més detalls.\n"
+"\n"
+"Hauríeu d'haver rebut una còpia de la Llicència Pública General GNU "
+"juntament amb el GNOME Video Arcade; en cas contrari, vegeu <http://www.gnu."
+"org/licenses/>."
+
+#: ../src/gva-ui.c:319
 msgid "M.A.M.E. Front-End"
 msgstr "Interfície del MAME"
 
-#: ../src/gva-ui.c:325
+#: ../src/gva-ui.c:324
 msgid "Visit the Website"
 msgstr "Visiteu la pàgina web"
 
-#: ../src/gva-ui.c:327
+#: ../src/gva-ui.c:326
 msgid "translator-credits"
 msgstr "Jordi Mallach <jordi@sindominio.net>"
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
 #: ../src/gva-ui.c:457
 msgid "Watching a fullscreen game"
 msgstr "S'està visualitzant un joc a pantalla completa"
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:555
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:560
 msgid "Recording a fullscreen game"
 msgstr "S'està enregistrant un joc a pantalla completa"
 
 #. Translators: This is passed through D-Bus as the
 #. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:694
+#: ../src/gva-ui.c:704
 msgid "Playing a fullscreen game"
 msgstr "S'està jugant a un joc a pantalla completa"
 
-#: ../src/gva-ui.c:787
+#: ../src/gva-ui.c:801
 msgid "Failed to initialize user interface"
 msgstr "No s'ha pogut inicialitzar la interfície d'usuari"
 
-#: ../src/gva-ui.c:929
+#: ../src/gva-ui.c:943
 #, c-format
 msgid "Add %s Column"
 msgstr "Afegeix la columna %s"
 
-#: ../src/gva-ui.c:931
+#: ../src/gva-ui.c:945
 #, c-format
 msgid "Add a \"%s\" column to the game list"
 msgstr "Afegeix una columna «%s» a la llista de jocs"
 
-#: ../src/main.c:57
+#: ../src/main.c:53
 msgid "Build the games database"
 msgstr "Construeix la base de dades dels jocs"
 
-#: ../src/main.c:61
+#: ../src/main.c:57
 msgid "Inspect an emulator setting"
 msgstr "Inspecciona un paràmetre de l'emulador"
 
-#: ../src/main.c:62
+#: ../src/main.c:58
 msgid "NAME"
 msgstr "NOM"
 
-#: ../src/main.c:66
+#: ../src/main.c:62
 msgid "Show the application version"
 msgstr "Mostra la versió de l'aplicació"
 
-#: ../src/main.c:70
+#: ../src/main.c:66
 msgid "Show which emulator will be used"
 msgstr "Mostra quin emulador s'emprarà"
 
-#: ../src/main.c:109
+#: ../src/main.c:105
 msgid "No ROM files found"
 msgstr "No s'ha trobat fitxers ROM"
 
-#: ../src/main.c:113
+#: ../src/main.c:109
 msgid ""
 "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
 "is misconfigured or that no ROM files are installed. Click <b>Help</b> for "
@@ -1086,11 +1050,11 @@ msgstr ""
 "instaŀlat. Feu clic a <b>Ajuda</b> per obtenir-ne més detalls i consells per "
 "resoldre problemes."
 
-#: ../src/main.c:198
+#: ../src/main.c:152
 msgid "Changes detected in ROM files"
 msgstr "S'han detectat canvis als fitxers ROM"
 
-#: ../src/main.c:202
+#: ../src/main.c:156
 msgid ""
 "GNOME Video Arcade has detected changes in your ROM files and will need to "
 "audit them in order to update the game list. However the audit may take "
@@ -1106,13 +1070,61 @@ msgstr ""
 "Si ometeu l'auditoria ara, es realitzarà automàticament la pròxima vegada "
 "que inicieu el GNOME Video Arcade."
 
-#: ../src/main.c:212
+#: ../src/main.c:166
 msgid "_Skip Audit"
 msgstr "_Omet l'auditoria"
 
-#: ../src/main.c:213
+#: ../src/main.c:167
 msgid "_Audit ROM Files"
 msgstr "_Audita els fitxers ROM"
+
+#~ msgid "Database built in %ld.%ld seconds."
+#~ msgstr "S'ha construït la base de dades en %ld.%ld segons."
+
+#~ msgid "the user requested it"
+#~ msgstr "ho ha demanat l'usuari"
+
+#~ msgid "'s version changed"
+#~ msgstr "ha canviat de versió"
+
+#~ msgid "the database does not have a build ID"
+#~ msgstr "la base de dades no té un ID de construcció"
+
+#~ msgid "the MAME version could not be determined"
+#~ msgstr "la versió del MAME no s'ha pogut determinar"
+
+#~ msgid "the database build ID does not match the MAME version"
+#~ msgstr ""
+#~ "l'ID de construcció de la base de dades no coincideix amb la versió del "
+#~ "MAME"
+
+#~ msgid "the category file changed"
+#~ msgstr "ha canviat el fitxer de categoria"
+
+#~ msgid "Building database because %s."
+#~ msgstr "S'està construint la base de dades perquè %s."
+
+#~ msgid "Database seems up-to-date; no rebuild necessary."
+#~ msgstr "La base de dades sembla estar al dia, no cal reconstruir-la."
+
+#~ msgid "This program is not configured to show category information."
+#~ msgstr ""
+#~ "Aquest programa no està configurat per mostrar informació sobre la "
+#~ "categoria."
+
+#~ msgid "This program is not configured to show history information."
+#~ msgstr ""
+#~ "Aquest programa no està configurat per mostrar informació de l'historial."
+
+#~ msgid ""
+#~ "This program is not configured to show detailed number of players "
+#~ "information."
+#~ msgstr ""
+#~ "Aquest programa no està configurat per mostrar informació detallada sobre "
+#~ "el nombre de jugadors."
+
+#~ msgid "Sending KILL signal to process %d."
+#~ msgstr "S'està enviant el senyal KILL al procés %d."
 
 #~ msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
 #~ msgstr "&#x2022; <b>AQUEST JOC NO FUNCIONA.</b>"
