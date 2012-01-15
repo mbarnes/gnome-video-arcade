@@ -1,3 +1,42 @@
+GNOME Video Arcade 0.8.1
+========================
+
+        Released January 15, 2012
+
+        What's New
+        ----------
+        * Jordi Mallach moved GVA's stale old home page on GitHub
+          to http://live.gnome.org/GnomeVideoArcade.  GNOME Video
+          Arcade is now fully hosted on gnome.org!  Thanks Jordi!
+        * MAME 0.144 changed its -listxml DTD in a way that breaks
+          GNOME Video Arcade, so this release is mainly to adapt to
+          the new DTD.  (Thanks again to Jordi Mallach for alerting
+          me to the problem.)
+        * Fixed some unsightly spacing glitches in the UI caused by
+          widget packing changes in GTK v3 versus v2.
+
+        Bugs Fixed
+        ----------
+        GNOME #667318: Make GPL blurb translatable
+                       (reported and patched by Jordi Mallach)
+
+        Other Contributions
+        -------------------
+        * Edd Barrett reported an assertion tripping on OpenBSD which
+          wound up being caused by MAME crashing on OpenBSD, but some
+          portability improvements still got committed to GVA in the
+          course of the investigation.
+
+        New Translations
+        ----------------
+        Turkish (Volkan Yalçın)
+
+        Updated Translations
+        --------------------
+        Brazilian Portuguese (Gabriel Speckhahn)
+        Catalan (Jordi Mallach)
+        Spanish (Daniel Mustieles)
+
 GNOME Video Arcade 0.8.0
 ========================
 
