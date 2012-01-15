@@ -59,6 +59,15 @@ installed prior to compiling the source code:
        should be something similar to sqlite-devel (Fedora) or
        libsqlite3-dev (Debian/Ubuntu).
 
+   - Header files for libsoup version 2.4 (or higher).
+
+       GNOME Video Arcade uses libsoup to download arcade-related images
+       off the web for use in the Properties window. The libsoup header
+       files should be available from your GNU/Linux distribution as a
+       "development" package. The exact package name varies by
+       distribution, but it should be something similar to libsoup-devel
+       (Fedora) or libsoup2.4-dev (Debian/Ubuntu).
+
    - Header files and base plugins for GStreamer. (optional)
 
        The GStreamer header files should be available from your
