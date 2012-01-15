@@ -1,2 +1,1 @@
-Redirect 301 /old/index.html
-/new/http://live.gnome.org/GnomeVideoArcade
+Redirect 301 / http://live.gnome.org/GnomeVideoArcade
