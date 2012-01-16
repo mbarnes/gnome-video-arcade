@@ -1,3 +1,14 @@
+GNOME Video Arcade 0.8.2
+========================
+
+        Released January 15, 2012
+
+        What's New
+        ----------
+        * BROWN PAPER BAG RELEASE.  GVA 0.8.1 has a bug that may cause
+          the startup routine to be run repeatedly until the program is
+          terminated.  This release fixes the bug.
+
 GNOME Video Arcade 0.8.1
 ========================
 
