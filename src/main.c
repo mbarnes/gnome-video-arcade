@@ -290,6 +290,15 @@ start (void)
         setup_file_monitors ();
 }
 
+static gboolean
+idle_start (gpointer unused)
+{
+        start ();
+
+        /* Do not reschedule this callback. */
+        return FALSE;
+}
+
 gint
 main (gint argc, gchar **argv)
 {
@@ -416,7 +425,7 @@ main (gint argc, gchar **argv)
         gva_nplayers_init (&error);
         gva_error_handle (&error);
 
-        g_idle_add ((GSourceFunc) start, NULL);
+        g_idle_add (idle_start, NULL);
 
         gtk_main ();
 
