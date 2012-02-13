@@ -192,6 +192,12 @@ rompath_changed_cb (GFileMonitor *monitor,
                 /* Present a helpful dialog if no ROMs were found. */
                 warn_if_no_roms ();
         }
+        else
+        {
+                /* Don't bother the user again during this session. */
+                g_signal_handlers_disconnect_by_func (
+                        monitor, rompath_changed_cb, NULL);
+        }
 
         gtk_widget_destroy (dialog);
         dialog = NULL;
