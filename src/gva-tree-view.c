@@ -142,7 +142,23 @@ tree_view_search_equal (GtkTreeModel *model,
         gchar *s1, *s2;
         gboolean retval;
 
-        g_assert (column == GVA_GAME_STORE_COLUMN_DESCRIPTION);
+        /* XXX In earlier versions of GVA we set the tree view search
+         *     column to DESCRIPTION every time we loaded a new model,
+         *     since changing the model sets the search column to -1.
+         *
+         *     However this function would still occasionally get the
+         *     wrong search column ID passed to it, which would trip a
+         *     column ID assertion (GNOME #670102).  Never figured out
+         *     why, or how to reliably reproduce it.
+         *
+         *     But since the search column for the type-ahead feature
+         *     is always the DESCRIPTION column, it finally dawned on
+         *     me that we can just hard-code it here and do away with
+         *     the assertion and having to repeatedly set the search
+         *     column -- just leave it unset.
+         */
+
+        column = GVA_GAME_STORE_COLUMN_DESCRIPTION;
         gtk_tree_model_get (model, iter, column, &title, -1);
         g_assert (title != NULL);
 
@@ -355,12 +371,6 @@ gva_tree_view_run_query (const gchar *expression,
         gtk_tree_view_columns_autosize (view);
         gva_tree_view_update_status_bar ();
         g_object_unref (model);
-
-        /* Need to reset the search column after loading a new model,
-         * since GtkTreeView apparenly forgets.  This is not mentioned
-         * in the GTK+ documentation (GNOME bug #351910). */
-        gtk_tree_view_set_search_column (
-                view, GVA_GAME_STORE_COLUMN_DESCRIPTION);
 
         return TRUE;
 }
