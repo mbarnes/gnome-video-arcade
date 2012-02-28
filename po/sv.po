@@ -1,14 +1,14 @@
 # Swedish translation for gnome-video-arcade.
-# Copyright (C) 2007, 2009, 2011 Free Software Foundation, Inc.
+# Copyright (C) 2007, 2009, 2011, 2012 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-video-arcade package.
-# Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2011.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-09 10:54+0200\n"
-"PO-Revision-Date: 2011-04-09 10:55+0100\n"
+"POT-Creation-Date: 2012-02-28 09:18+0100\n"
+"PO-Revision-Date: 2012-02-28 09:19+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -18,425 +18,553 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../data/gnome-video-arcade.builder.h:1
+msgid "Add to _Favorites"
+msgstr "Lägg till i _favoriter"
+
+#: ../data/gnome-video-arcade.builder.h:2
+msgid "Show next game"
+msgstr "Visa nästa spel"
+
+#: ../data/gnome-video-arcade.builder.h:3
+msgid "Play _Back..."
+msgstr "Spela _upp..."
+
+#: ../data/gnome-video-arcade.builder.h:4
+msgid "Play back the selected game recording"
+msgstr "Spela upp inspelning för det markerade spelet"
+
+#: ../data/gnome-video-arcade.builder.h:5
+msgid "Show previous game"
+msgstr "Visa föregående spel"
+
+#: ../data/gnome-video-arcade.builder.h:6
+msgid "_Properties"
+msgstr "_Egenskaper"
+
+#: ../data/gnome-video-arcade.builder.h:7
+msgid "Show information about the selected game"
+msgstr "Visa information om det markerade spelet"
+
+#: ../data/gnome-video-arcade.builder.h:8
+msgid "_Record"
+msgstr "Spela _in"
+
+#: ../data/gnome-video-arcade.builder.h:9
+msgid "Start the selected game and record keypresses to a file"
+msgstr "Starta det markerade spelet och spela in tangenttryckningar till en fil"
+
+#: ../data/gnome-video-arcade.builder.h:10
+msgid "Remove from _Favorites"
+msgstr "Ta bort från _favoriter"
+
+#: ../data/gnome-video-arcade.builder.h:11
+msgid "Remove the selected game from my list of favorites"
+msgstr "Ta bort det markerade spelet från min favoritlista"
+
+#: ../data/gnome-video-arcade.builder.h:12
+msgid "Save _As..."
+msgstr "Spara so_m..."
+
+#: ../data/gnome-video-arcade.builder.h:13
+msgid "Save ROM errors to a file"
+msgstr "Spara ROM-fel till en fil"
+
+#: ../data/gnome-video-arcade.builder.h:14
+msgid "S_earch..."
+msgstr "Sö_k..."
+
+#: ../data/gnome-video-arcade.builder.h:15
+msgid "Show a custom list of games"
+msgstr "Visa en anpassad spellista"
+
+#: ../data/gnome-video-arcade.builder.h:16
+msgid "Play back a previously recorded game"
+msgstr "Spela upp ett tidigare inspelat spel"
+
+#: ../data/gnome-video-arcade.builder.h:17
+msgid "_Start"
+msgstr "_Starta"
+
+#: ../data/gnome-video-arcade.builder.h:18
+msgid "Start the selected game"
+msgstr "Starta markerat spel"
+
+#: ../data/gnome-video-arcade.builder.h:19
+msgid "Show _alternate versions of original games"
+msgstr "Visa _alternativa versioner av ursprungliga spel"
+
+#: ../data/gnome-video-arcade.builder.h:20
+msgid "_Available Games"
+msgstr "_Tillgängliga spel"
+
+#: ../data/gnome-video-arcade.builder.h:21
+msgid "Show all available games"
+msgstr "Visa alla tillgängliga spel"
+
+#: ../data/gnome-video-arcade.builder.h:22
+msgid "_Favorite Games"
+msgstr "_Favoritspel"
+
+#: ../data/gnome-video-arcade.builder.h:23
+msgid "Only show my favorite games"
+msgstr "Visa endast mina favoritspel"
+
+#: ../data/gnome-video-arcade.builder.h:24
+msgid "Search _Results"
+msgstr "Sök_resultat"
+
+#: ../data/gnome-video-arcade.builder.h:25
+msgid "Show my search results"
+msgstr "Visa mina sökresultat"
+
+#: ../data/gnome-video-arcade.builder.h:26
+msgid "_About"
+msgstr "_Om"
+
+#: ../data/gnome-video-arcade.builder.h:27
+msgid "Show information about the application"
+msgstr "Visa information om programmet"
+
+#: ../data/gnome-video-arcade.builder.h:28
+msgid "_Contents"
+msgstr "_Innehåll"
+
+#: ../data/gnome-video-arcade.builder.h:29
+msgid "Open the help documentation"
+msgstr "Öppna hjälpdokumentationen"
+
+#: ../data/gnome-video-arcade.builder.h:30
+msgid "_Preferences"
+msgstr "_Inställningar"
+
+#: ../data/gnome-video-arcade.builder.h:31
+msgid "Configure the application"
+msgstr "Konfigurera programmet"
+
+#: ../data/gnome-video-arcade.builder.h:32
+msgid "_Quit"
+msgstr "_Avsluta"
+
+#: ../data/gnome-video-arcade.builder.h:33
+msgid "Quit the application"
+msgstr "Avsluta programmet"
+
+#: ../data/gnome-video-arcade.builder.h:34
+msgid "_Add Column"
+msgstr "_Lägg till kolumn"
+
+#: ../data/gnome-video-arcade.builder.h:35
+msgid "_Edit"
+msgstr "R_edigera"
+
+#: ../data/gnome-video-arcade.builder.h:36
+msgid "_Game"
+msgstr "_Spel"
+
+#: ../data/gnome-video-arcade.builder.h:37
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../data/gnome-video-arcade.builder.h:38
+msgid "_View"
+msgstr "_Visa"
+
+#: ../data/gnome-video-arcade.builder.h:39
+msgid "Play music _automatically"
+msgstr "Spela automatiskt _musik"
+
+#: ../data/gnome-video-arcade.builder.h:40
+msgid "Automatically play a music clip from the selected game"
+msgstr "Spela automatiskt ett musikklipp från det markerade spelet"
+
+#: ../data/gnome-video-arcade.builder.h:41
+msgid "_Restore previous state when starting a game"
+msgstr "Å_terställ föregående tillstånd för start av spel"
+
+#: ../data/gnome-video-arcade.builder.h:42
+msgid "Start games in _fullscreen mode"
+msgstr "Starta spel i _helskärmsläge"
+
+#: ../data/gnome-video-arcade.builder.h:43
 msgid " "
 msgstr " "
 
-#: ../data/gnome-video-arcade.builder.h:2
-msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
-msgstr "&#x2022; <b>DETTA SPEL FUNGERAR INTE.</b>"
-
-#: ../data/gnome-video-arcade.builder.h:3
-msgid "&#x2022; Screen flipping in cocktail mode is not supported."
-msgstr "&#x2022; Skärmvändning i cocktail-läge stöds inte."
-
-#: ../data/gnome-video-arcade.builder.h:4
-msgid "&#x2022; The colors are completely wrong."
-msgstr "&#x2022; Färgerna är helt fel."
-
-#: ../data/gnome-video-arcade.builder.h:6
-#, no-c-format
-msgid "&#x2022; The colors aren't 100% accurate."
-msgstr "&#x2022; Färgerna är inte 100% korrekta."
-
-#: ../data/gnome-video-arcade.builder.h:7
-msgid "&#x2022; The game has protection which isn't fully emulated."
-msgstr "&#x2022; Spelet har ett skydd som inte är fullt emulerat."
-
-#: ../data/gnome-video-arcade.builder.h:8
-msgid "&#x2022; The game lacks sound."
-msgstr "&#x2022; Spelet saknar ljud."
-
-#: ../data/gnome-video-arcade.builder.h:10
-#, no-c-format
-msgid "&#x2022; The sound emulation isn't 100% accurate."
-msgstr "&#x2022; Ljudemuleringen är inte 100% korrekt."
-
-#: ../data/gnome-video-arcade.builder.h:12
-#, no-c-format
-msgid "&#x2022; The video emulation isn't 100% accurate."
-msgstr "&#x2022; Videoemuleringen är inte 100% korrekt."
-
-#: ../data/gnome-video-arcade.builder.h:13
-msgid "<b>Alternate Versions</b>"
-msgstr "<b>Alternativa versioner</b>"
-
-#: ../data/gnome-video-arcade.builder.h:14
-msgid "<b>BIOS</b>"
-msgstr "<b>BIOS</b>"
-
-#: ../data/gnome-video-arcade.builder.h:15
-msgid "<b>CPU</b>"
-msgstr "<b>Processor</b>"
-
-#: ../data/gnome-video-arcade.builder.h:16
-msgid "<b>Columns</b>"
-msgstr "<b>Kolumner</b>"
-
-#: ../data/gnome-video-arcade.builder.h:17
-msgid "<b>Game List</b>"
-msgstr "<b>Spellista</b>"
-
-#: ../data/gnome-video-arcade.builder.h:18
-msgid "<b>General</b>"
-msgstr "<b>Allmänt</b>"
-
-#: ../data/gnome-video-arcade.builder.h:19
-msgid "<b>Original Version</b>"
-msgstr "<b>Ursprunglig version</b>"
-
-#: ../data/gnome-video-arcade.builder.h:20
-msgid "<b>Sound</b>"
-msgstr "<b>Ljud</b>"
-
-#. The same text is in gnome-video-arcade.builder,
-#. * so it has to be translated with markup anyway.
-#: ../data/gnome-video-arcade.builder.h:21
-#: ../src/gva-columns.c:750
-msgid "<b>There are known problems with this game:</b>"
-msgstr "<b>Det finns kända problem med detta spel:</b>"
-
-#: ../data/gnome-video-arcade.builder.h:22
-msgid "<b>Video</b>"
-msgstr "<b>Video</b>"
-
-#: ../data/gnome-video-arcade.builder.h:23
+#: ../data/gnome-video-arcade.builder.h:44
 msgid "<big><b>Errors detected in ROM files</b></big>"
 msgstr "<big><b>Fel upptäcktes i ROM-filer</b></big>"
 
-#: ../data/gnome-video-arcade.builder.h:24
-msgid "<small></small>"
-msgstr "<small></small>"
-
-#: ../data/gnome-video-arcade.builder.h:25
-msgid "<small><i><b>Note:</b> Setting this will not take effect until the second time the game is started. It does not apply to recording or playing back games.</i></small>"
-msgstr "<small><i><b>OBSERVERA:</b> Denna inställning kommer inte att bli aktiverad förrän nästa gång som spelet startas.  Den gäller inte för inspelning eller uppspelning av spel.</i></small>"
-
-#: ../data/gnome-video-arcade.builder.h:26
-msgid "<small><i>If these games worked with previous versions of MAME, it is likely their ROM requirements have changed.  If so, you will need to acquire more recent ROM files.</i></small>"
-msgstr "<small><i>Om dessa spel fungerade med tidigare versioner av MAME så är det möjligt att deras ROM-krav har ändrats.  Om så är fallet så behöver du få tag på senare versioner av ROM-filerna.</i></small>"
-
-#: ../data/gnome-video-arcade.builder.h:27
+#: ../data/gnome-video-arcade.builder.h:45
 msgid "An audit of the available games has detected errors in some of the ROM files. The following games will not be available in GNOME Video Arcade."
 msgstr "En granskning av de tillgängliga spelet har upptäckt fel i några av ROM-filerna. Följande spel kommer inte att vara tillgängliga i GNOME Video Arcade."
 
-#: ../data/gnome-video-arcade.builder.h:28
-msgid "Choose the order of information to appear in the game list."
-msgstr "Välj ordningen som informationen ska visas i spellistan."
+#: ../data/gnome-video-arcade.builder.h:46
+msgid "<small><i>If these games worked with previous versions of MAME, it is likely their ROM requirements have changed.  If so, you will need to acquire more recent ROM files.</i></small>"
+msgstr "<small><i>Om dessa spel fungerade med tidigare versioner av MAME så är det möjligt att deras ROM-krav har ändrats.  Om så är fallet så behöver du få tag på senare versioner av ROM-filerna.</i></small>"
 
-#: ../data/gnome-video-arcade.builder.h:29
+#: ../data/gnome-video-arcade.builder.h:47
 msgid "Close this window"
 msgstr "Stäng det här fönstret"
 
-#: ../data/gnome-video-arcade.builder.h:30
-msgid "Columns"
-msgstr "Kolumner"
-
-#: ../data/gnome-video-arcade.builder.h:31
-msgid "Delete the selected game recordings"
-msgstr "Ta bort inspelningar för det markerade spelet"
-
-#: ../data/gnome-video-arcade.builder.h:32
+#: ../data/gnome-video-arcade.builder.h:48
 #: ../data/gnome-video-arcade.desktop.in.h:1
 msgid "GNOME Video Arcade"
 msgstr "GNOME Video Arcade"
 
-#: ../data/gnome-video-arcade.builder.h:33
-msgid "Gallery"
-msgstr "Galleri"
-
-#: ../data/gnome-video-arcade.builder.h:34
-msgid "General"
-msgstr "Allmänt"
-
-#: ../data/gnome-video-arcade.builder.h:35
-msgid "History"
-msgstr "Historik"
-
-#: ../data/gnome-video-arcade.builder.h:36
-#: ../src/gva-ui.c:920
-msgid "Only show my favorite games"
-msgstr "Visa endast mina favoritspel"
-
-#: ../data/gnome-video-arcade.builder.h:37
-msgid "Play _Back"
-msgstr "Spela _upp"
-
-#: ../data/gnome-video-arcade.builder.h:38
-msgid "Play a music clip"
-msgstr "Spela ett musikklipp"
-
-#: ../data/gnome-video-arcade.builder.h:39
-#: ../src/gva-ui.c:792
-msgid "Play back the selected game recording"
-msgstr "Spela upp inspelning för det markerade spelet"
-
-#: ../data/gnome-video-arcade.builder.h:40
-msgid "Preferences"
-msgstr "Inställningar"
-
-#: ../data/gnome-video-arcade.builder.h:41
-msgid "Properties"
-msgstr "Egenskaper"
-
-#: ../data/gnome-video-arcade.builder.h:42
-msgid "Recorded Games"
-msgstr "Inspelade spel"
-
-#: ../data/gnome-video-arcade.builder.h:43
-#: ../src/gva-ui.c:834
-msgid "Save ROM errors to a file"
-msgstr "Spara ROM-fel till en fil"
-
 #. This label precedes the search entry. e.g. Search for: Pac-Man
-#: ../data/gnome-video-arcade.builder.h:45
+#: ../data/gnome-video-arcade.builder.h:50
 msgid "Search for:"
 msgstr "Sök efter:"
 
-#: ../data/gnome-video-arcade.builder.h:46
-#: ../src/gva-ui.c:913
-msgid "Show all available games"
-msgstr "Visa alla tillgängliga spel"
-
-#: ../data/gnome-video-arcade.builder.h:47
-#: ../src/gva-ui.c:806
-msgid "Show information about the selected game"
-msgstr "Visa information om det markerade spelet"
-
-#: ../data/gnome-video-arcade.builder.h:48
-#: ../src/gva-ui.c:927
-msgid "Show my search results"
-msgstr "Visa mina sökresultat"
-
-#: ../data/gnome-video-arcade.builder.h:49
-#: ../src/gva-ui.c:785
-msgid "Show next game"
-msgstr "Visa nästa spel"
-
-#: ../data/gnome-video-arcade.builder.h:50
-#: ../src/gva-ui.c:799
-msgid "Show previous game"
-msgstr "Visa föregående spel"
-
 #: ../data/gnome-video-arcade.builder.h:51
-#: ../src/gva-ui.c:855
-msgid "Start the selected game"
-msgstr "Starta markerat spel"
-
-#: ../data/gnome-video-arcade.builder.h:52
-msgid "Technical"
-msgstr "Tekniskt"
-
-#: ../data/gnome-video-arcade.builder.h:53
 msgid "_Start Game"
 msgstr "_Starta spel"
 
-#: ../data/gnome-video-arcade.desktop.in.h:2
-msgid "Play classic arcade games"
-msgstr "Spela klassiska arkadspel"
+#: ../data/gnome-video-arcade.builder.h:52
+msgid "Recorded Games"
+msgstr "Inspelade spel"
 
-#: ../data/gnome-video-arcade.desktop.in.h:3
+#: ../data/gnome-video-arcade.builder.h:53
+msgid "Delete the selected game recordings"
+msgstr "Ta bort inspelningar för det markerade spelet"
+
+#: ../data/gnome-video-arcade.builder.h:54
+msgid "Play _Back"
+msgstr "Spela _upp"
+
+#: ../data/gnome-video-arcade.builder.h:55
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: ../data/gnome-video-arcade.builder.h:56
+msgid "<b>General</b>"
+msgstr "<b>Allmänt</b>"
+
+#: ../data/gnome-video-arcade.builder.h:57
+msgid "<small><i><b>Note:</b> Setting this will not take effect until the second time the game is started. It does not apply to recording or playing back games.</i></small>"
+msgstr "<small><i><b>OBSERVERA:</b> Denna inställning kommer inte att bli aktiverad förrän nästa gång som spelet startas.  Den gäller inte för inspelning eller uppspelning av spel.</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:58
+msgid "<b>Game List</b>"
+msgstr "<b>Spellista</b>"
+
+#: ../data/gnome-video-arcade.builder.h:59
+msgid "General"
+msgstr "Allmänt"
+
+#: ../data/gnome-video-arcade.builder.h:60
+msgid "<b>Columns</b>"
+msgstr "<b>Kolumner</b>"
+
+#: ../data/gnome-video-arcade.builder.h:61
+msgid "Choose the order of information to appear in the game list."
+msgstr "Välj ordningen som informationen ska visas i spellistan."
+
+#: ../data/gnome-video-arcade.builder.h:62
+msgid "Columns"
+msgstr "Kolumner"
+
+#: ../data/gnome-video-arcade.builder.h:63
+msgid "Properties"
+msgstr "Egenskaper"
+
+#: ../data/gnome-video-arcade.builder.h:64
+msgid "History"
+msgstr "Historik"
+
+#: ../data/gnome-video-arcade.builder.h:65
+msgid "Gallery"
+msgstr "Galleri"
+
+#. The same text is in gnome-video-arcade.builder,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.builder.h:66
+#: ../src/gva-columns.c:753
+msgid "<b>There are known problems with this game:</b>"
+msgstr "<b>Det finns kända problem med detta spel:</b>"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.builder.h:68
+#: ../src/gva-columns.c:765
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• Färgerna är inte 100% korrekta."
+
+#: ../data/gnome-video-arcade.builder.h:69
+#: ../src/gva-columns.c:774
+msgid "• The colors are completely wrong."
+msgstr "• Färgerna är helt fel."
+
+#: ../data/gnome-video-arcade.builder.h:71
+#: ../src/gva-columns.c:784
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• Videoemuleringen är inte 100% korrekt."
+
+#: ../data/gnome-video-arcade.builder.h:73
+#: ../src/gva-columns.c:794
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• Ljudemuleringen är inte 100% korrekt."
+
+#: ../data/gnome-video-arcade.builder.h:74
+#: ../src/gva-columns.c:803
+msgid "• The game lacks sound."
+msgstr "• Spelet saknar ljud."
+
+#: ../data/gnome-video-arcade.builder.h:75
+#: ../src/gva-columns.c:812
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr "• Skärmvändning i cocktail-läge stöds inte."
+
+#: ../data/gnome-video-arcade.builder.h:76
+#: ../src/gva-columns.c:821
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>DETTA SPEL FUNGERAR INTE.</b>"
+
+#: ../data/gnome-video-arcade.builder.h:77
+#: ../src/gva-columns.c:831
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• Spelet har ett skydd som inte är fullt emulerat."
+
+#: ../data/gnome-video-arcade.builder.h:78
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/gnome-video-arcade.builder.h:79
+msgid "<b>CPU</b>"
+msgstr "<b>Processor</b>"
+
+#: ../data/gnome-video-arcade.builder.h:80
+msgid "<b>Sound</b>"
+msgstr "<b>Ljud</b>"
+
+#: ../data/gnome-video-arcade.builder.h:81
+msgid "<b>Video</b>"
+msgstr "<b>Video</b>"
+
+#: ../data/gnome-video-arcade.builder.h:82
+msgid "<b>Original Version</b>"
+msgstr "<b>Ursprunglig version</b>"
+
+#: ../data/gnome-video-arcade.builder.h:83
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>Alternativa versioner</b>"
+
+#: ../data/gnome-video-arcade.builder.h:84
+msgid "Technical"
+msgstr "Tekniskt"
+
+#: ../data/gnome-video-arcade.builder.h:85
+msgid "Play a music clip"
+msgstr "Spela ett musikklipp"
+
+#: ../data/gnome-video-arcade.builder.h:86
+msgid "<small></small>"
+msgstr "<small></small>"
+
+#: ../data/gnome-video-arcade.desktop.in.h:2
 msgid "Video Arcade"
 msgstr "Arkadspel"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+msgid "Play classic arcade games"
+msgstr "Spela klassiska arkadspel"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
 msgid "All available column names"
 msgstr "Alla tillgängliga kolumnnamn"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:2
-msgid "Auto-play music clip"
-msgstr "Spela musikklipp automatiskt"
+msgid "List of all available column names. The user may choose to only display a subset of them (see \"columns\")."
+msgstr "Lista över alla tillgängliga kolumnnamn. Användaren kan välja att endast visa en del av dem (se \"kolumner\")."
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:3
-msgid "Column names"
-msgstr "Kolumnnamn"
+msgid "Auto-play music clip"
+msgstr "Spela musikklipp automatiskt"
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:4
 msgid "Enable automatic playing of in-game music clips. If true, and a music clip is available for the selected game, the clip will automatically begin playing when the user opens the Properties window or when the user selects a different game while the Properties window is visible. Music clips are streamed from http://www.arcade-history.com/."
 msgstr ""
 
 #: ../data/org.gnome.VideoArcade.gschema.xml.in.h:5
-msgid "Enable automatic restore at startup and save at exit. If true, the emulator will try to restore the previous state of the arcade machine when starting a game. If false, the emulator will boot the arcade machine from a cold start. This setting does not apply to recording games or playing back previously recorded games. In those cases the emulator will always reboot the arcade machine."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
-msgid "Favorite games"
-msgstr "Favoritspel"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:7
-msgid "If true, automatically switch to full screen mode when starting a game. If false, start the game in a window."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:8
-msgid "If true, games are started without sound."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:9
-msgid "If true, show both original and cloned games in the main window. If false, show only original games."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:10
-msgid "List of all available column names. The user may choose to only display a subset of them (see \"columns\")."
-msgstr "Lista över alla tillgängliga kolumnnamn. Användaren kan välja att endast visa en del av dem (se \"kolumner\")."
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:11
-msgid "List of column names to display."
-msgstr "Lista över kolumnnamn att visa."
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:12
-msgid "List of the user's favorite games."
-msgstr "Lista över användarens favoritspel."
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:13
-msgid "Program version"
-msgstr "Programversion"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:14
-msgid "Properties height"
-msgstr "Höjd för egenskaper"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:15
-msgid "Properties maximized"
-msgstr "Egenskaper maximerade"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:16
-msgid "Properties page"
-msgstr "Egenskapssida"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:17
-msgid "Properties width"
-msgstr "Bredd för egenskaper"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:18
-msgid "ROM error filename"
-msgstr "Filnamn för ROM-fel"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:19
 msgid "Save and restore state"
 msgstr "Spara och återställ tillstånd"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:20
-msgid "Search text"
-msgstr "Söktext"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:21
-msgid "Selected completion match"
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
+msgid "Enable automatic restore at startup and save at exit. If true, the emulator will try to restore the previous state of the arcade machine when starting a game. If false, the emulator will boot the arcade machine from a cold start. This setting does not apply to recording games or playing back previously recorded games. In those cases the emulator will always reboot the arcade machine."
 msgstr ""
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
-msgid "Selected game"
-msgstr "Markerat spel"
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:7
+msgid "Column names"
+msgstr "Kolumnnamn"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:23
-msgid "Selected view"
-msgstr ""
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:8
+msgid "List of column names to display."
+msgstr "Lista över kolumnnamn att visa."
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:24
-msgid "Show cloned games"
-msgstr "Visa klonade spel"
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:9
+msgid "Favorite games"
+msgstr "Favoritspel"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:25
-msgid "Sort column and sort order"
-msgstr "Sortera kolumn och sorteringsordning"
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:10
+msgid "List of the user's favorite games."
+msgstr "Lista över användarens favoritspel."
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
-msgid "Sound muted"
-msgstr "Ljud inaktiverat"
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:27
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:11
 msgid "Start games in full screen mode"
 msgstr "Starta spel i helskärmsläge"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:28
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:12
+msgid "If true, automatically switch to full screen mode when starting a game. If false, start the game in a window."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:13
+msgid "ROM error filename"
+msgstr "Filnamn för ROM-fel"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:14
 msgid "Suggested filename for the ROM error \"Save As\" dialog."
 msgstr ""
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:29
-msgid "The X coordinate of the main window."
-msgstr "X-koordinaten för huvudfönstret."
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:15
+msgid "Properties height"
+msgstr "Höjd för egenskaper"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:30
-msgid "The Y coordinate of the main window."
-msgstr "Y-koordinaten för huvudfönstret."
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:31
-msgid "The first value is the most recently sorted column name (or \"default\" for default sorting), and the second value is the sort order. True indicates descending order; False indicates ascending order."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:32
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:16
 msgid "The height of the Properties window."
-msgstr ""
+msgstr "Höjden för egenskapsfönstret."
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:33
-msgid "The height of the main window."
-msgstr "Höjd för huvudfönstret."
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:17
+msgid "Properties maximized"
+msgstr "Egenskaper maximerade"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:34
-msgid "The most recent text in the search entry."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:35
-msgid "The most recently run version of GNOME Video Arcade."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
-msgid "The most recently selected game."
-msgstr "Det senaste valda spelet."
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:37
-msgid "The most recently selected match from a search completion list. The first value is the column name of the match, and the second value is the text of the match. Example: (manufacturer, Williams). Empty values indicate the completion feature was not used in the most recent search."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:38
-msgid "The most recently selected page in the Properties window."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:39
-msgid "The most recently selected view."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:40
-msgid "The width of the Properties window."
-msgstr ""
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:41
-msgid "The width of the main window."
-msgstr "Bredd för huvudfönstret."
-
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:42
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:18
 msgid "True if the Properties window is maximized."
 msgstr ""
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:43
-msgid "True if the main window is maximized."
-msgstr "Sant om huvudfönstret är maximerat."
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:19
+msgid "Properties page"
+msgstr "Egenskapssida"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:44
-msgid "Window X coordinate"
-msgstr "Fönstrets X-koordinat"
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:20
+msgid "The most recently selected page in the Properties window."
+msgstr ""
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:45
-msgid "Window Y coordinate"
-msgstr "Fönstrets Y-koordinat"
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:21
+msgid "Properties width"
+msgstr "Bredd för egenskaper"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:46
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
+msgid "The width of the Properties window."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:23
+msgid "Search text"
+msgstr "Söktext"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:24
+msgid "The most recent text in the search entry."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:25
+msgid "Selected game"
+msgstr "Markerat spel"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
+msgid "The most recently selected game."
+msgstr "Det senaste valda spelet."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:27
+msgid "Selected completion match"
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:28
+msgid "The most recently selected match from a search completion list. The first value is the column name of the match, and the second value is the text of the match. Example: (manufacturer, Williams). Empty values indicate the completion feature was not used in the most recent search."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:29
+msgid "Selected view"
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:30
+msgid "The most recently selected view."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:31
+msgid "Show cloned games"
+msgstr "Visa klonade spel"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:32
+msgid "If true, show both original and cloned games in the main window. If false, show only original games."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:33
+msgid "Sort column and sort order"
+msgstr "Sortera kolumn och sorteringsordning"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:34
+msgid "The first value is the most recently sorted column name (or \"default\" for default sorting), and the second value is the sort order. True indicates descending order; False indicates ascending order."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:35
+msgid "Sound muted"
+msgstr "Ljud inaktiverat"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
+msgid "If true, games are started without sound."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:37
+msgid "Program version"
+msgstr "Programversion"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:38
+msgid "The most recently run version of GNOME Video Arcade."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:39
 msgid "Window height"
 msgstr "Fönsterhöjd"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:47
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:40
+msgid "The height of the main window."
+msgstr "Höjd för huvudfönstret."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:41
 msgid "Window maximized"
 msgstr "Fönstret maximerat"
 
-#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:48
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:42
+msgid "True if the main window is maximized."
+msgstr "Sant om huvudfönstret är maximerat."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:43
 msgid "Window width"
 msgstr "Fönsterbredd"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:44
+msgid "The width of the main window."
+msgstr "Bredd för huvudfönstret."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:45
+msgid "Window X coordinate"
+msgstr "Fönstrets X-koordinat"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:46
+msgid "The X coordinate of the main window."
+msgstr "X-koordinaten för huvudfönstret."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:47
+msgid "Window Y coordinate"
+msgstr "Fönstrets Y-koordinat"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:48
+msgid "The Y coordinate of the main window."
+msgstr "Y-koordinaten för huvudfönstret."
 
 #: ../src/gva-audit.c:238
 msgid "Save As"
 msgstr "Spara som"
-
-#: ../src/gva-categories.c:71
-msgid "This program is not configured to show category information."
-msgstr "Det här programmet är inte konfigurerat att visa kategoriinformation."
 
 #: ../src/gva-column-manager.c:557
 msgid "Managed View"
@@ -472,167 +600,127 @@ msgstr "Ta bort %s-kolumn"
 msgid "Remove the \"%s\" column from the game list"
 msgstr "Ta bort kolumnen \"%s\" från spellistan"
 
-#. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-columns.c:762
-#, no-c-format
-msgid "• The colors aren't 100% accurate."
-msgstr "• Färgerna är inte 100% korrekta."
-
-#: ../src/gva-columns.c:771
-msgid "• The colors are completely wrong."
-msgstr "• Färgerna är helt fel."
-
-#: ../src/gva-columns.c:781
-#, no-c-format
-msgid "• The video emulation isn't 100% accurate."
-msgstr "• Videoemuleringen är inte 100% korrekt."
-
-#: ../src/gva-columns.c:791
-#, no-c-format
-msgid "• The sound emulation isn't 100% accurate."
-msgstr "• Ljudemuleringen är inte 100% korrekt."
-
-#: ../src/gva-columns.c:800
-msgid "• The game lacks sound."
-msgstr "• Spelet saknar ljud."
-
-#: ../src/gva-columns.c:809
-msgid "• Screen flipping in cocktail mode is not supported."
-msgstr "• Skärmvändning i cocktail-läge stöds inte."
-
-#: ../src/gva-columns.c:818
-msgid "• <b>THIS GAME DOESN'T WORK.</b>"
-msgstr "• <b>DETTA SPEL FUNGERAR INTE.</b>"
-
-#: ../src/gva-columns.c:828
-msgid "• The game has protection which isn't fully emulated."
-msgstr "• Spelet har ett skydd som inte är fullt emulerat."
-
-#: ../src/gva-columns.c:864
+#: ../src/gva-columns.c:867
 msgid "Click here to remove from favorites"
 msgstr "Klicka här för att ta bort från favoriter"
 
-#: ../src/gva-columns.c:866
+#: ../src/gva-columns.c:869
 msgid "Click here to add to favorites"
 msgstr "Klicka här för att lägga till favoriter"
 
-#: ../src/gva-columns.c:958
+#: ../src/gva-columns.c:961
 #: ../src/gva-properties.c:410
 msgid "(Game Description Unknown)"
 msgstr "(Spelbeskrivningen är okänd)"
 
-#: ../src/gva-columns.c:961
+#: ../src/gva-columns.c:964
 #: ../src/gva-properties.c:413
 msgid "(Manufacturer Unknown)"
 msgstr "(Tillverkaren är okänd)"
 
-#: ../src/gva-columns.c:964
+#: ../src/gva-columns.c:967
 #: ../src/gva-properties.c:416
 msgid "(Year Unknown)"
 msgstr "(Året är okänt)"
 
-#: ../src/gva-columns.c:988
-#: ../src/gva-main.c:1022
+#: ../src/gva-columns.c:991
+#: ../src/gva-main.c:1007
 msgid "ROM Name"
 msgstr "ROM-namn"
 
-#: ../src/gva-columns.c:990
+#: ../src/gva-columns.c:993
 msgid "BIOS"
 msgstr "BIOS"
 
-#: ../src/gva-columns.c:992
-#: ../src/gva-main.c:1015
+#: ../src/gva-columns.c:995
+#: ../src/gva-main.c:1000
 msgid "Category"
 msgstr "Kategori"
 
-#: ../src/gva-columns.c:994
+#: ../src/gva-columns.c:997
 msgid "Favorite"
 msgstr "Favorit"
 
-#: ../src/gva-columns.c:997
+#: ../src/gva-columns.c:1000
 msgid "Driver"
 msgstr "Drivrutin"
 
-#: ../src/gva-columns.c:1005
+#: ../src/gva-columns.c:1008
 msgid "Samples"
 msgstr "Samplingar"
 
-#: ../src/gva-columns.c:1007
+#: ../src/gva-columns.c:1010
 msgid "Title"
 msgstr "Titel"
 
-#: ../src/gva-columns.c:1010
+#: ../src/gva-columns.c:1013
 msgid "Year"
 msgstr "År"
 
-#: ../src/gva-columns.c:1013
-#: ../src/gva-main.c:1001
+#: ../src/gva-columns.c:1016
+#: ../src/gva-main.c:986
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
-#: ../src/gva-columns.c:1019
+#: ../src/gva-columns.c:1022
 msgid "Players"
 msgstr "Spelare"
 
-#: ../src/gva-columns.c:1022
+#: ../src/gva-columns.c:1025
 msgid "Players (Alt.)"
 msgstr "Spelare (Alt.)"
 
-#: ../src/gva-columns.c:1025
+#: ../src/gva-columns.c:1028
 msgid "Players (Sim.)"
 msgstr "Spelare (Sim.)"
 
-#: ../src/gva-columns.c:1030
+#: ../src/gva-columns.c:1033
 msgid "Status"
 msgstr "Status"
 
-#: ../src/gva-columns.c:1041
+#: ../src/gva-columns.c:1044
 msgid "Last Played"
 msgstr "Senast spelad"
 
-#: ../src/gva-columns.c:1043
+#: ../src/gva-columns.c:1046
 msgid "Comment"
 msgstr "Kommentar"
 
-#: ../src/gva-columns.c:1047
+#: ../src/gva-columns.c:1050
 msgid "Played On"
 msgstr "Spelades den"
-
-#: ../src/gva-history.c:55
-msgid "This program is not configured to show history information."
-msgstr "Det här programmet är inte konfigurerat att visa historikinformation."
 
 #: ../src/gva-input-file.c:505
 #, c-format
 msgid "Invalid or unsupported INP file format"
 msgstr "Ogiltigt INP-filformat eller stöds inte"
 
-#: ../src/gva-main.c:243
+#: ../src/gva-main.c:230
 msgid "Building game database..."
 msgstr "Bygger speldatabasen..."
 
-#: ../src/gva-main.c:304
+#: ../src/gva-main.c:291
 msgid "Analyzing ROM files..."
 msgstr "Analyserar ROM-filer..."
 
-#: ../src/gva-main.c:987
+#: ../src/gva-main.c:972
 msgid "Search for any of the following:"
 msgstr "Sök efter något av följande:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:994
+#: ../src/gva-main.c:979
 msgid "Game Title"
 msgstr "Speltitel"
 
-#: ../src/gva-main.c:1008
+#: ../src/gva-main.c:993
 msgid "Copyright Year"
 msgstr "Copyright (år)"
 
-#: ../src/gva-main.c:1029
+#: ../src/gva-main.c:1014
 msgid "BIOS Name"
 msgstr "BIOS-namn"
 
-#: ../src/gva-main.c:1036
+#: ../src/gva-main.c:1021
 msgid "Driver Name"
 msgstr "Drivrutinens namn"
 
@@ -679,10 +767,6 @@ msgstr "Ljud i spelet är inaktiverat"
 #: ../src/gva-mute-button.c:207
 msgid "In-game sound is enabled"
 msgstr "Ljud i spelet är aktiverat"
-
-#: ../src/gva-nplayers.c:99
-msgid "This program is not configured to show detailed number of players information."
-msgstr "Det här programmet är inte konfigurerat att visa detaljerad information om antal spelare."
 
 #: ../src/gva-nplayers.c:179
 msgid "Up to four players alternating or two players simultaneously"
@@ -811,33 +895,42 @@ msgstr ""
 msgid "History not available"
 msgstr "Historik är inte tillgänglig"
 
-#: ../src/gva-tree-view.c:421
+#: ../src/gva-tree-view.c:431
 msgid "Available Game"
 msgid_plural "Available Games"
 msgstr[0] "Tillgängligt spel"
 msgstr[1] "Tillgängliga spel"
 
-#: ../src/gva-tree-view.c:428
+#: ../src/gva-tree-view.c:438
 msgid "Favorite Game"
 msgid_plural "Favorite Games"
 msgstr[0] "Favoritspel"
 msgstr[1] "Favoritspel"
 
-#: ../src/gva-tree-view.c:435
+#: ../src/gva-tree-view.c:445
 msgid "Search Result"
 msgid_plural "Search Results"
 msgstr[0] "Sökresultat"
 msgstr[1] "Sökresultat"
 
-#: ../src/gva-ui.c:150
+#: ../src/gva-ui.c:59
+msgid ""
+"GNOME Video Arcade is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.\n"
+"\n"
+"GNOME Video Arcade is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with GNOME Video Arcade.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+
+#: ../src/gva-ui.c:319
 msgid "M.A.M.E. Front-End"
 msgstr "Gränssnitt för M.A.M.E."
 
-#: ../src/gva-ui.c:155
+#: ../src/gva-ui.c:324
 msgid "Visit the Website"
 msgstr "Besök webbplatsen"
 
-#: ../src/gva-ui.c:157
+#: ../src/gva-ui.c:326
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -845,208 +938,71 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:341
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:457
 msgid "Watching a fullscreen game"
 msgstr "Ser på ett helskärmsspel"
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:475
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:560
 msgid "Recording a fullscreen game"
 msgstr "Spelar in ett helskärmsspel"
 
 #. Translators: This is passed through D-Bus as the
 #. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:654
+#: ../src/gva-ui.c:704
 msgid "Playing a fullscreen game"
 msgstr "Spelar ett helskärmsspel"
 
-#: ../src/gva-ui.c:710
-msgid "_About"
-msgstr "_Om"
-
-#: ../src/gva-ui.c:712
-msgid "Show information about the application"
-msgstr "Visa information om programmet"
-
-#: ../src/gva-ui.c:717
-msgid "_Contents"
-msgstr "_Innehåll"
-
-#: ../src/gva-ui.c:719
-msgid "Open the help documentation"
-msgstr "Öppna hjälpdokumentationen"
-
-#: ../src/gva-ui.c:724
-msgid "_Preferences"
-msgstr "_Inställningar"
-
-#: ../src/gva-ui.c:726
-msgid "Configure the application"
-msgstr "Konfigurera programmet"
-
-#: ../src/gva-ui.c:731
-msgid "_Quit"
-msgstr "_Avsluta"
-
-#: ../src/gva-ui.c:733
-msgid "Quit the application"
-msgstr "Avsluta programmet"
-
-#: ../src/gva-ui.c:738
-msgid "_Add Column"
-msgstr "_Lägg till kolumn"
-
-#: ../src/gva-ui.c:745
-msgid "_Edit"
-msgstr "R_edigera"
-
-#: ../src/gva-ui.c:752
-msgid "_Game"
-msgstr "_Spel"
-
-#: ../src/gva-ui.c:759
-msgid "_Help"
-msgstr "_Hjälp"
-
-#: ../src/gva-ui.c:766
-msgid "_View"
-msgstr "_Visa"
-
-#: ../src/gva-ui.c:776
-msgid "Add to _Favorites"
-msgstr "Lägg till i _favoriter"
-
-#: ../src/gva-ui.c:778
-msgid "Add the selected game to my list of favorites"
-msgstr "Lägg till markerat spel i min favoritlista"
-
-#: ../src/gva-ui.c:790
-#: ../src/gva-ui.c:846
-msgid "Play _Back..."
-msgstr "Spela _upp..."
-
-#: ../src/gva-ui.c:804
-msgid "_Properties"
-msgstr "_Egenskaper"
-
-#: ../src/gva-ui.c:811
-msgid "_Record"
-msgstr "Spela _in"
-
-#: ../src/gva-ui.c:813
-msgid "Start the selected game and record keypresses to a file"
-msgstr "Starta det markerade spelet och spela in tangenttryckningar till en fil"
-
-#: ../src/gva-ui.c:825
-msgid "Remove from _Favorites"
-msgstr "Ta bort från _favoriter"
-
-#: ../src/gva-ui.c:827
-msgid "Remove the selected game from my list of favorites"
-msgstr "Ta bort det markerade spelet från min favoritlista"
-
-#: ../src/gva-ui.c:832
-msgid "Save _As..."
-msgstr "Spara so_m..."
-
-#: ../src/gva-ui.c:839
-msgid "S_earch..."
-msgstr "Sö_k..."
-
-#: ../src/gva-ui.c:841
-msgid "Show a custom list of games"
-msgstr "Visa en anpassad spellista"
-
-#: ../src/gva-ui.c:848
-msgid "Play back a previously recorded game"
-msgstr "Spela upp ett tidigare inspelat spel"
-
-#: ../src/gva-ui.c:853
-msgid "_Start"
-msgstr "_Starta"
-
-#: ../src/gva-ui.c:863
-msgid "Play music _automatically"
-msgstr "Spela automatiskt _musik"
-
-#: ../src/gva-ui.c:865
-msgid "Automatically play a music clip from the selected game"
-msgstr "Spela automatiskt ett musikklipp från det markerade spelet"
-
-#: ../src/gva-ui.c:871
-msgid "_Restore previous state when starting a game"
-msgstr "Å_terställ föregående tillstånd för start av spel"
-
-#: ../src/gva-ui.c:879
-msgid "Start games in _fullscreen mode"
-msgstr "Starta spel i _helskärmsläge"
-
-#: ../src/gva-ui.c:890
-msgid "Show _alternate versions of original games"
-msgstr "Visa _alternativa versioner av ursprungliga spel"
-
-#: ../src/gva-ui.c:911
-msgid "_Available Games"
-msgstr "_Tillgängliga spel"
-
-#: ../src/gva-ui.c:918
-msgid "_Favorite Games"
-msgstr "_Favoritspel"
-
-#: ../src/gva-ui.c:925
-msgid "Search _Results"
-msgstr "Sök_resultat"
-
-#: ../src/gva-ui.c:1022
+#: ../src/gva-ui.c:801
 msgid "Failed to initialize user interface"
 msgstr "Misslyckades med att initiera användargränssnittet"
 
-#: ../src/gva-ui.c:1146
+#: ../src/gva-ui.c:943
 #, c-format
 msgid "Add %s Column"
 msgstr "Lägg till %s-kolumn"
 
-#: ../src/gva-ui.c:1148
+#: ../src/gva-ui.c:945
 #, c-format
 msgid "Add a \"%s\" column to the game list"
 msgstr "Lägg till en \"%s\"-kolumn till spellistan"
 
-#: ../src/main.c:57
+#: ../src/main.c:53
 msgid "Build the games database"
 msgstr "Bygg speldatabasen"
 
-#: ../src/main.c:61
+#: ../src/main.c:57
 msgid "Inspect an emulator setting"
 msgstr "Inspektera en emulatorinställning"
 
-#: ../src/main.c:62
+#: ../src/main.c:58
 msgid "NAME"
 msgstr "NAMN"
 
-#: ../src/main.c:66
+#: ../src/main.c:62
 msgid "Show the application version"
 msgstr "Visa programmets version"
 
-#: ../src/main.c:70
+#: ../src/main.c:66
 msgid "Show which emulator will be used"
 msgstr "Visa vilken emulator som kommer att användas"
 
-#: ../src/main.c:109
+#: ../src/main.c:105
 msgid "No ROM files found"
 msgstr "Inga ROM-filer hittades"
 
-#: ../src/main.c:113
+#: ../src/main.c:109
 msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or that no ROM files are installed. Click <b>Help</b> for more details and troubleshooting tips."
 msgstr "GNOME Video Arcade kunde inte hitta några ROM-filer. Det kan vara så att MAME är felkonfigurerat eller att inga ROM-filer har installerats. Klicka på <b>Hjälp</b> för mer information och tips om felsökning."
 
-#: ../src/main.c:198
+#: ../src/main.c:152
 msgid "Changes detected in ROM files"
 msgstr "Ändringar upptäcktes i ROM-filer"
 
-#: ../src/main.c:202
+#: ../src/main.c:156
 msgid ""
 "GNOME Video Arcade has detected changes in your ROM files and will need to audit them in order to update the game list. However the audit may take several minutes to complete. Would you like to perform the audit now?\n"
 "\n"
@@ -1056,18 +1012,62 @@ msgstr ""
 "\n"
 "Om du hoppar över granskningen nu så kommer den att genomföras automatiskt nästa gång du startar GNOME Video Arcade."
 
-#: ../src/main.c:212
+#: ../src/main.c:166
 msgid "_Skip Audit"
 msgstr "_Hoppa över granskning"
 
-#: ../src/main.c:213
+#: ../src/main.c:167
 msgid "_Audit ROM Files"
 msgstr "_Granska ROM-filer"
 
+#~ msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
+#~ msgstr "&#x2022; <b>DETTA SPEL FUNGERAR INTE.</b>"
+
+#~ msgid "&#x2022; Screen flipping in cocktail mode is not supported."
+#~ msgstr "&#x2022; Skärmvändning i cocktail-läge stöds inte."
+
+#~ msgid "&#x2022; The colors are completely wrong."
+#~ msgstr "&#x2022; Färgerna är helt fel."
+
+#~ msgid "&#x2022; The colors aren't 100% accurate."
+#~ msgstr "&#x2022; Färgerna är inte 100% korrekta."
+
+#~ msgid "&#x2022; The game has protection which isn't fully emulated."
+#~ msgstr "&#x2022; Spelet har ett skydd som inte är fullt emulerat."
+
+#~ msgid "&#x2022; The game lacks sound."
+#~ msgstr "&#x2022; Spelet saknar ljud."
+
+#~ msgid "&#x2022; The sound emulation isn't 100% accurate."
+#~ msgstr "&#x2022; Ljudemuleringen är inte 100% korrekt."
+
+#~ msgid "&#x2022; The video emulation isn't 100% accurate."
+#~ msgstr "&#x2022; Videoemuleringen är inte 100% korrekt."
+
+#~ msgid "This program is not configured to show category information."
+#~ msgstr ""
+#~ "Det här programmet är inte konfigurerat att visa kategoriinformation."
+
+#~ msgid "This program is not configured to show history information."
+#~ msgstr ""
+#~ "Det här programmet är inte konfigurerat att visa historikinformation."
+
+#~ msgid ""
+#~ "This program is not configured to show detailed number of players "
+#~ "information."
+#~ msgstr ""
+#~ "Det här programmet är inte konfigurerat att visa detaljerad information "
+#~ "om antal spelare."
+
+#~ msgid "Add the selected game to my list of favorites"
+#~ msgstr "Lägg till markerat spel i min favoritlista"
+
 #~ msgid "GConf error: %s"
 #~ msgstr "GConf-fel: %s"
+
 #~ msgid "All further errors shown only on terminal."
 #~ msgstr "Alla ytterligare fel visas endast på terminalen."
+
 #~ msgid ""
 #~ "GNOME Video Arcade was unable to locate any ROM files. It could be that "
 #~ "MAME is misconfigured or no ROM files are installed. Consult the user "
@@ -1076,22 +1076,28 @@ msgstr "_Granska ROM-filer"
 #~ "GNOME Video Arcade kunde inte hitta några ROM-filer. Det kan vara så att "
 #~ "MAME är felkonfigurerat eller att inga ROM-filer har installerats. Läs "
 #~ "användardokumentationen för mer information och tips om felsökning."
+
 #~ msgid "gtk-close"
 #~ msgstr "Stäng"
+
 #~ msgid ""
 #~ "<big><b>Game Description</b></big>\n"
 #~ "Manufacturer, Year"
 #~ msgstr ""
 #~ "<big><b>Spelbeskrivning</b></big>\n"
 #~ "Tillverkare, År"
+
 #~ msgid "Child process exited with status (%d)"
 #~ msgstr "Barnprocessen avslutades med status (%d)"
+
 #~ msgid "(auto-save) GtkUIManager supplies the label"
 #~ msgstr "(auto-save) GtkUIManager anger etiketten"
+
 #~ msgid "(full-screen) GtkUIManager supplies the label"
 #~ msgstr "(full-screen) GtkUIManager anger etiketten"
+
 #~ msgid "Show properties about the selected game"
 #~ msgstr "Visa egenskaperna för det markerade spelet"
+
 #~ msgid "Could not find xmame executable"
 #~ msgstr "Kunde inte hitta xmame"
-
