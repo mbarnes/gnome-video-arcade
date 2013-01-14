@@ -1,0 +1,1109 @@
+# Serbian translation for gnome-video-arcade.
+# Copyright (C) 2013 gnome-video-arcade's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-video-arcade package.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade master\n"
+"Report-Msgid-Bugs-To: "
+"http://bugzilla.gnome.org/enter_bug.cgi?product=&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2012-06-02 16:10+0000\n"
+"PO-Revision-Date: 2013-01-14 11:27+0200\n"
+"Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
+"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/gnome-video-arcade.builder.h:1
+msgid "Add to _Favorites"
+msgstr "Dodaj u _omiljene"
+
+#: ../data/gnome-video-arcade.builder.h:2
+msgid "Show next game"
+msgstr "Prikažite sledeću igru"
+
+#: ../data/gnome-video-arcade.builder.h:3
+msgid "Play _Back..."
+msgstr "_Igraj..."
+
+#: ../data/gnome-video-arcade.builder.h:4
+msgid "Play back the selected game recording"
+msgstr "Igrajte zapis izabrane igre"
+
+#: ../data/gnome-video-arcade.builder.h:5
+msgid "Show previous game"
+msgstr "Prikažite prethodnu igru"
+
+#: ../data/gnome-video-arcade.builder.h:6
+msgid "_Properties"
+msgstr "_Svojstva"
+
+#: ../data/gnome-video-arcade.builder.h:7
+msgid "Show information about the selected game"
+msgstr "Prikažite podatke o izabranoj igri"
+
+#: ../data/gnome-video-arcade.builder.h:8
+msgid "_Record"
+msgstr "_Snimi"
+
+#: ../data/gnome-video-arcade.builder.h:9
+msgid "Start the selected game and record keypresses to a file"
+msgstr "Započnite izabranu igru i snimite pritiske tastera u datoteku"
+
+#: ../data/gnome-video-arcade.builder.h:10
+msgid "Remove from _Favorites"
+msgstr "Ukloni iz _omiljenih"
+
+#: ../data/gnome-video-arcade.builder.h:11
+msgid "Remove the selected game from my list of favorites"
+msgstr "Uklonite izabranu igru sa spiska omiljenih"
+
+#: ../data/gnome-video-arcade.builder.h:12
+msgid "Save _As..."
+msgstr "Sačuvaj _kao..."
+
+#: ../data/gnome-video-arcade.builder.h:13
+msgid "Save ROM errors to a file"
+msgstr "Sačuvajte greške ROM-a u datoteku"
+
+#: ../data/gnome-video-arcade.builder.h:14
+msgid "S_earch..."
+msgstr "_Potraži..."
+
+#: ../data/gnome-video-arcade.builder.h:15
+msgid "Show a custom list of games"
+msgstr "Prikažite proizvoljni spisak igara"
+
+#: ../data/gnome-video-arcade.builder.h:16
+msgid "Play back a previously recorded game"
+msgstr "Igrajte prethodno zapisanu igru"
+
+#: ../data/gnome-video-arcade.builder.h:17
+msgid "_Start"
+msgstr "_Pokreni"
+
+#: ../data/gnome-video-arcade.builder.h:18
+msgid "Start the selected game"
+msgstr "Pokrenite izabranu igru"
+
+#: ../data/gnome-video-arcade.builder.h:19
+msgid "Show _alternate versions of original games"
+msgstr "Prikaži _izmenjeno izdanje izvornih igara"
+
+#: ../data/gnome-video-arcade.builder.h:20
+msgid "_Available Games"
+msgstr "_Dostupne igre"
+
+#: ../data/gnome-video-arcade.builder.h:21
+msgid "Show all available games"
+msgstr "Prikažite sve dostupne igre"
+
+#: ../data/gnome-video-arcade.builder.h:22
+msgid "_Favorite Games"
+msgstr "_Omiljene igre"
+
+#: ../data/gnome-video-arcade.builder.h:23
+msgid "Only show my favorite games"
+msgstr "Prikažite samo vaše omiljene igre"
+
+#: ../data/gnome-video-arcade.builder.h:24
+msgid "Search _Results"
+msgstr "Rezultati _pretrage"
+
+#: ../data/gnome-video-arcade.builder.h:25
+msgid "Show my search results"
+msgstr "Prikažite rezultate pretrage"
+
+#: ../data/gnome-video-arcade.builder.h:26
+msgid "_About"
+msgstr "_O programu"
+
+#: ../data/gnome-video-arcade.builder.h:27
+msgid "Show information about the application"
+msgstr "Prikažite podatke o ovom programu"
+
+#: ../data/gnome-video-arcade.builder.h:28
+msgid "_Contents"
+msgstr "_Sadržaj"
+
+#: ../data/gnome-video-arcade.builder.h:29
+msgid "Open the help documentation"
+msgstr "Otvorite dokumentaciju pomoći"
+
+#: ../data/gnome-video-arcade.builder.h:30
+msgid "_Preferences"
+msgstr "_Postavke"
+
+#: ../data/gnome-video-arcade.builder.h:31
+msgid "Configure the application"
+msgstr "Podesite program"
+
+#: ../data/gnome-video-arcade.builder.h:32
+msgid "_Quit"
+msgstr "_Izađi"
+
+#: ../data/gnome-video-arcade.builder.h:33
+msgid "Quit the application"
+msgstr "Izađite iz programa"
+
+#: ../data/gnome-video-arcade.builder.h:34
+msgid "_Add Column"
+msgstr "_Dodaj kolonu"
+
+#: ../data/gnome-video-arcade.builder.h:35
+msgid "_Edit"
+msgstr "_Uređivanje"
+
+#: ../data/gnome-video-arcade.builder.h:36
+msgid "_Game"
+msgstr "_Igra"
+
+#: ../data/gnome-video-arcade.builder.h:37
+msgid "_Help"
+msgstr "Po_moć"
+
+#: ../data/gnome-video-arcade.builder.h:38
+msgid "_View"
+msgstr "_Pregled"
+
+#: ../data/gnome-video-arcade.builder.h:39
+msgid "Play music _automatically"
+msgstr "Sam _pusti muziku"
+
+#: ../data/gnome-video-arcade.builder.h:40
+msgid "Automatically play a music clip from the selected game"
+msgstr "Sami pustite muzički zapis iz izabrane igre"
+
+#: ../data/gnome-video-arcade.builder.h:41
+msgid "_Restore previous state when starting a game"
+msgstr "_Vrati prethodno stanje pri pokretanju igre"
+
+#: ../data/gnome-video-arcade.builder.h:42
+msgid "Start games in _fullscreen mode"
+msgstr "Pokreni igru preko celog _ekrana"
+
+#: ../data/gnome-video-arcade.builder.h:43
+msgid " "
+msgstr " "
+
+#: ../data/gnome-video-arcade.builder.h:44
+msgid "<big><b>Errors detected in ROM files</b></big>"
+msgstr "<big><b>Otkrivene su greške u ROM datotekama</b></big>"
+
+#: ../data/gnome-video-arcade.builder.h:45
+msgid ""
+"An audit of the available games has detected errors in some of the ROM "
+"files. The following games will not be available in GNOME Video Arcade."
+msgstr ""
+"Pregled dostupnih igara je otkrio greške u nekim ROM datotekama. Sledeće "
+"igre neće biti dostupne u Gnomovoj video arkadi."
+
+#: ../data/gnome-video-arcade.builder.h:46
+msgid ""
+"<small><i>If these games worked with previous versions of MAME, it is likely "
+"their ROM requirements have changed.  If so, you will need to acquire more "
+"recent ROM files.</i></small>"
+msgstr ""
+"<small><i>Ako su te igre radile sa prethodnim izdanjem MAME-a, najverovatnije "
+"da su izmenjeni njihovi ROM zahtevi.  Ako je tako, moraćete da nabavite "
+"novije ROM datoteke.</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:47
+msgid "Close this window"
+msgstr "Zatvorite ovaj prozor"
+
+#: ../data/gnome-video-arcade.builder.h:48
+#: ../data/gnome-video-arcade.desktop.in.h:1
+msgid "GNOME Video Arcade"
+msgstr "Gnomova video arkada"
+
+#. This label precedes the search entry. e.g. Search for: Pac-Man
+#: ../data/gnome-video-arcade.builder.h:50
+msgid "Search for:"
+msgstr "Potraži:"
+
+#: ../data/gnome-video-arcade.builder.h:51
+msgid "_Start Game"
+msgstr "_Počni igru"
+
+#: ../data/gnome-video-arcade.builder.h:52
+msgid "Recorded Games"
+msgstr "Snimljene igre"
+
+#: ../data/gnome-video-arcade.builder.h:53
+msgid "Delete the selected game recordings"
+msgstr "Obrišite zapise izabrane igre"
+
+#: ../data/gnome-video-arcade.builder.h:54
+msgid "Play _Back"
+msgstr "_Igraj"
+
+#: ../data/gnome-video-arcade.builder.h:55
+msgid "Preferences"
+msgstr "Postavke"
+
+#: ../data/gnome-video-arcade.builder.h:56
+msgid "<b>General</b>"
+msgstr "<b>Opšte</b>"
+
+#: ../data/gnome-video-arcade.builder.h:57
+msgid ""
+"<small><i><b>Note:</b> Setting this will not take effect until the second "
+"time the game is started. It does not apply to recording or playing back "
+"games.</i></small>"
+msgstr ""
+"<small><i><b>Napomena:</b> Ovo podešavanje neće stupiti na snagu sve do "
+"sledećeg pokretanja ove igre. Ne primenjuje se na snimanje ili igranje "
+"igara.</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:58
+msgid "<b>Game List</b>"
+msgstr "<b>Spisak igara</b>"
+
+#: ../data/gnome-video-arcade.builder.h:59
+msgid "General"
+msgstr "Opšte"
+
+#: ../data/gnome-video-arcade.builder.h:60
+msgid "<b>Columns</b>"
+msgstr "<b>Kolone</b>"
+
+#: ../data/gnome-video-arcade.builder.h:61
+msgid "Choose the order of information to appear in the game list."
+msgstr "Izaberite redosled podataka za prikazivanje na spisku igara."
+
+#: ../data/gnome-video-arcade.builder.h:62
+msgid "Columns"
+msgstr "Kolone"
+
+#: ../data/gnome-video-arcade.builder.h:63
+msgid "Properties"
+msgstr "Svojstva"
+
+#: ../data/gnome-video-arcade.builder.h:64
+msgid "History"
+msgstr "Istorijat"
+
+#: ../data/gnome-video-arcade.builder.h:65
+msgid "Gallery"
+msgstr "Zbirka"
+
+#. The same text is in gnome-video-arcade.builder,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.builder.h:66 ../src/gva-columns.c:753
+msgid "<b>There are known problems with this game:</b>"
+msgstr "<b>Postoje poznati problemi sa ovom igrom:</b>"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.builder.h:68 ../src/gva-columns.c:765
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• Boje nisu 100% precizne."
+
+#: ../data/gnome-video-arcade.builder.h:69 ../src/gva-columns.c:774
+msgid "• The colors are completely wrong."
+msgstr "• Boje su potpuno pogrešne."
+
+#: ../data/gnome-video-arcade.builder.h:71 ../src/gva-columns.c:784
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• Oponašanje videa nije 100% precizno."
+
+#: ../data/gnome-video-arcade.builder.h:73 ../src/gva-columns.c:794
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• Oponašanje zvuka nije 100% precizno."
+
+#: ../data/gnome-video-arcade.builder.h:74 ../src/gva-columns.c:803
+msgid "• The game lacks sound."
+msgstr "• Igri nedostaje zvuk."
+
+#: ../data/gnome-video-arcade.builder.h:75 ../src/gva-columns.c:812
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr "• Izvrtanje ekrana u koktel režimu nije podržano."
+
+#: ../data/gnome-video-arcade.builder.h:76 ../src/gva-columns.c:821
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>OVA IGRA NE RADI.</b>"
+
+#: ../data/gnome-video-arcade.builder.h:77 ../src/gva-columns.c:831
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• Igra ima zaštitu koja nije potpuno oponašana."
+
+#: ../data/gnome-video-arcade.builder.h:78
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/gnome-video-arcade.builder.h:79
+msgid "<b>CPU</b>"
+msgstr "<b>Procesor</b>"
+
+#: ../data/gnome-video-arcade.builder.h:80
+msgid "<b>Sound</b>"
+msgstr "<b>Zvuk</b>"
+
+#: ../data/gnome-video-arcade.builder.h:81
+msgid "<b>Video</b>"
+msgstr "<b>Video</b>"
+
+#: ../data/gnome-video-arcade.builder.h:82
+msgid "<b>Original Version</b>"
+msgstr "<b>Izvorno izdanje</b>"
+
+#: ../data/gnome-video-arcade.builder.h:83
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>Izmenjena izdanja</b>"
+
+#: ../data/gnome-video-arcade.builder.h:84
+msgid "Technical"
+msgstr "Tehnički"
+
+#: ../data/gnome-video-arcade.builder.h:85
+msgid "Play a music clip"
+msgstr "Pustite muzički zapis"
+
+#: ../data/gnome-video-arcade.builder.h:86
+msgid "<small></small>"
+msgstr "<small></small>"
+
+#: ../data/gnome-video-arcade.desktop.in.h:2
+msgid "Video Arcade"
+msgstr "Video arkada"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+msgid "Play classic arcade games"
+msgstr "Igrajte klasične arkadne igre"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
+msgid "All available column names"
+msgstr "Svi dostupni nazivi igara"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:2
+msgid ""
+"List of all available column names. The user may choose to only display a "
+"subset of them (see \"columns\")."
+msgstr ""
+"Spisak svih dostupnih naziva kolona. Korisnik može da izabere da prikaže "
+"samo njihov podskup (pogledajte „columns“ — kolone)."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:3
+msgid "Auto-play music clip"
+msgstr "Samostalno puštanje muzičkog zapisa"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:4
+msgid ""
+"Enable automatic playing of in-game music clips. If true, and a music clip "
+"is available for the selected game, the clip will automatically begin "
+"playing when the user opens the Properties window or when the user selects a "
+"different game while the Properties window is visible. Music clips are "
+"streamed from http://www.arcade-history.com/."
+msgstr ""
+"Uključuje samostalno puštanje muzičkih zapisa igre. Ako je izabrano, a muzički "
+"zapis je dostupan za izabranu igru, zapis će sam početi sa puštanjem kada "
+"korisnik otvori prozor svojstava ili kada izabere drugu igru dok je prozor "
+"svojstava vidljiv. Muzički zapisi se dovlače sa „http://www.arcade-"
+"history.com/“."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:5
+msgid "Save and restore state"
+msgstr "Čuva i vraća stanje"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
+msgid ""
+"Enable automatic restore at startup and save at exit. If true, the emulator "
+"will try to restore the previous state of the arcade machine when starting a "
+"game. If false, the emulator will boot the arcade machine from a cold start. "
+"This setting does not apply to recording games or playing back previously "
+"recorded games. In those cases the emulator will always reboot the arcade "
+"machine."
+msgstr ""
+"Uključuje samostalno vraćanje pri pokretanju i čuva pri zatvaranju. Ako je "
+"izabrano, oponašavač će pokušati da povrati prethodno stanje arkadne mašine "
+"pri pokretanju igre. Ako nije izabrano, oponašavač će učitati arkadnu mašinu "
+"iz praznog početka. Ovo podešavanje se ne primenjuje na snimanje igre ili "
+"igranje prethodno snimljene igre. U tim slučajevima oponašavač će uvek ponovo "
+"da učita arkadnu mašinu."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:7
+msgid "Column names"
+msgstr "Nazivi kolona"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:8
+msgid "List of column names to display."
+msgstr "Spisak naziva kolona za prikazivanje."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:9
+msgid "Favorite games"
+msgstr "Omiljene igre"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:10
+msgid "List of the user's favorite games."
+msgstr "Spisak korisnikovih omiljenih igara."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:11
+msgid "Start games in full screen mode"
+msgstr "Pokreće igru preko celog ekrana"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:12
+msgid ""
+"If true, automatically switch to full screen mode when starting a game. If "
+"false, start the game in a window."
+msgstr ""
+"Ako je izabrano, samostalno će se prebaciti u režim preko celog ekrana "
+"prilikom pokretanja igre. Ako nije izabrano, pokrenuće igru u prozoru."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:13
+msgid "ROM error filename"
+msgstr "Naziv datoteke greške ROM-a"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:14
+msgid "Suggested filename for the ROM error \"Save As\" dialog."
+msgstr "Predloženi naziv datoteke za „Sačuvaj kao“ prozorče greška ROM-a."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:15
+msgid "Properties height"
+msgstr "Visina svojstava"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:16
+msgid "The height of the Properties window."
+msgstr "Visina prozora svojstava."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:17
+msgid "Properties maximized"
+msgstr "Uvećana svojstva"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:18
+msgid "True if the Properties window is maximized."
+msgstr "Izabrano ako je prozor svojstava uvećan."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:19
+msgid "Properties page"
+msgstr "Stranica svojstava"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:20
+msgid "The most recently selected page in the Properties window."
+msgstr "Najskorije izabrana stranica u prozoru svojstava."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:21
+msgid "Properties width"
+msgstr "Širina svojstava"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
+msgid "The width of the Properties window."
+msgstr "Širina prozora svojstava."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:23
+msgid "Search text"
+msgstr "Tekst pretrage"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:24
+msgid "The most recent text in the search entry."
+msgstr "Najskoriji tekst u unosu pretrage."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:25
+msgid "Selected game"
+msgstr "Izabrana igra"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
+msgid "The most recently selected game."
+msgstr "Najskorije izabrana igra."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:27
+msgid "Selected completion match"
+msgstr "Izabrano poklapanje dovršavanja"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:28
+msgid ""
+"The most recently selected match from a search completion list. The first "
+"value is the column name of the match, and the second value is the text of "
+"the match. Example: (manufacturer, Williams). Empty values indicate the "
+"completion feature was not used in the most recent search."
+msgstr ""
+"Najskorije izabrano poklapanje sa spiska dovršavanja pretrage. Prva vrednost "
+"je naziv kolone poklapanja, a druga vrednost je tekst poklapanja. Primer: "
+"(proizvođač, Vilijams). Prazne vrednosti znače da funkcija dovršavanja nije "
+"korišćena u najskorijoj pretrazi."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:29
+msgid "Selected view"
+msgstr "Izabrani pregled"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:30
+msgid "The most recently selected view."
+msgstr "Najskorije izabrani pregled."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:31
+msgid "Show cloned games"
+msgstr "Prikaz kloniranih igara"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:32
+msgid ""
+"If true, show both original and cloned games in the main window. If false, "
+"show only original games."
+msgstr ""
+"Ako je izabrano, prikazuje i izvorne i klonirane igre u glavnom prozoru. Ako "
+"nije izabrano, prikazuje samo izvorne igre."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:33
+msgid "Sort column and sort order"
+msgstr "Ređanje kolona i redosled ređanja"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:34
+msgid ""
+"The first value is the most recently sorted column name (or \"default\" for "
+"default sorting), and the second value is the sort order. True indicates "
+"descending order; False indicates ascending order."
+msgstr ""
+"Prva vrednost je naziv najskorije poređane kolone (ili „osnovno“ za osnovno "
+"ređanje), a druga vrednost je redosled ređanja. Izabrano označava opadajući "
+"redosled; dok neizabrano označava rastući redosled."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:35
+msgid "Sound muted"
+msgstr "Utišan zvuk"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
+msgid "If true, games are started without sound."
+msgstr "Ako je izabrano, igre se pokreću bez zvuka."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:37
+msgid "Program version"
+msgstr "Izdanje programa"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:38
+msgid "The most recently run version of GNOME Video Arcade."
+msgstr "Najskorije pokrenuto izdanje Gnomove video arkade."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:39
+msgid "Window height"
+msgstr "Visina prozora"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:40
+msgid "The height of the main window."
+msgstr "Visina glavnog prozora."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:41
+msgid "Window maximized"
+msgstr "Uvećan prozor"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:42
+msgid "True if the main window is maximized."
+msgstr "Izabrano ako je prozor uvećan."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:43
+msgid "Window width"
+msgstr "Širina prozora"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:44
+msgid "The width of the main window."
+msgstr "Širina glavnog prozora."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:45
+msgid "Window X coordinate"
+msgstr "Vodoravna koordinata prozora"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:46
+msgid "The X coordinate of the main window."
+msgstr "Vodoravna koordinata glavnog prozora."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:47
+msgid "Window Y coordinate"
+msgstr "Uspravna koordinata prozora"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:48
+msgid "The Y coordinate of the main window."
+msgstr "Uspravna koordinata glavnog prozora."
+
+#: ../src/gva-audit.c:238
+msgid "Save As"
+msgstr "Sačuvaj kao"
+
+#: ../src/gva-column-manager.c:557
+msgid "Managed View"
+msgstr "Upravljani pregled"
+
+#: ../src/gva-column-manager.c:558
+msgid "The GtkTreeView being managed"
+msgstr "Gtk pregled stablom je upravljan"
+
+#: ../src/gva-column-manager.c:615
+msgid "Move _Up"
+msgstr "Premesti _gore"
+
+#: ../src/gva-column-manager.c:628
+msgid "Move _Down"
+msgstr "Premesti _dole"
+
+#: ../src/gva-column-manager.c:641
+msgid "_Show"
+msgstr "_Prikaži"
+
+#: ../src/gva-column-manager.c:650
+msgid "_Hide"
+msgstr "_Sakrij"
+
+#: ../src/gva-columns.c:299
+#, c-format
+msgid "Remove %s Column"
+msgstr "Ukloni kolonu „%s“"
+
+#: ../src/gva-columns.c:301
+#, c-format
+msgid "Remove the \"%s\" column from the game list"
+msgstr "Uklonite kolonu „%s“ sa spiska igara"
+
+#: ../src/gva-columns.c:867
+msgid "Click here to remove from favorites"
+msgstr "Kliknite ovde da uklonite iz omiljenih"
+
+#: ../src/gva-columns.c:869
+msgid "Click here to add to favorites"
+msgstr "Kliknite ovde da dodate u omiljene"
+
+#: ../src/gva-columns.c:961 ../src/gva-properties.c:410
+msgid "(Game Description Unknown)"
+msgstr "(Nepoznat opis igre)"
+
+#: ../src/gva-columns.c:964 ../src/gva-properties.c:413
+msgid "(Manufacturer Unknown)"
+msgstr "(Nepoznat proizvođač)"
+
+#: ../src/gva-columns.c:967 ../src/gva-properties.c:416
+msgid "(Year Unknown)"
+msgstr "(Nepoznata godina)"
+
+#: ../src/gva-columns.c:991 ../src/gva-main.c:1007
+msgid "ROM Name"
+msgstr "Naziv ROM-a"
+
+#: ../src/gva-columns.c:993
+msgid "BIOS"
+msgstr "BIOS"
+
+#: ../src/gva-columns.c:995 ../src/gva-main.c:1000
+msgid "Category"
+msgstr "Kategorija"
+
+#: ../src/gva-columns.c:997
+msgid "Favorite"
+msgstr "Omiljeno"
+
+#: ../src/gva-columns.c:1000
+msgid "Driver"
+msgstr "Upravljački program"
+
+#: ../src/gva-columns.c:1008
+msgid "Samples"
+msgstr "Uzorci"
+
+#: ../src/gva-columns.c:1010
+msgid "Title"
+msgstr "Naziv"
+
+#: ../src/gva-columns.c:1013
+msgid "Year"
+msgstr "Godina"
+
+#: ../src/gva-columns.c:1016 ../src/gva-main.c:986
+msgid "Manufacturer"
+msgstr "Proizvođač"
+
+#: ../src/gva-columns.c:1022
+msgid "Players"
+msgstr "Igrači"
+
+#: ../src/gva-columns.c:1025
+msgid "Players (Alt.)"
+msgstr "Igrači (naizmenično)"
+
+#: ../src/gva-columns.c:1028
+msgid "Players (Sim.)"
+msgstr "Igrači (istovremeno)"
+
+#: ../src/gva-columns.c:1033
+msgid "Status"
+msgstr "Stanje"
+
+#: ../src/gva-columns.c:1044
+msgid "Last Played"
+msgstr "Poslednja igrana"
+
+#: ../src/gva-columns.c:1046
+msgid "Comment"
+msgstr "Napomena"
+
+#: ../src/gva-columns.c:1050
+msgid "Played On"
+msgstr "Odigrana"
+
+#: ../src/gva-input-file.c:505
+#, c-format
+msgid "Invalid or unsupported INP file format"
+msgstr "Neispravan ili nepodržan oblik INP datoteke"
+
+#: ../src/gva-main.c:230
+msgid "Building game database..."
+msgstr "Izgrađujem bazu podataka igara..."
+
+#: ../src/gva-main.c:291
+msgid "Analyzing ROM files..."
+msgstr "Ispitujem ROM datoteke..."
+
+#: ../src/gva-main.c:972
+msgid "Search for any of the following:"
+msgstr "Potražite nešto od navedenog:"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../src/gva-main.c:979
+msgid "Game Title"
+msgstr "Naziv igre"
+
+#: ../src/gva-main.c:993
+msgid "Copyright Year"
+msgstr "Godina autorskog prava"
+
+#: ../src/gva-main.c:1014
+msgid "BIOS Name"
+msgstr "Naziv BIOS-a"
+
+#: ../src/gva-main.c:1021
+msgid "Driver Name"
+msgstr "Naziv upravljačkog programa"
+
+#: ../src/gva-mame-common.c:224
+#, c-format
+msgid "%s: No such configuration key"
+msgstr "%s: Nema takvog ključa podešavanja"
+
+#: ../src/gva-mame-sdlmame.c:66 ../src/gva-mame-xmame.c:62
+#, c-format
+msgid "Could not determine emulator version"
+msgstr "Ne mogu da odredim izdanje oponašavača"
+
+#: ../src/gva-music-button.c:122
+msgid "No music available"
+msgstr "Muzika nije dostupna"
+
+#: ../src/gva-music-button.c:125
+msgid "Unable to play music"
+msgstr "Ne mogu da pustim muziku"
+
+#: ../src/gva-music-button.c:152
+#, c-format
+msgid "Buffering %d%%..."
+msgstr "Smeštam u međumemoriju %d%%..."
+
+#: ../src/gva-music-button.c:268
+msgid "Connecting..."
+msgstr "Povezujem se..."
+
+#: ../src/gva-mute-button.c:126
+msgid "Muted"
+msgstr "Utišan"
+
+#: ../src/gva-mute-button.c:127
+msgid "Whether the button state is muted"
+msgstr "Da li je utišano stanje dugmeta"
+
+#: ../src/gva-mute-button.c:202
+msgid "In-game sound is muted"
+msgstr "Zvuk igre je utišan"
+
+#: ../src/gva-mute-button.c:207
+msgid "In-game sound is enabled"
+msgstr "Zvuk igre je uključen"
+
+#: ../src/gva-nplayers.c:179
+msgid "Up to four players alternating or two players simultaneously"
+msgstr "Do četiri igrača koji se smenjuju ili dva igrača istovremeno"
+
+#: ../src/gva-nplayers.c:183
+msgid "Up to eight players alternating or two players simultaneously"
+msgstr "Do osam igrača koji se smenjuju ili dva igrača istovremeno"
+
+#: ../src/gva-nplayers.c:198 ../src/gva-nplayers.c:241
+#: ../src/gva-nplayers.c:277
+msgid "One player only"
+msgstr "Samo jedan igrač"
+
+#: ../src/gva-nplayers.c:201
+msgid "One or two players"
+msgstr "Jedan ili dva igrača"
+
+#: ../src/gva-nplayers.c:204
+msgid "Up to three players"
+msgstr "Do tri igrača"
+
+#: ../src/gva-nplayers.c:207
+msgid "Up to four players"
+msgstr "Do četri igrača"
+
+#: ../src/gva-nplayers.c:210
+msgid "Up to five players"
+msgstr "Do pet igrača"
+
+#: ../src/gva-nplayers.c:213
+msgid "Up to six players"
+msgstr "Do šest igrača"
+
+#: ../src/gva-nplayers.c:216
+msgid "Up to seven players"
+msgstr "Do sedam igrača"
+
+#: ../src/gva-nplayers.c:219
+msgid "Up to eight players"
+msgstr "Do osam igrača"
+
+#: ../src/gva-nplayers.c:244
+msgid "One or two players alternating"
+msgstr "Jedan ili dva igrača se smenjuju"
+
+#: ../src/gva-nplayers.c:247
+msgid "Up to three players alternating"
+msgstr "Do tri igrača se smenjuju"
+
+#: ../src/gva-nplayers.c:250
+msgid "Up to four players alternating"
+msgstr "Do četri igrača se smenjuju"
+
+#: ../src/gva-nplayers.c:253
+msgid "Up to five players alternating"
+msgstr "Do pet igrača se smenjuju"
+
+#: ../src/gva-nplayers.c:256
+msgid "Up to six players alternating"
+msgstr "Do šest igrača se smenjuju"
+
+#: ../src/gva-nplayers.c:259
+msgid "Up to seven players alternating"
+msgstr "Do sedam igrača se smenjuju"
+
+#: ../src/gva-nplayers.c:262
+msgid "Up to eight players alternating"
+msgstr "Do osam igrača se smenjuju"
+
+#: ../src/gva-nplayers.c:280
+msgid "One or two players simultaneously"
+msgstr "Jedan ili dva igrača istovremeno"
+
+#: ../src/gva-nplayers.c:283
+msgid "Up to three players simultaneously"
+msgstr "Do tri igrača istovremeno"
+
+#: ../src/gva-nplayers.c:286
+msgid "Up to four players simultaneously"
+msgstr "Do četri igrača istovremeno"
+
+#: ../src/gva-nplayers.c:289
+msgid "Up to five players simultaneously"
+msgstr "Do pet igrača istovremeno"
+
+#: ../src/gva-nplayers.c:292
+msgid "Up to six players simultaneously"
+msgstr "Do šest igrača istovremeno"
+
+#: ../src/gva-nplayers.c:295
+msgid "Up to seven players simultaneously"
+msgstr "Do sedam igrača istovremeno"
+
+#: ../src/gva-nplayers.c:298
+msgid "Up to eight players simultaneously"
+msgstr "Do osam igrača istovremeno"
+
+#: ../src/gva-play-back.c:54
+msgid "Delete selected game recordings?"
+msgstr "Da obrišem izabrane snimke igara?"
+
+#: ../src/gva-play-back.c:58
+msgid ""
+"This operation will permanently erase the recorded games you have selected.  "
+"Are you sure you want to proceed?"
+msgstr ""
+"Ova radnja će trajno obrisati snimljene igre koje ste izabrali.  Da li ste "
+"sigurni da želite da nastavite?"
+
+#: ../src/gva-play-back.c:62
+msgid "Do Not Delete"
+msgstr "Ne briši"
+
+#: ../src/gva-properties.c:146
+msgid "Show this game"
+msgstr "Prikazuje ovu igru"
+
+#: ../src/gva-properties.c:457
+#, c-format
+msgid ""
+"Error while fetching history:\n"
+"%s"
+msgstr ""
+"Greška za vreme preuzimanja istorijata:\n"
+"%s"
+
+#: ../src/gva-properties.c:462
+msgid "History not available"
+msgstr "Istorijat nije dostupan"
+
+#: ../src/gva-tree-view.c:431
+msgid "Available Game"
+msgid_plural "Available Games"
+msgstr[0] "dostupna igra"
+msgstr[1] "dostupne igre"
+msgstr[2] "dostupnih igara"
+msgstr[3] "dostupna igra"
+
+#: ../src/gva-tree-view.c:438
+msgid "Favorite Game"
+msgid_plural "Favorite Games"
+msgstr[0] "omiljena igra"
+msgstr[1] "omiljene igre"
+msgstr[2] "omiljenih igara"
+msgstr[3] "omiljena igra"
+
+#: ../src/gva-tree-view.c:445
+msgid "Search Result"
+msgid_plural "Search Results"
+msgstr[0] "rezultat pretrage"
+msgstr[1] "rezultata pretrage"
+msgstr[2] "rezultata pretrage"
+msgstr[3] "rezultat pretrage"
+
+#: ../src/gva-ui.c:59
+msgid ""
+"GNOME Video Arcade is free software; you can redistribute it and/or modify "
+"it under the terms of the GNU General Public License as published by the "
+"Free Software Foundation; either version 3 of the License, or (at your "
+"option) any later version.\n"
+"\n"
+"GNOME Video Arcade is distributed in the hope that it will be useful, but "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
+"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"GNOME Video Arcade.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Ovaj program je slobodan softver: možete ga deliti i/ili menjati pod uslovima "
+"Gnuove Opšte javne licence koju je objavila Zadužbina slobodnog softvera, "
+"bilo verzije 3 licence, ili (prema vašem izboru) bilo koje novije verzije.\n"
+"\n"
+"Ovaj program se raspodeljuje u nadi da će biti koristan,ali BEZ IKAKVE "
+"GARANCIJE, čak i bez primenjene garancije TRŽIŠNE VREDNOSTI ili "
+"PRILAGOĐENOSTI ODREĐENOJ NAMENI.  Pogledajte Gnuovu Opštu javnu licencu za "
+"više detalja.\n"
+"\n"
+"Trebali ste da primite primerak Gnuove Opšte javne licence uz ovaj program. "
+" Ako niste, pogledajte: http://www.gnu.org/licenses/."
+
+#: ../src/gva-ui.c:319
+msgid "M.A.M.E. Front-End"
+msgstr "Sučelje za M.A.M.E."
+
+#: ../src/gva-ui.c:324
+msgid "Visit the Website"
+msgstr "Poseti veb stranicu"
+
+#: ../src/gva-ui.c:326
+msgid "translator-credits"
+msgstr ""
+"  Miroslav Nikolić\n"
+"\n"
+"  http://prevod.org — prevod na srpski jezik"
+
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:457
+msgid "Watching a fullscreen game"
+msgstr "Nadgledam igru preko celog ekrana"
+
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:560
+msgid "Recording a fullscreen game"
+msgstr "Snimam igru preko celog ekrana"
+
+#. Translators: This is passed through D-Bus as the
+#. * reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:704
+msgid "Playing a fullscreen game"
+msgstr "Igram igru preko celog ekrana"
+
+#: ../src/gva-ui.c:801
+msgid "Failed to initialize user interface"
+msgstr "Nisam uspeo da pokrenem korisničko sučelje"
+
+#: ../src/gva-ui.c:943
+#, c-format
+msgid "Add %s Column"
+msgstr "Dodaj kolonu „%s“"
+
+#: ../src/gva-ui.c:945
+#, c-format
+msgid "Add a \"%s\" column to the game list"
+msgstr "Dodajte kolonu „%s“ na spisak igara"
+
+#: ../src/main.c:53
+msgid "Build the games database"
+msgstr "Izgrađuje bazu podataka igara"
+
+#: ../src/main.c:57
+msgid "Inspect an emulator setting"
+msgstr "Proverava podešavanje oponašavača"
+
+#: ../src/main.c:58
+msgid "NAME"
+msgstr "NAZIV"
+
+#: ../src/main.c:62
+msgid "Show the application version"
+msgstr "Prikazuje izdanje programa"
+
+#: ../src/main.c:66
+msgid "Show which emulator will be used"
+msgstr "Prikazuje koji oponašavač će biti korišćen"
+
+#: ../src/main.c:105
+msgid "No ROM files found"
+msgstr "Nisu pronađene ROM datoteke"
+
+#: ../src/main.c:109
+msgid ""
+"GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
+"is misconfigured or that no ROM files are installed. Click <b>Help</b> for "
+"more details and troubleshooting tips."
+msgstr ""
+"Gnomova video arkada nije mogla da pronađe ni jednu ROM datoteku. Može biti "
+"da je MAME loše podešen ili da ni jedna ROM datoteka nije instalirana. "
+"Kliknite na „<b>Help</b>“ za više podataka i za savete o rešavanju problema."
+
+#: ../src/main.c:152
+msgid "Changes detected in ROM files"
+msgstr "Otkrivene su izmene u ROM datotekama"
+
+#: ../src/main.c:156
+msgid ""
+"GNOME Video Arcade has detected changes in your ROM files and will need to "
+"audit them in order to update the game list. However the audit may take "
+"several minutes to complete. Would you like to perform the audit now?\n"
+"\n"
+"If you skip the audit now, it will be performed automatically the next time "
+"you start GNOME Video Arcade."
+msgstr ""
+"Gnomova video arkada je otkrio izmene u vašim ROM datotekama i moraće da ih "
+"pregleda da bi osvežio spisak igara. Međutim pregled može da potraje "
+"nekoliko minuta. Da li biste želeli sada da obavite pregled?\n"
+"\n"
+"Ako sada preskočite pregled, biće samostalno obavljen kada sledeći put "
+"pokrenete Gnomovu video arkadu."
+
+#: ../src/main.c:166
+msgid "_Skip Audit"
+msgstr "_Preskoči pregled"
+
+#: ../src/main.c:167
+msgid "_Audit ROM Files"
+msgstr "Pregledaj _ROM datoteke"
