@@ -1,120 +1,208 @@
 # Chinese (China) translation for gnome-video-arcade.
 # Copyright (C) 2010 gnome-video-arcade's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-video-arcade package.
-# Yinghua_Wang <wantinghard@gmail.com>, 2010.
+# Wylmer Wang <wantinghard@gmail.com>, 2010, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=\n"
-"POT-Creation-Date: 2010-07-19 12:44+0000\n"
-"PO-Revision-Date: 2010-07-31 09:36+0800\n"
-"Last-Translator: Yinghua Wang <wantinghard@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2013-01-14 10:45+0000\n"
+"PO-Revision-Date: 2013-01-14 19:21+0800\n"
+"Last-Translator: Wylmer Wang <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/gnome-video-arcade.builder.h:1
+msgid "Add to _Favorites"
+msgstr "添加到最爱游戏(_F)"
+
+#: ../data/gnome-video-arcade.builder.h:2
+msgid "Show next game"
+msgstr "显示下个游戏"
+
+#: ../data/gnome-video-arcade.builder.h:3
+msgid "Play _Back..."
+msgstr "回放(_B)..."
+
+#: ../data/gnome-video-arcade.builder.h:4
+msgid "Play back the selected game recording"
+msgstr "播放选择的游戏片段"
+
+#: ../data/gnome-video-arcade.builder.h:5
+msgid "Show previous game"
+msgstr "显示上个游戏"
+
+#: ../data/gnome-video-arcade.builder.h:6
+msgid "_Properties"
+msgstr "属性(_P)"
+
+#: ../data/gnome-video-arcade.builder.h:7
+msgid "Show information about the selected game"
+msgstr "显示所选游戏的信息"
+
+#: ../data/gnome-video-arcade.builder.h:8
+msgid "_Record"
+msgstr "记录(_R)"
+
+#: ../data/gnome-video-arcade.builder.h:9
+msgid "Start the selected game and record keypresses to a file"
+msgstr "开始选择的游戏并将按键记录到文件"
+
+#: ../data/gnome-video-arcade.builder.h:10
+msgid "Remove from _Favorites"
+msgstr "从最爱游戏中移除(_F)"
+
+#: ../data/gnome-video-arcade.builder.h:11
+msgid "Remove the selected game from my list of favorites"
+msgstr "将选择的游戏从我的最爱游戏列表中移除"
+
+#: ../data/gnome-video-arcade.builder.h:12
+msgid "Save _As..."
+msgstr "保存为(_A)..."
+
+#: ../data/gnome-video-arcade.builder.h:13
+msgid "Save ROM errors to a file"
+msgstr "将 ROM 错误保存到文件"
+
+#: ../data/gnome-video-arcade.builder.h:14
+msgid "S_earch..."
+msgstr "搜索(_E)..."
+
+#: ../data/gnome-video-arcade.builder.h:15
+msgid "Show a custom list of games"
+msgstr "显示自定义的游戏列表"
+
+#: ../data/gnome-video-arcade.builder.h:16
+msgid "Play back a previously recorded game"
+msgstr "回放以前记录的游戏"
+
+#: ../data/gnome-video-arcade.builder.h:17
+msgid "_Start"
+msgstr "开始(_S)"
+
+#: ../data/gnome-video-arcade.builder.h:18
+msgid "Start the selected game"
+msgstr "开始选择的游戏"
+
+#: ../data/gnome-video-arcade.builder.h:19
+msgid "Show _alternate versions of original games"
+msgstr "显示原游戏的可替代版本(_A)"
+
+#: ../data/gnome-video-arcade.builder.h:20
+msgid "_Available Games"
+msgstr "可用游戏(_A)"
+
+#: ../data/gnome-video-arcade.builder.h:21
+msgid "Show all available games"
+msgstr "显示所有可用游戏"
+
+#: ../data/gnome-video-arcade.builder.h:22
+msgid "_Favorite Games"
+msgstr "最爱游戏(_F)"
+
+#: ../data/gnome-video-arcade.builder.h:23
+msgid "Only show my favorite games"
+msgstr "只显示我最爱的游戏"
+
+#: ../data/gnome-video-arcade.builder.h:24
+msgid "Search _Results"
+msgstr "搜索结果(_R)"
+
+#: ../data/gnome-video-arcade.builder.h:25
+msgid "Show my search results"
+msgstr "显示我的搜索结果"
+
+#: ../data/gnome-video-arcade.builder.h:26
+msgid "_About"
+msgstr "关于(_A)"
+
+#: ../data/gnome-video-arcade.builder.h:27
+msgid "Show information about the application"
+msgstr "显示应用程序相关信息"
+
+#: ../data/gnome-video-arcade.builder.h:28
+msgid "_Contents"
+msgstr "内容(_C)"
+
+#: ../data/gnome-video-arcade.builder.h:29
+msgid "Open the help documentation"
+msgstr "打开帮助文档"
+
+#: ../data/gnome-video-arcade.builder.h:30
+msgid "_Preferences"
+msgstr "首选项(_P)"
+
+#: ../data/gnome-video-arcade.builder.h:31
+msgid "Configure the application"
+msgstr "配置该应用程序"
+
+#: ../data/gnome-video-arcade.builder.h:32
+msgid "_Quit"
+msgstr "退出(_Q)"
+
+#: ../data/gnome-video-arcade.builder.h:33
+msgid "Quit the application"
+msgstr "退出该应用程序"
+
+#: ../data/gnome-video-arcade.builder.h:34
+msgid "_Add Column"
+msgstr "添加列(_A)"
+
+#: ../data/gnome-video-arcade.builder.h:35
+msgid "_Edit"
+msgstr "编辑(_E)"
+
+#: ../data/gnome-video-arcade.builder.h:36
+msgid "_Game"
+msgstr "游戏(_G)"
+
+#: ../data/gnome-video-arcade.builder.h:37
+msgid "_Help"
+msgstr "帮助(_H)"
+
+#: ../data/gnome-video-arcade.builder.h:38
+msgid "_View"
+msgstr "查看(_V)"
+
+#: ../data/gnome-video-arcade.builder.h:39
+msgid "Play music _automatically"
+msgstr "自动播放音乐(_A)"
+
+#: ../data/gnome-video-arcade.builder.h:40
+msgid "Automatically play a music clip from the selected game"
+msgstr "自动播放来自所选游戏的音乐片段"
+
+#: ../data/gnome-video-arcade.builder.h:41
+msgid "_Restore previous state when starting a game"
+msgstr "恢复上次启动游戏时的状态(_R)"
+
+#: ../data/gnome-video-arcade.builder.h:42
+msgid "Start games in _fullscreen mode"
+msgstr "以全屏模式开始游戏(_F)"
+
+#: ../data/gnome-video-arcade.builder.h:43
 msgid " "
 msgstr " "
 
-#: ../data/gnome-video-arcade.builder.h:2
-msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
-msgstr "&#x2022; <b>该游戏不工作。</b>"
-
-#: ../data/gnome-video-arcade.builder.h:3
-msgid "&#x2022; Screen flipping in cocktail mode is not supported."
-msgstr ""
-
-#: ../data/gnome-video-arcade.builder.h:4
-msgid "&#x2022; The colors are completely wrong."
-msgstr "&#x2022; 颜色完全错误。"
-
-#: ../data/gnome-video-arcade.builder.h:6
-#, no-c-format
-msgid "&#x2022; The colors aren't 100% accurate."
-msgstr "&#x2022; 颜色不是 100% 准确。"
-
-#: ../data/gnome-video-arcade.builder.h:7
-msgid "&#x2022; The game has protection which isn't fully emulated."
-msgstr "&#x2022; 该游戏有保护，不能完全模拟。"
-
-#: ../data/gnome-video-arcade.builder.h:8
-msgid "&#x2022; The game lacks sound."
-msgstr "&#x2022; 该游戏没有声音。"
-
-#: ../data/gnome-video-arcade.builder.h:10
-#, no-c-format
-msgid "&#x2022; The sound emulation isn't 100% accurate."
-msgstr "&#x2022; 声音模拟不是 100% 准确。"
-
-#: ../data/gnome-video-arcade.builder.h:12
-#, no-c-format
-msgid "&#x2022; The video emulation isn't 100% accurate."
-msgstr "&#x2022; 视频模拟不是 100% 准确。"
-
-#: ../data/gnome-video-arcade.builder.h:13
-msgid "<b>Alternate Versions</b>"
-msgstr "<b>可替代版本</b>"
-
-#: ../data/gnome-video-arcade.builder.h:14
-msgid "<b>BIOS</b>"
-msgstr "<b>BIOS</b>"
-
-#: ../data/gnome-video-arcade.builder.h:15
-msgid "<b>CPU</b>"
-msgstr "<b>CPU</b>"
-
-#: ../data/gnome-video-arcade.builder.h:16
-msgid "<b>Columns</b>"
-msgstr "<b>列</b>"
-
-#: ../data/gnome-video-arcade.builder.h:17
-msgid "<b>Game List</b>"
-msgstr "<b>游戏列表</b>"
-
-#: ../data/gnome-video-arcade.builder.h:18
-msgid "<b>General</b>"
-msgstr "<b>常规</b>"
-
-#: ../data/gnome-video-arcade.builder.h:19
-msgid "<b>Original Version</b>"
-msgstr "<b>原始版本</b>"
-
-#: ../data/gnome-video-arcade.builder.h:20
-msgid "<b>Sound</b>"
-msgstr "<b>声音</b>"
-
-#. The same text is in gnome-video-arcade.builder,
-#. * so it has to be translated with markup anyway.
-#: ../data/gnome-video-arcade.builder.h:21 ../src/gva-columns.c:747
-msgid "<b>There are known problems with this game:</b>"
-msgstr "<b>此游戏存在已知问题：</b>"
-
-#: ../data/gnome-video-arcade.builder.h:22
-msgid "<b>Video</b>"
-msgstr "<b>视频</b>"
-
-#: ../data/gnome-video-arcade.builder.h:23
+#: ../data/gnome-video-arcade.builder.h:44
 msgid "<big><b>Errors detected in ROM files</b></big>"
 msgstr "<big><b>在 ROM 文件中检测到错误</b></big>"
 
-#: ../data/gnome-video-arcade.builder.h:24
-msgid "<small></small>"
-msgstr "<small></small>"
-
-#: ../data/gnome-video-arcade.builder.h:25
+#: ../data/gnome-video-arcade.builder.h:45
 msgid ""
-"<small><i><b>Note:</b> Setting this will not take effect until the second "
-"time the game is started. It does not apply to recording or playing back "
-"games.</i></small>"
+"An audit of the available games has detected errors in some of the ROM "
+"files. The following games will not be available in GNOME Video Arcade."
 msgstr ""
-"<small><i><b>注：</b> 此项设置游戏下次启动时才会生效。它不应用于记录或回放游"
-"戏。</i></small>"
+"审计可用游戏时检测到一些 ROM 文件中有错误。以下游戏将不能在 GNOME Video "
+"Arcade 里用。"
 
-#: ../data/gnome-video-arcade.builder.h:26
+#: ../data/gnome-video-arcade.builder.h:46
 msgid ""
 "<small><i>If these games worked with previous versions of MAME, it is likely "
 "their ROM requirements have changed.  If so, you will need to acquire more "
@@ -123,323 +211,544 @@ msgstr ""
 "<small><i>如果这些游戏能在上一版本的 MAME 中工作，则有可能它们的 ROM 要求改变"
 "了。如果是这样，您需要获取更新点的 ROM 文件。</i></small>"
 
-#: ../data/gnome-video-arcade.builder.h:27
-msgid ""
-"An audit of the available games has detected errors in some of the ROM "
-"files. The following games will not be available in GNOME Video Arcade."
-msgstr ""
-"审计可用游戏时检测到一些 ROM 文件中有错误。以下游戏将不能在 GNOME Video "
-"Arcade 里用。"
-
-#: ../data/gnome-video-arcade.builder.h:28
-msgid "Choose the order of information to appear in the game list."
-msgstr "选择游戏列表中信息显示的顺序"
-
-#: ../data/gnome-video-arcade.builder.h:29
+#: ../data/gnome-video-arcade.builder.h:47
 msgid "Close this window"
 msgstr "关闭此窗口"
 
-#: ../data/gnome-video-arcade.builder.h:30
-msgid "Columns"
-msgstr "列"
-
-#: ../data/gnome-video-arcade.builder.h:31
-msgid "Delete the selected game recordings"
-msgstr "删除所选的游戏记录"
-
-#: ../data/gnome-video-arcade.builder.h:32
+#: ../data/gnome-video-arcade.builder.h:48
+#: ../data/gnome-video-arcade.desktop.in.h:1
 msgid "GNOME Video Arcade"
 msgstr "GNOME Video Arcade"
 
-#: ../data/gnome-video-arcade.builder.h:33
-#, fuzzy
-msgid "Gallery"
-msgstr "展厅"
-
-#: ../data/gnome-video-arcade.builder.h:34
-msgid "General"
-msgstr "常规"
-
-#: ../data/gnome-video-arcade.builder.h:35
-msgid "History"
-msgstr "历史"
-
-#: ../data/gnome-video-arcade.builder.h:36 ../src/gva-ui.c:920
-msgid "Only show my favorite games"
-msgstr "只显示我最爱的游戏"
-
-#: ../data/gnome-video-arcade.builder.h:37
-msgid "Play _Back"
-msgstr "回放(_B)"
-
-#: ../data/gnome-video-arcade.builder.h:38
-msgid "Play a music clip"
-msgstr "播放音乐片段"
-
-#: ../data/gnome-video-arcade.builder.h:39 ../src/gva-ui.c:792
-msgid "Play back the selected game recording"
-msgstr "播放选择的游戏片段"
-
-#: ../data/gnome-video-arcade.builder.h:40
-msgid "Preferences"
-msgstr "首选项"
-
-#: ../data/gnome-video-arcade.builder.h:41
-msgid "Properties"
-msgstr "属性"
-
-#: ../data/gnome-video-arcade.builder.h:42
-msgid "Recorded Games"
-msgstr "记录的游戏"
-
-#: ../data/gnome-video-arcade.builder.h:43 ../src/gva-ui.c:834
-msgid "Save ROM errors to a file"
-msgstr "将 ROM 错误保存到文件"
-
 #. This label precedes the search entry. e.g. Search for: Pac-Man
-#: ../data/gnome-video-arcade.builder.h:45
+#: ../data/gnome-video-arcade.builder.h:50
 msgid "Search for:"
 msgstr "搜索："
 
-#: ../data/gnome-video-arcade.builder.h:46 ../src/gva-ui.c:913
-msgid "Show all available games"
-msgstr "显示所有可用游戏"
-
-#: ../data/gnome-video-arcade.builder.h:47 ../src/gva-ui.c:806
-msgid "Show information about the selected game"
-msgstr "显示所选游戏的信息"
-
-#: ../data/gnome-video-arcade.builder.h:48 ../src/gva-ui.c:927
-msgid "Show my search results"
-msgstr "显示我的搜索结果"
-
-#: ../data/gnome-video-arcade.builder.h:49 ../src/gva-ui.c:785
-msgid "Show next game"
-msgstr "显示下个游戏"
-
-#: ../data/gnome-video-arcade.builder.h:50 ../src/gva-ui.c:799
-msgid "Show previous game"
-msgstr "显示上个游戏"
-
-#: ../data/gnome-video-arcade.builder.h:51 ../src/gva-ui.c:855
-msgid "Start the selected game"
-msgstr "开始选择的游戏"
-
-#: ../data/gnome-video-arcade.builder.h:52
-msgid "Technical"
-msgstr "技术"
-
-#: ../data/gnome-video-arcade.builder.h:53
+#: ../data/gnome-video-arcade.builder.h:51
 msgid "_Start Game"
 msgstr "开始游戏(_S)"
 
-#: ../src/gconf-bridge.c:1222
-#, c-format
-msgid "GConf error: %s"
-msgstr "GConf 错误：%s"
+#: ../data/gnome-video-arcade.builder.h:52
+msgid "Recorded Games"
+msgstr "记录的游戏"
 
-#: ../src/gconf-bridge.c:1232
-msgid "All further errors shown only on terminal."
-msgstr "以后的所有错误只在终端上显示。"
+#: ../data/gnome-video-arcade.builder.h:53
+msgid "Delete the selected game recordings"
+msgstr "删除所选的游戏记录"
+
+#: ../data/gnome-video-arcade.builder.h:54
+msgid "Play _Back"
+msgstr "回放(_B)"
+
+#: ../data/gnome-video-arcade.builder.h:55
+msgid "Preferences"
+msgstr "首选项"
+
+#: ../data/gnome-video-arcade.builder.h:56
+msgid "<b>General</b>"
+msgstr "<b>常规</b>"
+
+#: ../data/gnome-video-arcade.builder.h:57
+msgid ""
+"<small><i><b>Note:</b> Setting this will not take effect until the second "
+"time the game is started. It does not apply to recording or playing back "
+"games.</i></small>"
+msgstr ""
+"<small><i><b>注：</b> 此项设置游戏下次启动时才会生效。它不应用于记录或回放游"
+"戏。</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:58
+msgid "<b>Game List</b>"
+msgstr "<b>游戏列表</b>"
+
+#: ../data/gnome-video-arcade.builder.h:59
+msgid "General"
+msgstr "常规"
+
+#: ../data/gnome-video-arcade.builder.h:60
+msgid "<b>Columns</b>"
+msgstr "<b>列</b>"
+
+#: ../data/gnome-video-arcade.builder.h:61
+msgid "Choose the order of information to appear in the game list."
+msgstr "选择游戏列表中信息显示的顺序"
+
+#: ../data/gnome-video-arcade.builder.h:62
+msgid "Columns"
+msgstr "列"
+
+#: ../data/gnome-video-arcade.builder.h:63
+msgid "Properties"
+msgstr "属性"
+
+#: ../data/gnome-video-arcade.builder.h:64
+msgid "History"
+msgstr "历史"
+
+#: ../data/gnome-video-arcade.builder.h:65
+msgid "Gallery"
+msgstr "陈列室"
+
+#. The same text is in gnome-video-arcade.builder,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.builder.h:66 ../src/gva-columns.c:753
+msgid "<b>There are known problems with this game:</b>"
+msgstr "<b>此游戏存在已知问题：</b>"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.builder.h:68 ../src/gva-columns.c:765
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• 颜色不是 100% 准确。"
+
+#: ../data/gnome-video-arcade.builder.h:69 ../src/gva-columns.c:774
+msgid "• The colors are completely wrong."
+msgstr "• 颜色完全错误。"
+
+#: ../data/gnome-video-arcade.builder.h:71 ../src/gva-columns.c:784
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• 视频模拟不是 100% 准确。"
+
+#: ../data/gnome-video-arcade.builder.h:73 ../src/gva-columns.c:794
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• 声音模拟不是 100% 准确。"
+
+#: ../data/gnome-video-arcade.builder.h:74 ../src/gva-columns.c:803
+msgid "• The game lacks sound."
+msgstr "• 游戏缺少声音。"
+
+#: ../data/gnome-video-arcade.builder.h:75 ../src/gva-columns.c:812
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr ""
+
+#: ../data/gnome-video-arcade.builder.h:76 ../src/gva-columns.c:821
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>该游戏不工作。</b>"
+
+#: ../data/gnome-video-arcade.builder.h:77 ../src/gva-columns.c:831
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• 该游戏有保护，不能完全模拟。"
+
+#: ../data/gnome-video-arcade.builder.h:78
+msgid "<b>BIOS</b>"
+msgstr "<b>BIOS</b>"
+
+#: ../data/gnome-video-arcade.builder.h:79
+msgid "<b>CPU</b>"
+msgstr "<b>CPU</b>"
+
+#: ../data/gnome-video-arcade.builder.h:80
+msgid "<b>Sound</b>"
+msgstr "<b>声音</b>"
+
+#: ../data/gnome-video-arcade.builder.h:81
+msgid "<b>Video</b>"
+msgstr "<b>视频</b>"
+
+#: ../data/gnome-video-arcade.builder.h:82
+msgid "<b>Original Version</b>"
+msgstr "<b>原始版本</b>"
+
+#: ../data/gnome-video-arcade.builder.h:83
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>可替代版本</b>"
+
+#: ../data/gnome-video-arcade.builder.h:84
+msgid "Technical"
+msgstr "技术"
+
+#: ../data/gnome-video-arcade.builder.h:85
+msgid "Play a music clip"
+msgstr "播放音乐片段"
+
+#: ../data/gnome-video-arcade.builder.h:86
+msgid "<small></small>"
+msgstr "<small></small>"
+
+#: ../data/gnome-video-arcade.desktop.in.h:2
+msgid "Video Arcade"
+msgstr "视频街机"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+msgid "Play classic arcade games"
+msgstr "玩经典的街机游戏"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
+msgid "All available column names"
+msgstr "所有可用列名"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:2
+msgid ""
+"List of all available column names. The user may choose to only display a "
+"subset of them (see \"columns\")."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:3
+msgid "Auto-play music clip"
+msgstr "自动播放音乐片段"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:4
+msgid ""
+"Enable automatic playing of in-game music clips. If true, and a music clip "
+"is available for the selected game, the clip will automatically begin "
+"playing when the user opens the Properties window or when the user selects a "
+"different game while the Properties window is visible. Music clips are "
+"streamed from http://www.arcade-history.com/."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:5
+msgid "Save and restore state"
+msgstr "保存和恢复状态"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
+msgid ""
+"Enable automatic restore at startup and save at exit. If true, the emulator "
+"will try to restore the previous state of the arcade machine when starting a "
+"game. If false, the emulator will boot the arcade machine from a cold start. "
+"This setting does not apply to recording games or playing back previously "
+"recorded games. In those cases the emulator will always reboot the arcade "
+"machine."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:7
+msgid "Column names"
+msgstr "列名"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:8
+msgid "List of column names to display."
+msgstr "要显示的列名清单。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:9
+msgid "Favorite games"
+msgstr "最爱游戏"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:10
+msgid "List of the user's favorite games."
+msgstr "用户最喜欢的游戏清单。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:11
+msgid "Start games in full screen mode"
+msgstr "以全屏模式开始游戏"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:12
+msgid ""
+"If true, automatically switch to full screen mode when starting a game. If "
+"false, start the game in a window."
+msgstr ""
+"若为 true，开始游戏前自动切换到全屏模式。如果为 false，在窗口中启动游戏。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:13
+msgid "ROM error filename"
+msgstr "ROM 错误文件名"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:14
+msgid "Suggested filename for the ROM error \"Save As\" dialog."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:15
+msgid "Properties height"
+msgstr "属性高度"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:16
+msgid "The height of the Properties window."
+msgstr "属性窗口的高度。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:17
+msgid "Properties maximized"
+msgstr "属性最大化"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:18
+msgid "True if the Properties window is maximized."
+msgstr "若属性窗口最大化，则为 True。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:19
+msgid "Properties page"
+msgstr "属性页面"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:20
+msgid "The most recently selected page in the Properties window."
+msgstr "属性窗口中最近选择的页面。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:21
+msgid "Properties width"
+msgstr "属性宽度"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
+msgid "The width of the Properties window."
+msgstr "属性窗口的宽度。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:23
+msgid "Search text"
+msgstr "搜索文本"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:24
+msgid "The most recent text in the search entry."
+msgstr "搜索框中最近输入过的文本。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:25
+msgid "Selected game"
+msgstr "选择的游戏"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
+msgid "The most recently selected game."
+msgstr "最近选择的游戏。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:27
+#, fuzzy
+msgid "Selected completion match"
+msgstr "选择的完成式竞赛"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:28
+msgid ""
+"The most recently selected match from a search completion list. The first "
+"value is the column name of the match, and the second value is the text of "
+"the match. Example: (manufacturer, Williams). Empty values indicate the "
+"completion feature was not used in the most recent search."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:29
+msgid "Selected view"
+msgstr "选择的视图"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:30
+msgid "The most recently selected view."
+msgstr "最近选择的视图。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:31
+msgid "Show cloned games"
+msgstr "显示复制的游戏"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:32
+msgid ""
+"If true, show both original and cloned games in the main window. If false, "
+"show only original games."
+msgstr ""
+"如果为 true，在主窗口中同时显示原游戏和复制的游戏。如果为 false，只显示原游"
+"戏。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:33
+msgid "Sort column and sort order"
+msgstr "排序列及排序依据"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:34
+msgid ""
+"The first value is the most recently sorted column name (or \"default\" for "
+"default sorting), and the second value is the sort order. True indicates "
+"descending order; False indicates ascending order."
+msgstr ""
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:35
+msgid "Sound muted"
+msgstr "已静音"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
+msgid "If true, games are started without sound."
+msgstr "如果为 true，游戏启动时静音。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:37
+msgid "Program version"
+msgstr "程序版本"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:38
+msgid "The most recently run version of GNOME Video Arcade."
+msgstr "GNOME 视频街机的最近运行版本。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:39
+msgid "Window height"
+msgstr "窗口高度"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:40
+msgid "The height of the main window."
+msgstr "主窗口的高度。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:41
+msgid "Window maximized"
+msgstr "窗口最大化"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:42
+msgid "True if the main window is maximized."
+msgstr "若主窗口最大化，则为 True。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:43
+msgid "Window width"
+msgstr "窗口宽度"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:44
+msgid "The width of the main window."
+msgstr "主窗口的宽度。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:45
+msgid "Window X coordinate"
+msgstr "窗口 X 坐标"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:46
+msgid "The X coordinate of the main window."
+msgstr "主窗口的 X 坐标。"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:47
+msgid "Window Y coordinate"
+msgstr "窗口 Y 坐标"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:48
+msgid "The Y coordinate of the main window."
+msgstr "主窗口的 Y 坐标。"
 
 #: ../src/gva-audit.c:238
 msgid "Save As"
 msgstr "保存为"
 
-#: ../src/gva-categories.c:71
-msgid "This program is not configured to show category information."
-msgstr "程序没有配置来显示分类信息。"
-
-#: ../src/gva-column-manager.c:554
+#: ../src/gva-column-manager.c:557
 msgid "Managed View"
 msgstr "管理的视图"
 
-#: ../src/gva-column-manager.c:555
-#, fuzzy
+#: ../src/gva-column-manager.c:558
 msgid "The GtkTreeView being managed"
 msgstr "正在管理的 GtkTreeView"
 
-#: ../src/gva-column-manager.c:611
+#: ../src/gva-column-manager.c:615
 msgid "Move _Up"
 msgstr "上移(_U)"
 
-#: ../src/gva-column-manager.c:624
+#: ../src/gva-column-manager.c:628
 msgid "Move _Down"
 msgstr "下移(_D)"
 
-#: ../src/gva-column-manager.c:637
+#: ../src/gva-column-manager.c:641
 msgid "_Show"
 msgstr "显示(_S)"
 
-#: ../src/gva-column-manager.c:646
+#: ../src/gva-column-manager.c:650
 msgid "_Hide"
 msgstr "隐藏(_H)"
 
-#: ../src/gva-columns.c:298
+#: ../src/gva-columns.c:299
 #, c-format
 msgid "Remove %s Column"
 msgstr "删除第 %s 列"
 
-#: ../src/gva-columns.c:300
+#: ../src/gva-columns.c:301
 #, c-format
 msgid "Remove the \"%s\" column from the game list"
 msgstr "从游戏列表中删除第 \"%s\""
 
-#. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-columns.c:759
-#, no-c-format
-msgid "• The colors aren't 100% accurate."
-msgstr "• 颜色不是 100% 准确。"
-
-#: ../src/gva-columns.c:768
-msgid "• The colors are completely wrong."
-msgstr "• 颜色完全错误。"
-
-#: ../src/gva-columns.c:778
-#, no-c-format
-msgid "• The video emulation isn't 100% accurate."
-msgstr "• 视频模拟不是 100% 准确。"
-
-#: ../src/gva-columns.c:788
-#, no-c-format
-msgid "• The sound emulation isn't 100% accurate."
-msgstr "• 声音模拟不是 100% 准确。"
-
-#: ../src/gva-columns.c:797
-msgid "• The game lacks sound."
-msgstr "• 游戏缺少声音。"
-
-#: ../src/gva-columns.c:806
-msgid "• Screen flipping in cocktail mode is not supported."
-msgstr ""
-
-#: ../src/gva-columns.c:815
-msgid "• <b>THIS GAME DOESN'T WORK.</b>"
-msgstr "• <b>该游戏不工作。</b>"
-
-#: ../src/gva-columns.c:825
-msgid "• The game has protection which isn't fully emulated."
-msgstr "• 该游戏有保护，不能完全模拟。"
-
-#: ../src/gva-columns.c:861
+#: ../src/gva-columns.c:867
 msgid "Click here to remove from favorites"
 msgstr "点击此处从最爱游戏中移除"
 
-#: ../src/gva-columns.c:863
+#: ../src/gva-columns.c:869
 msgid "Click here to add to favorites"
 msgstr "点击此处添加到最爱游戏"
 
-#: ../src/gva-columns.c:955 ../src/gva-properties.c:410
+#: ../src/gva-columns.c:961 ../src/gva-properties.c:410
 msgid "(Game Description Unknown)"
 msgstr "(游戏描述未知)"
 
-#: ../src/gva-columns.c:958 ../src/gva-properties.c:413
+#: ../src/gva-columns.c:964 ../src/gva-properties.c:413
 msgid "(Manufacturer Unknown)"
 msgstr "(厂商未知)"
 
-#: ../src/gva-columns.c:961 ../src/gva-properties.c:416
+#: ../src/gva-columns.c:967 ../src/gva-properties.c:416
 msgid "(Year Unknown)"
 msgstr "(年份未知)"
 
-#: ../src/gva-columns.c:985 ../src/gva-main.c:1021
+#: ../src/gva-columns.c:991 ../src/gva-main.c:1007
 msgid "ROM Name"
 msgstr "ROM 名称"
 
-#: ../src/gva-columns.c:987
+#: ../src/gva-columns.c:993
 msgid "BIOS"
 msgstr "BIOS"
 
-#: ../src/gva-columns.c:989 ../src/gva-main.c:1014
+#: ../src/gva-columns.c:995 ../src/gva-main.c:1000
 msgid "Category"
 msgstr "分类"
 
-#: ../src/gva-columns.c:991
+#: ../src/gva-columns.c:997
 msgid "Favorite"
 msgstr "最爱游戏"
 
-#: ../src/gva-columns.c:994
+#: ../src/gva-columns.c:1000
 msgid "Driver"
 msgstr "驱动"
 
-#: ../src/gva-columns.c:1002
+#: ../src/gva-columns.c:1008
 msgid "Samples"
-msgstr ""
+msgstr "示例"
 
-#: ../src/gva-columns.c:1004
+#: ../src/gva-columns.c:1010
 msgid "Title"
 msgstr "标题"
 
-#: ../src/gva-columns.c:1007
+#: ../src/gva-columns.c:1013
 msgid "Year"
 msgstr "年份"
 
-#: ../src/gva-columns.c:1010 ../src/gva-main.c:1000
+#: ../src/gva-columns.c:1016 ../src/gva-main.c:986
 msgid "Manufacturer"
 msgstr "厂商"
 
-#: ../src/gva-columns.c:1016
+#: ../src/gva-columns.c:1022
 msgid "Players"
 msgstr "游戏者"
 
-#: ../src/gva-columns.c:1019
+#: ../src/gva-columns.c:1025
 msgid "Players (Alt.)"
 msgstr "游戏者(轮流)"
 
-#: ../src/gva-columns.c:1022
+#: ../src/gva-columns.c:1028
 msgid "Players (Sim.)"
 msgstr "游戏者(同时)"
 
-#: ../src/gva-columns.c:1027
+#: ../src/gva-columns.c:1033
 msgid "Status"
 msgstr "状态"
 
-#: ../src/gva-columns.c:1038
+#: ../src/gva-columns.c:1044
 msgid "Last Played"
 msgstr "上次进行"
 
-#: ../src/gva-columns.c:1040
+#: ../src/gva-columns.c:1046
 msgid "Comment"
 msgstr "评论"
 
-#: ../src/gva-columns.c:1044
+#: ../src/gva-columns.c:1050
 msgid "Played On"
-msgstr ""
+msgstr "玩过的时间"
 
-#: ../src/gva-history.c:54
-msgid "This program is not configured to show history information."
-msgstr "程序没有配置来显示历史信息。"
-
-#: ../src/gva-input-file.c:525
+#: ../src/gva-input-file.c:505
 #, c-format
 msgid "Invalid or unsupported INP file format"
 msgstr "无效可不支持的 INP 文件格式"
 
-#: ../src/gva-main.c:235
+#: ../src/gva-main.c:230
 msgid "Building game database..."
 msgstr "正在建立游戏数据库..."
 
-#: ../src/gva-main.c:296
+#: ../src/gva-main.c:291
 msgid "Analyzing ROM files..."
 msgstr "正在分析 ROM 文件..."
 
-#: ../src/gva-main.c:986
+#: ../src/gva-main.c:972
 msgid "Search for any of the following:"
 msgstr "搜索以下条件之一："
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:993
+#: ../src/gva-main.c:979
 msgid "Game Title"
 msgstr "游戏标题"
 
-#: ../src/gva-main.c:1007
+#: ../src/gva-main.c:993
 msgid "Copyright Year"
 msgstr "版权年限"
 
-#: ../src/gva-main.c:1028
+#: ../src/gva-main.c:1014
 msgid "BIOS Name"
 msgstr "BIOS 名称"
 
-#: ../src/gva-main.c:1035
+#: ../src/gva-main.c:1021
 msgid "Driver Name"
 msgstr "驱动名称"
 
@@ -453,20 +762,20 @@ msgstr "%s：没有该配置键"
 msgid "Could not determine emulator version"
 msgstr "无法确定模拟器版本"
 
-#: ../src/gva-music-button.c:116
+#: ../src/gva-music-button.c:122
 msgid "No music available"
 msgstr "没有可用的音乐"
 
-#: ../src/gva-music-button.c:119
+#: ../src/gva-music-button.c:125
 msgid "Unable to play music"
 msgstr "无法播放音乐"
 
-#: ../src/gva-music-button.c:146
+#: ../src/gva-music-button.c:152
 #, c-format
 msgid "Buffering %d%%..."
 msgstr "正在缓冲 %d%%..."
 
-#: ../src/gva-music-button.c:265
+#: ../src/gva-music-button.c:268
 msgid "Connecting..."
 msgstr "正在连接..."
 
@@ -478,19 +787,13 @@ msgstr "已静音"
 msgid "Whether the button state is muted"
 msgstr "按钮状态是否为静音"
 
-#: ../src/gva-mute-button.c:229
+#: ../src/gva-mute-button.c:202
 msgid "In-game sound is muted"
 msgstr "游戏背景声音已关闭"
 
-#: ../src/gva-mute-button.c:234
+#: ../src/gva-mute-button.c:207
 msgid "In-game sound is enabled"
 msgstr "游戏背景声音已开启"
-
-#: ../src/gva-nplayers.c:99
-msgid ""
-"This program is not configured to show detailed number of players "
-"information."
-msgstr "该程序没有配置来显示详细数量的游戏者信息。"
 
 #: ../src/gva-nplayers.c:179
 msgid "Up to four players alternating or two players simultaneously"
@@ -620,227 +923,106 @@ msgstr ""
 msgid "History not available"
 msgstr "历史不可用"
 
-#: ../src/gva-tree-view.c:421
+#: ../src/gva-tree-view.c:431
 msgid "Available Game"
 msgid_plural "Available Games"
 msgstr[0] "可用游戏"
 
-#: ../src/gva-tree-view.c:428
+#: ../src/gva-tree-view.c:438
 msgid "Favorite Game"
 msgid_plural "Favorite Games"
-msgstr[0] ""
+msgstr[0] "最爱的游戏"
 
-#: ../src/gva-tree-view.c:435
+#: ../src/gva-tree-view.c:445
 msgid "Search Result"
 msgid_plural "Search Results"
 msgstr[0] "搜索结果"
 
-#: ../src/gva-ui.c:150
+#: ../src/gva-ui.c:59
+msgid ""
+"GNOME Video Arcade is free software; you can redistribute it and/or modify "
+"it under the terms of the GNU General Public License as published by the "
+"Free Software Foundation; either version 3 of the License, or (at your "
+"option) any later version.\n"
+"\n"
+"GNOME Video Arcade is distributed in the hope that it will be useful, but "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
+"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"GNOME Video Arcade.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+
+#: ../src/gva-ui.c:319
 msgid "M.A.M.E. Front-End"
 msgstr "M.A.M.E. 前台程序"
 
-#: ../src/gva-ui.c:155
+#: ../src/gva-ui.c:324
 msgid "Visit the Website"
 msgstr "搜索网络"
 
-#: ../src/gva-ui.c:157
+#: ../src/gva-ui.c:326
 msgid "translator-credits"
-msgstr "Yinghua_Wang <wantinghard@gmail.com>"
+msgstr "Wylmer Wang <wantinghard@gmail.com>"
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:341
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:457
 msgid "Watching a fullscreen game"
 msgstr "观看全屏游戏"
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:475
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:560
 msgid "Recording a fullscreen game"
 msgstr "记录全屏游戏"
 
 #. Translators: This is passed through D-Bus as the
 #. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:654
+#: ../src/gva-ui.c:704
 msgid "Playing a fullscreen game"
 msgstr "玩全屏游戏"
 
-#: ../src/gva-ui.c:710
-msgid "_About"
-msgstr "关于(_A)"
-
-#: ../src/gva-ui.c:712
-msgid "Show information about the application"
-msgstr "显示应用程序相关信息"
-
-#: ../src/gva-ui.c:717
-msgid "_Contents"
-msgstr "内容(_C)"
-
-#: ../src/gva-ui.c:719
-msgid "Open the help documentation"
-msgstr "打开帮助文档"
-
-#: ../src/gva-ui.c:724
-msgid "_Preferences"
-msgstr "首选项(_P)"
-
-#: ../src/gva-ui.c:726
-msgid "Configure the application"
-msgstr "配置该应用程序"
-
-#: ../src/gva-ui.c:731
-msgid "_Quit"
-msgstr "退出(_Q)"
-
-#: ../src/gva-ui.c:733
-msgid "Quit the application"
-msgstr "退出该应用程序"
-
-#: ../src/gva-ui.c:738
-msgid "_Add Column"
-msgstr "添加列(_A)"
-
-#: ../src/gva-ui.c:745
-msgid "_Edit"
-msgstr "编辑(_E)"
-
-#: ../src/gva-ui.c:752
-msgid "_Game"
-msgstr "游戏(_G)"
-
-#: ../src/gva-ui.c:759
-msgid "_Help"
-msgstr "帮助(_H)"
-
-#: ../src/gva-ui.c:766
-msgid "_View"
-msgstr "查看(_V)"
-
-#: ../src/gva-ui.c:776
-msgid "Add to _Favorites"
-msgstr "添加到最爱游戏(_F)"
-
-#: ../src/gva-ui.c:778
-msgid "Add the selected game to my list of favorites"
-msgstr "将选择的游戏添加到我的最爱游戏列表"
-
-#: ../src/gva-ui.c:790 ../src/gva-ui.c:846
-msgid "Play _Back..."
-msgstr "回放(_B)..."
-
-#: ../src/gva-ui.c:804
-msgid "_Properties"
-msgstr "属性(_P)"
-
-#: ../src/gva-ui.c:811
-msgid "_Record"
-msgstr "记录(_R)"
-
-#: ../src/gva-ui.c:813
-msgid "Start the selected game and record keypresses to a file"
-msgstr "开始选择的游戏并将按键记录到文件"
-
-#: ../src/gva-ui.c:825
-msgid "Remove from _Favorites"
-msgstr "从最爱游戏中移除(_F)"
-
-#: ../src/gva-ui.c:827
-msgid "Remove the selected game from my list of favorites"
-msgstr "将选择的游戏从我的最爱游戏列表中移除"
-
-#: ../src/gva-ui.c:832
-msgid "Save _As..."
-msgstr "保存为(_A)..."
-
-#: ../src/gva-ui.c:839
-msgid "S_earch..."
-msgstr "搜索(_E)..."
-
-#: ../src/gva-ui.c:841
-msgid "Show a custom list of games"
-msgstr "显示自定义的游戏列表"
-
-#: ../src/gva-ui.c:848
-msgid "Play back a previously recorded game"
-msgstr "回放以前记录的游戏"
-
-#: ../src/gva-ui.c:853
-msgid "_Start"
-msgstr "开始(_S)"
-
-#: ../src/gva-ui.c:863
-msgid "Play music _automatically"
-msgstr "自动播放音乐(_A)"
-
-#: ../src/gva-ui.c:865
-msgid "Automatically play a music clip from the selected game"
-msgstr "自动播放来自所选游戏的音乐片段"
-
-#: ../src/gva-ui.c:871
-msgid "_Restore previous state when starting a game"
-msgstr "恢复上次启动游戏时的状态(_R)"
-
-#: ../src/gva-ui.c:879
-msgid "Start games in _fullscreen mode"
-msgstr "以全屏模式开始游戏(_F)"
-
-#: ../src/gva-ui.c:890
-msgid "Show _alternate versions of original games"
-msgstr "显示原游戏的可替代版本(_A)"
-
-#: ../src/gva-ui.c:911
-msgid "_Available Games"
-msgstr "可用游戏(_A)"
-
-#: ../src/gva-ui.c:918
-msgid "_Favorite Games"
-msgstr "最爱游戏(_F)"
-
-#: ../src/gva-ui.c:925
-msgid "Search _Results"
-msgstr "搜索结果(_R)"
-
-#: ../src/gva-ui.c:1022
+#: ../src/gva-ui.c:801
 msgid "Failed to initialize user interface"
 msgstr "初始化用户界面失败"
 
-#: ../src/gva-ui.c:1146
+#: ../src/gva-ui.c:943
 #, c-format
 msgid "Add %s Column"
 msgstr "添加 %s 列"
 
-#: ../src/gva-ui.c:1148
+#: ../src/gva-ui.c:945
 #, c-format
 msgid "Add a \"%s\" column to the game list"
 msgstr "向游戏列表添加一个 \"%s\" 列"
 
-#: ../src/main.c:55
+#: ../src/main.c:53
 msgid "Build the games database"
 msgstr "建立游戏数据库"
 
-#: ../src/main.c:59
+#: ../src/main.c:57
 msgid "Inspect an emulator setting"
 msgstr "查看模拟器设置"
 
-#: ../src/main.c:60
-#, fuzzy
+#: ../src/main.c:58
 msgid "NAME"
 msgstr "名称"
 
-#: ../src/main.c:64
+#: ../src/main.c:62
 msgid "Show the application version"
 msgstr "显示应用程序版本"
 
-#: ../src/main.c:68
+#: ../src/main.c:66
 msgid "Show which emulator will be used"
 msgstr "显示要使用的模拟器"
 
-#: ../src/main.c:107
+#: ../src/main.c:105
 msgid "No ROM files found"
 msgstr "未找到 ROM 文件"
 
-#: ../src/main.c:111
+#: ../src/main.c:109
 msgid ""
 "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
 "is misconfigured or that no ROM files are installed. Click <b>Help</b> for "
@@ -849,11 +1031,11 @@ msgstr ""
 "GNOME Video Arcade 无法定位任何 ROM 文件。可能是 MAME 配置有误，或者没有安装 "
 "ROM 文件。点击 <b>帮助</b> 了解更多细节和故障排除提示。"
 
-#: ../src/main.c:199
+#: ../src/main.c:152
 msgid "Changes detected in ROM files"
 msgstr "检测到 ROM 文件的改动"
 
-#: ../src/main.c:203
+#: ../src/main.c:156
 msgid ""
 "GNOME Video Arcade has detected changes in your ROM files and will need to "
 "audit them in order to update the game list. However the audit may take "
@@ -867,10 +1049,51 @@ msgstr ""
 "\n"
 "如果您现在略过审计，下次启动 GNOME Video Arcade 时会自动执行。"
 
-#: ../src/main.c:213
+#: ../src/main.c:166
 msgid "_Skip Audit"
 msgstr "跳过审计(_S)"
 
-#: ../src/main.c:214
+#: ../src/main.c:167
 msgid "_Audit ROM Files"
 msgstr "审计 ROM 文件(_A)"
+
+#~ msgid "&#x2022; <b>THIS GAME DOESN'T WORK.</b>"
+#~ msgstr "&#x2022; <b>该游戏不工作。</b>"
+
+#~ msgid "&#x2022; The colors are completely wrong."
+#~ msgstr "&#x2022; 颜色完全错误。"
+
+#~ msgid "&#x2022; The colors aren't 100% accurate."
+#~ msgstr "&#x2022; 颜色不是 100% 准确。"
+
+#~ msgid "&#x2022; The game has protection which isn't fully emulated."
+#~ msgstr "&#x2022; 该游戏有保护，不能完全模拟。"
+
+#~ msgid "&#x2022; The game lacks sound."
+#~ msgstr "&#x2022; 该游戏没有声音。"
+
+#~ msgid "&#x2022; The sound emulation isn't 100% accurate."
+#~ msgstr "&#x2022; 声音模拟不是 100% 准确。"
+
+#~ msgid "&#x2022; The video emulation isn't 100% accurate."
+#~ msgstr "&#x2022; 视频模拟不是 100% 准确。"
+
+#~ msgid "GConf error: %s"
+#~ msgstr "GConf 错误：%s"
+
+#~ msgid "All further errors shown only on terminal."
+#~ msgstr "以后的所有错误只在终端上显示。"
+
+#~ msgid "This program is not configured to show category information."
+#~ msgstr "程序没有配置来显示分类信息。"
+
+#~ msgid "This program is not configured to show history information."
+#~ msgstr "程序没有配置来显示历史信息。"
+
+#~ msgid ""
+#~ "This program is not configured to show detailed number of players "
+#~ "information."
+#~ msgstr "该程序没有配置来显示详细数量的游戏者信息。"
+
+#~ msgid "Add the selected game to my list of favorites"
+#~ msgstr "将选择的游戏添加到我的最爱游戏列表"
