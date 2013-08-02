@@ -8,7 +8,6 @@ endif
 
 EXTRA_DIST = \
 	config.rpath			\
-	gnome-doc-utils.make		\
 	intltool-extract.in		\
 	intltool-merge.in		\
 	intltool-update.in		\
@@ -29,11 +28,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/ltmain.sh		\
 	$(srcdir)/missing		\
 	$(srcdir)/mkinstalldirs		\
-	$(srcdir)/omf.make		\
-	$(srcdir)/xmldocs.make		\
 	$(srcdir)/gtk-doc.make		\
-	$(srcdir)/gnome-doc-utils.make	\
-	$(srcdir)/m4/gnome-doc-utils.m4	\
 	$(srcdir)/m4/gtk-doc.m4		\
 	$(srcdir)/m4/intltool.m4	\
 	$(srcdir)/m4/libtool.m4		\

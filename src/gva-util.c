@@ -385,14 +385,14 @@ gva_help_display (GtkWindow *parent,
         GError *error = NULL;
         guint32 timestamp;
 
-        uri = g_string_new ("ghelp:" PACKAGE);
+        uri = g_string_new ("help:" PACKAGE);
         timestamp = gtk_get_current_event_time ();
 
         if (parent != NULL)
                 screen = gtk_widget_get_screen (GTK_WIDGET (parent));
 
         if (link_id != NULL)
-                g_string_append_printf (uri, "?%s", link_id);
+                g_string_append_printf (uri, "/%s", link_id);
 
         if (gtk_show_uri (screen, uri->str, timestamp, &error))
                 goto exit;

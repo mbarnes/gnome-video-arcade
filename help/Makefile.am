@@ -1,13 +1,12 @@
-### Process this file with automake to produce Makefile.in
+@YELP_HELP_RULES@
 
-include $(top_srcdir)/gnome-doc-utils.make
-dist-hook: doc-dist-hook
+HELP_ID = gnome-video-arcade
 
-DOC_MODULE = gnome-video-arcade
-DOC_ENTITIES = legal.xml
-DOC_INCLUDES =
+HELP_FILES = \
+	index.docbook \
+	legal.xml
 
-DOC_FIGURES = \
+HELP_MEDIA = \
 	figures/gva_building_database.png	\
 	figures/gva_column_preferences.png	\
 	figures/gva_general_preferences.png	\
@@ -15,6 +14,6 @@ DOC_FIGURES = \
 	figures/gva_recorded_games.png		\
 	figures/gva_search_window.png
 
-DOC_LINGUAS = cs da de es it sl sv
+HELP_LINGUAS = cs da de es it sl sv
 
 -include $(top_srcdir)/git.mk
