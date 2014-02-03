@@ -1,238 +1,794 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade\n"
-"Report-Msgid-Bugs-To: matthew@barnes.net\n"
-"POT-Creation-Date: 2009-09-12 18:29+0300\n"
-"PO-Revision-Date: 2009-09-12 18:52+0200\n"
-"Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
-"Language-Team: greek-team <gnome@gnome.gr>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2014-02-02 09:40+0000\n"
+"PO-Revision-Date: 2014-02-02 18:43+0300\n"
+"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"Language-Team: team@lists.gnome.gr\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.0\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Project-Style: gnome\n"
 
-#: ../src/gconf-bridge.c:1218
-#, c-format
-msgid "GConf error: %s"
-msgstr "GConf σφάλμα: %s"
+#: ../data/gnome-video-arcade.builder.h:1
+msgid "Add to _Favorites"
+msgstr "Προσθήκη στα _Αγαπημένα"
 
-#: ../src/gconf-bridge.c:1228
-msgid "All further errors shown only on terminal."
-msgstr "Όλα τα επόμενα σφάλματα εμφανίζονται μόνο στο τερματικό."
+#: ../data/gnome-video-arcade.builder.h:2
+msgid "Show next game"
+msgstr "Εμφάνιση επόμενου παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:3
+msgid "Play _Back..."
+msgstr "Αναπα_ραγωγή..."
+
+#: ../data/gnome-video-arcade.builder.h:4
+msgid "Play back the selected game recording"
+msgstr "Αναπαραγωγή της επιλεγμένης μαγνητοσκόπησης του παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:5
+msgid "Show previous game"
+msgstr "Εμφάνιση προηγούμενου παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:6
+msgid "_Properties"
+msgstr "_Ιδιότητες"
+
+#: ../data/gnome-video-arcade.builder.h:7
+msgid "Show information about the selected game"
+msgstr "Εμφάνιση πληροφορίας για το επιλεγμένο παιχνίδι"
+
+#: ../data/gnome-video-arcade.builder.h:8
+msgid "_Record"
+msgstr "_Μαγνητοσκόπηση"
+
+#: ../data/gnome-video-arcade.builder.h:9
+msgid "Start the selected game and record keypresses to a file"
+msgstr ""
+"Έναρξη επιλεγμένου παιχνιδιού και καταγραφή πλήκτρων που πατήθηκαν σε ένα "
+"αρχείο"
+
+#: ../data/gnome-video-arcade.builder.h:10
+msgid "Remove from _Favorites"
+msgstr "Διαγραφή από τα _Αγαπημένα"
+
+#: ../data/gnome-video-arcade.builder.h:11
+msgid "Remove the selected game from my list of favorites"
+msgstr ""
+"Διαγραφή του επιλεγμένου παιχνιδιού από τον κατάλογο των αγαπημένων μου"
+
+#: ../data/gnome-video-arcade.builder.h:12
+msgid "Save _As..."
+msgstr "Αποθήκευση _ως..."
+
+#: ../data/gnome-video-arcade.builder.h:13
+msgid "Save ROM errors to a file"
+msgstr "Αποθήκευση σφαλμάτων ROM σε ένα αρχείο"
+
+#: ../data/gnome-video-arcade.builder.h:14
+msgid "S_earch..."
+msgstr "Α_ναζήτηση..."
+
+#: ../data/gnome-video-arcade.builder.h:15
+msgid "Show a custom list of games"
+msgstr "Εμφάνιση προσαρμοσμένου καταλόγου παιχνιδιών"
+
+#: ../data/gnome-video-arcade.builder.h:16
+msgid "Play back a previously recorded game"
+msgstr "Αναπαραγωγή ενός προηγούμενου μαγνητοσκοπημένου παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:17
+msgid "_Start"
+msgstr "Έ_ναρξη"
+
+#: ../data/gnome-video-arcade.builder.h:18
+msgid "Start the selected game"
+msgstr "Έναρξη του επιλεγμένου παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:19
+msgid "Show _alternate versions of original games"
+msgstr "Εμφάνιση _εναλλακτικών εκδόσεων από τα αρχικά παιχνίδια"
+
+#: ../data/gnome-video-arcade.builder.h:20
+msgid "_Available Games"
+msgstr "_Διαθέσιμα παιχνίδια"
+
+#: ../data/gnome-video-arcade.builder.h:21
+msgid "Show all available games"
+msgstr "Εμφάνιση όλων των διαθέσιμων παιχνιδιών"
+
+#: ../data/gnome-video-arcade.builder.h:22
+msgid "_Favorite Games"
+msgstr "Α_γαπημένα παιχνίδια"
+
+#: ../data/gnome-video-arcade.builder.h:23
+msgid "Only show my favorite games"
+msgstr "Εμφάνιση μόνο των αγαπημένων μου παιχνιδιών"
+
+#: ../data/gnome-video-arcade.builder.h:24
+msgid "Search _Results"
+msgstr "Αποτε_λέσματα αναζήτησης"
+
+#: ../data/gnome-video-arcade.builder.h:25
+msgid "Show my search results"
+msgstr "Εμφάνιση των αποτελεσμάτων αναζήτησης μου"
+
+#: ../data/gnome-video-arcade.builder.h:26
+msgid "_About"
+msgstr "_Περί"
+
+#: ../data/gnome-video-arcade.builder.h:27
+msgid "Show information about the application"
+msgstr "Εμφάνιση πληροφορίας για την εφαρμογή"
+
+#: ../data/gnome-video-arcade.builder.h:28
+msgid "_Contents"
+msgstr "_Περιεχόμενα"
+
+#: ../data/gnome-video-arcade.builder.h:29
+msgid "Open the help documentation"
+msgstr "Άνοιγμα της τεκμηρίωσης"
+
+#: ../data/gnome-video-arcade.builder.h:30
+msgid "_Preferences"
+msgstr "_Προτιμήσεις"
+
+#: ../data/gnome-video-arcade.builder.h:31
+msgid "Configure the application"
+msgstr "Ρύθμιση της εφαρμογής"
+
+#: ../data/gnome-video-arcade.builder.h:32
+msgid "_Quit"
+msgstr "Έ_ξοδος"
+
+#: ../data/gnome-video-arcade.builder.h:33
+msgid "Quit the application"
+msgstr "Έξοδος από την εφαρμογή"
+
+#: ../data/gnome-video-arcade.builder.h:34
+msgid "_Add Column"
+msgstr "_Προσθήκη στήλης"
+
+#: ../data/gnome-video-arcade.builder.h:35
+msgid "_Edit"
+msgstr "_Επεξεργασία"
+
+#: ../data/gnome-video-arcade.builder.h:36
+msgid "_Game"
+msgstr "_Παιχνίδι"
+
+#: ../data/gnome-video-arcade.builder.h:37
+msgid "_Help"
+msgstr "_Βοήθεια"
+
+#: ../data/gnome-video-arcade.builder.h:38
+msgid "_View"
+msgstr "_Προβολή"
+
+#: ../data/gnome-video-arcade.builder.h:39
+msgid "Play music _automatically"
+msgstr "Α_υτόματη αναπαραγωγή μουσικής"
+
+#: ../data/gnome-video-arcade.builder.h:40
+msgid "Automatically play a music clip from the selected game"
+msgstr ""
+"Αυτόματη αναπαραγωγή ενός μουσικού κομματιού από το επιλεγμένο παιχνίδι"
+
+#: ../data/gnome-video-arcade.builder.h:41
+msgid "_Restore previous state when starting a game"
+msgstr "Επανα_φορά προηγούμενης κατάστασης κατά την εκκίνηση ενός παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:42
+msgid "Start games in _fullscreen mode"
+msgstr "Έναρξη παιχνιδιών σε κατάσταση _πλήρους οθόνης"
+
+#: ../data/gnome-video-arcade.builder.h:43
+msgid " "
+msgstr " "
+
+#: ../data/gnome-video-arcade.builder.h:44
+msgid "<big><b>Errors detected in ROM files</b></big>"
+msgstr "<big><b>Σφάλματα ανιχνεύτηκαν σε αρχεία ROM</b></big>"
+
+#: ../data/gnome-video-arcade.builder.h:45
+msgid ""
+"An audit of the available games has detected errors in some of the ROM "
+"files. The following games will not be available in GNOME Video Arcade."
+msgstr ""
+"Ένας έλεγχος επαλήθευσης των διαθέσιμων παιχνιδιών έχει ανιχνεύσει σφάλματα "
+"σε μερικά από τα αρχεία μνήμης μόνο ανάγνωσης (ROM). Τα παρακάτω παιχνίδια "
+"δεν θα είναι διαθέσιμα στο GNOME Συλλογή Τηλεοπτικών Παιχνιδιών."
+
+#: ../data/gnome-video-arcade.builder.h:46
+msgid ""
+"<small><i>If these games worked with previous versions of MAME, it is likely "
+"their ROM requirements have changed.  If so, you will need to acquire more "
+"recent ROM files.</i></small>"
+msgstr ""
+"<small><i>Αν κάποια παιχνίδια έπαιζαν με προηγούμενες εκδόσεις του MAME, "
+"είναι πιθανόν οι απαιτήσεις μνήμης μόνο ανάγνωσης (ROM) να έχουν αλλάξει. Αν "
+"είναι έτσι, χρειάζεται η απόκτηση πιο πρόσφατων αρχείων μνήμης μόνο "
+"ανάγνωσης (ROM).</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:47
+msgid "Close this window"
+msgstr "Κελίσιμο αυτού του παραθύρου"
+
+#: ../data/gnome-video-arcade.builder.h:48
+#: ../data/gnome-video-arcade.desktop.in.h:1
+msgid "GNOME Video Arcade"
+msgstr "GNOME Συλλογή Τηλεοπτικών Παιχνιδών"
+
+#. This label precedes the search entry. e.g. Search for: Pac-Man
+#: ../data/gnome-video-arcade.builder.h:50
+msgid "Search for:"
+msgstr "Αναζήτηση για:"
+
+#: ../data/gnome-video-arcade.builder.h:51
+msgid "_Start Game"
+msgstr "Έναρ_ξη παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:52
+msgid "Recorded Games"
+msgstr "Μαγνητοσκοπημένα παιχνίδια"
+
+#: ../data/gnome-video-arcade.builder.h:53
+msgid "Delete the selected game recordings"
+msgstr "Διαγραφή των μαγνητοσκοπήσεων του επιλεγμένου παιχνιδιού"
+
+#: ../data/gnome-video-arcade.builder.h:54
+msgid "Play _Back"
+msgstr "Αναπ_αραγωγή"
+
+#: ../data/gnome-video-arcade.builder.h:55
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
+#: ../data/gnome-video-arcade.builder.h:56
+msgid "<b>General</b>"
+msgstr "<b>Γενικά</b>"
+
+#: ../data/gnome-video-arcade.builder.h:57
+msgid ""
+"<small><i><b>Note:</b> Setting this will not take effect until the second "
+"time the game is started. It does not apply to recording or playing back "
+"games.</i></small>"
+msgstr ""
+"<small><i><b>Σημείωση:</b> Με την ρύθμιση του δεν θα υπάρχει επίδραση μέχρι "
+"την δεύτερη φορά που θα ξεκινήσει το παιχνίδι. Δεν απευθύνεται ατην εγγραφή "
+"ή την αναπαραγωγή παιχνιδιών.</i></small>"
+
+#: ../data/gnome-video-arcade.builder.h:58
+msgid "<b>Game List</b>"
+msgstr "<b>Κατάλογος παιχνιδιώνt</b>"
+
+#: ../data/gnome-video-arcade.builder.h:59
+msgid "General"
+msgstr "Γενικά"
+
+#: ../data/gnome-video-arcade.builder.h:60
+msgid "<b>Columns</b>"
+msgstr "<b>Στήλες</b>"
+
+#: ../data/gnome-video-arcade.builder.h:61
+msgid "Choose the order of information to appear in the game list."
+msgstr ""
+"Επιλέξτε την κατηγορία της πληροφορίας που θα εμφανίζεται στον κατάλογο των "
+"παιχνιδιών."
+
+#: ../data/gnome-video-arcade.builder.h:62
+msgid "Columns"
+msgstr "Στήλες"
+
+#: ../data/gnome-video-arcade.builder.h:63
+msgid "Properties"
+msgstr "Ιδιότητες"
+
+#: ../data/gnome-video-arcade.builder.h:64
+msgid "History"
+msgstr "Ιστορικό"
+
+#: ../data/gnome-video-arcade.builder.h:65
+msgid "Gallery"
+msgstr "Συλλογή"
+
+#. The same text is in gnome-video-arcade.builder,
+#. * so it has to be translated with markup anyway.
+#: ../data/gnome-video-arcade.builder.h:66 ../src/gva-columns.c:753
+msgid "<b>There are known problems with this game:</b>"
+msgstr "<b>Υπάρχουν γνωστά προβλήματα με αυτό το παιχνίδι:</b>"
+
+#. The labels begin with a UTF-8 encoded bullet character.
+#: ../data/gnome-video-arcade.builder.h:68 ../src/gva-columns.c:765
+#, no-c-format
+msgid "• The colors aren't 100% accurate."
+msgstr "• Τα χρώματα δεν είναι 100% ακριβή."
+
+#: ../data/gnome-video-arcade.builder.h:69 ../src/gva-columns.c:774
+msgid "• The colors are completely wrong."
+msgstr "• Τα χρώματα είναι τελείως λάθος."
+
+#: ../data/gnome-video-arcade.builder.h:71 ../src/gva-columns.c:784
+#, no-c-format
+msgid "• The video emulation isn't 100% accurate."
+msgstr "• Η προσομοίωση βίντεο δεν είναι 100% ακριβής."
+
+#: ../data/gnome-video-arcade.builder.h:73 ../src/gva-columns.c:794
+#, no-c-format
+msgid "• The sound emulation isn't 100% accurate."
+msgstr "• Η προσομοίωση ήχου δεν είναι 100% ακριβής."
+
+#: ../data/gnome-video-arcade.builder.h:74 ../src/gva-columns.c:803
+msgid "• The game lacks sound."
+msgstr "• Έλλειψη ήχου στο παιχνίδι."
+
+#: ../data/gnome-video-arcade.builder.h:75 ../src/gva-columns.c:812
+msgid "• Screen flipping in cocktail mode is not supported."
+msgstr ""
+"• Η αναστροφή της οθόνης δεν υποστηρίζεται σε ανάμικτη κατάσταση λειτουργίας."
+
+#: ../data/gnome-video-arcade.builder.h:76 ../src/gva-columns.c:821
+msgid "• <b>THIS GAME DOESN'T WORK.</b>"
+msgstr "• <b>ΤΟ ΠΑΙΧΝΙΔΙ ΔΕΝ ΛΕΙΤΟΥΡΓΕΙ.</b>"
+
+#: ../data/gnome-video-arcade.builder.h:77 ../src/gva-columns.c:831
+msgid "• The game has protection which isn't fully emulated."
+msgstr "• Το παιχνίδι έχει προστασία η οποία δεν είναι πλήρως προσομοιωμένη."
+
+#: ../data/gnome-video-arcade.builder.h:78
+msgid "<b>BIOS</b>"
+msgstr "<b>Σύστημα βασικής εισόδου-εξόδου(BIOS)</b>"
+
+#: ../data/gnome-video-arcade.builder.h:79
+msgid "<b>CPU</b>"
+msgstr "<b>Κεντρικής μονάδα επεξεργασίας(CPU)</b>"
+
+#: ../data/gnome-video-arcade.builder.h:80
+msgid "<b>Sound</b>"
+msgstr "<b>Ήχος</b>"
+
+#: ../data/gnome-video-arcade.builder.h:81
+msgid "<b>Video</b>"
+msgstr "<b>Τηλεοπτικό</b>"
+
+#: ../data/gnome-video-arcade.builder.h:82
+msgid "<b>Original Version</b>"
+msgstr "<b>Αρχική έκδοση</b>"
+
+#: ../data/gnome-video-arcade.builder.h:83
+msgid "<b>Alternate Versions</b>"
+msgstr "<b>Εναλλακτικές εκδόσεις</b>"
+
+#: ../data/gnome-video-arcade.builder.h:84
+msgid "Technical"
+msgstr "Τεχνικό"
+
+#: ../data/gnome-video-arcade.builder.h:85
+msgid "Play a music clip"
+msgstr "Αναπαραγωγή μουσικού κομματιού"
+
+#: ../data/gnome-video-arcade.builder.h:86
+msgid "<small></small>"
+msgstr "<small></small>"
+
+#: ../data/gnome-video-arcade.desktop.in.h:2
+msgid "Video Arcade"
+msgstr "Βίντεο Arcade"
+
+#: ../data/gnome-video-arcade.desktop.in.h:3
+msgid "Play classic arcade games"
+msgstr "Παίξιμο κλασικών παιχνιδιών arcade"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:1
+msgid "All available column names"
+msgstr "Όλα τα διαθέσιμα ονόματα στηλών"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:2
+msgid ""
+"List of all available column names. The user may choose to only display a "
+"subset of them (see \"columns\")."
+msgstr ""
+"Κατάλογος όλων των διαθέσιμων ονομάτων στηλών. Ο χρήστης μπορεί να επιλέξει "
+"να εμφανίσει μόνο ένα υποσύνολο τους (δείτε \"στήλες\")."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:3
+msgid "Auto-play music clip"
+msgstr "Αυτόματη αναπαραγωγή μουσικού κομματιού"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:4
+msgid ""
+"Enable automatic playing of in-game music clips. If true, and a music clip "
+"is available for the selected game, the clip will automatically begin "
+"playing when the user opens the Properties window or when the user selects a "
+"different game while the Properties window is visible. Music clips are "
+"streamed from http://www.arcade-history.com/."
+msgstr ""
+"Ενεργοποίηση αυτόματης αναπαραγωγής μουσικών κομματιών του παιχνιδιού. Αν "
+"είναι αληθές και ένα μουσικό κομμάτι είναι διαθέσιμο για το επιλεγμένο "
+"παιχνίδι, το κομμάτι θα ξεκινήσει αυτόματα να παίζει όταν ο χρήστης ανοίγει "
+"το παράθυρο ιδιοτήτων ή όταν ο χρήστης επιλέξει ένα διαφορετικό παιχνίδι ενώ "
+"το παράθυρο ιδιοτήτων είναι ορατό. Τα μουσικά κομμάτια τροφοδοτούνται από το "
+"http://www.arcade-history.com/."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:5
+msgid "Save and restore state"
+msgstr "Αποθήκευση και επαναφορά κατάστασης"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:6
+msgid ""
+"Enable automatic restore at startup and save at exit. If true, the emulator "
+"will try to restore the previous state of the arcade machine when starting a "
+"game. If false, the emulator will boot the arcade machine from a cold start. "
+"This setting does not apply to recording games or playing back previously "
+"recorded games. In those cases the emulator will always reboot the arcade "
+"machine."
+msgstr ""
+"Ενεργοποίηση αυτόματης επαναφοράς στην έναρξη και αποθήκευση στην έξοδο. Αν "
+"είναι αληθές, ο προσομοιωτής θα προσπαθήσει να αποκαταστήσει την προηγούμενη "
+"κατάσταση της μηχανής arcade κατά την έναρξη ενός παιχνιδιού. Αν είναι "
+"ψευδές, ο προσομοιωτής θα εκκινήσει τη μηχανή arcade από μια κρύα αρχή. Αυτή "
+"η ρύθμιση δεν εφαρμόζεται για να γράψει παιχνίδια ή να αναπαράγει "
+"προηγουμένως γραμμένα παιχνίδια. Σε αυτές τις περιπτώσεις ο προσομοιωτής θα "
+"επανεκκινεί πάντα τη μηχανή arcade."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:7
+msgid "Column names"
+msgstr "Ονόματα στηλών"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:8
+msgid "List of column names to display."
+msgstr "Κατάλογος των ονομάτων στηλών που θα εμφανιστεί."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:9
+msgid "Favorite games"
+msgstr "Αγαπημένα παιχνίδια"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:10
+msgid "List of the user's favorite games."
+msgstr "Κατάλογος των αγαπημένων παιχνιδιών του χρήστη."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:11
+msgid "Start games in full screen mode"
+msgstr "Έναρξη παιχνιδιών σε κατάσταση πλήρους οθόνης"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:12
+msgid ""
+"If true, automatically switch to full screen mode when starting a game. If "
+"false, start the game in a window."
+msgstr ""
+"Αν είναι αληθές, αυτόματη εναλλαγή σε κατάσταση πλήρους οθόνης, όταν "
+"ξεκινάτε ένα παιχνίδι. Αν είναι ψευδές, ξεκινήστε το παιχνίδι σε ένα "
+"παράθυρο."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:13
+msgid "ROM error filename"
+msgstr "Όνομα αρχείου σφαλμάτων ROM"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:14
+msgid "Suggested filename for the ROM error \"Save As\" dialog."
+msgstr ""
+"Προτεινόμενο όνομα αρχείου για τον διάλογο σφάλματος ROM \"Αποθήκευση ως\"."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:15
+msgid "Properties height"
+msgstr "Ύψος ιδιοτήτων"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:16
+msgid "The height of the Properties window."
+msgstr "Το ύψος του παραθύρου ιδιοτήτων."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:17
+msgid "Properties maximized"
+msgstr "Μεγιστοποιημένες ιδιότητες"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:18
+msgid "True if the Properties window is maximized."
+msgstr "Αληθές αν το παράθυρο ιδιοτήτων είναι μεγιστοποιημένο."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:19
+msgid "Properties page"
+msgstr "Σελίδα ιδιοτήτων"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:20
+msgid "The most recently selected page in the Properties window."
+msgstr "Η πιο πρόσφατα επιλεγμένη σελίδα στο παράθυρο ιδιοτήτων."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:21
+msgid "Properties width"
+msgstr "Πλάτος ιδιοτήτων"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:22
+msgid "The width of the Properties window."
+msgstr "Το πλάτος του παραθύρου ιδιοτήτων."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:23
+msgid "Search text"
+msgstr "Κείμενο αναζήτησης"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:24
+msgid "The most recent text in the search entry."
+msgstr "Το πιο πρόσφατο κείμενο στην καταχώριση αναζήτησης."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:25
+msgid "Selected game"
+msgstr "Επιλεγμένο παιχνίδι"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:26
+msgid "The most recently selected game."
+msgstr "Το πιο πρόσφατα επιλεγμένο παιχνίδι."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:27
+msgid "Selected completion match"
+msgstr "Επιλεγμένη συμφωνία ολοκλήρωσης"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:28
+msgid ""
+"The most recently selected match from a search completion list. The first "
+"value is the column name of the match, and the second value is the text of "
+"the match. Example: (manufacturer, Williams). Empty values indicate the "
+"completion feature was not used in the most recent search."
+msgstr ""
+"Η πιο πρόσφατα επιλεγμένη συμφωνία από έναν κατάλογο ολοκλήρωσης αναζήτησης. "
+"Η πρώτη τιμή είναι το όνομα της στήλης της συμφωνίας και η δεύτερη τιμή "
+"είναι το κείμενο της συμφωνίας. Παράδειγμα: (κατασκευαστής, Williams). Κενές "
+"τιμές δείχνουν ότι το χαρακτηριστικό ολοκλήρωσης δεν χρησιμοποιήθηκε στην "
+"πιο πρόσφατη αναζήτηση."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:29
+msgid "Selected view"
+msgstr "Επιλεγμένη προβολή"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:30
+msgid "The most recently selected view."
+msgstr "Η πιο πρόσφατα επιλεγμένη προβολή."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:31
+msgid "Show cloned games"
+msgstr "Εμφάνιση κλωνοποιημένων παιχνιδιών"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:32
+msgid ""
+"If true, show both original and cloned games in the main window. If false, "
+"show only original games."
+msgstr ""
+"Αν είναι αληθές, εμφανίζονται και το αρχικό και το κλωνοποιημένο παιχνίδι "
+"στο κυρίως παράθυρο. Αν είναι ψευδές, εμφανίζονται μόνο τα αρχικά παιχνίδια."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:33
+msgid "Sort column and sort order"
+msgstr "Ταξινόμηση στηλών και σειρά ταξινόμησης"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:34
+msgid ""
+"The first value is the most recently sorted column name (or \"default\" for "
+"default sorting), and the second value is the sort order. True indicates "
+"descending order; False indicates ascending order."
+msgstr ""
+"Η πρώτη τιμή είναι το πιο πρόσφατο ταξινομημένο όνομα στήλης (ή \"προεπιλογή"
+"\" για προεπιλεγμένη ταξινόμηση) και η δεύτερη τιμή είναι η σειρά "
+"ταξινόμησης. Αληθές δείχνει φθίνουσα σειρά· ψευδές δείχνει αύξουσα σειρά."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:35
+msgid "Sound muted"
+msgstr "Σίγαση ήχου"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:36
+msgid "If true, games are started without sound."
+msgstr "Αν είναι αληθές, τα παιχνίδια αρχίζουν χωρίς ήχο."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:37
+msgid "Program version"
+msgstr "Έκδοση προγράμματος"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:38
+msgid "The most recently run version of GNOME Video Arcade."
+msgstr "Η πιο πρόσφατη έκδοση εκτέλεσης του βίντεο Arcade GNOME."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:39
+msgid "Window height"
+msgstr "Ύψος παραθύρου"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:40
+msgid "The height of the main window."
+msgstr "Το ύψος του κυρίως παραθύρου."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:41
+msgid "Window maximized"
+msgstr "Μεγιστοποιημένο παράθυρο"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:42
+msgid "True if the main window is maximized."
+msgstr "Αληθές αν το κυρίως παράθυρο είναι μεγιστοποιημένο."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:43
+msgid "Window width"
+msgstr "Πλάτος παραθύρου"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:44
+msgid "The width of the main window."
+msgstr "Το πλάτος του κυρίως παραθύρου."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:45
+msgid "Window X coordinate"
+msgstr "Συντεταγμένη Χ του παραθύρου"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:46
+msgid "The X coordinate of the main window."
+msgstr "Η συντεταγμένη Χ του κυρίως παραθύρου."
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:47
+msgid "Window Y coordinate"
+msgstr "Συντεταγμένη Υ του παραθύρου"
+
+#: ../data/org.gnome.VideoArcade.gschema.xml.in.h:48
+msgid "The Y coordinate of the main window."
+msgstr "Η συντεταγμένη Υ του κυρίως παραθύρου."
 
 #: ../src/gva-audit.c:238
 msgid "Save As"
 msgstr "Αποθήκευση ως"
 
-#: ../src/gva-categories.c:71
-msgid "This program is not configured to show category information."
-msgstr "Το πρόγραμμα αυτό δεν έχει ρυθμιστεί για να εμφανίζει την πληροφορία κατηγορίας."
-
-#: ../src/gva-column-manager.c:554
+#: ../src/gva-column-manager.c:557
 msgid "Managed View"
 msgstr "Ελεγχόμενη προβολή"
 
-#: ../src/gva-column-manager.c:555
+#: ../src/gva-column-manager.c:558
 msgid "The GtkTreeView being managed"
 msgstr "Η δενδρική προβολή του Gtk είναι ελεγχόμενη"
 
-#: ../src/gva-column-manager.c:611
+#: ../src/gva-column-manager.c:615
 msgid "Move _Up"
 msgstr "Μετακίνηση προς τα _πάνω"
 
-#: ../src/gva-column-manager.c:624
+#: ../src/gva-column-manager.c:628
 msgid "Move _Down"
 msgstr "Μετακίνηση προς τα _κάτω"
 
-#: ../src/gva-column-manager.c:637
+#: ../src/gva-column-manager.c:641
 msgid "_Show"
 msgstr "_Προβολή"
 
-#: ../src/gva-column-manager.c:646
+#: ../src/gva-column-manager.c:650
 msgid "_Hide"
-msgstr "Ᾰπόκρυψη"
+msgstr "Απόκρυ_ψη"
 
-#: ../src/gva-columns.c:279
+#: ../src/gva-columns.c:299
 #, c-format
 msgid "Remove %s Column"
 msgstr "Διαγραφή στήλης %s"
 
-#: ../src/gva-columns.c:281
+#: ../src/gva-columns.c:301
 #, c-format
 msgid "Remove the \"%s\" column from the game list"
 msgstr "Διαγραφή της στήλης \"%s\" από τον κατάλογο παιχνιδιών"
 
-#. The same text is in gnome-video-arcade.builder,
-#. * so it has to be translated with markup anyway.
-#: ../src/gva-columns.c:708
-msgid "<b>There are known problems with this game:</b>"
-msgstr "<b>Υπάρχουν γνωστά προβλήματα με αυτό το παιχνίδι:</b>"
-
-#. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-columns.c:719
-#, c-format
-msgid "• The colors aren't 100% accurate."
-msgstr ""
-
-#: ../src/gva-columns.c:728
-msgid "• The colors are completely wrong."
-msgstr "• Τα χρώματα είναι τελείως λάθος."
-
-#: ../src/gva-columns.c:737
-#, c-format
-msgid "• The video emulation isn't 100% accurate."
-msgstr ""
-
-#: ../src/gva-columns.c:746
-#, c-format
-msgid "• The sound emulation isn't 100% accurate."
-msgstr ""
-
-#: ../src/gva-columns.c:755
-msgid "• The game lacks sound."
-msgstr "• Έλλειψη ήχου στο παιχνίδι."
-
-#: ../src/gva-columns.c:764
-msgid "• Screen flipping in cocktail mode is not supported."
-msgstr "• Η αναστροφή της οθόνης δεν υποστηρίζεται σε ανάμικτη κατάσταση λειτουργίας."
-
-#: ../src/gva-columns.c:773
-msgid "• <b>THIS GAME DOESN'T WORK.</b>"
-msgstr "• <b>ΤΟ ΠΑΙΧΝΙΔΙ ΔΕΝ ΛΕΙΤΟΥΡΓΕΙ.</b>"
-
-#: ../src/gva-columns.c:783
-msgid "• The game has protection which isn't fully emulated."
-msgstr "• Το παιχνίδι έχει προστασία η οποία δεν είναι πλήρως προσομοιωμένη."
-
-#: ../src/gva-columns.c:819
+#: ../src/gva-columns.c:867
 msgid "Click here to remove from favorites"
 msgstr "Πατήστε εδώ για διαγραφή από τα αγαπημένα"
 
-#: ../src/gva-columns.c:821
+#: ../src/gva-columns.c:869
 msgid "Click here to add to favorites"
 msgstr "Πατήστε εδώ για προσθήκη στα αγαπημένα"
 
-#: ../src/gva-columns.c:913
-#: ../src/gva-properties.c:412
+#: ../src/gva-columns.c:961 ../src/gva-properties.c:410
 msgid "(Game Description Unknown)"
 msgstr "(Άγνωστη περιγραφή παιχνιδιού)"
 
-#: ../src/gva-columns.c:916
-#: ../src/gva-properties.c:415
+#: ../src/gva-columns.c:964 ../src/gva-properties.c:413
 msgid "(Manufacturer Unknown)"
-msgstr "(Άγνωστος κατασκευαστής"
+msgstr "(Άγνωστος κατασκευαστής)"
 
-#: ../src/gva-columns.c:919
-#: ../src/gva-properties.c:418
+#: ../src/gva-columns.c:967 ../src/gva-properties.c:416
 msgid "(Year Unknown)"
 msgstr "(Άγνωστο έτος)"
 
-#: ../src/gva-columns.c:943
-#: ../src/gva-main.c:974
+#: ../src/gva-columns.c:991 ../src/gva-main.c:1007
 msgid "ROM Name"
 msgstr "Όνομα ROM"
 
-#: ../src/gva-columns.c:945
+#: ../src/gva-columns.c:993
 msgid "BIOS"
 msgstr "BIOS"
 
-#: ../src/gva-columns.c:947
-#: ../src/gva-main.c:967
+#: ../src/gva-columns.c:995 ../src/gva-main.c:1000
 msgid "Category"
 msgstr "Κατηγορία"
 
-#: ../src/gva-columns.c:949
+#: ../src/gva-columns.c:997
 msgid "Favorite"
 msgstr "Αγαπημένο"
 
-#: ../src/gva-columns.c:952
+#: ../src/gva-columns.c:1000
 msgid "Driver"
 msgstr "Οδηγός"
 
-#: ../src/gva-columns.c:960
+#: ../src/gva-columns.c:1008
 msgid "Samples"
 msgstr "Δείγματα"
 
-#: ../src/gva-columns.c:962
+#: ../src/gva-columns.c:1010
 msgid "Title"
 msgstr "Ονομασία"
 
-#: ../src/gva-columns.c:965
+#: ../src/gva-columns.c:1013
 msgid "Year"
 msgstr "Έτος"
 
-#: ../src/gva-columns.c:968
-#: ../src/gva-main.c:953
+#: ../src/gva-columns.c:1016 ../src/gva-main.c:986
 msgid "Manufacturer"
 msgstr "Κατασκευαστής"
 
-#: ../src/gva-columns.c:974
+#: ../src/gva-columns.c:1022
 msgid "Players"
 msgstr "Παίκτες"
 
-#: ../src/gva-columns.c:977
+#: ../src/gva-columns.c:1025
 msgid "Players (Alt.)"
 msgstr "Παίκτες (Εναλ.)"
 
-#: ../src/gva-columns.c:980
+#: ../src/gva-columns.c:1028
 msgid "Players (Sim.)"
 msgstr "Παίκτες (ταυτ.)"
 
-#: ../src/gva-columns.c:985
+#: ../src/gva-columns.c:1033
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: ../src/gva-columns.c:996
+#: ../src/gva-columns.c:1044
+msgid "Last Played"
+msgstr "Τελευταία αναπαραγωγή"
+
+#: ../src/gva-columns.c:1046
 msgid "Comment"
 msgstr "Σχόλιο"
 
-#: ../src/gva-columns.c:1000
+#: ../src/gva-columns.c:1050
 msgid "Played On"
 msgstr "Παίχθηκε στις"
 
-#: ../src/gva-history.c:43
-msgid "This program is not configured to show history information."
-msgstr "Αυτό το πρόγραμμα δεν έχει ρυθμιστεί για να εμφανίζει πληροφορία για το ιστορικό."
-
-#: ../src/gva-input-file.c:525
+#: ../src/gva-input-file.c:505
 #, c-format
 msgid "Invalid or unsupported INP file format"
 msgstr "Άκυρη ή μη υποστηριζόμενη μορφή αρχείου INP"
 
-#: ../src/gva-main.c:240
+#: ../src/gva-main.c:230
 msgid "Building game database..."
 msgstr "Χτήσιμο βάσης δεδομένων παιχνιδιού..."
 
-#: ../src/gva-main.c:298
+#: ../src/gva-main.c:291
 msgid "Analyzing ROM files..."
-msgstr "Ανάλυση αρχείων ROM.."
+msgstr "Ανάλυση αρχείων ROM..."
 
-#: ../src/gva-main.c:939
+#: ../src/gva-main.c:972
 msgid "Search for any of the following:"
 msgstr "Αναζήτηση για οποιαδήποτε από τα παρακάτω:"
 
 #. The labels begin with a UTF-8 encoded bullet character.
-#: ../src/gva-main.c:946
+#: ../src/gva-main.c:979
 msgid "Game Title"
 msgstr "Ονομασία παιχνιδιού"
 
-#: ../src/gva-main.c:960
+#: ../src/gva-main.c:993
 msgid "Copyright Year"
 msgstr "Έτος πνευματικών δικαιωμάτων"
 
-#: ../src/gva-main.c:981
+#: ../src/gva-main.c:1014
 msgid "BIOS Name"
 msgstr "Όνομα BIOS"
 
-#: ../src/gva-main.c:988
+#: ../src/gva-main.c:1021
 msgid "Driver Name"
 msgstr "Όνομα οδηγού"
 
@@ -241,11 +797,27 @@ msgstr "Όνομα οδηγού"
 msgid "%s: No such configuration key"
 msgstr "%s: Δεν υπάρχει τέτοιο κλειδί ρύθμισης"
 
-#: ../src/gva-mame-sdlmame.c:66
-#: ../src/gva-mame-xmame.c:62
+#: ../src/gva-mame-sdlmame.c:66 ../src/gva-mame-xmame.c:62
 #, c-format
 msgid "Could not determine emulator version"
 msgstr "Ο προσδιορισμός της έκδοσης του προσομοιωτή δεν είναι δυνατός"
+
+#: ../src/gva-music-button.c:122
+msgid "No music available"
+msgstr "Δεν υπάρχει διαθέσιμη μουσική"
+
+#: ../src/gva-music-button.c:125
+msgid "Unable to play music"
+msgstr "Αδύνατη η αναπαραγωγή μουσικής"
+
+#: ../src/gva-music-button.c:152
+#, c-format
+msgid "Buffering %d%%..."
+msgstr "Ενδιάμεση μνήμη %d%%..."
+
+#: ../src/gva-music-button.c:268
+msgid "Connecting..."
+msgstr "Σύνδεση..."
 
 #: ../src/gva-mute-button.c:126
 msgid "Muted"
@@ -255,17 +827,13 @@ msgstr "Σίγαση"
 msgid "Whether the button state is muted"
 msgstr "Αν η κατάσταση του κουμπιού είναι σε σίγαση"
 
-#: ../src/gva-mute-button.c:229
+#: ../src/gva-mute-button.c:202
 msgid "In-game sound is muted"
 msgstr "Σίγαση ήχου στο παιχνίδι"
 
-#: ../src/gva-mute-button.c:234
+#: ../src/gva-mute-button.c:207
 msgid "In-game sound is enabled"
 msgstr "Ενεργοποίηση ήχου στο παιχνίδι"
-
-#: ../src/gva-nplayers.c:99
-msgid "This program is not configured to show detailed number of players information."
-msgstr "Αυτό το πρόγραμμα δεν έχει ρυθμιστεί να προβάλει πληροφορία για των λεποτομερή αριθμό των αναπαραγωγέων."
 
 #: ../src/gva-nplayers.c:179
 msgid "Up to four players alternating or two players simultaneously"
@@ -275,8 +843,7 @@ msgstr "Μέχρι τέσσερις παίκτες με εναλλαγή ή δύ
 msgid "Up to eight players alternating or two players simultaneously"
 msgstr "Μέχρι οκτώ παίκτες με εναλλαγή ή δύο παίκτες ταυτόχρονα"
 
-#: ../src/gva-nplayers.c:198
-#: ../src/gva-nplayers.c:241
+#: ../src/gva-nplayers.c:198 ../src/gva-nplayers.c:241
 #: ../src/gva-nplayers.c:277
 msgid "One player only"
 msgstr "Ένας παίκτης μόνο"
@@ -370,18 +937,22 @@ msgid "Delete selected game recordings?"
 msgstr "Διαγραφή επιλεγμένων μαγνητοσκοπήσεων του παιχνιδιού;"
 
 #: ../src/gva-play-back.c:58
-msgid "This operation will permanently erase the recorded games you have selected.  Are you sure you want to proceed?"
-msgstr "Αυτή η λειτουργία θα σβήσει μόνιμα τα καταγραμμένα παιχνίδια που έχετε επιλέξει. Είστε σίγουροι για αυτό;"
+msgid ""
+"This operation will permanently erase the recorded games you have selected.  "
+"Are you sure you want to proceed?"
+msgstr ""
+"Αυτή η λειτουργία θα σβήσει μόνιμα τα καταγραμμένα παιχνίδια που έχετε "
+"επιλέξει. Είστε σίγουροι για αυτό;"
 
 #: ../src/gva-play-back.c:62
 msgid "Do Not Delete"
 msgstr "Να μην διαγραφεί"
 
-#: ../src/gva-properties.c:148
+#: ../src/gva-properties.c:146
 msgid "Show this game"
 msgstr "Εμφάνιση παιχνιδιού"
 
-#: ../src/gva-properties.c:459
+#: ../src/gva-properties.c:457
 #, c-format
 msgid ""
 "Error while fetching history:\n"
@@ -390,347 +961,204 @@ msgstr ""
 "Σφάλμα κατά την ανάκληση του ιστορικού:\n"
 "%s"
 
-#: ../src/gva-properties.c:464
+#: ../src/gva-properties.c:462
 msgid "History not available"
 msgstr "Το ιστορικό δεν είναι διαθέσιμο"
 
-#: ../src/gva-tree-view.c:421
+#: ../src/gva-tree-view.c:431
 msgid "Available Game"
 msgid_plural "Available Games"
 msgstr[0] "Διαθέσιμο παιχνίδι"
 msgstr[1] "Διαθέσιμα παιχνίδια"
 
-#: ../src/gva-tree-view.c:428
+#: ../src/gva-tree-view.c:438
 msgid "Favorite Game"
 msgid_plural "Favorite Games"
 msgstr[0] "Αγαπημένο παιχνίδι"
 msgstr[1] "Αγαπημένα παιχνίδια"
 
-#: ../src/gva-tree-view.c:435
+#: ../src/gva-tree-view.c:445
 msgid "Search Result"
 msgid_plural "Search Results"
 msgstr[0] "Αποτέλεσμα αναζήτησης"
 msgstr[1] "Αποτελέσματα αναζήτησης"
 
-#: ../src/gva-ui.c:101
+#: ../src/gva-ui.c:59
+msgid ""
+"GNOME Video Arcade is free software; you can redistribute it and/or modify "
+"it under the terms of the GNU General Public License as published by the "
+"Free Software Foundation; either version 3 of the License, or (at your "
+"option) any later version.\n"
+"\n"
+"GNOME Video Arcade is distributed in the hope that it will be useful, but "
+"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
+"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"GNOME Video Arcade.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Το βίντεο GNOME Arcade είναι ελεύθερο λογισμικό· μπορείτε να αναδιανεμηθεί "
+"και/ή να τροποποιηθεί με τους όρους της GNU Γενικής Δημόσιας Άδειας όπως "
+"δημοσιεύτηκε από το ίδρυμα ελεύθερου λογισμικού· είτε της έκδοσης 3 της "
+"άδειας, ή (προαιρετικά) με οποιαδήποτε μεταγενέστερη έκδοση.\n"
+"\n"
+"Αυτό το πρόγραμμα διανέμεται με την ελπίδα ότι θα είναι χρήσιμο, αλλά ΧΩΡΙΣ "
+"ΚΑΜΙΑ ΕΓΓΥΗΣΗ· χωρίς ακόμα και την υπονοούμενη εγγύηση της ΕΜΠΟΡΙΚΟΤΗΤΑΣ ή "
+"ΚΑΤΑΛΛΗΛΟΤΗΤΑΣ ΓΙΑ ΕΝΑΝ ΕΙΔΙΚΟ ΣΚΟΠΟ. Δείτε τη GNU γενική δημόσια άδεια για "
+"περισσότερες λεπτομέρειες.\n"
+"\n"
+"Θα πρέπει να πήρατε ένα αντίγραφο της GNU Γενικής Δημόσιας Άδειας μαζί με "
+"αυτό το πρόγραμμα. Αν όχι, δείτε <http://www.gnu.org/licenses/>."
+
+#: ../src/gva-ui.c:319
 msgid "M.A.M.E. Front-End"
 msgstr "Εφαρμογή προσκηνίου M.A.M.E."
 
-#: ../src/gva-ui.c:106
+#: ../src/gva-ui.c:324
+msgid "Visit the Website"
+msgstr "Επισκεφτείτε τον ιστότοπο"
+
+#: ../src/gva-ui.c:326
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα GNOME\n"
-"  Βασίλης Κοντογιάννης <vasilisk@ics.forth.gr>, 2009\n"
-"\n"
-"Για περισσότερες πληροφορίες, επισκεφθείτε την σελίδα http://www.gnome.gr/"
+" Δημήτρης Σπίγγος, <dmtrs32@gmail.com>, 2014\n"
+" Βασίλης Κοντογιάννης <vasilisk@ics.forth.gr>, 2009\n"
+"Για περισσότερες πληροφορίες, http://www.gnome.gr/"
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:278
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:457
 msgid "Watching a fullscreen game"
 msgstr "Παρακολούθηση ενός παιχνιδιού σε κατάσταση πλήρους οθόνης"
 
-#. Translators: This is passed through D-Bus as the
-#. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:405
+#. Translators: This is passed through D-Bus as
+#. * the reason to inhibit GNOME screen saver.
+#: ../src/gva-ui.c:560
 msgid "Recording a fullscreen game"
 msgstr "Μαγνητοσκόπηση ενός παιχνιδιού πλήρους οθόνης"
 
 #. Translators: This is passed through D-Bus as the
 #. * reason to inhibit GNOME screen saver.
-#: ../src/gva-ui.c:572
+#: ../src/gva-ui.c:704
 msgid "Playing a fullscreen game"
 msgstr "Παίξιμο πιαχνιδιού σε κατάσταση πλήρους οθόνης"
 
-#: ../src/gva-ui.c:625
-msgid "_About"
-msgstr "_Περί"
-
-#: ../src/gva-ui.c:627
-msgid "Show information about the application"
-msgstr "Εμφάνιση πληροφορίας για την εφαρμογή"
-
-#: ../src/gva-ui.c:632
-msgid "_Contents"
-msgstr "_Περιεχόμενα"
-
-#: ../src/gva-ui.c:634
-msgid "Open the help documentation"
-msgstr "Άνοιγμα της τεκμηρίωσης"
-
-#: ../src/gva-ui.c:639
-msgid "Add to _Favorites"
-msgstr "Προσθήκη στα _Αγαπημένα"
-
-#: ../src/gva-ui.c:641
-msgid "Add the selected game to my list of favorites"
-msgstr "Προσθήκη του επιλεγμένου παιχνιδιού στον κατάλογο των αγαπημένων μου"
-
-#: ../src/gva-ui.c:648
-msgid "Show next game"
-msgstr "Εμφάνιση επόμενου παιχνιδιού"
-
-#: ../src/gva-ui.c:653
-#: ../src/gva-ui.c:723
-msgid "Play _Back..."
-msgstr "Αναπα_ραγωγή"
-
-#: ../src/gva-ui.c:655
-msgid "Play back the selected game recording"
-msgstr "Αναπαραγωγή της επιλεγμένης μαγνητοσκόπησης του παιχνιδιού"
-
-#: ../src/gva-ui.c:660
-msgid "_Preferences"
-msgstr "_Προτιμήσεις"
-
-#: ../src/gva-ui.c:662
-msgid "Configure the application"
-msgstr "Ρύθμιση της εφαρμογής"
-
-#: ../src/gva-ui.c:669
-msgid "Show previous game"
-msgstr "Εμφάνιση προηγούμενου παιχνιδιού"
-
-#: ../src/gva-ui.c:674
-msgid "_Properties"
-msgstr "_Ῐδιότητες"
-
-#: ../src/gva-ui.c:676
-msgid "Show information about the selected game"
-msgstr "Εμφάνιση πληροφορίας για το επιλεγμένο παιχνίδι"
-
-#: ../src/gva-ui.c:681
-msgid "_Quit"
-msgstr "Έ_ξοδος"
-
-#: ../src/gva-ui.c:683
-msgid "Quit the application"
-msgstr "Έξοδος από την εφαρμογή"
-
-#: ../src/gva-ui.c:688
-msgid "_Record"
-msgstr "_Μαγνητοσκόπηση"
-
-#: ../src/gva-ui.c:690
-msgid "Start the selected game and record keypresses to a file"
-msgstr "Έναρξη επιλεγμένου παιχνιδιού και καταγραφή πλήκτρων που πατήθηκαν σε ένα αρχείο"
-
-#: ../src/gva-ui.c:702
-msgid "Remove from _Favorites"
-msgstr "Διαγραφή από τα _Αγαπημένα"
-
-#: ../src/gva-ui.c:704
-msgid "Remove the selected game from my list of favorites"
-msgstr "Διαγραφή του επιλεγμένου παιχνιδιού από τον κατάλογο των αγαπημένων μου"
-
-#: ../src/gva-ui.c:709
-msgid "Save _As..."
-msgstr "Αποθήκευση _ως..."
-
-#: ../src/gva-ui.c:711
-msgid "Save ROM errors to a file"
-msgstr "Αποθήκευση σφαλμάτων ROM  σε ένα αρχείο"
-
-#: ../src/gva-ui.c:716
-msgid "S_earch..."
-msgstr "Α_ναζήτηση..."
-
-#: ../src/gva-ui.c:718
-msgid "Show a custom list of games"
-msgstr "Εμφάνιση προσαρμοσμένου καταλόγου παιχνιδιών"
-
-#: ../src/gva-ui.c:725
-msgid "Play back a previously recorded game"
-msgstr "Αναπαραγωγή ενός προηγούμενου μαγνητοσκοπημένου παιχνιδιού"
-
-#: ../src/gva-ui.c:730
-msgid "_Start"
-msgstr "Έ_ναρξη"
-
-#: ../src/gva-ui.c:732
-msgid "Start the selected game"
-msgstr "Έναρξη του επιλεγμένου παιχνιδιού"
-
-#: ../src/gva-ui.c:737
-msgid "_Add Column"
-msgstr "_Προσθήκη στήλης"
-
-#: ../src/gva-ui.c:744
-msgid "_Edit"
-msgstr "_Επεξεργασία"
-
-#: ../src/gva-ui.c:751
-msgid "_Game"
-msgstr "_Παιχνίδι"
-
-#: ../src/gva-ui.c:758
-msgid "_Help"
-msgstr "_Βοήθεια"
-
-#: ../src/gva-ui.c:765
-msgid "_View"
-msgstr "_Προβολή"
-
-#: ../src/gva-ui.c:775
-msgid "_Restore previous state when starting a game"
-msgstr "Επανα_φορά προηγούμενης κατάστασης κατά την εκκίνηση ενός παιχνιδιού"
-
-#: ../src/gva-ui.c:783
-msgid "Start games in _fullscreen mode"
-msgstr "Έναρξη παιχνιδιών σε κατάσταση _πλήρους οθόνης"
-
-#: ../src/gva-ui.c:791
-msgid "Show _alternate versions of original games"
-msgstr "Εμφάνιση _εναλλακτικών εκδόσεων από τα αρχικά παιχνίδια"
-
-#: ../src/gva-ui.c:802
-msgid "_Available Games"
-msgstr "_Διαθέσιμα παιχνίδια"
-
-#: ../src/gva-ui.c:804
-msgid "Show all available games"
-msgstr "Εμφάνιση όλων των διαθέσιμων παιχνιδιών"
-
-#: ../src/gva-ui.c:809
-msgid "_Favorite Games"
-msgstr "Αγαπημένα παιχνίδια"
-
-#: ../src/gva-ui.c:811
-msgid "Only show my favorite games"
-msgstr "Εμφάνιση μόνο των αγαπημένων μου παιχνιδιών"
-
-#: ../src/gva-ui.c:816
-msgid "Search _Results"
-msgstr "Αποτε_λέσματα αναζήτησης"
-
-#: ../src/gva-ui.c:818
-msgid "Show my search results"
-msgstr "Εμφάνιση των αποτελεσμάτων αναζήτησης μου"
-
-#: ../src/gva-ui.c:901
+#: ../src/gva-ui.c:801
 msgid "Failed to initialize user interface"
 msgstr "Αποτυχία αρχικοποίησης περιβάλλοντος χρήσης"
 
-#: ../src/gva-ui.c:1019
+#: ../src/gva-ui.c:943
 #, c-format
 msgid "Add %s Column"
 msgstr "Προσθήκη %s στήλης"
 
-#: ../src/gva-ui.c:1021
+#: ../src/gva-ui.c:945
 #, c-format
 msgid "Add a \"%s\" column to the game list"
 msgstr "Προσθήκη στήλης \"%s\" στον κατάλογο παιχνιδιών"
 
-#: ../src/main.c:58
+#: ../src/main.c:53
 msgid "Build the games database"
 msgstr "Κτίσιμο της βάσης δεδομένων των παιχνιδιών"
 
-#: ../src/main.c:62
+#: ../src/main.c:57
 msgid "Inspect an emulator setting"
 msgstr "Επιθεώρηση της ρύθμισης ενός προσομοιωτή"
 
-#: ../src/main.c:63
+#: ../src/main.c:58
 msgid "NAME"
 msgstr "ΟΝΟΜΑ"
 
-#: ../src/main.c:67
+#: ../src/main.c:62
 msgid "Show the application version"
 msgstr "Εμφάνιση έκδοσης της εφαρμογής"
 
-#: ../src/main.c:71
+#: ../src/main.c:66
 msgid "Show which emulator will be used"
 msgstr "Εμφάνιση του προσομοιωτή που θα χρησιμοποιηθεί"
 
-#: ../src/main.c:110
+#: ../src/main.c:105
 msgid "No ROM files found"
 msgstr "Δεν βρέθηκαν αρχεία ROM"
 
-#: ../src/main.c:115
-msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or that no ROM files are installed. Click <b>Help</b> for more details and troubleshooting tips."
-msgstr "Το GNOME Video Arcade δεν ήταν δυνατό να εντοπίσει αρχεία ROM. Πιθανόν το MAME δεν έχει ρυθμιστεί σωστά ή δεν έχουν εγκατασταθεί αρχεία ROM. Πατήστε τη <b>Βοήθεια</b> για περισσότερες λεπτομέρειες και συμβουλές εντοπισμού και επισκευής προβλημάτων."
+#: ../src/main.c:109
+msgid ""
+"GNOME Video Arcade was unable to locate any ROM files. It could be that MAME "
+"is misconfigured or that no ROM files are installed. Click <b>Help</b> for "
+"more details and troubleshooting tips."
+msgstr ""
+"Το GNOME Video Arcade δεν ήταν δυνατό να εντοπίσει αρχεία ROM. Πιθανόν το "
+"MAME δεν έχει ρυθμιστεί σωστά ή δεν έχουν εγκατασταθεί αρχεία ROM. Πατήστε "
+"τη <b>Βοήθεια</b> για περισσότερες λεπτομέρειες και συμβουλές εντοπισμού και "
+"επισκευής προβλημάτων."
 
-#: ../src/main.c:125
-msgid "GNOME Video Arcade was unable to locate any ROM files. It could be that MAME is misconfigured or no ROM files are installed. Consult the user documentation for more details and troubleshooting tips."
-msgstr "Το GNOME Video Arcade δεν ήταν δυνατό να εντοπίσει ROM. Πιθανόν το MAME δεν έχει ρυθμιστεί σωστά ή δεν έχουν εγκατασταθεί αρχεία ROM. Συμβουλευτείτε της οδηγίες χρήστη για περισσότερες λεπτομέρειες και συμβουλές εντοπισμού και επισκευής προβλημάτων."
+#: ../src/main.c:152
+msgid "Changes detected in ROM files"
+msgstr "Ανιχνεύτηκαν σφάλματα σε αρχεία ROM"
 
-#~ msgid " "
-#~ msgstr " "
-#~ msgid "<b>Alternate Versions</b>"
-#~ msgstr "<b>Εναλλακτικές εκδόσεις</b>"
-#~ msgid "<b>BIOS</b>"
-#~ msgstr "<b>Σύστημα βασικής εισόδου-εξόδου(BIOS)</b>"
-#~ msgid "<b>CPU</b>"
-#~ msgstr "<b>Κεντρικής μονάδα επεξεργασίας(CPU)</b>"
-#~ msgid "<b>Columns</b>"
-#~ msgstr "<b>Στήλες</b>"
-#~ msgid "<b>Game List</b>"
-#~ msgstr "<b>Κατάλογος παιχνιδιώνt</b>"
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>Γενικά</b>"
-#~ msgid "<b>Original Version</b>"
-#~ msgstr "<b>Αρχική έκδοση</b>"
-#~ msgid "<b>Sound</b>"
-#~ msgstr "<b>Ήχος</b>"
-#~ msgid "<b>Video</b>"
-#~ msgstr "<b>Τηλεοπτικό</b>"
-#~ msgid "<big><b>Errors detected in ROM files</b></big>"
-#~ msgstr "<big><b>Σφάλματα ανιχνεύτηκαν σε αρχεία ROM</b></big>"
+#: ../src/main.c:156
+msgid ""
+"GNOME Video Arcade has detected changes in your ROM files and will need to "
+"audit them in order to update the game list. However the audit may take "
+"several minutes to complete. Would you like to perform the audit now?\n"
+"\n"
+"If you skip the audit now, it will be performed automatically the next time "
+"you start GNOME Video Arcade."
+msgstr ""
+"Το βίντεο Arcade GNOME έχει ανιχνεύσει αλλαγές στα αρχεία σας ROM και θα "
+"χρειαστεί να τα ελέγξει για να ενημερώσει τον κατάλογο παιχνιδιού. Όμως ο "
+"έλεγχος μπορεί να πάρει αρκετά λεπτά για να ολοκληρωθεί. Θα θέλατε να "
+"εκτελέσετε τον έλεγχο τώρα;\n"
+"\n"
+"Αν παραλείψετε τον έλεγχο τώρα, θα εκτελεστεί αυτόματα την επόμενη φορά που "
+"θα ξεκινήσετε το βίντεο Arcade GNOME."
+
+#: ../src/main.c:166
+msgid "_Skip Audit"
+msgstr "_Παράλειψη ελέγχου"
+
+#: ../src/main.c:167
+msgid "_Audit ROM Files"
+msgstr "Έ_λεγχος αρχείων ROM"
+
+#~ msgid "GConf error: %s"
+#~ msgstr "GConf σφάλμα: %s"
+
+#~ msgid "All further errors shown only on terminal."
+#~ msgstr "Όλα τα επόμενα σφάλματα εμφανίζονται μόνο στο τερματικό."
+
+#~ msgid "This program is not configured to show category information."
+#~ msgstr ""
+#~ "Το πρόγραμμα αυτό δεν έχει ρυθμιστεί για να εμφανίζει την πληροφορία "
+#~ "κατηγορίας."
+
+#~ msgid "This program is not configured to show history information."
+#~ msgstr ""
+#~ "Αυτό το πρόγραμμα δεν έχει ρυθμιστεί για να εμφανίζει πληροφορία για το "
+#~ "ιστορικό."
+
 #~ msgid ""
-#~ "<small><i><b>Note:</b> Setting this will not take effect until the second "
-#~ "time the game is started. It does not apply to recording or playing back "
-#~ "games.</i></small>"
+#~ "This program is not configured to show detailed number of players "
+#~ "information."
 #~ msgstr ""
-#~ "<small><i><b>Σημείωση:</b> Με την ρύθμιση του δεν θα υπάρχει επίδραση "
-#~ "μέχρι την δεύτερη φορά που θα ξεκινήσει το παιχνίδι. Δεν απευθύνεται ατην "
-#~ "εγγραφή ή την αναπαραγωγή παιχνιδιών.</i></small>"
+#~ "Αυτό το πρόγραμμα δεν έχει ρυθμιστεί να προβάλει πληροφορία για των "
+#~ "λεποτομερή αριθμό των αναπαραγωγέων."
+
+#~ msgid "Add the selected game to my list of favorites"
+#~ msgstr ""
+#~ "Προσθήκη του επιλεγμένου παιχνιδιού στον κατάλογο των αγαπημένων μου"
+
 #~ msgid ""
-#~ "<small><i>If these games worked with previous versions of MAME, it is "
-#~ "likely their ROM requirements have changed.  If so, you will need to "
-#~ "acquire more recent ROM files.</i></small>"
+#~ "GNOME Video Arcade was unable to locate any ROM files. It could be that "
+#~ "MAME is misconfigured or no ROM files are installed. Consult the user "
+#~ "documentation for more details and troubleshooting tips."
 #~ msgstr ""
-#~ "<small><i>Αν κάποια παιχνίδια έπαιζαν με προηγούμενες εκδόσεις του MAME, "
-#~ "είναι πιθανόν οι απαιτήσεις μνήμης μόνο ανάγνωσης (ROM) να έχουν αλλάξει. "
-#~ "Αν είναι έτσι, χρειάζεται η απόκτηση πιο πρόσφατων αρχείων μνήμης μόνο "
-#~ "ανάγνωσης (ROM).</i></small>"
-#~ msgid ""
-#~ "An audit of the available games has detected errors in some of the ROM "
-#~ "files. The following games will not be available in GNOME Video Arcade."
-#~ msgstr ""
-#~ "Ένας έλεγχος επαλήθευσης των διαθἐσιμων παιχνιδιών έχει ανιχνεύσει "
-#~ "σφάλματα σε μερικά από τα αρχεία μνήμης μόνο ανάγνωσης (ROM). Τα παρακάτω "
-#~ "παιχνίδια δεν θα είναι διαθέσιμα στο GNOME Συλλογή Τηλεοπτικών Παιχνιδιών."
-#~ msgid "Choose the order of information to appear in the game list."
-#~ msgstr ""
-#~ "Επιλέξτε την κατηγορία της πληροφορίας που θα εμφανίζεται στον κατάλογο "
-#~ "των παιχνιδιών."
-#~ msgid "Close this window"
-#~ msgstr "Κελίσιμο αυτού του παραθύρου"
-#~ msgid "Columns"
-#~ msgstr "Στήλες"
-#~ msgid "Delete the selected game recordings"
-#~ msgstr "Διαγραφή των μαγνητοσκοπήσεων του επιλεγμένου παιχνιδιού"
-#~ msgid "GNOME Video Arcade"
-#~ msgstr "GNOME Συλλογή Τηλεοπτικών Παιχνιδών"
-#~ msgid "Gallery"
-#~ msgstr "Συλλογή"
-#~ msgid "General"
-#~ msgstr "Γενικά"
-#~ msgid "History"
-#~ msgstr "Ιστορικό"
-#~ msgid "Play _Back"
-#~ msgstr "Αναπ_αραγωγή"
-#~ msgid "Preferences"
-#~ msgstr "Προτιμήσεις"
-#~ msgid "Properties"
-#~ msgstr "Ιδιότητες"
-#~ msgid "Recorded Games"
-#~ msgstr "Μαγνητοσκοπημένα παιχνίδια"
-#~ msgid "Search for:"
-#~ msgstr "Αναζήτηση για:"
-#~ msgid "Technical"
-#~ msgstr "Τεχνικό"
-#~ msgid "_Start Game"
-#~ msgstr "_΄Εκκίνηση παιχνιδιού"
+#~ "Το GNOME Video Arcade δεν ήταν δυνατό να εντοπίσει ROM. Πιθανόν το MAME "
+#~ "δεν έχει ρυθμιστεί σωστά ή δεν έχουν εγκατασταθεί αρχεία ROM. "
+#~ "Συμβουλευτείτε της οδηγίες χρήστη για περισσότερες λεπτομέρειες και "
+#~ "συμβουλές εντοπισμού και επισκευής προβλημάτων."
+
 #~ msgid "gtk-close"
 #~ msgstr "gtk-κλείσιμο"
-
