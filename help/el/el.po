@@ -1,0 +1,1268 @@
+# Greek translation for gnome-video-arcade.
+# Copyright (C) 2014 gnome-video-arcade's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-video-arcade package.
+# Dimitris Spingos <dmtrs32@gmail.com>, 2014.
+# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-video-arcade master\n"
+"POT-Creation-Date: 2014-04-17 08:47+0000\n"
+"PO-Revision-Date: 2014-04-17 20:02+0300\n"
+"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"Language-Team: team@lists.gnome.gr\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.0\n"
+"X-Project-Style: gnome\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr ""
+"Ελληνική μεταφραστική ομάδα του GNOME\n"
+" Δημήτρης Σπίγγος <dmtrs32@gmail.com>, 2014\n"
+"Για περισσότερα δείτε: http://gnome.gr"
+
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:142
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_building_database.png' "
+"md5='148adbf1c2d3240c68fc42c4c23a70b4'"
+msgstr ""
+"external ref='figures/gva_building_database.png' "
+"md5='148adbf1c2d3240c68fc42c4c23a70b4'"
+
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:162
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_main_window.png' "
+"md5='146c3e4eb7bc6a7b0d366bc903844293'"
+msgstr ""
+"external ref='figures/gva_main_window.png' "
+"md5='146c3e4eb7bc6a7b0d366bc903844293'"
+
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:406
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_search_window.png' "
+"md5='cb85cf748755ccc2e3cfdc64b7783d94'"
+msgstr ""
+"external ref='figures/gva_search_window.png' "
+"md5='cb85cf748755ccc2e3cfdc64b7783d94'"
+
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:458
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_recorded_games.png' "
+"md5='77bf453222d3efea3bc4274aa4653ba6'"
+msgstr ""
+"external ref='figures/gva_recorded_games.png' "
+"md5='77bf453222d3efea3bc4274aa4653ba6'"
+
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:509
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_general_preferences.png' "
+"md5='1e74c6d14e1535ce12dee1b187408cd2'"
+msgstr ""
+"external ref='figures/gva_general_preferences.png' "
+"md5='1e74c6d14e1535ce12dee1b187408cd2'"
+
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:618
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_column_preferences.png' "
+"md5='56d51f7cd01cc78b37942a101f0032a9'"
+msgstr ""
+"external ref='figures/gva_column_preferences.png' "
+"md5='56d51f7cd01cc78b37942a101f0032a9'"
+
+#. (itstool) path: articleinfo/title
+#: C/index.docbook:15
+msgid "<application>GNOME Video Arcade</application> Manual"
+msgstr "Εγχειρίδιο <application>GNOME Video Arcade</application>"
+
+#. (itstool) path: abstract/para
+#: C/index.docbook:18
+msgid ""
+"GNOME Video Arcade is a front-end for the <application>Multiple Arcade "
+"Machine Emulator (MAME)</application>."
+msgstr ""
+"Το GNOME Video Arcade είναι μια διεπαφή χρήστη για τον <application>πολλαπλό "
+"προσομοιωτή μηχανής Arcade (MAME)</application>."
+
+#. (itstool) path: articleinfo/copyright
+#: C/index.docbook:22
+msgid "<year>2007</year> <year>2008</year> <holder>Matthew Barnes</holder>"
+msgstr "<year>2007</year> <year>2008</year> <holder>Matthew Barnes</holder>"
+
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:2
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink type=\"help\" url=\"help:fdl\">link</ulink> or in "
+"the file COPYING-DOCS distributed with this manual."
+msgstr ""
+"Δίνεται άδεια για αντιγραφή, διανομή και/ή τροποποίηση του εγγράφου υπό τους "
+"όρους της GNU Free Documentation License (GFDL), Έκδοση 1.1 ή μεταγενέστερη "
+"εκδιδόμενη από το Ίδρυμα Ελεύθερου Λογισμικού χωρίς Σταθερά Εδάφια, χωρίς "
+"Εξώφυλλα Κειμένου, και χωρίς Οπισθόφυλλα Κειμένου. Μπορείτε να βρείτε ένα "
+"αντίγραφο της GFDL σε αυτόν τον <ulink type=\"help\" url=\"help:fdl"
+"\">σύνδεσμο</ulink> ή στο αρχείο COPYING-DOCS που διανεμήθηκε με αυτόν τον "
+"οδηγό."
+
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:12 C/legal.xml:12
+msgid ""
+"This manual is part of a collection of GNOME manuals distributed under the "
+"GFDL. If you want to distribute this manual separately from the collection, "
+"you can do so by adding a copy of the license to the manual, as described in "
+"section 6 of the license."
+msgstr ""
+"Αυτή η τεκμηρίωση είναι μέρος της συλλογής τεκμηρίωσης του GNOME όπως "
+"διανέμεται υπό τους όρους της GFDL. Εάν επιθυμείτε να διανείμετε αυτή την "
+"τεκμηρίωση ξεχωριστά από την συλλογή, μπορείτε να το κάνετε εάν η τεκμηρίωση "
+"συνοδεύεται από αντίγραφο της άδειας (GFDL) όπως περιγράφεται στον τομέα 6 "
+"της άδειας."
+
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:19 C/legal.xml:19
+msgid ""
+"Many of the names used by companies to distinguish their products and "
+"services are claimed as trademarks. Where those names appear in any GNOME "
+"documentation, and the members of the GNOME Documentation Project are made "
+"aware of those trademarks, then the names are in capital letters or initial "
+"capital letters."
+msgstr ""
+"Πολλά από τα ονόματα που χρησιμοποιούνται από επιχειρήσεις για να διακρίνουν "
+"τα προϊόντα τους και τις υπηρεσίες αξιώνονται ως εμπορικά σήματα. Όπου "
+"εμφανίζονται αυτά τα ονόματα σε κάποια τεκμηρίωση του GNOME και τα μέλη του "
+"έργου τεκμηρίωσης του GNOME γνωρίζουν για αυτά τα εμπορικά σήματα, τότε τα "
+"ονόματα είναι με κεφαλαία γράμματα ή με αρχικά κεφαλαία γράμματα."
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:35 C/legal.xml:35
+msgid ""
+"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
+"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
+"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
+"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
+"RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
+"MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
+"MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
+"WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
+"SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN "
+"ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION "
+"OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr ""
+"Η ΤΕΚΜΗΡΙΩΣΗ ΑΥΤΗ ΠΑΡΕΧΕΤΑΙ \"ΩΣ ΕΧΕΙ\", ΧΩΡΙΣ ΚΑΜΙΑ ΕΓΓΥΗΣΗ ΚΑΝΕΝΟΣ ΕΙΔΟΥΣ, "
+"ΕΚΦΡΑΣΜΕΝΗ 'Η ΝΟΟΥΜΕΝΗ, ΠΕΡΙΛΑΜΒΑΝΟΜΕΝΩΝ, ΧΩΡΙΣ ΠΕΡΙΟΡΙΣΜΟ, ΕΓΓΥΗΣΕΩΝ ΟΤΙ ΤΟ "
+"ΕΓΓΡΑΦΟ 'Η ΠΑΡΑΛΛΑΓΕΣ ΤΟΥ ΕΓΓΡΑΦΟΥ ΕΙΝΑΙ ΕΛΕΥΘΕΡΑ ΚΑΘΕ ΕΛΑΤΤΩΜΑΤΟΣ, "
+"ΕΜΠΟΡΕΥΣΙΜΑ, ΚΑΤΑΛΛΗΛΑ ΓΙΑ ΕΝΑ ΣΥΓΚΕΚΡΙΜΕΝΟ ΣΚΟΠΟ, Η ΜΗ-ΠΑΡΑΒΑΙΝΟΝΤΑ. Η "
+"ΕΥΘΥΝΗ ΓΙΑ ΤΗΝ ΠΟΙΟΤΗΤΑ, ΑΚΡΙΒΕΙΑ, ΚΑΙ ΑΠΟΔΟΣΗ ΤΟΥ ΕΓΓΡΑΦΟΥ ΕΙΝΑΙ "
+"ΑΠΟΚΛΕΙΣΤΙΚΑ ΔΙΚΗ ΣΑΣ. ΑΝ ΟΠΟΙΟΔΗΠΟΤΕ ΕΓΓΡΑΦΟ Η ΠΑΡΑΛΛΑΓΗ ΤΟΥΑΠΟΔΕΙΚΤΟΥΝ "
+"ΕΛΑΤΤΩΜΑΤΙΚΑ ΜΕ ΟΠΟΙΟΔΗΠΟΤΕ ΤΡΟΠΟ, ΕΣΕΙΣ (ΚΑΙ ΟΧΙ Ο ΑΡΧΙΚΟΣ ΣΥΓΓΡΑΦΕΑΣ 'Η "
+"ΟΠΟΙΟΣΔΗΠΟΤΕ ΣΥΜΒΑΛΛΟΝΤΑΣ) ΑΝΑΛΑΜΒΑΝΕΤΕ ΤΟ ΚΟΣΤΟΣ ΟΠΟΙΑΣΔΗΠΟΤΕ ΑΝΑΓΚΑΙΑΣ "
+"ΥΠΗΡΕΣΙΑΣ, ΕΠΙΣΚΕΥΗΣ 'Η ΔΙΟΡΘΩΣΗΣ. Η ΑΠΑΛΛΑΓΗ ΕΥΘΥΝΗΣ ΠΟΥ ΣΥΝΟΔΕΥΕΙ ΑΥΤΗ ΤΗΝ "
+"ΤΕΚΜΗΡΙΩΣΗ ΕΙΝΑΙ ΑΝΑΠΟΣΠΑΣΤΟ ΚΟΜΜΑΤΙ ΑΥΤΗΣ. ΚΑΜΙΑ ΧΡΗΣΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ Ή "
+"ΠΑΡΑΛΛΑΓΩΝ ΑΥΤΗΣ ΔΕΝ ΕΠΙΤΡΕΠΕΤΑΙ ΠΑΡΑ ΜΟΝΟ ΕΑΝ ΣΥΝΟΔΕΥΕΤΑΙ ΑΠΟ ΤΗΝ ΑΠΑΛΛΑΓΗ "
+"ΕΥΘΥΝΗΣ. ΚΑΙ"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:55 C/legal.xml:55
+msgid ""
+"UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
+"NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
+"CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE "
+"DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON "
+"FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF "
+"ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, "
+"WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES "
+"OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED "
+"VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE "
+"POSSIBILITY OF SUCH DAMAGES."
+msgstr ""
+"ΚΑΙ ΣΕ ΚΑΜΙΑ ΠΕΡΙΠΤΩΣΗ ΚΑΙ ΣΕ ΚΑΜΙΑ ΝΟΜΟΛΟΓΙΑ ΑΣΤΙΚΟΥ ΑΔΙΚΗΜΑΤΟΣ "
+"(ΠΕΡΙΛΑΜΒΑΝΟΜΕΝΗΣ ΕΚΕΙΝΟΥ ΤΗΣ ΑΜΕΛΕΙΑΣ), ΣΥΜΒΟΛΑΙΟΥ Ή ΑΛΛΟΥ, Ο ΣΥΝΤΑΚΤΗΣ, Ο "
+"ΑΡΧΙΚΟΣ ΣΥΓΓΡΑΦΕΑΣ, ΟΠΟΙΟΣΔΗΠΟΤΕ ΣΥΝΕΡΓΑΤΗΣ Ή ΟΠΟΙΟΣΔΗΠΟΤΕ ΔΙΑΝΟΜΕΑΣ ΤΟΥ "
+"ΕΓΓΡΑΦΟΥ Ή ΤΡΟΠΟΠΟΙΗΜΕΝΗΣ ΕΚΔΟΣΗΣ ΤΟΥ ΕΓΓΡΑΦΟΥ, Ή ΟΠΟΙΣΔΗΠΟΤΕ ΠΡΟΜΗΘΕΥΤΗΣ "
+"ΟΠΟΙΟΥΔΗΠΟΤΕ ΕΚ ΤΩΝ ΑΝΩΤΕΡΩ ΠΡΟΣΩΠΩΝ ΕΙΝΑΙ ΥΠΕΥΘΥΝΟΣ ΕΝΑΝΤΙ ΟΙΟΥΔΗΠΟΤΕ "
+"ΠΡΟΣΩΠΟΥ ΓΙΑ ΟΠΟΙΑΔΗΠΟΤΕ ΑΜΕΣΗ, ΕΜΜΕΣΗ, ΙΔΙΑΙΤΗΕΡΗ, ΑΤΥΧΗ Ή ΣΥΝΕΠΑΓΟΜΕΝΗ "
+"ΒΛΑΒΗ ΟΙΟΥΔΗΠΟΤΕ ΧΑΡΑΚΤΗΡΑ ΣΥΜΠΕΡΙΛΑΜΒΑΝΟΜΕΝΩΝ, ΧΩΡΙΣ ΠΕΡΙΟΡΙΣΜΟΥΣ, ΒΛΑΒΕΣ "
+"ΕΞΑΙΤΙΑΣ ΑΠΩΛΕΙΑΣ ΠΕΛΑΤΕΙΑΣ, ΣΤΑΣΗ ΕΡΓΑΣΙΑΣ, ΑΣΤΟΧΙΑ Ή ΚΑΚΗ ΛΕΙΤΟΥΡΓΙΑ "
+"ΥΠΟΛΟΓΙΣΤΗ, Ή ΟΠΟΙΑΔΗΠΟΤΕ ΚΑΙ ΚΑΘΕ ΑΛΛΗ ΒΛΑΒΗ Ή ΑΠΩΛΕΙΑ ΠΟΥ ΘΑ ΕΓΕΙΡΕΙ Ή "
+"ΣΧΕΤΙΖΕΤΑΙ ΜΕ ΤΗΝ ΧΡΗΣΗ ΤΟΥ ΕΓΓΡΑΦΟΥ ΚΑΙ ΟΠΟΙΑΣΔΗΠΟΤΕ ΤΡΟΠΟΠΟΙΗΜΕΝΗΣ ΕΚΔΟΣΗΣ "
+"ΤΟΥ ΕΓΓΡΑΦΟΥ, ΑΚΟΜΗ ΚΑΙ ΑΝ ΚΑΠΟΙΟ ΑΠΟ ΑΥΤΑ ΤΑ ΠΡΟΣΩΠΑ ΕΙΝΑΙ ΕΝΗΜΕΡΟ ΓΙΑ ΤΗΝ "
+"ΠΙΘΑΝΟΤΗΤΑ ΠΡΟΚΛΗΣΗΣ ΤΕΤΟΙΩΝ ΒΛΑΒΩΝ."
+
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:28 C/legal.xml:28
+msgid ""
+"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
+"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
+"<_:orderedlist-1/>"
+msgstr ""
+"TΟ ΕΓΓΡΑΦΟ ΚΑΙ ΟΙ ΤΡΟΠΟΙΗΜΕΝΕΣ ΕΚΔΟΣΕΙΣ ΤΟΥ ΠΑΡΕΧΟΝΤΑΙ ΥΠΟ ΤΟΥΣ ΟΡΟΥΣ ΤΗΣ "
+"ΕΛΕΥΘΕΡΗΣ ΑΔΕΙΑΣ ΤΕΚΜΗΡΙΩΣΗΣ GNU ΜΕ ΤΙΣ ΕΠΙΠΛΕΟΝ ΓΝΩΣΤΟΠΟΙΗΣΕΙΣ: <_:"
+"orderedlist-1/>"
+
+#. (itstool) path: authorgroup/author
+#: C/index.docbook:31
+msgid "<firstname>Matthew</firstname> <surname>Barnes</surname>"
+msgstr "<firstname>Matthew</firstname> <surname>Barnes</surname>"
+
+#. (itstool) path: revhistory/revision
+#: C/index.docbook:38
+msgid ""
+"<revnumber>GNOME Video Arcade Manual 1.1</revnumber> <date>2008-02-24</date>"
+msgstr ""
+"<revnumber>Εγχειρίδιο GNOME Video Arcade 1.1</revnumber> <date>24-02-2008</"
+"date>"
+
+#. (itstool) path: articleinfo/releaseinfo
+#: C/index.docbook:44
+msgid "This manual describes version 0.5.6 of GNOME Video Arcade"
+msgstr "Αυτό το εγχειρίδιο περιγράφει την έκδοση 0.5.6 του GNOME Video Arcade"
+
+#. (itstool) path: section/title
+#: C/index.docbook:49
+msgid "Introduction"
+msgstr "Εισαγωγή"
+
+#. (itstool) path: section/para
+#: C/index.docbook:50
+msgid ""
+"The <application>GNOME Video Arcade</application> application allows you to "
+"play classic coin-operated arcade games on your GNOME desktop using the "
+"<application>Multiple Arcade Machine Emulator (MAME)</application>."
+msgstr ""
+"Η εφαρμογή <application>GNOME Video Arcade</application> σας επιτρέπει να "
+"παίξετε κλασικά παιχνίδια arcade με κέρματα στην επιφάνεια εργασίας του "
+"GNOME χρησιμοποιώντας τον <application>πολλαπλό προσομοιωτή μηχανής Arcade "
+"(MAME)</application>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:55
+msgid ""
+"<application>GNOME Video Arcade</application> provides the following "
+"features:"
+msgstr ""
+"Το <application>GNOME Video Arcade</application> παρέχει τα παρακάτω "
+"χαρακτηριστικά:"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:60
+msgid "Play classic arcade games on your desktop."
+msgstr "Να παίζετε κλασικά παιχνίδια arcade στην επιφάνεια εργασίας σας."
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:65
+msgid "Tag favorite games to easily find them again later."
+msgstr ""
+"Να βάλετε ετικέτα στα αγαπημένα παιχνίδια για να τα βρίσκετε εύκολα αργότερα."
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:70
+msgid "Read historical information and tips about your favorite games."
+msgstr ""
+"Να διαβάζετε ιστορικές πληροφορίες και συμβουλές για τα αγαπημένα σας "
+"παιχνίδια."
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:75
+msgid "Game recording and play back."
+msgstr "Να γράφετε το παιχνίδι και να το αναπαράγετε."
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:80
+msgid "Search."
+msgstr "Αναζήτηση."
+
+#. (itstool) path: section/title
+#: C/index.docbook:88
+msgid "Getting Started"
+msgstr "Ξεκινώντας"
+
+#. (itstool) path: section/title
+#: C/index.docbook:90
+msgid "Starting GNOME Video Arcade"
+msgstr "Έναρξη του GNOME βίντεο arcade"
+
+#. (itstool) path: section/para
+#: C/index.docbook:91
+msgid ""
+"You can start <application>GNOME Video Arcade</application> in the following "
+"ways:"
+msgstr ""
+"Μπορείτε να αρχίσετε το <application>GNOME Video Arcade</application> με "
+"τους παρακάτω τρόπους:"
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:96
+msgid "<guimenu>Applications</guimenu> menu"
+msgstr "Μενού <guimenu>Εφαρμογές</guimenu>"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:98
+msgid ""
+"Choose <menuchoice> <guisubmenu>Games</guisubmenu> <guimenuitem>Video "
+"Arcade</guimenuitem> </menuchoice>."
+msgstr ""
+"Επιλέξτε <menuchoice> <guisubmenu>Παιχνίδια</guisubmenu> <guimenuitem>Βίντεο "
+"Arcade</guimenuitem> </menuchoice>."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:108
+msgid "Command line"
+msgstr "Γραμμή εντολών"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:110
+msgid ""
+"To start <application>GNOME Video Arcade</application> from a command line, "
+"type the following command, then press <keycap>Return</keycap>:"
+msgstr ""
+"Για να ξεκινήσετε το <application>GNOME Video Arcade</application> από τη "
+"γραμμή εντολών, πληκτρολογήστε την παρακάτω εντολή, έπειτα πατήστε το "
+"πλήκτρο <keycap>επιστροφή</keycap>:"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:114
+msgid "<command>gnome-video-arcade</command>"
+msgstr "<command>gnome-video-arcade</command>"
+
+#. (itstool) path: tip/para
+#: C/index.docbook:118
+msgid ""
+"To view other command line options that are available, type <command>gnome-"
+"video-arcade --help</command>, then press <keycap>Return</keycap>."
+msgstr ""
+"Για να προβάλλετε άλλες επιλογές της γραμμής εντολών που είναι διαθέσιμες, "
+"πληκτρολογήστε <command>gnome-video-arcade --help</command>, έπειτα πατήστε "
+"το πλήκτρο <keycap>επιστροφή</keycap>."
+
+#. (itstool) path: section/title
+#: C/index.docbook:129
+msgid "When You Start GNOME Video Arcade"
+msgstr "Όταν αρχίζετε το GNOME Βίντεο Arcade"
+
+#. (itstool) path: section/para
+#: C/index.docbook:130
+msgid ""
+"The first time <application>GNOME Video Arcade</application> starts, it will "
+"build a database of game information and analyze available ROM files to "
+"determine which games are playable. This process may take several minutes to "
+"complete, during which time the following window is displayed:"
+msgstr ""
+"Την πρώτη φορά που αρχίζει το <application>GNOME Βίντεο Arcade</"
+"application>, θα δομήσει μια βάση δεδομένων των πληροφοριών του παιχνιδιού "
+"και θα αναλύσει τα διαθέσιμα αρχεία ROM για να προσδιορίσει ποια παιχνίδια "
+"μπορούν να παιχτούν. Αυτή η διεργασία μπορεί να πάρει αρκετά λεπτά για να "
+"ολοκληρωθεί και κατά τη διάρκεια της εμφανίζεται το παρακάτω παράθυρο:"
+
+#. (itstool) path: figure/title
+#: C/index.docbook:138
+msgid "GNOME Video Arcade Building the Game Database"
+msgstr "GNOME Βίντεο Arcade Δόμηση της βάσης δεδομένων του παιχνιδιού"
+
+#. (itstool) path: textobject/para
+#: C/index.docbook:145
+msgid ""
+"Shows GNOME Video Arcade main window while the database is being built. Most "
+"of the elements are grayed out, and a progress bar is shown at the bottom."
+msgstr ""
+"Εμφανίζει το κυρίως παράθυρο του GNOME Βίντεο Arcade, ενώ δημιουργείται η "
+"βάση δεδομένων. Τα περισσότερα στοιχεία είναι αχνά και μια γραμμή προόδου "
+"εμφανίζεται στο τέλος."
+
+#. (itstool) path: section/para
+#: C/index.docbook:154
+msgid "The window will then change to look like this:"
+msgstr "Το παράθυρο τότε αλλάζει για να φαίνεται όπως αυτό:"
+
+#. (itstool) path: figure/title
+#: C/index.docbook:158
+msgid "GNOME Video Arcade Start Up Window"
+msgstr "Το αρχικό παράθυρο του GNOME Βίντεο Arcade"
+
+#. (itstool) path: textobject/para
+#: C/index.docbook:165
+msgid ""
+"Shows GNOME Video Arcade main window with a sample list of games. Contains "
+"menubar, game list, view buttons, start game button, properties button and "
+"statusbar."
+msgstr ""
+"Εμφανίζει το κυρίως παράθυρο του GNOME Βίντεο Arcade με έναν κατάλογο "
+"δειγμάτων παιχνιδιών. Περιέχει τη γραμμή μενού, τον κατάλογο παιχνιδιών, τα "
+"πλήκτρα προβολής, το πλήκτρο έναρξης παιχνιδιού, το πλήκτρο ιδιοτήτων και τη "
+"γραμμή κατάστασης."
+
+#. (itstool) path: section/para
+#: C/index.docbook:174
+msgid ""
+"You may see a different list of games, depending on which ROM images are "
+"installed on your system."
+msgstr ""
+"Μπορεί να δείτε έναν διαφορετικό κατάλογο παιχνιδιών, ανάλογα με το ποιες "
+"εικόνες ROM είναι εγκατεστημένες στο σύστημά σας."
+
+#. (itstool) path: tip/para
+#: C/index.docbook:179
+msgid ""
+"If you know that ROM images are installed on your system but "
+"<application>GNOME Video Arcade</application> does not list any games, it "
+"may be that <application>MAME</application> is misconfigured or none of the "
+"installed ROM images are playable. See the Troubleshooting section for more "
+"information."
+msgstr ""
+"Αν ξέρετε ότι εικόνες ROM είναι εγκατεστημένες στο σύστημά σας, αλλά το "
+"<application>GNOME Βίντεο Arcade</application> δεν εμφανίζει κανένα "
+"παιχνίδι, μπορεί να συμβαίνει το <application>MAME</application> να είναι "
+"απορυθμισμένο ή καμία από τις εγκατεστημένες εικόνες ROM να μην παίζει. "
+"Δείτε την ενότητα αντιμετώπισης προβλημάτων για περισσότερες πληροφορίες."
+
+#. (itstool) path: note/para
+#: C/index.docbook:188
+msgid ""
+"Occasionally, the database may be rebuilt when <application>GNOME Video "
+"Arcade</application> starts. Most of the time it will skip this process and "
+"go straight to the window in Figure 2."
+msgstr ""
+"Ενίοτε, η βάση δεδομένων μπορεί να ξαναδημιουργείται όταν το "
+"<application>GNOME Βίντεο Arcade</application> αρχίζει. Τις περισσότερες "
+"φορές θα παραλείπει αυτή τη διεργασία και θα πηγαίνει απ' ευθείας στο "
+"παράθυρο στο σχήμα 2."
+
+#. (itstool) path: section/para
+#: C/index.docbook:194
+msgid ""
+"The <application>GNOME Video Arcade</application> window contains the "
+"following elements:"
+msgstr ""
+"Το παράθυρο <application>GNOME Βίντεο Arcade</application> περιέχει τα "
+"παρακάτω στοιχεία:"
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:200
+msgid "Menubar"
+msgstr "Γραμμή μενού"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:202
+msgid ""
+"The menus on the menubar contain all the commands needed to use "
+"<application>GNOME Video Arcade</application>."
+msgstr ""
+"Τα μενού στη γραμμή μενού περιέχουν όλες τις απαραίτητες εντολές που "
+"χρησιμοποιούνται στο <application>GNOME Βίντεο Arcade</application>."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:209
+msgid "Game List"
+msgstr "Κατάλογος παιχνιδιών"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:211
+msgid "The game list displays a list of games to choose from."
+msgstr ""
+"Ο κατάλογος παιχνιδιών εμφανίζει έναν κατάλογο παιχνιδιών για να διαλέξετε."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:217
+msgid "View Buttons"
+msgstr "Πλήκτρα προβολής"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:219
+msgid ""
+"The view buttons control which games are displayed in the game list. Choose "
+"between displaying all available games, a list of favorite games, or "
+"previous search results."
+msgstr ""
+"Ο έλεγχος πλήκτρων προβολής για το ποια παιχνίδια εμφανίζονται στον κατάλογο "
+"παιχνιδιών. Επιλέξτε μεταξύ προβολής όλων των διαθέσιμων παιχνιδιών, ενός "
+"καταλόγου αγαπημένων παιχνιδιών, ή των αποτελεσμάτων προηγούμενης αναζήτησης."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:227
+msgid "<guibutton>Start Game</guibutton> Button"
+msgstr "Πλήκτρο <guibutton>Έναρξης παιχνιδιού</guibutton>"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:229
+msgid ""
+"The <guibutton>Start Game</guibutton> button starts the highlighted game in "
+"the game list."
+msgstr ""
+"Το πλήκτρο <guibutton>Έναρξη παιχνιδιού</guibutton> αρχίζει το επισημασμένο "
+"παιχνίδι στον κατάλογο παιχνιδιών."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:236
+msgid "<guibutton>Properties</guibutton> Button"
+msgstr "Πλήκτρο <guibutton>Ιδιότητες</guibutton>"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:238
+msgid ""
+"The <guibutton>Properties</guibutton> button displays additional information "
+"about the highlighted game in the game list."
+msgstr ""
+"Το πλήκτρο <guibutton>Ιδιότητες</guibutton> εμφανίζει πρόσθετες πληροφορίες "
+"για το επισημασμένο παιχνίδι στον κατάλογο παιχνιδιών."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:245
+msgid "Statusbar"
+msgstr "Γραμμή κατάστασης"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:247
+msgid ""
+"The statusbar displays the <application>MAME</application> version used to "
+"play games and contextual information about the menu items. It also displays "
+"a progress bar while building the game database."
+msgstr ""
+"Η γραμμή κατάστασης εμφανίζει την έκδοση <application>MAME</application> που "
+"χρησιμοποιούταν για να παίξει παιχνίδια και να εμφανίσει πληροφορίες για τα "
+"στοιχεία μενού. Εμφανίζει επίσης μια γραμμή προόδου, ενώ δομεί τη βάση "
+"δεδομένων του παιχνιδιού."
+
+#. (itstool) path: section/title
+#: C/index.docbook:260
+msgid "Usage"
+msgstr "Χρήση"
+
+#. (itstool) path: section/title
+#: C/index.docbook:262
+msgid "To Start a Game"
+msgstr "Για να αρχίσετε ένα παιχνίδι"
+
+#. (itstool) path: section/para
+#: C/index.docbook:263
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Start Game</guibutton> button or choose <menuchoice> "
+"<shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>S</keycap> </keycombo> </"
+"shortcut> <guimenu>Game</guimenu> <guimenuitem>Start</guimenuitem> </"
+"menuchoice>."
+msgstr ""
+"Επιλέξτε ένα παιχνίδι από τον κατάλογο παιχνιδιών και πατήστε πάνω του για "
+"να το επισημάνετε. Έπειτα πατήστε το πλήκτρο <guibutton>Έναρξη παιχνιδιού</"
+"guibutton> ή επιλέξτε <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</"
+"keycap> <keycap>S</keycap> </keycombo> </shortcut> <guimenu>Παιχνίδι</"
+"guimenu><guimenuitem>Έναρξη</guimenuitem> </menuchoice>."
+
+#. (itstool) path: tip/para
+#: C/index.docbook:278
+msgid "You can also start a game by double-clicking on it in the game list."
+msgstr ""
+"Μπορείτε επίσης να αρχίσετε ένα παιχνίδι διπλοπατώντας το στον κατάλογο "
+"παιχνιδιών."
+
+#. (itstool) path: section/title
+#: C/index.docbook:284
+msgid "To View Properties of a Game"
+msgstr "Για να προβάλετε τις ιδιότητες ενός παιχνιδιού"
+
+#. (itstool) path: section/para
+#: C/index.docbook:285
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Properties</guibutton> button or choose <menuchoice> "
+"<shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> </"
+"shortcut> <guimenu>View</guimenu> <guimenuitem>Properties</guimenuitem> </"
+"menuchoice>."
+msgstr ""
+"Επιλέξτε ένα παιχνίδι από τον κατάλογο παιχνιδιών και πατήστε πάνω του για "
+"να το επισημάνετε. Έπειτα πατήστε το πλήκτρο <guibutton>Ιδιότητες</"
+"guibutton> ή επιλέξτε <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</"
+"keycap> <keycap>P</keycap> </keycombo> </shortcut> <guimenu>Προβολή</"
+"guimenu><guimenuitem>Ιδιότητες</guimenuitem> </menuchoice>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:299
+msgid ""
+"The <guilabel>Properties</guilabel> dialog displays information about the "
+"highlighted game, including some history about the game, tips and tricks to "
+"help improve your scores, pictures of the arcade cabinet, screen shots of "
+"the game in progress and some technical information about <application>MAME</"
+"application>'s emulation of the game."
+msgstr ""
+"Ο διάλογος <guilabel>Ιδιότητες</guilabel> εμφανίζει πληροφορίες για το "
+"επισημασμένο παιχνίδι, συμπεριλαμβάνοντας κάποιο ιστορικό για το παιχνίδι, "
+"συμβουλές και κόλπα για να σας βοηθήσουν να βελτιώσετε τις επιδόσεις σας, "
+"εικόνες της αρχειοθήκης arcade, στιγμιότυπα του παιχνιδιού σε εξέλιξη και "
+"κάποιες τεχνικές πληροφορίες για την προσομοίωση του παιχνιδιού του "
+"<application>MAME</application>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:306
+msgid ""
+"To close the <guilabel>Properties</guilabel> dialog, click the "
+"<guibutton>Close</guibutton> button."
+msgstr ""
+"Για να κλείσετε τον διάλογο <guilabel>Ιδιότητες</guilabel>, πατήστε το "
+"πλήκτρο <guibutton>Κλείσιμο</guibutton>."
+
+#. (itstool) path: note/para
+#: C/index.docbook:311
+msgid ""
+"Some of these features are not yet completed and will be available in a "
+"future version of <application>GNOME Video Arcade</application>."
+msgstr ""
+"Κάποια από αυτά τα γνωρίσματα δεν είναι ακόμα ολοκληρωμένα και θα είναι "
+"διαθέσιμα σε μια μελλοντική έκδοση του <application>GNOME Βίντεο Arcade</"
+"application>."
+
+#. (itstool) path: section/title
+#: C/index.docbook:318
+msgid "To Tag a Game as a Favorite"
+msgstr "Για να ονομάσετε ένα παιχνίδι ως αγαπημένο"
+
+#. (itstool) path: section/para
+#: C/index.docbook:319
+msgid ""
+"To tag a game as a favorite, choose a game from the game list and click on "
+"it to highlight it. Then choose <menuchoice> <shortcut> <keycombo> "
+"<keycap>Ctrl</keycap> <keycap>+</keycap> </keycombo> </shortcut> "
+"<guimenu>Game</guimenu> <guimenuitem>Add to Favorites</guimenuitem> </"
+"menuchoice>. The heart icon for the highlighted game will light up to "
+"indicate that the game has been added to your list of favorites."
+msgstr ""
+"Για να ονομάσετε ένα παιχνίδι ως αγαπημένο, επιλέξτε το παιχνίδι από τον "
+"κατάλογο παιχνιδιών και πατήστε το για να το επισημάνετε. Έπειτα επιλέξτε "
+"<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>+</keycap> "
+"</keycombo> </shortcut> <guimenu>Παιχνίδι</guimenu> <guimenuitem>Προσθήκη "
+"στα αγαπημένα</guimenuitem> </menuchoice>. Το εικονίδιο καρδιάς για το "
+"επισημασμένο παιχνίδι θα φωτίσει για να δείξει ότι το παιχνίδι έχει "
+"προστεθεί στον κατάλογο των αγαπημένων σας."
+
+#. (itstool) path: section/para
+#: C/index.docbook:335
+msgid ""
+"If a game is no longer your favorite, click on its name in the game list to "
+"highlight it. Then choose <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</"
+"keycap> <keycap>-</keycap> </keycombo> </shortcut> <guimenu>Game</guimenu> "
+"<guimenuitem>Remove from Favorites</guimenuitem> </menuchoice>. The heart "
+"icon for the highlighted game will turn gray to indicate that the game has "
+"been removed from your list of favorites."
+msgstr ""
+"Αν ένα παιχνίδι δεν ανήκει πια στα αγαπημένα σας, πατήστε το όνομά του στον "
+"κατάλογο παιχνιδιών για να το επισημάνετε. Έπειτα επιλέξτε <menuchoice> "
+"<shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>-</keycap> </keycombo> </"
+"shortcut> <guimenu>Παιχνίδι</guimenu> <guimenuitem>Αφαίρεση από τα "
+"αγαπημένα</guimenuitem> </menuchoice>. Το εικονίδιο της καρδιάς για το "
+"επισημασμένο παιχνίδι θα γίνει γκρίζο για να δείξει ότι το παιχνίδι έχει "
+"αφαιρεθεί από τον κατάλογο των αγαπημένων σας."
+
+#. (itstool) path: tip/para
+#: C/index.docbook:352
+msgid ""
+"You can also click directly on a heart icon in the game list to tag the game "
+"as a favorite or not a favorite."
+msgstr ""
+"Μπορείτε επίσης να πατήσετε άμεσα στο εικονίδιο της καρδιάς στον κατάλογο "
+"παιχνιδιών για να ονομάσετε το παιχνίδι ως αγαπημένο ή όχι."
+
+#. (itstool) path: section/title
+#: C/index.docbook:359
+msgid "To Change Which Games Are Displayed"
+msgstr "Για να αλλάξετε ποια παιχνίδια εμφανίζονται"
+
+#. (itstool) path: section/para
+#: C/index.docbook:360
+msgid ""
+"To show all available games in the game list, click the <guibutton>Available "
+"Games</guibutton> view button or choose <menuchoice> <guimenu>View</guimenu> "
+"<guimenuitem>Available Games</guimenuitem> </menuchoice>."
+msgstr ""
+"Για να εμφανίσετε όλα τα διαθέσιμα παιχνίδια στον κατάλογο παιχνιδιών, "
+"πατήστε το πλήκτρο προβολής <guibutton>Διαθέσιμα παιχνίδια</guibutton> ή "
+"επιλέξτε <menuchoice> <guimenu>Προβολή</guimenu> <guimenuitem>Διαθέσιμα "
+"παιχνίδια</guimenuitem> </menuchoice>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:368
+msgid ""
+"To show only your favorite games in the game list, click the "
+"<guibutton>Favorite Games</guibutton> view button or choose <menuchoice> "
+"<guimenu>View</guimenu> <guimenuitem>Favorite Games</guimenuitem> </"
+"menuchoice>."
+msgstr ""
+"Για να εμφανίσετε μόνο τα αγαπημένα σας παιχνίδια στον κατάλογο παιχνιδιών, "
+"πατήστε το πλήκτρο προβολής <guibutton>Αγαπημένα παιχνίδια</guibutton> ή "
+"επιλέξτε <menuchoice> <guimenu>Προβολή</guimenu> <guimenuitem>Αγαπημένα "
+"παιχνίδια</guimenuitem> </menuchoice>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:376
+msgid ""
+"To show your previous search results in the game list, click the "
+"<guibutton>Search Results</guibutton> view button or choose <menuchoice> "
+"<guimenu>View</guimenu> <guimenuitem>Search Results</guimenuitem> </"
+"menuchoice>."
+msgstr ""
+"Για να εμφανίσετε τα προηγούμενα αποτελέσματα αναζήτησης στον κατάλογο "
+"παιχνιδιών, πατήστε το πλήκτρο προβολής <guibutton>Αποτελέσματα αναζήτησης</"
+"guibutton> ή επιλέξτε <menuchoice> <guimenu>Προβολή</guimenu> "
+"<guimenuitem>Αποτελέσματα αναζήτησης</guimenuitem> </menuchoice>."
+
+#. (itstool) path: section/title
+#: C/index.docbook:386
+msgid "To Search for Games"
+msgstr "Για να αναζητήσετε παιχνίδια"
+
+#. (itstool) path: section/para
+#: C/index.docbook:387
+msgid ""
+"Choose <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>F</"
+"keycap> </keycombo> </shortcut> <guimenu>Edit</guimenu> "
+"<guimenuitem>Search...</guimenuitem> </menuchoice> to display the following "
+"dialog:"
+msgstr ""
+"Επιλέξτε <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap><keycap>F</"
+"keycap> </keycombo> </shortcut> <guimenu>Επεξεργασία</"
+"guimenu><guimenuitem>Αναζήτηση...</guimenuitem> </menuchoice> για να "
+"εμφανίσετε τον παρακάτω διάλογο:"
+
+#. (itstool) path: figure/title
+#: C/index.docbook:402
+msgid "GNOME Video Arcade Search Dialog"
+msgstr "Ο διάλογος αναζήτησης του GNOME Βίντεο Arcade"
+
+#. (itstool) path: textobject/para
+#: C/index.docbook:409
+msgid ""
+"Shows GNOME Video Arcade search dialog. Contains text entry box, find button "
+"and close button."
+msgstr ""
+"Εμφανίζει τον διάλογο αναζήτησης του GNOME Βίντεο Arcade. Περιέχει το "
+"πλαίσιο καταχώριση κειμένου, το πλήκτρο εύρεσης και το πλήκτρο κλεισίματος."
+
+#. (itstool) path: section/para
+#: C/index.docbook:417
+msgid ""
+"Type your search criteria in the entry box. Search by the title of the game, "
+"the company that manufactured the game, the year the game was released, or "
+"the name of the game's ROM set or <application>MAME</application> driver."
+msgstr ""
+"Πληκτρολογήστε τα κριτήρια αναζήτησης στο πλαίσιο καταχώρισης. Αναζητήστε "
+"κατά τον τίτλο του παιχνιδιού, του κατασκευαστή του παιχνιδιού, του έτους "
+"έκδοσης του παιχνιδιού ή του ονόματος του συνόλου ROM του παιχνιδιού ή του "
+"οδηγού του <application>MAME</application>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:423
+msgid ""
+"Click the <guibutton>Find</guibutton> button to start your search. The "
+"<guilabel>Search</guilabel> dialog will close and the results of your search "
+"will be displayed in the game list."
+msgstr ""
+"Πατήστε το πλήκτρο <guibutton>Εύρεση</guibutton> για να αρχίσετε την "
+"αναζήτησή σας. Ο διάλογος <guilabel>Αναζήτηση</guilabel> θα κλείσει και τα "
+"αποτελέσματα της αναζήτησής σας θα εμφανιστούν στον κατάλογο παιχνιδιών."
+
+#. (itstool) path: section/para
+#: C/index.docbook:428
+msgid ""
+"Click the <guibutton>Close</guibutton> button to close the <guilabel>Search</"
+"guilabel> dialog without searching."
+msgstr ""
+"Πατήστε το πλήκτρο <guibutton>Κλείσιμο</guibutton> για να κλείσετε τον "
+"διάλογο <guilabel>Αναζήτηση</guilabel> χωρίς να ψάξετε."
+
+#. (itstool) path: section/title
+#: C/index.docbook:434
+msgid "To Record a Game"
+msgstr "Για να γράψετε ένα παιχνίδι"
+
+#. (itstool) path: section/para
+#: C/index.docbook:435
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then "
+"choose <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>R</"
+"keycap> </keycombo> </shortcut> <guimenu>Game</guimenu> <guimenuitem>Record</"
+"guimenuitem> </menuchoice>."
+msgstr ""
+"Επιλέξτε ένα παιχνίδι από τον κατάλογο παιχνιδιών και πατήστε πάνω του για "
+"να το επισημάνετε. Έπειτα επιλέξτε <menuchoice> <shortcut> <keycombo> "
+"<keycap>Ctrl</keycap> <keycap>R</keycap> </keycombo> </shortcut> "
+"<guimenu>Παιχνίδι</guimenu><guimenuitem>Εγγραφή</guimenuitem> </menuchoice>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:449
+msgid ""
+"After you exit from <application>MAME</application>, your new recording will "
+"be highlighted in the following window:"
+msgstr ""
+"Αφού βγείτε από το <application>MAME</application>, η νέα σας εγγραφή θα "
+"επισημανθεί στο παρακάτω παράθυρο:"
+
+#. (itstool) path: figure/title
+#: C/index.docbook:454
+msgid "GNOME Video Arcade Recorded Games Window"
+msgstr "Παράθυρο γραμμένων παιχνιδιών του GNOME Βίντεο Arcade"
+
+#. (itstool) path: textobject/para
+#: C/index.docbook:461
+msgid ""
+"Shows GNOME Video Arcade recorded games window. Contains list of game "
+"recordings, play back button, delete button and close button."
+msgstr ""
+"Εμφανίζει το παράθυρο γραμμένων παιχνιδιών του GNOME Βίντεο Arcade. Περιέχει "
+"τον κατάλογο των γραμμένων παιχνιδιών, το πλήκτρο αναπαραγωγής, το πλήκτρο "
+"διαγραφής και το πλήκτρο κλεισίματος."
+
+#. (itstool) path: section/para
+#: C/index.docbook:469
+msgid ""
+"Each entry shows the title of the game that was recorded, and the date and "
+"time when recording began. Click on the game's title to customize the "
+"comment. You can add more information to the comment such as the final score "
+"or level reached."
+msgstr ""
+"Κάθε καταχώριση εμφανίζει τον τίτλο του παιχνιδιού που γράφτηκε και την "
+"ημερομηνία και τον χρόνο που άρχισε η εγγραφή. Πατήστε στον τίτλο του "
+"παιχνιδιού για να προσαρμόσετε το σχόλιο. Μπορείτε να προσθέσετε "
+"περισσότερες πληροφορίες στο σχόλιο όπως το τελικό αποτέλεσμα ή το επίπεδο "
+"που φτάσατε."
+
+#. (itstool) path: section/title
+#: C/index.docbook:477
+msgid "To Play Back a Recorded Game"
+msgstr "Για να αναπαράξετε ένα γραμμένο παιχνίδι"
+
+#. (itstool) path: section/para
+#: C/index.docbook:478
+msgid ""
+"Choose <menuchoice> <guimenu>Game</guimenu> <guimenuitem>Play Back...</"
+"guimenuitem> </menuchoice> to display the <guilabel>Recorded Games</"
+"guilabel> window. Choose a game recording to play back and click on it to "
+"highlight it. Then click the <guibutton>Play Back</guibutton> button."
+msgstr ""
+"Επιλέξτε <menuchoice> <guimenu>Παιχνίδι</guimenu> <guimenuitem>Αναπαραγωγή..."
+"</guimenuitem> </menuchoice> για να εμφανίσετε το παράθυρο "
+"<guilabel>Γραμμένα παιχνίδια</guilabel>. Επιλέξτε μια εγγραφή παιχνιδιού για "
+"αναπαραγωγή και πατήστε την για να την επισημάνετε. Έπειτα πατήστε το "
+"πλήκτρο <guibutton>Αναπαραγωγή</guibutton>."
+
+#. (itstool) path: section/title
+#: C/index.docbook:492
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
+#. (itstool) path: section/para
+#: C/index.docbook:493
+msgid ""
+"To modify the preferences of <application>GNOME Video Arcade</application>, "
+"choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</"
+"guimenuitem> </menuchoice>."
+msgstr ""
+"Για να τροποποιήσετε τις προτιμήσεις του <application>GNOME Βίντεο Arcade</"
+"application>, επιλέξτε <menuchoice> <guimenu>Επεξεργασία</"
+"guimenu><guimenuitem>Προτιμήσεις</guimenuitem> </menuchoice>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:500
+msgid ""
+"The <guilabel>Preferences</guilabel> dialog contains the following sections:"
+msgstr ""
+"Ο διάλογος <guilabel>Προτιμήσεις</guilabel> περιέχει τις ακόλουθες ενότητες:"
+
+#. (itstool) path: section/title
+#: C/index.docbook:505
+msgid "General"
+msgstr "Γενικά"
+
+#. (itstool) path: textobject/para
+#: C/index.docbook:512
+msgid "Shows the General tab of the Preferences window."
+msgstr "Εμφανίζει την καρτέλα γενικά του παραθύρου προτιμήσεις."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:520
+msgid "<guilabel> Start games in fullscreen mode </guilabel>"
+msgstr "<guilabel> Έναρξη παιχνιδιών σε κατάσταση πλήρους οθόνης </guilabel>"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:526
+msgid ""
+"Select this option to start games in fullscreen mode. Otherwise, games will "
+"be started in a window."
+msgstr ""
+"Επιλέξτε αυτήν την επιλογή για να αρχίσετε τα παιχνίδια σε κατάσταση πλήρους "
+"οθόνης. Αλλιώς, τα παιχνίδια θα αρχίσουν σε ένα παράθυρο."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:533
+msgid "<guilabel> Restore previous state when starting a game </guilabel>"
+msgstr ""
+"<guilabel> Επαναφορά της προηγούμενης κατάστασης κατά την έναρξη ενός "
+"παιχνιδιού </guilabel>"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:539
+msgid ""
+"Select this option to continue where you left off when you last exited "
+"<application>MAME</application>. If this option is not selected, the "
+"emulator will boot the arcade machine each time a game is started."
+msgstr ""
+"Επιλέξτε αυτήν την επιλογή για να συνεχίσετε όπου αφήσατε, όταν βγήκατε "
+"τελευταία από το <application>MAME</application>. Αν αυτή η επιλογή δεν "
+"επιλεγεί, ο προσομοιωτής θα εκκινεί τη μηχανή arcade κάθε φορά που ένα "
+"παιχνίδι ξεκινά."
+
+#. (itstool) path: note/para
+#: C/index.docbook:546
+msgid ""
+"State restoration does not take effect until the second time the game is "
+"started with the option enabled. It does not apply to recording or playing "
+"back games."
+msgstr ""
+"Η επαναφορά κατάστασης δεν εφαρμόζεται μέχρι να ξεκινήσει για δεύτερη φορά "
+"το παιχνίδι με ενεργή την επιλογή. Δεν εφαρμόζεται στην εγγραφή ή "
+"αναπαραγωγή παιχνιδιών."
+
+#. (itstool) path: warning/para
+#: C/index.docbook:553
+msgid "Not all games support this feature."
+msgstr "Δεν υποστηρίζουν όλα τα παιχνίδια αυτό το γνώρισμα."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:560
+msgid "<guilabel> Show alternate versions of original games </guilabel>"
+msgstr ""
+"<guilabel> Εμφάνιση εναλλακτικών εκδόσεων των αρχικών παιχνιδιών </guilabel>"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:566
+msgid ""
+"Select this option to show alternate versions of original games in the game "
+"list in the main window."
+msgstr ""
+"Επιλέξτε αυτήν την επιλογή για να εμφανίσετε εναλλακτικές εκδόσεις των "
+"αρχικών παιχνιδιών στον κατάλογο παιχνιδιών στο κυρίως παράθυρο."
+
+#. (itstool) path: note/title
+#: C/index.docbook:574
+msgid "What are alternate versions?"
+msgstr "Ποιες είναι οι εναλλακτικές εκδόσεις;"
+
+#. (itstool) path: note/para
+#: C/index.docbook:575
+msgid ""
+"From the <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\"><application>MAME</application> FAQ</ulink>:"
+msgstr ""
+"Από το <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\"><application>MAME</application> Συχνές ερωτήσεις</ulink>:"
+
+#. (itstool) path: blockquote/para
+#: C/index.docbook:580
+msgid ""
+"Games were often licensed to other companies for a variety of reasons: the "
+"most common was that the makers wished to sell the game in a country or "
+"region in which they had no distribution of their own. In the early 80s, "
+"Namco had no US distribution network so their games were licensed to Atari, "
+"Bally-Midway, and others. Conversely, Atari licensed their games to Japanese "
+"companies (usually Namco) for sale there."
+msgstr ""
+"Τα παιχνίδια αδειοδοτούνται συχνά σε άλλες εταιρείες για διάφορους λόγους: ο "
+"πιο συνηθισμένος είναι ότι οι δημιουργοί επιθυμούν να πουλήσουν το παιχνίδι "
+"σε μια χώρα ή περιοχή στην οποία δεν έχουν δικιά τους διανομή. Στις αρχές "
+"80, η Namco δεν είχε δίκτυο διανομής στις ΗΠΑ, έτσι τα παιχνίδια της "
+"αδειοδοτήθηκαν στους Atari, Bally-Midway και σε άλλους. Αντίστροφα, η Atari "
+"αδειοδότησε τα παιχνίδια της σε ιαπωνικές εταιρείες (συνήθως τη Namco) στην "
+"Ιαπωνία."
+
+#. (itstool) path: blockquote/para
+#: C/index.docbook:589
+msgid ""
+"Sometimes a set of ROMs with a different copyright date is found, or a "
+"bootleg set, or another alternate version. When the <quote>parent</quote> "
+"game has already been emulated in <application>MAME</application>, these "
+"alternates are usually easy to add. In some cases, alternate versions are "
+"slightly different: Game levels are in a different order, the game is harder "
+"or faster, etc."
+msgstr ""
+"Μερικές φορές ένα σύνολο ROMs με διαφορετική ημερομηνία πνευματικών "
+"δικαιωμάτων βρίσκεται, ή ένα λαθραίο σύνολο, ή άλλη εναλλακτική έκδοση. Όταν "
+"το <quote>γονικό</quote> παιχνίδι έχει ήδη προσομοιωθεί στο "
+"<application>MAME</application>, αυτοί οι αντικαταστάτες είναι συνήθως "
+"εύκολο να προστεθούν. Σε κάποιες περιπτώσεις, οι εναλλακτικές εκδόσεις είναι "
+"ελαφρά διαφορετικές: Τα επίπεδα του παιχνιδιού είναι με διαφορετική σειρά, "
+"το παιχνίδι είναι πιο δύσκολο ή πιο γρήγορο, κλπ."
+
+#. (itstool) path: blockquote/para
+#: C/index.docbook:598
+msgid ""
+"In some cases, ROMs were hacked to run on hardware they were not intended "
+"for. For example, when <productname>Pac-Man</productname> was <quote>hot,</"
+"quote> some arcade operators found a way to dump <productname>Pac-Man</"
+"productname> ROMs and hack them to work on <productname>Scramble</"
+"productname> machines so they wouldn't have to purchase extra "
+"<productname>Pac-Man</productname> boards. Since these hacked versions are "
+"masterpieces in their own right, the <application>MAME</application> "
+"developers have included them."
+msgstr ""
+"Σε κάποιες περιπτώσεις, υπήρξαν επεμβάσεις στα ROMs για να τρέξουν σε υλικό "
+"για το οποίο δεν προοριζόντουσαν. Για παράδειγμα, όταν το <productname>Pac-"
+"Man</productname> ήταν <quote>πρόσφατο,</quote> κάποιοι χειριστές του arcade "
+"βρήκαν έναν τρόπο να μεταφέρουν τα ROMs του <productname>Pac-Man</"
+"productname> και να επέμβουν σε αυτά για να δουλέψουν σε μηχανές "
+"<productname>Scramble</productname>, έτσι δεν έπρεπε να αγοράσουν πρόσθετες "
+"πλακέτες του <productname>Pac-Man</productname>. Από τότε που αυτές οι "
+"εκδόσεις με επεμβάσεις έγιναν θαυμάσιες με τα δικά τους δικαιώματα, οι "
+"προγραμματιστές του <application>MAME</application> τις συμπεριέλαβαν."
+
+#. (itstool) path: section/title
+#: C/index.docbook:614
+msgid "Columns"
+msgstr "Στήλες"
+
+#. (itstool) path: textobject/para
+#: C/index.docbook:621
+msgid "Shows the Columns tab of the Preferences window."
+msgstr "Εμφανίζει την καρτέλα με τις στήλες στο παράθυρο προτιμήσεων."
+
+#. (itstool) path: section/para
+#: C/index.docbook:627
+msgid ""
+"The <guilabel>Columns</guilabel> tab allows you to configure the game list "
+"in the main window to show additional information about the available games. "
+"The column names are listed in the order that they appear in the game list. "
+"Reorder columns and show additional columns using the <guibutton>Move Up</"
+"guibutton>, <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> "
+"and <guibutton>Hide</guibutton> buttons to the right of the column list."
+msgstr ""
+"Η καρτέλα <guilabel>Στήλες</guilabel> σας επιτρέπει να ρυθμίσετε τον "
+"κατάλογο παιχνιδιών στο κυρίως παράθυρο για να εμφανίσετε πρόσθετες "
+"πληροφορίες για τα διαθέσιμα παιχνίδια. Τα ονόματα στηλών καταχωρίζονται με "
+"τη σειρά που εμφανίζονται στον κατάλογο παιχνιδιών. Αναδιατάξτε τις στήλες "
+"και εμφανίστε πρόσθετες στήλες χρησιμοποιώντας τα πλήκτρα <guibutton>Πάνω</"
+"guibutton>, <guibutton>Κάτω</guibutton>, <guibutton>Εμφάνιση</guibutton> και "
+"<guibutton>Απόκρυψη</guibutton> στα δεξιά του καταλόγου στηλών."
+
+#. (itstool) path: section/title
+#: C/index.docbook:640
+msgid "Troubleshooting"
+msgstr "Αντιμετώπιση προβλημάτων"
+
+#. (itstool) path: section/title
+#: C/index.docbook:643
+msgid "No games listed in the main window"
+msgstr "Δεν υπάρχουν καταχωρισμένα παιχνίδια στο κυρίως παράθυρο"
+
+#. (itstool) path: section/title
+#: C/index.docbook:645
+msgid "Are any ROM images installed?"
+msgstr "Είναι εγκατεστημένες εικόνες ROM;"
+
+#. (itstool) path: section/para
+#: C/index.docbook:648
+msgid ""
+"For legal reasons, games are not bundled with <application>GNOME Video "
+"Arcade</application> or <application>MAME</application>. The <ulink url="
+"\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\"><application>MAME</"
+"application> FAQ</ulink> has some suggestions for obtaining ROM images:"
+msgstr ""
+"Για νομικούς λόγους, τα παιχνίδια δεν είναι πακεταρισμένα με το "
+"<application>GNOME Βίντεο Arcade</application> ή <application>MAME</"
+"application>. Το <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:"
+"Setting_Up\"><application>MAME</application> Συχνές ερωτήσεις</ulink> έχει "
+"κάποιες προτάσεις για τη λήψη εικόνων ROM:"
+
+#. (itstool) path: blockquote/para
+#: C/index.docbook:656
+msgid ""
+"There are several means of obtaining ROM images for use in "
+"<application>MAME</application>:"
+msgstr ""
+"Υπάρχουν πολλά μέσα λήψης εικόνων ROM για χρήση στο <application>MAME</"
+"application>:"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:662
+msgid ""
+"A small number of ROM images are now available with the copyright holders' "
+"permission at the <ulink url=\"http://mamedev.org/roms/\">mamedev.org ROMs "
+"page</ulink>."
+msgstr ""
+"Ένας μικρός αριθμός εικόνων ROM είναι διαθέσιμες τώρα με την άδεια των "
+"κατόχων των πνευματικών δικαιωμάτων στη <ulink url=\"http://mamedev.org/roms/"
+"\">σελίδα ROMs του mamedev.org</ulink>."
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:669
+msgid ""
+"The <ulink url=\"http://www.hanaho.com/Products/HotRodJoystick.php"
+"\"><productname>HotRod Joystick</productname> control panel</ulink> from "
+"<ulink url=\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> comes "
+"bundled with a CD that includes <application>MAME</application> and a "
+"selection of Capcom ROMs. Hanaho also sells the <ulink url=\"http://www."
+"hanaho.com/Products/ArcadePC.php\"><productname>ArcadePC</productname> "
+"cabinet</ulink> with a different selection of Capcom ROMs."
+msgstr ""
+"Ο πίνακας ελέγχου του <ulink url=\"http://www.hanaho.com/Products/"
+"HotRodJoystick.php\"><productname>HotRod Joystick</productname></ulink> από "
+"τα <ulink url=\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> έρχεται "
+"πακεταρισμένο με ένα CD που περιλαμβάνει το <application>MAME</application> "
+"και μια επιλογή των Capcom ROMs. Το Hanaho επίσης πουλά την αρχειοθήκη "
+"<ulink url=\"http://www.hanaho.com/Products/ArcadePC.php"
+"\"><productname>ArcadePC</productname></ulink> με μια διαφορετική επιλογή "
+"των Capcom ROMs."
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:682
+msgid ""
+"You can purchase your own arcade PCBs (on <ulink url=\"http://www.ebay.com/"
+"\">eBay</ulink>, for example), buy a ROM reader, and use it to copy the ROM "
+"chips' contents into files for your personal use."
+msgstr ""
+"Μπορείτε να αγοράσετε τα δικά σας PCBs arcade (στο <ulink url=\"http://www."
+"ebay.com/\">eBay</ulink>, για παράδειγμα), να αγοράσετε έναν αναγνώστη ROM "
+"και να τον χρησιμοποιήσετε για να αντιγράψετε τα περιεχόμενα των "
+"ολοκληρωμένων ROM σε αρχεία για προσωπική χρήση."
+
+#. (itstool) path: blockquote/para
+#: C/index.docbook:690
+msgid ""
+"Always check if the particular arcade games' copyright owner is selling the "
+"ROMs legally (as with Capcom). That way you will support the companies that "
+"support emulation."
+msgstr ""
+"Να ελέγχεται πάντα αν ο κάτοχος πνευματικών δικαιωμάτων των συγκεκριμένων "
+"παιχνιδιών arcade πουλά τα ROMs νόμιμα (όπως στην περίπτωση Capcom). Έτσι θα "
+"υποστηρίξετε τις εταιρείες που υποστηρίζουν προσομοίωση."
+
+#. (itstool) path: section/title
+#: C/index.docbook:698
+msgid "Can <application>MAME</application> find the installed ROM images?"
+msgstr ""
+"Μπορεί το <application>MAME</application> να βρει τις εγκατεστημένες εικόνες "
+"ROM;"
+
+#. (itstool) path: section/para
+#: C/index.docbook:701
+msgid ""
+"<application>GNOME Video Arcade</application> relies on <application>MAME</"
+"application> to find installed ROM images. To test where <application>MAME</"
+"application> is configured to look for ROM images, type the following "
+"command on a command line, then press <keycap>Return</keycap>:"
+msgstr ""
+"Το <application>GNOME Βίντεο Arcade</application> βασίζεται στο "
+"<application>MAME</application> για να βρει τις εγκατεστημένες εικόνες ROM. "
+"Για να ελέγξετε πού το <application>MAME</application> είναι ρυθμισμένο να "
+"αναζητήσει για εικόνες ROM, πληκτρολογήστε την παρακάτω εντολή σε μια γραμμή "
+"εντολών, έπειτα πατήστε το πλήκτρο <keycap>επιστροφή</keycap>:"
+
+#. (itstool) path: section/para
+#: C/index.docbook:708
+msgid "<command>gnome-video-arcade --inspect rompath</command>"
+msgstr "<command>gnome-video-arcade --inspect rompath</command>"
+
+#. (itstool) path: section/para
+#: C/index.docbook:711
+msgid ""
+"The command should print a directory name such as <computeroutput>/usr/share/"
+"mame/roms</computeroutput>. Move ROM images to this directory and restart "
+"<application>GNOME Video Arcade</application>."
+msgstr ""
+"Η εντολή πρέπει να εμφανίσει ένα όνομα καταλόγου όπως <computeroutput>/usr/"
+"share/mame/roms</computeroutput>. Μετακινήστε τις εικόνες ROM σε αυτόν τον "
+"κατάλογο και επανεκκινήστε το <application>GNOME Βίντεο Arcade</application>."
+
+#. (itstool) path: section/para
+#: C/index.docbook:717
+msgid ""
+"If the command does not print a directory name, it may mean that "
+"<application>MAME</application> is not properly configured on your system. "
+"If you obtained <application>MAME</application> from a <productname>GNU/"
+"Linux</productname> distribution, please contact the maintainers of that "
+"distribution for further instructions."
+msgstr ""
+"Αν η εντολή δεν εμφανίζει ένα όνομα καταλόγου, μπορεί να σημαίνει ότι η "
+"<application>MAME</application> δεν είναι σωστά ρυθμισμένη στο σύστημά σας. "
+"Αν πήρατε το <application>MAME</application> από μια διανομή "
+"<productname>GNU/Λίνουξ</productname>, παρακαλούμε να επικοινωνήσετε με τους "
+"συντηρητές αυτής της διανομής για παραπέρα οδηγίες."
+
+#. (itstool) path: section/title
+#: C/index.docbook:727
+msgid "Is the Available Games view selected?"
+msgstr "Είναι επιλεγμένη η προβολή διαθέσιμα παιχνίδια;"
+
+#. (itstool) path: section/para
+#: C/index.docbook:730
+msgid ""
+"If no games have been tagged as favorites, the <guilabel>Favorite Games</"
+"guilabel> view will be empty. Similarly, if no searches have been run, the "
+"<guilabel>Search Results</guilabel> view will be empty. Switch to the "
+"<guilabel>Available Games</guilabel> view to ensure all available games are "
+"listed."
+msgstr ""
+"Αν δεν έχουν χαρακτηριστεί παιχνίδια ως αγαπημένα, η προβολή "
+"<guilabel>Αγαπημένα παιχνίδια</guilabel> θα είναι κενή. Παρόμοια, αν δεν "
+"έχουν εκτελεστεί αναζητήσεις, η προβολή <guilabel>Αποτελέσματα αναζήτησης</"
+"guilabel> θα είναι κενή. Μεταβείτε στην προβολή <guilabel>Διαθέσιμα "
+"παιχνίδια</guilabel> για να εξασφαλίσετε όλα τα διαθέσιμα παιχνίδια που "
+"είναι καταχωρισμένα."
+
+#. (itstool) path: para/ulink
+#: C/legal.xml:9
+msgid "link"
+msgstr "σύνδεσμος"
+
+#. (itstool) path: legalnotice/para
+#: C/legal.xml:2
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <_:ulink-1/> or in the file COPYING-DOCS distributed "
+"with this manual."
+msgstr ""
+"Δίνεται άδεια για αντιγραφή, διανομή και/ή τροποποίηση του εγγράφου υπό τους "
+"όρους της GNU Free Documentation License (GFDL), Έκδοση 1.1 ή μεταγενέστερη "
+"εκδιδόμενη από το Ίδρυμα Ελεύθερου Λογισμικού χωρίς Σταθερά Εδάφια, χωρίς "
+"Εξώφυλλα Κειμένου, και χωρίς Οπισθόφυλλα Κειμένου. Μπορείτε να βρείτε ένα "
+"αντίγραφο της GFDL στο <_:ulink-1/> ή στο αρχείο COPYING-DOCS που "
+"διανεμήθηκε με αυτό το εγχειρίδιο."
