@@ -1,552 +1,1229 @@
+# Swedish translation for gnome-video-arcade-help.
+# Copyright © 2007-2014 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-video-arcade package.
+# Josef Andersson <josef.andersson@fripost.org>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-video-arcade doc\n"
-"POT-Creation-Date: 2009-04-23 15:48+0000\n"
-"PO-Revision-Date: 2009-04-23 18:05+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"POT-Creation-Date: 2014-12-28 21:17+0000\n"
+"PO-Revision-Date: 2014-12-18 18:49+0100\n"
+"Last-Translator: Josef Andersson <josef.andersson@fripost.org>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: C/gnome-video-arcade.xml:142(None)
-msgid "@@image: 'figures/gva_building_database.png'; md5=148adbf1c2d3240c68fc42c4c23a70b4"
-msgstr "@@image: 'figures/gva_building_database.png'; md5=148adbf1c2d3240c68fc42c4c23a70b4"
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr ""
+"Daniel Nylander <po@danielnylander.se>, 2009\n"
+"Josef Andersson <josef.andersson@fripost.org>, 2014"
 
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: C/gnome-video-arcade.xml:162(None)
-msgid "@@image: 'figures/gva_main_window.png'; md5=146c3e4eb7bc6a7b0d366bc903844293"
-msgstr "@@image: 'figures/gva_main_window.png'; md5=146c3e4eb7bc6a7b0d366bc903844293"
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:142
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_building_database.png' "
+"md5='148adbf1c2d3240c68fc42c4c23a70b4'"
+msgstr ""
+"external ref='figures/gva_building_database.png' "
+"md5='148adbf1c2d3240c68fc42c4c23a70b4'"
 
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: C/gnome-video-arcade.xml:406(None)
-msgid "@@image: 'figures/gva_search_window.png'; md5=cb85cf748755ccc2e3cfdc64b7783d94"
-msgstr "@@image: 'figures/gva_search_window.png'; md5=cb85cf748755ccc2e3cfdc64b7783d94"
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:162
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_main_window.png' "
+"md5='146c3e4eb7bc6a7b0d366bc903844293'"
+msgstr ""
+"external ref='figures/gva_main_window.png' "
+"md5='146c3e4eb7bc6a7b0d366bc903844293'"
 
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: C/gnome-video-arcade.xml:458(None)
-msgid "@@image: 'figures/gva_recorded_games.png'; md5=77bf453222d3efea3bc4274aa4653ba6"
-msgstr "@@image: 'figures/gva_recorded_games.png'; md5=77bf453222d3efea3bc4274aa4653ba6"
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:406
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_search_window.png' "
+"md5='cb85cf748755ccc2e3cfdc64b7783d94'"
+msgstr ""
+"external ref='figures/gva_search_window.png' "
+"md5='cb85cf748755ccc2e3cfdc64b7783d94'"
 
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: C/gnome-video-arcade.xml:509(None)
-msgid "@@image: 'figures/gva_general_preferences.png'; md5=1e74c6d14e1535ce12dee1b187408cd2"
-msgstr "@@image: 'figures/gva_general_preferences.png'; md5=1e74c6d14e1535ce12dee1b187408cd2"
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:458
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_recorded_games.png' "
+"md5='77bf453222d3efea3bc4274aa4653ba6'"
+msgstr ""
+"external ref='figures/gva_recorded_games.png' "
+"md5='77bf453222d3efea3bc4274aa4653ba6'"
 
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: C/gnome-video-arcade.xml:618(None)
-msgid "@@image: 'figures/gva_column_preferences.png'; md5=56d51f7cd01cc78b37942a101f0032a9"
-msgstr "@@image: 'figures/gva_column_preferences.png'; md5=56d51f7cd01cc78b37942a101f0032a9"
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:509
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_general_preferences.png' "
+"md5='1e74c6d14e1535ce12dee1b187408cd2'"
+msgstr ""
+"external ref='figures/gva_general_preferences.png' "
+"md5='1e74c6d14e1535ce12dee1b187408cd2'"
 
-#: C/gnome-video-arcade.xml:15(title)
+#. (itstool) path: imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/index.docbook:618
+msgctxt "_"
+msgid ""
+"external ref='figures/gva_column_preferences.png' "
+"md5='56d51f7cd01cc78b37942a101f0032a9'"
+msgstr ""
+"external ref='figures/gva_column_preferences.png' "
+"md5='56d51f7cd01cc78b37942a101f0032a9'"
+
+#. (itstool) path: articleinfo/title
+#: C/index.docbook:15
 msgid "<application>GNOME Video Arcade</application> Manual"
-msgstr "Handbok för <application>GNOME Video Arcade</application>"
+msgstr "Handbok för <application>GNOME Arkadspel</application>"
 
-#: C/gnome-video-arcade.xml:18(para)
-msgid "GNOME Video Arcade is a front-end for the <application>Multiple Arcade Machine Emulator (MAME)</application>."
-msgstr "GNOME Video Arcade är en grafisk klient för <application>Multiple Arcade Machine Emulator (MAME)</application>."
+#. (itstool) path: abstract/para
+#: C/index.docbook:18
+msgid ""
+"GNOME Video Arcade is a front-end for the <application>Multiple Arcade "
+"Machine Emulator (MAME)</application>."
+msgstr ""
+"GNOME Arkadspel är en grafisk klient för <application>Multiple Arcade "
+"Machine Emulator (MAME)</application>."
 
-#: C/gnome-video-arcade.xml:23(year)
-msgid "2007"
-msgstr "2007"
+#. (itstool) path: articleinfo/copyright
+#: C/index.docbook:22
+msgid "<year>2007</year> <year>2008</year> <holder>Matthew Barnes</holder>"
+msgstr "<year>2007</year> <year>2008</year> <holder>Matthew Barnes</holder>"
 
-#: C/gnome-video-arcade.xml:24(year)
-msgid "2008"
-msgstr "2008"
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:2
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink type=\"help\" url=\"help:fdl\">link</ulink> or in "
+"the file COPYING-DOCS distributed with this manual."
+msgstr ""
+"Tillstånd att kopiera, distribuera och/eller modifiera detta dokument ges "
+"under villkoren i GNU Free Documentation License (GFDL), version 1.1 eller "
+"senare, utgivet av Free Software Foundation utan standardavsnitt och "
+"omslagstexter.  En kopia av GFDL finns att hämta på denna <ulink type=\"help"
+"\" url=\"help:fdl\">länk</ulink> eller i filen COPYING-DOCS som medföljer "
+"denna handbok."
 
-#: C/gnome-video-arcade.xml:25(holder)
-msgid "Matthew Barnes"
-msgstr "Matthew Barnes"
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:12 C/legal.xml:12
+msgid ""
+"This manual is part of a collection of GNOME manuals distributed under the "
+"GFDL. If you want to distribute this manual separately from the collection, "
+"you can do so by adding a copy of the license to the manual, as described in "
+"section 6 of the license."
+msgstr ""
+"Denna handbok utgör en av flera GNOME-handböcker som distribueras under "
+"villkoren i GFDL.  Om du vill distribuera denna handbok separat från övriga "
+"handböcker kan du göra detta genom att lägga till en kopia av licensavtalet "
+"i handboken enligt instruktionerna i avsnitt 6 i licensavtalet."
 
-#: C/gnome-video-arcade.xml:2(para)
-msgid "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink type=\"help\" url=\"help:fdl\">link</ulink> or in the file COPYING-DOCS distributed with this manual."
-msgstr "Tillstånd att kopiera, distribuera och/eller modifiera detta dokument ges under villkoren i GNU Free Documentation License (GFDL), version 1.1 eller senare, utgivet av Free Software Foundation utan standardavsnitt och omslagstexter.  En kopia av GFDL finns att hämta på denna <ulink type=\"help\" url=\"help:fdl\">länk</ulink> eller i filen COPYING-DOCS som medföljer denna handbok."
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:19 C/legal.xml:19
+msgid ""
+"Many of the names used by companies to distinguish their products and "
+"services are claimed as trademarks. Where those names appear in any GNOME "
+"documentation, and the members of the GNOME Documentation Project are made "
+"aware of those trademarks, then the names are in capital letters or initial "
+"capital letters."
+msgstr ""
+"Flera namn på produkter och tjänster är registrerade varumärken. I de fall "
+"dessa namn förekommer i GNOME-dokumentation - och medlemmarna i GNOME-"
+"dokumentationsprojektet är medvetna om dessa varumärken - är de skrivna med "
+"versaler eller med inledande versal."
 
-#: C/gnome-video-arcade.xml:12(para)
-msgid "This manual is part of a collection of GNOME manuals distributed under the GFDL. If you want to distribute this manual separately from the collection, you can do so by adding a copy of the license to the manual, as described in section 6 of the license."
-msgstr "Denna handbok utgör en av flera GNOME-handböcker som distribueras under villkoren i GFDL.  Om du vill distribuera denna handbok separat från övriga handböcker kan du göra detta genom att lägga till en kopia av licensavtalet i handboken enligt instruktionerna i avsnitt 6 i licensavtalet."
+#. (itstool) path: listitem/para
+#: C/index.docbook:35 C/legal.xml:35
+msgid ""
+"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
+"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
+"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
+"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
+"RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
+"MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
+"MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
+"WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
+"SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN "
+"ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION "
+"OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr ""
+"DOKUMENTET TILLHANDAHÅLLS I \"BEFINTLIGT SKICK\" UTAN NÅGRA SOM HELST "
+"GARANTIER, VARE SIG UTTRYCKLIGA ELLER UNDERFÖRSTÅDDA, INKLUSIVE, MEN INTE "
+"BEGRÄNSAT TILL, GARANTIER ATT DOKUMENTET ELLER EN MODIFIERAD VERSION AV "
+"DOKUMENTET INTE INNEHÅLLER NÅGRA FELAKTIGHETER, ÄR LÄMPLIGT FÖR ETT VISST "
+"ÄNDAMÅL ELLER INTE STRIDER MOT LAG. HELA RISKEN VAD GÄLLER KVALITET, "
+"EXAKTHET OCH UTFÖRANDE AV DOKUMENTET OCH MODIFIERADE VERSIONER AV DOKUMENTET "
+"LIGGER HELT OCH HÅLLET PÅ ANVÄNDAREN. OM ETT DOKUMENT ELLER EN MODIFIERAD "
+"VERSION AV ETT DOKUMENT SKULLE VISA SIG INNEHÅLLA FELAKTIGHETER I NÅGOT "
+"HÄNSEENDE ÄR DET DU (INTE DEN URSPRUNGLIGA SKRIBENTEN, FÖRFATTAREN ELLER "
+"NÅGON ANNAN MEDARBETARE) SOM FÅR STÅ FÖR ALLA EVENTUELLA KOSTNADER FÖR "
+"SERVICE, REPARATIONER ELLER KORRIGERINGAR. DENNA GARANTIFRISKRIVNING UTGÖR "
+"EN VÄSENTLIG DEL AV DETTA LICENSAVTAL. DETTA INNEBÄR ATT ALL ANVÄNDNING AV "
+"ETT DOKUMENT ELLER EN MODIFIERAD VERSION AV ETT DOKUMENT BEVILJAS ENDAST "
+"UNDER DENNA ANSVARSFRISKRIVNING;"
 
-#: C/gnome-video-arcade.xml:19(para)
-msgid "Many of the names used by companies to distinguish their products and services are claimed as trademarks. Where those names appear in any GNOME documentation, and the members of the GNOME Documentation Project are made aware of those trademarks, then the names are in capital letters or initial capital letters."
-msgstr "Flera namn på produkter och tjänster är registrerade varumärken. I de fall dessa namn förekommer i GNOME-dokumentation - och medlemmarna i GNOME-dokumentationsprojektet är medvetna om dessa varumärken - är de skrivna med versaler eller med inledande versal."
+#. (itstool) path: listitem/para
+#: C/index.docbook:55 C/legal.xml:55
+msgid ""
+"UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
+"NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
+"CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE "
+"DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON "
+"FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF "
+"ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, "
+"WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES "
+"OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED "
+"VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE "
+"POSSIBILITY OF SUCH DAMAGES."
+msgstr ""
+"UNDER INGA OMSTÄNDIGHETER ELLER INOM RAMEN FÖR NÅGON LAGSTIFTNING, OAVSETT "
+"OM DET GÄLLER KRÄNKNING (INKLUSIVE VÅRDSLÖSHET), KONTRAKT ELLER DYLIKT, SKA "
+"FÖRFATTAREN, DEN URSPRUNGLIGA SKRIBENTEN ELLER ANNAN MEDARBETARE ELLER "
+"ÅTERFÖRSÄLJARE AV DOKUMENTET ELLER AV EN MODIFIERAD VERSION AV DOKUMENTET "
+"ELLER NÅGON LEVERANTÖR TILL NÅGON AV NÄMNDA PARTER STÄLLAS ANSVARIG GENTEMOT "
+"NÅGON FÖR NÅGRA DIREKTA, INDIREKTA, SÄRSKILDA ELLER OFÖRUTSEDDA SKADOR ELLER "
+"FÖLJDSKADOR AV NÅGOT SLAG, INKLUSIVE, MEN INTE BEGRÄNSAT TILL, SKADOR "
+"BETRÄFFANDE FÖRLORAD GOODWILL, HINDER I ARBETET, DATORHAVERI ELLER NÅGRA "
+"ANDRA TÄNKBARA SKADOR ELLER FÖRLUSTER SOM KAN UPPKOMMA PÅ GRUND AV ELLER "
+"RELATERAT TILL ANVÄNDNINGEN AV DOKUMENTET ELLER MODIFIERADE VERSIONER AV "
+"DOKUMENTET, ÄVEN OM PART SKA HA BLIVIT INFORMERAD OM MÖJLIGHETEN TILL SÅDANA "
+"SKADOR."
 
-#: C/gnome-video-arcade.xml:35(para)
-msgid "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
-msgstr "DOKUMENTET TILLHANDAHÅLLS I \"BEFINTLIGT SKICK\" UTAN NÅGRA SOM HELST GARANTIER, VARE SIG UTTRYCKLIGA ELLER UNDERFÖRSTÅDDA, INKLUSIVE, MEN INTE BEGRÄNSAT TILL, GARANTIER ATT DOKUMENTET ELLER EN MODIFIERAD VERSION AV DOKUMENTET INTE INNEHÅLLER NÅGRA FELAKTIGHETER, ÄR LÄMPLIGT FÖR ETT VISST ÄNDAMÅL ELLER INTE STRIDER MOT LAG. HELA RISKEN VAD GÄLLER KVALITET, EXAKTHET OCH UTFÖRANDE AV DOKUMENTET OCH MODIFIERADE VERSIONER AV DOKUMENTET LIGGER HELT OCH HÅLLET PÅ ANVÄNDAREN. OM ETT DOKUMENT ELLER EN MODIFIERAD VERSION AV ETT DOKUMENT SKULLE VISA SIG INNEHÅLLA FELAKTIGHETER I NÅGOT HÄNSEENDE ÄR DET DU (INTE DEN URSPRUNGLIGA SKRIBENTEN, FÖRFATTAREN ELLER NÅGON ANNAN MEDARBETARE) SOM FÅR STÅ FÖR ALLA EVENTUELLA KOSTNADER FÖR SERVICE, REPARATIONER ELLER KORRIGERINGAR. DENNA GARANTIFRISKRIVNING UTGÖR EN VÄSENTLIG DEL AV DETTA LICENSAVTAL. DETTA INNEBÄR ATT ALL ANVÄNDNING AV ETT DOKUMENT ELLER EN MODIFIERAD VERSION AV ETT DOKUMENT BEVILJAS ENDAST UNDER DENNA ANSVARSFRISKRIVNING;"
+#. (itstool) path: legalnotice/para
+#: C/index.docbook:28 C/legal.xml:28
+msgid ""
+"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
+"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
+"<_:orderedlist-1/>"
+msgstr ""
+"DOKUMENTET OCH MODIFIERADE VERSIONER AV DOKUMENTET TILLHANDAHÅLLS UNDER "
+"VILLKOREN I GNU FREE DOCUMENTATION LICENSE ENDAST UNDER FÖLJANDE "
+"FÖRUTSÄTTNINGAR: <_:orderedlist-1/>"
 
-#: C/gnome-video-arcade.xml:55(para)
-msgid "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES."
-msgstr "UNDER INGA OMSTÄNDIGHETER ELLER INOM RAMEN FÖR NÅGON LAGSTIFTNING, OAVSETT OM DET GÄLLER KRÄNKNING (INKLUSIVE VÅRDSLÖSHET), KONTRAKT ELLER DYLIKT, SKA FÖRFATTAREN, DEN URSPRUNGLIGA SKRIBENTEN ELLER ANNAN MEDARBETARE ELLER ÅTERFÖRSÄLJARE AV DOKUMENTET ELLER AV EN MODIFIERAD VERSION AV DOKUMENTET ELLER NÅGON LEVERANTÖR TILL NÅGON AV NÄMNDA PARTER STÄLLAS ANSVARIG GENTEMOT NÅGON FÖR NÅGRA DIREKTA, INDIREKTA, SÄRSKILDA ELLER OFÖRUTSEDDA SKADOR ELLER FÖLJDSKADOR AV NÅGOT SLAG, INKLUSIVE, MEN INTE BEGRÄNSAT TILL, SKADOR BETRÄFFANDE FÖRLORAD GOODWILL, HINDER I ARBETET, DATORHAVERI ELLER NÅGRA ANDRA TÄNKBARA SKADOR ELLER FÖRLUSTER SOM KAN UPPKOMMA PÅ GRUND AV ELLER RELATERAT TILL ANVÄNDNINGEN AV DOKUMENTET ELLER MODIFIERADE VERSIONER AV DOKUMENTET, ÄVEN OM PART SKA HA BLIVIT INFORMERAD OM MÖJLIGHETEN TILL SÅDANA SKADOR."
+#. (itstool) path: authorgroup/author
+#: C/index.docbook:31
+msgid "<firstname>Matthew</firstname> <surname>Barnes</surname>"
+msgstr "<firstname>Matthew</firstname> <surname>Barnes</surname>"
 
-#: C/gnome-video-arcade.xml:28(para)
-msgid "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: <placeholder-1/>"
-msgstr "DOKUMENTET OCH MODIFIERADE VERSIONER AV DOKUMENTET TILLHANDAHÅLLS UNDER VILLKOREN I GNU FREE DOCUMENTATION LICENSE ENDAST UNDER FÖLJANDE FÖRUTSÄTTNINGAR: <placeholder-1/>"
+#. (itstool) path: revhistory/revision
+#: C/index.docbook:38
+msgid ""
+"<revnumber>GNOME Video Arcade Manual 1.1</revnumber> <date>2008-02-24</date>"
+msgstr ""
+"<revnumber>Handbok för GNOME Arkadspel 1.1</revnumber> <date>2008-02-24</"
+"date>"
 
-#: C/gnome-video-arcade.xml:32(firstname)
-msgid "Matthew"
-msgstr "Matthew"
-
-#: C/gnome-video-arcade.xml:33(surname)
-msgid "Barnes"
-msgstr "Barnes"
-
-#: C/gnome-video-arcade.xml:39(revnumber)
-msgid "GNOME Video Arcade Manual 1.1"
-msgstr "Handbok för GNOME Video Arcade 1.1"
-
-#: C/gnome-video-arcade.xml:40(date)
-msgid "2008-02-24"
-msgstr "2008-02-24"
-
-#: C/gnome-video-arcade.xml:44(releaseinfo)
+#. (itstool) path: articleinfo/releaseinfo
+#: C/index.docbook:44
 msgid "This manual describes version 0.5.6 of GNOME Video Arcade"
-msgstr "Denna handbok beskriver version 0.5.6 av GNOME Video Arcade"
+msgstr "Denna handbok beskriver version 0.5.6 av GNOME Arkadspel"
 
-#: C/gnome-video-arcade.xml:49(title)
+#. (itstool) path: section/title
+#: C/index.docbook:49
 msgid "Introduction"
 msgstr "Introduktion"
 
-#: C/gnome-video-arcade.xml:50(para)
-msgid "The <application>GNOME Video Arcade</application> application allows you to play classic coin-operated arcade games on your GNOME desktop using the <application>Multiple Arcade Machine Emulator (MAME)</application>."
+#. (itstool) path: section/para
+#: C/index.docbook:50
+msgid ""
+"The <application>GNOME Video Arcade</application> application allows you to "
+"play classic coin-operated arcade games on your GNOME desktop using the "
+"<application>Multiple Arcade Machine Emulator (MAME)</application>."
 msgstr ""
+"Programmet <application>GNOME Arkadspel</application> låter dig spela "
+"klassiska myntdrivna arkadspel på ditt GNOME-skrivbord med hjälp "
+"av<application>Multiple Arcade Machine Emulator (MAME)</application>."
 
-#: C/gnome-video-arcade.xml:55(para)
-msgid "<application>GNOME Video Arcade</application> provides the following features:"
-msgstr "<application>GNOME Video Arcade</application> tillhandahåller följande funktioner:"
+#. (itstool) path: section/para
+#: C/index.docbook:55
+msgid ""
+"<application>GNOME Video Arcade</application> provides the following "
+"features:"
+msgstr ""
+"<application>GNOME Arkadspel</application> tillhandahåller följande "
+"funktioner:"
 
-#: C/gnome-video-arcade.xml:60(para)
+#. (itstool) path: listitem/para
+#: C/index.docbook:60
 msgid "Play classic arcade games on your desktop."
 msgstr "Spela klassiska arkadspel på ditt skrivbord."
 
-#: C/gnome-video-arcade.xml:65(para)
+#. (itstool) path: listitem/para
+#: C/index.docbook:65
 msgid "Tag favorite games to easily find them again later."
-msgstr "Märk dina favoritspel för att enkelt hitta dem senare."
+msgstr "Markera dina favoritspel för att enkelt hitta dem senare."
 
-#: C/gnome-video-arcade.xml:70(para)
+#. (itstool) path: listitem/para
+#: C/index.docbook:70
 msgid "Read historical information and tips about your favorite games."
-msgstr "Läs historisk information och tips om dina favoritspel."
+msgstr "Läs om historik och tips för dina favoritspel."
 
-#: C/gnome-video-arcade.xml:75(para)
+#. (itstool) path: listitem/para
+#: C/index.docbook:75
 msgid "Game recording and play back."
 msgstr "Spela in spelet och spela upp."
 
-#: C/gnome-video-arcade.xml:80(para)
+#. (itstool) path: listitem/para
+#: C/index.docbook:80
 msgid "Search."
 msgstr "Sök."
 
-#: C/gnome-video-arcade.xml:88(title)
+#. (itstool) path: section/title
+#: C/index.docbook:88
 msgid "Getting Started"
 msgstr "Komma igång"
 
-#: C/gnome-video-arcade.xml:90(title)
+#. (itstool) path: section/title
+#: C/index.docbook:90
 msgid "Starting GNOME Video Arcade"
-msgstr "Starta GNOME Video Arcade"
+msgstr "Starta GNOME Arkadspel"
 
-#: C/gnome-video-arcade.xml:91(para)
-msgid "You can start <application>GNOME Video Arcade</application> in the following ways:"
-msgstr "Du kan starta <application>GNOME Video Arcade</application> på följande sätt:"
+#. (itstool) path: section/para
+#: C/index.docbook:91
+msgid ""
+"You can start <application>GNOME Video Arcade</application> in the following "
+"ways:"
+msgstr ""
+"Du kan starta <application>GNOME Arkadspel</application> på följande sätt:"
 
-#: C/gnome-video-arcade.xml:96(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:96
 msgid "<guimenu>Applications</guimenu> menu"
 msgstr "<guimenu>Program</guimenu>-menyn"
 
-#: C/gnome-video-arcade.xml:98(para)
-msgid "Choose <menuchoice><guisubmenu>Games</guisubmenu><guimenuitem>Video Arcade</guimenuitem></menuchoice>."
-msgstr "Välj <menuchoice><guisubmenu>Spel</guisubmenu><guimenuitem>Video Arcade</guimenuitem></menuchoice>."
+#. (itstool) path: listitem/para
+#: C/index.docbook:98
+msgid ""
+"Choose <menuchoice> <guisubmenu>Games</guisubmenu> <guimenuitem>Video "
+"Arcade</guimenuitem> </menuchoice>."
+msgstr ""
+"Välj <menuchoice><guisubmenu>Spel</guisubmenu><guimenuitem>Arkadspel</"
+"guimenuitem></menuchoice>."
 
-#: C/gnome-video-arcade.xml:108(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:108
 msgid "Command line"
 msgstr "Kommandorad"
 
-#: C/gnome-video-arcade.xml:110(para)
-msgid "To start <application>GNOME Video Arcade</application> from a command line, type the following command, then press <keycap>Return</keycap>:"
+#. (itstool) path: listitem/para
+#: C/index.docbook:110
+msgid ""
+"To start <application>GNOME Video Arcade</application> from a command line, "
+"type the following command, then press <keycap>Return</keycap>:"
 msgstr ""
+"För att starta <application>GNOME Arkadspel</application> från en "
+"kommandorad, skriv in följande kommando och tryck sedan <keycap>Retur</"
+"keycap>:"
 
-#: C/gnome-video-arcade.xml:115(command)
-msgid "gnome-video-arcade"
-msgstr "gnome-video-arcade"
+#. (itstool) path: listitem/para
+#: C/index.docbook:114
+msgid "<command>gnome-video-arcade</command>"
+msgstr "<command>gnome-video-arcade</command>"
 
-#: C/gnome-video-arcade.xml:118(para)
-msgid "To view other command line options that are available, type <command>gnome-video-arcade --help</command>, then press <keycap>Return</keycap>."
+#. (itstool) path: tip/para
+#: C/index.docbook:118
+msgid ""
+"To view other command line options that are available, type <command>gnome-"
+"video-arcade --help</command>, then press <keycap>Return</keycap>."
 msgstr ""
+"För att se andra tillgängliga kommandoradsalternativ, skriv <command-gnome-"
+"video-arcade --help</command> och tryck sedan <keycap>Retur</keycap>."
 
-#: C/gnome-video-arcade.xml:129(title)
+#. (itstool) path: section/title
+#: C/index.docbook:129
 msgid "When You Start GNOME Video Arcade"
-msgstr "När du startar GNOME Video Arcade"
+msgstr "När du startar GNOME Arkadspel"
 
-#: C/gnome-video-arcade.xml:130(para)
-msgid "The first time <application>GNOME Video Arcade</application> starts, it will build a database of game information and analyze available ROM files to determine which games are playable. This process may take several minutes to complete, during which time the following window is displayed:"
+#. (itstool) path: section/para
+#: C/index.docbook:130
+msgid ""
+"The first time <application>GNOME Video Arcade</application> starts, it will "
+"build a database of game information and analyze available ROM files to "
+"determine which games are playable. This process may take several minutes to "
+"complete, during which time the following window is displayed:"
 msgstr ""
+"Första gången <application>GNOME Arkadspel</application> startar bygger den "
+"upp en databas av spelinformation och analyserar tillgängliga ROM-filer för "
+"att avgöra vilka spel som är spelbara. Denna process kan ta flera minuter "
+"att genomföra. Under tiden kommer följande fönster att visas:"
 
-#: C/gnome-video-arcade.xml:138(title)
+#. (itstool) path: figure/title
+#: C/index.docbook:138
 msgid "GNOME Video Arcade Building the Game Database"
-msgstr ""
+msgstr "GNOME Arkadspel bygger speldatabasen"
 
-#: C/gnome-video-arcade.xml:145(para)
-msgid "Shows GNOME Video Arcade main window while the database is being built. Most of the elements are grayed out, and a progress bar is shown at the bottom."
+#. (itstool) path: textobject/para
+#: C/index.docbook:145
+msgid ""
+"Shows GNOME Video Arcade main window while the database is being built. Most "
+"of the elements are grayed out, and a progress bar is shown at the bottom."
 msgstr ""
+"Visar huvudfönstret för GNOME Arkadspel medan databasen byggs. De flesta "
+"element är utgråade, och en förloppsindikator visas längst ned."
 
-#: C/gnome-video-arcade.xml:154(para)
+#. (itstool) path: section/para
+#: C/index.docbook:154
 msgid "The window will then change to look like this:"
-msgstr ""
+msgstr "Fönstret kommer sedan att ändras till detta:"
 
-#: C/gnome-video-arcade.xml:158(title)
+#. (itstool) path: figure/title
+#: C/index.docbook:158
 msgid "GNOME Video Arcade Start Up Window"
-msgstr ""
+msgstr "Startfönster för GNOME Arkadspel"
 
-#: C/gnome-video-arcade.xml:165(para)
-msgid "Shows GNOME Video Arcade main window with a sample list of games. Contains menubar, game list, view buttons, start game button, properties button and statusbar."
+#. (itstool) path: textobject/para
+#: C/index.docbook:165
+msgid ""
+"Shows GNOME Video Arcade main window with a sample list of games. Contains "
+"menubar, game list, view buttons, start game button, properties button and "
+"statusbar."
 msgstr ""
+"Visar huvudfönstret för GNOME Arkadspel med en urvalslista av spel. "
+"Innehåller menyrad, spellista, vyknappar, spelstartknapp, egenskapsknapp och "
+"en statusrad."
 
-#: C/gnome-video-arcade.xml:174(para)
-msgid "You may see a different list of games, depending on which ROM images are installed on your system."
+#. (itstool) path: section/para
+#: C/index.docbook:174
+msgid ""
+"You may see a different list of games, depending on which ROM images are "
+"installed on your system."
 msgstr ""
+"Du kanske ser en annan spellista beroende på vilka ROM-avbilder som är "
+"installerade på ditt system."
 
-#: C/gnome-video-arcade.xml:179(para)
-msgid "If you know that ROM images are installed on your system but <application>GNOME Video Arcade</application> does not list any games, it may be that <application>MAME</application> is misconfigured or none of the installed ROM images are playable. See the Troubleshooting section for more information."
+#. (itstool) path: tip/para
+#: C/index.docbook:179
+msgid ""
+"If you know that ROM images are installed on your system but "
+"<application>GNOME Video Arcade</application> does not list any games, it "
+"may be that <application>MAME</application> is misconfigured or none of the "
+"installed ROM images are playable. See the Troubleshooting section for more "
+"information."
 msgstr ""
+"Om du vet om att ROM-avbilder är installerade på ditt system men "
+"<application>GNOME Arkadspel</application> inte visar några spel kan det "
+"bero på att <application>MAME</application> är felkonfigurerad eller att "
+"inga av de installerade ROM-avbilderna är spelbara. Se "
+"problemlösningsavsnittet för mer information."
 
-#: C/gnome-video-arcade.xml:188(para)
-msgid "Occasionally, the database may be rebuilt when <application>GNOME Video Arcade</application> starts. Most of the time it will skip this process and go straight to the window in Figure 2."
+#. (itstool) path: note/para
+#: C/index.docbook:188
+msgid ""
+"Occasionally, the database may be rebuilt when <application>GNOME Video "
+"Arcade</application> starts. Most of the time it will skip this process and "
+"go straight to the window in Figure 2."
 msgstr ""
+"Ibland kan databasen byggas om när <application>GNOME Arkadspel</"
+"application> startar. För det mesta hoppar den över denna process och går "
+"direkt till fönstret i figur 2."
 
-#: C/gnome-video-arcade.xml:194(para)
-msgid "The <application>GNOME Video Arcade</application> window contains the following elements:"
+#. (itstool) path: section/para
+#: C/index.docbook:194
+msgid ""
+"The <application>GNOME Video Arcade</application> window contains the "
+"following elements:"
 msgstr ""
+"Fönstret för <application>GNOME Arkadspel</application> innehåller följande "
+"element:"
 
-#: C/gnome-video-arcade.xml:200(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:200
 msgid "Menubar"
 msgstr "Menyrad"
 
-#: C/gnome-video-arcade.xml:202(para)
-msgid "The menus on the menubar contain all the commands needed to use <application>GNOME Video Arcade</application>."
-msgstr "Menyerna på menyraden innehåller alla kommandon som behövs för att använda <application>GNOME Video Arcade</application>."
+#. (itstool) path: listitem/para
+#: C/index.docbook:202
+msgid ""
+"The menus on the menubar contain all the commands needed to use "
+"<application>GNOME Video Arcade</application>."
+msgstr ""
+"Menyerna på menyraden innehåller alla kommandon som behövs för att använda "
+"<application>GNOME Arkadspel</application>."
 
-#: C/gnome-video-arcade.xml:209(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:209
 msgid "Game List"
 msgstr "Spellista"
 
-#: C/gnome-video-arcade.xml:211(para)
+#. (itstool) path: listitem/para
+#: C/index.docbook:211
 msgid "The game list displays a list of games to choose from."
 msgstr "Spellistan visar en lista över spel att välja från."
 
-#: C/gnome-video-arcade.xml:217(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:217
 msgid "View Buttons"
-msgstr ""
+msgstr "Vyknappar"
 
-#: C/gnome-video-arcade.xml:219(para)
-msgid "The view buttons control which games are displayed in the game list. Choose between displaying all available games, a list of favorite games, or previous search results."
+#. (itstool) path: listitem/para
+#: C/index.docbook:219
+msgid ""
+"The view buttons control which games are displayed in the game list. Choose "
+"between displaying all available games, a list of favorite games, or "
+"previous search results."
 msgstr ""
+"Vyknapparna kontrollerar vilka spel som visas i spellistan. Välj mellan att "
+"visa alla tillgängliga spel, en lista av favoritspel eller tidigare "
+"sökresultat."
 
-#: C/gnome-video-arcade.xml:227(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:227
 msgid "<guibutton>Start Game</guibutton> Button"
-msgstr ""
+msgstr "Knappen <guibutton>Starta spel</guibutton>"
 
-#: C/gnome-video-arcade.xml:229(para)
-msgid "The <guibutton>Start Game</guibutton> button starts the highlighted game in the game list."
+#. (itstool) path: listitem/para
+#: C/index.docbook:229
+msgid ""
+"The <guibutton>Start Game</guibutton> button starts the highlighted game in "
+"the game list."
 msgstr ""
+"Knappen <guibutton>Starta spel</guibutton> startar det markerade spelet i "
+"spellistan."
 
-#: C/gnome-video-arcade.xml:236(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:236
 msgid "<guibutton>Properties</guibutton> Button"
-msgstr ""
+msgstr "Knappen <guibutton>Egenskaper</guibutton>"
 
-#: C/gnome-video-arcade.xml:238(para)
-msgid "The <guibutton>Properties</guibutton> button displays additional information about the highlighted game in the game list."
+#. (itstool) path: listitem/para
+#: C/index.docbook:238
+msgid ""
+"The <guibutton>Properties</guibutton> button displays additional information "
+"about the highlighted game in the game list."
 msgstr ""
+"Knappen <guibutton>Egenskaper</guibutton> visar ytterligare information om "
+"det markerade spelet i spellistan."
 
-#: C/gnome-video-arcade.xml:245(term)
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:245
 msgid "Statusbar"
 msgstr "Statusrad"
 
-#: C/gnome-video-arcade.xml:247(para)
-msgid "The statusbar displays the <application>MAME</application> version used to play games and contextual information about the menu items. It also displays a progress bar while building the game database."
+#. (itstool) path: listitem/para
+#: C/index.docbook:247
+msgid ""
+"The statusbar displays the <application>MAME</application> version used to "
+"play games and contextual information about the menu items. It also displays "
+"a progress bar while building the game database."
 msgstr ""
+"Statusraden visar <application>MAME</application>-versionen som används för "
+"att spela spel och annan information om menyobjekten. Den visar också en "
+"förloppsindikator under tiden speldatabasen byggs."
 
-#: C/gnome-video-arcade.xml:260(title)
+#. (itstool) path: section/title
+#: C/index.docbook:260
 msgid "Usage"
 msgstr "Användning"
 
-#: C/gnome-video-arcade.xml:262(title)
+#. (itstool) path: section/title
+#: C/index.docbook:262
 msgid "To Start a Game"
 msgstr "Starta ett spel"
 
-#: C/gnome-video-arcade.xml:263(para)
-msgid "Choose a game from the game list and click on it to highlight it. Then click the <guibutton>Start Game</guibutton> button or choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>S</keycap></keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Start</guimenuitem></menuchoice>."
+#. (itstool) path: section/para
+#: C/index.docbook:263
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Start Game</guibutton> button or choose <menuchoice> "
+"<shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>S</keycap> </keycombo> </"
+"shortcut> <guimenu>Game</guimenu> <guimenuitem>Start</guimenuitem> </"
+"menuchoice>."
 msgstr ""
+"Välj ett spel från spellistan och klicka på det för att markera det. Klicka "
+"sedan på knappen <guibutton>Starta spel</guibutton> eller välj "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>S</keycap></"
+"keycombo></shortcut><guimenu>Spel</guimenu><guimenuitem>Starta</"
+"guimenuitem></menuchoice>."
 
-#: C/gnome-video-arcade.xml:278(para)
+#. (itstool) path: tip/para
+#: C/index.docbook:278
 msgid "You can also start a game by double-clicking on it in the game list."
 msgstr ""
+"Du kan också starta ett spel genom att dubbelklicka på det i spellistan."
 
-#: C/gnome-video-arcade.xml:284(title)
+#. (itstool) path: section/title
+#: C/index.docbook:284
 msgid "To View Properties of a Game"
-msgstr "Visa egenskaper för ett spel"
+msgstr "För att visa egenskaper för ett spel"
 
-#: C/gnome-video-arcade.xml:285(para)
-msgid "Choose a game from the game list and click on it to highlight it. Then click the <guibutton>Properties</guibutton> button or choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>P</keycap></keycombo></shortcut><guimenu>View</guimenu><guimenuitem>Properties</guimenuitem></menuchoice>."
+#. (itstool) path: section/para
+#: C/index.docbook:285
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then click "
+"the <guibutton>Properties</guibutton> button or choose <menuchoice> "
+"<shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> </"
+"shortcut> <guimenu>View</guimenu> <guimenuitem>Properties</guimenuitem> </"
+"menuchoice>."
 msgstr ""
+"Välj ett spel från spellistan och klicka på det för att markera det. Välj "
+"sedan knappen <guibutton>Egenskaper</guibutton> eller välj "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>P</keycap></"
+"keycombo></shortcut><guimenu>Visa</guimenu><guimenuitem>Egenskaper</"
+"guimenuitem></menuchoice>."
 
-#: C/gnome-video-arcade.xml:299(para)
-msgid "The <guilabel>Properties</guilabel> dialog displays information about the highlighted game, including some history about the game, tips and tricks to help improve your scores, pictures of the arcade cabinet, screen shots of the game in progress and some technical information about <application>MAME</application>'s emulation of the game."
+#. (itstool) path: section/para
+#: C/index.docbook:299
+msgid ""
+"The <guilabel>Properties</guilabel> dialog displays information about the "
+"highlighted game, including some history about the game, tips and tricks to "
+"help improve your scores, pictures of the arcade cabinet, screen shots of "
+"the game in progress and some technical information about <application>MAME</"
+"application>'s emulation of the game."
 msgstr ""
+"Dialogen <guilabel>Egenskaper</guilabel> visar information om det markerade "
+"spelet, inklusive en del historik om spelet, tips och trick för att hjälpa "
+"dig höja poängen, bilder av arkadkabinettet, skärmdumpar från spelet, och en "
+"del teknisk information om <application>MAME</application>-emuleringen av "
+"spelet."
 
-#: C/gnome-video-arcade.xml:306(para)
-msgid "To close the <guilabel>Properties</guilabel> dialog, click the <guibutton>Close</guibutton> button."
+#. (itstool) path: section/para
+#: C/index.docbook:306
+msgid ""
+"To close the <guilabel>Properties</guilabel> dialog, click the "
+"<guibutton>Close</guibutton> button."
 msgstr ""
+"För att stänga dialogen <guilabel>Egenskaper</guilabel>,klicka på knappen "
+"<guibutton>Stäng</guibutton>."
 
-#: C/gnome-video-arcade.xml:311(para)
-msgid "Some of these features are not yet completed and will be available in a future version of <application>GNOME Video Arcade</application>."
+#. (itstool) path: note/para
+#: C/index.docbook:311
+msgid ""
+"Some of these features are not yet completed and will be available in a "
+"future version of <application>GNOME Video Arcade</application>."
 msgstr ""
+"En del av dessa egenskaper är ännu inte färdiga och kommer att bli "
+"tillgängliga i en framtida version av <application>GNOME Arkadspel</"
+"application>."
 
-#: C/gnome-video-arcade.xml:318(title)
+#. (itstool) path: section/title
+#: C/index.docbook:318
 msgid "To Tag a Game as a Favorite"
-msgstr "Märk ett spel som favoritspel"
+msgstr "Markera ett spel som favoritspel"
 
-#: C/gnome-video-arcade.xml:319(para)
-msgid "To tag a game as a favorite, choose a game from the game list and click on it to highlight it. Then choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>+</keycap></keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Add to Favorites</guimenuitem></menuchoice>. The heart icon for the highlighted game will light up to indicate that the game has been added to your list of favorites."
+#. (itstool) path: section/para
+#: C/index.docbook:319
+msgid ""
+"To tag a game as a favorite, choose a game from the game list and click on "
+"it to highlight it. Then choose <menuchoice> <shortcut> <keycombo> "
+"<keycap>Ctrl</keycap> <keycap>+</keycap> </keycombo> </shortcut> "
+"<guimenu>Game</guimenu> <guimenuitem>Add to Favorites</guimenuitem> </"
+"menuchoice>. The heart icon for the highlighted game will light up to "
+"indicate that the game has been added to your list of favorites."
 msgstr ""
+"För att markera spelet som en favorit, välj ett spel från spellistan och "
+"klicka på det för att markera det. Välj sedan "
+"<menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>+</keycap></"
+"keycombo></shortcut><guimenu>Spel</guimenu><guimenuitem>Lägg till i "
+"favoriter</guimenuitem></menuchoice>. Hjärtikonen för det markerade spelet "
+"kommer att lysa upp för att visa att spelet har lagts till i listan över "
+"favoriter."
 
-#: C/gnome-video-arcade.xml:335(para)
-msgid "If a game is no longer your favorite, click on its name in the game list to highlight it. Then choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>-</keycap></keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Remove from Favorites</guimenuitem></menuchoice>. The heart icon for the highlighted game will turn gray to indicate that the game has been removed from your list of favorites."
+#. (itstool) path: section/para
+#: C/index.docbook:335
+msgid ""
+"If a game is no longer your favorite, click on its name in the game list to "
+"highlight it. Then choose <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</"
+"keycap> <keycap>-</keycap> </keycombo> </shortcut> <guimenu>Game</guimenu> "
+"<guimenuitem>Remove from Favorites</guimenuitem> </menuchoice>. The heart "
+"icon for the highlighted game will turn gray to indicate that the game has "
+"been removed from your list of favorites."
 msgstr ""
+"Om ett spel inte längre är din favorit, klicka på dess namn i spellistan för "
+"att markera det. Välj sedan <menuchoice><shortcut><keycombo><keycap>Ctrl</"
+"keycap><keycap></keycap></keycombo></shortcut><guimenu>Spel</"
+"guimenu><guimenuitem>Ta bort från favoriter</guimenuitem></menuchoice>. "
+"Hjärtikonen för det markerade spelet kommer att bli grå för att visa att "
+"spelet har tagits bort från din lista över favoriter."
 
-#: C/gnome-video-arcade.xml:352(para)
-msgid "You can also click directly on a heart icon in the game list to tag the game as a favorite or not a favorite."
-msgstr "Du kan även klicka direkt på hjärtikonen i spellistan för att märka spelet som ett favoritspel (eller inte)."
+#. (itstool) path: tip/para
+#: C/index.docbook:352
+msgid ""
+"You can also click directly on a heart icon in the game list to tag the game "
+"as a favorite or not a favorite."
+msgstr ""
+"Du kan även klicka direkt på hjärtikonen i spellistan för att markera spelet "
+"som ett favoritspel (eller inte)."
 
-#: C/gnome-video-arcade.xml:359(title)
+#. (itstool) path: section/title
+#: C/index.docbook:359
 msgid "To Change Which Games Are Displayed"
-msgstr "Ändra vilka spel som visas"
+msgstr "För att ändra vilka spel som visas"
 
-#: C/gnome-video-arcade.xml:360(para)
-msgid "To show all available games in the game list, click the <guibutton>Available Games</guibutton> view button or choose <menuchoice><guimenu>View</guimenu><guimenuitem>Available Games</guimenuitem></menuchoice>."
+#. (itstool) path: section/para
+#: C/index.docbook:360
+msgid ""
+"To show all available games in the game list, click the <guibutton>Available "
+"Games</guibutton> view button or choose <menuchoice> <guimenu>View</guimenu> "
+"<guimenuitem>Available Games</guimenuitem> </menuchoice>."
 msgstr ""
+"För att visa alla tillgängliga spel i spellistan, klicka på visningsknappen "
+"<guibutton>Tillgängliga spel</guibutton> eller välj "
+"<menuchoice><guimenu>Visa</guimenu><guimenuitem>Tillgängliga spel</"
+"guimenuitem> </menuchoice>."
 
-#: C/gnome-video-arcade.xml:368(para)
-msgid "To show only your favorite games in the game list, click the <guibutton>Favorite Games</guibutton> view button or choose <menuchoice><guimenu>View</guimenu><guimenuitem>Favorite Games</guimenuitem></menuchoice>."
+#. (itstool) path: section/para
+#: C/index.docbook:368
+msgid ""
+"To show only your favorite games in the game list, click the "
+"<guibutton>Favorite Games</guibutton> view button or choose <menuchoice> "
+"<guimenu>View</guimenu> <guimenuitem>Favorite Games</guimenuitem> </"
+"menuchoice>."
 msgstr ""
+"För att endast visa dina favoritspel i spellistan, klicka på vyknappen "
+"<guibutton>Favoritspel</guibutton> eller välj <menuchoice><guimenu>Visa</"
+"guimenu><guimenuitem>Favoritspel</guimenuitem></menuchoice>"
 
-#: C/gnome-video-arcade.xml:376(para)
-msgid "To show your previous search results in the game list, click the <guibutton>Search Results</guibutton> view button or choose <menuchoice><guimenu>View</guimenu><guimenuitem>Search Results</guimenuitem></menuchoice>."
+#. (itstool) path: section/para
+#: C/index.docbook:376
+msgid ""
+"To show your previous search results in the game list, click the "
+"<guibutton>Search Results</guibutton> view button or choose <menuchoice> "
+"<guimenu>View</guimenu> <guimenuitem>Search Results</guimenuitem> </"
+"menuchoice>."
 msgstr ""
+"För att visa tidigare sökresultat i spellistan, klicka vyknappen "
+"<guibutton>Sökresultat</guibutton> eller välj <menuchoice><guimenu>Visa</"
+"guimenu><guimenuitem>Sökresultat</guimenuitem></menuchoice>."
 
-#: C/gnome-video-arcade.xml:386(title)
+#. (itstool) path: section/title
+#: C/index.docbook:386
 msgid "To Search for Games"
 msgstr "Sök efter spel"
 
-#: C/gnome-video-arcade.xml:387(para)
-msgid "Choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo></shortcut><guimenu>Edit</guimenu><guimenuitem>Search...</guimenuitem></menuchoice> to display the following dialog:"
-msgstr "Välj <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo></shortcut><guimenu>Redigera</guimenu><guimenuitem>Sök...</guimenuitem></menuchoice> för att visa följande dialogruta:"
+#. (itstool) path: section/para
+#: C/index.docbook:387
+msgid ""
+"Choose <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>F</"
+"keycap> </keycombo> </shortcut> <guimenu>Edit</guimenu> "
+"<guimenuitem>Search...</guimenuitem> </menuchoice> to display the following "
+"dialog:"
+msgstr ""
+"Välj <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>F</"
+"keycap></keycombo></shortcut><guimenu>Redigera</guimenu><guimenuitem>Sök…</"
+"guimenuitem></menuchoice> för att visa följande dialogruta:"
 
-#: C/gnome-video-arcade.xml:402(title)
+#. (itstool) path: figure/title
+#: C/index.docbook:402
 msgid "GNOME Video Arcade Search Dialog"
-msgstr ""
+msgstr "Sökruta för GNOME Arkadspel"
 
-#: C/gnome-video-arcade.xml:409(para)
-msgid "Shows GNOME Video Arcade search dialog. Contains text entry box, find button and close button."
+#. (itstool) path: textobject/para
+#: C/index.docbook:409
+msgid ""
+"Shows GNOME Video Arcade search dialog. Contains text entry box, find button "
+"and close button."
 msgstr ""
+"Visar sökdialogen för GNOME Arkadspel. Innehåller fält för textinmatning, "
+"sökknapp och en stängknapp."
 
-#: C/gnome-video-arcade.xml:417(para)
-msgid "Type your search criteria in the entry box. Search by the title of the game, the company that manufactured the game, the year the game was released, or the name of the game's ROM set or <application>MAME</application> driver."
+#. (itstool) path: section/para
+#: C/index.docbook:417
+msgid ""
+"Type your search criteria in the entry box. Search by the title of the game, "
+"the company that manufactured the game, the year the game was released, or "
+"the name of the game's ROM set or <application>MAME</application> driver."
 msgstr ""
+"Skriv in din sökterm i sökfältet. Sök efter speltitel, tillverkaren som "
+"distribuerade spelet, året spelet släpptes, spelets ROM-namn eller drivrutin "
+"för <application>MAME</application>."
 
-#: C/gnome-video-arcade.xml:423(para)
-msgid "Click the <guibutton>Find</guibutton> button to start your search. The <guilabel>Search</guilabel> dialog will close and the results of your search will be displayed in the game list."
+#. (itstool) path: section/para
+#: C/index.docbook:423
+msgid ""
+"Click the <guibutton>Find</guibutton> button to start your search. The "
+"<guilabel>Search</guilabel> dialog will close and the results of your search "
+"will be displayed in the game list."
 msgstr ""
+"Klicka på knappen <guibutton>Sök</guibutton> för att starta din sök. "
+"Dialogen <guilabel>Sök</guilabel> kommer att stängas och resultaten av din "
+"sökning kommer att visas i spellistan."
 
-#: C/gnome-video-arcade.xml:428(para)
-msgid "Click the <guibutton>Close</guibutton> button to close the <guilabel>Search</guilabel> dialog without searching."
+#. (itstool) path: section/para
+#: C/index.docbook:428
+msgid ""
+"Click the <guibutton>Close</guibutton> button to close the <guilabel>Search</"
+"guilabel> dialog without searching."
 msgstr ""
+"Klicka på knappen <guibutton>Stäng</guibutton> för att stänga <guilabel>Sök</"
+"guilabel>-dialogen utan att söka."
 
-#: C/gnome-video-arcade.xml:434(title)
+#. (itstool) path: section/title
+#: C/index.docbook:434
 msgid "To Record a Game"
 msgstr "Spela in ett spel"
 
-#: C/gnome-video-arcade.xml:435(para)
-msgid "Choose a game from the game list and click on it to highlight it. Then choose <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>R</keycap></keycombo></shortcut><guimenu>Game</guimenu><guimenuitem>Record</guimenuitem></menuchoice>."
+#. (itstool) path: section/para
+#: C/index.docbook:435
+msgid ""
+"Choose a game from the game list and click on it to highlight it. Then "
+"choose <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>R</"
+"keycap> </keycombo> </shortcut> <guimenu>Game</guimenu> <guimenuitem>Record</"
+"guimenuitem> </menuchoice>."
 msgstr ""
+"Välj ett spel från spellistan och klicka på det för att markera det. Välj "
+"sedan <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap><keycap>R</"
+"keycap></keycombo></shortcut><guimenu>Spel</guimenu><guimenuitem>Spela in</"
+"guimenuitem></menuchoice>."
 
-#: C/gnome-video-arcade.xml:449(para)
-msgid "After you exit from <application>MAME</application>, your new recording will be highlighted in the following window:"
+#. (itstool) path: section/para
+#: C/index.docbook:449
+msgid ""
+"After you exit from <application>MAME</application>, your new recording will "
+"be highlighted in the following window:"
 msgstr ""
+"Efter att du avslutat <application>MAME</application> kommer din nya "
+"inspelning att markeras i följande fönster:"
 
-#: C/gnome-video-arcade.xml:454(title)
+#. (itstool) path: figure/title
+#: C/index.docbook:454
 msgid "GNOME Video Arcade Recorded Games Window"
-msgstr ""
+msgstr "GNOME Arkadspels fönster för inspelade spel"
 
-#: C/gnome-video-arcade.xml:461(para)
-msgid "Shows GNOME Video Arcade recorded games window. Contains list of game recordings, play back button, delete button and close button."
+#. (itstool) path: textobject/para
+#: C/index.docbook:461
+msgid ""
+"Shows GNOME Video Arcade recorded games window. Contains list of game "
+"recordings, play back button, delete button and close button."
 msgstr ""
+"Visar GNOME Arkadspels fönster för inspelade spel. Innehåller lista över "
+"spelinspelningar, uppspelningsknapp, ta bort-knapp och stängknapp."
 
-#: C/gnome-video-arcade.xml:469(para)
-msgid "Each entry shows the title of the game that was recorded, and the date and time when recording began. Click on the game's title to customize the comment. You can add more information to the comment such as the final score or level reached."
+#. (itstool) path: section/para
+#: C/index.docbook:469
+msgid ""
+"Each entry shows the title of the game that was recorded, and the date and "
+"time when recording began. Click on the game's title to customize the "
+"comment. You can add more information to the comment such as the final score "
+"or level reached."
 msgstr ""
+"Var post visar titeln på spelet som spelades in samt datum och tid för när "
+"inspelningen påbörjades. Klicka på spelets titel för att anpassa "
+"kommentaren. Du kan lägga till mer information till kommentaren, som den "
+"slutliga poängen eller nådd nivå."
 
-#: C/gnome-video-arcade.xml:477(title)
+#. (itstool) path: section/title
+#: C/index.docbook:477
 msgid "To Play Back a Recorded Game"
 msgstr "Spela upp ett inspelat spel"
 
-#: C/gnome-video-arcade.xml:478(para)
-msgid "Choose <menuchoice><guimenu>Game</guimenu><guimenuitem>Play Back...</guimenuitem></menuchoice> to display the <guilabel>Recorded Games</guilabel> window. Choose a game recording to play back and click on it to highlight it. Then click the <guibutton>Play Back</guibutton> button."
+#. (itstool) path: section/para
+#: C/index.docbook:478
+msgid ""
+"Choose <menuchoice> <guimenu>Game</guimenu> <guimenuitem>Play Back...</"
+"guimenuitem> </menuchoice> to display the <guilabel>Recorded Games</"
+"guilabel> window. Choose a game recording to play back and click on it to "
+"highlight it. Then click the <guibutton>Play Back</guibutton> button."
 msgstr ""
+"Välj<menuchoice><guimenu>Spel</guimenu><guimenuitem>Spela upp…</"
+"guimenuitem></menuchoice> för att visa fönstret <guilabel>Inspelade spel</"
+"guilabel>. Välj en spelinspelning att spela upp och klicka på den för att "
+"markera en. Välj sedan knappen <guibutton>Spela upp</guibutton>."
 
-#: C/gnome-video-arcade.xml:492(title)
+#. (itstool) path: section/title
+#: C/index.docbook:492
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: C/gnome-video-arcade.xml:493(para)
-msgid "To modify the preferences of <application>GNOME Video Arcade</application>, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</guimenuitem></menuchoice>."
+#. (itstool) path: section/para
+#: C/index.docbook:493
+msgid ""
+"To modify the preferences of <application>GNOME Video Arcade</application>, "
+"choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</"
+"guimenuitem> </menuchoice>."
 msgstr ""
+"För att ändra inställningarna för <application>GNOME Arkadspel</"
+"application>, välj <menuchoice><guimenu>Redigera</"
+"guimenu><guimenuitem>Inställningar</guimenuitem></menuchoice>."
 
-#: C/gnome-video-arcade.xml:500(para)
-msgid "The <guilabel>Preferences</guilabel> dialog contains the following sections:"
+#. (itstool) path: section/para
+#: C/index.docbook:500
+msgid ""
+"The <guilabel>Preferences</guilabel> dialog contains the following sections:"
 msgstr ""
+"Dialogen <guilabel>Inställningar</guilabel> innehåller följande sektioner:"
 
-#: C/gnome-video-arcade.xml:505(title)
+#. (itstool) path: section/title
+#: C/index.docbook:505
 msgid "General"
 msgstr "Allmänt"
 
-#: C/gnome-video-arcade.xml:512(para)
+#. (itstool) path: textobject/para
+#: C/index.docbook:512
 msgid "Shows the General tab of the Preferences window."
+msgstr "Visar fliken Allmänt under fönstret egenskaper."
+
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:520
+msgid "<guilabel> Start games in fullscreen mode </guilabel>"
+msgstr "<guilabel> Starta spel i helskärmsläge </guilabel>"
+
+#. (itstool) path: listitem/para
+#: C/index.docbook:526
+msgid ""
+"Select this option to start games in fullscreen mode. Otherwise, games will "
+"be started in a window."
 msgstr ""
+"Välj detta alternativ för att starta spel i helskärmsläge. Annars kommer "
+"spel att startas i ett fönster."
 
-#: C/gnome-video-arcade.xml:521(guilabel)
-msgid "Start games in fullscreen mode"
-msgstr "Starta spel i helskärmsläge"
-
-#: C/gnome-video-arcade.xml:526(para)
-msgid "Select this option to start games in fullscreen mode. Otherwise, games will be started in a window."
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:533
+msgid "<guilabel> Restore previous state when starting a game </guilabel>"
 msgstr ""
+"<guilabel> Återställ föregående tillstånd när ett spel startas </guilabel>"
 
-#: C/gnome-video-arcade.xml:534(guilabel)
-msgid "Restore previous state when starting a game"
+#. (itstool) path: listitem/para
+#: C/index.docbook:539
+msgid ""
+"Select this option to continue where you left off when you last exited "
+"<application>MAME</application>. If this option is not selected, the "
+"emulator will boot the arcade machine each time a game is started."
 msgstr ""
+"Välj detta alternativ för att fortsätta där du lämnade när du senast "
+"avslutade <application>MAME</application>. Om detta alternativ inte är "
+"markerat kommer emulatorn att starta upp arkadmaskinen var gång spelet "
+"startas."
 
-#: C/gnome-video-arcade.xml:539(para)
-msgid "Select this option to continue where you left off when you last exited <application>MAME</application>. If this option is not selected, the emulator will boot the arcade machine each time a game is started."
+#. (itstool) path: note/para
+#: C/index.docbook:546
+msgid ""
+"State restoration does not take effect until the second time the game is "
+"started with the option enabled. It does not apply to recording or playing "
+"back games."
 msgstr ""
+"Tillståndsåterställning verkar inte förrän andra gången spelet startas med "
+"alternativet aktiverat. Det gäller inte för inspelning eller uppspelning av "
+"spel."
 
-#: C/gnome-video-arcade.xml:546(para)
-msgid "State restoration does not take effect until the second time the game is started with the option enabled. It does not apply to recording or playing back games."
-msgstr ""
-
-#: C/gnome-video-arcade.xml:553(para)
+#. (itstool) path: warning/para
+#: C/index.docbook:553
 msgid "Not all games support this feature."
 msgstr "Inte alla spel har stöd för denna funktion."
 
-#: C/gnome-video-arcade.xml:561(guilabel)
-msgid "Show alternate versions of original games"
-msgstr "Visa alternativa versioner av ursprungliga spel"
+#. (itstool) path: varlistentry/term
+#: C/index.docbook:560
+msgid "<guilabel> Show alternate versions of original games </guilabel>"
+msgstr "<guilabel> Visa alternativa versioner av ursprungliga spel </guilabel>"
 
-#: C/gnome-video-arcade.xml:566(para)
-msgid "Select this option to show alternate versions of original games in the game list in the main window."
+#. (itstool) path: listitem/para
+#: C/index.docbook:566
+msgid ""
+"Select this option to show alternate versions of original games in the game "
+"list in the main window."
 msgstr ""
+"Välj detta alternativ för att visa alternativa versioner av originalspel i "
+"spellistan i huvudfönstret."
 
-#: C/gnome-video-arcade.xml:574(title)
+#. (itstool) path: note/title
+#: C/index.docbook:574
 msgid "What are alternate versions?"
 msgstr "Vad är alternativa versioner?"
 
-#: C/gnome-video-arcade.xml:575(para)
-msgid "From the <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games\"><application>MAME</application> FAQ</ulink>:"
-msgstr "Från <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games\"><application>MAME</application> FAQ</ulink>:"
-
-#: C/gnome-video-arcade.xml:580(para)
-msgid "Games were often licensed to other companies for a variety of reasons: the most common was that the makers wished to sell the game in a country or region in which they had no distribution of their own. In the early 80s, Namco had no US distribution network so their games were licensed to Atari, Bally-Midway, and others. Conversely, Atari licensed their games to Japanese companies (usually Namco) for sale there."
+#. (itstool) path: note/para
+#: C/index.docbook:575
+msgid ""
+"From the <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\"><application>MAME</application> FAQ</ulink>:"
 msgstr ""
+"Från <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:General_Games"
+"\"><application>MAME</application> FAQ</ulink>:"
 
-#: C/gnome-video-arcade.xml:589(para)
-msgid "Sometimes a set of ROMs with a different copyright date is found, or a bootleg set, or another alternate version. When the <quote>parent</quote> game has already been emulated in <application>MAME</application>, these alternates are usually easy to add. In some cases, alternate versions are slightly different: Game levels are in a different order, the game is harder or faster, etc."
+#. (itstool) path: blockquote/para
+#: C/index.docbook:580
+msgid ""
+"Games were often licensed to other companies for a variety of reasons: the "
+"most common was that the makers wished to sell the game in a country or "
+"region in which they had no distribution of their own. In the early 80s, "
+"Namco had no US distribution network so their games were licensed to Atari, "
+"Bally-Midway, and others. Conversely, Atari licensed their games to Japanese "
+"companies (usually Namco) for sale there."
 msgstr ""
+"Spel licenserades ofta ut till andra bolag av olika skäl: det vanligaste var "
+"att tillverkarna ville sälja spelet i ett land eller område där de inte hade "
+"någon egen distribution. På det tidiga 80-talet hade Namco inget "
+"distributionsnätverk i USA, och deras spel licenserades till Atari, Bally-"
+"Midway och andra. På motsvarande sätt licenserade Atari sina spel till "
+"japanska bolag (vanligen Namco) för försäljning."
 
-#: C/gnome-video-arcade.xml:598(para)
-msgid "In some cases, ROMs were hacked to run on hardware they were not intended for. For example, when <productname>Pac-Man</productname> was <quote>hot,</quote> some arcade operators found a way to dump <productname>Pac-Man</productname> ROMs and hack them to work on <productname>Scramble</productname> machines so they wouldn't have to purchase extra <productname>Pac-Man</productname> boards. Since these hacked versions are masterpieces in their own right, the <application>MAME</application> developers have included them."
+#. (itstool) path: blockquote/para
+#: C/index.docbook:589
+msgid ""
+"Sometimes a set of ROMs with a different copyright date is found, or a "
+"bootleg set, or another alternate version. When the <quote>parent</quote> "
+"game has already been emulated in <application>MAME</application>, these "
+"alternates are usually easy to add. In some cases, alternate versions are "
+"slightly different: Game levels are in a different order, the game is harder "
+"or faster, etc."
 msgstr ""
+"Ibland hittas ett ROM-set med ett annan upphovsrättsdatum eller ett bootleg-"
+"set, eller en annan alternativ version. När det <quote>överordnade</quote> "
+"spelet redan har emulerats i <application>MAME</application> är alternativen "
+"vanligtvis lätta att lägga till. I vissa fall är alternativa version något "
+"annorlunda. Spelnivåer kommer i en annan ordning, spelet är svårare eller "
+"snabbare och så vidare."
 
-#: C/gnome-video-arcade.xml:614(title)
+#. (itstool) path: blockquote/para
+#: C/index.docbook:598
+msgid ""
+"In some cases, ROMs were hacked to run on hardware they were not intended "
+"for. For example, when <productname>Pac-Man</productname> was <quote>hot,</"
+"quote> some arcade operators found a way to dump <productname>Pac-Man</"
+"productname> ROMs and hack them to work on <productname>Scramble</"
+"productname> machines so they wouldn't have to purchase extra "
+"<productname>Pac-Man</productname> boards. Since these hacked versions are "
+"masterpieces in their own right, the <application>MAME</application> "
+"developers have included them."
+msgstr ""
+"I vissa fall hackades ROM:ar för att köras på hårdvara de inte var skapade "
+"för. Till exempel, när <productname>Pac-man</productname> blev <quote>inne</"
+"quote> hittade en del arkadoperatörer ett sätt att dumpa <productname>Pac-"
+"man</productname> ROM:arna och hacka dem till att fungera på "
+"<productname>Scramble</productname>-maskiner så att de inte behövde köpa "
+"extra <productname>Pac-man</productname>-moderkort. Eftersom dessa hackade "
+"versioner är mästerverk på sitt sätt har <application>MAME</application>-"
+"utvecklarna inkluderat dem."
+
+#. (itstool) path: section/title
+#: C/index.docbook:614
 msgid "Columns"
 msgstr "Kolumner"
 
-#: C/gnome-video-arcade.xml:621(para)
+#. (itstool) path: textobject/para
+#: C/index.docbook:621
 msgid "Shows the Columns tab of the Preferences window."
-msgstr ""
+msgstr "Visa kolumnfliken för egenskapsfönstret."
 
-#: C/gnome-video-arcade.xml:627(para)
-msgid "The <guilabel>Columns</guilabel> tab allows you to configure the game list in the main window to show additional information about the available games. The column names are listed in the order that they appear in the game list. Reorder columns and show additional columns using the <guibutton>Move Up</guibutton>, <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> and <guibutton>Hide</guibutton> buttons to the right of the column list."
+#. (itstool) path: section/para
+#: C/index.docbook:627
+msgid ""
+"The <guilabel>Columns</guilabel> tab allows you to configure the game list "
+"in the main window to show additional information about the available games. "
+"The column names are listed in the order that they appear in the game list. "
+"Reorder columns and show additional columns using the <guibutton>Move Up</"
+"guibutton>, <guibutton>Move Down</guibutton>, <guibutton>Show</guibutton> "
+"and <guibutton>Hide</guibutton> buttons to the right of the column list."
 msgstr ""
+"Fliken <guilabel>Kolumner</guilabel> låter dig konfigurera spellistan i "
+"huvudfönstret för att visa ytterligare information om tillgängliga spel. "
+"Kolumnnamnen listas i den ordning som de visas i spellistan. Ordna om "
+"kolumnerna och visa ytterligare information med knapparna <guibutton>Flytta "
+"upp</guibutton>, <guibutton>Flytta ned</guibutton>, <guibutton>Visa</"
+"guibutton> och <guibutton>Dölj</guibutton> till höger om kolumnlistan."
 
-#: C/gnome-video-arcade.xml:640(title)
+#. (itstool) path: section/title
+#: C/index.docbook:640
 msgid "Troubleshooting"
 msgstr "Felsökning"
 
-#: C/gnome-video-arcade.xml:643(title)
+#. (itstool) path: section/title
+#: C/index.docbook:643
 msgid "No games listed in the main window"
 msgstr "Inga spel listas i huvudfönstret"
 
-#: C/gnome-video-arcade.xml:645(title)
+#. (itstool) path: section/title
+#: C/index.docbook:645
 msgid "Are any ROM images installed?"
 msgstr "Finns det några ROM-avbildningar installerade?"
 
-#: C/gnome-video-arcade.xml:648(para)
-msgid "For legal reasons, games are not bundled with <application>GNOME Video Arcade</application> or <application>MAME</application>. The <ulink url=\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\"><application>MAME</application> FAQ</ulink> has some suggestions for obtaining ROM images:"
+#. (itstool) path: section/para
+#: C/index.docbook:648
+msgid ""
+"For legal reasons, games are not bundled with <application>GNOME Video "
+"Arcade</application> or <application>MAME</application>. The <ulink url="
+"\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\"><application>MAME</"
+"application> FAQ</ulink> has some suggestions for obtaining ROM images:"
 msgstr ""
+"Av lagliga skäl följer inga spel med <application>GNOME "
+"Arkadspel<application> eller <application>MAME</application>.  <ulink url="
+"\"http://mamedev.org/devwiki/index.php/FAQ:Setting_Up\"><application>MAME</"
+"application> FAQ:n</ulink> förslår några sätt att få tag i ROM-avbilder."
 
-#: C/gnome-video-arcade.xml:656(para)
-msgid "There are several means of obtaining ROM images for use in <application>MAME</application>:"
+#. (itstool) path: blockquote/para
+#: C/index.docbook:656
+msgid ""
+"There are several means of obtaining ROM images for use in "
+"<application>MAME</application>:"
 msgstr ""
+"Det finns flera sätt att få tag i ROM-avbilder att använda i "
+"<application>MAME</application> på:"
 
-#: C/gnome-video-arcade.xml:662(para)
-msgid "A small number of ROM images are now available with the copyright holders' permission at the <ulink url=\"http://mamedev.org/roms/\">mamedev.org ROMs page</ulink>."
+#. (itstool) path: listitem/para
+#: C/index.docbook:662
+msgid ""
+"A small number of ROM images are now available with the copyright holders' "
+"permission at the <ulink url=\"http://mamedev.org/roms/\">mamedev.org ROMs "
+"page</ulink>."
 msgstr ""
+"Ett mindre antal ROM-avbilder är tillgängliga med upphovsrättsägarens "
+"tillstånd på  <ulink url=\"http://mamedev.org/roms/\">ROM-sidan för mamedev."
+"org</ulink>."
 
-#: C/gnome-video-arcade.xml:669(para)
-msgid "The <ulink url=\"http://www.hanaho.com/Products/HotRodJoystick.php\"><productname>HotRod Joystick</productname> control panel</ulink> from <ulink url=\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> comes bundled with a CD that includes <application>MAME</application> and a selection of Capcom ROMs. Hanaho also sells the <ulink url=\"http://www.hanaho.com/Products/ArcadePC.php\"><productname>ArcadePC</productname> cabinet</ulink> with a different selection of Capcom ROMs."
+#. (itstool) path: listitem/para
+#: C/index.docbook:669
+msgid ""
+"The <ulink url=\"http://www.hanaho.com/Products/HotRodJoystick.php"
+"\"><productname>HotRod Joystick</productname> control panel</ulink> from "
+"<ulink url=\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> comes "
+"bundled with a CD that includes <application>MAME</application> and a "
+"selection of Capcom ROMs. Hanaho also sells the <ulink url=\"http://www."
+"hanaho.com/Products/ArcadePC.php\"><productname>ArcadePC</productname> "
+"cabinet</ulink> with a different selection of Capcom ROMs."
 msgstr ""
+"Kontrollpanelen <ulink url=\"http://www.hanaho.com/Products/HotRodJoystick."
+"php\"><productname>HotRod Joystick</productname></ulink> från <ulink url="
+"\"http://www.hanaho.com/\">Hanaho Games, Inc.</ulink> inkluderar en CD med "
+"<application>MAME</application> och ett urval av  Capcom ROM-avbilder. "
+"Hanaho säljer också  <ulink url=\"http://www.hanaho.com/Products/ArcadePC.php"
+"\"><productname>ArcadePC</productname>-kabinettet </ulink> med ett annat "
+"urval Capcom ROM-avbilder."
 
-#: C/gnome-video-arcade.xml:682(para)
-msgid "You can purchase your own arcade PCBs (on <ulink url=\"http://www.ebay.com/\">eBay</ulink>, for example), buy a ROM reader, and use it to copy the ROM chips' contents into files for your personal use."
+#. (itstool) path: listitem/para
+#: C/index.docbook:682
+msgid ""
+"You can purchase your own arcade PCBs (on <ulink url=\"http://www.ebay.com/"
+"\">eBay</ulink>, for example), buy a ROM reader, and use it to copy the ROM "
+"chips' contents into files for your personal use."
 msgstr ""
+"Du kan köpa dina egna arkad-PBC:er (exempelvis på <ulink url=\"http://www."
+"ebay.com/\">eBay</ulink>, ), köpa en ROM-läsare och använda den för att "
+"kopiera ROM-chippens innehåll till filer för personligt bruk."
 
-#: C/gnome-video-arcade.xml:690(para)
-msgid "Always check if the particular arcade games' copyright owner is selling the ROMs legally (as with Capcom). That way you will support the companies that support emulation."
+#. (itstool) path: blockquote/para
+#: C/index.docbook:690
+msgid ""
+"Always check if the particular arcade games' copyright owner is selling the "
+"ROMs legally (as with Capcom). That way you will support the companies that "
+"support emulation."
 msgstr ""
+"Kontrollera alltid om arkadspelets upphovsrättsägare säljer ROM-avbilderna "
+"lagligt (som i Capcoms fall). På det sättet stödjer du företag som stödjer "
+"emulering."
 
-#: C/gnome-video-arcade.xml:698(title)
+#. (itstool) path: section/title
+#: C/index.docbook:698
 msgid "Can <application>MAME</application> find the installed ROM images?"
-msgstr "Kan <application>MAME</application> hitta de installerade ROM-avbildningarna?"
-
-#: C/gnome-video-arcade.xml:701(para)
-msgid "<application>GNOME Video Arcade</application> relies on <application>MAME</application> to find installed ROM images. To test where <application>MAME</application> is configured to look for ROM images, type the following command on a command line, then press <keycap>Return</keycap>:"
 msgstr ""
+"Kan <application>MAME</application> hitta de installerade ROM-avbildningarna?"
 
-#: C/gnome-video-arcade.xml:709(command)
-msgid "gnome-video-arcade --inspect rompath"
-msgstr "gnome-video-arcade --inspect rom-sökväg"
-
-#: C/gnome-video-arcade.xml:711(para)
-msgid "The command should print a directory name such as <computeroutput>/usr/share/mame/roms</computeroutput>. Move ROM images to this directory and restart <application>GNOME Video Arcade</application>."
+#. (itstool) path: section/para
+#: C/index.docbook:701
+msgid ""
+"<application>GNOME Video Arcade</application> relies on <application>MAME</"
+"application> to find installed ROM images. To test where <application>MAME</"
+"application> is configured to look for ROM images, type the following "
+"command on a command line, then press <keycap>Return</keycap>:"
 msgstr ""
+"<application>GNOME Arkadspel</application> använder <application>MAME</"
+"application> för att hitta installerade ROM-avbilder. För att testa om "
+"<application>MAME</application> är konfigurerad att leta efter ROM-avbilder, "
+"skriv in följande kommando på kommandoraden och tryck sedan <keycap>Retur</"
+"keycap>:"
 
-#: C/gnome-video-arcade.xml:717(para)
-msgid "If the command does not print a directory name, it may mean that <application>MAME</application> is not properly configured on your system. If you obtained <application>MAME</application> from a <productname>GNU/Linux</productname> distribution, please contact the maintainers of that distribution for further instructions."
+#. (itstool) path: section/para
+#: C/index.docbook:708
+msgid "<command>gnome-video-arcade --inspect rompath</command>"
+msgstr "<command>gnome-video-arcade --inspect rom-sökväg</command>"
+
+#. (itstool) path: section/para
+#: C/index.docbook:711
+msgid ""
+"The command should print a directory name such as <computeroutput>/usr/share/"
+"mame/roms</computeroutput>. Move ROM images to this directory and restart "
+"<application>GNOME Video Arcade</application>."
 msgstr ""
+"Kommandot borde skriva ut ett katalognamn som exempelvis <computeroutput>/"
+"usr/share/mame/roms</computeroutput>. Flytta ROM-avbilder till denna katalog "
+"och starta om <application>GNOME Arkadspel</application>."
 
-#: C/gnome-video-arcade.xml:727(title)
+#. (itstool) path: section/para
+#: C/index.docbook:717
+msgid ""
+"If the command does not print a directory name, it may mean that "
+"<application>MAME</application> is not properly configured on your system. "
+"If you obtained <application>MAME</application> from a <productname>GNU/"
+"Linux</productname> distribution, please contact the maintainers of that "
+"distribution for further instructions."
+msgstr ""
+"Om kommandot inte skriver ut ett katalognamn kan det betyda att "
+"<application>MAME</application> inte är rätt konfigurerat på ditt system. Om "
+"du erhöll <application>MAME</application> från en <productname>GNU/Linux</"
+"productname>-distribution, kontakta ansvariga för den distributionen för "
+"vidare instruktioner."
+
+#. (itstool) path: section/title
+#: C/index.docbook:727
 msgid "Is the Available Games view selected?"
+msgstr "Är vyn tillgängliga spel vald?"
+
+#. (itstool) path: section/para
+#: C/index.docbook:730
+msgid ""
+"If no games have been tagged as favorites, the <guilabel>Favorite Games</"
+"guilabel> view will be empty. Similarly, if no searches have been run, the "
+"<guilabel>Search Results</guilabel> view will be empty. Switch to the "
+"<guilabel>Available Games</guilabel> view to ensure all available games are "
+"listed."
 msgstr ""
+"Om inga spel har taggats som favoriter kommer <guilabel>Favoritspel</"
+"guilabel> att vara tom. På liknande sätt, om inga sökningar ägt rum så "
+"kommer vyn <guilabel>Sökresultat</guilabel> att vara tom. Växla till "
+"<guilabel>Tillgängliga spel</guilabel> för att vara säker på att alla spel "
+"visas."
 
-#: C/gnome-video-arcade.xml:730(para)
-msgid "If no games have been tagged as favorites, the <guilabel>Favorite Games</guilabel> view will be empty. Similarly, if no searches have been run, the <guilabel>Search Results</guilabel> view will be empty. Switch to the <guilabel>Available Games</guilabel> view to ensure all available games are listed."
+#. (itstool) path: para/ulink
+#: C/legal.xml:9
+msgid "link"
+msgstr "länk"
+
+#. (itstool) path: legalnotice/para
+#: C/legal.xml:2
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <_:ulink-1/> or in the file COPYING-DOCS distributed "
+"with this manual."
 msgstr ""
-
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
-#: C/gnome-video-arcade.xml:0(None)
-msgid "translator-credits"
-msgstr "Daniel Nylander <po@danielnylander.se>, 2009"
-
+"Tillstånd att kopiera, distribuera och/eller modifiera detta dokument ges "
+"under villkoren i GNU Free Documentation License (GFDL), version 1.1 eller "
+"senare, utgivet av Free Software Foundation utan standardavsnitt och "
+"omslagstexter.  En kopia av GFDL finns att hämta på denna  <_:ulink-1/> "
+"eller i filen COPYING-DOCS som medföljer denna handbok."
