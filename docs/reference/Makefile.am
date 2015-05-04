@@ -76,7 +76,6 @@ INCLUDES=							\
 	-I$(top_builddir)/src					\
 	$(GLIB_CFLAGS)						\
 	$(GTK_CFLAGS)						\
-	$(GIT_CFLAGS)						\
 	$(GSTREAMER_CFLAGS)					\
 	$(SOUP_CFLAGS)						\
 	$(SQLITE_CFLAGS)					\
@@ -113,7 +112,6 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/@MAME_BACKEND@			\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
-	$(GIT_LIBS)						\
 	$(SOUP_LIBS)						\
 	$(GSTREAMER_LIBS)					\
 	$(SQLITE_LIBS)						\

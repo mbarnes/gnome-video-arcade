@@ -4,7 +4,7 @@ bin_PROGRAMS = gnome-video-arcade
 
 AM_CFLAGS = \
 	-Wall \
-	@GLIB_CFLAGS@ @GTK_CFLAGS@ @GIT_CFLAGS@ @GSTREAMER_CFLAGS@ \
+	@GLIB_CFLAGS@ @GTK_CFLAGS@ @GSTREAMER_CFLAGS@ \
 	@SOUP_CFLAGS@ @SQLITE_CFLAGS@ @WNCK_CFLAGS@
 
 AM_CPPFLAGS = \
@@ -79,7 +79,7 @@ EXTRA_gnome_video_arcade_SOURCES = \
 	gva-mame-xmame.c
 
 gnome_video_arcade_LDADD = \
-	@GLIB_LIBS@ @GTK_LIBS@ @GIT_LIBS@ \
+	@GLIB_LIBS@ @GTK_LIBS@ \
 	@GSTREAMER_LIBS@ @MAME_BACKEND@ \
 	@SOUP_LIBS@ @SQLITE_LIBS@ @WNCK_LIBS@
 
