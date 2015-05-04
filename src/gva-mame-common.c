@@ -142,6 +142,53 @@ fail:
  *****************************************************************************/
 
 /**
+ * gva_mame_get_version_int:
+ *
+ * Returns the MAME version as a whole number for easy comparison.
+ * For example, MAME version 0.123 is returned as 123.
+ *
+ * Returns: the MAME version as an integer
+ **/
+guint
+gva_mame_get_version_int (void)
+{
+        static gsize regex_initialized;
+        static GRegex *regex;
+        GMatchInfo *match = NULL;
+        gchar *string;
+        guint version_int = 0;
+        GError *error = NULL;
+
+        if (g_once_init_enter (&regex_initialized))
+        {
+                /* MAME versions have been 0.xxx for nearly 20 years,
+                 * so I think it's safe to disregard the leading zero. */
+                regex = g_regex_new ("0\\.(\\d\\d\\d)", 0, 0, NULL);
+                g_assert (regex != NULL);
+                g_once_init_leave (&regex_initialized, 1);
+        }
+
+        string = gva_mame_get_version (&error);
+        gva_error_handle (&error);
+
+        if (string != NULL)
+        {
+                if (g_regex_match (regex, string, 0, &match))
+                {
+                        gchar *substring;
+
+                        substring = g_match_info_fetch (match, 1);
+                        version_int = (guint) strtoul (substring, NULL, 10);
+                        g_free (substring);
+                }
+
+                g_free (string);
+        }
+
+        return version_int;
+}
+
+/**
  * gva_mame_get_config_value:
  * @config_key: a configuration key
  * @error: return location for a #GError, or %NULL

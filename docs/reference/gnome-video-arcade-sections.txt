@@ -196,6 +196,7 @@ gva_main_window_destroy_cb
 GvaMameCallback
 gva_mame_get_path_sep
 gva_mame_get_version
+gva_mame_get_version_int
 gva_mame_get_total_supported
 gva_mame_get_config_value
 gva_mame_has_config_value

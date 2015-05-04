@@ -48,6 +48,15 @@
 @Returns: 
 
 
+<!-- ##### FUNCTION gva_mame_get_version_int ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
 <!-- ##### FUNCTION gva_mame_get_total_supported ##### -->
 <para>
 
