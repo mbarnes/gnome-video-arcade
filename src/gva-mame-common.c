@@ -682,12 +682,27 @@ gva_mame_run_game (const gchar *name,
         if (gva_mame_supports_sound ())
         {
                 GvaMuteButton *mute_button;
+                gboolean muted;
 
                 mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
-                if (gva_mute_button_get_muted (mute_button))
-                        g_string_append (arguments, "-nosound ");
+                muted = gva_mute_button_get_muted (mute_button);
+
+                /* MAME 0.153 and earlier used "-[no]sound".
+                 * MAME 0.154 and later use "-sound auto|none". */
+                if (gva_mame_get_version_int () < 154)
+                {
+                        if (muted)
+                                g_string_append (arguments, "-nosound ");
+                        else
+                                g_string_append (arguments, "-sound ");
+                }
                 else
-                        g_string_append (arguments, "-sound ");
+                {
+                        if (muted)
+                                g_string_append (arguments, "-sound none ");
+                        else
+                                g_string_append (arguments, "-sound auto ");
+                }
         }
 
         g_string_append_printf (arguments, "%s", name);
