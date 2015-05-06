@@ -11,7 +11,6 @@ EXTRA_DIST = \
 	intltool-extract.in		\
 	intltool-merge.in		\
 	intltool-update.in		\
-	mkinstalldirs			\
 	TODO
 
 MAINTAINERCLEANFILES = \
@@ -27,7 +26,6 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/install-sh		\
 	$(srcdir)/ltmain.sh		\
 	$(srcdir)/missing		\
-	$(srcdir)/mkinstalldirs		\
 	$(srcdir)/gtk-doc.make		\
 	$(srcdir)/m4/gtk-doc.m4		\
 	$(srcdir)/m4/intltool.m4	\
