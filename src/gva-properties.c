@@ -50,16 +50,16 @@
 #define SQL_SELECT_CPU \
         "SELECT COUNT(*), name, clock FROM chip " \
         "WHERE game = \"%s\" AND type = \"cpu\" " \
-        "GROUP BY name, clock ORDER BY CAST (clock AS INT) DESC LIMIT %d"
+        "GROUP BY name, clock ORDER BY CAST (clock AS INT) DESC LIMIT %lu"
 
 #define SQL_SELECT_SOUND \
         "SELECT COUNT(*), name, clock FROM chip " \
         "WHERE game = \"%s\" AND type = \"audio\" " \
-        "GROUP BY name, clock ORDER BY CAST (clock AS INT) DESC LIMIT %d"
+        "GROUP BY name, clock ORDER BY CAST (clock AS INT) DESC LIMIT %lu"
 
 #define SQL_SELECT_VIDEO \
         "SELECT type, rotate, width, height, refresh " \
-        "FROM display WHERE game = \"%s\" LIMIT %d"
+        "FROM display WHERE game = \"%s\" LIMIT %lu"
 
 /* Keep this in sync with the Glade file. */
 enum

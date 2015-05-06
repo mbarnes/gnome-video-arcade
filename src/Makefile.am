@@ -8,6 +8,7 @@ AM_CFLAGS = \
 	@SOUP_CFLAGS@ @SQLITE_CFLAGS@ @WNCK_CFLAGS@
 
 AM_CPPFLAGS = \
+	$(DEP_CPPFLAGS) \
 	-DG_LOG_DOMAIN=\"Gva\" \
 	-DTOPSRCDIR=\""$(abs_top_builddir)"\" \
 	-DLOCALEDIR=\""$(datadir)/locale/"\"

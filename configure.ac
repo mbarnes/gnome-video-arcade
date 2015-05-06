@@ -23,25 +23,49 @@ AC_SUBST(abs_top_builddir)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 # Dependencies
-GLIB_MODULES="glib-2.0 gio-2.0 >= 2.28"
-PKG_CHECK_MODULES(GLIB, $GLIB_MODULES)
+
+# Keep these two definitions in agreement.
+m4_define([glib_minimum_version], [2.28])
+m4_define([glib_encoded_version], [GLIB_VERSION_2_28])
+
+# Keep these two definitions in agreement.
+m4_define([gdk_minimum_version], [3.0])
+m4_define([gdk_encoded_version], [GDK_VERSION_3_0])
+
+# Keep these two definitions in agreement.
+m4_define([soup_minimum_version], [2.34])
+m4_define([soup_encoded_version], [SOUP_VERSION_2_34])
+
+PKG_CHECK_MODULES(GLIB, [gio-2.0 >= glib_minimum_version])
 AC_SUBST(GLIB_CFLAGS)
 AC_SUBST(GLIB_LIBS)
 
-GTK_MODULES="gtk+-3.0 >= 3.0"
-PKG_CHECK_MODULES(GTK, $GTK_MODULES)
+PKG_CHECK_MODULES(GTK, [gtk+-3.0 >= gdk_minimum_version])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
-SOUP_MODULES="libsoup-2.4 >= 2.4.0"
-PKG_CHECK_MODULES(SOUP, $SOUP_MODULES)
+PKG_CHECK_MODULES(SOUP, [libsoup-2.4 >= soup_minimum_version])
 AC_SUBST(SOUP_CFLAGS)
 AC_SUBST(SOUP_LIBS)
 
-SQLITE_MODULES="sqlite3 >= 3.0.0"
-PKG_CHECK_MODULES(SQLITE, $SQLITE_MODULES)
+PKG_CHECK_MODULES(SQLITE, [sqlite3 >= 3.0])
 AC_SUBST(SQLITE_CFLAGS)
 AC_SUBST(SQLITE_LIBS)
+
+# Warn about API usage that violates our minimum requirements.
+DEP_CPPFLAGS="$DEP_CPPFLAGS -DGLIB_VERSION_MAX_ALLOWED=glib_encoded_version"
+DEP_CPPFLAGS="$DEP_CPPFLAGS -DGDK_VERSION_MAX_ALLOWED=gdk_encoded_version"
+DEP_CPPFLAGS="$DEP_CPPFLAGS -DSOUP_VERSION_MAX_ALLOWED=soup_encoded_version"
+
+# These will suppress warnings about newly-deprecated symbols.  Ideally
+# these settings should match our minimum requirements and we will clean
+# up any new deprecation warnings after bumping our minimum requirements.
+# But if the warnings get to be overwhelming, use fixed versions instead.
+DEP_CPPFLAGS="$DEP_CPPFLAGS -DGLIB_VERSION_MIN_REQUIRED=glib_encoded_version"
+DEP_CPPFLAGS="$DEP_CPPFLAGS -DGDK_VERSION_MIN_REQUIRED=gdk_encoded_version"
+DEP_CPPFLAGS="$DEP_CPPFLAGS -DSOUP_VERSION_MIN_REQUIRED=soup_encoded_version"
+
+AC_SUBST(DEP_CPPFLAGS)
 
 # Needed for the monospace font name.
 GDS_MODULES="gsettings-desktop-schemas"

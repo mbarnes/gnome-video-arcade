@@ -467,7 +467,7 @@ gva_main_cursor_busy (void)
         display = gtk_widget_get_display (widget);
         cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
         gdk_window_set_cursor (window, cursor);
-        gdk_cursor_unref (cursor);
+        g_object_unref (cursor);
 }
 
 /**
