@@ -458,6 +458,7 @@ static struct
         const gchar *input;
         const gchar *isbios;
         const gchar *keydelta;
+        const gchar *machine;
         const gchar *mame;
         const gchar *manufacturer;
         const gchar *mask;
@@ -1228,7 +1229,9 @@ db_parser_start_element (GMarkupParseContext *context,
                 db_parser_start_element_driver (
                         data, attribute_name, attribute_value, error);
 
-        else if (element_name == intern.game)
+        /* XXX The <game> element was renamed to <machine> in 0.162. */
+        else if (element_name == intern.game ||
+                 element_name == intern.machine)
                 db_parser_start_element_game (
                         data, attribute_name, attribute_value, error);
 
@@ -1373,7 +1376,9 @@ db_parser_end_element (GMarkupParseContext *context,
         else if (element_name == intern.display)
                 db_parser_exec_stmt (data->insert_display_stmt, error);
 
-        else if (element_name == intern.game)
+        /* XXX The <game> element was renamed to <machine> in 0.162. */
+        else if (element_name == intern.game ||
+                 element_name == intern.machine)
                 db_parser_end_element_game (data, error);
 
         /* Skip unused elements to speed up parsing. */
@@ -1762,6 +1767,7 @@ gva_db_build (GError **error)
         intern.input         = g_intern_static_string ("input");
         intern.isbios        = g_intern_static_string ("isbios");
         intern.keydelta      = g_intern_static_string ("keydelta");
+        intern.machine       = g_intern_static_string ("machine");
         intern.mame          = g_intern_static_string ("mame");
         intern.manufacturer  = g_intern_static_string ("manufacturer");
         intern.mask          = g_intern_static_string ("mask");
