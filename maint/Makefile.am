@@ -11,8 +11,10 @@ gladepixmapdir = `$(PKG_CONFIG) --variable=pixmapdir gladeui-2.0`/hicolor/22x22/
 gladegva_LTLIBRARIES = libgladegva.la
 gladegvadir = `$(PKG_CONFIG) --variable=moduledir gladeui-2.0`
 
+libgladegva_la_CPPFLAGS = $(DEP_CPPFLAGS)
+
 libgladegva_la_CFLAGS = \
-	@GLIB_CFLAGS@ @GTK_CFLAGS@ @GSTREAMER_CFLAGS@
+	@GLIB_CFLAGS@ @GTK_CFLAGS@ @GSTREAMER_CFLAGS@ @SOUP_CFLAGS@
 
 libgladegva_la_SOURCES = \
 	$(top_srcdir)/src/gva-column-manager.c \
@@ -23,7 +25,7 @@ libgladegva_la_LDFLAGS = \
 	-module -avoid-version
 
 libgladegva_la_LIBADD = \
-	@GLIB_LIBS@ @GTK_LIBS@ @GSTREAMER_LIBS@
+	@GLIB_LIBS@ @GTK_LIBS@ @GSTREAMER_LIBS@ @SOUP_LIBS@
 
 EXTRA_DIST = \
 	$(gladecatalog_DATA) \
