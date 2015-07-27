@@ -149,7 +149,7 @@ AM_GLIB_GNU_GETTEXT
 
 # Miscellaneous
 GLIB_GSETTINGS
-GTK_DOC_CHECK(1.6)
+GTK_DOC_CHECK([1.6], [--flavour no-tmpl])
 YELP_HELP_INIT
 
 # Optional Features

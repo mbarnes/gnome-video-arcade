@@ -121,7 +121,9 @@ include $(top_srcdir)/gtk-doc.make
 # e.g. EXTRA_DIST += version.xml.in
 EXTRA_DIST += version.xml.in
 
-TESTS_ENVIRONMENT = cd $(srcdir)
-TESTS = $(GTKDOC_CHECK)
+# XXX Breaks when $(srcdir) != $(builddir) which in turn breaks
+#     "make distcheck".  Leave disabled until resolved upstream.
+#     See: https://bugzilla.gnome.org/719446
+# TESTS = $(GTKDOC_CHECK)
 
 -include $(top_srcdir)/git.mk

@@ -840,7 +840,6 @@ gva_properties_show_game (const gchar *game)
 /**
  * gva_properties_hide_cb:
  * @window: the "Properties" window
- * @button: the "Close" button
  *
  * Handler for #GtkWidget::show signals to the "Properties" window.
  **/
