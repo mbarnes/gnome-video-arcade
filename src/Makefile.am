@@ -42,10 +42,9 @@ gnome_video_arcade_SOURCES = \
 	gva-input-file.h		\
 	gva-main.c			\
 	gva-main.h			\
-	gva-mame-common.c		\
-	gva-mame-common.h		\
 	gva-mame-process.c		\
 	gva-mame-process.h		\
+	gva-mame.c			\
 	gva-mame.h			\
 	gva-mute-button.c		\
 	gva-mute-button.h		\
@@ -73,16 +72,8 @@ gnome_video_arcade_SOURCES = \
 	gva-wnck.h			\
 	main.c
 
-EXTRA_gnome_video_arcade_SOURCES = \
-	gva-mame-sdlmame.c		\
-	gva-mame-xmame.c
-
 gnome_video_arcade_LDADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
-	@MAME_BACKEND@ \
 	@SOUP_LIBS@ @SQLITE_LIBS@ @WNCK_LIBS@
-
-gnome_video_arcade_DEPENDENCIES = \
-	@MAME_BACKEND@
 
 -include $(top_srcdir)/git.mk

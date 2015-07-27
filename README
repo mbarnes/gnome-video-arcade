@@ -19,17 +19,11 @@ Dependencies
 GNOME Video Arcade has a few external dependencies which need to be
 installed prior to compiling the source code:
 
-   - mame or xmame
+   - mame
 
-       These may be available as pre-compiled packages from your
+       This may be available as a pre-compiled package from your
        GNU/Linux distribution.  If not, you can download and compile
-       the source code yourself.
-
-       I recommend mame (formerly sdlmame) over xmame.  The mame project
-       is still actively developed, xmame has been defunct for years.
-
-          mame:     http://mamedev.org/
-          xmame:    (formerly http://x.mame.net/, since taken down)
+       the source code yourself at https://github.com/mamedev/mame.
 
    - intltool
 
@@ -125,19 +119,10 @@ The standard installation procedure looks like this:
    To start: Applications -> Games -> Video Arcade
 
 If the configure script cannot find the MAME program, you can
-specify the MAME program location by defining a MAME or XMAME
-environment variable, like this:
+specify the MAME program location by defining an environment
+variable, like this:
 
    $ MAME=/path/to/program/mame ./configure
-
-   or
-
-   $ XMAME=/path/to/program/xmame ./configure
-
-The choice of environment variable determines which MAME driver
-is compiled, so use the MAME environment variable if you have the
-official mame software installed, or the XMAME environment variable
-if you have xmame installed.
 
 You can use the --with-category-file configure option to specify
 the location of a catver.ini file as mentioned above.  Usage looks

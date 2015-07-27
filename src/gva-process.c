@@ -1011,8 +1011,8 @@ gva_process_kill (GvaProcess *process)
 
         g_return_if_fail (GVA_IS_PROCESS (process));
 
-        /* XXX Using SIGKILL here because xmame appears to ignore SIGINT
-         *     and SIGTERM.  A friendlier approach for an arbitrary process
+        /* XXX Using SIGKILL because mame appears to ignore SIGINT and
+         *     SIGTERM.  A friendlier approach for an arbitrary process
          *     might be to use SIGTERM first.  Then, if it hasn't exited
          *     after a reasonable duration, SIGKILL. */
 

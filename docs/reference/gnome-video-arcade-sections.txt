@@ -193,7 +193,7 @@ gva_main_window_destroy_cb
 
 <SECTION>
 <FILE>gva-mame</FILE>
-gva_mame_get_path_sep
+gva_mame_command
 gva_mame_get_version
 gva_mame_get_version_int
 gva_mame_get_total_supported
@@ -216,15 +216,9 @@ gva_mame_get_input_directory
 gva_mame_get_snapshot_directory
 gva_mame_get_state_directory
 gva_mame_supports_auto_save
-gva_mame_supports_full_screen
 gva_mame_supports_maximize
 gva_mame_supports_sound
 gva_mame_supports_window
-</SECTION>
-
-<SECTION>
-<FILE>gva-mame-common</FILE>
-gva_mame_command
 </SECTION>
 
 <SECTION>

@@ -117,27 +117,18 @@ AC_ARG_VAR([MAME], [MAME command])
 AC_PATH_PROGS([MAME], [mame sdlmame],, [$PATH:/usr/local/games:/usr/games])
 if test "x$MAME" != "x"; then
         MAME_PROGRAM=$MAME
-        MAME_BACKEND='gva-mame-sdlmame.$(OBJEXT)'
-else
-        AC_ARG_VAR([XMAME], [XMAME command])
-        AC_PATH_PROG([XMAME], [xmame],, [$PATH:/usr/local/games:/usr/games])
-        if test "x$XMAME" != "x"; then
-                MAME_PROGRAM=$XMAME
-                MAME_BACKEND='gva-mame-xmame.$(OBJEXT)'
-        fi
 fi
 if test "x$MAME" = "x"; then
         AC_MSG_ERROR([
 
         Unable to find a MAME program.
 
-        Please install either sdlmame or xmame, or specify the
-        MAME command with a MAME or XMAME environment variable.
+        Please install MAME, or specify the path to the
+        executable binary with a MAME environment variable.
 
-        e.g. XMAME=/path/to/program/xmame.x11 ./configure
+        e.g. MAME=/path/to/program/mame ./configure
 ])
 fi
-AC_SUBST([MAME_BACKEND])
 AC_DEFINE_UNQUOTED(MAME_PROGRAM, "$MAME_PROGRAM", [Location of the MAME program])
 
 # Localization

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "gva-mame-common.h"
+#include "gva-mame.h"
 
 #include <errno.h>
 #include <stdlib.h>
@@ -33,10 +33,6 @@
 #include "gva-mute-button.h"
 #include "gva-preferences.h"
 #include "gva-ui.h"
-
-/*****************************************************************************
- * Private utilities for MAME backends
- *****************************************************************************/
 
 /**
  * gva_mame_command:
@@ -103,9 +99,54 @@ fail:
         return status;
 }
 
-/*****************************************************************************
- * Partial implementation of public MAME interface
- *****************************************************************************/
+/**
+ * gva_mame_get_version:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the version of the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use.  If an
+ * error occurs, it returns %NULL and sets @error.
+ *
+ * Returns: the MAME version, or %NULL
+ **/
+gchar *
+gva_mame_get_version (GError **error)
+{
+        gchar *version = NULL;
+        gchar **lines;
+        gchar *cp;
+
+        /* Execute the command "${mame} -help". */
+        if (gva_mame_command ("-help", &lines, NULL, error) != 0)
+                return NULL;
+
+        /* Output is as follows:
+         *
+         * M.A.M.E. v0.xxx (Mmm dd yyyy) - Multiple Arcade Machine Emulator
+         * Copyright (x) 1997-2007 by Nicola Salmoria and the MAME Team
+         * ...
+         */
+
+        if (lines == NULL || lines[0] == NULL)
+                goto exit;
+
+        cp = strstr (lines[0], " - Multiple Arcade Machine Emulator");
+        if (cp != NULL)
+        {
+                *cp = '\0';
+                version = g_strdup (lines[0]);
+        }
+
+exit:
+        if (version == NULL)
+                g_set_error (
+                        error, GVA_ERROR, GVA_ERROR_MAME,
+                        _("Could not determine emulator version"));
+
+        g_strfreev (lines);
+
+        return version;
+}
 
 /**
  * gva_mame_get_version_int:
@@ -152,6 +193,42 @@ gva_mame_get_version_int (void)
         }
 
         return version_int;
+}
+
+/**
+ * gva_mame_get_total_supported:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns the number of games supported by the MAME executable that
+ * <emphasis>GNOME Video Arcade</emphasis> is configured to use.  If an
+ * error occurs, it returns zero and sets @error.
+ *
+ * Returns: number of supported games, or zero
+ **/
+guint
+gva_mame_get_total_supported (GError **error)
+{
+        gchar **lines;
+        guint num_lines;
+
+        /* Execute the command "${mame} -listfull". */
+        if (gva_mame_command ("-listfull", &lines, NULL, error) != 0)
+                return 0;
+
+        /* Output is as follows:
+         *
+         * Name:     Description:
+         * puckman   "PuckMan (Japan set 1, Probably Bootleg)"
+         * puckmana  "PuckMan (Japan set 2)"
+         * puckmanf  "PuckMan (Japan set 1 with speedup hack)"
+         * ...
+         */
+
+        num_lines = (lines != NULL) ? g_strv_length (lines) : 0;
+        g_strfreev (lines);
+
+        /* Count the lines, excluding the header. */
+        return (num_lines > 1) ? num_lines - 1 : 0;
 }
 
 /**
@@ -298,7 +375,7 @@ gva_mame_get_search_paths (const gchar *config_key,
         if (config_value == NULL)
                 return NULL;
 
-        return g_strsplit (config_value, gva_mame_get_path_sep (), -1);
+        return g_strsplit (config_value, ";", -1);
 }
 
 /**
@@ -620,19 +697,7 @@ gva_mame_run_game (const gchar *name,
                         g_string_append (arguments, "-noautosave ");
         }
 
-        /* Support for the -fullscreen and -window options appears to be
-         * mutually exclusive.  The latest xmame supports -fullscreen but
-         * not -window, while the latest sdlmame supports -window but not
-         * -fullscreen.  We'll use whichever is available. */
-
-        if (gva_mame_supports_full_screen ())
-        {
-                if (gva_preferences_get_full_screen ())
-                        g_string_append (arguments, "-fullscreen ");
-                else
-                        g_string_append (arguments, "-nofullscreen ");
-        }
-        else if (gva_mame_supports_window ())
+        if (gva_mame_supports_window ())
         {
                 if (gva_preferences_get_full_screen ())
                         g_string_append (arguments, "-nowindow ");
@@ -712,19 +777,7 @@ gva_mame_record_game (const gchar *name,
         if (gva_mame_supports_auto_save ())
                 g_string_append (arguments, "-noautosave ");
 
-        /* Support for the -fullscreen and -window options appears to be
-         * mutually exclusive.  The latest xmame supports -fullscreen but
-         * not -window, while the latest sdlmame supports -window but not
-         * -fullscreen.  We'll use whichever is available. */
-
-        if (gva_mame_supports_full_screen ())
-        {
-                if (gva_preferences_get_full_screen ())
-                        g_string_append (arguments, "-fullscreen ");
-                else
-                        g_string_append (arguments, "-nofullscreen ");
-        }
-        else if (gva_mame_supports_window ())
+        if (gva_mame_supports_window ())
         {
                 if (gva_preferences_get_full_screen ())
                         g_string_append (arguments, "-nowindow ");
@@ -786,19 +839,7 @@ gva_mame_playback_game (const gchar *name,
         if (gva_mame_supports_auto_save ())
                 g_string_append (arguments, "-noautosave ");
 
-        /* Support for the -fullscreen and -window options appears to be
-         * mutually exclusive.  The latest xmame supports -fullscreen but
-         * not -window, while the latest sdlmame supports -window but not
-         * -fullscreen.  We'll use whichever is available. */
-
-        if (gva_mame_supports_full_screen ())
-        {
-                if (gva_preferences_get_full_screen ())
-                        g_string_append (arguments, "-fullscreen ");
-                else
-                        g_string_append (arguments, "-nofullscreen ");
-        }
-        else if (gva_mame_supports_window ())
+        if (gva_mame_supports_window ())
         {
                 if (gva_preferences_get_full_screen ())
                         g_string_append (arguments, "-nowindow ");
@@ -976,37 +1017,3 @@ gva_mame_get_state_directory (GError **error)
         return directory;
 }
 
-/*****************************************************************************
- * Documentation for the rest of the public MAME interface
- *****************************************************************************/
-
-/**
- * gva_mame_get_path_sep:
- *
- * Returns the search path delimiter string.
- * XMAME uses UNIX-style ':' whereas SDLMAME uses Window-style ';'.
- *
- * Returns: search path delimiter string
- **/
-
-/**
- * gva_mame_get_version:
- * @error: return location for a #GError, or %NULL
- *
- * Returns the version of the MAME executable that
- * <emphasis>GNOME Video Arcade</emphasis> is configured to use.  If an
- * error occurs, it returns %NULL and sets @error.
- *
- * Returns: the MAME version, or %NULL
- **/
-
-/**
- * gva_mame_get_total_supported:
- * @error: return location for a #GError, or %NULL
- *
- * Returns the number of games supported by the MAME executable that
- * <emphasis>GNOME Video Arcade</emphasis> is configured to use.  If an
- * error occurs, it returns zero and sets @error.
- *
- * Returns: number of supported games, or zero
- **/

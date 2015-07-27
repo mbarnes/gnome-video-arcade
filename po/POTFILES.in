@@ -9,10 +9,8 @@ src/gva-column-manager.c
 src/gva-columns.c
 src/gva-input-file.c
 src/gva-main.c
-src/gva-mame-common.c
+src/gva-mame.c
 src/gva-mame-process.c
-src/gva-mame-sdlmame.c
-src/gva-mame-xmame.c
 src/gva-mute-button.c
 src/gva-nplayers.c
 src/gva-play-back.c

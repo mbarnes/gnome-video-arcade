@@ -5,11 +5,9 @@
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">GNOME Video Arcade</name>
-  <shortdesc xml:lang="en">Simple MAME frontend for the GNOME Desktop</shortdesc>
-  <description>GNOME Video Arcade is a simple MAME frontend, which
-supports both the xmame and sdlmame ports of MAME for GNU/Linux and other
-UNIX-like operating systems, and can utilize third-party data files like
-arcade history and game categories.
+  <shortdesc xml:lang="en">Simple MAME frontend for free desktops</shortdesc>
+  <description>GNOME Video Arcade is a MAME front-end for desktop environments
+compliant with the various freedesktop.org specifications.
 
 GNOME Video Arcade recognizes that the frontend is not the point; the
 games are. As such, its chief design goal is to help you quickly find a

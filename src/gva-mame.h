@@ -20,10 +20,7 @@
  * SECTION: gva-mame
  * @short_description: MAME Communication Backend
  *
- * These functions define the interface for MAME communication backends.
- * <emphasis>GNOME Video Arcade</emphasis> currently supports backends for
- * <ulink url="http://x.mame.net/">xmame</ulink> and
- * <ulink url="http://rbelmont.mameworld.info/?page_id=163">sdlmame</ulink>.
+ * These functions define the interface for communication with MAME.
  **/
 
 #ifndef GVA_MAME_H
@@ -34,7 +31,10 @@
 
 G_BEGIN_DECLS
 
-const gchar *   gva_mame_get_path_sep           (void);
+gint            gva_mame_command                (const gchar *arguments,
+                                                 gchar ***stdout_lines,
+                                                 gchar ***stderr_lines,
+                                                 GError **error);
 gchar *         gva_mame_get_version            (GError **error);
 guint           gva_mame_get_version_int        (void);
 guint           gva_mame_get_total_supported    (GError **error);
@@ -81,18 +81,6 @@ const gchar *   gva_mame_get_state_directory    (GError **error);
  **/
 #define gva_mame_supports_auto_save() \
         (gva_mame_has_config_value ("autosave"))
-
-/**
- * gva_mame_supports_full_screen:
- *
- * Returns %TRUE if the MAME executable that
- * <emphasis>GNOME Video Arcade</emphasis> is configured to use
- * supports a "fullscreen" option.
- *
- * Returns: %TRUE if MAME supports the "fullscreen" option
- **/
-#define gva_mame_supports_full_screen() \
-        (gva_mame_has_config_value ("fullscreen"))
 
 /**
  * gva_mame_supports_maximize:
