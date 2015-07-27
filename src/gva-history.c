@@ -142,11 +142,13 @@ gva_history_init (GError **error)
                 }
                 else if (g_str_has_prefix (buffer->str, "$<a"))
                 {
-                        history_process_link (entry, buffer->str + 1);
+                        if (entry != NULL)
+                                history_process_link (entry, buffer->str + 1);
                 }
                 else if (g_str_has_prefix (buffer->str, "$bio"))
                 {
-                        entry->offset = offset;
+                        if (entry != NULL)
+                                entry->offset = offset;
                 }
         }
 
