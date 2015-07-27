@@ -313,8 +313,6 @@ main (gint argc, gchar **argv)
         gchar *path;
         GError *error = NULL;
 
-        g_thread_init (NULL);
-
         bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
