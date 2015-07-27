@@ -1,4 +1,4 @@
-/* Copyright 2007-2011 Matthew Barnes
+/* Copyright 2007-2015 Matthew Barnes
  *
  * This file is part of GNOME Video Arcade.
  *
@@ -53,7 +53,7 @@ static const gchar *authors[] =
         NULL
 };
 static const gchar *copyright =
-"Copyright \xC2\xA9 2007-2012 Matthew Barnes";
+"Copyright \xC2\xA9 2007-2015 Matthew Barnes";
 static const gchar *license =
 N_("GNOME Video Arcade is free software; you can redistribute it "
    "and/or modify it under the terms of the GNU General Public License "
