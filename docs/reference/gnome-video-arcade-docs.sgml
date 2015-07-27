@@ -43,7 +43,6 @@
     <xi:include href="xml/gva-game-store.xml"/>
     <xi:include href="xml/gva-input-file.xml"/>
     <xi:include href="xml/gva-mame-process.xml"/>
-    <xi:include href="xml/gva-music-button.xml"/>
     <xi:include href="xml/gva-mute-button.xml"/>
     <xi:include href="xml/gva-process.xml"/>
     <xi:include href="xml/gva-screen-saver.xml"/>

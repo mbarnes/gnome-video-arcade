@@ -38,16 +38,6 @@ gva_preferences_init (void)
 
         settings = gva_get_settings ();
 
-        /* Auto Play */
-
-        /* This actually appears in the Properties window,
-         * but it's still a preference so we manage it here. */
-
-        g_settings_bind (
-                settings, GVA_SETTING_AUTO_PLAY,
-                GVA_ACTION_AUTO_PLAY, "active",
-                G_SETTINGS_BIND_DEFAULT);
-
         /* Auto Save */
 
         gtk_action_set_sensitive (
@@ -79,47 +69,6 @@ gva_preferences_init (void)
                 settings, GVA_SETTING_SHOW_CLONES,
                 GVA_ACTION_SHOW_CLONES, "active",
                 G_SETTINGS_BIND_DEFAULT);
-}
-
-/**
- * gva_preferences_get_auto_play:
- *
- * Returns the user's preference for whether to automatically
- * play a music clip of the selected game when the user opens
- * the Properties window or when the user selects a different
- * game while the Properties window is visible.
- *
- * Returns: %TRUE to automatically play music clips
- **/
-gboolean
-gva_preferences_get_auto_play (void)
-{
-        GtkToggleAction *toggle_action;
-
-        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_PLAY);
-
-        return gtk_toggle_action_get_active (toggle_action);
-}
-
-/**
- * gva_preferences_set_auto_play:
- * @auto_play: the user's preference
- *
- * Accepts the user's preference for whether to automatically
- * play a music clip of the selected game when the user opens
- * the Properties window or when the user selects a different
- * game while the Properties window is visible.
- *
- * The preference is stored in GSettings key <filename>auto-play</filename>.
- **/
-void
-gva_preferences_set_auto_play (gboolean auto_play)
-{
-        GtkToggleAction *toggle_action;
-
-        toggle_action = GTK_TOGGLE_ACTION (GVA_ACTION_AUTO_PLAY);
-
-        gtk_toggle_action_set_active (toggle_action, auto_play);
 }
 
 /**

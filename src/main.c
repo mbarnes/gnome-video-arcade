@@ -322,11 +322,6 @@ main (gint argc, gchar **argv)
         if (error != NULL)
                 g_error ("%s", error->message);
 
-#ifdef HAVE_GSTREAMER
-        if (!gst_init_check (&argc, &argv, &error))
-                g_error ("%s", error->message);
-#endif
-
         /* This installs handlers for our custom debug log levels. */
         gva_get_debug_flags ();
 

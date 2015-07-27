@@ -76,7 +76,6 @@ INCLUDES=							\
 	-I$(top_builddir)/src					\
 	$(GLIB_CFLAGS)						\
 	$(GTK_CFLAGS)						\
-	$(GSTREAMER_CFLAGS)					\
 	$(SOUP_CFLAGS)						\
 	$(SQLITE_CFLAGS)					\
 	$(WNCK_CFLAGS)
@@ -96,7 +95,6 @@ GTKDOC_LIBS=							\
 	$(top_builddir)/src/gva-main.o				\
 	$(top_builddir)/src/gva-mame-common.o			\
 	$(top_builddir)/src/gva-mame-process.o			\
-	$(top_builddir)/src/gva-music-button.o			\
 	$(top_builddir)/src/gva-mute-button.o			\
 	$(top_builddir)/src/gva-nplayers.o			\
 	$(top_builddir)/src/gva-play-back.o			\
@@ -113,7 +111,6 @@ GTKDOC_LIBS=							\
 	$(GLIB_LIBS)						\
 	$(GTK_LIBS)						\
 	$(SOUP_LIBS)						\
-	$(GSTREAMER_LIBS)					\
 	$(SQLITE_LIBS)						\
 	$(WNCK_LIBS)
 

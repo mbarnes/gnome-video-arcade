@@ -28,23 +28,6 @@
 @void: 
 
 
-<!-- ##### FUNCTION gva_preferences_get_auto_play ##### -->
-<para>
-
-</para>
-
-@void: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gva_preferences_set_auto_play ##### -->
-<para>
-
-</para>
-
-@auto_play: 
-
-
 <!-- ##### FUNCTION gva_preferences_get_auto_save ##### -->
 <para>
 

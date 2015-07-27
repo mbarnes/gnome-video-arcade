@@ -31,26 +31,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct _GvaMameAsyncData GvaMameAsyncData;
-
-/**
- * GvaMameAsyncData:
- * @callback: callback function
- * @user_data: user data to pass to the callback function
- *
- * This structure is used to pass callback information to asynchronous
- * operations.
- **/
-struct _GvaMameAsyncData
-{
-        GvaMameCallback callback;
-        gpointer user_data;
-};
-
-GvaMameAsyncData * gva_mame_async_data_new      (GvaMameCallback callback,
-                                                 gpointer user_data);
-void               gva_mame_async_data_free     (GvaMameAsyncData *data);
-
 gint               gva_mame_command             (const gchar *arguments,
                                                  gchar ***stdout_lines,
                                                  gchar ***stderr_lines,

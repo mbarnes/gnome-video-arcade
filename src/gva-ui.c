@@ -26,7 +26,6 @@
 #include "gva-game-store.h"
 #include "gva-main.h"
 #include "gva-mame.h"
-#include "gva-music-button.h"
 #include "gva-mute-button.h"
 #include "gva-play-back.h"
 #include "gva-preferences.h"
@@ -76,14 +75,6 @@ N_("GNOME Video Arcade is free software; you can redistribute it "
  * Activation of this action displays the application's About dialog.
  *
  * Main menu item: Help -> About
- **/
-
-/**
- * GVA_ACTION_AUTO_PLAY:
- *
- * This toggle action tracks the user's preference for whether to
- * automatically start playing a music clip from the selected game
- * (if available) when the Properties window is open.
  **/
 
 /**
@@ -411,7 +402,6 @@ gva_action_next_game_cb (GtkAction *action)
 void
 gva_action_play_back_cb (GtkAction *action)
 {
-        GtkWidget *widget;
         GvaProcess *process;
         GtkTreeModel *model;
         GtkTreeView *view;
@@ -439,9 +429,6 @@ gva_action_play_back_cb (GtkAction *action)
                 GVA_GAME_STORE_COLUMN_NAME, &name, -1);
         inpname = g_strdelimit (g_path_get_basename (inpfile), ".", '\0');
         g_free (inpfile);
-
-        widget = GVA_WIDGET_PROPERTIES_MUSIC_BUTTON;
-        gva_music_button_pause (GVA_MUSIC_BUTTON (widget));
 
         process = gva_mame_playback_game (name, inpname, &error);
         gva_error_handle (&error);
@@ -532,7 +519,6 @@ gva_action_quit_cb (GtkAction *action)
 void
 gva_action_record_cb (GtkAction *action)
 {
-        GtkWidget *widget;
         GvaProcess *process;
         const gchar *name;
         gchar *inpname;
@@ -542,9 +528,6 @@ gva_action_record_cb (GtkAction *action)
         g_assert (name != NULL);
 
         inpname = gva_choose_inpname (name);
-
-        widget = GVA_WIDGET_PROPERTIES_MUSIC_BUTTON;
-        gva_music_button_pause (GVA_MUSIC_BUTTON (widget));
 
         process = gva_mame_record_game (name, inpname, &error);
         gva_error_handle (&error);
@@ -676,7 +659,6 @@ gva_action_show_play_back_cb (GtkAction *action)
 void
 gva_action_start_cb (GtkAction *action)
 {
-        GtkWidget *widget;
         GvaProcess *process;
         const gchar *name;
         GError *error = NULL;
@@ -686,9 +668,6 @@ gva_action_start_cb (GtkAction *action)
 
         if (!gva_preferences_get_auto_save ())
                 gva_mame_delete_save_state (name);
-
-        widget = GVA_WIDGET_PROPERTIES_MUSIC_BUTTON;
-        gva_music_button_pause (GVA_MUSIC_BUTTON (widget));
 
         process = gva_mame_run_game (name, &error);
         gva_error_handle (&error);

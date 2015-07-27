@@ -20,32 +20,6 @@
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### STRUCT GvaMameAsyncData ##### -->
-<para>
-
-</para>
-
-@callback: 
-@user_data: 
-
-<!-- ##### FUNCTION gva_mame_async_data_new ##### -->
-<para>
-
-</para>
-
-@callback: 
-@user_data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gva_mame_async_data_free ##### -->
-<para>
-
-</para>
-
-@data: 
-
-
 <!-- ##### FUNCTION gva_mame_command ##### -->
 <para>
 

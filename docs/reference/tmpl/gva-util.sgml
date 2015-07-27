@@ -57,7 +57,6 @@
 @GVA_DEBUG_SQL: 
 @GVA_DEBUG_IO: 
 @GVA_DEBUG_INP: 
-@GVA_DEBUG_GST: 
 @GVA_DEBUG_HTTP: 
 
 <!-- ##### FUNCTION gva_get_last_version ##### -->

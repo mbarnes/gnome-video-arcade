@@ -34,15 +34,10 @@
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
 
-#if HAVE_GSTREAMER
-#include <gst/gst.h>
-#endif
-
 #include <sqlite3.h>
 #include <libsoup/soup.h>
 
 #define GVA_SETTING_ALL_COLUMNS                 "all-columns"
-#define GVA_SETTING_AUTO_PLAY                   "auto-play"
 #define GVA_SETTING_AUTO_SAVE                   "auto-save"
 #define GVA_SETTING_COLUMNS                     "columns"
 #define GVA_SETTING_FAVORITES                   "favorites"

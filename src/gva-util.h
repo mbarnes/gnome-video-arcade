@@ -43,8 +43,6 @@ G_BEGIN_DECLS
  *      Print all communication between GVA and MAME.
  * @GVA_DEBUG_INP:
  *      Print information about input files.
- * @GVA_DEBUG_GST:
- *      Print GStreamer activity.
  * @GVA_DEBUG_HTTP:
  *      Print HTTP communication.
  *
@@ -60,8 +58,7 @@ typedef enum
         GVA_DEBUG_SQL   = 1 << (G_LOG_LEVEL_USER_SHIFT + 1),
         GVA_DEBUG_IO    = 1 << (G_LOG_LEVEL_USER_SHIFT + 2),
         GVA_DEBUG_INP   = 1 << (G_LOG_LEVEL_USER_SHIFT + 3),
-        GVA_DEBUG_GST   = 1 << (G_LOG_LEVEL_USER_SHIFT + 4),
-        GVA_DEBUG_HTTP  = 1 << (G_LOG_LEVEL_USER_SHIFT + 5)
+        GVA_DEBUG_HTTP  = 1 << (G_LOG_LEVEL_USER_SHIFT + 4)
 } GvaDebugFlags;
 
 gchar *         gva_choose_inpname              (const gchar *game);

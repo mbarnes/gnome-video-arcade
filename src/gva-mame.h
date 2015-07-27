@@ -34,19 +34,6 @@
 
 G_BEGIN_DECLS
 
-/**
- * GvaMameCallback:
- * @name: a unique identifier, usually the game name
- * @game_data: data for @name
- * @user_data: user-provided data
- *
- * Specifies the type of function for passing results of an asynchronous
- * operation to the user.
- **/
-typedef void    (*GvaMameCallback)              (const gchar *name,
-                                                 const gchar *game_data,
-                                                 gpointer user_data);
-
 const gchar *   gva_mame_get_path_sep           (void);
 gchar *         gva_mame_get_version            (GError **error);
 guint           gva_mame_get_version_int        (void);

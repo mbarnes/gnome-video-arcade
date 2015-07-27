@@ -2,13 +2,11 @@
 
   <glade-widget-classes>
     <glade-widget-class name="GvaColumnManager" generic-name="column-manager" title="Column Manager"/>
-    <glade-widget-class name="GvaMusicButton" generic-name="music-button" title="Music Button"/>
     <glade-widget-class name="GvaMuteButton" generic-name="mute-button" title="Mute Button"/>
   </glade-widget-classes>
 
   <glade-widget-group name="gva-widgets" title="GNOME Video Arcade">
     <glade-widget-class-ref name="GvaColumnManager"/>
-    <glade-widget-class-ref name="GvaMusicButton"/>
     <glade-widget-class-ref name="GvaMuteButton"/>
   </glade-widget-group>
 

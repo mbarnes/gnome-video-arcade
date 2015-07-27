@@ -4,7 +4,7 @@ bin_PROGRAMS = gnome-video-arcade
 
 AM_CFLAGS = \
 	-Wall \
-	@GLIB_CFLAGS@ @GTK_CFLAGS@ @GSTREAMER_CFLAGS@ \
+	@GLIB_CFLAGS@ @GTK_CFLAGS@ \
 	@SOUP_CFLAGS@ @SQLITE_CFLAGS@ @WNCK_CFLAGS@
 
 AM_CPPFLAGS = \
@@ -47,8 +47,6 @@ gnome_video_arcade_SOURCES = \
 	gva-mame-process.c		\
 	gva-mame-process.h		\
 	gva-mame.h			\
-	gva-music-button.c		\
-	gva-music-button.h		\
 	gva-mute-button.c		\
 	gva-mute-button.h		\
 	gva-nplayers.c			\
@@ -81,7 +79,7 @@ EXTRA_gnome_video_arcade_SOURCES = \
 
 gnome_video_arcade_LDADD = \
 	@GLIB_LIBS@ @GTK_LIBS@ \
-	@GSTREAMER_LIBS@ @MAME_BACKEND@ \
+	@MAME_BACKEND@ \
 	@SOUP_LIBS@ @SQLITE_LIBS@ @WNCK_LIBS@
 
 gnome_video_arcade_DEPENDENCIES = \

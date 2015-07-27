@@ -20,16 +20,6 @@
 <!-- ##### SECTION Image ##### -->
 
 
-<!-- ##### USER_FUNCTION GvaMameCallback ##### -->
-<para>
-
-</para>
-
-@name: 
-@game_data: 
-@user_data: 
-
-
 <!-- ##### FUNCTION gva_mame_get_path_sep ##### -->
 <para>
 

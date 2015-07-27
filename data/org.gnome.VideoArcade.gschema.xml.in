@@ -9,17 +9,6 @@
       to only display a subset of them (see "columns").</_description>
     </key>
 
-    <key name="auto-play" type="b">
-      <default>false</default>
-      <_summary>Auto-play music clip</_summary>
-      <_description>Enable automatic playing of in-game music clips.
-      If true, and a music clip is available for the selected game,
-      the clip will automatically begin playing when the user opens the
-      Properties window or when the user selects a different game while
-      the Properties window is visible.  Music clips are streamed from
-      http://www.arcade-history.com/.</_description>
-    </key>
-
     <key name="auto-save" type="b">
       <default>false</default>
       <_summary>Save and restore state</_summary>

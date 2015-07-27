@@ -25,8 +25,7 @@ enhancement request at:
 
   I'm unsure of what the user interface should look like.  The simpler the
   better.  Perhaps just an image and a "Next" button.  Other features to
-  consider are zooming and a full-screen slideshow mode (might be neat in
-  combination with the streamed music).
+  consider are zooming and a full-screen slideshow mode.
 
   A GIO-based solution is preferred over adding more library dependencies,
   but that's not a hard requirement.

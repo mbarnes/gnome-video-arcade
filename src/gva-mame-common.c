@@ -19,6 +19,7 @@
 #include "gva-mame-common.h"
 
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/wait.h>
 
@@ -36,41 +37,6 @@
 /*****************************************************************************
  * Private utilities for MAME backends
  *****************************************************************************/
-
-/**
- * gva_mame_async_data_new:
- * @callback: callback function
- * @user_data: user data to pass to the callback function
- *
- * Creates a new #GvaMameAsyncData structure and populates it with @callback
- * and @user_data.  Call gva_mame_async_data_free() to free it.
- *
- * Returns: a new #GvaMameAsyncData
- **/
-GvaMameAsyncData *
-gva_mame_async_data_new (GvaMameCallback callback,
-                         gpointer user_data)
-{
-        GvaMameAsyncData *data;
-
-        data = g_slice_new (GvaMameAsyncData);
-        data->callback = callback;
-        data->user_data = user_data;
-
-        return data;
-}
-
-/**
- * gva_mame_async_data_free:
- * @data: a #GvaMameAsyncData
- *
- * Frees @data.
- **/
-void
-gva_mame_async_data_free (GvaMameAsyncData *data)
-{
-        g_slice_free (GvaMameAsyncData, data);
-}
 
 /**
  * gva_mame_command:

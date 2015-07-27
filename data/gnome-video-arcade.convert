@@ -1,6 +1,5 @@
 [org.gnome.VideoArcade]
 all-columns = /apps/gnome-video-arcade/all-columns
-auto-play = /apps/gnome-video-arcade/auto-play
 auto-save = /apps/gnome-video-arcade/auto-save
 columns = /apps/gnome-video-arcade/columns
 favorites = /apps/gnome-video-arcade/favorites

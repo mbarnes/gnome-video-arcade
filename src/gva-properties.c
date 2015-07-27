@@ -25,7 +25,6 @@
 #include "gva-error.h"
 #include "gva-game-store.h"
 #include "gva-history.h"
-#include "gva-music-button.h"
 #include "gva-preferences.h"
 #include "gva-tree-view.h"
 #include "gva-ui.h"
@@ -471,19 +470,6 @@ properties_update_history (GtkTreeModel *model,
 }
 
 static void
-properties_update_music (const gchar *name)
-{
-        GvaMusicButton *music_button;
-
-        music_button = GVA_MUSIC_BUTTON (GVA_WIDGET_PROPERTIES_MUSIC_BUTTON);
-        gva_music_button_set_game (music_button, name);
-
-        if (gtk_widget_get_visible (GVA_WIDGET_PROPERTIES_WINDOW)
-                && gva_preferences_get_auto_play ())
-                gva_music_button_play (music_button);
-}
-
-static void
 properties_update_sound (const gchar *name)
 {
         GtkWidget *label;
@@ -735,25 +721,6 @@ properties_selection_changed_cb (GtkTreeSelection *selection)
                 properties_update_timeout_cb, NULL);
 }
 
-static void
-properties_notify_music_status_cb (GvaMusicButton *music_button)
-{
-        GtkWidget *label;
-        const gchar *status;
-        gchar *markup;
-
-        label = GVA_WIDGET_PROPERTIES_MUSIC_STATUS;
-        status = gva_music_button_get_status (music_button);
-
-        /* Use whitespace to keep the widget height stable. */
-        if (status == NULL)
-                status = " ";
-
-        markup = g_markup_printf_escaped ("<small>%s</small>", status);
-        gtk_label_set_markup (GTK_LABEL (label), markup);
-        g_free (markup);
-}
-
 /**
  * gva_properties_init:
  *
@@ -790,10 +757,6 @@ gva_properties_init (void)
                 gtk_tree_view_get_selection (view), "changed",
                 G_CALLBACK (properties_selection_changed_cb), NULL);
 
-        g_signal_connect (
-                GVA_WIDGET_PROPERTIES_MUSIC_BUTTON, "notify::status",
-                G_CALLBACK (properties_notify_music_status_cb), NULL);
-
         gtk_window_resize (
                 GTK_WINDOW (GVA_WIDGET_PROPERTIES_WINDOW),
                 g_settings_get_int (settings, "properties-width"),
@@ -814,10 +777,6 @@ gva_properties_init (void)
         widget = gtk_bin_get_child (GTK_BIN (widget));
         context = gtk_widget_get_style_context (widget);
         gtk_style_context_add_class (context, GTK_STYLE_CLASS_WARNING);
-
-#ifndef HAVE_GSTREAMER
-        gtk_widget_hide (GVA_WIDGET_PROPERTIES_MUSIC_TABLE);
-#endif
 
 #ifndef HISTORY_FILE
         /* Hide the history page if we have no history file. */
@@ -870,7 +829,6 @@ gva_properties_show_game (const gchar *game)
                 properties_update_cpu (game);
                 properties_update_header (model, &iter);
                 properties_update_history (model, &iter);
-                properties_update_music (game);
                 properties_update_sound (game);
                 properties_update_status (model, &iter);
                 properties_update_video (game);
@@ -885,16 +843,10 @@ gva_properties_show_game (const gchar *game)
  * @button: the "Close" button
  *
  * Handler for #GtkWidget::show signals to the "Properties" window.
- *
- * Stops in-game music clip.
  **/
 void
 gva_properties_hide_cb (GtkWindow *window)
 {
-        GvaMusicButton *music_button;
-
-        music_button = GVA_MUSIC_BUTTON (GVA_WIDGET_PROPERTIES_MUSIC_BUTTON);
-        gva_music_button_pause (music_button);
 }
 
 /**
@@ -903,19 +855,11 @@ gva_properties_hide_cb (GtkWindow *window)
  *
  * Handler for #GtkWidget::show signals to the "Properties" window.
  *
- * Resets all scrolled windows to the top, and starts in-game music clip
- * if the "auto-play" preference is enabled.
+ * Resets all scrolled windows to the top.
  **/
 void
 gva_properties_show_cb (GtkWindow *window)
 {
-        GvaMusicButton *music_button;
-
-        music_button = GVA_MUSIC_BUTTON (GVA_WIDGET_PROPERTIES_MUSIC_BUTTON);
-
-        if (gva_preferences_get_auto_play ())
-                gva_music_button_play (music_button);
-
         properties_scroll_to_top ();
 }
 

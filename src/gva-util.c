@@ -176,7 +176,6 @@ gva_get_debug_flags (void)
                         { "sql",   GVA_DEBUG_SQL },
                         { "io",    GVA_DEBUG_IO },
                         { "inp",   GVA_DEBUG_INP },
-                        { "gst",   GVA_DEBUG_GST },
                         { "http",  GVA_DEBUG_HTTP }
                 };
 
