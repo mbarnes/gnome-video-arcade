@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <!-- interface-requires gva 0.0 -->
+  <requires lib="gtk+" version="3.0"/>
+  <requires lib="gva" version="0.0"/>
   <object class="GtkActionGroup" id="lockable-actions">
     <child>
       <object class="GtkAction" id="insert-favorite">
@@ -148,78 +149,301 @@
       <accelerator key="3" modifiers="GDK_CONTROL_MASK"/>
     </child>
   </object>
-  <object class="GtkActionGroup" id="standard-actions">
+  <object class="GtkImage" id="main-start-game-image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-execute</property>
+  </object>
+  <object class="GtkWindow" id="main-window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">GNOME Video Arcade</property>
+    <property name="default_width">500</property>
+    <property name="default_height">400</property>
+    <property name="icon_name">gnome-video-arcade</property>
+    <signal name="configure-event" handler="gva_main_window_configure_event_cb" swapped="no"/>
+    <signal name="destroy" handler="gva_main_window_destroy_cb" swapped="no"/>
+    <signal name="window-state-event" handler="gva_main_window_window_state_event_cb" swapped="no"/>
     <child>
-      <object class="GtkAction" id="about">
-        <property name="label" translatable="yes">_About</property>
-        <property name="tooltip" translatable="yes">Show information about the application</property>
-        <property name="stock_id">gtk-about</property>
-        <signal name="activate" handler="gva_action_about_cb" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="contents">
-        <property name="label" translatable="yes">_Contents</property>
-        <property name="tooltip" translatable="yes">Open the help documentation</property>
-        <property name="stock_id">gtk-help</property>
-        <signal name="activate" handler="gva_action_contents_cb" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="preferences">
-        <property name="label" translatable="yes">_Preferences</property>
-        <property name="tooltip" translatable="yes">Configure the application</property>
-        <property name="stock_id">gtk-preferences</property>
-        <signal name="activate" handler="gva_action_preferences_cb" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="quit">
-        <property name="label" translatable="yes">_Quit</property>
-        <property name="tooltip" translatable="yes">Quit the application</property>
-        <property name="stock_id">gtk-quit</property>
-        <signal name="activate" handler="gva_action_quit_cb" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="add-column-menu">
-        <property name="label" translatable="yes">_Add Column</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="edit-menu">
-        <property name="label" translatable="yes">_Edit</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="game-menu">
-        <property name="label" translatable="yes">_Game</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="help-menu">
-        <property name="label" translatable="yes">_Help</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="view-menu">
-        <property name="label" translatable="yes">_View</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkToggleAction" id="auto-play">
-        <property name="label" translatable="yes">Play music _automatically</property>
-        <property name="tooltip" translatable="yes">Automatically play a music clip from the selected game</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkToggleAction" id="auto-save">
-        <property name="label" translatable="yes">_Restore previous state when starting a game</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkToggleAction" id="full-screen">
-        <property name="label" translatable="yes">Start games in _fullscreen mode</property>
+      <object class="GtkVBox" id="main-vbox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkVBox" id="main-contents">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="border_width">12</property>
+            <property name="spacing">12</property>
+            <child>
+              <object class="GtkHBox" id="main-top-hbox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkHButtonBox" id="main-top-button-box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="spacing">3</property>
+                    <property name="homogeneous">True</property>
+                    <property name="layout_style">start</property>
+                    <child>
+                      <object class="GtkToggleButton" id="main-view-button-0">
+                        <property name="related_action">view-available</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="tooltip_text" translatable="yes">Show all available games</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToggleButton" id="main-view-button-1">
+                        <property name="related_action">view-favorites</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="tooltip_text" translatable="yes">Only show my favorite games</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToggleButton" id="main-view-button-2">
+                        <property name="related_action">view-results</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="tooltip_text" translatable="yes">Show my search results</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GvaMuteButton" id="main-mute-button">
+                    <property name="use_action_appearance">False</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="receives_default">True</property>
+                    <property name="has_tooltip">True</property>
+                    <property name="tooltip_markup">In-game sound is enabled</property>
+                    <property name="tooltip_text">In-game sound is enabled</property>
+                    <property name="relief">none</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkVBox" id="main-center-vbox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="spacing">2</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="main-scrolled-window">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkTreeView" id="main-tree-view">
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="rules_hint">True</property>
+                        <property name="show_expanders">False</property>
+                        <signal name="button-press-event" handler="gva_tree_view_button_press_event_cb" swapped="no"/>
+                        <signal name="popup-menu" handler="gva_tree_view_popup_menu_cb" swapped="no"/>
+                        <signal name="query-tooltip" handler="gva_tree_view_query_tooltip_cb" swapped="no"/>
+                        <signal name="row-activated" handler="gva_tree_view_row_activated_cb" swapped="no"/>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection" id="treeview-selection1"/>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkHBox" id="main-search-hbox">
+                    <property name="can_focus">False</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="has_tooltip">True</property>
+                    <property name="spacing">6</property>
+                    <signal name="query-tooltip" handler="gva_main_search_query_tooltip_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="main-search-label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes" comments="This label precedes the search entry. e.g. Search for: Pac-Man">Search for:</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="main-search-entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                        <property name="secondary_icon_stock">gtk-clear</property>
+                        <property name="secondary_icon_tooltip_text">Clear the search</property>
+                        <signal name="activate" handler="gva_main_search_entry_activate_cb" swapped="no"/>
+                        <signal name="changed" handler="gva_main_search_entry_changed_cb" swapped="no"/>
+                        <signal name="icon-release" handler="gva_main_search_entry_icon_release_cb" swapped="no"/>
+                        <signal name="notify" handler="gva_main_search_entry_notify_cb" swapped="no"/>
+                        <signal name="remove-widget" handler="gtk_widget_hide" object="main-search-hbox" swapped="yes"/>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHButtonBox" id="main-bottom-button-box">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">12</property>
+                <property name="layout_style">end</property>
+                <child>
+                  <object class="GtkButton" id="main-properties-button">
+                    <property name="related_action">properties</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="can_default">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="tooltip_text" translatable="yes">Show information about the selected game</property>
+                    <property name="use_stock">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="main-start-game-button">
+                    <property name="label" translatable="yes">_Start Game</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="related_action">start</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="has_focus">True</property>
+                    <property name="can_default">True</property>
+                    <property name="has_default">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="tooltip_text" translatable="yes">Start the selected game</property>
+                    <property name="image">main-start-game-image</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="main-hbox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+            <child>
+              <object class="GtkStatusbar" id="main-statusbar">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkProgressBar" id="main-progress-bar">
+                <property name="can_focus">False</property>
+                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
     </child>
   </object>
@@ -251,10 +475,10 @@
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
             <property name="yalign">0</property>
             <property name="stock">gtk-dialog-warning</property>
-            <property name="icon-size">6</property>
+            <property name="icon_size">6</property>
           </object>
           <packing>
-            <property name="x_options"></property>
+            <property name="x_options"/>
             <property name="y_options">GTK_FILL</property>
           </packing>
         </child>
@@ -379,6 +603,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="audit-save-button">
+                <property name="related_action">save-errors</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -386,7 +611,6 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">Save ROM errors to a file</property>
                 <property name="tooltip_text" translatable="yes">Save ROM errors to a file</property>
-                <property name="related_action">save-errors</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -398,6 +622,7 @@
             <child>
               <object class="GtkButton" id="audit-close-button">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -407,7 +632,6 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">Close this window</property>
                 <property name="tooltip_text" translatable="yes">Close this window</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="gtk_widget_hide" object="audit-window" swapped="yes"/>
               </object>
@@ -422,305 +646,7 @@
             <property name="right_attach">2</property>
             <property name="top_attach">1</property>
             <property name="bottom_attach">2</property>
-            <property name="y_options"></property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkImage" id="main-start-game-image">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-execute</property>
-  </object>
-  <object class="GtkWindow" id="main-window">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">GNOME Video Arcade</property>
-    <property name="default_width">500</property>
-    <property name="default_height">400</property>
-    <property name="icon_name">gnome-video-arcade</property>
-    <signal name="destroy" handler="gva_main_window_destroy_cb" swapped="no"/>
-    <signal name="window-state-event" handler="gva_main_window_window_state_event_cb" swapped="no"/>
-    <signal name="configure-event" handler="gva_main_window_configure_event_cb" swapped="no"/>
-    <child>
-      <object class="GtkVBox" id="main-vbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="GtkVBox" id="main-contents">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="border_width">12</property>
-            <property name="spacing">12</property>
-            <child>
-              <object class="GtkHBox" id="main-top-hbox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">12</property>
-                <child>
-                  <object class="GtkHButtonBox" id="main-top-button-box">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="spacing">3</property>
-                    <property name="homogeneous">True</property>
-                    <property name="layout_style">start</property>
-                    <child>
-                      <object class="GtkToggleButton" id="main-view-button-0">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="tooltip_text" translatable="yes">Show all available games</property>
-                        <property name="related_action">view-available</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkToggleButton" id="main-view-button-1">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="tooltip_text" translatable="yes">Only show my favorite games</property>
-                        <property name="related_action">view-favorites</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkToggleButton" id="main-view-button-2">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="tooltip_text" translatable="yes">Show my search results</property>
-                        <property name="related_action">view-results</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GvaMuteButton" id="main-mute-button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="receives_default">True</property>
-                    <property name="has_tooltip">True</property>
-                    <property name="tooltip_markup">In-game sound is enabled</property>
-                    <property name="tooltip_text">In-game sound is enabled</property>
-                    <property name="use_action_appearance">False</property>
-                    <property name="relief">none</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkVBox" id="main-center-vbox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="spacing">2</property>
-                <child>
-                  <object class="GtkScrolledWindow" id="main-scrolled-window">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="shadow_type">in</property>
-                    <child>
-                      <object class="GtkTreeView" id="main-tree-view">
-                        <property name="visible">True</property>
-                        <property name="sensitive">False</property>
-                        <property name="can_focus">True</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="has_tooltip">True</property>
-                        <property name="rules_hint">True</property>
-                        <property name="show_expanders">False</property>
-                        <signal name="button-press-event" handler="gva_tree_view_button_press_event_cb" swapped="no"/>
-                        <signal name="row-activated" handler="gva_tree_view_row_activated_cb" swapped="no"/>
-                        <signal name="query-tooltip" handler="gva_tree_view_query_tooltip_cb" swapped="no"/>
-                        <signal name="popup-menu" handler="gva_tree_view_popup_menu_cb" swapped="no"/>
-                        <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="treeview-selection1"/>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkHBox" id="main-search-hbox">
-                    <property name="can_focus">False</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="has_tooltip">True</property>
-                    <property name="spacing">6</property>
-                    <signal name="query-tooltip" handler="gva_main_search_query_tooltip_cb" swapped="no"/>
-                    <child>
-                      <object class="GtkLabel" id="main-search-label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes" comments="This label precedes the search entry. e.g. Search for: Pac-Man">Search for:</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="main-search-entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="secondary_icon_stock">gtk-clear</property>
-                        <property name="secondary_icon_tooltip_text">Clear the search</property>
-                        <signal name="changed" handler="gva_main_search_entry_changed_cb" swapped="no"/>
-                        <signal name="notify" handler="gva_main_search_entry_notify_cb" swapped="no"/>
-                        <signal name="activate" handler="gva_main_search_entry_activate_cb" swapped="no"/>
-                        <signal name="remove-widget" handler="gtk_widget_hide" object="main-search-hbox" swapped="yes"/>
-                        <signal name="icon-release" handler="gva_main_search_entry_icon_release_cb" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkHButtonBox" id="main-bottom-button-box">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">12</property>
-                <property name="layout_style">end</property>
-                <child>
-                  <object class="GtkButton" id="main-properties-button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="can_default">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="tooltip_text" translatable="yes">Show information about the selected game</property>
-                    <property name="related_action">properties</property>
-                    <property name="use_stock">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="main-start-game-button">
-                    <property name="label" translatable="yes">_Start Game</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="has_focus">True</property>
-                    <property name="can_default">True</property>
-                    <property name="has_default">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="tooltip_text" translatable="yes">Start the selected game</property>
-                    <property name="related_action">start</property>
-                    <property name="use_action_appearance">False</property>
-                    <property name="image">main-start-game-image</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkHBox" id="main-hbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <child>
-              <object class="GtkStatusbar" id="main-statusbar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkProgressBar" id="main-progress-bar">
-                <property name="can_focus">False</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
+            <property name="y_options"/>
           </packing>
         </child>
       </object>
@@ -781,12 +707,12 @@
             <child>
               <object class="GtkButton" id="play-back-close-button">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Close this window</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="gva_play_back_close_clicked_cb" object="play-back-window" swapped="yes"/>
               </object>
@@ -799,12 +725,12 @@
             <child>
               <object class="GtkButton" id="play-back-delete-button">
                 <property name="label">gtk-delete</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Delete the selected game recordings</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="gva_play_back_delete_clicked_cb" object="play-back-tree-view" swapped="yes"/>
               </object>
@@ -817,6 +743,7 @@
             <child>
               <object class="GtkButton" id="play-back-button">
                 <property name="label" translatable="yes">Play _Back</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_focus">True</property>
@@ -825,7 +752,6 @@
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Play back the selected game recording</property>
-                <property name="use_action_appearance">False</property>
                 <property name="image">play-back-button-image</property>
                 <property name="use_underline">True</property>
                 <signal name="clicked" handler="gva_play_back_clicked_cb" swapped="no"/>
@@ -843,6 +769,81 @@
             <property name="position">1</property>
           </packing>
         </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkActionGroup" id="standard-actions">
+    <child>
+      <object class="GtkAction" id="about">
+        <property name="label" translatable="yes">_About</property>
+        <property name="tooltip" translatable="yes">Show information about the application</property>
+        <property name="stock_id">gtk-about</property>
+        <signal name="activate" handler="gva_action_about_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="contents">
+        <property name="label" translatable="yes">_Contents</property>
+        <property name="tooltip" translatable="yes">Open the help documentation</property>
+        <property name="stock_id">gtk-help</property>
+        <signal name="activate" handler="gva_action_contents_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="preferences">
+        <property name="label" translatable="yes">_Preferences</property>
+        <property name="tooltip" translatable="yes">Configure the application</property>
+        <property name="stock_id">gtk-preferences</property>
+        <signal name="activate" handler="gva_action_preferences_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="quit">
+        <property name="label" translatable="yes">_Quit</property>
+        <property name="tooltip" translatable="yes">Quit the application</property>
+        <property name="stock_id">gtk-quit</property>
+        <signal name="activate" handler="gva_action_quit_cb" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="add-column-menu">
+        <property name="label" translatable="yes">_Add Column</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="edit-menu">
+        <property name="label" translatable="yes">_Edit</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="game-menu">
+        <property name="label" translatable="yes">_Game</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="help-menu">
+        <property name="label" translatable="yes">_Help</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="view-menu">
+        <property name="label" translatable="yes">_View</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleAction" id="auto-play">
+        <property name="label" translatable="yes">Play music _automatically</property>
+        <property name="tooltip" translatable="yes">Automatically play a music clip from the selected game</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleAction" id="auto-save">
+        <property name="label" translatable="yes">_Restore previous state when starting a game</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleAction" id="full-screen">
+        <property name="label" translatable="yes">Start games in _fullscreen mode</property>
       </object>
     </child>
   </object>
@@ -909,11 +910,11 @@
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="preferences-full-screen">
+                                <property name="related_action">full-screen</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="related_action">full-screen</property>
                                 <property name="use_underline">True</property>
                                 <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
@@ -926,11 +927,11 @@
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="preferences-auto-save">
+                                <property name="related_action">auto-save</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="related_action">auto-save</property>
                                 <property name="use_underline">True</property>
                                 <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
@@ -1017,11 +1018,11 @@
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="preferences-show-clones">
+                                <property name="related_action">show-clones</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="related_action">show-clones</property>
                                 <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
@@ -1165,6 +1166,7 @@
             <child>
               <object class="GtkButton" id="preferences-close-button">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_focus">True</property>
@@ -1174,7 +1176,6 @@
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="tooltip_text" translatable="yes">Close this window</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="gva_preferences_close_clicked_cb" object="preferences-window" swapped="yes"/>
               </object>
@@ -1204,10 +1205,10 @@
     <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">main-window</property>
-    <signal name="show" handler="gva_properties_show_cb" swapped="no"/>
     <signal name="configure-event" handler="gva_properties_configure_event_cb" swapped="no"/>
     <signal name="delete-event" handler="gtk_widget_hide_on_delete" swapped="no"/>
     <signal name="hide" handler="gva_properties_hide_cb" swapped="no"/>
+    <signal name="show" handler="gva_properties_show_cb" swapped="no"/>
     <signal name="window-state-event" handler="gva_properties_window_state_event_cb" swapped="no"/>
     <child>
       <object class="GtkVBox" id="properties-vbox">
@@ -1224,6 +1225,9 @@
             <property name="n_columns">2</property>
             <property name="column_spacing">12</property>
             <child>
+              <placeholder/>
+            </child>
+            <child>
               <object class="GtkHBox" id="properties-upper-hbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -1232,13 +1236,13 @@
                 <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkButton" id="properties-back-button">
+                    <property name="use_action_appearance">False</property>
+                    <property name="related_action">previous-game</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Show previous game</property>
-                    <property name="related_action">previous-game</property>
-                    <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkImage" id="properties-back-button-image">
                         <property name="visible">True</property>
@@ -1255,13 +1259,13 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="properties-forward-button">
+                    <property name="use_action_appearance">False</property>
+                    <property name="related_action">next-game</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Show next game</property>
-                    <property name="related_action">next-game</property>
-                    <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkImage" id="properties-forward-button-image">
                         <property name="visible">True</property>
@@ -1281,8 +1285,8 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="x_options"></property>
-                <property name="y_options"></property>
+                <property name="x_options"/>
+                <property name="y_options"/>
               </packing>
             </child>
             <child>
@@ -1301,9 +1305,6 @@ Manufacturer, Year</property>
                 <property name="bottom_attach">2</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
           </object>
           <packing>
@@ -1449,7 +1450,7 @@ Manufacturer, Year</property>
                                     <property name="can_focus">False</property>
                                     <property name="yalign">0</property>
                                     <property name="stock">gtk-dialog-warning</property>
-                                    <property name="icon-size">5</property>
+                                    <property name="icon_size">5</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -2101,18 +2102,18 @@ Manufacturer, Year</property>
                     <property name="yscale">0</property>
                     <child>
                       <object class="GvaMusicButton" id="properties-music-button">
+                        <property name="use_action_appearance">False</property>
                         <property name="width_request">64</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Play a music clip</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                     </child>
                   </object>
                   <packing>
                     <property name="bottom_attach">2</property>
-                    <property name="x_options"></property>
+                    <property name="x_options"/>
                     <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
@@ -2133,10 +2134,10 @@ Manufacturer, Year</property>
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="properties-music-auto-play">
+                    <property name="related_action">auto-play</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
-                    <property name="related_action">auto-play</property>
                     <property name="use_underline">True</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
@@ -2171,6 +2172,7 @@ Manufacturer, Year</property>
                     <child>
                       <object class="GtkButton" id="properties-close-button">
                         <property name="label">gtk-close</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="can_default">True</property>
@@ -2178,7 +2180,6 @@ Manufacturer, Year</property>
                         <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="tooltip_text" translatable="yes">Close this window</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
                         <signal name="clicked" handler="gtk_widget_hide" object="properties-window" swapped="yes"/>
                       </object>
