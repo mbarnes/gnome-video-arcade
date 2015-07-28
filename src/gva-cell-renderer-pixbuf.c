@@ -109,19 +109,27 @@ cell_renderer_pixbuf_render (GtkCellRenderer *cell,
                              const GdkRectangle *cell_area,
                              GtkCellRendererState flags)
 {
-        GvaCellRendererPixbufPrivate *priv;
-        gboolean sensitive;
+        GvaCellRendererPixbuf *pixbuf_cell;
+        GtkStyleContext *context;
+        GtkStateFlags state;
 
-        priv = GVA_CELL_RENDERER_PIXBUF_GET_PRIVATE (cell);
+        pixbuf_cell = GVA_CELL_RENDERER_PIXBUF (cell);
 
-        sensitive = gtk_cell_renderer_get_sensitive (cell);
-        gtk_cell_renderer_set_sensitive (cell, priv->active);
+        context = gtk_widget_get_style_context (widget);
+
+        gtk_style_context_save (context);
+
+        if (!pixbuf_cell->priv->active)
+                flags |= GTK_CELL_RENDERER_INSENSITIVE;
+
+        state = gtk_cell_renderer_get_state (cell, widget, flags);
+        gtk_style_context_set_state (context, state);
 
         /* Chain up to parent's render() method. */
         GTK_CELL_RENDERER_CLASS (gva_cell_renderer_pixbuf_parent_class)->
                 render (cell, cr, widget, background_area, cell_area, flags);
 
-        gtk_cell_renderer_set_sensitive (cell, sensitive);
+        gtk_style_context_restore (context);
 }
 
 static void
