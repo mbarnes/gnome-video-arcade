@@ -430,6 +430,7 @@
               <object class="GtkProgressBar" id="main-progress-bar">
                 <property name="can_focus">False</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                <property name="valign">center</property>
               </object>
               <packing>
                 <property name="expand">False</property>

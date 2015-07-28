@@ -305,6 +305,41 @@ idle_start (gpointer unused)
         return FALSE;
 }
 
+static gboolean
+tweak_css (gpointer unused)
+{
+        GtkAllocation allocation;
+        GtkCssProvider *provider;
+        GtkStyleContext *context;
+        gchar *css_data;
+
+        /* XXX Restore progress bar to the way it was intended to look. */
+
+        gtk_widget_get_allocation (GVA_WIDGET_MAIN_STATUSBAR, &allocation);
+
+        css_data = g_strdup_printf (
+                "GtkProgressBar { "
+                "-GtkProgressBar-min-horizontal-bar-height: %u;"
+                " }",
+                allocation.height);
+
+        provider = gtk_css_provider_new ();
+        gtk_css_provider_load_from_data (provider, css_data, -1, NULL);
+
+        g_free (css_data);
+
+        context = gtk_widget_get_style_context (GVA_WIDGET_MAIN_PROGRESS_BAR);
+
+        gtk_style_context_add_provider (
+                context, GTK_STYLE_PROVIDER (provider),
+                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        g_object_unref (provider);
+
+        /* Do not reschedule this callback. */
+        return FALSE;
+}
+
 gint
 main (gint argc, gchar **argv)
 {
@@ -425,6 +460,8 @@ main (gint argc, gchar **argv)
         gva_error_handle (&error);
 
         g_idle_add (idle_start, NULL);
+
+        g_idle_add (tweak_css, NULL);
 
         gtk_main ();
 
