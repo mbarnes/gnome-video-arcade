@@ -40,6 +40,8 @@
         "SELECT DISTINCT manufacturer, 'manufacturer' FROM available UNION " \
         "SELECT DISTINCT year, 'year' FROM available;"
 
+#define PROGRESS_BAR_PULSE_INTERVAL_MS 100
+
 /* Entry completion columns */
 enum
 {
@@ -132,6 +134,16 @@ static void
 main_menu_item_deselect_cb (GtkMenuItem *item)
 {
         gva_main_statusbar_pop (menu_tooltip_cid);
+}
+
+static gboolean
+main_progress_bar_pulse_cb (gpointer user_data)
+{
+        GtkProgressBar *progress_bar = GTK_PROGRESS_BAR (user_data);
+
+        gtk_progress_bar_pulse (progress_bar);
+
+        return TRUE;
 }
 
 /**
@@ -271,12 +283,11 @@ gva_main_analyze_roms (GError **error)
         GvaProcess *process;
         GvaProcess *process2 = NULL;
         guint context_id;
-        guint total_supported;
         gboolean main_loop_quit = FALSE;
         gboolean success = FALSE;
+        guint timeout_id = 0;
 
         context_id = gva_main_statusbar_get_context_id (G_STRFUNC);
-        total_supported = gva_mame_get_total_supported (NULL);
 
         process = gva_audit_roms (error);
         if (process == NULL)
@@ -290,10 +301,10 @@ gva_main_analyze_roms (GError **error)
         gva_main_progress_bar_set_fraction (0.0);
         gva_main_statusbar_push (context_id, _("Analyzing ROM files..."));
 
-        g_signal_connect (
-                process, "notify::progress",
-                G_CALLBACK (main_build_database_progress_cb),
-                GUINT_TO_POINTER (total_supported));
+        timeout_id = g_timeout_add (
+                PROGRESS_BAR_PULSE_INTERVAL_MS,
+                main_progress_bar_pulse_cb,
+                GVA_WIDGET_MAIN_PROGRESS_BAR);
 
         while (!gva_process_has_exited (process, NULL))
                 main_loop_quit = gtk_main_iteration ();
@@ -313,6 +324,9 @@ gva_main_analyze_roms (GError **error)
         gva_main_progress_bar_hide ();
 
 exit:
+        if (timeout_id > 0)
+                g_source_remove (timeout_id);
+
         if (process != NULL)
                 g_object_unref (process);
 

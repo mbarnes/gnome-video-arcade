@@ -169,8 +169,6 @@ audit_read (GvaProcess *process,
                         g_strdup (status), string);
         }
 
-        gva_process_inc_progress (process);
-
         g_free (name);
         g_free (status);
 
