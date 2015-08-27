@@ -64,7 +64,6 @@
 enum
 {
         NOTEBOOK_PAGE_HISTORY,
-        NOTEBOOK_PAGE_GALLERY,
         NOTEBOOK_PAGE_TECHNICAL
 };
 
