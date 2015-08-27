@@ -3,8 +3,8 @@ GNOME Video Arcade
 
 Written by Matthew Barnes <mbarnes@redhat.com>
 
-GNOME Video Arcade is a clean and simple MAME front-end for the
-GNOME Desktop Environment.
+GNOME Video Arcade is a clean and simple MAME front-end for any
+freedesktop.org compliant desktop environment.
 
 This project is targeted towards non-technical arcade enthusiasts
 who just want to easily play classic arcade games on their desktop.
@@ -31,9 +31,9 @@ installed prior to compiling the source code:
        user interface.  This should be available from your GNU/Linux
        distribution as a pre-compiled package.
 
-   - gnome-doc-utils
+   - yelp-tools
 
-       GNOME Video Arcade uses gnome-doc-utils to build the user
+       GNOME Video Arcade uses yelp-tools to build the user
        documentation.  This should be available from your GNU/Linux
        distribution as a pre-compiled package.
 
@@ -106,11 +106,11 @@ including GNOME Video Arcade.  This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.8.3 and may change in forthcoming releases.
+version 0.8.4 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.8.3
+   $ cd /path/to/gnome-video-arcade-0.8.4
    $ ./configure
    $ make
    $ su -c "make install"

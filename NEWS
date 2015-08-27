@@ -1,3 +1,56 @@
+GNOME Video Arcade 0.8.4
+========================
+
+        Released August 26, 2015
+
+        Been awhile!  This is just a bug fix release mainly to repair
+        deterioration caused by backward-incompatible changes in recent
+        releases of MAME and GTK3.
+
+        What's New
+        ----------
+        * The music feature on the Properties window is gone.
+          GVA was streaming the music from arcade-history.com, but
+          the website no longer (openly) serves those music files.
+          I suppose this was bound to happen but it was neat while
+          it lasted.  (GStreamer is no longer a build requirement.)
+        * Also removed the empty Gallery tab from the Properties
+          window.  This was a placeholder for a feature that never
+          happened.
+        * Dropped support for XMAME.  Remember XMAME?  Me neither.
+
+        Bugs Fixed
+        ----------
+        GNOME #704632: Switch from gnome-doc-utils to yelp-tools
+                       (reported and patched by Jeremy Bicha)
+        GNOME #704811: All available games are shown as favourite
+                       (reported by Gioele Barabucci)
+        GNOME #704860: Screensaver is not properly inhibited
+                       (reported by Gioele Barabucci)
+        GNOME #748667: Adapt to new sound options in MAME >= 0.154
+                       (reported and patched by Emmanuel Kasper)
+        GNOME #752266: Rename /game/machine/ since 0.163
+                       (reported by Fabrice Bellet)
+
+        New Translations
+        ----------------
+        Bosnian (Samir Ribic)
+        Greek (Dimitris Spingos)
+        Serbian (Мирослав Николић)
+
+        Updated Translations
+        --------------------
+        Brazilian Portuguese (Rafael Ferreira)
+        Chinese [simplified] (Wylmer Wang)
+        Czech (Marek Černocký)
+        French (Bruno Brouard)
+        Galician (Fran Diéguez)
+        Polish (Piotr Drąg)
+        Slovenian (Matej Urbančič)
+        Spanish (Daniel Mustieles)
+        Swedish (Josef Andersson and Daniel Nylander)
+        Turkish (Muhammet Kara)
+
 GNOME Video Arcade 0.8.3
 ========================
 
