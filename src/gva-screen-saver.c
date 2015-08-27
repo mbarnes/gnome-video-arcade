@@ -20,9 +20,9 @@
 
 #include "gva-screen-saver.h"
 
-#define SCREEN_SAVER_SERVICE   "org.gnome.ScreenSaver"
-#define SCREEN_SAVER_PATH      "/org/gnome/ScreenSaver"
-#define SCREEN_SAVER_INTERFACE "org.gnome.ScreenSaver"
+#define SCREEN_SAVER_SERVICE   "org.freedesktop.ScreenSaver"
+#define SCREEN_SAVER_PATH      "/org/freedesktop/ScreenSaver"
+#define SCREEN_SAVER_INTERFACE "org.freedesktop.ScreenSaver"
 
 #define GVA_SCREEN_SAVER_GET_PRIVATE(obj) \
         (G_TYPE_INSTANCE_GET_PRIVATE \
@@ -408,8 +408,8 @@ gva_screen_saver_get_reason (GvaScreenSaver *screen_saver)
  * @reason: the reason for disabling the screen saver
  *
  * Sets the reason for disabling the screen saver.  This string is passed
- * to the "org.gnome.ScreenSaver" D-Bus interface on subsequent calls to
- * gva_screen_saver_disable().
+ * to the "org.freedesktop.ScreenSaver" D-Bus interface on subsequent calls
+ * to gva_screen_saver_disable().
  **/
 void
 gva_screen_saver_set_reason (GvaScreenSaver *screen_saver,
