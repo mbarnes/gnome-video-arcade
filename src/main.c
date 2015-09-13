@@ -265,6 +265,12 @@ start (void)
                         gva_error_handle (&error);
                         return;
                 }
+
+                if (!gva_db_mark_complete (&error))
+                {
+                        gva_error_handle (&error);
+                        return;
+                }
         }
         else if (gva_audit_detect_changes ())
         {

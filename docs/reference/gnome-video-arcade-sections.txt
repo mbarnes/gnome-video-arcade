@@ -80,6 +80,8 @@ gva_db_transaction_commit
 gva_db_transaction_rollback
 gva_db_prepare
 gva_db_get_build
+gva_db_get_complete
+gva_db_mark_complete
 gva_db_get_filename
 gva_db_is_older_than
 gva_db_needs_rebuilt

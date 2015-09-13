@@ -40,6 +40,8 @@
 #define SQL_CREATE_TABLE_MAME \
         "CREATE TABLE IF NOT EXISTS mame (" \
                 "build, " \
+                "complete DEFAULT 'no' " \
+                "CHECK (complete in ('yes', 'no')), " \
                 "debug DEFAULT 'no' " \
                 "CHECK (debug in ('yes', 'no')));"
 
@@ -434,6 +436,7 @@ static struct
         const gchar *cocktail;
         const gchar *coins;
         const gchar *color;
+        const gchar *complete;
         const gchar *configuration;
         const gchar *confsetting;
         const gchar *control;
@@ -2096,6 +2099,78 @@ gva_db_get_build (gchar **build,
         return (errcode == SQLITE_OK);
 }
 
+static gint
+db_get_complete_cb (gpointer user_data,
+                    gint n_columns,
+                    gchar **column_values,
+                    gchar **column_names)
+{
+        gboolean *complete = user_data;
+
+        g_assert (n_columns > 0);
+        *complete = (g_strcmp0 (column_values[0], "yes") == 0);
+
+        return 0;
+}
+
+/**
+ * gva_db_get_complete:
+ * @complete: return location for the "complete" flag
+ * @error: return location for a #GError, or %NULL
+ *
+ * Returns whether the database contents are complete.
+ *
+ * If the application terminated prematurely during the last database
+ * rebuild, its "complete" flag won't be set.  gva_db_needs_rebuilt()
+ * checks this flag as one of its tests.
+ *
+ * If an error occurs while querying the database, the function returns
+ * %FALSE and sets @error.
+ *
+ * Returns: %TRUE on success, %FALSE if an error occurred
+ **/
+gboolean
+gva_db_get_complete (gboolean *complete,
+                     GError **error)
+{
+        const gchar *sql = "SELECT complete FROM mame";
+        gint errcode;
+        char *errmsg;
+
+        g_return_val_if_fail (db != NULL, FALSE);
+        g_return_val_if_fail (complete != NULL, FALSE);
+
+        *complete = FALSE;  /* in case we don't get a result */
+        errcode = sqlite3_exec (db, sql, db_get_complete_cb, complete, &errmsg);
+
+        if (errcode != SQLITE_OK)
+        {
+                gva_db_set_error (error, errcode, errmsg);
+                sqlite3_free (errmsg);
+        }
+
+        return (errcode == SQLITE_OK);
+}
+
+/**
+ * gva_db_mark_complete:
+ * @error: return location for a #GError, or %NULL
+ *
+ * Updates the games database to indicate its contents are complete.
+ * Call this after rebuilding the database and performing a ROM analysis.
+ *
+ * If the application terminated prematurely during the last database
+ * rebuild, its "complete" flag won't be set.  gva_db_needs_rebuilt()
+ * checks this flag as one of its tests.
+ *
+ * Returns: %TRUE if the database was successfully updated
+ **/
+gboolean
+gva_db_mark_complete (GError **error)
+{
+        return gva_db_execute ("UPDATE mame SET complete='yes'", error);
+}
+
 /**
  * gva_db_get_filename:
  *
@@ -2154,10 +2229,11 @@ gva_db_is_older_than (const gchar *filename)
  * gva_db_needs_rebuilt:
  *
  * Runs a series of tests to determine whether the game database is
- * out-of-date and needs to be rebuilt.  Examples of conditions that
- * would cause a database rebuild are a new version of
- * <emphasis>GNOME Video Arcade</emphasis>, a new version of MAME,
- * database corruption, or if the user explicitly asked us to rebuild.
+ * out-of-date or incomplete and needs to be rebuilt.  Examples of conditions
+ * that would cause a database rebuild are a new version of
+ * <emphasis>GNOME Video Arcade</emphasis>, a new version of MAME, the last
+ * database rebuild terminated prematurely, or if the user explicitly asked
+ * us to rebuild.
  *
  * Returns: %TRUE if a rebuild is needed, %FALSE if the database
  *          <emphasis>seems</emphasis> okay
@@ -2168,6 +2244,7 @@ gva_db_needs_rebuilt (void)
         gchar *db_build_id = NULL;
         gchar *mame_version = NULL;
         const gchar *reason;
+        gboolean complete = FALSE;
         gboolean rebuild;
         GError *error = NULL;
 
@@ -2184,7 +2261,12 @@ gva_db_needs_rebuilt (void)
         TEST_CASE (gva_get_last_version () == NULL);
         TEST_CASE (strcmp (gva_get_last_version (), PACKAGE_VERSION) != 0);
 
-        reason = "the database does not have a build ID";
+        reason = "its content is incomplete";
+        gva_db_get_complete (&complete, &error);
+        gva_error_handle (&error);
+        TEST_CASE (!complete);
+
+        reason = "it does not have a build ID";
         gva_db_get_build (&db_build_id, &error);
         gva_error_handle (&error);
         TEST_CASE (db_build_id == NULL);
@@ -2194,7 +2276,7 @@ gva_db_needs_rebuilt (void)
         gva_error_handle (&error);
         TEST_CASE (mame_version == NULL);
 
-        reason = "the database build ID does not match the MAME version";
+        reason = "its build ID does not match the MAME version";
         TEST_CASE (strstr (mame_version, db_build_id) == NULL);
 
 #ifdef CATEGORY_FILE

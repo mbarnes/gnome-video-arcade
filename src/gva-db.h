@@ -49,6 +49,9 @@ gboolean        gva_db_prepare                  (const gchar *sql,
                                                  GError **error);
 gboolean        gva_db_get_build                (gchar **build,
                                                  GError **error);
+gboolean        gva_db_get_complete             (gboolean *complete,
+                                                 GError **error);
+gboolean        gva_db_mark_complete            (GError **error);
 const gchar *   gva_db_get_filename             (void);
 gboolean        gva_db_is_older_than            (const gchar *filename);
 gboolean        gva_db_needs_rebuilt            (void);
