@@ -6,14 +6,13 @@
 
   <name xml:lang="en">GNOME Video Arcade</name>
   <shortdesc xml:lang="en">Simple MAME frontend for free desktops</shortdesc>
-  <description>GNOME Video Arcade is a MAME front-end for desktop environments
-compliant with the various freedesktop.org specifications.
+  <description>GNOME Video Arcade is a clean and simple MAME front-end for
+any freedesktop.org compliant desktop environment.
 
-GNOME Video Arcade recognizes that the frontend is not the point; the
-games are. As such, its chief design goal is to help you quickly find a
-game to play and then get out of the way. Its purpose is not to help you
-manage your ROM collection, nor to provide a confusing graphical interface
-for MAME's plethora of configuration options.</description>
+The project is targeted towards non-technical arcade enthusiasts who just
+want to easily play classic arcade games on their desktop. Though it may be
+suitable for use in custom arcade cabinets, the project is not designed for
+that purpose.</description>
   <homepage rdf:resource="http://live.gnome.org/GnomeVideoArcade" />
   <download-page rdf:resource="http://download.gnome.org/sources/gnome-video-arcade/" />
   <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=gnome-video-arcade" />

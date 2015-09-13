@@ -1,18 +1,18 @@
 .\" GNOME Video Arcade manpage.
 .\" Copyright © 2007-2015 Matthew Barnes
 .\"
-.TH GNOME-VIDEO-ARCADE "1" "October 2007" "GNOME" ""
+.TH GNOME-VIDEO-ARCADE "1" "@TIMESTAMP@" "GNOME" ""
 .SH NAME
-gnome-video-arcade \- A MAME front-end for GNOME 
+gnome-video-arcade \- a MAME front-end
 .SH SYNOPSIS
 .B gnome-video-arcade
 [\fIOPTION\fR...]
 .SH DESCRIPTION
 .B gnome-video-arcade
-is a MAME front-end for desktop environments compliant with the various
-freedesktop.org specifications.
+is a clean and simple MAME front-end for any freedesktop.org compliant
+desktop environment.
 .P
-This program is targeted towards non-technical arcade enthusiasts who just
+The program is targeted towards non-technical arcade enthusiasts who just
 want to easily play classic arcade games on their desktop.  Though it may
 be suitable for use in custom arcade cabinets,
 .B gnome-video-arcade
