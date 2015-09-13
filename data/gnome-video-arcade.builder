@@ -419,6 +419,7 @@
               <object class="GtkStatusbar" id="main-statusbar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">12</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -431,6 +432,7 @@
                 <property name="can_focus">False</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <property name="valign">center</property>
+                <property name="margin_right">12</property>
               </object>
               <packing>
                 <property name="expand">False</property>
