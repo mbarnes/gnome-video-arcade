@@ -3,6 +3,12 @@
 <interface>
   <requires lib="gtk+" version="3.0"/>
   <requires lib="gva" version="0.0"/>
+  <object class="GtkTreeStore" id="audit-tree-store">
+    <columns>
+      <!-- column-name description -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkActionGroup" id="lockable-actions">
     <child>
       <object class="GtkAction" id="insert-favorite">
@@ -577,9 +583,23 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="model">audit-tree-store</property>
                     <property name="headers_visible">False</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection"/>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="audit-tree-view-column">
+                        <property name="spacing">3</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="audit-text-renderer">
+                            <property name="ellipsize">end</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
                     </child>
                   </object>
                 </child>

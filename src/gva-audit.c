@@ -83,27 +83,41 @@ audit_data_free (GvaAuditData *data)
         g_slice_free (GvaAuditData, data);
 }
 
-static GtkTreeModel *
-audit_build_model (GvaAuditData *data,
+static gboolean
+audit_build_model (GtkTreeStore *tree_store,
+                   GvaAuditData *data,
                    GError **error)
 {
-        GtkTreeModel *model;
+        GtkTreeModel *game_store;
         GtkTreeIter iter;
         gboolean iter_valid;
 
-        model = gva_game_store_new_from_query (SQL_SELECT_BAD_GAMES, error);
-        if (model == NULL)
-                return NULL;
+        game_store = gva_game_store_new_from_query (
+                SQL_SELECT_BAD_GAMES, error);
+        if (game_store == NULL)
+                return FALSE;
 
-        iter_valid = gtk_tree_model_get_iter_first (model, &iter);
+        gtk_tree_store_clear (tree_store);
+
+        iter_valid = gtk_tree_model_get_iter_first (game_store, &iter);
 
         while (iter_valid)
         {
+                GtkTreeIter parent;
                 GtkTreeIter child;
                 guint index;
                 gchar *name;
+                gchar *description;
 
-                gtk_tree_model_get (model, &iter, 0, &name, -1);
+                gtk_tree_model_get (
+                        game_store, &iter,
+                        GVA_GAME_STORE_COLUMN_NAME, &name,
+                        GVA_GAME_STORE_COLUMN_DESCRIPTION, &description,
+                        -1);
+
+                gtk_tree_store_append (tree_store, &parent, NULL);
+                gtk_tree_store_set (tree_store, &parent, 0, description, -1);
+
                 index = GPOINTER_TO_UINT (g_hash_table_lookup (
                         data->output_index, name));
 
@@ -116,23 +130,22 @@ audit_build_model (GvaAuditData *data,
                         if (!g_str_has_prefix (line, name))
                                 break;
 
-                        gtk_tree_store_prepend (
-                                GTK_TREE_STORE (model), &child, &iter);
-                        gtk_tree_store_set (
-                                GTK_TREE_STORE (model), &child,
-                                GVA_GAME_STORE_COLUMN_DESCRIPTION, line, -1);
+                        gtk_tree_store_prepend (tree_store, &child, &parent);
+                        gtk_tree_store_set (tree_store, &child, 0, line, -1);
                 }
 
                 g_free (name);
+                g_free (description);
 
-                iter_valid = gtk_tree_model_iter_next (model, &iter);
+                iter_valid = gtk_tree_model_iter_next (game_store, &iter);
         }
 
         gtk_tree_sortable_set_sort_column_id (
-                GTK_TREE_SORTABLE (model),
-                GVA_GAME_STORE_COLUMN_DESCRIPTION, GTK_SORT_ASCENDING);
+                GTK_TREE_SORTABLE (tree_store), 0, GTK_SORT_ASCENDING);
 
-        return model;
+        g_object_unref (game_store);
+
+        return TRUE;
 }
 
 static void
@@ -283,41 +296,24 @@ audit_show_dialog (GvaProcess *process,
                    gint status,
                    GvaAuditData *data)
 {
-        GtkTreeView *view;
+        GtkTreeView *tree_view;
         GtkTreeModel *model;
         GError *error = NULL;
 
         if (process->error != NULL)
                 return;
 
-        model = audit_build_model (data, &error);
-        gva_error_handle (&error);
-        if (model == NULL)
-                return;
+        tree_view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
+        model = gtk_tree_view_get_model (tree_view);
 
-        view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
-        gtk_tree_view_set_model (view, model);
+        if (!audit_build_model (GTK_TREE_STORE (model), data, &error))
+        {
+                gva_error_handle (&error);
+                return;
+        }
 
         if (gtk_tree_model_iter_n_children (model, NULL) > 0)
                 gtk_window_present (GTK_WINDOW (GVA_WIDGET_AUDIT_WINDOW));
-}
-
-/**
- * gva_audit_init:
- *
- * Initializes the ROM audit window.
- *
- * This function should be called once when the application starts.
- **/
-void
-gva_audit_init (void)
-{
-        GtkTreeViewColumn *column;
-        GtkTreeView *view;
-
-        view = GTK_TREE_VIEW (GVA_WIDGET_AUDIT_TREE_VIEW);
-        column = gva_columns_new_from_id (GVA_GAME_STORE_COLUMN_DESCRIPTION);
-        gtk_tree_view_append_column (view, column);
 }
 
 /**
@@ -410,8 +406,7 @@ audit_save_errors_foreach (GtkTreeModel *model,
 {
         gchar *text;
 
-        gtk_tree_model_get (
-                model, iter, GVA_GAME_STORE_COLUMN_DESCRIPTION, &text, -1);
+        gtk_tree_model_get (model, iter, 0, &text, -1);
         if (gtk_tree_path_get_depth (path) > 1)
                 g_string_append_len (contents, "  ", 2);
         g_string_append_printf (contents, "%s\n", text);

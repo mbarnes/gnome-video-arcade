@@ -1,6 +1,5 @@
 <SECTION>
 <FILE>gva-audit</FILE>
-gva_audit_init
 gva_audit_roms
 gva_audit_samples
 gva_audit_save_errors

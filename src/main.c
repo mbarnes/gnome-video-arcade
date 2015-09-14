@@ -449,7 +449,6 @@ main (gint argc, gchar **argv)
         if (!gva_db_init (&error))
                 g_error ("%s", error->message);
 
-        gva_audit_init ();
         gva_main_init ();
         gva_play_back_init ();
         gva_preferences_init ();
