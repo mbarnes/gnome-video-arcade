@@ -67,6 +67,10 @@ typedef struct _GvaGameStoreClass GvaGameStoreClass;
  *      Corresponds to the "available.sourcefile" database field.
  * @GVA_GAME_STORE_COLUMN_ISBIOS:
  *      Corresponds to the "available.isbios" database field.
+ * @GVA_GAME_STORE_COLUMN_ISDEVICE:
+ *      Corresponds to the "available.isdevice" database field.
+ * @GVA_GAME_STORE_COLUMN_ISMECHANICAL:
+ *      Corresponds to the "available.ismechanical" database field.
  * @GVA_GAME_STORE_COLUMN_RUNNABLE:
  *      Corresponds to the "available.runnable" database field.
  * @GVA_GAME_STORE_COLUMN_CLONEOF:
@@ -142,6 +146,8 @@ typedef enum
         GVA_GAME_STORE_COLUMN_FAVORITE,           /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_SOURCEFILE,         /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_ISBIOS,             /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_ISDEVICE,           /* G_TYPE_BOOLEAN */
+        GVA_GAME_STORE_COLUMN_ISMECHANICAL,       /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_RUNNABLE,           /* G_TYPE_BOOLEAN */
         GVA_GAME_STORE_COLUMN_CLONEOF,            /* G_TYPE_STRING */
         GVA_GAME_STORE_COLUMN_ROMOF,              /* G_TYPE_STRING */

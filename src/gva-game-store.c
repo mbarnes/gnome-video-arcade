@@ -152,6 +152,8 @@ game_store_constructor (GType type,
         types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_FAVORITE */
         types[column++] = G_TYPE_STRING;     /* COLUMN_SOURCEFILE */
         types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_ISBIOS */
+        types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_ISDEVICE */
+        types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_ISMECHANICAL */
         types[column++] = G_TYPE_BOOLEAN;    /* COLUMN_RUNNABLE */
         types[column++] = G_TYPE_STRING;     /* COLUMN_CLONEOF */
         types[column++] = G_TYPE_STRING;     /* COLUMN_ROMOF */

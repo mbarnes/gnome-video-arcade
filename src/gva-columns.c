@@ -1000,6 +1000,8 @@ column_info[GVA_GAME_STORE_NUM_COLUMNS] =
         { "sourcefile",         N_("Driver"),
                                 columns_factory_sourcefile },
         { "isbios",             NULL },
+        { "isdevice",           NULL },
+        { "ismechanical",       NULL },
         { "runnable",           NULL },
         { "cloneof",            NULL },
         { "romof",              NULL },

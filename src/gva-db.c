@@ -52,6 +52,10 @@
                 "sourcefile, " \
                 "isbios DEFAULT 'no' " \
                 "CHECK (isbios in ('yes', 'no')), " \
+                "isdevice DEFAULT 'no' " \
+                "CHECK (isdevice in ('yes', 'no')), " \
+                "ismechanical DEFAULT 'no' " \
+                "CHECK (ismechanical in ('yes', 'no')), " \
                 "runnable DEFAULT 'yes' " \
                 "CHECK (runnable in ('yes', 'no')), " \
                 "cloneof, " \
@@ -243,7 +247,9 @@
                 "LEFT JOIN (SELECT name, description FROM game WHERE " \
                 "isbios = 'yes') AS bios ON game.romof = bios.name " \
                 "WHERE (romset IN ('good', 'best available') " \
-                "AND isbios = 'no');"
+                "AND isbios = 'no' " \
+                "AND isdevice = 'no' " \
+                "AND ismechanical = 'no');"
 
 #define SQL_DROP_TABLES \
         "DROP TABLE IF EXISTS mame; " \
@@ -266,6 +272,8 @@
                 "@category, " \
                 "@sourcefile, " \
                 "@isbios, " \
+                "@isdevice, " \
+                "@ismechanical, " \
                 "@runnable, " \
                 "@cloneof, " \
                 "@romof, " \
@@ -460,6 +468,8 @@ static struct
         const gchar *index_;
         const gchar *input;
         const gchar *isbios;
+        const gchar *isdevice;
+        const gchar *ismechanical;
         const gchar *keydelta;
         const gchar *machine;
         const gchar *mame;
@@ -952,6 +962,8 @@ db_parser_start_element_game (ParserData *data,
 
         /* Bind default values. */
         db_parser_bind_text (stmt, "@isbios", "no");
+        db_parser_bind_text (stmt, "@isdevice", "no");
+        db_parser_bind_text (stmt, "@ismechanical", "no");
         db_parser_bind_text (stmt, "@runnable", "yes");
 
         for (ii = 0; attribute_name[ii] != NULL; ii++)
@@ -967,6 +979,10 @@ db_parser_start_element_game (ParserData *data,
                         param = "@sourcefile";
                 else if (attribute_name[ii] == intern.isbios)
                         param = "@isbios";
+                else if (attribute_name[ii] == intern.isdevice)
+                        param = "@isdevice";
+                else if (attribute_name[ii] == intern.ismechanical)
+                        param = "@ismechanical";
                 else if (attribute_name[ii] == intern.runnable)
                         param = "@runnable";
                 else if (attribute_name[ii] == intern.cloneof)
@@ -1769,6 +1785,8 @@ gva_db_build (GError **error)
         intern.index_        = g_intern_static_string ("index_");
         intern.input         = g_intern_static_string ("input");
         intern.isbios        = g_intern_static_string ("isbios");
+        intern.isdevice      = g_intern_static_string ("isdevice");
+        intern.ismechanical  = g_intern_static_string ("ismechanical");
         intern.keydelta      = g_intern_static_string ("keydelta");
         intern.machine       = g_intern_static_string ("machine");
         intern.mame          = g_intern_static_string ("mame");
