@@ -34,6 +34,36 @@
 #include "gva-preferences.h"
 #include "gva-ui.h"
 
+static void
+mame_add_sound_option (GString *arguments)
+{
+        if (gva_mame_supports_sound ())
+        {
+                GvaMuteButton *mute_button;
+                gboolean muted;
+
+                mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
+                muted = gva_mute_button_get_muted (mute_button);
+
+                /* MAME 0.153 and earlier used "-[no]sound".
+                 * MAME 0.154 and later use "-sound auto|none". */
+                if (gva_mame_get_version_int () < 154)
+                {
+                        if (muted)
+                                g_string_append (arguments, "-nosound ");
+                        else
+                                g_string_append (arguments, "-sound ");
+                }
+                else
+                {
+                        if (muted)
+                                g_string_append (arguments, "-sound none ");
+                        else
+                                g_string_append (arguments, "-sound auto ");
+                }
+        }
+}
+
 /**
  * gva_mame_command:
  * @arguments: command line arguments
@@ -710,31 +740,8 @@ gva_mame_run_game (const gchar *name,
                 g_string_append (arguments, "-nomaximize ");
 #endif
 
-        if (gva_mame_supports_sound ())
-        {
-                GvaMuteButton *mute_button;
-                gboolean muted;
-
-                mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
-                muted = gva_mute_button_get_muted (mute_button);
-
-                /* MAME 0.153 and earlier used "-[no]sound".
-                 * MAME 0.154 and later use "-sound auto|none". */
-                if (gva_mame_get_version_int () < 154)
-                {
-                        if (muted)
-                                g_string_append (arguments, "-nosound ");
-                        else
-                                g_string_append (arguments, "-sound ");
-                }
-                else
-                {
-                        if (muted)
-                                g_string_append (arguments, "-sound none ");
-                        else
-                                g_string_append (arguments, "-sound auto ");
-                }
-        }
+        /* This got complicated. */
+        mame_add_sound_option (arguments);
 
         g_string_append_printf (arguments, "%s", name);
 
@@ -790,16 +797,8 @@ gva_mame_record_game (const gchar *name,
                 g_string_append (arguments, "-nomaximize ");
 #endif
 
-        if (gva_mame_supports_sound ())
-        {
-                GvaMuteButton *mute_button;
-
-                mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
-                if (gva_mute_button_get_muted (mute_button))
-                        g_string_append (arguments, "-nosound ");
-                else
-                        g_string_append (arguments, "-sound ");
-        }
+        /* This got complicated. */
+        mame_add_sound_option (arguments);
 
         g_string_append_printf (arguments, "-record %s %s", inpname, name);
 
@@ -852,16 +851,8 @@ gva_mame_playback_game (const gchar *name,
                 g_string_append (arguments, "-nomaximize ");
 #endif
 
-        if (gva_mame_supports_sound ())
-        {
-                GvaMuteButton *mute_button;
-
-                mute_button = GVA_MUTE_BUTTON (GVA_WIDGET_MAIN_MUTE_BUTTON);
-                if (gva_mute_button_get_muted (mute_button))
-                        g_string_append (arguments, "-nosound ");
-                else
-                        g_string_append (arguments, "-sound ");
-        }
+        /* This got complicated. */
+        mame_add_sound_option (arguments);
 
         g_string_append_printf (arguments, "%s -playback %s", name, inpname);
 
