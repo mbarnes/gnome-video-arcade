@@ -106,11 +106,11 @@ including GNOME Video Arcade.  This section supplements the INSTALL
 file with information specific to GNOME Video Arcade.
 
 These instructions are written specifically for GNOME Video Arcade
-version 0.8.4 and may change in forthcoming releases.
+version 0.8.5 and may change in forthcoming releases.
 
 The standard installation procedure looks like this:
 
-   $ cd /path/to/gnome-video-arcade-0.8.4
+   $ cd /path/to/gnome-video-arcade-0.8.5
    $ ./configure
    $ make
    $ su -c "make install"

@@ -1,3 +1,25 @@
+GNOME Video Arcade 0.8.5
+========================
+
+        Released September 14, 2015
+
+        What's New
+        ----------
+        * Bug fixes and a big performance improvement to the game list.
+        * Recording and play back works again (was still broken in 0.8.4).
+        * Fixed handling of $HOME in mame.ini paths.
+
+        Bugs Fixed
+        ----------
+        GNOME #710222: Hide bios in game list
+                       (reported by Bastián Díaz)
+        GNOME #754216: Recover from interrupted database build
+                       (reported by Bastián Díaz)
+
+        Updated Translations
+        --------------------
+        Polish (Piotr Drąg)
+
 GNOME Video Arcade 0.8.4
 ========================
 
