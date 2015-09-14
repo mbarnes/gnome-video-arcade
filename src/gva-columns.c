@@ -123,8 +123,8 @@ columns_comment_edited_cb (GtkCellRendererText *renderer,
         gtk_tree_path_free (path);
         g_return_if_fail (valid);
 
-        gtk_tree_store_set (
-                GTK_TREE_STORE (model), &iter, column_id, new_text, -1);
+        gtk_list_store_set (
+                GTK_LIST_STORE (model), &iter, column_id, new_text, -1);
 }
 
 static void

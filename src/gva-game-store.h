@@ -190,12 +190,12 @@ typedef enum
  **/
 struct _GvaGameStore
 {
-        GtkTreeStore parent;
+        GtkListStore parent;
 };
 
 struct _GvaGameStoreClass
 {
-        GtkTreeStoreClass parent_class;
+        GtkListStoreClass parent_class;
 };
 
 GType           gva_game_store_get_type         (void);

@@ -32,7 +32,7 @@
 G_DEFINE_TYPE (
         GvaGameStore,
         gva_game_store,
-        GTK_TYPE_TREE_STORE)
+        GTK_TYPE_LIST_STORE)
 
 static GHashTable *
 game_store_get_index (GvaGameStore *game_store)
@@ -192,8 +192,8 @@ game_store_constructor (GType type,
         object = G_OBJECT_CLASS (gva_game_store_parent_class)->constructor (
                 type, n_construct_properties, construct_properties);
 
-        gtk_tree_store_set_column_types (
-                GTK_TREE_STORE (object), G_N_ELEMENTS (types), types);
+        gtk_list_store_set_column_types (
+                GTK_LIST_STORE (object), G_N_ELEMENTS (types), types);
 
         gtk_tree_sortable_set_default_sort_func (
                 GTK_TREE_SORTABLE (object),
@@ -331,7 +331,7 @@ gva_game_store_new_from_query (const gchar *sql,
                 GValue *value;
 
                 /* Append a new row to the tree store. */
-                gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+                gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
                 /* Populate the row with available values. */
                 for (ii = 0; ii < n_columns; ii++)
@@ -391,8 +391,8 @@ gva_game_store_new_from_query (const gchar *sql,
                 g_value_set_boolean (value, gva_favorites_contains (name));
 
                 /* Store the row in the tree model. */
-                gtk_tree_store_set_valuesv (
-                        GTK_TREE_STORE (model), &iter,
+                gtk_list_store_set_valuesv (
+                        GTK_LIST_STORE (model), &iter,
                         (gint *) column_ids, column_values, n_columns + 1);
 
                 /* Keep the UI responsive. */
@@ -441,7 +441,7 @@ gva_game_store_clear (GvaGameStore *game_store)
         g_return_if_fail (GVA_IS_GAME_STORE (game_store));
 
         g_hash_table_remove_all (game_store_get_index (game_store));
-        gtk_tree_store_clear (GTK_TREE_STORE (game_store));
+        gtk_list_store_clear (GTK_LIST_STORE (game_store));
 }
 
 /**
@@ -452,7 +452,7 @@ gva_game_store_clear (GvaGameStore *game_store)
  *
  * Adds an entry to @game_store's internal index.  You will want to call
  * this immediately after adding a new row to @game_store, such as with
- * gtk_tree_store_append().
+ * gtk_list_store_append().
  **/
 void
 gva_game_store_index_insert (GvaGameStore *game_store,
