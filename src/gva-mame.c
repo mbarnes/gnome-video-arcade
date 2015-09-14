@@ -64,6 +64,38 @@ mame_add_sound_option (GString *arguments)
         }
 }
 
+static void
+mame_expand_string (gchar **p_string)
+{
+#if HAVE_WORDEXP_H
+        wordexp_t words;
+
+        g_return_if_fail (p_string != NULL);
+        g_return_if_fail (*p_string != NULL);
+
+        /* MAME configurations often use shell variables like $HOME
+         * in its search and output paths, so we need to expand them. */
+        if (wordexp (*p_string, &words, WRDE_NOCMD) == 0)
+        {
+                GString *buffer;
+                gsize ii;
+
+                buffer = g_string_sized_new (strlen (*p_string));
+                for (ii = 0; ii < words.we_wordc; ii++)
+                {
+                        if (ii > 0)
+                                g_string_append_c (buffer, ' ');
+                        g_string_append (buffer, words.we_wordv[ii]);
+                }
+
+                g_free (*p_string);
+                *p_string = g_string_free (buffer, FALSE);
+
+                wordfree (&words);
+        }
+#endif
+}
+
 /**
  * gva_mame_command:
  * @arguments: command line arguments
@@ -279,9 +311,6 @@ gva_mame_get_config_value (const gchar *config_key,
         gchar *config_value = NULL;
         gchar **lines;
         guint num_lines, ii;
-#ifdef HAVE_WORDEXP_H
-        wordexp_t words;
-#endif
 
         g_return_val_if_fail (config_key != NULL, NULL);
 
@@ -311,37 +340,16 @@ gva_mame_get_config_value (const gchar *config_key,
 
         g_strfreev (lines);
 
-#ifdef HAVE_WORDEXP_H
-        if (config_value == NULL)
-                goto exit;
-
-        /* MAME sometimes reports shell variables like $HOME in some of
-         * its configuration values, so we need to expand them ourselves. */
-        if (wordexp (config_value, &words, 0) == 0)
+        if (config_value != NULL)
         {
-                GString *buffer;
-                gsize ii;
-
-                buffer = g_string_sized_new (strlen (config_value));
-                for (ii = 0; ii < words.we_wordc; ii++)
-                {
-                        if (ii > 0)
-                                g_string_append_c (buffer, ' ');
-                        g_string_append (buffer, words.we_wordv[ii]);
-                }
-
-                g_free (config_value);
-                config_value = g_string_free (buffer, FALSE);
-
-                wordfree (&words);
+                mame_expand_string (&config_value);
         }
-#endif
-
-exit:
-        if (config_value == NULL)
+        else
+        {
                 g_set_error (
                         error, GVA_ERROR, GVA_ERROR_MAME,
                         _("%s: No such configuration key"), config_key);
+        }
 
         return config_value;
 }
@@ -400,12 +408,20 @@ gva_mame_get_search_paths (const gchar *config_key,
                            GError **error)
 {
         gchar *config_value;
+        gchar **search_paths;
+        guint ii;
 
         config_value = gva_mame_get_config_value (config_key, error);
         if (config_value == NULL)
                 return NULL;
 
-        return g_strsplit (config_value, ";", -1);
+        search_paths = g_strsplit (config_value, ";", -1);
+        g_return_val_if_fail (search_paths != NULL, NULL);
+
+        for (ii = 0; search_paths[ii] != NULL; ii++)
+                mame_expand_string (&search_paths[ii]);
+
+        return search_paths;
 }
 
 /**
